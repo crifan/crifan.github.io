@@ -1,0 +1,1299 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>help语法 · iOS逆向开发：签名和权限</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../ldid/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_codesign_ent","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../codesign_ent_overview/">
+            
+                <a href="../../codesign_ent_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    签名和权限概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../entitlement/">
+            
+                <a href="../../entitlement/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    entitlement权限
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../entitlement/what_is_ent.html">
+            
+                <a href="../../entitlement/what_is_ent.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    什么是entitlement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../entitlement/check_ent.html">
+            
+                <a href="../../entitlement/check_ent.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    查看权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../entitlement/common_ent/">
+            
+                <a href="../../entitlement/common_ent/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    常见权限
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../entitlement/common_ent/get_task_allow.html">
+            
+                <a href="../../entitlement/common_ent/get_task_allow.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    get-task-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../entitlement/common_ent/task_for_pid_allow.html">
+            
+                <a href="../../entitlement/common_ent/task_for_pid_allow.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    task_for_pid-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../entitlement/common_ent/platform_application.html">
+            
+                <a href="../../entitlement/common_ent/platform_application.html">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    platform-application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../../entitlement/common_ent/run_unsigned_code.html">
+            
+                <a href="../../entitlement/common_ent/run_unsigned_code.html">
+            
+                    
+                        <b>1.3.3.4.</b>
+                    
+                    run-unsigned-code
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="../../entitlement/common_ent/proc_info_allow.html">
+            
+                <a href="../../entitlement/common_ent/proc_info_allow.html">
+            
+                    
+                        <b>1.3.3.5.</b>
+                    
+                    proc_info-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.6" data-path="../../entitlement/common_ent/seatbelt_profiles.html">
+            
+                <a href="../../entitlement/common_ent/seatbelt_profiles.html">
+            
+                    
+                        <b>1.3.3.6.</b>
+                    
+                    seatbelt-profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7" data-path="../../entitlement/common_ent/com_apple_security/">
+            
+                <a href="../../entitlement/common_ent/com_apple_security/">
+            
+                    
+                        <b>1.3.3.7.</b>
+                    
+                    com.apple.security相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.7.1" data-path="../../entitlement/common_ent/com_apple_security/network.html">
+            
+                <a href="../../entitlement/common_ent/com_apple_security/network.html">
+            
+                    
+                        <b>1.3.3.7.1.</b>
+                    
+                    network相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7.2" data-path="../../entitlement/common_ent/com_apple_security/application_groups.html">
+            
+                <a href="../../entitlement/common_ent/com_apple_security/application_groups.html">
+            
+                    
+                        <b>1.3.3.7.2.</b>
+                    
+                    application-groups
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../entitlement/modify_ent.html">
+            
+                <a href="../../entitlement/modify_ent.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    更改权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../codesign/">
+            
+                <a href="../../codesign/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../codesign/what_is_codesign.html">
+            
+                <a href="../../codesign/what_is_codesign.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    什么是codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../codesign/check_sign.html">
+            
+                <a href="../../codesign/check_sign.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    查看签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../codesign/resign.html">
+            
+                <a href="../../codesign/resign.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    重新签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    常用工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1.1" data-path="help.html">
+            
+                <a href="help.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ldid/">
+            
+                <a href="../ldid/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    ldid
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../ldid/help.html">
+            
+                <a href="../ldid/help.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../security.html">
+            
+                <a href="../security.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    security
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../common_issue/">
+            
+                <a href="../../common_issue/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../common_issue/run_crash_killed.html">
+            
+                <a href="../../common_issue/run_crash_killed.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    运行崩溃Killed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../common_issue/process_debuggable/">
+            
+                <a href="../../common_issue/process_debuggable/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    任意进程可调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../common_issue/process_debuggable/xinaa15_builtin.html">
+            
+                <a href="../../common_issue/process_debuggable/xinaa15_builtin.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    XinaA15自带已支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../common_issue/process_debuggable/self_do_resign.html">
+            
+                <a href="../../common_issue/process_debuggable/self_do_resign.html">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    手动重签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../common_issue/install_app.html">
+            
+                <a href="../../common_issue/install_app.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    安装app时的签名问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../common_issue/monkeydev_debug_crash.html">
+            
+                <a href="../../common_issue/monkeydev_debug_crash.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    MonkeyDev调试时崩溃
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >help语法</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="codesign的help语法"><a name="codesign的help语法" class="plugin-anchor" href="#codesign的help语法"><i class="fa fa-link" aria-hidden="true"></i></a>codesign的help语法</h1>
+<h2 id="codesign1-osx-man-page"><a name="codesign1-osx-man-page" class="plugin-anchor" href="#codesign1-osx-man-page"><i class="fa fa-link" aria-hidden="true"></i></a>codesign(1) [osx man page]</h2>
+<pre class="language-"><code class="lang-bash">CODESIGN<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>                            BSD General Commands Manual                            CODESIGN<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+NAME
+
+     codesign -- Create and manipulate code signatures
+
+SYNOPSIS
+
+     codesign <span class="token parameter variable">-s</span> identity <span class="token punctuation">[</span>-i identifier<span class="token punctuation">]</span> <span class="token punctuation">[</span>-r requirements<span class="token punctuation">]</span> <span class="token punctuation">[</span>-fv<span class="token punctuation">]</span> <span class="token punctuation">[</span>path <span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+     codesign <span class="token parameter variable">-v</span> <span class="token punctuation">[</span>-R requirement<span class="token punctuation">]</span> <span class="token punctuation">[</span>-v<span class="token punctuation">]</span> <span class="token punctuation">[</span>path<span class="token operator">|</span>pid <span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+     codesign <span class="token parameter variable">-d</span> <span class="token punctuation">[</span>-v<span class="token punctuation">]</span> <span class="token punctuation">[</span>path<span class="token operator">|</span>pid <span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+     codesign <span class="token parameter variable">-h</span> <span class="token punctuation">[</span>-v<span class="token punctuation">]</span> <span class="token punctuation">[</span>pid <span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+DESCRIPTION
+
+     The codesign <span class="token builtin class-name">command</span> is used to create, check, and display code signatures, as well as inquire into the dynamic status of signed code <span class="token keyword">in</span> the
+     system.
+
+     codesign requires exactly one operation option to determine what action is to be performed, as well as any number of other options to modify
+     its behavior. It can act on any number of objects per invocation, but performs the same operation on all of them.
+
+     codesign accepts single-character <span class="token punctuation">(</span>classic<span class="token punctuation">)</span> options, as well as GNU-style long options of the form <span class="token parameter variable">--name</span> and <span class="token parameter variable">--name</span><span class="token operator">=</span>value. Common options
+     have both forms<span class="token punctuation">;</span> <span class="token function">less</span> frequent and specialized options have only long form.  Note that the form <span class="token parameter variable">--name</span> value <span class="token punctuation">(</span>without equal sign<span class="token punctuation">)</span> will not
+     work as expected on options with optional values.
+
+OPTIONS
+
+     The options are as follows:
+
+     --all-architectures
+         When verifying a code signature on code that has a universal <span class="token punctuation">(</span><span class="token string">&quot;fat&quot;</span><span class="token punctuation">)</span> Mach-O binary, separately verify each architecture contained.
+         This is the default unless overridden with the <span class="token parameter variable">-a</span> <span class="token punctuation">(</span>--architecture<span class="token punctuation">)</span> option.
+
+     -a, <span class="token parameter variable">--architecture</span> architecture
+         When verifying or displaying signatures, explicitly <span class="token keyword">select</span> the Mach-O architecture given. The architecture can be specified either by
+         name <span class="token punctuation">(</span>e.g. i386<span class="token punctuation">)</span> or by number<span class="token punctuation">;</span> <span class="token keyword">if</span> by number, a sub-architecture may be appended separated by a comma.  This option applies only to
+         Mach-O binary code and is ignored <span class="token keyword">for</span> other types.  If the path uses the Mach-O <span class="token function">format</span> and contains no code of the given architec-
+         ture, the <span class="token builtin class-name">command</span> will fail.  The default <span class="token keyword">for</span> verification is --all-architectures, to verify all architectures present.  The default
+         <span class="token keyword">for</span> display is to report on the native architecture of the <span class="token function">host</span> system.  When signing, codesign will always sign all architectures
+         contained <span class="token keyword">in</span> a universal Mach-O file.
+
+     --bundle-version version-string
+         When handling versioned bundles such as frameworks, explicitly specify the version to operate on. This must be one of the names <span class="token keyword">in</span>
+         the <span class="token string">&quot;Versions&quot;</span> directory of the bundle.  If not specified, codesign uses the bundle<span class="token string">&apos;s default version.  Note that most frameworks
+         delivered with the system have only one version, and thus this option is irrelevant for them.  There is currently no facility for
+         operating on all versions of a bundle at once.
+
+     -d, --display
+         Display information about the code at the path(s) given. Increasing levels of verbosity produce more output.  The format is designed
+         to be moderately easy to parse by simple scripts while still making sense to human eyes.  In addition, the -r, --file-list,
+         --extract-certificates, and --entitlements options can be used to retrieve additional information.
+
+     -D, --detached filename
+         When signing, designates that a detached signature should be written to the specified file. The code being signed is not modified and
+         need not be writable.  When verifying, designates a file containing a detached signature to be used for verification. Any embedded
+         signature in the code is ignored.
+
+     --deep  When signing a bundle, specifies that nested code content such as helpers, frameworks, and plug-ins, should be recursively signed in
+         turn. Beware that all signing options you specify will apply, in turn, to such nested content.
+         When verifying a bundle, specifies that any nested code content will be recursively verified as to its full content. By default, ver-
+         ification of nested content is limited to a shallow investigation that may not detect changes to the nested code.
+         When displaying a signature, specifies that a list of directly nested code should be written to the display output. This lists only
+         code directly nested within the subject; anything nested indirectly will require recursive application of the codesign command.
+
+     --detached-database
+         When signing, specifies that a detached signature should be generated as with the --detached option, but that the resulting signature
+         should be written into a system database, from where it is made automatically available whenever apparently unsigned code is vali-
+         dated on the system.
+         Writing to this system database requires elevated process privileges that are not available to ordinary users.
+
+     -f, --force
+         When signing, causes codesign to replace any existing signature on the path(s) given. Without this option, existing signatures will
+         not be replaced, and the signing operation fails.
+
+     -h, --hosting
+         Constructs and prints the hosting chain of a running program. The pid arguments must denote running code (pids etc.) With verbose
+         options, this also displays the individual dynamic validity status of each element of the hosting chain.
+
+     -i, --identifier identifier
+         During signing, explicitly specify the unique identifier string that is embedded in code signatures. If this option is omitted, the
+         identifier is derived from either the Info.plist (if present), or the filename of the executable being signed, possibly modified by
+         the --prefix option.  It is a very bad idea to sign different programs with the same identifier.
+
+     -o, --options flag,...
+         During signing, specifies a set of option flags to be embedded in the code signature. The value takes the form of a comma-separated
+         list of names (with no spaces). Alternatively, a numeric value can be used to directly specify the option mask (CodeDirectory flag
+         word). See OPTION FLAGS below.
+
+     -P, --pagesize pagesize
+         Indicates the granularity of code signing. Pagesize must be a power of two.  Chunks of pagesize bytes are separately signed and can
+         thus be independently verified as needed.    As a special case, a pagesize of zero indicates that the entire code should be signed and
+         verified as a single, possibly gigantic page. This option only applies to the main executable and has no effect on the sealing of
+         associated data, including resources.
+
+     -r, --requirements requirements
+         During signing, indicates that internal requirements should be embedded in the code path(s) as specified. See &quot;specifying require-
+         ments&quot; below.  Defaults will be applied to requirement types that are not explicitly specified; if you want to defeat such a default,
+         specify &quot;never&quot; for that type.
+         During display, indicates where to write the code&apos;</span>s internal requirements. Use -r- to <span class="token function">write</span> them to standard output.
+
+     -R, --test-requirement requirement
+         During verification, indicates that the path<span class="token punctuation">(</span>s<span class="token punctuation">)</span> given should be verified against the code requirement specified. If this option is
+         omitted, the code is verified only <span class="token keyword">for</span> internal integrity and against its own designated requirement.
+
+     -s, <span class="token parameter variable">--sign</span> identity
+         Sign the code at the path<span class="token punctuation">(</span>s<span class="token punctuation">)</span> given using this identity. See SIGNING IDENTITIES below.
+
+     -v, <span class="token parameter variable">--verbose</span>
+         Sets <span class="token punctuation">(</span>with a numeric value<span class="token punctuation">)</span> or increments the verbosity level of output. Without the verbose option, no output is produced upon suc-
+         cess, <span class="token keyword">in</span> the classic UNIX style.  If no other options request a different action, the first <span class="token parameter variable">-v</span> encountered will be interpreted as
+         <span class="token parameter variable">--verify</span> instead <span class="token punctuation">(</span>and does not increase verbosity<span class="token punctuation">)</span>.
+
+     -v, <span class="token parameter variable">--verify</span>
+         Requests verification of code signatures.    If other actions <span class="token punctuation">(</span>sign, display, etc.<span class="token punctuation">)</span> are also requested, <span class="token parameter variable">-v</span> is interpreted to mean
+         --verbose.
+
+     <span class="token parameter variable">--continue</span>
+         Instructs codesign to <span class="token builtin class-name">continue</span> processing path arguments even <span class="token keyword">if</span> processing one fails.  If this option is given, <span class="token builtin class-name">exit</span> due to opera-
+         tional errors is deferred <span class="token keyword">until</span> all path arguments have been considered. The <span class="token builtin class-name">exit</span> code will <span class="token keyword">then</span> indicate the <span class="token function">most</span> severe failure
+         <span class="token punctuation">(</span>or, with equal severity, the first such failure encountered<span class="token punctuation">)</span>.
+
+     <span class="token parameter variable">--dryrun</span>
+         During signing, performs almost all signing operations, but does not actually <span class="token function">write</span> the result anywhere. Cryptographic signatures are
+         still generated, actually using the given signing identity and triggering any access control checks normally, though the resulting
+         signature is <span class="token keyword">then</span> discarded.
+
+     <span class="token parameter variable">--entitlements</span> path
+         When signing, take the <span class="token function">file</span> at the given path and embed its contents <span class="token keyword">in</span> the signature as entitlement data. If the data at path does
+         not already begin with a suitable binary <span class="token punctuation">(</span><span class="token string">&quot;blob&quot;</span><span class="token punctuation">)</span> header, one is attached automatically.
+         When displaying a signature, extract any entitlement data from the signature and <span class="token function">write</span> it to the path given. Use <span class="token string">&quot;-&quot;</span> to <span class="token function">write</span> to
+         standard output.  By default, the binary <span class="token string">&quot;blob&quot;</span> header is returned intact<span class="token punctuation">;</span> prefix the path with a colon <span class="token string">&quot;:&quot;</span> to automatically strip it
+         off.  If the signature has no entitlement data, nothing is written <span class="token punctuation">(</span>this is not an error<span class="token punctuation">)</span>.
+
+     --extract-certificates prefix
+         When displaying a signature, extract the certificates <span class="token keyword">in</span> the embedded certificate chain and <span class="token function">write</span> them to individual files. The
+         prefix argument is appended with numbers <span class="token number">0</span>, <span class="token number">1</span>, <span class="token punctuation">..</span>. to form the filenames, <span class="token function">which</span> can be relative or absolute. Certificate <span class="token number">0</span> is the
+         leaf <span class="token punctuation">(</span>signing<span class="token punctuation">)</span> certificate, and as many files are written as there are certificates <span class="token keyword">in</span> the signature. The files are <span class="token keyword">in</span> ASN.1 <span class="token punctuation">(</span>DER<span class="token punctuation">)</span>
+         form.  If prefix is omitted, the default prefix is <span class="token string">&quot;codesign&quot;</span> <span class="token keyword">in</span> the current directory.
+
+     --file-list path
+         When signing or displaying a signature, codesign writes to the given path a list of files that may have been modified as part of the
+         signing process. This is useful <span class="token keyword">for</span> installer or patcher programs that need to know what was changed or what files are needed to <span class="token function">make</span>
+         up the <span class="token string">&quot;signature&quot;</span> of a program. The <span class="token function">file</span> given is appended-to, with one line per absolute path written. An argument of <span class="token string">&quot;-&quot;</span> <span class="token punctuation">(</span>single
+         dash<span class="token punctuation">)</span> denotes standard output.  Note that the list may be somewhat pessimistic - all files not listed are guaranteed to be unchanged
+         by the signing process, but some of the listed files may not actually have changed.  Also note that changes may have been made to
+         extended attributes of these files.
+
+     --ignore-resources
+         During static validation, <span class="token keyword">do</span> not validate the contents of the code<span class="token string">&apos;s resources.  In effect, this will pass validation on code whose
+         resources have been corrupted (or inappropriately signed). On large programs, it will also substantially speed up static validation,
+         since all the resources will not be read into memory.  Obviously, the outcome of such a validation should be considered on its mer-
+         its.
+
+     --keychain filename
+         During signing, only search for the signing identity in the keychain file specified. This can be used to break any matching ties if
+         you have multiple similarly-named identities in several keychains on the user&apos;</span>s search list.  Note that the standard keychain search
+         path is still consulted <span class="token keyword">while</span> constructing the certificate chain being embedded <span class="token keyword">in</span> the signature.
+         Note that filename will not be searched to resolve the signing identity<span class="token string">&apos;s certificate chain unless it is also on the user&apos;</span>s keychain
+         search list.
+
+     <span class="token parameter variable">--prefix</span> string
+         If no explicit unique identifier is specified <span class="token punctuation">(</span>using the <span class="token parameter variable">-i</span> option<span class="token punctuation">)</span>, and <span class="token keyword">if</span> the implicitly generated identifier does not contain any
+         dot <span class="token punctuation">(</span>.<span class="token punctuation">)</span> characters, <span class="token keyword">then</span> the given string is prefixed to the identifier before use. If the implicit identifier contains a dot, it is
+         used as-is. Typically, this is used to deal with <span class="token builtin class-name">command</span> tools without Info.plists, whose default identifier is simply the <span class="token builtin class-name">command</span><span class="token string">&apos;s
+         filename; the conventional prefix used is com.domain. (note that the final dot needs to be explicit).
+
+     --preserve-metadata=list
+         When re-signing code that is already signed, reuse some information from the old signature.  If new data is specified explicitly, it
+         is preferred.  You still need to specify the -f (--force) option to enable overwriting signatures at all.    If this option is absent,
+         any old signature has no effect on the signing process.
+         This option takes a comma-separated list of names, which you may reasonably abbreviate:
+
+         identifier      Preserve the signing identifier (--identifier) instead of generating a default identifier.
+
+         entitlements    Preserve the entitlement data (--entitlements).
+
+         resource-rules  Preserve and reuse the resource rules (--resource-rules).
+
+         requirements    Preserve the internal requirements (--requirements option), including any explicit Designated Requirement. Note that
+                 all internal requirements are preserved or regenerated as a whole; you cannot pick and choose individual elements
+                 with this option.
+         For historical reasons, this option can be given without a value, which preserves all of these values as presently known. This use is
+         deprecated and will eventually be removed; always specify an explicit list of preserved items.
+
+     --resource-rules filename
+         During signing, this option overrides the default rules for identifying and collecting bundle resources and nested code to be sealed
+         into the signature. The argument is the path to a property list (plist) file containing scanning and qualification instructions. See
+         the code signing documentation for details.
+
+     --timestamp [=URL]
+         During signing, requests that a timestamp authority server be contacted to authenticate the time of signing. The server contacted is
+         given by the URL value.  If this option is given without a value, a default server provided by Apple is used.  Note that this server
+         may not support signatures made with identities not furnished by Apple.  If the timestamp authority service cannot be contacted over
+         the Internet, or it malfunctions or refuses service, the signing operation will fail.
+         If this option is not given at all, a system-specific default behavior is invoked.  This may result in some but not all code signa-
+         tures being timestamped.
+         The special value none explicitly disables the use of timestamp services.
+
+OPERATION
+
+     In the first synopsis form, codesign attempts to sign the code objects at the path(s) given, using the identity provided. Internal
+     requirements and entitlements are embedded if requested. Internal requirements not specified may be assigned suitable default values.
+     Defaulting applies separately to each type of internal requirement.  If an identifier is explicitly given, it is sealed into all path(s).
+     Otherwise, each path derives its identifier independently from its Info.plist or pathname.  Code nested within bundle directories (as identi-
+     fied from the applicable Resource Rules) must already be signed or the signing operation will fail, unless the --deep option is given, in
+     which case any unsigned nested code will be recursively signed before proceeding, using the same signing options and parameters. If the
+     --force option is given, any existing top-level signature is replaced, subject to any --preserve-metadata options also present. Combining the
+     --force and --deep options results in forcible replacement of all signatures within the target bundle, as long as the resource rules identify
+     them.
+
+     In the second synopsis form, codesign verifies the code signatures on all the path(s) given. The verification confirms that the code at those
+     path(s) is signed, that the signature is valid, and that all sealed components are unaltered. If a requirement is given, each path is also
+     checked against this requirement (but see DIAGNOSTICS below).  If verbose verification is requested, the program is also checked against its
+     own designated requirement, which should never fail for a properly signed program.
+
+     If a path begins with a decimal digit, it is interpreted as the process id of a running process in the system, and dynamic validation is per-
+     formed on that process instead.  This checks the code&apos;</span>s dynamic status and just enough static data to close the nominal security envelope.
+     Add at least one level of verbosity to also perform a full static check.
+
+     In the third synopsis form, codesign displays the contents of the signatures on the path<span class="token punctuation">(</span>s<span class="token punctuation">)</span> given. More information is displayed as the ver-
+     bosity level increases.  This form may not completely verify the signatures on the path<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> though it may perform some verification steps <span class="token keyword">in</span>
+     the process of obtaining information about the path<span class="token punctuation">(</span>s<span class="token punctuation">)</span>.  If the <span class="token parameter variable">-r</span> path option is given, internal requirements will be extracted from the
+     path<span class="token punctuation">(</span>s<span class="token punctuation">)</span> and written to path<span class="token punctuation">;</span> specify a dash <span class="token string">&quot;-&quot;</span> to <span class="token function">write</span> to standard output. If the code does not contain an explicit designated requirement,
+     the implied one will be retrieved and written out as a <span class="token builtin class-name">source</span> comment.  If the <span class="token parameter variable">--entitlements</span> path option is given, embedded entitlement data
+     will be extracted likewise and written to the <span class="token function">file</span> specified.
+
+     In the fourth synopsis form, codesign constructs the hosting path <span class="token keyword">for</span> each pid given and writes it, one <span class="token function">host</span> per line, to standard output.
+     The hosting path is the chain of code signing hosts starting with the <span class="token function">most</span> specific code known to be running, and ending with the root of
+     trust <span class="token punctuation">(</span>the kernel<span class="token punctuation">)</span>. If the <span class="token parameter variable">--verbose</span> option is given, the dynamic validity status of each <span class="token function">host</span> is also displayed, separated from the path by
+     a tab character.  Note that hosting chains can at <span class="token builtin class-name">times</span> be constructed <span class="token keyword">for</span> invalid or even unsigned code, and the output of this form of the
+     codesign <span class="token builtin class-name">command</span> should not be taken as a statement of formal code validity. Only codesign <span class="token parameter variable">--verify</span> can <span class="token keyword">do</span> that<span class="token punctuation">;</span> and <span class="token keyword">in</span> fact, formal verifi-
+     cation constructs the hosting chain as part of its operation <span class="token punctuation">(</span>but does not display it<span class="token punctuation">)</span>.
+
+SIGNING IDENTITIES
+
+     To be used <span class="token keyword">for</span> code signing, a digital identity must be stored <span class="token keyword">in</span> a keychain that is on the calling user<span class="token string">&apos;s keychain search list.  All key-
+     chain sources are supported if properly configured. In particular, it is possible to sign code with an identity stored on a supported smart
+     card.  If your signing identity is stored in a different form, you need to make it available in keychain form to sign code with it.
+     If the --keychain argument is used, identity is only looked-for in the specific keychain given. This is meant to help disambiguate references
+     to identities.  Even in that case, the full keychain search list is still consulted for additional certificates needed to complete the signa-
+     ture.
+
+     The identity is first considered as the full name of a keychain identity preference.  If such a preference exists, it directly names the
+     identity used.  Otherwise, the identity is located by searching all keychains for a certificate whose subject common name (only) contains the
+     identity string given. If there are multiple matches, the operation fails and no signing is performed; however, an exact match is preferred
+     over a partial match.  These comparisons are case sensitive.  Multiple instances of the exactly same certificate in multiple keychains are
+     tolerated as harmless.
+
+     If identity consists of exactly forty hexadecimal digits, it is instead interpreted as the SHA-1 hash of the certificate part of the desired
+     identity.    In this case, the identity&apos;</span>s subject name is not considered.
+
+     Both identity preferences and certificate hashes can be used to identify a particular signing identity regardless of name. Identity prefer-
+     ences are global settings <span class="token keyword">for</span> each user and provide a layer of indirection. Certificate hashes are very explicit and local. These choices,
+     combined with what is placed into Xcode project and target build variables and/or script settings, allows <span class="token keyword">for</span> very flexible designation of
+     signing identities.
+
+     If identity is the single letter <span class="token string">&quot;-&quot;</span> <span class="token punctuation">(</span>dash<span class="token punctuation">)</span>, ad-hoc signing is performed.    Ad-hoc signing does not use an identity at all, and identifies
+     exactly one instance of code. Significant restrictions apply to the use of ad-hoc signed code<span class="token punctuation">;</span> consult documentation before using this.
+
+     codesign will attempt to embed the entire certificate chain documenting the signing identity <span class="token keyword">in</span> the code signature it generates, including
+     any intermediate certificates and the anchor certificate. It looks <span class="token keyword">for</span> <span class="token for-or-select variable">those</span> <span class="token keyword">in</span> the keychain search list of the user performing the signing
+     operation. If it cannot generate the entire certificate chain, signing may still succeed, but verification may fail <span class="token keyword">if</span> the verifying code
+     does not have an independent <span class="token builtin class-name">source</span> <span class="token keyword">for</span> the missing certificates <span class="token punctuation">(</span>from its keychains<span class="token punctuation">)</span>.
+
+SPECIFYING REQUIREMENTS
+
+     The requirement<span class="token punctuation">(</span>s<span class="token punctuation">)</span> arguments <span class="token punctuation">(</span>-r and -R<span class="token punctuation">)</span> can be given <span class="token keyword">in</span> various forms. A plain text argument is taken to be a path to a <span class="token function">file</span> containing the
+     requirement<span class="token punctuation">(</span>s<span class="token punctuation">)</span>.  codesign will accept both binary files containing properly compiled requirements code, and <span class="token builtin class-name">source</span> files that are automati-
+     cally compiled before use.  An argument of <span class="token string">&quot;-&quot;</span> requests that the requirement<span class="token punctuation">(</span>s<span class="token punctuation">)</span> are <span class="token builtin class-name">read</span> from standard input.  Finally, an argument that
+     begins with an equal sign <span class="token string">&quot;=&quot;</span> is taken as a literal requirements <span class="token builtin class-name">source</span> text, and is compiled accordingly <span class="token keyword">for</span> use.
+
+OPTION FLAGS
+
+     When signing, a <span class="token builtin class-name">set</span> of option flags can be specified to change the behavior of the system when using the signed code. The following flags are
+     recognized by codesign<span class="token punctuation">;</span> other flags may exist at the API level. Note that you can specify any valid flags by giving a <span class="token punctuation">(</span>single<span class="token punctuation">)</span> numeric value
+     instead of a list of option names.
+
+     <span class="token function">kill</span>     Forces the signed code<span class="token string">&apos;s kill flag to be set when the code begins execution.  Code with the kill flag set will die when it becomes
+          dynamically invalid. It is therefore safe to assume that code marked this way, once validated, will have continue to have a valid
+          identity while alive.
+
+     hard     Forces the signed code&apos;</span>s hard flag to be <span class="token builtin class-name">set</span> when the code begins execution.  The hard flag is a hint to the system that the code
+          prefers to be denied access to resources <span class="token keyword">if</span> gaining such access would invalidate its identity.
+
+     <span class="token function">host</span>     Marks the code as capable of hosting guest code. You must <span class="token builtin class-name">set</span> this option <span class="token keyword">if</span> you want the code to act as a code signing host, con-
+          trolling subsidiary <span class="token punctuation">(</span><span class="token string">&quot;guest&quot;</span><span class="token punctuation">)</span> code. This flag is <span class="token builtin class-name">set</span> automatically <span class="token keyword">if</span> you specify an internal guest requirement.
+
+     expires  Forces any validation of the code to consider expiration of the certificates involved. Code signatures generated with this flag will
+          fail to verify once any of the certificates <span class="token keyword">in</span> the chain has expired, regardless of the intentions of the verifier. Note that this
+          flag does not affect any other checks that may cause signature validation to fail, including checks <span class="token keyword">for</span> certificate revocation.
+
+     Note that code can <span class="token builtin class-name">set</span> the hard and <span class="token function">kill</span> flags on itself at any time. The signing options only affect their initial state. Once <span class="token builtin class-name">set</span> by any
+     means, these flags cannot be cleared <span class="token keyword">for</span> the lifetime of the code. Therefore, specifying such flags as signing options guarantees that they
+     will be <span class="token builtin class-name">set</span> whenever the signed code runs.
+
+     If the code being signed has an Info.plist that contains a key named CSFlags, the value of that key is taken as the default value <span class="token keyword">for</span> the
+     options. The value of CSFlags can be a string <span class="token keyword">in</span> the same form as the <span class="token parameter variable">--options</span> option, or an integer number specifying the absolute numeric
+     value. Note however that <span class="token keyword">while</span> you can abbreviate flag names on the <span class="token builtin class-name">command</span> lines, you must spell them out <span class="token keyword">in</span> the Info.plist.
+
+EXAMPLES
+
+     To sign application Terminal.app with a signing identity named <span class="token string">&quot;authority&quot;</span><span class="token builtin class-name">:</span>
+       codesign <span class="token parameter variable">-s</span> authority Terminal.app
+
+     To sign the command-line tool <span class="token string">&quot;helper&quot;</span> with the same identity, overwriting any existing signature, using the signing identifier
+     <span class="token string">&quot;com.mycorp.helper&quot;</span>, and embedding a custom designated requirement
+       codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> authority <span class="token parameter variable">--prefix</span><span class="token operator">=</span>com.mycorp. <span class="token parameter variable">-r</span><span class="token operator">=</span><span class="token string">&quot;designated =&gt; anchor /tmp/foo&quot;</span> helper
+
+     To verify the signature on Terminal.app and produce some verbose output:
+       codesign <span class="token parameter variable">--verify</span> <span class="token parameter variable">--verbose</span> Terminal.app
+
+     To verify the dynamic validity of process <span class="token number">666</span>:
+       codesign <span class="token parameter variable">--verify</span> <span class="token number">666</span>
+
+     To display all information about Terminal.app&apos;s code signature:
+       codesign <span class="token parameter variable">--display</span> <span class="token parameter variable">--verbose</span><span class="token operator">=</span><span class="token number">4</span> Terminal.app
+
+     To extract the internal requirements from Terminal.app to standard output:
+       codesign <span class="token parameter variable">--display</span> -r- Terminal.app
+
+DIAGNOSTICS
+
+     codesign exits <span class="token number">0</span> <span class="token keyword">if</span> all operations succeed. This indicates that all codes were signed, or all codes verified properly as requested. If a
+     signing or verification operation fails, the <span class="token builtin class-name">exit</span> code is <span class="token number">1</span>. Exit code <span class="token number">2</span> indicates invalid arguments or parameters. Exit code <span class="token number">3</span> indicates
+     that during verification, all path<span class="token punctuation">(</span>s<span class="token punctuation">)</span> were properly signed but at least one of them failed to satisfy the requirement specified with the <span class="token parameter variable">-R</span>
+     option.
+
+     For verification, all path arguments are always investigated before the program exits.  For all other operations, the program exits upon the
+     first error encountered, and any further path arguments are ignored, unless the <span class="token parameter variable">--continue</span> option was specified, <span class="token keyword">in</span> <span class="token function">which</span> <span class="token keyword">case</span> codesign will
+     defer the failure <span class="token builtin class-name">exit</span> <span class="token keyword">until</span> after it has attempted to process all path arguments <span class="token keyword">in</span> turn.
+
+SIGNING ATOMICITY
+
+     When a signing operation fails <span class="token keyword">for</span> a particular code, the code may already have been modified <span class="token keyword">in</span> certain ways by adding requisite signature
+     data. Such information will not change the operation of the code, and the code will not be considered signed even with these pieces <span class="token keyword">in</span> place.
+     You may repeat the signing operation without difficulty.  Note however that a previous valid signature may have been effectively destroyed <span class="token keyword">if</span>
+     you specified the <span class="token parameter variable">-f</span> option.
+     If you require atomicity of signing stricter than provided by codesign, you need to <span class="token function">make</span> an explicit copy of your code and sign that.
+
+ENVIRONMENT
+
+     If the CODESIGN_ALLOCATE environment variable is set, it identifies a substitute codesign_allocate tool used to allocate space <span class="token keyword">for</span> code sig-
+     natures <span class="token keyword">in</span> Mach-O binaries. This is used by Xcode SDK distributions to provide architectural support <span class="token keyword">for</span> non-native platforms such as
+     iPhones.  The system will not accept such substitutes unless they are specially signed <span class="token punctuation">(</span>by Apple<span class="token punctuation">)</span>.
+
+FILES
+
+     /var/db/DetachedSignatures  System-wide database of detached code signatures <span class="token keyword">for</span> unsigned code.
+
+SEE ALSO
+
+     csreq<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>, xcodebuild<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>, codesign_allocate<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+HISTORY
+
+     The codesign <span class="token builtin class-name">command</span> first appeared <span class="token keyword">in</span> Mac OS <span class="token number">10.5</span>.0 <span class="token punctuation">(</span>Leopard<span class="token punctuation">)</span>.
+
+BUGS
+
+     Some options only apply to particular operations, and codesign ignores them <span class="token punctuation">(</span>without complaining<span class="token punctuation">)</span> <span class="token keyword">if</span> you specify them <span class="token keyword">for</span> an operation <span class="token keyword">for</span>
+     <span class="token function">which</span> they have no meaning.
+
+     The --preserve-metadata option used to take no value, and varied across releases <span class="token keyword">in</span> what exactly it preserved. The ensuing confusion is still
+     with you <span class="token keyword">if</span> you need to <span class="token function">make</span> backward-compatible scripts.
+
+     The dual meaning of the <span class="token parameter variable">-v</span> option, indicating either verbosity or verification, confuses some people. If you <span class="token function">find</span> it confusing, use the unam-
+     biguous long forms <span class="token parameter variable">--verbose</span> and <span class="token parameter variable">--verify</span> instead.
+
+NOTES
+
+     The Xcode build system invokes codesign automatically <span class="token keyword">if</span> the CODE_SIGN_IDENTITY build variable is set.  You can express any combination of
+     codesign options with additional build variables there.
+
+     codesign is fundamentally a shell around the code signing APIs, and performs nothing of the underlying work.  Replacing it with older or
+     newer versions is unlikely to have a useful effect.
+
+     codesign has several operations and options that are purposely left undocumented <span class="token keyword">in</span> this manual page because they are either experimental
+     <span class="token punctuation">(</span>and subject to change at any <span class="token function">time</span><span class="token punctuation">)</span>, or unadvised to the unwary.  The interminably curious are referred to the published <span class="token builtin class-name">source</span> code.
+
+BSD
+                                    May <span class="token number">7</span>, <span class="token number">2011</span>                                    BSD
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-15 09:32:36
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: codesign">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../ldid/" class="navigation navigation-next " aria-label="Next page: ldid">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"help语法","level":"1.5.1.1","depth":3,"next":{"title":"ldid","level":"1.5.2","depth":2,"path":"common_tools/ldid/README.md","ref":"common_tools/ldid/README.md","articles":[{"title":"help语法","level":"1.5.2.1","depth":3,"path":"common_tools/ldid/help.md","ref":"common_tools/ldid/help.md","articles":[]}]},"previous":{"title":"codesign","level":"1.5.1","depth":2,"path":"common_tools/codesign/README.md","ref":"common_tools/codesign/README.md","articles":[{"title":"help语法","level":"1.5.1.1","depth":3,"path":"common_tools/codesign/help.md","ref":"common_tools/codesign/help.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_codesign_ent/pdf/ios_re_codesign_ent.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_codesign_ent/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_codesign_ent","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：签名和权限","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的codesign代码签名和entitlement权限等相关内容。先是给概览，再是entitlement权限，包括什么是entitlement权限，如何用ldid和codesign查看权限、以及常见的权限，比如get-task-allow、task_for_pid-allow、platform-application等等；接着介绍如何更改权限；然后介绍codesign代码签名，先介绍什么是codesign，然后介绍如何用codesign命令行工具查看签名信息，以及如何用ldid和codesign重新签名；接着介绍常用工具，包括ldid、codesign、security；接着介绍常见的问题，包括运行时崩溃killed、任意进程可调试，包括XinaA15自带支持和自己手动重签名、安装app时的签名问题、MonkeyDev调试时崩溃等，最后附录中贴上参考资料。"},"file":{"path":"common_tools/codesign/help.md","mtime":"2023-07-15T01:32:36.461Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-15T14:21:55.892Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

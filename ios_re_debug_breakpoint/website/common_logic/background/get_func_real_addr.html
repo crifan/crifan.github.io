@@ -1,0 +1,989 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>得到函数的实际地址 · iOS逆向之动态调试：断点</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../basic_breakpoint.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_debug_breakpoint","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../debug_breakpoint_overview/">
+            
+                <a href="../../debug_breakpoint_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    调试断点概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    通用逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1.1" data-path="get_func_real_addr.html">
+            
+                <a href="get_func_real_addr.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    得到函数的实际地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../basic_breakpoint.html">
+            
+                <a href="../basic_breakpoint.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    普通断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../advanced_usage/">
+            
+                <a href="../advanced_usage/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    高级用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../advanced_usage/module.html">
+            
+                <a href="../advanced_usage/module.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    指定模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../advanced_usage/condition/">
+            
+                <a href="../advanced_usage/condition/">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    条件判断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.2.1" data-path="../advanced_usage/condition/examples.html">
+            
+                <a href="../advanced_usage/condition/examples.html">
+            
+                    
+                        <b>1.3.3.2.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../ui_xcode/">
+            
+                <a href="../../ui_xcode/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Xcode图形界面中的断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../cmd_lldb/">
+            
+                <a href="../../cmd_lldb/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    lldb命令行中的断点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../cmd_lldb/br_help.html">
+            
+                <a href="../../cmd_lldb/br_help.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    breakpoint的help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../common_issue/">
+            
+                <a href="../../common_issue/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../common_issue/not_trigger.html">
+            
+                <a href="../../common_issue/not_trigger.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    断点没触发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../common_issue/xcode/">
+            
+                <a href="../../common_issue/xcode/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    Xcode
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../common_issue/xcode/hook_code_br.html">
+            
+                <a href="../../common_issue/xcode/hook_code_br.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    hook代码的断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../common_issue/lldb/">
+            
+                <a href="../../common_issue/lldb/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    lldb
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../note_summary/">
+            
+                <a href="../../note_summary/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    经验心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../note_summary/common/">
+            
+                <a href="../../note_summary/common/">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    通用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../../note_summary/common/cause_stuck.html">
+            
+                <a href="../../note_summary/common/cause_stuck.html">
+            
+                    
+                        <b>1.7.1.1.</b>
+                    
+                    导致卡死
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../note_summary/cond_br/">
+            
+                <a href="../../note_summary/cond_br/">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    条件判断断点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../note_summary/cond_br/expr_write.html">
+            
+                <a href="../../note_summary/cond_br/expr_write.html">
+            
+                    
+                        <b>1.7.2.1.</b>
+                    
+                    表达式写法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../note_summary/cond_br/func_addr_logic_same.html">
+            
+                <a href="../../note_summary/cond_br/func_addr_logic_same.html">
+            
+                    
+                        <b>1.7.2.2.</b>
+                    
+                    函数名和地址逻辑一致
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../note_summary/objc.html">
+            
+                <a href="../../note_summary/objc.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    OjbC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../../note_summary/xcode/RADME.html">
+            
+                <a href="../../note_summary/xcode/RADME.html">
+            
+                    
+                        <b>1.7.4.</b>
+                    
+                    Xcode
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.4.1" data-path="../../note_summary/xcode/debug_multiple_br.html">
+            
+                <a href="../../note_summary/xcode/debug_multiple_br.html">
+            
+                    
+                        <b>1.7.4.1.</b>
+                    
+                    调试多个函数断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.2" data-path="../../note_summary/xcode/deactive_all_br.html">
+            
+                <a href="../../note_summary/xcode/deactive_all_br.html">
+            
+                    
+                        <b>1.7.4.2.</b>
+                    
+                    临时关闭所有断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.3" data-path="../../note_summary/xcode/check_br_added/">
+            
+                <a href="../../note_summary/xcode/check_br_added/">
+            
+                    
+                        <b>1.7.4.3.</b>
+                    
+                    断点是否加成功
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.4.3.1" data-path="../../note_summary/xcode/check_br_added/add_fail.html">
+            
+                <a href="../../note_summary/xcode/check_br_added/add_fail.html">
+            
+                    
+                        <b>1.7.4.3.1.</b>
+                    
+                    断点加不上
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.4" data-path="../../note_summary/xcode/added_and_trigger.html">
+            
+                <a href="../../note_summary/xcode/added_and_trigger.html">
+            
+                    
+                        <b>1.7.4.4.</b>
+                    
+                    断点能加上且能触发
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../../note_summary/lldb_unname/">
+            
+                <a href="../../note_summary/lldb_unname/">
+            
+                    
+                        <b>1.7.5.</b>
+                    
+                    lldb无名函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.5.1" data-path="../../note_summary/lldb_unname/restore_symbol.html">
+            
+                <a href="../../note_summary/lldb_unname/restore_symbol.html">
+            
+                    
+                        <b>1.7.5.1.</b>
+                    
+                    恢复符号表
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >得到函数的实际地址</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="得到函数的实际地址"><a name="得到函数的实际地址" class="plugin-anchor" href="#得到函数的实际地址"><i class="fa fa-link" aria-hidden="true"></i></a>得到函数的实际地址</h1>
+<p>iOS逆向调试期间，往往需要搞清楚某个函数的实际地址，然后用于后续通过地址添加断点</p>
+<p>而函数的实际地址，有多种方式可以获取到：</p>
+<h2 id="通过po查看类的描述，得到函数实际地址"><a name="通过po查看类的描述，得到函数实际地址" class="plugin-anchor" href="#通过po查看类的描述，得到函数实际地址"><i class="fa fa-link" aria-hidden="true"></i></a>通过po查看类的描述，得到函数实际地址</h2>
+<p>举例说明：</p>
+<p>当某个函数</p>
+<p><code>-[__NSXPCInterfaceProxy_AKAppleIDAuthenticationDaemonProtocol authenticateWithContext:completion:]</code></p>
+<p>去通过Xcode的UI界面去（调试期间，实时去）添加断点后，发现加不上断点 == 具体表现是 断点的底色不是蓝色，而是灰色，且是虚线边框</p>
+<p>而想要去加断点的话，也通过函数模糊搜索：</p>
+<pre class="language-"><code class="lang-bash">im lookup <span class="token parameter variable">-r</span> <span class="token parameter variable">-n</span> <span class="token string">&quot;authenticateWithContext:completion:&quot;</span>
+</code></pre>
+<p>的确搜不到该函数</p>
+<p>此时，想要给该函数加断点的话：</p>
+<p>可以通过函数地址加断点，函数地址可以从po查看实例的描述中找到</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">[</span>0x28211abc0 _shortMethodDescription<span class="token punctuation">]</span>
+<span class="token operator">&lt;</span>__NSXPCInterfaceProxy_AKAppleIDAuthenticationDaemonProtocol: 0x28211abc<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>:
+<span class="token keyword">in</span> __NSXPCInterfaceProxy_AKAppleIDAuthenticationDaemonProtocol:
+     Instance Methods:
+<span class="token punctuation">..</span>.
+        - <span class="token punctuation">(</span>void<span class="token punctuation">)</span> authenticateWithContext:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg1 completion:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg2<span class="token punctuation">;</span> <span class="token punctuation">(</span>0xb74ee6818326cc9c<span class="token punctuation">)</span>
+<span class="token punctuation">(</span>_NSXPCDistantObject <span class="token punctuation">..</span>.<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>该函数的实际地址：<code>0xb74ee6818326cc9c</code></li>
+</ul>
+<p>由此后续去通过该函数的实际地址添加断点：</p>
+<pre class="language-"><code class="lang-bash">breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">-a</span> 0xb74ee6818326cc9c
+
+br s <span class="token parameter variable">-a</span> 0xb74ee6818326cc9c
+</code></pre>
+<p>即可顺利加上断点，并真正触发到该断点。</p>
+<h2 id="计算出函数的实际地址"><a name="计算出函数的实际地址" class="plugin-anchor" href="#计算出函数的实际地址"><i class="fa fa-link" aria-hidden="true"></i></a>计算出函数的实际地址</h2>
+<ul>
+<li>背景：已知函数在二进制内部的偏移量</li>
+<li>希望：计算出函数的实际的地址<ul>
+<li>计算公式：<code>函数实际地址</code>=<code>二进制的ALSR基地址</code>+<code>函数二进制内偏移量</code> </li>
+</ul>
+</li>
+</ul>
+<h2 id="举例"><a name="举例" class="plugin-anchor" href="#举例"><i class="fa fa-link" aria-hidden="true"></i></a>举例</h2>
+<p><code>RzGame</code>中的<code>sub_1000B0770</code>函数，起始地址是：<code>0x00000100157BB0</code></p>
+<p>而二进制<code>RzGame</code>的ALSR基地址，通过：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> image list <span class="token parameter variable">-o</span> <span class="token parameter variable">-f</span> <span class="token operator">|</span> <span class="token function">grep</span> RzGame
+<span class="token punctuation">[</span>  <span class="token number">0</span><span class="token punctuation">]</span> 0x0000000000c04000 /Users/crifan/Library/Developer/Xcode/DerivedData/udg-cuzlxqfnklemxfexjbcfnupseasc/Build/Products/Debug-iphoneos/udg.app/RzGame
+</code></pre>
+<p>查看到是：<code>0x0000000000c04000</code></p>
+<p>所以：</p>
+<ul>
+<li><code>sub_1000B0770</code>函数实际地址 = <code>二进制的ALSR基地址</code> + <code>函数二进制内偏移量</code> = <code>0x0000000000c04000</code> + <code>0x00000100157BB0</code> = <code>0x0000000100d5bbb0</code></li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-06 22:04:54
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 背景知识">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../basic_breakpoint.html" class="navigation navigation-next " aria-label="Next page: 普通断点">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"得到函数的实际地址","level":"1.3.1.1","depth":3,"next":{"title":"普通断点","level":"1.3.2","depth":2,"path":"common_logic/basic_breakpoint.md","ref":"common_logic/basic_breakpoint.md","articles":[]},"previous":{"title":"背景知识","level":"1.3.1","depth":2,"path":"common_logic/background/README.md","ref":"common_logic/background/README.md","articles":[{"title":"得到函数的实际地址","level":"1.3.1.1","depth":3,"path":"common_logic/background/get_func_real_addr.md","ref":"common_logic/background/get_func_real_addr.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_breakpoint/pdf/ios_re_debug_breakpoint.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_breakpoint/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_breakpoint","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向之动态调试：断点","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的断点的各方面的知识和心得。先对于iOS逆向调试期间的断点进行概览介绍。接着介绍Xcode图形界面和lldb命令行中的断点的通用逻辑，包括相关背景知识，比如如何得到函数的实际地址；以及介绍普通断点的通用逻辑；接着介绍普通断点如何加断点，以及断点的一些高级用法，比如指定模块、条件判断断点和对应例子；接着介绍Xcode图形界面和lldb命令行中的关于断点的各自特有的内容。包括lldb中breakpoint的help语法。接着整理常见问题，包括断点没触发、Xcode中hook代码的断点以及lldb；以及各种经验和心得，包括通用的，比如加断点导致卡死等；以及ObjC方面的断点，和Xcode的各种心得，包括如何同时调试多个断点、临时关闭所有断点、确认断点是否加上、确保断点能加上且能触发等；以及lldb无名函数和恢复符号表；最后贴上附录资料。"},"file":{"path":"common_logic/background/get_func_real_addr.md","mtime":"2023-07-06T14:04:54.342Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-30T14:10:41.899Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,796 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>运行崩溃killed · iOS逆向调试：debugserver+lldb</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../appendix/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_debug_debugserver_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../debugserver_lldb_overview/">
+            
+                <a href="../debugserver_lldb_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    debugserver+lldb概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../debugserver_lldb_debug/">
+            
+                <a href="../debugserver_lldb_debug/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    debugserver+lldb调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../debugserver_lldb_debug/proper_entitlemets.html">
+            
+                <a href="../debugserver_lldb_debug/proper_entitlemets.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    确保debugserver权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../debugserver_lldb_debug/iphone_run_debugserver.html">
+            
+                <a href="../debugserver_lldb_debug/iphone_run_debugserver.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    iPhone运行debugserver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../debugserver_lldb_debug/mac_run_lldb_debug.html">
+            
+                <a href="../debugserver_lldb_debug/mac_run_lldb_debug.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    Mac运行lldb
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../debugserver/">
+            
+                <a href="../debugserver/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    debugserver
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../debugserver/origin_debugserver/">
+            
+                <a href="../debugserver/origin_debugserver/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    原始debugserver位置
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../debugserver/origin_debugserver/origin_entitlement.html">
+            
+                <a href="../debugserver/origin_debugserver/origin_entitlement.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    原始entitlement权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../debugserver/help_syntax.html">
+            
+                <a href="../debugserver/help_syntax.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../lldb/">
+            
+                <a href="../lldb/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    lldb
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../usage_note/">
+            
+                <a href="../usage_note/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    使用心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../usage_note/ios_bin_full_path.html">
+            
+                <a href="../usage_note/ios_bin_full_path.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    获取iOS的app二进制路径
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../usage_note/entitlement/">
+            
+                <a href="../usage_note/entitlement/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    entitlement权限
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../usage_note/entitlement/check_entitlement/">
+            
+                <a href="../usage_note/entitlement/check_entitlement/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    查看entitlement权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../usage_note/entitlement/re_codesign.html">
+            
+                <a href="../usage_note/entitlement/re_codesign.html">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    重签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.7.1" data-path="run_crash_killed.html">
+            
+                <a href="run_crash_killed.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    运行崩溃killed
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >运行崩溃killed</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="运行崩溃killed"><a name="运行崩溃killed" class="plugin-anchor" href="#运行崩溃killed"><i class="fa fa-link" aria-hidden="true"></i></a>运行崩溃killed</h1>
+<p>重签名后的debugserver运行崩溃：killed</p>
+<h2 id="现象"><a name="现象" class="plugin-anchor" href="#现象"><i class="fa fa-link" aria-hidden="true"></i></a>现象</h2>
+<h3 id="表面现象"><a name="表面现象" class="plugin-anchor" href="#表面现象"><i class="fa fa-link" aria-hidden="true"></i></a>表面现象</h3>
+<p>之前用：</p>
+<pre class="language-"><code class="lang-bash">ldid <span class="token parameter variable">-Sdebugable_entitlement.xml</span> debugserver_debugable
+</code></pre>
+<p>给debugserver重签名，加上了额外的可以被调试的权限。</p>
+<p>注：此方法，之前在<code>iOS 14</code>中，是有效的。</p>
+<p>但是此处<code>iOS 15</code>中，报错了：运行崩溃killed</p>
+<pre class="language-"><code class="lang-bash">iPhone8-150:/Developer/usr/bin root<span class="token comment"># debugserver --version</span>
+zsh: killed     debugserver <span class="token parameter variable">--version</span>
+
+iPhone8-150:/usr/bin root<span class="token comment"># /usr/bin/debugserver --help</span>
+zsh: killed     /usr/bin/debugserver <span class="token parameter variable">--help</span>
+</code></pre>
+<p><img src="../assets/img/debugserver_recodesigned_crash_killed.png" alt="debugserver_recodesigned_crash_killed"></p>
+<h3 id="深层次现象"><a name="深层次现象" class="plugin-anchor" href="#深层次现象"><i class="fa fa-link" aria-hidden="true"></i></a>深层次现象</h3>
+<p><code>debugserver</code>的崩溃日志<code>.ips</code>文件：</p>
+<h4 id="崩溃日志1"><a name="崩溃日志1" class="plugin-anchor" href="#崩溃日志1"><i class="fa fa-link" aria-hidden="true"></i></a>崩溃日志1</h4>
+<p><img src="../assets/img/debugserver_crash_ips_file.png" alt="debugserver_crash_ips_file"></p>
+<p>可以看到具体崩溃原因是：</p>
+<p><img src="../assets/img/debugserver_ips_detail_sigkill_codesigning.png" alt="debugserver_ips_detail_sigkill_codesigning"></p>
+<pre class="language-"><code class="lang-json">Incident Identifier<span class="token operator">:</span> FC53485C-2EFB-4BBD-BFFA-C5E4423472AA
+CrashReporter Key<span class="token operator">:</span>   af51fc83d1f85f879bfdec1ca10f7cda9c77ed26
+Hardware Model<span class="token operator">:</span>      iPhone10<span class="token punctuation">,</span><span class="token number">1</span>
+Process<span class="token operator">:</span>             debugserver <span class="token punctuation">[</span><span class="token number">15077</span><span class="token punctuation">]</span>
+Path<span class="token operator">:</span>                /usr/bin/debugserver
+Identifier<span class="token operator">:</span>          debugserver
+Version<span class="token operator">:</span>             ???
+Code Type<span class="token operator">:</span>           ARM<span class="token number">-64</span> (Native)
+Role<span class="token operator">:</span>                Unspecified
+Parent Process<span class="token operator">:</span>      zsh <span class="token punctuation">[</span><span class="token number">15063</span><span class="token punctuation">]</span>
+Coalition<span class="token operator">:</span>           com.openssh.sshd.83419ED5-C693-40F0-A9FD-555AEC8B5B26 <span class="token punctuation">[</span><span class="token number">24334</span><span class="token punctuation">]</span>
+
+Date/Time<span class="token operator">:</span>           <span class="token number">2023</span><span class="token number">-03</span><span class="token number">-03</span> <span class="token number">11</span><span class="token operator">:</span><span class="token number">54</span><span class="token operator">:</span><span class="token number">31.9855</span> +<span class="token number">0800</span>
+Launch Time<span class="token operator">:</span>         <span class="token number">2023</span><span class="token number">-03</span><span class="token number">-03</span> <span class="token number">11</span><span class="token operator">:</span><span class="token number">54</span><span class="token operator">:</span><span class="token number">31.9682</span> +<span class="token number">0800</span>
+OS Version<span class="token operator">:</span>          iPhone OS <span class="token number">15.0</span> (19A346)
+Release Type<span class="token operator">:</span>        User
+Baseband Version<span class="token operator">:</span>    <span class="token number">7.02</span>.<span class="token number">00</span>
+Report Version<span class="token operator">:</span>      <span class="token number">104</span>
+
+Exception Type<span class="token operator">:</span>  EXC_CRASH (SIGKILL - CODESIGNING)
+Exception Codes<span class="token operator">:</span> 0x0000000000000000<span class="token punctuation">,</span> 0x0000000000000000
+Exception Note<span class="token operator">:</span>  EXC_CORPSE_NOTIFY
+Termination Reason<span class="token operator">:</span> EXEC; <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+Triggered by Thread<span class="token operator">:</span>  <span class="token number">0</span>
+
+Application Specific Information<span class="token operator">:</span>
+
+crashed on child side of fork pre-exec
+
+Thread <span class="token number">0</span> name<span class="token operator">:</span>   Dispatch queue<span class="token operator">:</span> com.apple.main-thread
+Thread <span class="token number">0</span> Crashed<span class="token operator">:</span>
+<span class="token number">0</span>   libsystem_kernel.dylib                   0x1bba74f28 0x1bba70000 + <span class="token number">20264</span>
+<span class="token number">1</span>   libsystem_kernel.dylib                   0x1bba758f8 0x1bba70000 + <span class="token number">22776</span>
+<span class="token number">2</span>   substitute-loader.dylib                  0x1018464a8 0x101618000 + <span class="token number">2286760</span>
+<span class="token number">3</span>   substitute-loader.dylib                  0x1016ba81c 0x101618000 + <span class="token number">665628</span>
+<span class="token number">4</span>   substitute-loader.dylib                  0x101860edc 0x101618000 + <span class="token number">2395868</span>
+<span class="token number">5</span>   substitute-loader.dylib                  0x101860efc 0x101618000 + <span class="token number">2395900</span>
+<span class="token number">6</span>   substitute-loader.dylib                  0x101860f1c 0x101618000 + <span class="token number">2395932</span>
+<span class="token number">7</span>   substitute-loader.dylib                  0x10184d368 0x101618000 + <span class="token number">2315112</span>
+<span class="token number">8</span>   libiosexec.<span class="token number">1</span>.dylib                       0x100c6d270 0x100c68000 + <span class="token number">21104</span>
+<span class="token number">9</span>   zsh                                      0x100ac9b4c 0x100aa4000 + <span class="token number">154444</span>
+<span class="token number">10</span>  zsh                                      0x100ac85d0 0x100aa4000 + <span class="token number">148944</span>
+<span class="token number">11</span>  zsh                                      0x100ac485c 0x100aa4000 + <span class="token number">133212</span>
+<span class="token number">12</span>  zsh                                      0x100abf388 0x100aa4000 + <span class="token number">111496</span>
+<span class="token number">13</span>  zsh                                      0x100abec3c 0x100aa4000 + <span class="token number">109628</span>
+<span class="token number">14</span>  zsh                                      0x100abe450 0x100aa4000 + <span class="token number">107600</span>
+<span class="token number">15</span>  zsh                                      0x100ada524 0x100aa4000 + <span class="token number">222500</span>
+<span class="token number">16</span>  zsh                                      0x100add6d0 0x100aa4000 + <span class="token number">235216</span>
+<span class="token number">17</span>  dyld                                     0x100ee8190 0x100ed0000 + <span class="token number">98704</span>
+
+Thread <span class="token number">0</span> crashed with ARM Thread State (<span class="token number">64</span>-bit)<span class="token operator">:</span>
+    x0<span class="token operator">:</span> 0x000000000000000d   x1<span class="token operator">:</span> 0x0000000000000000   x2<span class="token operator">:</span> 0x000000016f357b20   x3<span class="token operator">:</span> 0x0000000100cc17c8
+    x4<span class="token operator">:</span> 0x000000016f357c00   x5<span class="token operator">:</span> 0x000000016f357c00   x6<span class="token operator">:</span> 0x0000000000000006   x7<span class="token operator">:</span> 0x0000000000000160
+    x8<span class="token operator">:</span> 0x0000000000000000   x9<span class="token operator">:</span> 0x0000000000000000  x10<span class="token operator">:</span> 0x0000000101308d00  x11<span class="token operator">:</span> 0x0000000000179f41
+   x12<span class="token operator">:</span> 0x0000000101300000  x13<span class="token operator">:</span> 0x0000000000000000  x14<span class="token operator">:</span> 0x000000005037fbca  x15<span class="token operator">:</span> 0x00000000b3c61a67
+   x16<span class="token operator">:</span> 0x00000000000000f4  x17<span class="token operator">:</span> 0x00000001bba75718  x18<span class="token operator">:</span> 0x0000000000000000  x19<span class="token operator">:</span> 0x000000016f357c00
+   x20<span class="token operator">:</span> 0x0000000100cc17c8  x21<span class="token operator">:</span> 0x000000016f359240  x22<span class="token operator">:</span> 0x0000000000000000  x23<span class="token operator">:</span> 0x000000016f357b20
+   x24<span class="token operator">:</span> 0x000000016f358e10  x25<span class="token operator">:</span> 0x0000000000000016  x26<span class="token operator">:</span> 0x000000004d8f3103  x27<span class="token operator">:</span> 0x00000000ffffff92
+   x28<span class="token operator">:</span> 0x000000016f358640   fp<span class="token operator">:</span> 0x000000016f357bf0   lr<span class="token operator">:</span> 0x00000001bba758f8
+    sp<span class="token operator">:</span> 0x000000016f357b20   pc<span class="token operator">:</span> 0x00000001bba74f28 cpsr<span class="token operator">:</span> 0x20000000
+   far<span class="token operator">:</span> 0x0000000100ca4000  esr<span class="token operator">:</span> 0x56000080  Address size fault
+
+Binary Images<span class="token operator">:</span>
+       0x1bba70000 -        0x1bbaa1fff libsystem_kernel.dylib arm64  &lt;83a7e9554c943d9d9c1163fe9c36fbd7&gt; /usr/lib/system/libsystem_kernel.dylib
+       0x101618000 -        0x1018c3fff substitute-loader.dylib arm64  &lt;f7c5d185cc163b6b8bb2bb36e2c86755&gt; /usr/lib/substitute-loader.dylib
+       0x100c68000 -        0x100c6ffff libiosexec.<span class="token number">1</span>.dylib arm64  &lt;fff6c30d2a49376eb070606153db8b99&gt; /usr/lib/libiosexec.<span class="token number">1</span>.dylib
+       0x100aa4000 -        0x100b33fff zsh arm64  &lt;5f9852c7fc8c37dc81250e39a1bd688b&gt; /usr/bin/zsh
+       0x100ed0000 -        0x100f23fff dyld arm64  &lt;d7a0282e93de3a1e981327e84517cc96&gt; /usr/lib/dyld
+
+EOF
+</code></pre>
+<p>其中的<code>Exception Type:  EXC_CRASH (SIGKILL - CODESIGNING)</code>能看出是：代码签名方面的问题</p>
+<h4 id="崩溃日志2"><a name="崩溃日志2" class="plugin-anchor" href="#崩溃日志2"><i class="fa fa-link" aria-hidden="true"></i></a>崩溃日志2</h4>
+<p><img src="../assets/img/debugserver_ips_detail_bad_macho.png" alt="debugserver_ips_detail_bad_macho"></p>
+<pre class="language-"><code class="lang-json">  <span class="token property">&quot;exception&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;codes&quot;</span><span class="token operator">:</span><span class="token string">&quot;0x0000000000000000, 0x0000000000000000&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;rawCodes&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">&quot;type&quot;</span><span class="token operator">:</span><span class="token string">&quot;EXC_CRASH&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;signal&quot;</span><span class="token operator">:</span><span class="token string">&quot;SIGKILL - CODESIGNING&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;termination&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;flags&quot;</span><span class="token operator">:</span><span class="token number">64</span><span class="token punctuation">,</span><span class="token property">&quot;code&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token property">&quot;namespace&quot;</span><span class="token operator">:</span><span class="token string">&quot;EXEC&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;indicator&quot;</span><span class="token operator">:</span><span class="token string">&quot;Bad Mach-O&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;asi&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;libsystem_c.dylib&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">&quot;crashed on child side of fork pre-exec&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">&quot;dyld&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<p>其中的：</p>
+<ul>
+<li><code>&quot;signal&quot;:&quot;SIGKILL - CODESIGNING&quot;}</code>：确定是：代码签名方面的问题，导致的崩溃</li>
+<li><code>&quot;indicator&quot;:&quot;Bad Mach-O&quot;</code>：具体指示器 ~= 出错的地方/来源：是由于<code>Bad Mach-O</code>=Mach-O二进制文件是坏的<ul>
+<li>后续证明：是签名方面有问题 -》所以是：坏的Mach-O文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="原因"><a name="原因" class="plugin-anchor" href="#原因"><i class="fa fa-link" aria-hidden="true"></i></a>原因</h2>
+<p><code>iOS &lt;15</code>时的旧的重签名的方式=ldid重签名，不满足此处（<code>arm64</code>的<code>A11</code>的<code>iPhone8</code>，<code>iOS 15.0</code>）新的<code>iOS 15+</code>的要求</p>
+<h2 id="解决办法"><a name="解决办法" class="plugin-anchor" href="#解决办法"><i class="fa fa-link" aria-hidden="true"></i></a>解决办法</h2>
+<p>用<code>codesign</code>重新签名</p>
+<h2 id="具体步骤"><a name="具体步骤" class="plugin-anchor" href="#具体步骤"><i class="fa fa-link" aria-hidden="true"></i></a>具体步骤</h2>
+<ul>
+<li>概述<pre class="language-"><code class="lang-bash">codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--entitlements</span> debugable_entitlement.xml debugserver
+</code></pre>
+</li>
+<li>详解<ul>
+<li><a href="../usage_note/entitlement/re_codesign.html">重签名</a></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-21 18:27:48
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 常见问题">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../appendix/" class="navigation navigation-next " aria-label="Next page: 附录">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"运行崩溃killed","level":"1.7.1","depth":2,"next":{"title":"附录","level":"1.8","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.8.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"常见问题","level":"1.7","depth":1,"path":"common_issues/README.md","ref":"common_issues/README.md","articles":[{"title":"运行崩溃killed","level":"1.7.1","depth":2,"path":"common_issues/run_crash_killed.md","ref":"common_issues/run_crash_killed.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/pdf/ios_re_debug_debugserver_lldb.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_debugserver_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向调试：debugserver+lldb","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中动态调试中的其中一种方式：debugserver+lldb。先是概览；然后再去详细介绍如何调试，首先是确保iPhone中debugserver有正确的权限，接着是iPhone中用debugserver启动app，最后是Mac中用lldb去调试app；接着单独介绍debugserver，包括原始的位置和来源，以及附录上原始entitlement权限供参考，以及help语法；然后介绍lldb；然后总结使用心得，包括获取iOS的app二进制路径，entitlement权限的如何查看权限、如何重签名；以及常见问题，包括运行崩溃killed等内容。"},"file":{"path":"common_issues/run_crash_killed.md","mtime":"2023-10-21T10:27:48.336Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-21T11:14:42.393Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

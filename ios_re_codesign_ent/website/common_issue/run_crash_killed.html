@@ -1,0 +1,1032 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>运行崩溃Killed · iOS逆向开发：签名和权限</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="process_debuggable/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_codesign_ent","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../codesign_ent_overview/">
+            
+                <a href="../codesign_ent_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    签名和权限概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../entitlement/">
+            
+                <a href="../entitlement/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    entitlement权限
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../entitlement/what_is_ent.html">
+            
+                <a href="../entitlement/what_is_ent.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    什么是entitlement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../entitlement/check_ent.html">
+            
+                <a href="../entitlement/check_ent.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    查看权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../entitlement/common_ent/">
+            
+                <a href="../entitlement/common_ent/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    常见权限
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../entitlement/common_ent/get_task_allow.html">
+            
+                <a href="../entitlement/common_ent/get_task_allow.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    get-task-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../entitlement/common_ent/task_for_pid_allow.html">
+            
+                <a href="../entitlement/common_ent/task_for_pid_allow.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    task_for_pid-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../entitlement/common_ent/platform_application.html">
+            
+                <a href="../entitlement/common_ent/platform_application.html">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    platform-application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../entitlement/common_ent/run_unsigned_code.html">
+            
+                <a href="../entitlement/common_ent/run_unsigned_code.html">
+            
+                    
+                        <b>1.3.3.4.</b>
+                    
+                    run-unsigned-code
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="../entitlement/common_ent/proc_info_allow.html">
+            
+                <a href="../entitlement/common_ent/proc_info_allow.html">
+            
+                    
+                        <b>1.3.3.5.</b>
+                    
+                    proc_info-allow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.6" data-path="../entitlement/common_ent/seatbelt_profiles.html">
+            
+                <a href="../entitlement/common_ent/seatbelt_profiles.html">
+            
+                    
+                        <b>1.3.3.6.</b>
+                    
+                    seatbelt-profiles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7" data-path="../entitlement/common_ent/com_apple_security/">
+            
+                <a href="../entitlement/common_ent/com_apple_security/">
+            
+                    
+                        <b>1.3.3.7.</b>
+                    
+                    com.apple.security相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.7.1" data-path="../entitlement/common_ent/com_apple_security/network.html">
+            
+                <a href="../entitlement/common_ent/com_apple_security/network.html">
+            
+                    
+                        <b>1.3.3.7.1.</b>
+                    
+                    network相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7.2" data-path="../entitlement/common_ent/com_apple_security/application_groups.html">
+            
+                <a href="../entitlement/common_ent/com_apple_security/application_groups.html">
+            
+                    
+                        <b>1.3.3.7.2.</b>
+                    
+                    application-groups
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../entitlement/modify_ent.html">
+            
+                <a href="../entitlement/modify_ent.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    更改权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../codesign/">
+            
+                <a href="../codesign/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../codesign/what_is_codesign.html">
+            
+                <a href="../codesign/what_is_codesign.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    什么是codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../codesign/check_sign.html">
+            
+                <a href="../codesign/check_sign.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    查看签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../codesign/resign.html">
+            
+                <a href="../codesign/resign.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    重新签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../common_tools/">
+            
+                <a href="../common_tools/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    常用工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../common_tools/codesign/">
+            
+                <a href="../common_tools/codesign/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../common_tools/codesign/help.html">
+            
+                <a href="../common_tools/codesign/help.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../common_tools/ldid/">
+            
+                <a href="../common_tools/ldid/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    ldid
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../common_tools/ldid/help.html">
+            
+                <a href="../common_tools/ldid/help.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../common_tools/security.html">
+            
+                <a href="../common_tools/security.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    security
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.1" data-path="run_crash_killed.html">
+            
+                <a href="run_crash_killed.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    运行崩溃Killed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="process_debuggable/">
+            
+                <a href="process_debuggable/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    任意进程可调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="process_debuggable/xinaa15_builtin.html">
+            
+                <a href="process_debuggable/xinaa15_builtin.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    XinaA15自带已支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="process_debuggable/self_do_resign.html">
+            
+                <a href="process_debuggable/self_do_resign.html">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    手动重签名
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="install_app.html">
+            
+                <a href="install_app.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    安装app时的签名问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="monkeydev_debug_crash.html">
+            
+                <a href="monkeydev_debug_crash.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    MonkeyDev调试时崩溃
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >运行崩溃Killed</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="运行崩溃killed"><a name="运行崩溃killed" class="plugin-anchor" href="#运行崩溃killed"><i class="fa fa-link" aria-hidden="true"></i></a>运行崩溃killed</h1>
+<p>iOS（或Mac中）的app，由于签名方面问题，运行时出现崩溃问题，且提示Killed，可能的情况有多种：</p>
+<h2 id="debugserver运行崩溃killed"><a name="debugserver运行崩溃killed" class="plugin-anchor" href="#debugserver运行崩溃killed"><i class="fa fa-link" aria-hidden="true"></i></a>debugserver运行崩溃killed</h2>
+<ul>
+<li>现象：用<code>ldid</code>重签名后的debugserver在<code>iOS 15.0</code>的<code>iPhone8</code>上运行出现崩溃提示killed<pre class="language-"><code class="lang-bash">iPhone8-150:/usr/bin root<span class="token comment"># /usr/bin/debugserver --version</span>
+zsh: killed     /usr/bin/debugserver <span class="token parameter variable">--version</span>
+</code></pre>
+</li>
+<li>原因：代码签名方面的问题<ul>
+<li>查看崩溃日志ips，可以看到是代码签名问题<ul>
+<li><code>type EXC_CRASH signal SIGKILL CODESIGNING</code></li>
+</ul>
+</li>
+<li>对比<ul>
+<li><code>iOS 15</code>之前可以用<code>ldid</code>重签名 -&gt; 运行不会崩溃</li>
+<li>但<code>iOS 15</code>之后会崩溃<ul>
+<li>iOS 15之后，应该是内部做了签名方面的校验和判断</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决办法：要改用<code>codesign</code>重签名<pre class="language-"><code class="lang-bash">codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--entitlements</span> debugable_entitlement.xml debugserver
+</code></pre>
+<ul>
+<li>注：核心差异应该是，<code>-s -</code>会用上当前的签名</li>
+</ul>
+</li>
+</ul>
+<p>由此有了心得：</p>
+<h3 id="ldid换codesign"><a name="ldid换codesign" class="plugin-anchor" href="#ldid换codesign"><i class="fa fa-link" aria-hidden="true"></i></a>ldid换codesign</h3>
+<ul>
+<li>iOS 15之前<pre class="language-"><code class="lang-bash">ldid <span class="token parameter variable">-Sdebugserver.entitlements</span> debugserver
+</code></pre>
+<ul>
+<li>可以正常运行</li>
+</ul>
+</li>
+<li>iOS 15之后<pre class="language-"><code class="lang-bash">ldid <span class="token parameter variable">-Sdebugserver.entitlements</span> debugserver
+</code></pre>
+<ul>
+<li>运行崩溃：`Killed 9``<ul>
+<li>解决办法：换<code>codesign</code><pre class="language-"><code class="lang-bash">  codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--entitlements</span> debugserver.entitlements debugserver
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>即：</p>
+<ul>
+<li>给debugserver添加entitlement权限（后，再放回iPhone中使用）<ul>
+<li><code>&lt; iOS 15</code>：可以用<code>ldid</code><pre class="language-"><code class="lang-bash">ldid <span class="token parameter variable">-Sdebugable_entitlement.xml</span> debugserver
+</code></pre>
+</li>
+<li><code>&gt;= iOS 15</code><ul>
+<li>不能用ldid<ul>
+<li>否则就会运行报错killed<ul>
+<li>查看崩溃日志ips，可以看到是：代码签名问题<ul>
+<li><code>type EXC_CRASH signal SIGKILL CODESIGNING</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>要用<code>codesign</code>（估计是其中带了<code>signature</code>）<pre class="language-"><code class="lang-bash">codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--entitlements</span> debugable_entitlement.xml debugserver
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="mac-m2-max中jtool2运行崩溃killed"><a name="mac-m2-max中jtool2运行崩溃killed" class="plugin-anchor" href="#mac-m2-max中jtool2运行崩溃killed"><i class="fa fa-link" aria-hidden="true"></i></a>Mac M2 Max中jtool2运行崩溃Killed</h2>
+<ul>
+<li>现象</li>
+</ul>
+<p>brew安装的官网的jtool2</p>
+<pre class="language-"><code class="lang-bash">brew <span class="token function">install</span> <span class="token parameter variable">--cask</span> jtool2
+</code></pre>
+<p>运行时报错：<code>Unrecoverable CT signature issue, bailing out</code></p>
+<pre class="language-"><code class="lang-bash">默认    <span class="token number">17</span>:41:55.432539+0800    kernel    Checking <span class="token keyword">in</span> with amfid <span class="token keyword">for</span> DER jtool2.arm64e
+默认    <span class="token number">17</span>:41:55.433342+0800    kernel    AMFI: /Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2_old/jtool2 doesn<span class="token string">&apos;t have DER entitlements and will not work in a future release
+默认    17:41:55.433439+0800    kernel    AMFI: &apos;</span>/Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2_old/jtool2<span class="token string">&apos; has no CMS blob?
+默认    17:41:55.433454+0800    kernel    AMFI: &apos;</span>/Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2_old/jtool2&apos;: Unrecoverable CT signature issue, bailing out.
+默认    <span class="token number">17</span>:41:55.433480+0800    kernel    AMFI: Releasing transmuted blob <span class="token keyword">for</span> jtool2.arm64e - <span class="token operator">&lt;</span>private<span class="token operator">&gt;</span> 94x
+默认    <span class="token number">17</span>:41:55.433516+0800    kernel    proc <span class="token number">77535</span>: load code signature error <span class="token number">4</span> <span class="token keyword">for</span> <span class="token function">file</span> <span class="token string">&quot;jtool2&quot;</span>
+默认    <span class="token number">17</span>:41:55.434075+0800    kernel    exec_mach_imgact: not running binary <span class="token string">&quot;jtool2&quot;</span> built against preview arm64e ABI
+默认    <span class="token number">17</span>:41:55.434268+0800    kernel    ASP: Security policy would not allow process: <span class="token number">77535</span>, /Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2_old/jtool2
+</code></pre>
+<ul>
+<li>原因：签名方面问题</li>
+<li>解决过程</li>
+</ul>
+<p>用codesign去签名</p>
+<pre class="language-"><code class="lang-bash">codesign <span class="token parameter variable">-f</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--entitlements</span> jtool2.entitlements jtool2
+</code></pre>
+<p>虽然能解决：<code>Unrecoverable CT signature issue, bailing out</code>的签名问题，会仍会出现其他签名方面问题：</p>
+<p><code>unsuitable CT policy 0 for this platform/device, rejecting signature.</code></p>
+<pre class="language-"><code class="lang-bash">  默认    09:46:52.624806+0800    kernel    AMFI: <span class="token string">&apos;/Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2/jtool2&apos;</span> is adhoc signed.
+  默认    09:46:52.624815+0800    kernel    AMFI: <span class="token string">&apos;/Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2/jtool2&apos;</span><span class="token builtin class-name">:</span> unsuitable CT policy <span class="token number">0</span> <span class="token keyword">for</span> this platform/device, rejecting signature.
+  默认    09:46:52.624854+0800    kernel    proc <span class="token number">13558</span>: load code signature error <span class="token number">4</span> <span class="token keyword">for</span> <span class="token function">file</span> <span class="token string">&quot;jtool2&quot;</span>
+  默认    09:46:52.625370+0800    kernel    exec_mach_imgact: not running binary <span class="token string">&quot;jtool2&quot;</span> built against preview arm64e ABI
+  默认    09:46:52.625580+0800    kernel    ASP: Security policy would not allow process: <span class="token number">13558</span>, /Users/crifan/dev/dev_tool/reverse_security/iOS/jtool2/jtool2/jtool2
+</code></pre>
+<p>-&gt; 最终解决办法：</p>
+<ul>
+<li>不用brew安装官网的jtool2 = 卸载掉原先安装的版本<pre class="language-"><code class="lang-bash">brew uninstall jtool2
+</code></pre>
+</li>
+<li>换装其他版本的jtool2<pre class="language-"><code class="lang-bash">brew <span class="token function">install</span> --no-quarantine excitedplus1s/repo/jtool2
+</code></pre>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-15 10:25:37
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 常见问题">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="process_debuggable/" class="navigation navigation-next " aria-label="Next page: 任意进程可调试">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"运行崩溃Killed","level":"1.6.1","depth":2,"next":{"title":"任意进程可调试","level":"1.6.2","depth":2,"path":"common_issue/process_debuggable/README.md","ref":"common_issue/process_debuggable/README.md","articles":[{"title":"XinaA15自带已支持","level":"1.6.2.1","depth":3,"path":"common_issue/process_debuggable/xinaa15_builtin.md","ref":"common_issue/process_debuggable/xinaa15_builtin.md","articles":[]},{"title":"手动重签名","level":"1.6.2.2","depth":3,"path":"common_issue/process_debuggable/self_do_resign.md","ref":"common_issue/process_debuggable/self_do_resign.md","articles":[]}]},"previous":{"title":"常见问题","level":"1.6","depth":1,"path":"common_issue/README.md","ref":"common_issue/README.md","articles":[{"title":"运行崩溃Killed","level":"1.6.1","depth":2,"path":"common_issue/run_crash_killed.md","ref":"common_issue/run_crash_killed.md","articles":[]},{"title":"任意进程可调试","level":"1.6.2","depth":2,"path":"common_issue/process_debuggable/README.md","ref":"common_issue/process_debuggable/README.md","articles":[{"title":"XinaA15自带已支持","level":"1.6.2.1","depth":3,"path":"common_issue/process_debuggable/xinaa15_builtin.md","ref":"common_issue/process_debuggable/xinaa15_builtin.md","articles":[]},{"title":"手动重签名","level":"1.6.2.2","depth":3,"path":"common_issue/process_debuggable/self_do_resign.md","ref":"common_issue/process_debuggable/self_do_resign.md","articles":[]}]},{"title":"安装app时的签名问题","level":"1.6.3","depth":2,"path":"common_issue/install_app.md","ref":"common_issue/install_app.md","articles":[]},{"title":"MonkeyDev调试时崩溃","level":"1.6.4","depth":2,"path":"common_issue/monkeydev_debug_crash.md","ref":"common_issue/monkeydev_debug_crash.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_codesign_ent/pdf/ios_re_codesign_ent.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_codesign_ent/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_codesign_ent","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：签名和权限","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的codesign代码签名和entitlement权限等相关内容。先是给概览，再是entitlement权限，包括什么是entitlement权限，如何用ldid和codesign查看权限、以及常见的权限，比如get-task-allow、task_for_pid-allow、platform-application等等；接着介绍如何更改权限；然后介绍codesign代码签名，先介绍什么是codesign，然后介绍如何用codesign命令行工具查看签名信息，以及如何用ldid和codesign重新签名；接着介绍常用工具，包括ldid、codesign、security；接着介绍常见的问题，包括运行时崩溃killed、任意进程可调试，包括XinaA15自带支持和自己手动重签名、安装app时的签名问题、MonkeyDev调试时崩溃等，最后附录中贴上参考资料。"},"file":{"path":"common_issue/run_crash_killed.md","mtime":"2023-07-15T02:25:37.154Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-15T14:21:55.892Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
