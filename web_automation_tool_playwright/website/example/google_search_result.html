@@ -1,0 +1,1322 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>模拟谷歌搜索并获取结果 · 跨平台Web自动化神器：Playwright</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="other.html" />
+    
+    
+    <link rel="prev" href="baidu_search.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"web_automation_tool_playwright","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview/">
+            
+                <a href="../overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Playwright概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../init_dev_env.html">
+            
+                <a href="../init_dev_env.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    初始化环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../basic/">
+            
+                <a href="../basic/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../basic/find_element.html">
+            
+                <a href="../basic/find_element.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    查找元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../basic/find_and_click.html">
+            
+                <a href="../basic/find_and_click.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    查找并点击元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../basic/input_text.html">
+            
+                <a href="../basic/input_text.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    输入文字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../basic/wait_for.html">
+            
+                <a href="../basic/wait_for.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    等待元素出现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../basic/emulate_key.html">
+            
+                <a href="../basic/emulate_key.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    模拟按键
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../basic/get_value.html">
+            
+                <a href="../basic/get_value.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    获取元素属性值
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../issues_summary/">
+            
+                <a href="../issues_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    常见问题和心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../issues_summary/sync_instance_init.html">
+            
+                <a href="../issues_summary/sync_instance_init.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    初始化Sync的playwright的实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../issues_summary/sync_inside_asyncio.html">
+            
+                <a href="../issues_summary/sync_inside_asyncio.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    using Sync API inside the asyncio loop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../issues_summary/all_goto_timeout.html">
+            
+                <a href="../issues_summary/all_goto_timeout.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    所有页面加载都超时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../issues_summary/browser_not_found.html">
+            
+                <a href="../issues_summary/browser_not_found.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    browser was not found
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../issues_summary/add_proxy.html">
+            
+                <a href="../issues_summary/add_proxy.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    给playwright加代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="baidu_search.html">
+            
+                <a href="baidu_search.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    百度搜索自动化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.2" data-path="google_search_result.html">
+            
+                <a href="google_search_result.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    模拟谷歌搜索并获取结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="other.html">
+            
+                <a href="other.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/doc_tutorial.html">
+            
+                <a href="../appendix/doc_tutorial.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    教程和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >模拟谷歌搜索并获取结果</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6A21;&#x62DF;&#x8C37;&#x6B4C;&#x641C;&#x7D22;&#x5E76;&#x83B7;&#x53D6;&#x7ED3;&#x679C;"><a name="&#x6A21;&#x62DF;&#x8C37;&#x6B4C;&#x641C;&#x7D22;&#x5E76;&#x83B7;&#x53D6;&#x7ED3;&#x679C;" class="plugin-anchor" href="#&#x6A21;&#x62DF;&#x8C37;&#x6B4C;&#x641C;&#x7D22;&#x5E76;&#x83B7;&#x53D6;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x62DF;&#x8C37;&#x6B4C;&#x641C;&#x7D22;&#x5E76;&#x83B7;&#x53D6;&#x7ED3;&#x679C;</h1>
+<ul>
+<li>&#x6CE8;&#xFF1A;&#x6700;&#x65B0;&#x4EE3;&#x7801;&#x8BE6;&#x89C1;<ul>
+<li><a href="https://github.com/crifan/crifanLibPython/blob/master/python3/crifanLib/thirdParty/crifanPlaywright.py" target="_blank">https://github.com/crifan/crifanLibPython/blob/master/python3/crifanLib/thirdParty/crifanPlaywright.py</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>&#x6B64;&#x5904;&#x5B9E;&#x73B0;&#x4E86;&#xFF0C;&#x7528;Playwright&#x6A21;&#x62DF;google&#x8C37;&#x6B4C;&#x641C;&#x7D22;&#xFF0C;&#x5E76;&#x89E3;&#x6790;&#x51FA;&#x7B2C;&#x4E00;&#x9875;&#x7684;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#xFF1A;</p>
+<p><img src="../assets/img/playwright_google_first_result_page.png" alt="playwright_google_first_result_page"></p>
+<h2 id="&#x4EE3;&#x7801;"><a name="&#x4EE3;&#x7801;" class="plugin-anchor" href="#&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4EE3;&#x7801;</h2>
+<h3 id="&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x9875;&#x9762;&#x521D;&#x59CB;&#x5316;"><a name="&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x9875;&#x9762;&#x521D;&#x59CB;&#x5316;" class="plugin-anchor" href="#&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x9875;&#x9762;&#x521D;&#x59CB;&#x5316;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x9875;&#x9762;&#x521D;&#x59CB;&#x5316;</h3>
+<p>&#x521D;&#x59CB;&#x5316;&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x9875;&#x9762;&#x76F8;&#x5173;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">from</span> playwright<span class="token punctuation">.</span>sync_api <span class="token keyword">import</span> sync_playwright
+
+<span class="token keyword">def</span> <span class="token function">initBrowser</span><span class="token punctuation">(</span>browserType<span class="token operator">=</span><span class="token string">&quot;chromium&quot;</span><span class="token punctuation">,</span> browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> <span class="token boolean">False</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    For playwright, init to create a browser. For later use, such as google search
+
+    Args:
+        browserType (str): Playwright browser type: chromium / firefox / webkit
+        browserConfig (dict): Playwright browser config. Default is {&quot;headless&quot;: False}.
+    Returns:
+        BrowserType
+    Examples:
+        browserConfig
+            {
+                &quot;headless&quot;: False,
+                &quot;proxy&quot;: {
+                    &quot;server&quot;: &quot;http://127.0.0.1:58591&quot;,
+                }
+            }
+    Raises:
+    &quot;&quot;&quot;</span>
+    curBrowserType <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">if</span> browserType<span class="token punctuation">:</span>
+        browserType <span class="token operator">=</span> browserType<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># with sync_playwright() as p:</span>
+    <span class="token comment"># p = sync_playwright()</span>
+    p <span class="token operator">=</span> sync_playwright<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># &#x591A;&#x6B21;&#x8C03;&#x7528;&#xFF0C;&#x4F1A;&#xFF1A;</span>
+    <span class="token comment"># &#x53D1;&#x751F;&#x5F02;&#x5E38;: Error</span>
+    <span class="token comment"># It looks like you are using Playwright Sync API inside the asyncio loop.</span>
+    <span class="token comment"># Please use the Async API instead.</span>
+
+    <span class="token keyword">if</span> browserType <span class="token operator">==</span> <span class="token string">&quot;chromium&quot;</span><span class="token punctuation">:</span>
+        curBrowserType <span class="token operator">=</span> p<span class="token punctuation">.</span>chromium
+    <span class="token keyword">elif</span> browserType <span class="token operator">==</span> <span class="token string">&quot;firefox&quot;</span><span class="token punctuation">:</span>
+        curBrowserType <span class="token operator">=</span> p<span class="token punctuation">.</span>firefox
+    <span class="token keyword">elif</span> browserType <span class="token operator">==</span> <span class="token string">&quot;webkit&quot;</span><span class="token punctuation">:</span>
+        curBrowserType <span class="token operator">=</span> p<span class="token punctuation">.</span>webkit
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;curBrowserType=%s&quot;</span> <span class="token operator">%</span> curBrowserType<span class="token punctuation">)</span>
+    <span class="token comment"># curBrowserType=&lt;BrowserType name=chromium executable_path=/Users/limao/Library/Caches/ms-playwright/chromium-901522/chrome-mac/Chromium.app/Contents/MacOS/Chromium&gt;</span>
+
+    <span class="token keyword">if</span> <span class="token keyword">not</span> curBrowserType<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Unsupported playwright browser type: %s&quot;</span> <span class="token operator">%</span> browserType<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+    <span class="token comment"># browser = curBrowserType.launch(headless=False)</span>
+    <span class="token comment"># browser = curBrowserType.launch(**browserLaunchOptionDict)</span>
+    browser <span class="token operator">=</span> curBrowserType<span class="token punctuation">.</span>launch<span class="token punctuation">(</span><span class="token operator">**</span>browserConfig<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;browser=%s&quot;</span> <span class="token operator">%</span> browser<span class="token punctuation">)</span>
+    <span class="token comment"># browser=&lt;Browser type=&lt;BrowserType name=chromium executable_path=/Users/limao/Library/Caches/ms-playwright/chromium-901522/chrome-mac/Chromium.app/Contents/MacOS/Chromium&gt; version=93.0.4576.0&gt;</span>
+
+    <span class="token keyword">return</span> browser
+
+<span class="token keyword">def</span> <span class="token function">initPage</span><span class="token punctuation">(</span>pageConfig<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> browser<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Init playwright browser new page
+
+    Args:
+        pageConfig (dict): page config. Default is None.
+        browser (BrowserType): Playwright browser. Default is None. If None, create new one
+    Returns:
+        Page
+    Examples:
+        pageConfig
+            {&quot;pageLoadTimeout&quot;: 10}
+    Raises:
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> browser<span class="token punctuation">:</span>
+        browser <span class="token operator">=</span> initBrowser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    page <span class="token operator">=</span> browser<span class="token punctuation">.</span>new_page<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;page=%s&quot; % page)</span>
+
+    <span class="token keyword">if</span> pageConfig<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token string">&quot;pageLoadTimeout&quot;</span> <span class="token keyword">in</span> pageConfig<span class="token punctuation">:</span>
+            curPageLoadTimeout <span class="token operator">=</span> pageConfig<span class="token punctuation">[</span><span class="token string">&quot;pageLoadTimeout&quot;</span><span class="token punctuation">]</span>
+            curPageLoadTimeoutMilliSec <span class="token operator">=</span> curPageLoadTimeout <span class="token operator">*</span> <span class="token number">1000</span>
+
+            page<span class="token punctuation">.</span>set_default_navigation_timeout<span class="token punctuation">(</span>curPageLoadTimeoutMilliSec<span class="token punctuation">)</span>
+            page<span class="token punctuation">.</span>set_default_timeout<span class="token punctuation">(</span>curPageLoadTimeoutMilliSec<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> page
+
+<span class="token keyword">def</span> <span class="token function">closeBrowser</span><span class="token punctuation">(</span>browser<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    For playwright, close browser
+
+    Args:
+        browser (BrowserType): Playwright browser
+    Returns:
+    Raises:
+    &quot;&quot;&quot;</span>
+    browser<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="&#x83B7;&#x53D6;google&#x641C;&#x7D22;&#x7ED3;&#x679C;"><a name="&#x83B7;&#x53D6;google&#x641C;&#x7D22;&#x7ED3;&#x679C;" class="plugin-anchor" href="#&#x83B7;&#x53D6;google&#x641C;&#x7D22;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;google&#x641C;&#x7D22;&#x7ED3;&#x679C;</h3>
+<p>&#x6A21;&#x62DF;google&#x641C;&#x7D22;&#xFF0C;&#x8FD4;&#x56DE;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">
+<span class="token keyword">def</span> <span class="token function">getGoogleSearchResult</span><span class="token punctuation">(</span>searchKeyword<span class="token punctuation">,</span> browser<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> isAutoCloseBrowser<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    Emulate google search, return search result
+
+    Args:
+        searchKeyword (str): str to search
+        browser (BrowserType): Playwright browser. Default is None. If None, create new one
+        isAutoCloseBrowser (bool): whether auto close browser after search
+    Returns:
+        result dict list
+    Raises:
+    Examples:
+        &apos;&#x6E38;&#x620F;&#x9898;&#x6750; &#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&apos;
+    &quot;&quot;&quot;</span>
+    GoogleHomeUrl <span class="token operator">=</span> <span class="token string">&quot;https://www.google.com/&quot;</span>
+
+    searchResultDictList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token comment"># if not browser:</span>
+    <span class="token comment">#     browser = initBrowser()</span>
+
+    <span class="token comment"># page = browser.new_page()</span>
+    <span class="token comment"># print(&quot;page=%s&quot; % page)</span>
+
+    page <span class="token operator">=</span> initPage<span class="token punctuation">(</span>browser<span class="token operator">=</span>browser<span class="token punctuation">)</span>
+
+    page<span class="token punctuation">.</span>goto<span class="token punctuation">(</span>GoogleHomeUrl<span class="token punctuation">)</span>
+
+    <span class="token comment"># &lt;input class=&quot;gLFyf gsfi&quot; jsaction=&quot;paste:puy29d;&quot; maxlength=&quot;2048&quot; name=&quot;q&quot; type=&quot;text&quot; aria-autocomplete=&quot;both&quot; aria-haspopup=&quot;false&quot; autocapitalize=&quot;off&quot; autocomplete=&quot;off&quot; autocorrect=&quot;off&quot; autofocus=&quot;&quot; role=&quot;combobox&quot; spellcheck=&quot;false&quot; title=&quot;Google &#x641C;&#x7D22;&quot; value=&quot;&quot; aria-label=&quot;&#x641C;&#x7D22;&quot; data-ved=&quot;0ahUKEwj8vNuMwdDxAhVmw4sBHb-jBCYQ39UDCAQ&quot;&gt;</span>
+    SearchInputSelector <span class="token operator">=</span> <span class="token string">&quot;input.gLFyf.gsfi&quot;</span>
+    <span class="token comment"># page.click(SearchInputSelector)</span>
+    page<span class="token punctuation">.</span>fill<span class="token punctuation">(</span>SearchInputSelector<span class="token punctuation">,</span> searchKeyword<span class="token punctuation">)</span>
+
+    EnterKey <span class="token operator">=</span> <span class="token string">&quot;Enter&quot;</span>
+    page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span>press<span class="token punctuation">(</span>EnterKey<span class="token punctuation">)</span>
+
+    <span class="token comment"># wait -&gt; makesure element visible</span>
+    <span class="token comment"># &lt;div id=&quot;result-stats&quot;&gt;&#x627E;&#x5230;&#x7EA6; 384,000 &#x6761;&#x7ED3;&#x679C;&lt;nobr&gt; &#xFF08;&#x7528;&#x65F6; 0.28 &#x79D2;&#xFF09;&amp;nbsp;&lt;/nobr&gt;&lt;/div&gt;</span>
+    SearchFoundSelector <span class="token operator">=</span> <span class="token string">&apos;div#result-stats&apos;</span>
+    page<span class="token punctuation">.</span>wait_for_selector<span class="token punctuation">(</span>SearchFoundSelector<span class="token punctuation">,</span> state<span class="token operator">=</span><span class="token string">&quot;visible&quot;</span><span class="token punctuation">)</span>
+
+
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        &lt;table class=&quot;AaVjTc&quot; style=&quot;border-collapse:collapse;text-align:left&quot; role=&quot;presentation&quot;&gt;
+            &lt;tbody&gt;
+                &lt;tr jsname=&quot;TeSSVd&quot; valign=&quot;top&quot;&gt;
+                    &lt;td class=&quot;d6cvqb&quot;&gt;&lt;span class=&quot;SJajHc&quot;
+                            style=&quot;background:url(/images/nav_logo321.webp) no-repeat;background-position:-24px 0;width:28px&quot;&gt;&lt;/span&gt;
+                    &lt;/td&gt;
+                    &lt;td class=&quot;YyVfkd&quot;&gt;&lt;span class=&quot;SJajHc&quot;
+                            style=&quot;background:url(/images/nav_logo321.webp) no-repeat;background-position:-53px 0;width:20px&quot;&gt;&lt;/span&gt;1
+                    &lt;/td&gt;
+        &#x3002;&#x3002;&#x3002;
+                    &lt;td&gt;&lt;a aria-label=&quot;Page 10&quot; class=&quot;fl&quot;
+                            href=&quot;/search?q=%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90+%E6%96%B0%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&amp;amp;ei=k-vrYIaDOa6Vr7wPsbaisAY&amp;amp;start=90&amp;amp;sa=N&amp;amp;ved=2ahUKEwjGmIjb_dzxAhWuyosBHTGbCGYQ8tMDegQIARBN&quot;&gt;&lt;span
+                                class=&quot;SJajHc NVbCr&quot;
+                                style=&quot;background:url(/images/nav_logo321.webp) no-repeat;background-position:-74px 0;width:20px&quot;&gt;&lt;/span&gt;10&lt;/a&gt;
+                    &lt;/td&gt;
+                    &lt;td aria-level=&quot;3&quot; class=&quot;d6cvqb&quot; role=&quot;heading&quot;&gt;&lt;a
+                            href=&quot;/search?q=%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90+%E6%96%B0%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&amp;amp;ei=k-vrYIaDOa6Vr7wPsbaisAY&amp;amp;start=10&amp;amp;sa=N&amp;amp;ved=2ahUKEwjGmIjb_dzxAhWuyosBHTGbCGYQ8NMDegQIARBP&quot;
+                            id=&quot;pnnext&quot; style=&quot;text-align:left&quot;&gt;&lt;span class=&quot;SJajHc NVbCr&quot;
+                                style=&quot;background:url(/images/nav_logo321.webp) no-repeat;background-position:-96px 0;width:71px&quot;&gt;&lt;/span&gt;&lt;span
+                                style=&quot;display:block;margin-left:53px&quot;&gt;&#x4E0B;&#x4E00;&#x9875;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+
+    &quot;&quot;&quot;</span>
+    <span class="token comment"># &#x5E95;&#x90E8; Goooooooogle &#x591A;&#x9875;&#x9762;&#x5BFC;&#x822A;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x786E;&#x4FDD;&#x51FA;&#x73B0; -&#x300B; &#x907F;&#x514D;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x4E0D;&#x5B8C;&#x6574;&#xFF0C;&#x540E;&#x7EED;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x53EA;&#x6709;2&#x4E2A;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5B8C;&#x6574;&#x7684;&#x4E2A;&#x6570;&#xFF08;&#x4E00;&#x822C;&#x662F;8/9/10&#x4E2A;&#xFF09;</span>
+    <span class="token comment"># &lt;table class=&quot;AaVjTc&quot; style=&quot;border-collapse:collapse;text-align:left&quot; role=&quot;presentation&quot;&gt;</span>
+    bottomNaviPageSelector <span class="token operator">=</span> <span class="token string">&quot;table[role=&apos;presentation&apos;]&quot;</span>
+    page<span class="token punctuation">.</span>wait_for_selector<span class="token punctuation">(</span>bottomNaviPageSelector<span class="token punctuation">,</span> state<span class="token operator">=</span><span class="token string">&quot;visible&quot;</span><span class="token punctuation">)</span>
+
+    searchResultDictList <span class="token operator">=</span> parseGoogleSearchResult<span class="token punctuation">(</span>page<span class="token punctuation">)</span>
+    <span class="token comment"># searchResultNum = len(searchResultDictList)</span>
+    <span class="token comment"># print(&quot;searchResultNum=%s&quot; % searchResultNum)</span>
+
+    page<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> isAutoCloseBrowser<span class="token punctuation">:</span>
+        <span class="token comment"># close browser</span>
+        closeBrowser<span class="token punctuation">(</span>browser<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> searchResultDictList
+</code></pre>
+<h3 id="&#x89E3;&#x6790;google&#x641C;&#x7D22;&#x7ED3;&#x679C;"><a name="&#x89E3;&#x6790;google&#x641C;&#x7D22;&#x7ED3;&#x679C;" class="plugin-anchor" href="#&#x89E3;&#x6790;google&#x641C;&#x7D22;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x6790;google&#x641C;&#x7D22;&#x7ED3;&#x679C;</h3>
+<p>&#x671F;&#x95F4;&#x8C03;&#x7528;&#x4E86;&#xFF1A;&#x4ECE;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;&#x9762;&#x89E3;&#x6790;&#x63D0;&#x53D6;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x5185;&#x5BB9;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">
+<span class="token keyword">def</span> <span class="token function">parseGoogleSearchResult</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    Parse google search result from current (search result) page
+
+    Args:
+        page (Page): playwright browser Page
+    Returns:
+        result dict list
+    Raises:
+    &quot;&quot;&quot;</span>
+    searchResultDictList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    &lt;div class=&quot;g&quot;&gt;
+        &lt;h2 class=&quot;Uo8X3b OhScic zsYMMe&quot;&gt;&#x7F51;&#x7EDC;&#x641C;&#x7D22;&#x7ED3;&#x679C;&lt;/h2&gt;
+        &lt;div data-hveid=&quot;CAIQAA&quot; data-ved=&quot;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFSgAMAB6BAgCEAA&quot;&gt;
+            &lt;div class=&quot;tF2Cxc&quot;&gt;
+                &lt;div class=&quot;yuRUbf&quot;&gt;&lt;a
+                        href=&quot;/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD&amp;amp;url=http%3A%2F%2Fm.7724.com%2Fccgjz%2F&amp;amp;usg=AOvVaw02ypkYtu3h9TQzpCu3biwN&quot;
+                        data-ved=&quot;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD&quot;
+                        onmousedown=&quot;return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw02ypkYtu3h9TQzpCu3biwN&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD&apos;,&apos;&apos;,&apos;&apos;,event)&quot;
+                        target=&quot;_blank&quot; rel=&quot;noopener&quot; data-ctbtn=&quot;2&quot;
+                        data-cthref=&quot;/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD&amp;amp;url=http%3A%2F%2Fm.7724.com%2Fccgjz%2F&amp;amp;usg=AOvVaw02ypkYtu3h9TQzpCu3biwN&quot;&gt;&lt;br&gt;
+                        &lt;h3 class=&quot;LC20lb DKV0Md&quot;&gt;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x673A;&#x6E38;&#x620F;&#x4E0B;&#x8F7D;-7724&#x6E38;&#x620F;&lt;/h3&gt;
+                        &#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;IsZvec&quot;&gt;
+                    &lt;div class=&quot;VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc&quot;&gt;&lt;span&gt;&lt;em class=&quot;qkunPe&quot;&gt;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&lt;/em&gt;&#x662F;&#x4E00;&#x6B3E;&#x975E;&#x5E38;&#x523A;&#x6FC0;&#x597D;&#x73A9;&#x7684;&#x4E09;&#x56FD;&lt;em
+                                class=&quot;qkunPe&quot;&gt;&#x9898;&#x6750;&lt;/em&gt;&#x7B56;&#x7565;&#x7C7B;&#x624B;&#x6E38;&#x3002;&#x5728;&lt;em
+                                class=&quot;qkunPe&quot;&gt;&#x6E38;&#x620F;&lt;/em&gt;&#x4E2D;&#xFF0C;&#x73A9;&#x5BB6;&#x5C06;&#x68A6;&#x56DE;&#x4E09;&#x56FD;&#x4E71;&#x4E16;&#xFF0C;&#x6210;&#x4E3A;&#x4E00;&#x65B9;&#x8BF8;&#x4FAF;&#xFF0C;&#x4E0E;&#x767E;&#x4E07;&#x73A9;&#x5BB6;&#x4E00;&#x8D77;&#x9010;&#x9E7F;&#x5929;&#x4E0B;!&#x73A9;&#x5BB6;&#x60F3;&#x8981;&#x5728;&#x8FD9;&#x7247;&#x6218;&#x4E71;&#x4E0D;&#x4F11;&#x7684;&#x5927;&amp;nbsp;...&lt;/span&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &#x3002;&#x3002;&#x3002;
+
+    &lt;div class=&quot;g&quot;&gt;
+        &lt;div data-hveid=&quot;CA4QAA&quot; data-ved=&quot;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFSgAMAl6BAgOEAA&quot;&gt;
+            &lt;div class=&quot;tF2Cxc&quot;&gt;
+                &lt;div class=&quot;yuRUbf&quot;&gt;&lt;a href=&quot;https://www.diyiyou.com/zt/zlccdyx/&quot;
+                        data-ved=&quot;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAJegQIDhAD&quot;
+                        onmousedown=&quot;return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw2YT1TExiYAGLEIgDsnscDf&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAJegQIDhAD&apos;,&apos;&apos;,&apos;&apos;,event)&quot;
+                        target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;br&gt;
+                        &lt;h3 class=&quot;LC20lb DKV0Md&quot;&gt;&#x5360;&#x9886;&#x57CE;&#x6C60;&#x7684;&#x6E38;&#x620F;&#x63A8;&#x8350;-&#x8010;&#x73A9;&#x7684;&#x5360;&#x9886;&#x57CE;&#x6C60;&#x7684;&#x6E38;&#x620F;&#x5408;&#x96C6;-&#x7B2C;&#x4E00;&#x624B;&#x6E38;&#x7F51;&lt;/h3&gt;
+                        &#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;
+                &lt;/div&gt;
+                &lt;div class=&quot;IsZvec&quot;&gt;
+                    &lt;div class=&quot;VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc&quot;&gt;&lt;span class=&quot;MUxGbd wuQ4Ob WZ8Tjf&quot;&gt;2020&#x5E74;12&#x6708;26&#x65E5; &#x2014;
+                        &lt;/span&gt;&lt;span&gt;&#x63A8;&#x8350;&#x7406;&#x7531;&#xFF1A;&lt;em class=&quot;qkunPe&quot;&gt;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&lt;/em&gt;&#x662F;&#x4E00;&#x6B3E;&#x5927;&#x578B;&#x6218;&#x4E89;&#x7B56;&#x7565;&lt;em class=&quot;qkunPe&quot;&gt;&#x9898;&#x6750;&lt;/em&gt;&#x7684;&#x5373;&#x65F6;&#x7ADE;&#x6280;&#x7C7B;&#x578B;&#x624B;&#x6E38;&#xFF0C;&lt;em
+                                class=&quot;qkunPe&quot;&gt;&#x6E38;&#x620F;&lt;/em&gt;&#x4EE5;&#x591A;&#x5143;&#x5316;&#x5175;&#x79CD;&#x8BBE;&#x5B9A;&#xFF0C;&#x52A0;&#x6DF1;&#x6218;&#x573A;&#x4EA4;&#x950B;&#x7684;&#x7B56;&#x7565;&#x5730;&#x4F4D;&#xFF0C;&#x5927;&#x6C14;&#x78C5;&#x7934;&#x7684;&#x4E09;&#x56FD;&#x53E4;&#x6218;&#x573A;&amp;nbsp;...&lt;/span&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    ...
+
+    &lt;div class=&quot;g&quot;&gt;
+        &lt;div data-hveid=&quot;CAgQAA&quot; data-ved=&quot;2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFSgAMAd6BAgIEAA&quot;&gt;
+            &lt;div class=&quot;tF2Cxc&quot;&gt;
+                &lt;div class=&quot;yuRUbf&quot;&gt;&lt;a href=&quot;https://www.youxi369.com/apps/50997.html&quot;
+                        data-ved=&quot;2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFjAHegQICBAD&quot;
+                        ping=&quot;/url?sa=t&amp;amp;source=web&amp;amp;rct=j&amp;amp;url=https://www.youxi369.com/apps/50997.html&amp;amp;ved=2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFjAHegQICBAD&quot;&gt;&lt;br&gt;
+                        &lt;h3 class=&quot;LC20lb DKV0Md&quot;&gt;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x6E38;&#x514D;&#x8D39;&#x4E0B;&#x8F7D;-&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B89;&#x5353;&#x6700;&#x65B0;&#x7248;&#x672C; ... - &#x6E38;&#x620F;369&lt;/h3&gt;
+                        &lt;div class=&quot;TbwUpd NJjxre&quot;&gt;&lt;cite class=&quot;iUh30 Zu0yb qLRx3b tjvcx&quot;&gt;https://www.youxi369.com&lt;span
+                                    class=&quot;dyjrff qzEoUe&quot;&gt; &#x203A; apps&lt;/span&gt;&lt;/cite&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                    &lt;div class=&quot;B6fmyf&quot;&gt;
+                        &lt;div class=&quot;TbwUpd&quot;&gt;&lt;cite class=&quot;iUh30 Zu0yb qLRx3b tjvcx&quot;&gt;https://www.youxi369.com&lt;span
+                                    class=&quot;dyjrff qzEoUe&quot;&gt; &#x203A; apps&lt;/span&gt;&lt;/cite&gt;&lt;/div&gt;
+                        &lt;div class=&quot;eFM0qc&quot;&gt;&lt;span&gt;
+                                &lt;div jscontroller=&quot;hiU8Ie&quot; class=&quot;action-menu&quot;&gt;&lt;a class=&quot;GHDvEf&quot; href=&quot;#&quot; aria-label=&quot;&#x7ED3;&#x679C;&#x9009;&#x9879;&quot;
+                                        aria-expanded=&quot;false&quot; aria-haspopup=&quot;true&quot; role=&quot;button&quot;
+                                        jsaction=&quot;PZcoEd;keydown:wU6FVd;keypress:uWmNaf&quot;
+                                        data-ved=&quot;2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8Q7B0wB3oECAgQBg&quot;&gt;&lt;span
+                                            class=&quot;gTl8xb&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+                                    &lt;ol class=&quot;action-menu-panel zsYMMe&quot; role=&quot;menu&quot; tabindex=&quot;-1&quot;
+                                        jsaction=&quot;keydown:Xiq7wd;mouseover:pKPowd;mouseout:O9bKS&quot;
+                                        data-ved=&quot;2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QqR8wB3oECAgQBw&quot;&gt;
+                                        &lt;li class=&quot;action-menu-item OhScic zsYMMe&quot; role=&quot;menuitem&quot;&gt;&lt;a class=&quot;fl&quot;
+                                                href=&quot;https://webcache.googleusercontent.com/search?q=cache:SGA7R-UcWfEJ:https://www.youxi369.com/apps/50997.html+&amp;amp;cd=8&amp;amp;hl=zh-CN&amp;amp;ct=clnk&amp;amp;gl=jp&quot;
+                                                ping=&quot;/url?sa=t&amp;amp;source=web&amp;amp;rct=j&amp;amp;url=https://webcache.googleusercontent.com/search%3Fq%3Dcache:SGA7R-UcWfEJ:https://www.youxi369.com/apps/50997.html%2B%26cd%3D8%26hl%3Dzh-CN%26ct%3Dclnk%26gl%3Djp&amp;amp;ved=2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QIDAHegQICBAI&quot;&gt;&lt;span&gt;&#x7F51;&#x9875;&#x5FEB;&#x7167;&lt;/span&gt;&lt;/a&gt;
+                                        &lt;/li&gt;
+                                    &lt;/ol&gt;
+                                &lt;/div&gt;
+                            &lt;/span&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;IsZvec&quot;&gt;
+                    &lt;div class=&quot;VwiC3b MUxGbd yDYNvb lyLwlc&quot;&gt;&lt;span class=&quot;MUxGbd wuQ4Ob WZ8Tjf&quot;&gt;2021&#x5E74;6&#x6708;4&#x65E5; &#x2014;
+                        &lt;/span&gt;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x662F;&#x4E00;&#x6B3E;&#x975E;&#x5E38;&#x523A;&#x6FC0;&#x597D;&#x73A9;&#x7684;&#x4E09;&#x56FD;&#x9898;&#x6750;&#x7B56;&#x7565;&#x591A;&#x4EBA;&#x624B;&#x6E38;&#x3002;&#x5728;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B98;&#x65B9;&#x7248;&#x4E2D;&#xFF0C;&#x73A9;&#x5BB6;&#x5C06;&#x56DE;&#x5230;&#x4E09;&#x56FD;&#x4E71;&#x4E16;&#xFF0C;&#x6210;&#x4E3A;&#x4E71;&#x4E16;&#x9738;&#x4E3B;&#xFF0C;&#x6307;&#x6325;&#x4F60;&#x7684;&#x519B;&#x961F;&#xFF0C;&#x8FDB;&#x884C;&amp;nbsp;...&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &quot;&quot;&quot;</span>
+    <span class="token comment"># searchResultSelector = &quot;div[class=&apos;g&apos;] div[class=&apos;IsZvec&apos;] div span:last-child&quot;</span>
+    <span class="token comment"># searchResultSelector = &quot;div[class=&apos;g&apos;] div[class=&apos;IsZvec&apos;] div span:first-child&quot;</span>
+    searchResultSelector <span class="token operator">=</span> <span class="token string">&quot;div[class=&apos;g&apos;]&quot;</span>
+    searchResultList <span class="token operator">=</span> page<span class="token punctuation">.</span>query_selector_all<span class="token punctuation">(</span>searchResultSelector<span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;searchResultList=%s&quot; % searchResultList)</span>
+    <span class="token comment"># searchResultList=[&lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;, &lt;JSHandle preview=JSHandle@node&gt;]</span>
+    searchResultNum <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>searchResultList<span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;Found %s search result&quot; % searchResultNum) # 9, 10</span>
+
+    <span class="token comment"># for debug</span>
+    <span class="token comment"># if searchResultNum &lt; 8:</span>
+    <span class="token keyword">if</span> searchResultNum <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Unexpcted too little result count: %s&quot;</span> <span class="token operator">%</span> searchResultNum<span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> curIdx<span class="token punctuation">,</span> curResultElem <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>searchResultList<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        curNum <span class="token operator">=</span> curIdx <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token comment"># print(&quot;%s [%d] %s&quot; % (&quot;-&quot;*20, curNum, &quot;-&quot;*20))</span>
+        <span class="token comment"># print(&quot;curResultElem=%s&quot; % curResultElem)</span>
+
+        <span class="token comment"># urlTitleElemSelector = &quot;div[class=&apos;tF2Cxc&apos;]&quot;</span>
+        urlTitleSelector <span class="token operator">=</span> <span class="token string">&quot;div[class=&apos;tF2Cxc&apos;] div[class=&apos;yuRUbf&apos;]&quot;</span>
+        urlTitleElem <span class="token operator">=</span> curResultElem<span class="token punctuation">.</span>query_selector<span class="token punctuation">(</span>urlTitleSelector<span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;urlTitleElem=%s&quot; % urlTitleElem) # urlTitleElem=JSHandle@&lt;div class=&quot;yuRUbf&quot;&gt;&#x2026;&lt;/div&gt;</span>
+
+        urlSelector <span class="token operator">=</span> <span class="token string">&quot;a[href^=&apos;http&apos;]&quot;</span>
+        urlElem <span class="token operator">=</span> urlTitleElem<span class="token punctuation">.</span>query_selector<span class="token punctuation">(</span>urlSelector<span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;urlElem=%s&quot; % urlElem) # urlElem=JSHandle@node</span>
+        urlStr <span class="token operator">=</span> urlElem<span class="token punctuation">.</span>get_attribute<span class="token punctuation">(</span><span class="token string">&quot;href&quot;</span><span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;urlStr=%s&quot; % urlStr) # urlStr=https://www.325sy.com/game/1118.html</span>
+
+        titleSelector <span class="token operator">=</span> <span class="token string">&quot;h3[class=&apos;LC20lb DKV0Md&apos;]&quot;</span>
+        titleElem <span class="token operator">=</span> urlTitleElem<span class="token punctuation">.</span>query_selector<span class="token punctuation">(</span>titleSelector<span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;titleElem=%s&quot; % titleElem) # titleElem=JSHandle@node</span>
+        titleStr <span class="token operator">=</span> titleElem<span class="token punctuation">.</span>text_content<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;titleStr=%s&quot; % titleStr) # titleStr=&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;_&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x6E38;- 325&#x624B;&#x6E38;</span>
+
+        dateDescSelector <span class="token operator">=</span> <span class="token string">&quot;div[class=&apos;IsZvec&apos;] div[class^=&apos;VwiC3b&apos;]&quot;</span>
+        dateDescElem <span class="token operator">=</span> curResultElem<span class="token punctuation">.</span>query_selector<span class="token punctuation">(</span>dateDescSelector<span class="token punctuation">)</span>
+
+        <span class="token comment"># spanElemList = dateDescElem.query_selector_all(&quot;span&quot;)</span>
+        dateStr <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+        originDateStr <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+        dateSelector <span class="token operator">=</span> <span class="token string">&quot;span[class^=&apos;MUxGbd&apos;]&quot;</span>
+        dateElem <span class="token operator">=</span> dateDescElem<span class="token punctuation">.</span>query_selector<span class="token punctuation">(</span>dateSelector<span class="token punctuation">)</span> <span class="token comment"># None</span>
+        <span class="token keyword">if</span> dateElem<span class="token punctuation">:</span>
+            originDateStr <span class="token operator">=</span> dateElem<span class="token punctuation">.</span>text_content<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment"># print(&quot;originDateStr=%s&quot; % originDateStr) # &apos;2021&#x5E74;4&#x6708;19&#x65E5; &#x2014;&apos;</span>
+            dateStr <span class="token operator">=</span> originDateStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot; &#x2014; &quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+            <span class="token comment"># print(&quot;dateStr=%s&quot; % dateStr) # &apos;2021&#x5E74;4&#x6708;19&#x65E5;&apos;</span>
+
+        dateDescStr <span class="token operator">=</span> dateDescElem<span class="token punctuation">.</span>text_content<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># &apos;&#x4E0B;&#x8F7D;&#x540E;&#x8BF7;&#x91CD;&#x65B0;&#x6CE8;&#x518C;&#x8D26;&#x53F7;&#xFF0C;&#x4EE5;&#x514D;&#x4E32;&#x53F7;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x8FD4;&#x5229;! &#x63A8;&#x8350;&#x7528;&#x68A8;&#x5B50;&#x624B;&#x6E38;&#x6E38;&#x620F;&#x76D2;&#x4E0B;&#x8F7D;&#xFF0C;&#x627E;&#x6E38;&#x620F;&#x66F4;&#x65B9;&#x4FBF;&#xFF0C;&#x8FD8;&#x6709;&#x4E0A;&#x7EBF;&#x9001;&#x6EE1;&#x7EA7;VIP&#x3001;&#x65E0;&#x9650;&#x5143;&#x5B9D;&#x7B49;&#x798F;&#x5229;&#x7B49;&#x4F60;&#x6765;&#x62FF;! &#x300A;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x9001;&#x4E24;&#x4E07;\xa0...&apos;</span>
+        dateDescStr <span class="token operator">=</span> dateDescStr<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;dateDescStr=%s&quot; % dateDescStr)</span>
+        descStr <span class="token operator">=</span> dateDescStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>originDateStr<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+        <span class="token comment"># print(&quot;descStr=%s&quot; % descStr)</span>
+
+        curSearchResultDict <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;url&quot;</span><span class="token punctuation">:</span> urlStr<span class="token punctuation">,</span>
+            <span class="token string">&quot;title&quot;</span><span class="token punctuation">:</span> titleStr<span class="token punctuation">,</span>
+            <span class="token string">&quot;date&quot;</span><span class="token punctuation">:</span> dateStr<span class="token punctuation">,</span>
+            <span class="token string">&quot;description&quot;</span><span class="token punctuation">:</span> descStr<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment"># print(&quot;curSearchResultDict=%s&quot; % curSearchResultDict)</span>
+        <span class="token comment"># curSearchResultDict={&apos;url&apos;: &apos;https://www.325sy.com/game/1118.html&apos;, &apos;title&apos;: &apos;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;_&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x6E38;- 325&#x624B;&#x6E38;&apos;, &apos;date&apos;: &apos;2021&#x5E74;4&#x6708;19&#x65E5;&apos;, &apos;description&apos;: &apos;&#x300A;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x9001;2&#x4E07;&#x771F;&#x5145;&#x300B;&#x662F;&#x4E00;&#x6B3E;&#x4EE5;&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x673A;&#x6E38;&#x620F;&#xFF01;&#x8FDB;&#x5165;&#x6E38;&#x620F;&#x4E4B;&#x540E;&#xFF0C;&#x9996;&#x5148;&#x5347;&#x7EA7;&#x9886;&#x53D6;&#x4F60;&#x7684;2W&#x771F;&#x5145;.&#x6FC0;&#x6D3B;&#x8FD0;&#x8425;&#x6D3B;&#x52A8;&#xFF0C;&#x4F60;&#x5C31;&#x662F;\xa0...&apos;}</span>
+        searchResultDictList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>curSearchResultDict<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> searchResultDictList
+</code></pre>
+<h2 id="&#x4EE3;&#x7801;&#x8C03;&#x7528;"><a name="&#x4EE3;&#x7801;&#x8C03;&#x7528;" class="plugin-anchor" href="#&#x4EE3;&#x7801;&#x8C03;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4EE3;&#x7801;&#x8C03;&#x7528;</h2>
+<pre class="language-"><code class="lang-python"><span class="token comment"># test code</span>
+PROXY_HTTP <span class="token operator">=</span> <span class="token string">&quot;http://127.0.0.1:58591&quot;</span>
+PROXY_SOCKS5 <span class="token operator">=</span> <span class="token string">&quot;socks5://127.0.0.1:51837&quot;</span>
+browserConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> <span class="token boolean">False</span><span class="token punctuation">,</span>
+    <span class="token comment"># &quot;headless&quot;: True,</span>
+    <span class="token string">&quot;proxy&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;server&quot;</span><span class="token punctuation">:</span> PROXY_HTTP<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+browser <span class="token operator">=</span> initBrowser<span class="token punctuation">(</span>browserConfig<span class="token operator">=</span>browserConfig<span class="token punctuation">)</span>
+
+searchStr <span class="token operator">=</span> <span class="token string">&apos;&#x6E38;&#x620F;&#x9898;&#x6750; &#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;&apos;</span>
+resultDictList <span class="token operator">=</span> getGoogleSearchResult<span class="token punctuation">(</span>searchStr<span class="token punctuation">,</span> browser<span class="token operator">=</span>browser<span class="token punctuation">)</span>
+resultNum <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>resultDictList<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Google search %s found %s result&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>searchStr<span class="token punctuation">,</span> resultNum<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+searchStr <span class="token operator">=</span> <span class="token string">&apos;&#x6E38;&#x620F;&#x9898;&#x6750; &#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&apos;</span>
+resultDictList <span class="token operator">=</span> getGoogleSearchResult<span class="token punctuation">(</span>searchStr<span class="token punctuation">,</span> browser<span class="token operator">=</span>browser<span class="token punctuation">)</span>
+resultNum <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>resultDictList<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Google search %s found %s result&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>searchStr<span class="token punctuation">,</span> resultNum<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+closeBrowser<span class="token punctuation">(</span>browser<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x9875;&#x9762;&#x548C;html&#x548C;&#x8C03;&#x8BD5;"><a name="&#x9875;&#x9762;&#x548C;html&#x548C;&#x8C03;&#x8BD5;" class="plugin-anchor" href="#&#x9875;&#x9762;&#x548C;html&#x548C;&#x8C03;&#x8BD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9875;&#x9762;&#x548C;html&#x548C;&#x8C03;&#x8BD5;</h2>
+<h3 id="&#x6A21;&#x62DF;google&#x641C;&#x7D22;"><a name="&#x6A21;&#x62DF;google&#x641C;&#x7D22;" class="plugin-anchor" href="#&#x6A21;&#x62DF;google&#x641C;&#x7D22;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x62DF;google&#x641C;&#x7D22;</h3>
+<ul>
+<li>&#x641C;&#x7D22;&#x8F93;&#x5165;&#x6846;<ul>
+<li><img src="../assets/img/playwright_chrome_google_input.png" alt="playwright_chrome_google_input"></li>
+<li>html<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gLFyf gsfi<span class="token punctuation">&quot;</span></span> <span class="token attr-name">jsaction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>paste:puy29d;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">maxlength</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2048<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>q<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>both<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-haspopup</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span> <span class="token attr-name">autocapitalize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>off<span class="token punctuation">&quot;</span></span> <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>off<span class="token punctuation">&quot;</span></span> <span class="token attr-name">autocorrect</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>off<span class="token punctuation">&quot;</span></span> <span class="token attr-name">autofocus</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>combobox<span class="token punctuation">&quot;</span></span> <span class="token attr-name">spellcheck</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>Google &#x641C;&#x7D22;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x641C;&#x7D22;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>0ahUKEwj8vNuMwdDxAhVmw4sBHb-jBCYQ39UDCAQ<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>&#x5DF2;&#x8F93;&#x5165;&#x8981;&#x641C;&#x7D22;&#x7684;&#x6587;&#x5B57;<ul>
+<li><img src="../assets/img/playwright_chrome_google_has_input.png" alt="playwright_chrome_google_has_input"></li>
+</ul>
+</li>
+<li>&#x89E6;&#x53D1;&#x4E86;&#x641C;&#x7D22;<ul>
+<li><img src="../assets/img/playwright_triggered_google_search.png" alt="playwright_triggered_google_search"></li>
+</ul>
+</li>
+<li>&#x7B49;&#x5F85;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x5B8C;&#x6BD5;&#xFF1A;&#x51FA;&#x73B0;<code>&#x627E;&#x5230;&#x7EA6; xxx &#x6761;&#x7ED3;&#x679C;</code><ul>
+<li><img src="../assets/img/playwright_google_show_result.png" alt="playwright_google_show_result"></li>
+<li>html<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>result-stats<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x627E;&#x5230;&#x7EA6; 384,000 &#x6761;&#x7ED3;&#x679C;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nobr</span><span class="token punctuation">&gt;</span></span> &#xFF08;&#x7528;&#x65F6; 0.28 &#x79D2;&#xFF09;<span class="token entity" title="&#xA0;">&amp;nbsp;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nobr</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>&#x5DF2;&#x89E3;&#x6790;&#x53EF;&#x8F93;&#x51FA;&#x6BCF;&#x4E2A;&#x7ED3;&#x679C;&#x7684;&#x6807;&#x9898;<ul>
+<li><img src="../assets/img/playwright_parsed_result_title.png" alt="playwright_parsed_result_title"></li>
+</ul>
+</li>
+<li>&#x8FD4;&#x56DE;10&#x4E2A;&#x641C;&#x7D22;&#x7ED3;&#x679C;<ul>
+<li><img src="../assets/img/playwright_google_debug_resp.png" alt="playwright_google_debug_resp"></li>
+</ul>
+</li>
+</ul>
+<h3 id="google&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;"><a name="google&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;" class="plugin-anchor" href="#google&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;"><i class="fa fa-link" aria-hidden="true"></i></a>google&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;</h3>
+<ul>
+<li><p>&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x9875;</p>
+<ul>
+<li><p><img src="../assets/img/playwright_chrome_google_result_page.png" alt="playwright_chrome_google_result_page"></p>
+<ul>
+<li><p>html</p>
+<pre class="language-"><code class="lang-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>g<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-hveid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>CAUQAA<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFSgAMAF6BAgFEAA<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>tF2Cxc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>yuRUbf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span>
+                      <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>q=<span class="token entity" title="&amp;">&amp;amp;</span>esrc=s<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>cd=<span class="token entity" title="&amp;">&amp;amp;</span>cad=rja<span class="token entity" title="&amp;">&amp;amp;</span>uact=8<span class="token entity" title="&amp;">&amp;amp;</span>ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjABegQIBRAD<span class="token entity" title="&amp;">&amp;amp;</span>url=https%3A%2F%2Fgame.xiaomi.com%2Fgame%2F62267919&amp;usg=AOvVaw2DAfhy5mpu2IOx-kTbWr2I<span class="token punctuation">&quot;</span></span>
+                      <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjABegQIBRAD<span class="token punctuation">&quot;</span></span>
+                      <span class="token attr-name">onmousedown</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw2DAfhy5mpu2IOx-kTbWr2I&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjABegQIBRAD&apos;,&apos;&apos;,&apos;&apos;,event)<span class="token punctuation">&quot;</span></span>
+                      <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>_blank<span class="token punctuation">&quot;</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>noopener<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ctbtn</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2<span class="token punctuation">&quot;</span></span>
+                      <span class="token attr-name">data-cthref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>q=<span class="token entity" title="&amp;">&amp;amp;</span>esrc=s<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>cd=<span class="token entity" title="&amp;">&amp;amp;</span>cad=rja<span class="token entity" title="&amp;">&amp;amp;</span>uact=8<span class="token entity" title="&amp;">&amp;amp;</span>ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjABegQIBRAD<span class="token entity" title="&amp;">&amp;amp;</span>url=https%3A%2F%2Fgame.xiaomi.com%2Fgame%2F62267919&amp;usg=AOvVaw2DAfhy5mpu2IOx-kTbWr2I<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>LC20lb DKV0Md<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x7B56;&#x7565;&#x4E09;&#x56FD;&#x6218;&#x4E89;&#x624B;&#x6E38;&#x5B89;&#x5353;&#x4E0B;&#x8F7D;-&#x5C0F;&#x7C73;&#x6E38;&#x620F;&#x4E2D;&#x5FC3;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>TbwUpd NJjxre<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cite</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>iUh30 Zu0yb qLRx3b tjvcx<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>https://game.xiaomi.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                  <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dyjrff qzEoUe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> &#x203A; game<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cite</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>B6fmyf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>TbwUpd<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cite</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>iUh30 Zu0yb qLRx3b tjvcx<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>https://game.xiaomi.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                  <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dyjrff qzEoUe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> &#x203A; game<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cite</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>eFM0qc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>
+                              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">jscontroller</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>hiU8Ie<span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>GHDvEf<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7ED3;&#x679C;&#x9009;&#x9879;<span class="token punctuation">&quot;</span></span>
+                                      <span class="token attr-name">aria-expanded</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-haspopup</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>button<span class="token punctuation">&quot;</span></span>
+                                      <span class="token attr-name">jsaction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>PZcoEd;keydown:wU6FVd;keypress:uWmNaf<span class="token punctuation">&quot;</span></span>
+                                      <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4Q7B0wAXoECAUQBg<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                          <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gTl8xb<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu-panel zsYMMe<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menu<span class="token punctuation">&quot;</span></span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>-1<span class="token punctuation">&quot;</span></span>
+                                      <span class="token attr-name">jsaction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>keydown:Xiq7wd;mouseover:pKPowd;mouseout:O9bKS<span class="token punctuation">&quot;</span></span>
+                                      <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QqR8wAXoECAUQBw<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu-item OhScic zsYMMe<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menuitem<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>fl<span class="token punctuation">&quot;</span></span>
+                                              <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://webcache.googleusercontent.com/search?q=cache:qMSNJUsA4a0J:https://game.xiaomi.com/game/62267919+&amp;cd=2&amp;hl=zh-CN&amp;ct=clnk<span class="token punctuation">&quot;</span></span>
+                                              <span class="token attr-name">onmousedown</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw1tf3IRFX3HzbRjQFxdt3A4&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QIDABegQIBRAI&apos;,&apos;&apos;,&apos;&apos;,event)<span class="token punctuation">&quot;</span></span>
+                                              <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>_blank<span class="token punctuation">&quot;</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>noopener<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>&#x7F51;&#x9875;&#x5FEB;&#x7167;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+                                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">&gt;</span></span>
+                              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>IsZvec<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>MUxGbd wuQ4Ob WZ8Tjf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>2021&#x5E74;6&#x6708;29&#x65E5; &#x2014;
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>&#x300A;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span>
+                              <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x300B;&#x4E07;&#x5343;&#x96C6;&#x7ED3;&#xFF0C;&#x57CE;&#x6C60;&#x653B;&#x575A;&#xFF01;&#x7ECF;&#x5178;&#x7B56;&#x7565;&#x4E09;&#x56FD;&#x624B;&#x6E38;&#x96C6;&#x5408;&#x4E86;&#x6C99;&#x76D8;&#x3001;&#x56FD;&#x6218;&#x3001;&#x5361;&#x724C;&#x3001;&#x517B;&#x6210;&#x7B49;&#x591A;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4EE5;&#x57CE;&#x6C60;&#x5212;&#x5206;&#x5EFA;&#x9020;&#x56FD;&#x5BB6;&#xFF1B;&#x4EE5;&#x7ECF;&#x5178;&#x4E09;&#x56FD;&#x5FD7;&#x4E3A;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span>
+                              <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x9898;&#x6750;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#xFF0C;<span class="token entity" title="&#xA0;">&amp;nbsp;</span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><img src="../assets/img/playwright_chrome_google_result_9.png" alt="playwright_chrome_google_result_9"></li>
+<li><img src="../assets/img/playwright_google_result_debug.png" alt="playwright_google_result_debug"></li>
+<li><img src="../assets/img/playwright_google_result_all.png" alt="playwright_google_result_all"><ul>
+<li>&#x90E8;&#x5206;&#x7684;html</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>g<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>Uo8X3b OhScic zsYMMe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x7F51;&#x7EDC;&#x641C;&#x7D22;&#x7ED3;&#x679C;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-hveid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>CAIQAA<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFSgAMAB6BAgCEAA<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>tF2Cxc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>yuRUbf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span>
+                    <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>q=<span class="token entity" title="&amp;">&amp;amp;</span>esrc=s<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>cd=<span class="token entity" title="&amp;">&amp;amp;</span>cad=rja<span class="token entity" title="&amp;">&amp;amp;</span>uact=8<span class="token entity" title="&amp;">&amp;amp;</span>ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD<span class="token entity" title="&amp;">&amp;amp;</span>url=http%3A%2F%2Fm.7724.com%2Fccgjz%2F&amp;usg=AOvVaw02ypkYtu3h9TQzpCu3biwN<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">onmousedown</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw02ypkYtu3h9TQzpCu3biwN&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD&apos;,&apos;&apos;,&apos;&apos;,event)<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>_blank<span class="token punctuation">&quot;</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>noopener<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ctbtn</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">data-cthref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>q=<span class="token entity" title="&amp;">&amp;amp;</span>esrc=s<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>cd=<span class="token entity" title="&amp;">&amp;amp;</span>cad=rja<span class="token entity" title="&amp;">&amp;amp;</span>uact=8<span class="token entity" title="&amp;">&amp;amp;</span>ved=2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAAegQIAhAD<span class="token entity" title="&amp;">&amp;amp;</span>url=http%3A%2F%2Fm.7724.com%2Fccgjz%2F&amp;usg=AOvVaw02ypkYtu3h9TQzpCu3biwN<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>LC20lb DKV0Md<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x673A;&#x6E38;&#x620F;&#x4E0B;&#x8F7D;-7724&#x6E38;&#x620F;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+                    &#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>IsZvec<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x662F;&#x4E00;&#x6B3E;&#x975E;&#x5E38;&#x523A;&#x6FC0;&#x597D;&#x73A9;&#x7684;&#x4E09;&#x56FD;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span>
+                            <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x9898;&#x6750;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x7B56;&#x7565;&#x7C7B;&#x624B;&#x6E38;&#x3002;&#x5728;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span>
+                            <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x6E38;&#x620F;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x4E2D;&#xFF0C;&#x73A9;&#x5BB6;&#x5C06;&#x68A6;&#x56DE;&#x4E09;&#x56FD;&#x4E71;&#x4E16;&#xFF0C;&#x6210;&#x4E3A;&#x4E00;&#x65B9;&#x8BF8;&#x4FAF;&#xFF0C;&#x4E0E;&#x767E;&#x4E07;&#x73A9;&#x5BB6;&#x4E00;&#x8D77;&#x9010;&#x9E7F;&#x5929;&#x4E0B;!&#x73A9;&#x5BB6;&#x60F3;&#x8981;&#x5728;&#x8FD9;&#x7247;&#x6218;&#x4E71;&#x4E0D;&#x4F11;&#x7684;&#x5927;<span class="token entity" title="&#xA0;">&amp;nbsp;</span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>g<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-hveid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>CA4QAA<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFSgAMAl6BAgOEAA<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>tF2Cxc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>yuRUbf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://www.diyiyou.com/zt/zlccdyx/<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAJegQIDhAD<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">onmousedown</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>return rwt(this,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;&apos;,&apos;AOvVaw2YT1TExiYAGLEIgDsnscDf&apos;,&apos;&apos;,&apos;2ahUKEwiUn6ShxtDxAhVUNKYKHbCkCD4QFjAJegQIDhAD&apos;,&apos;&apos;,&apos;&apos;,event)<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>_blank<span class="token punctuation">&quot;</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>noopener<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>LC20lb DKV0Md<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x5360;&#x9886;&#x57CE;&#x6C60;&#x7684;&#x6E38;&#x620F;&#x63A8;&#x8350;-&#x8010;&#x73A9;&#x7684;&#x5360;&#x9886;&#x57CE;&#x6C60;&#x7684;&#x6E38;&#x620F;&#x5408;&#x96C6;-&#x7B2C;&#x4E00;&#x624B;&#x6E38;&#x7F51;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+                    &#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>IsZvec<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>MUxGbd wuQ4Ob WZ8Tjf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>2020&#x5E74;12&#x6708;26&#x65E5; &#x2014;
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>&#x63A8;&#x8350;&#x7406;&#x7531;&#xFF1A;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x662F;&#x4E00;&#x6B3E;&#x5927;&#x578B;&#x6218;&#x4E89;&#x7B56;&#x7565;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x9898;&#x6750;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x7684;&#x5373;&#x65F6;&#x7ADE;&#x6280;&#x7C7B;&#x578B;&#x624B;&#x6E38;&#xFF0C;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span>
+                            <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>qkunPe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x6E38;&#x620F;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span>&#x4EE5;&#x591A;&#x5143;&#x5316;&#x5175;&#x79CD;&#x8BBE;&#x5B9A;&#xFF0C;&#x52A0;&#x6DF1;&#x6218;&#x573A;&#x4EA4;&#x950B;&#x7684;&#x7B56;&#x7565;&#x5730;&#x4F4D;&#xFF0C;&#x5927;&#x6C14;&#x78C5;&#x7934;&#x7684;&#x4E09;&#x56FD;&#x53E4;&#x6218;&#x573A;<span class="token entity" title="&#xA0;">&amp;nbsp;</span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>g<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-hveid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>CAgQAA<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFSgAMAd6BAgIEAA<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>tF2Cxc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>yuRUbf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://www.youxi369.com/apps/50997.html<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFjAHegQICBAD<span class="token punctuation">&quot;</span></span>
+                    <span class="token attr-name">ping</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>url=https://www.youxi369.com/apps/50997.html&amp;ved=2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QFjAHegQICBAD<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>LC20lb DKV0Md<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x6E38;&#x514D;&#x8D39;&#x4E0B;&#x8F7D;-&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B89;&#x5353;&#x6700;&#x65B0;&#x7248;&#x672C; ... - &#x6E38;&#x620F;369<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>TbwUpd NJjxre<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cite</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>iUh30 Zu0yb qLRx3b tjvcx<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>https://www.youxi369.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dyjrff qzEoUe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> &#x203A; apps<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cite</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>B6fmyf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>TbwUpd<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cite</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>iUh30 Zu0yb qLRx3b tjvcx<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>https://www.youxi369.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dyjrff qzEoUe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> &#x203A; apps<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cite</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>eFM0qc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">jscontroller</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>hiU8Ie<span class="token punctuation">&quot;</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>GHDvEf<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7ED3;&#x679C;&#x9009;&#x9879;<span class="token punctuation">&quot;</span></span>
+                                    <span class="token attr-name">aria-expanded</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span> <span class="token attr-name">aria-haspopup</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>button<span class="token punctuation">&quot;</span></span>
+                                    <span class="token attr-name">jsaction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>PZcoEd;keydown:wU6FVd;keypress:uWmNaf<span class="token punctuation">&quot;</span></span>
+                                    <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8Q7B0wB3oECAgQBg<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span>
+                                        <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gTl8xb<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu-panel zsYMMe<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menu<span class="token punctuation">&quot;</span></span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>-1<span class="token punctuation">&quot;</span></span>
+                                    <span class="token attr-name">jsaction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>keydown:Xiq7wd;mouseover:pKPowd;mouseout:O9bKS<span class="token punctuation">&quot;</span></span>
+                                    <span class="token attr-name">data-ved</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QqR8wB3oECAgQBw<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>action-menu-item OhScic zsYMMe<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menuitem<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>fl<span class="token punctuation">&quot;</span></span>
+                                            <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://webcache.googleusercontent.com/search?q=cache:SGA7R-UcWfEJ:https://www.youxi369.com/apps/50997.html+&amp;cd=8&amp;hl=zh-CN&amp;ct=clnk&amp;gl=jp<span class="token punctuation">&quot;</span></span>
+                                            <span class="token attr-name">ping</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/url?sa=t<span class="token entity" title="&amp;">&amp;amp;</span>source=web<span class="token entity" title="&amp;">&amp;amp;</span>rct=j<span class="token entity" title="&amp;">&amp;amp;</span>url=https://webcache.googleusercontent.com/search%3Fq%3Dcache:SGA7R-UcWfEJ:https://www.youxi369.com/apps/50997.html%2B%26cd%3D8%26hl%3Dzh-CN%26ct%3Dclnk%26gl%3Djp&amp;ved=2ahUKEwi5upCe5NzxAhXLbt4KHXSLBz8QIDAHegQICBAI<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>&#x7F51;&#x9875;&#x5FEB;&#x7167;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>IsZvec<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>VwiC3b MUxGbd yDYNvb lyLwlc<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>MUxGbd wuQ4Ob WZ8Tjf<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>2021&#x5E74;6&#x6708;4&#x65E5; &#x2014;
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x662F;&#x4E00;&#x6B3E;&#x975E;&#x5E38;&#x523A;&#x6FC0;&#x597D;&#x73A9;&#x7684;&#x4E09;&#x56FD;&#x9898;&#x6750;&#x7B56;&#x7565;&#x591A;&#x4EBA;&#x624B;&#x6E38;&#x3002;&#x5728;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B98;&#x65B9;&#x7248;&#x4E2D;&#xFF0C;&#x73A9;&#x5BB6;&#x5C06;&#x56DE;&#x5230;&#x4E09;&#x56FD;&#x4E71;&#x4E16;&#xFF0C;&#x6210;&#x4E3A;&#x4E71;&#x4E16;&#x9738;&#x4E3B;&#xFF0C;&#x6307;&#x6325;&#x4F60;&#x7684;&#x519B;&#x961F;&#xFF0C;&#x8FDB;&#x884C;<span class="token entity" title="&#xA0;">&amp;nbsp;</span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h2 id="&#x8F93;&#x51FA;&#x7ED3;&#x679C;"><a name="&#x8F93;&#x51FA;&#x7ED3;&#x679C;" class="plugin-anchor" href="#&#x8F93;&#x51FA;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x7ED3;&#x679C;</h2>
+<p>&#x4E3E;&#x4F8B;1&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Found 9 search result:
+-------------------- <span class="token punctuation">[</span>1<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@node
+urlTitleElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;yuRUbf&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+url<span class="token operator">=</span>https://www.325sy.com/game/1118.html
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;_&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x6E38;- 325&#x624B;&#x6E38;
+-------------------- <span class="token punctuation">[</span>2<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>https://app.mi.com/details?id<span class="token operator">=</span>com.game.chengchigjz.mi<span class="token operator">&amp;</span>ref<span class="token operator">=</span>search
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x4E09;&#x56FD;&#x7B56;&#x7565;&#x6E38;&#x620F;-&#x5C0F;&#x7C73;&#x5E94;&#x7528;&#x5546;&#x5E97;
+-------------------- <span class="token punctuation">[</span>3<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;yuRUbf&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+url<span class="token operator">=</span>https://www.taptap.com/app/217377
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;- &#x9884;&#x7EA6;&#x4E0B;&#x8F7D;<span class="token operator">|</span> TapTap &#x53D1;&#x73B0;&#x597D;&#x6E38;&#x620F;
+-------------------- <span class="token punctuation">[</span>4<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>https://m.3733.com/news/197605.html
+title<span class="token operator">=</span>&#x300A;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#xFF08;&#x9001;&#x4E24;&#x4E07;&#x771F;&#x5145;&#xFF09;&#x300B;&#x53D8;&#x6001;&#x6E38;&#x620F;&#x89C6;&#x9891;&#x89C6;&#x9891;&#x5206;&#x4EAB;&#xFF1A;&#x4E00;&#x6B3E;&#x4EE5;&#x4E09;&#x56FD; <span class="token punctuation">..</span>.
+-------------------- <span class="token punctuation">[</span>5<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>http://www.365chiji.com/shouji/502.html
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x6E38;&#x4E0B;&#x8F7D;_&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x6E38;&#x620F;&#x5B89;&#x5353;&#x7248;&#x4E0B;&#x8F7D;_&#x4E09;&#x516D;&#x4E94;&#x5403;&#x9E21;
+-------------------- <span class="token punctuation">[</span>6<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>https://game.xiaomi.com/game/62267919
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x7B56;&#x7565;&#x4E09;&#x56FD;&#x6218;&#x4E89;&#x624B;&#x6E38;&#x5B89;&#x5353;&#x4E0B;&#x8F7D;-&#x5C0F;&#x7C73;&#x6E38;&#x620F;&#x4E2D;&#x5FC3;
+-------------------- <span class="token punctuation">[</span>7<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;yuRUbf&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+url<span class="token operator">=</span>https://app.xiaomi.com/details?id<span class="token operator">=</span>com.game.chengchigjz.mi
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x7B56;&#x7565;&#x4E09;&#x56FD;&#x6218;&#x4E89;&#x624B;&#x6E38; - &#x624B;&#x673A;&#x6E38;&#x620F;&#x5E94;&#x7528;&#x5546;&#x5E97;_&#x8F6F;&#x4EF6;&#x5546;&#x5E97; <span class="token punctuation">..</span>.
+-------------------- <span class="token punctuation">[</span>8<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>https://www.youxi369.com/apps/50997.html
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x6E38;&#x514D;&#x8D39;&#x4E0B;&#x8F7D;-&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B89;&#x5353;&#x6700;&#x65B0;&#x7248;&#x672C; <span class="token punctuation">..</span>. - &#x6E38;&#x620F;369
+-------------------- <span class="token punctuation">[</span>9<span class="token punctuation">]</span> --------------------
+curResultElem<span class="token operator">=</span>JSHandle@<span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">&quot;g&quot;</span><span class="token operator">&gt;</span>&#x2026;<span class="token operator">&lt;</span>/div<span class="token operator">&gt;</span>
+urlTitleElem<span class="token operator">=</span>JSHandle@node
+url<span class="token operator">=</span>https://m.ali213.net/android/294035.html
+title<span class="token operator">=</span>&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x624B;&#x6E38;&#x514D;&#x8D39;&#x7248;&#x4E0B;&#x8F7D;-&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x6298;&#x6263;&#x5145;&#x503C;&#x7248;&#x4E0B;&#x8F7D;v1.0 <span class="token punctuation">..</span>.
+</code></pre>
+<p>&#x4E3E;&#x4F8B;2&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Found 8 search result:
+-------------------- <span class="token punctuation">[</span>1<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;https://shouji.newyx.net/top/dldltc.html&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x6597;&#x7F57;&#x5927;&#x9646;&#x9898;&#x6750;&#x624B;&#x6E38;&#x54EA;&#x4E2A;&#x6700;&#x597D;&#x73A9; - &#x725B;&#x6E38;&#x620F;&#x7F51;&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x6597;&#x7F57;&#x5927;&#x9646;&#x662F;&#x6211;&#x4EEC;&#x975E;&#x5E38;&#x719F;&#x6089;&#x7684;&#x5C0F;&#x8BF4;IP&#xFF0C;&#x5C0F;&#x7F16;&#x4E3A;&#x5927;&#x5BB6;&#x6574;&#x7406;&#x7684;&#x6597;&#x7F57;&#x5927;&#x9646;&#x9898;&#x6750;&#x6392;&#x884C;&#x699C;&#x90FD;&#x662F;&#x5341;&#x5206;&#x8FD8;&#x539F;&#x5C0F;&#x8BF4;&#x7684;&#x6E38;&#x620F;&#xFF0C;&#x91CC;&#x9762;&#x719F;&#x6089;&#x7684;&#x89D2;&#x8272;&#x4E00;&#x4E00;&#x5448;&#x73B0;&#x5728;&#x73A9;&#x5BB6;&#x9762;&#x524D;&#xFF0C;&#x91CC;&#x9762;&#x6709;&#x521B;&#x65B0;&#x7684;&#x73A9;&#x6CD5;&#xFF0C;\u200b\xa0...&apos;</span><span class="token punctuation">}</span>
+-------------------- <span class="token punctuation">[</span>2<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;https://zhuanlan.zhihu.com/p/383284290&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;X&#x9884;&#x6D4B;&#x670D;&#x52A1;&#x4E28;&#x5361;&#x724C;&#x6E38;&#x620F;&#x5982;&#x4F55;&#x501F;&#x529B;AI&#x6570;&#x636E;&#xFF0C;&#x6709;&#x6548;&#x63D0;&#x5347; ...&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;2021&#x5E74;6&#x6708;24&#x65E5;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x968F;&#x7740;&#x540C;IP&#x9898;&#x6750;&#x7ADE;&#x54C1;&#x7684;&#x4E0D;&#x65AD;&#x6D8C;&#x73B0;&#xFF0C;&#x7528;&#x6237;&#x6D41;&#x5931;&#x98CE;&#x9669;&#x9884;&#x8B66;&#x5E76;&#x9488;&#x5BF9;&#x6027;&#x5E72;&#x9884;&#x53EC;&#x56DE;&#xFF0C;&#x6210;&#x4E3A;&#x5176;&#x4EA7;&#x54C1;&#x8FD0;&#x8425;&#x7684;&#x6838;&#x5FC3;&#x5DE5;&#x4F5C;&#x4E4B;&#x4E00;&#x3002; &#x4E0B;&#x9762;&#x5C06;&#x7ED3;&#x5408;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;&#x4F7F;&#x7528;&#x534E;&#x4E3A;AppGallery\xa0...&apos;</span><span class="token punctuation">}</span>
+&#x3002;&#x3002;&#x3002;
+-------------------- <span class="token punctuation">[</span>7<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;https://www.taptap.com/app/135987/review&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;- &#x73A9;&#x5BB6;&#x8BC4;&#x4EF7;| TapTap &#x53D1;&#x73B0;&#x597D;&#x6E38;&#x620F;&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;&#x597D;&#x4E0D;&#x597D;&#x73A9;&#xFF1F;&#x9605;&#x8BFB;&#x771F;&#x5B9E;&#x8BE6;&#x5C3D;&#x7684;&#x73A9;&#x5BB6;&#x8BC4;&#x4EF7;&#xFF0C;&#x53D1;&#x73B0;&#x6E38;&#x620F;&#x7684;&#x4F18;&#x70B9;&#x4E0E;&#x4E0D;&#x8DB3;&#xFF0C;&#x4E0E;&#x5F00;&#x53D1;&#x8005;&#x8FD1;&#x8DDD;&#x79BB;&#x4EA4;&#x6D41;&#x53CD;&#x9988;&#xFF0C;&#x8F7B;&#x677E;&#x4E86;&#x89E3;&#x6E38;&#x620F;&#x7684;&#x771F;&#x5B9E;&#x9762;&#x8C8C;&#x3002;&apos;</span><span class="token punctuation">}</span>
+-------------------- <span class="token punctuation">[</span>8<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;http://www.te5.com/game/450202.html&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x3010;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;H52021&#x6700;&#x65B0;&#x7248;&#x3011;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;H5&#x514D;&#x8D39;&#x7248;&#x4E0B;&#x8F7D;_&#x7279;&#x73A9; ...&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646;H52021&#x6700;&#x65B0;&#x7248;&#x4E0B;&#x8F7D;&#x662F;&#x4E00;&#x6B3E;&#x975E;&#x5E38;&#x706B;&#x7206;&#x7684;&#x4FEE;&#x4ED9;&#x9898;&#x6750;&#x7684;rpg&#x624B;&#x6E38;&#xFF0C;&#x5927;&#x578B;&#x6E38;&#x620F;&#xFF0C;\u200b&#x591A;&#x4EBA;&#x5728;&#x7EBF;&#xFF0C;&#x6D77;&#x91CF;&#x7528;&#x6237;&#x4E0E;&#x4F60;&#x540C;&#x4E50;&#x3002;&#x6E38;&#x620F;&#x6839;&#x636E;&#x91CD;&#x91CF;&#x7EA7;IP&#xFF0C;&#x5510;&#x5BB6;&#x4E09;&#x5C11;&#x7684;&#x539F;&#x8457;&#x7CBE;&#x54C1;&#x8FDB;&#x884C;\xa0...&apos;</span><span class="token punctuation">}</span>
+searchResultNum<span class="token operator">=</span>8
+Google search &#x6E38;&#x620F;&#x9898;&#x6750; &#x65B0;&#x6597;&#x7F57;&#x5927;&#x9646; found 8 result
+page<span class="token operator">=</span><span class="token operator">&lt;</span>Page url<span class="token operator">=</span><span class="token string">&apos;about:blank&apos;</span><span class="token operator">&gt;</span>
+Found 9 search result:
+-------------------- <span class="token punctuation">[</span>1<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;https://www.325sy.com/game/1118.html&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;_&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x6E38;- 325&#x624B;&#x6E38;&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;2021&#x5E74;4&#x6708;19&#x65E5;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x300A;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;-&#x9001;2&#x4E07;&#x771F;&#x5145;&#x300B;&#x662F;&#x4E00;&#x6B3E;&#x4EE5;&#x4E09;&#x56FD;&#x9898;&#x6750;&#x4E3A;&#x57FA;&#x7840;&#x7684;&#x56FD;&#x6218;&#x7C7B;&#x7B56;&#x7565;&#x624B;&#x673A;&#x6E38;&#x620F;&#xFF01;&#x8FDB;&#x5165;&#x6E38;&#x620F;&#x4E4B;&#x540E;&#xFF0C;&#x9996;&#x5148;&#x5347;&#x7EA7;&#x9886;&#x53D6;&#x4F60;&#x7684;2W&#x771F;&#x5145;.&#x6FC0;&#x6D3B;&#x8FD0;&#x8425;&#x6D3B;&#x52A8;&#xFF0C;&#x4F60;&#x5C31;&#x662F;\xa0...&apos;</span><span class="token punctuation">}</span>
+&#x3002;&#x3002;&#x3002;
+-------------------- <span class="token punctuation">[</span>9<span class="token punctuation">]</span> --------------------
+curSearchResultDict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;url&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;https://www.3839.com/a/134478.htm&apos;</span>, <span class="token string">&apos;title&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x4E0B;&#x8F7D;_&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x5B98;&#x65B9;&#x7248;&#x4E0B;&#x8F7D;-&#x597D;&#x6E38;&#x5FEB;&#x7206;APP&apos;</span>, <span class="token string">&apos;date&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;2021&#x5E74;6&#x6708;10&#x65E5;&apos;</span>, <span class="token string">&apos;description&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;&#x300A;&#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218;&#x300B;&#x662F;&#x4E00;&#x6B3E;&#x533A;&#x57DF;&#x5212;&#x5206;&#x5EFA;&#x9020;&#x56FD;&#x5BB6;&#x7684;&#x7B56;&#x7565;&#x4E09;&#x56FD;&#x624B;&#x6E38;&#xFF01;&#x517C;&#x5177;&#x56FD;&#x6218;&#x624B;&#x6E38;&#x548C;&#x7B56;&#x7565;&#x6E38;&#x620F;&#x73A9;&#x6CD5;&#xFF0C;&#x4EE5;&#x7ECF;&#x5178;&#x7684;&#x4E09;&#x56FD;&#x5FD7;&#x4E3A;&#x9898;&#x6750;&#x3001;&#x8033;&#x719F;&#x80FD;&#x8BE6;&#x7684;&#x6545;&#x4E8B;&#x5267;&#x60C5;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;\xa0...&apos;</span><span class="token punctuation">}</span>
+searchResultNum<span class="token operator">=</span>9
+Google search &#x6E38;&#x620F;&#x9898;&#x6750; &#x57CE;&#x6C60;&#x653B;&#x575A;&#x6218; found 9 result
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-07-30 19:05:58
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="baidu_search.html" class="navigation navigation-prev " aria-label="Previous page: 百度搜索自动化">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="other.html" class="navigation navigation-next " aria-label="Next page: 其他">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"模拟谷歌搜索并获取结果","level":"1.6.2","depth":2,"next":{"title":"其他","level":"1.6.3","depth":2,"path":"example/other.md","ref":"example/other.md","articles":[]},"previous":{"title":"百度搜索自动化","level":"1.6.1","depth":2,"path":"example/baidu_search.md","ref":"example/baidu_search.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/web_automation_tool_playwright/pdf/web_automation_tool_playwright.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/web_automation_tool_playwright/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"web_automation_tool_playwright","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"跨平台Web自动化神器：Playwright","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍支持跨平台的Web自动化神器，playwright。先进行概览介绍；如何初始化搭建Playwright开发环境；在介绍一些基本操作，包括查找和定位元素、查找并直接点击元素、输入文字、等待元素出现、模拟按键输入、获取元素属性等；在列出常见的问题和心得，包括如何初始化Sync的playwright的实例、using Sync API inside the asyncio loop、所有页面加载都超时、browser was not found、给playwright加代理等；以及给出详尽的例子，包括百度搜索自动化、获取谷歌搜索结果以及其他一些小例子；最后给出教程和资料。"},"file":{"path":"example/google_search_result.md","mtime":"2021-07-30T11:05:58.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-30T11:13:24.130Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

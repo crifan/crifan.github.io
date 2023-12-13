@@ -1,0 +1,840 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>模拟百度搜索 · Selenium知识总结</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="emulate_bing_search.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"selenium_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../init/">
+            
+                <a href="../init/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    初始化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../basic_operation/">
+            
+                <a href="../basic_operation/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../basic_operation/locate_element.html">
+            
+                <a href="../basic_operation/locate_element.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    查找定位元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../basic_operation/input_text.html">
+            
+                <a href="../basic_operation/input_text.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    输入文字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../basic_operation/click_element/">
+            
+                <a href="../basic_operation/click_element/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    点击元素
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../basic_operation/click_element/trigger_search.html">
+            
+                <a href="../basic_operation/click_element/trigger_search.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    触发搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../basic_operation/wait_show.html">
+            
+                <a href="../basic_operation/wait_show.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    等待元素出现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../basic_operation/get_attribute.html">
+            
+                <a href="../basic_operation/get_attribute.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    获取元素属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../note_summary/">
+            
+                <a href="../note_summary/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    心得和总结
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../note_summary/running_cannot_found.html">
+            
+                <a href="../note_summary/running_cannot_found.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    代码运行时却找不到元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../note_summary/select_not_for_ul.html">
+            
+                <a href="../note_summary/select_not_for_ul.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    select不能用于ul
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../note_summary/sometime_chrome_html_not_expected.html">
+            
+                <a href="../note_summary/sometime_chrome_html_not_expected.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    偶尔Chrome右键元素不是你要的
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../note_summary/sometime_need_refresh.html">
+            
+                <a href="../note_summary/sometime_need_refresh.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    偶尔刷新后才能找到元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../note_summary/not_found_exception.html">
+            
+                <a href="../note_summary/not_found_exception.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    找不到元素会抛异常
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="emulate_baidu_search.html">
+            
+                <a href="emulate_baidu_search.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    模拟百度搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="emulate_bing_search.html">
+            
+                <a href="emulate_bing_search.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    模拟必应搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../plugin/">
+            
+                <a href="../plugin/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../plugin/selenium_wire.html">
+            
+                <a href="../plugin/selenium_wire.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    selenium-wire
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/doc_tutorial.html">
+            
+                <a href="../appendix/doc_tutorial.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    文档和教程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >模拟百度搜索</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x641C;&#x7D22;"><a name="&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x641C;&#x7D22;" class="plugin-anchor" href="#&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x641C;&#x7D22;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x641C;&#x7D22;</h1>
+<p>&#x6B64;&#x5904;&#x7528;Selenium&#xFF0C;&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x641C;&#x7D22;&#xFF0C;&#x5E76;&#x63D0;&#x53D6;&#x7B2C;&#x4E00;&#x9875;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<h2 id="&#x4EE3;&#x7801;"><a name="&#x4EE3;&#x7801;" class="plugin-anchor" href="#&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4EE3;&#x7801;</h2>
+<ul>
+<li>&#x6587;&#x4EF6;&#x4E0B;&#x8F7D;&#xFF1A;<a href="../assets/file/baiduSearchAutomation/selenium/seleniumDemoBaiduSearch.py">seleniumDemoBaiduSearch.py</a></li>
+<li>&#x76F4;&#x63A5;&#x8D34;&#x51FA;&#x6E90;&#x7801;</li>
+</ul>
+<pre class="language-"><code class="lang-python"><span class="token comment"># Function: demo selenium do baidu search and extract result</span>
+<span class="token comment"># Author: Crifan Li</span>
+<span class="token comment"># Update: 20210327</span>
+
+<span class="token keyword">from</span> selenium <span class="token keyword">import</span> webdriver
+<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver<span class="token punctuation">.</span>common<span class="token punctuation">.</span>keys <span class="token keyword">import</span> Keys
+<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver<span class="token punctuation">.</span>common<span class="token punctuation">.</span>by <span class="token keyword">import</span> By
+<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver<span class="token punctuation">.</span>support<span class="token punctuation">.</span>ui <span class="token keyword">import</span> WebDriverWait
+<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver<span class="token punctuation">.</span>support <span class="token keyword">import</span> expected_conditions <span class="token keyword">as</span> EC
+
+<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+<span class="token keyword">import</span> re
+
+chromeDriver <span class="token operator">=</span> webdriver<span class="token punctuation">.</span>Chrome<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Open url</span>
+<span class="token comment">################################################################################</span>
+baiduUrl <span class="token operator">=</span> <span class="token string">&quot;https://www.baidu.com&quot;</span>
+chromeDriver<span class="token punctuation">.</span>get<span class="token punctuation">(</span>baiduUrl<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;title=%s&quot;</span> <span class="token operator">%</span> chromeDriver<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
+
+<span class="token keyword">assert</span> chromeDriver<span class="token punctuation">.</span>title <span class="token operator">==</span> <span class="token string">&quot;&#x767E;&#x5EA6;&#x4E00;&#x4E0B;&#xFF0C;&#x4F60;&#x5C31;&#x77E5;&#x9053;&quot;</span>
+<span class="token comment"># assert &apos;&#x767E;&#x5EA6;&apos; in chromeDriver.title</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Find/Locate search button</span>
+<span class="token comment">################################################################################</span>
+SearchButtonId <span class="token operator">=</span> <span class="token string">&quot;kw&quot;</span>
+searchButtonElem <span class="token operator">=</span> chromeDriver<span class="token punctuation">.</span>find_element_by_id<span class="token punctuation">(</span>SearchButtonId<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;searchButtonElem=%s&quot;</span> <span class="token operator">%</span> searchButtonElem<span class="token punctuation">)</span>
+<span class="token comment"># searchButtonElem=&lt;selenium.webdriver.remote.webelement.WebElement (session=&quot;e0d8b72f2fc31e27220f66fcbdb22bfc&quot;, element=&quot;21aa0e9d-04fa-4385-b16b-d82998068887&quot;)&gt;</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Input text</span>
+<span class="token comment">################################################################################</span>
+searchButtonElem<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Clear existed content&quot;</span><span class="token punctuation">)</span>
+
+searchStr <span class="token operator">=</span> <span class="token string">&quot;crifan&quot;</span>
+searchButtonElem<span class="token punctuation">.</span>send_keys<span class="token punctuation">(</span>searchStr<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Entered %s to search box&quot;</span> <span class="token operator">%</span> searchStr<span class="token punctuation">)</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Click button</span>
+<span class="token comment">################################################################################</span>
+
+<span class="token comment"># Method 1: emulate press Enter key</span>
+<span class="token comment"># searchButtonElem.send_keys(Keys.RETURN)</span>
+<span class="token comment"># print(&quot;Pressed Enter/Return key&quot;)</span>
+
+<span class="token comment"># Method 2: find button and click</span>
+BaiduSearchId <span class="token operator">=</span> <span class="token string">&quot;su&quot;</span>
+baiduSearchButtonElem <span class="token operator">=</span> chromeDriver<span class="token punctuation">.</span>find_element_by_id<span class="token punctuation">(</span>BaiduSearchId<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;baiduSearchButtonElem=%s&quot;</span> <span class="token operator">%</span> baiduSearchButtonElem<span class="token punctuation">)</span>
+baiduSearchButtonElem<span class="token punctuation">.</span>click<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Clicked button %s&quot;</span> <span class="token operator">%</span> baiduSearchButtonElem<span class="token punctuation">)</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Wait page change/loading completed</span>
+<span class="token comment">#   -&gt; following element makesure show = visible</span>
+<span class="token comment">#   -&gt; otherwise possibly can NOT find elements</span>
+<span class="token comment">################################################################################</span>
+MaxWaitSeconds <span class="token operator">=</span> <span class="token number">10</span>
+numTextElem <span class="token operator">=</span> WebDriverWait<span class="token punctuation">(</span>chromeDriver<span class="token punctuation">,</span> MaxWaitSeconds<span class="token punctuation">)</span><span class="token punctuation">.</span>until<span class="token punctuation">(</span>
+    EC<span class="token punctuation">.</span>presence_of_element_located<span class="token punctuation">(</span><span class="token punctuation">(</span>By<span class="token punctuation">.</span>XPATH<span class="token punctuation">,</span> <span class="token string">&quot;//span[@class=&apos;nums_text&apos;]&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Search complete, showing: %s&quot;</span> <span class="token operator">%</span> numTextElem<span class="token punctuation">)</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># Extract result</span>
+<span class="token comment">################################################################################</span>
+
+<span class="token comment"># Method 1: use Selenium to extract title list</span>
+searchResultAList <span class="token operator">=</span> chromeDriver<span class="token punctuation">.</span>find_elements_by_xpath<span class="token punctuation">(</span><span class="token string">&quot;//h3[contains(@class, &apos;t&apos;)]/a&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;searchResultAList=%s&quot;</span> <span class="token operator">%</span> searchResultAList<span class="token punctuation">)</span>
+searchResultANum <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>searchResultAList<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;searchResultANum=%s&quot;</span> <span class="token operator">%</span> searchResultANum<span class="token punctuation">)</span>
+<span class="token keyword">for</span> curIdx<span class="token punctuation">,</span> curSearchResultAElem <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>searchResultAList<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  curNum <span class="token operator">=</span> curIdx <span class="token operator">+</span> <span class="token number">1</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;%s [%d] %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token string">&quot;-&quot;</span><span class="token operator">*</span><span class="token number">20</span><span class="token punctuation">,</span> curNum<span class="token punctuation">,</span> <span class="token string">&quot;-&quot;</span><span class="token operator">*</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  baiduLinkUrl <span class="token operator">=</span> curSearchResultAElem<span class="token punctuation">.</span>get_attribute<span class="token punctuation">(</span><span class="token string">&quot;href&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;baiduLinkUrl=%s&quot;</span> <span class="token operator">%</span> baiduLinkUrl<span class="token punctuation">)</span>
+  title <span class="token operator">=</span> curSearchResultAElem<span class="token punctuation">.</span>text
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;title=%s&quot;</span> <span class="token operator">%</span> title<span class="token punctuation">)</span>
+
+<span class="token comment"># # Method 2: use BeautifulSoup to extract title list</span>
+<span class="token comment"># curHtml = chromeDriver.page_source</span>
+<span class="token comment"># curSoup = BeautifulSoup(curHtml, &apos;html.parser&apos;)</span>
+<span class="token comment"># beginTP = re.compile(&quot;^t.*&quot;)</span>
+<span class="token comment"># searchResultH3List = curSoup.find_all(&quot;h3&quot;, {&quot;class&quot;: beginTP})</span>
+<span class="token comment"># print(&quot;searchResultH3List=%s&quot; % searchResultH3List)</span>
+<span class="token comment"># searchResultH3Num = len(searchResultH3List)</span>
+<span class="token comment"># print(&quot;searchResultH3Num=%s&quot; % searchResultH3Num)</span>
+<span class="token comment"># for curIdx, searchResultH3Item in enumerate(searchResultH3List):</span>
+<span class="token comment">#   curNum = curIdx + 1</span>
+<span class="token comment">#   print(&quot;%s [%d] %s&quot; % (&quot;-&quot;*20, curNum, &quot;-&quot;*20))</span>
+<span class="token comment">#   aElem = searchResultH3Item.find(&quot;a&quot;)</span>
+<span class="token comment">#   # print(&quot;aElem=%s&quot; % aElem)</span>
+<span class="token comment">#   baiduLinkUrl = aElem.attrs[&quot;href&quot;]</span>
+<span class="token comment">#   print(&quot;baiduLinkUrl=%s&quot; % baiduLinkUrl)</span>
+<span class="token comment">#   title = aElem.text</span>
+<span class="token comment">#   print(&quot;title=%s&quot; % title)</span>
+
+<span class="token comment">################################################################################</span>
+<span class="token comment"># End close</span>
+<span class="token comment">################################################################################</span>
+chromeDriver<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x89C6;&#x9891;"><a name="&#x89C6;&#x9891;" class="plugin-anchor" href="#&#x89C6;&#x9891;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89C6;&#x9891;</h2>
+<video id="seleniumDemoBaiduSearch" controls="controls" preload="none" width="800" height="600">
+  <source src="../assets/file/baiduSearchAutomation/selenium/seleniumDemoBaiduSearch.mp4" type="video/mp4">
+</video>
+
+<h2 id="&#x76F8;&#x5173;&#x56FE;&#x7247;"><a name="&#x76F8;&#x5173;&#x56FE;&#x7247;" class="plugin-anchor" href="#&#x76F8;&#x5173;&#x56FE;&#x7247;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76F8;&#x5173;&#x56FE;&#x7247;</h2>
+<ul>
+<li>&#x6253;&#x5F00;&#x767E;&#x5EA6;&#x9996;&#x9875;<ul>
+<li><img src="../assets/img/example_has_open_baidu.png" alt="example_has_open_baidu"></li>
+</ul>
+</li>
+<li>&#x8C03;&#x8BD5;&#x8F93;&#x5165;&#x6846;&#x7684;html<ul>
+<li><img src="../assets/img/example_debug_input_box.jpg" alt="example_debug_input_box"></li>
+</ul>
+</li>
+<li>&#x8F93;&#x5165;&#x6846;&#x4E2D;&#x53EF;&#x4EE5;&#x8F93;&#x5165;&#x641C;&#x7D22;&#x5173;&#x952E;&#x5B57;&#xFF1A;crifan<ul>
+<li><img src="../assets/img/example_inputed_crifan_search.jpg" alt="example_inputed_crifan_search"></li>
+</ul>
+</li>
+<li>&#x7814;&#x7A76;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x4E2D;&#x5FC5;&#x7136;&#x51FA;&#x73B0;&#x7684;&#x5B57;&#x6BB5;<ul>
+<li><img src="../assets/img/example_debug_search_result_id.jpg" alt="example_debug_search_result_id"></li>
+</ul>
+</li>
+<li>&#x8C03;&#x8BD5;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x6BCF;&#x4E00;&#x9879;&#x7684;html<ul>
+<li><img src="../assets/img/example_debug_search_result_item.jpg" alt="example_debug_search_result_item"></li>
+</ul>
+</li>
+<li>&#x70B9;&#x51FB;&#x89E6;&#x53D1;&#x641C;&#x7D22;&#x662F;&#x53EF;&#x4EE5;&#x7684;<ul>
+<li><img src="../assets/img/example_done_trigger_search.png" alt="example_done_trigger_search"></li>
+</ul>
+</li>
+<li>&#x6700;&#x7EC8;&#x89E3;&#x6790;&#x51FA;&#x767E;&#x5EA6;&#x641C;&#x7D22;&#x7ED3;&#x679C;<ul>
+<li><img src="../assets/img/example_parsed_search_result.jpg" alt="example_parsed_search_result"></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-04-29 21:19:43
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 举例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="emulate_bing_search.html" class="navigation navigation-next " aria-label="Next page: 模拟必应搜索">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"模拟百度搜索","level":"1.5.1","depth":2,"next":{"title":"模拟必应搜索","level":"1.5.2","depth":2,"path":"example/emulate_bing_search.md","ref":"example/emulate_bing_search.md","articles":[]},"previous":{"title":"举例","level":"1.5","depth":1,"path":"example/README.md","ref":"example/README.md","articles":[{"title":"模拟百度搜索","level":"1.5.1","depth":2,"path":"example/emulate_baidu_search.md","ref":"example/emulate_baidu_search.md","articles":[]},{"title":"模拟必应搜索","level":"1.5.2","depth":2,"path":"example/emulate_bing_search.md","ref":"example/emulate_bing_search.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/selenium_summary/pdf/selenium_summary.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/selenium_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"selenium_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Selenium知识总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍PC端Web自动化最主流工具Selenium。先介绍了如何初始化Selenium开发环境，再介绍基本操作，包括查找元素、输入文字、点击元素、等待元素出现、获取元素属性等；以及总结一些开发经验，包括如何等待元素出现、select不能用于ul、偶尔Chrome右键找到的元素不是你要的，偶尔刷新后才能找到元素等；给出具体实例，比如模拟百度搜索并解析搜索结果；给出相关文档和资料。"},"file":{"path":"example/emulate_baidu_search.md","mtime":"2021-04-29T13:19:43.977Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-30T10:55:00.801Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

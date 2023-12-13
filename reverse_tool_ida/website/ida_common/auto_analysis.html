@@ -1,0 +1,821 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>自动分析 · 逆向利器：IDA</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="search.html" />
+    
+    
+    <link rel="prev" href="name_meaning.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ida_overview/">
+            
+                <a href="../ida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IDA概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ida_quick_start/">
+            
+                <a href="../ida_quick_start/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    IDA快手上手
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    IDA通用知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="version.html">
+            
+                <a href="version.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ui_layout.html">
+            
+                <a href="ui_layout.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    界面布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="name_meaning.html">
+            
+                <a href="name_meaning.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    命名和含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4" data-path="auto_analysis.html">
+            
+                <a href="auto_analysis.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    自动分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="search.html">
+            
+                <a href="search.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="shortcut.html">
+            
+                <a href="shortcut.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    快捷键
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ida_features/">
+            
+                <a href="../ida_features/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    IDA功能详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ida_features/view_code/">
+            
+                <a href="../ida_features/view_code/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    查看代码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../ida_features/view_code/asm_code.html">
+            
+                <a href="../ida_features/view_code/asm_code.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    汇编代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../ida_features/view_code/pseudocode.html">
+            
+                <a href="../ida_features/view_code/pseudocode.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    伪代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../ida_features/view_code/function_call.html">
+            
+                <a href="../ida_features/view_code/function_call.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    函数调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../ida_features/view_code/struct_class_def.html">
+            
+                <a href="../ida_features/view_code/struct_class_def.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    结构体类定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ida_features/strings.html">
+            
+                <a href="../ida_features/strings.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    字符串
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ida_features/function_list.html">
+            
+                <a href="../ida_features/function_list.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    函数列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ida_features/import_export.html">
+            
+                <a href="../ida_features/import_export.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    导入和导出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ida_features/plugins.html">
+            
+                <a href="../ida_features/plugins.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ida_usage_note/">
+            
+                <a href="../ida_usage_note/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    IDA使用心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ida_usage_note/objc.html">
+            
+                <a href="../ida_usage_note/objc.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    ObjC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/doc_refer.html">
+            
+                <a href="../appendix/doc_refer.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >自动分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="自动分析"><a name="自动分析" class="plugin-anchor" href="#自动分析"><i class="fa fa-link" aria-hidden="true"></i></a>自动分析</h1>
+<p>典型过程：把二进制文件拖动到IDA后，就开始自动分析`了。</p>
+<p>IDA中默认已开启左下角的：</p>
+<ul>
+<li><code>Analysis indicator</code>=<code>自动分析指示器</code><ul>
+<li>图<ul>
+<li><img src="../assets/img/ida_autoanalysis_indicator.png" alt="ida_autoanalysis_indicator"></li>
+</ul>
+</li>
+<li>作用：可以显示当前自动分析的进度</li>
+</ul>
+</li>
+</ul>
+<h2 id="为何要（自动）分析？"><a name="为何要（自动）分析？" class="plugin-anchor" href="#为何要（自动）分析？"><i class="fa fa-link" aria-hidden="true"></i></a>为何要（自动）分析？</h2>
+<p>我们用IDA去分析二进制中代码的逻辑。</p>
+<p>而二进制本身其实只有<code>0</code>和<code>1</code>二进制数据而已。</p>
+<p>而想要分析代码，即查看对应二进制对应的<code>汇编代码</code>（以及后续的<code>伪代码</code>），所包含的函数，所包含的字符串等等信息，则就需要：</p>
+<p>对二进制进行充分的分析，最后才能显示出我们要的上述的各种信息。</p>
+<p>而对于二进制加载后的分析过程，IDA叫做：</p>
+<ul>
+<li><code>自动分析</code>=<code>auto analysis</code></li>
+</ul>
+<h2 id="自动分析的过程和阶段"><a name="自动分析的过程和阶段" class="plugin-anchor" href="#自动分析的过程和阶段"><i class="fa fa-link" aria-hidden="true"></i></a>自动分析的过程和阶段</h2>
+<p>自动分析会先后有多个阶段，其中阶段的名称是2个字母的缩写，可以在左下角看到</p>
+<p>具体阶段和含义是：</p>
+<ul>
+<li><code>FL:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> execution <strong>FL</strong>ow is being traced</li>
+<li><code>PR:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> a function (=<strong>PR</strong>ocedure?) is being created</li>
+<li><code>TL:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> a function <strong>T</strong>ai<strong>L</strong> is being created</li>
+<li><code>SP:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the <strong>S</strong>tack <strong>P</strong>ointer is being traced</li>
+<li><code>AC:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the <strong>A</strong>ddress is being analyzed</li>
+<li><code>LL:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>number</span><span class="token punctuation">&gt;</span></span></code> a signature file is being loaded</li>
+<li><code>L1:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the first pass (<strong>L</strong>evel <strong>1</strong>) of FLIRT</li>
+<li><code>L2:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the second pass (<strong>L</strong>evel <strong>2</strong>) of FLIRT</li>
+<li><code>L3:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the third pass (<strong>L</strong>evel <strong>3</strong>) of FLIRT</li>
+<li><code>TP:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> <strong>TP</strong>pe information is being applied</li>
+<li><code>FI:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> the <strong>FI</strong>nal pass of autoanalysis</li>
+<li><code>WF:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>address</span><span class="token punctuation">&gt;</span></span></code> <strong>W</strong>eak execution <strong>F</strong>low is being traced</li>
+<li><code>AU:  idle</code>    <strong>A</strong>utoanalysis is finished</li>
+</ul>
+<h3 id="不同阶段举例"><a name="不同阶段举例" class="plugin-anchor" href="#不同阶段举例"><i class="fa fa-link" aria-hidden="true"></i></a>不同阶段举例</h3>
+<ul>
+<li>FL=Flow<ul>
+<li><img src="../assets/img/auto_analysis_step_fl.png" alt="auto_analysis_step_fl"></li>
+</ul>
+</li>
+<li>PR=PRocedure<ul>
+<li><img src="../assets/img/auto_analysis_step_pr.png" alt="auto_analysis_step_pr"></li>
+</ul>
+</li>
+<li>AC = Address<ul>
+<li><img src="../assets/img/auto_analysis_step_ac.png" alt="auto_analysis_step_ac"></li>
+</ul>
+</li>
+<li>FI=Final<ul>
+<li><img src="../assets/img/auto_analysis_step_fi.png" alt="auto_analysis_step_fi"></li>
+</ul>
+</li>
+<li>WF=Weak<ul>
+<li><img src="../assets/img/auto_analysis_step_wf.png" alt="auto_analysis_step_wf"></li>
+</ul>
+</li>
+<li>WU: idle<ul>
+<li><img src="../assets/img/auto_analysis_step_au_idle.png" alt="auto_analysis_step_au_idle"></li>
+</ul>
+</li>
+</ul>
+<h2 id="自动分析要多长时间"><a name="自动分析要多长时间" class="plugin-anchor" href="#自动分析要多长时间"><i class="fa fa-link" aria-hidden="true"></i></a>自动分析要多长时间</h2>
+<p>自动分析完毕所需时间，取决于，二进制文件大小，以及其内部逻辑复杂程度</p>
+<p>一般来说：</p>
+<ul>
+<li>很小的二进制文件：耗时很短，马上就结束了<ul>
+<li>举例<ul>
+<li>几十KB的抖音Aweme，耗时很短，没几分钟就结束了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>很大的二进制文件：耗时很久，有的长达数个小时<ul>
+<li>举例<ul>
+<li>200多MB的抖音AwemeCore，IDA自动解析最终耗时，大约12个小时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-14 22:27:21
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="name_meaning.html" class="navigation navigation-prev " aria-label="Previous page: 命名和含义">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="search.html" class="navigation navigation-next " aria-label="Next page: 搜索">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"自动分析","level":"1.4.4","depth":2,"next":{"title":"搜索","level":"1.4.5","depth":2,"path":"ida_common/search.md","ref":"ida_common/search.md","articles":[]},"previous":{"title":"命名和含义","level":"1.4.3","depth":2,"path":"ida_common/name_meaning.md","ref":"ida_common/name_meaning.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_tool_ida/pdf/reverse_tool_ida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_tool_ida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向利器：IDA","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍逆向领域中功能强大且好用的利器：IDA。先介绍IDA概览；再介绍IDA的快速上手过程；再介绍IDA中通用的基础知识，包括版本选择、界面相关比如布局等、常见命名和含义、自动分析过程、搜索、快捷键；以及介绍IDA各种功能，包括查看代码，比如汇编代码、F5伪代码、函数调用、结构体的类的定义、字符串、函数列表插件等等；再去记录IDA的使用心得；最后整理一些IDA相关的文档和资料，供参考。"},"file":{"path":"ida_common/auto_analysis.md","mtime":"2023-07-14T14:27:21.204Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-14T15:04:45.206Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,812 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>using Sync API inside the asyncio loop · 跨平台Web自动化神器：Playwright</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="all_goto_timeout.html" />
+    
+    
+    <link rel="prev" href="sync_instance_init.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"web_automation_tool_playwright","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview/">
+            
+                <a href="../overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Playwright概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../init_dev_env.html">
+            
+                <a href="../init_dev_env.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    初始化环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../basic/">
+            
+                <a href="../basic/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../basic/find_element.html">
+            
+                <a href="../basic/find_element.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    查找元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../basic/find_and_click.html">
+            
+                <a href="../basic/find_and_click.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    查找并点击元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../basic/input_text.html">
+            
+                <a href="../basic/input_text.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    输入文字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../basic/wait_for.html">
+            
+                <a href="../basic/wait_for.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    等待元素出现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../basic/emulate_key.html">
+            
+                <a href="../basic/emulate_key.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    模拟按键
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../basic/get_value.html">
+            
+                <a href="../basic/get_value.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    获取元素属性值
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    常见问题和心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="sync_instance_init.html">
+            
+                <a href="sync_instance_init.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    初始化Sync的playwright的实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="sync_inside_asyncio.html">
+            
+                <a href="sync_inside_asyncio.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    using Sync API inside the asyncio loop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="all_goto_timeout.html">
+            
+                <a href="all_goto_timeout.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    所有页面加载都超时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="browser_not_found.html">
+            
+                <a href="browser_not_found.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    browser was not found
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="add_proxy.html">
+            
+                <a href="add_proxy.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    给playwright加代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../example/">
+            
+                <a href="../example/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../example/baidu_search.html">
+            
+                <a href="../example/baidu_search.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    百度搜索自动化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../example/google_search_result.html">
+            
+                <a href="../example/google_search_result.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    模拟谷歌搜索并获取结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../example/other.html">
+            
+                <a href="../example/other.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/doc_tutorial.html">
+            
+                <a href="../appendix/doc_tutorial.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    教程和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >using Sync API inside the asyncio loop</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="using-playwright-sync-api-inside-the-asyncio-loop"><a name="using-playwright-sync-api-inside-the-asyncio-loop" class="plugin-anchor" href="#using-playwright-sync-api-inside-the-asyncio-loop"><i class="fa fa-link" aria-hidden="true"></i></a>using Playwright Sync API inside the asyncio loop</h1>
+<p><strong>&#x80CC;&#x666F;</strong></p>
+<p>&#x6B63;&#x5E38;&#x5199;&#x4E86;&#xFF0C;&#x521D;&#x59CB;&#x5316;Playwright&#x7684;sync&#x7684;api&#x7684;&#x4EE3;&#x7801;&#x540E;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">parseUrl</span><span class="token punctuation">(</span>inputUrl<span class="token punctuation">,</span> page<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Parse (redirected final long) url, title, html from input (possible short link) url
+
+    Args:
+        inputUrl (dict): input original (short link) url
+        page (Page): Playwright page. Default is None. If None, create a new one.
+    Returns:
+        parse result(dict)
+    Raises:
+    &quot;&quot;&quot;</span>
+    respValue <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">if</span> <span class="token keyword">not</span> page<span class="token punctuation">:</span>
+        page <span class="token operator">=</span> initPage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">initPage</span><span class="token punctuation">(</span>pageConfig<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> browser<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Init playwright browser new page
+
+    Args:
+        pageConfig (dict): page config. Default is None.
+        browser (BrowserType): Playwright browser. Default is None. If None, create new one
+    Returns:
+        Page
+    Examples:
+        pageConfig
+            {&quot;pageLoadTimeout&quot;: 10}
+    Raises:
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> browser<span class="token punctuation">:</span>
+        browser <span class="token operator">=</span> initBrowser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+&#x3002;&#x3002;&#x3002;
+
+<span class="token keyword">def</span> <span class="token function">initBrowser</span><span class="token punctuation">(</span>browserType<span class="token operator">=</span><span class="token string">&quot;chromium&quot;</span><span class="token punctuation">,</span> browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> <span class="token boolean">False</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    For playwright, init to create a browser. For later use, such as google search
+
+    Args:
+        browserType (str): Playwright browser type: chromium / firefox / webkit
+        browserConfig (dict): Playwright browser config. Default is {&quot;headless&quot;: False}.
+    Returns:
+        BrowserType
+    Examples:
+        browserConfig
+            {
+                &quot;headless&quot;: False,
+                &quot;proxy&quot;: {
+                    &quot;server&quot;: &quot;http://127.0.0.1:58591&quot;,
+                }
+            }
+    Raises:
+    &quot;&quot;&quot;</span>
+    curBrowserType <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">if</span> browserType<span class="token punctuation">:</span>
+        browserType <span class="token operator">=</span> browserType<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># with sync_playwright() as p:</span>
+    <span class="token comment"># p = sync_playwright()</span>
+    p <span class="token operator">=</span> sync_playwright<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x522B;&#x5904;&#x53BB;&#x8C03;&#x7528;&#xFF0C;&#x7ED3;&#x679C;&#x62A5;&#x9519;</p>
+<pre class="language-"><code class="lang-bash">&#x53D1;&#x751F;&#x5F02;&#x5E38;: Error
+It looks like you are using Playwright Sync API inside the asyncio loop. Please use the Async API instead.
+</code></pre>
+<p><img src="../assets/img/playwright_sync_inside_asyncio.png" alt="playwright_sync_inside_asyncio"></p>
+<p>&#x4EE5;&#x53CA;&#xFF1A;</p>
+<p>&#x540E;&#x7EED;&#x7C7B;&#x4F3C;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">testParseSpeed</span><span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> testRoundNum<span class="token punctuation">,</span> configDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> curRoundIdx <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>testRoundNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        curRoundResult <span class="token operator">=</span> parseShorLink_Common<span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> configDict<span class="token punctuation">)</span>
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">parseShorLink_Common</span><span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> configDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        browser <span class="token operator">=</span> crifanPlaywright<span class="token punctuation">.</span>initBrowser<span class="token punctuation">(</span>browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> isCurHeadless<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">initBrowser</span><span class="token punctuation">(</span>browserType<span class="token operator">=</span><span class="token string">&quot;chromium&quot;</span><span class="token punctuation">,</span> browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> <span class="token boolean">False</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    p <span class="token operator">=</span> sync_playwright<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x53C8;&#x62A5;&#x540C;&#x6837;&#x9519;&#x8BEF;&#x3002;</p>
+<p><strong>&#x9519;&#x8BEF;&#x539F;&#x56E0;</strong>&#xFF1A;Playwright&#x7684;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x673A;&#x5236;&#xFF0C;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#xFF0C;&#x867D;&#x7136;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x9AD8;&#x7EA7;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#x7528;&#x8D77;&#x6765;&#x5F88;&#x662F;&#x9EBB;&#x70E6;&#x3002;&#x5BFC;&#x81F4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x662F;&#x591A;&#x6B21;&#x5FAA;&#x73AF;&#x7C7B;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x6216;&#x8005;&#x662F;Python&#x4E2D;&#x7684;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x7B49;&#x60C5;&#x51B5;&#xFF0C;&#x53BB;&#x521D;&#x59CB;&#x5316;<code>browser</code>&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x88AB;&#x5185;&#x90E8;&#x5224;&#x65AD;&#x4E3A;&#xFF0C;&#x89C6;&#x4E3A;&#xFF0C;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#x3002;</p>
+<p><strong>&#x89E3;&#x51B3;&#x529E;&#x6CD5;</strong>&#xFF1A;&#x53EA;&#x80FD;&#x628A;&#x4EE3;&#x7801;&#xFF0C;&#x6539;&#x4E3A;&#xFF0C;&#x6574;&#x5957;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x671F;&#x95F4;&#xFF0C;<strong>&#x5168;&#x5C40;&#x53EA;&#x80FD;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x6B21;</strong><code>browser</code>&#x3002;</p>
+<p>&#x5426;&#x5219;&#x5982;&#x679C;&#x6709;&#x591A;&#x6B21;&#x521D;&#x59CB;&#x5316;&#x8C03;&#x7528;<code>sync_playwright().start()</code>&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x6211;&#x6B64;&#x5904;&#x6700;&#x540E;&#x7684;&#x4EE3;&#x7801;&#x662F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">    <span class="token keyword">elif</span> parseFunc <span class="token operator">==</span> crifanPlaywright<span class="token punctuation">.</span>parseUrl<span class="token punctuation">:</span>
+        <span class="token comment"># browser = extraParaDict[&quot;browser&quot;]</span>
+        <span class="token comment"># browser = extracPara[&quot;browser&quot;]</span>
+        <span class="token comment"># crifanPlaywright.closeBrowser(browser)</span>
+        <span class="token keyword">pass</span>
+</code></pre>
+<p>&#x5373;&#xFF1A;&#x5355;&#x8F6E;&#x6D4B;&#x8BD5;&#x4E4B;&#x524D;&#xFF0C;&#x4E0D;&#x53BB;close&#x8FD9;&#x4E2A;Playwright&#x7684;browser</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">testParseSpeed</span><span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> testRoundNum<span class="token punctuation">,</span> configDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> gDnsFailedHost
+
+
+    extracPara <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment"># workaround for: It looks like you are using Playwright Sync API inside the asyncio loop</span>
+    <span class="token keyword">if</span> parseFunc <span class="token operator">==</span> crifanPlaywright<span class="token punctuation">.</span>parseUrl<span class="token punctuation">:</span>
+        isCurHeadless <span class="token operator">=</span> configDict<span class="token punctuation">[</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">]</span>
+        browser <span class="token operator">=</span> crifanPlaywright<span class="token punctuation">.</span>initBrowser<span class="token punctuation">(</span>browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> isCurHeadless<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        extracPara <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;browser&quot;</span><span class="token punctuation">:</span> browser<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+
+&#x3002;&#x3002;&#x3002;
+    <span class="token keyword">for</span> curRoundIdx <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>testRoundNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+&#x3002;&#x3002;&#x3002;
+        curRoundResult <span class="token operator">=</span> parseShorLink_Common<span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> configDict<span class="token punctuation">,</span> extracPara<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x5373;&#xFF1A;testParseSpeed&#x4E2D;&#x628A;browser&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x53EA;&#x8FD0;&#x884C;&#x4E00;&#x6B21;</p>
+<p>&#x8FD8;&#x8981;&#x628A;&#x5168;&#x5C40;&#x7684;&#x79FB;&#x52A8;&#x5230;&#x6700;&#x9876;&#x5C42;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">    extracPara <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment"># workaround for: It looks like you are using Playwright Sync API inside the asyncio loop</span>
+    isCurHeadless <span class="token operator">=</span> configDict<span class="token punctuation">[</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">]</span>
+    browser <span class="token operator">=</span> crifanPlaywright<span class="token punctuation">.</span>initBrowser<span class="token punctuation">(</span>browserConfig<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;headless&quot;</span><span class="token punctuation">:</span> isCurHeadless<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> eachParseFunc <span class="token keyword">in</span> parseFuncList<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> eachParseFunc <span class="token operator">==</span> crifanPlaywright<span class="token punctuation">.</span>parseUrl<span class="token punctuation">:</span>
+            extracPara <span class="token operator">=</span> <span class="token punctuation">{</span>
+                <span class="token string">&quot;browser&quot;</span><span class="token punctuation">:</span> browser<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            extracPara <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+        testParseSpeed<span class="token punctuation">(</span>eachParseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> testRoundNum<span class="token punctuation">,</span> configDict<span class="token punctuation">,</span> extracPara<span class="token punctuation">)</span>
+
+&#x3002;&#x3002;&#x3002;
+<span class="token keyword">def</span> <span class="token function">testParseSpeed</span><span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> testRoundNum<span class="token punctuation">,</span> configDict<span class="token punctuation">,</span> extracPara<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        curRoundResult <span class="token operator">=</span> parseShorLink_Common<span class="token punctuation">(</span>parseFunc<span class="token punctuation">,</span> shortLinkList<span class="token punctuation">,</span> configDict<span class="token punctuation">,</span> extracPara<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x624D;&#x5B9E;&#x73B0;&#x4E86;&#xFF1A;&#x4EE3;&#x7801;&#x5168;&#x5C40;&#x53EA;&#x80FD;&#x548C;&#x786E;&#x4FDD;&#x53EA;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x6B21;<code>sync_playwright().start()</code>&#xFF0C;&#x624D;&#x80FD;&#x89C4;&#x907F;&#x6B64;&#x62A5;&#x9519;&#x3002;&#x3002;&#x3002;</p>
+<p>&#x611F;&#x6168;&#xFF1A;&#x7528;&#x8D77;&#x6765;&#x5F88;&#x662F;&#x5783;&#x573E;&#xFF0C;&#x4E0D;&#x597D;&#x7528;&#x554A;</p>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-07-30 19:10:54
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="sync_instance_init.html" class="navigation navigation-prev " aria-label="Previous page: 初始化Sync的playwright的实例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="all_goto_timeout.html" class="navigation navigation-next " aria-label="Next page: 所有页面加载都超时">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"using Sync API inside the asyncio loop","level":"1.5.2","depth":2,"next":{"title":"所有页面加载都超时","level":"1.5.3","depth":2,"path":"issues_summary/all_goto_timeout.md","ref":"issues_summary/all_goto_timeout.md","articles":[]},"previous":{"title":"初始化Sync的playwright的实例","level":"1.5.1","depth":2,"path":"issues_summary/sync_instance_init.md","ref":"issues_summary/sync_instance_init.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/web_automation_tool_playwright/pdf/web_automation_tool_playwright.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/web_automation_tool_playwright/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"web_automation_tool_playwright","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"跨平台Web自动化神器：Playwright","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍支持跨平台的Web自动化神器，playwright。先进行概览介绍；如何初始化搭建Playwright开发环境；在介绍一些基本操作，包括查找和定位元素、查找并直接点击元素、输入文字、等待元素出现、模拟按键输入、获取元素属性等；在列出常见的问题和心得，包括如何初始化Sync的playwright的实例、using Sync API inside the asyncio loop、所有页面加载都超时、browser was not found、给playwright加代理等；以及给出详尽的例子，包括百度搜索自动化、获取谷歌搜索结果以及其他一些小例子；最后给出教程和资料。"},"file":{"path":"issues_summary/sync_inside_asyncio.md","mtime":"2021-07-30T11:10:54.917Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-30T11:13:24.130Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
