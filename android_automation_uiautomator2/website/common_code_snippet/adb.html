@@ -1,0 +1,1368 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>adb相关 · 安卓自动化测试利器：uiautomator2</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="device.html" />
+    
+    
+    <link rel="prev" href="common_utils.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_automation_uiautomator2","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../build_dev_env/">
+            
+                <a href="../build_dev_env/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../core_function/">
+            
+                <a href="../core_function/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    核心功能
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../core_function/watcher.html">
+            
+                <a href="../core_function/watcher.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    监听
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../core_function/find_element/">
+            
+                <a href="../core_function/find_element/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    查找元素
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../core_function/find_element/example_input_box.html">
+            
+                <a href="../core_function/find_element/example_input_box.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    举例：浏览器的输入框
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../core_function/find_element/wait_elem_show.html">
+            
+                <a href="../core_function/find_element/wait_elem_show.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    等待元素出现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../core_function/find_element/xpath.html">
+            
+                <a href="../core_function/find_element/xpath.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    xpath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../core_function/operate_element/">
+            
+                <a href="../core_function/operate_element/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    操作元素
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../core_function/operate_element/click_element.html">
+            
+                <a href="../core_function/operate_element/click_element.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    点击元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../core_function/operate_element/input_content.html">
+            
+                <a href="../core_function/operate_element/input_content.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    输入内容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../core_function/operate_element/get_property.html">
+            
+                <a href="../core_function/operate_element/get_property.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    获取元素属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../core_function/operate_element/key.html">
+            
+                <a href="../core_function/operate_element/key.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    按键
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../core_function/operate_element/screen.html">
+            
+                <a href="../core_function/operate_element/screen.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    屏幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../core_function/operate_element/app.html">
+            
+                <a href="../core_function/operate_element/app.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    APP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../core_function/other_function.html">
+            
+                <a href="../core_function/other_function.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    其他功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../related/">
+            
+                <a href="../related/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../related/weditor.html">
+            
+                <a href="../related/weditor.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    weditor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../related/adb.html">
+            
+                <a href="../related/adb.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    adb
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../related/android_uiautomator_server.html">
+            
+                <a href="../related/android_uiautomator_server.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    android-uiautomator-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../related/uiautomator.html">
+            
+                <a href="../related/uiautomator.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    uiautomator
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../common_issue_summary/">
+            
+                <a href="../common_issue_summary/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    常见问题和经验
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../common_issue_summary/input_text.html">
+            
+                <a href="../common_issue_summary/input_text.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    文字输入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../common_issue_summary/xml_not_latest/">
+            
+                <a href="../common_issue_summary/xml_not_latest/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    xml源码不是最新的
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../common_issue_summary/xml_not_latest/restart_u2_serivice.html">
+            
+                <a href="../common_issue_summary/xml_not_latest/restart_u2_serivice.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    重启服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../common_issue_summary/naf.html">
+            
+                <a href="../common_issue_summary/naf.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    NAF
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../common_issue_summary/long_click_not_work.html">
+            
+                <a href="../common_issue_summary/long_click_not_work.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    long_click不工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../common_issue_summary/background_service_killed.html">
+            
+                <a href="../common_issue_summary/background_service_killed.html">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    后台服务已被杀掉
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../code_analysis/">
+            
+                <a href="../code_analysis/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    源码分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    常用代码段
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="common_utils.html">
+            
+                <a href="common_utils.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    工具类函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8.2" data-path="adb.html">
+            
+                <a href="adb.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    adb相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="device.html">
+            
+                <a href="device.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    设备相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="other.html">
+            
+                <a href="other.html">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../real_examples/">
+            
+                <a href="../real_examples/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    实际案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../real_examples/baidu_search.html">
+            
+                <a href="../real_examples/baidu_search.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    百度搜索自动化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../real_examples/weixin_related.html">
+            
+                <a href="../real_examples/weixin_related.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    微信相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../real_examples/confirm_buttons.html">
+            
+                <a href="../real_examples/confirm_buttons.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    确定类按钮
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../real_examples/ad_popup.html">
+            
+                <a href="../real_examples/ad_popup.html">
+            
+                    
+                        <b>1.9.4.</b>
+                    
+                    广告类弹框
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../real_examples/vivo_auto_install.html">
+            
+                <a href="../real_examples/vivo_auto_install.html">
+            
+                    
+                        <b>1.9.5.</b>
+                    
+                    Vivo自动安装app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../real_examples/vivo_auto_login.html">
+            
+                <a href="../real_examples/vivo_auto_login.html">
+            
+                    
+                        <b>1.9.6.</b>
+                    
+                    Vivo账号自动登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../real_examples/qihoo_360_auto_login.html">
+            
+                <a href="../real_examples/qihoo_360_auto_login.html">
+            
+                    
+                        <b>1.9.7.</b>
+                    
+                    奇虎360自动登录账号
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >adb相关</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="adb"><a name="adb" class="plugin-anchor" href="#adb"><i class="fa fa-link" aria-hidden="true"></i></a>adb</h1>
+<p>uiautomator2&#x64CD;&#x4F5C;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x671F;&#x95F4;&#xFF0C;&#x5F80;&#x5F80;&#x4F1A;&#x6D89;&#x53CA;&#x5230;&#xFF0C;&#x501F;&#x52A9;&#x4E8E;&#x5B89;&#x5353;&#x4F53;&#x7CFB;&#x5185;&#x672C;&#x8EAB;&#x5C31;&#x6709;&#x7684;&#x5DE5;&#x5177; <code>adb</code>&#xFF0C;&#x53BB;&#x5B9E;&#x73B0;&#x5BF9;&#x8BBE;&#x5907;&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x63A7;&#x3002;</p>
+<p>&#x6B64;&#x5904;&#x6574;&#x7406;&#x51FA;&#x4E00;&#x4E9B;&#x5E38;&#x89C1;&#x7684;&#x7528;&#x6CD5;&#x548C;&#x901A;&#x7528;&#x529F;&#x80FD;&#x3002;</p>
+<h2 id="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;"><a name="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_phone_name_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># cmd = &apos;adb -s {} shell getprop ro.product.model&apos;.format(self.device)</span>
+    cmd <span class="token operator">=</span> <span class="token string">&apos;adb -s {} shell getprop ro.product.name&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+    text <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>cmd<span class="token punctuation">,</span>text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token comment"># https://miuiver.com/xiaomi-device-codename/</span>
+    <span class="token comment">#     begonia -&gt; &#x7EA2;&#x7C73;Note 8&#x5185;&#x90E8;&#x4EE3;&#x53F7;&#x4E3A; &quot;begonia&quot;</span>
+    <span class="token keyword">return</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&quot;\s&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>text<span class="token punctuation">)</span>
+    <span class="token comment"># isRunCmdOk, outputText = self.getCommandOutput(cmd)</span>
+    <span class="token comment"># if isRunCmdOk:</span>
+    <span class="token comment">#     phoneName = outputText</span>
+    <span class="token comment"># else:</span>
+    <span class="token comment">#     phoneName = &quot;&quot;</span>
+    <span class="token comment"># return phoneName</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_phone_name</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># &#x83B7;&#x53D6;&#x624B;&#x673A;&#x540D;&#x79F0;&#xFF0C;&#x4EE5;&#x63D0;&#x53D6;&#x914D;&#x7F6E;&#x4FE1;&#x606F;</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>isAndroid<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>get_phone_name_Android<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x7684;&#x8BBE;&#x5907;"><a name="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x7684;&#x8BBE;&#x5907;" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x7684;&#x8BBE;&#x5907;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x8FDE;&#x63A5;&#x7684;&#x8BBE;&#x5907;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_devices_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    lines <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span><span class="token string">&apos;adb devices&apos;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">for</span> line <span class="token keyword">in</span> lines <span class="token keyword">if</span> line <span class="token keyword">and</span> <span class="token keyword">not</span> <span class="token string">&quot;devices&quot;</span> <span class="token keyword">in</span> line<span class="token punctuation">]</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">devices <span class="token operator">=</span> self<span class="token punctuation">.</span>get_devices_Android<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x76F8;&#x5173;&#x547D;&#x4EE4;&#x8F93;&#x51FA;&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  ~ adb devices
+List of devices attached
+8c8a4d4d    device
+</code></pre>
+<h3 id="&#x4F18;&#x5316;&#x7248;&#xFF1A;&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x5217;&#x8868;"><a name="&#x4F18;&#x5316;&#x7248;&#xFF1A;&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x5217;&#x8868;" class="plugin-anchor" href="#&#x4F18;&#x5316;&#x7248;&#xFF1A;&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x5217;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x5316;&#x7248;&#xFF1A;&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x5217;&#x8868;</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">getAndroidDeviceList</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> isGetDetail<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Get android device list
+
+    Args:
+        isGetDetail (bool): True to use `adb devices -l`, False to use `adb devices`
+    Returns:
+        device list(list)
+    Raises:
+    Examples:
+        output: 
+            False -&gt; [&apos;2e2a0cb1&apos;, &apos;orga4pmzee4ts47t&apos;, &apos;192.168.31.84:5555&apos;]
+            True -&gt; [{&apos;2e2a0cb1&apos;: {&apos;usb&apos;: &apos;338952192X&apos;, &apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;4&apos;}}, {&apos;orga4pmzee4ts47t&apos;: {&apos;usb&apos;: &apos;338886656X&apos;, &apos;product&apos;: &apos;atom&apos;, &apos;model&apos;: &apos;M2004J7AC&apos;, &apos;device&apos;: &apos;atom&apos;, &apos;transport_id&apos;: &apos;24&apos;}}, {&apos;192.168.31.84:5555&apos;: {&apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;5&apos;}}]
+    &quot;&quot;&quot;</span>
+    deviceList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    getDevicesCmd <span class="token operator">=</span> <span class="token string">&apos;adb devices&apos;</span>
+    <span class="token keyword">if</span> isGetDetail<span class="token punctuation">:</span>
+        getDevicesCmd <span class="token operator">+=</span> <span class="token string">&quot; -l&quot;</span>
+    logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;getDevicesCmd=%s&quot;</span><span class="token punctuation">,</span> getDevicesCmd<span class="token punctuation">)</span>
+
+    deviceLines <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>getDevicesCmd<span class="token punctuation">)</span>
+    logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;deviceLines=%s&quot;</span><span class="token punctuation">,</span> deviceLines<span class="token punctuation">)</span>
+    <span class="token comment"># [&apos;List of devices attached&apos;, &apos;2e2a0cb1\tdevice&apos;, &apos;orga4pmzee4ts47t\tdevice&apos;, &apos;192.168.31.84:5555\tdevice&apos;, &apos;&apos;]</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    adb devices :
+        List of devices attached
+        2e2a0cb1    device
+        orga4pmzee4ts47t    device
+        192.168.31.84:5555    device
+    &quot;&quot;&quot;</span>
+
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    adb devices -l:
+        List of devices attached
+        2e2a0cb1               device usb:338952192X product:PD2065 model:V2065A device:PD2065 transport_id:4
+        orga4pmzee4ts47t       device usb:338886656X product:atom model:M2004J7AC device:atom transport_id:24
+        192.168.31.84:5555     device product:PD2065 model:V2065A device:PD2065 transport_id:5
+    &quot;&quot;&quot;</span>
+
+    <span class="token keyword">for</span> eachLine <span class="token keyword">in</span> deviceLines<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> eachLine<span class="token punctuation">:</span>
+            <span class="token keyword">continue</span>
+
+        <span class="token keyword">if</span> <span class="token string">&quot;devices attached&quot;</span> <span class="token keyword">in</span> eachLine<span class="token punctuation">:</span>
+            <span class="token keyword">continue</span>
+
+        foundDevice <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;(?P&lt;devSerial&gt;[\w\.\:]+)\s+device\s*(?P&lt;devDetail&gt;[\w\: ]+)?&quot;</span><span class="token punctuation">,</span> eachLine<span class="token punctuation">)</span>
+        logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;foundDevice=%s&quot;</span><span class="token punctuation">,</span> foundDevice<span class="token punctuation">)</span>
+        <span class="token comment"># foundDevice=&lt;re.Match object; span=(0, 101), match=&apos;2e2a0cb1               device usb:338952192X prod&gt;</span>
+        <span class="token keyword">if</span> foundDevice<span class="token punctuation">:</span>
+            devSerial <span class="token operator">=</span> foundDevice<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;devSerial&quot;</span><span class="token punctuation">)</span>
+            logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;devSerial=%s&quot;</span><span class="token punctuation">,</span> devSerial<span class="token punctuation">)</span>
+            <span class="token comment"># devSerial=2e2a0cb1</span>
+            <span class="token keyword">if</span> isGetDetail<span class="token punctuation">:</span>
+                devDetail <span class="token operator">=</span> foundDevice<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;devDetail&quot;</span><span class="token punctuation">)</span>
+                logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;devDetail=%s&quot;</span><span class="token punctuation">,</span> devDetail<span class="token punctuation">)</span>
+                <span class="token comment"># devDetail=usb:338952192X product:PD2065 model:V2065A device:PD2065 transport_id:4</span>
+                keyValueIter <span class="token operator">=</span> re<span class="token punctuation">.</span>finditer<span class="token punctuation">(</span><span class="token string">&quot;(?P&lt;key&gt;\w+):(?P&lt;value&gt;\w+)&quot;</span><span class="token punctuation">,</span> devDetail<span class="token punctuation">)</span> <span class="token comment"># &lt;callable_iterator object at 0x10baa3a60&gt;</span>
+                keyValueMatchList <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>keyValueIter<span class="token punctuation">)</span>
+                logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;keyValueMatchList=%s&quot;</span><span class="token punctuation">,</span> keyValueMatchList<span class="token punctuation">)</span>
+                <span class="token comment"># keyValueMatchList=[&lt;re.Match object; span=(0, 14), match=&apos;usb:338952192X&apos;&gt;, &lt;re.Match object; span=(15, 29), match=&apos;product:PD2065&apos;&gt;, &lt;re.Match object; span=(30, 42), match=&apos;model:V2065A&apos;&gt;, &lt;re.Match object; span=(43, 56), match=&apos;device:PD2065&apos;&gt;, &lt;re.Match object; span=(57, 71), match=&apos;transport_id:4&apos;&gt;]</span>
+                detailInfoDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                <span class="token keyword">for</span> eachMatch <span class="token keyword">in</span> keyValueMatchList<span class="token punctuation">:</span>
+                    eachKey <span class="token operator">=</span> eachMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;key&quot;</span><span class="token punctuation">)</span>
+                    eachValue <span class="token operator">=</span> eachMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;value&quot;</span><span class="token punctuation">)</span>
+                    detailInfoDict<span class="token punctuation">[</span>eachKey<span class="token punctuation">]</span> <span class="token operator">=</span> eachValue
+                logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;detailInfoDict=%s&quot;</span><span class="token punctuation">,</span> detailInfoDict<span class="token punctuation">)</span>
+                <span class="token comment"># detailInfoDict={&apos;usb&apos;: &apos;338952192X&apos;, &apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;4&apos;}</span>
+                curDevDetailDict <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    devSerial<span class="token punctuation">:</span> detailInfoDict
+                <span class="token punctuation">}</span>
+                logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;curDevDetailDict=%s&quot;</span><span class="token punctuation">,</span> curDevDetailDict<span class="token punctuation">)</span>
+                <span class="token comment"># curDevDetailDict={&apos;2e2a0cb1&apos;: {&apos;usb&apos;: &apos;338952192X&apos;, &apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;4&apos;}}</span>
+                deviceList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>curDevDetailDict<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                deviceList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>devSerial<span class="token punctuation">)</span>
+
+    logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;deviceList=%s&quot;</span><span class="token punctuation">,</span> deviceList<span class="token punctuation">)</span>
+    <span class="token comment"># deviceList=[{&apos;2e2a0cb1&apos;: {&apos;usb&apos;: &apos;338952192X&apos;, &apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;4&apos;}}, {&apos;orga4pmzee4ts47t&apos;: {&apos;usb&apos;: &apos;338886656X&apos;, &apos;product&apos;: &apos;atom&apos;, &apos;model&apos;: &apos;M2004J7AC&apos;, &apos;device&apos;: &apos;atom&apos;, &apos;transport_id&apos;: &apos;24&apos;}}, {&apos;192.168.31.84:5555&apos;: {&apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;5&apos;}}]</span>
+    <span class="token comment"># [&apos;2e2a0cb1&apos;, &apos;orga4pmzee4ts47t&apos;, &apos;192.168.31.84:5555&apos;]</span>
+    <span class="token keyword">return</span> deviceList
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">deviceDetailList <span class="token operator">=</span> self<span class="token punctuation">.</span>getAndroidDeviceList<span class="token punctuation">(</span>isGetDetail<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token comment"># [&apos;2e2a0cb1&apos;, &apos;orga4pmzee4ts47t&apos;, &apos;192.168.31.84:5555&apos;]</span>
+</code></pre>
+<p>&#x6216;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">deviceDetailList <span class="token operator">=</span> self<span class="token punctuation">.</span>getAndroidDeviceList<span class="token punctuation">(</span>isGetDetail<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token comment"># [{&apos;2e2a0cb1&apos;: {&apos;usb&apos;: &apos;338952192X&apos;, &apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;4&apos;}}, {&apos;orga4pmzee4ts47t&apos;: {&apos;usb&apos;: &apos;338886656X&apos;, &apos;product&apos;: &apos;atom&apos;, &apos;model&apos;: &apos;M2004J7AC&apos;, &apos;device&apos;: &apos;atom&apos;, &apos;transport_id&apos;: &apos;24&apos;}}, {&apos;192.168.31.84:5555&apos;: {&apos;product&apos;: &apos;PD2065&apos;, &apos;model&apos;: &apos;V2065A&apos;, &apos;device&apos;: &apos;PD2065&apos;, &apos;transport_id&apos;: &apos;5&apos;}}]</span>
+</code></pre>
+<h2 id="&#x68C0;&#x6D4B;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x8FDE;&#x63A5;"><a name="&#x68C0;&#x6D4B;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x8FDE;&#x63A5;" class="plugin-anchor" href="#&#x68C0;&#x6D4B;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x8FDE;&#x63A5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x68C0;&#x6D4B;&#x5B89;&#x5353;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x8FDE;&#x63A5;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isAndroidUsbConnected</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> deviceSerialId<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Check whether android device is currently USB wired connected or not
+
+    Args:
+        deviceSerialId (str): android devivce serial id
+    Returns:
+        connected or not (bool)
+    Raises:
+    Examples:
+        input: &quot;orga4pmzee4ts47t&quot;
+        output: True
+    &quot;&quot;&quot;</span>
+    isUsbConnected <span class="token operator">=</span> <span class="token boolean">False</span>
+    isRealSerialId <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;\w+&quot;</span><span class="token punctuation">,</span> deviceSerialId<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> isRealSerialId<span class="token punctuation">:</span>
+        <span class="token comment"># makesure is not wifi, such as: 192.168.31.84:5555</span>
+        logging<span class="token punctuation">.</span>error<span class="token punctuation">(</span><span class="token string">&quot;Invalid android USB wired connected device serial id %s&quot;</span><span class="token punctuation">,</span> deviceSerialId<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> isUsbConnected
+
+    deviceDetailList <span class="token operator">=</span> self<span class="token punctuation">.</span>getAndroidDeviceList<span class="token punctuation">(</span>isGetDetail<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> eachDevDetailDict <span class="token keyword">in</span> deviceDetailList<span class="token punctuation">:</span>
+        curDevSerialStr<span class="token punctuation">,</span> curDevDetailDict <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>eachDevDetailDict<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> deviceSerialId <span class="token operator">==</span> curDevSerialStr<span class="token punctuation">:</span>
+            detailInfoKeyList <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>curDevDetailDict<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment"># [&apos;usb&apos;, &apos;product&apos;, &apos;model&apos;, &apos;device&apos;, &apos;transport_id&apos;]</span>
+            <span class="token keyword">if</span> <span class="token string">&quot;usb&quot;</span> <span class="token keyword">in</span> detailInfoKeyList<span class="token punctuation">:</span>
+                isUsbConnected <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">break</span>
+
+    <span class="token keyword">return</span> isUsbConnected
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">deviceId <span class="token operator">=</span> <span class="token string">&quot;orga4pmzee4ts47t&quot;</span>
+isUsbConnected <span class="token operator">=</span> self<span class="token punctuation">.</span>isAndroidUsbConnected<span class="token punctuation">(</span>deviceId<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x7528;adb&#x901A;&#x8FC7;wifi&#x8FDE;&#x63A5;&#x8BBE;&#x5907;"><a name="&#x7528;adb&#x901A;&#x8FC7;wifi&#x8FDE;&#x63A5;&#x8BBE;&#x5907;" class="plugin-anchor" href="#&#x7528;adb&#x901A;&#x8FC7;wifi&#x8FDE;&#x63A5;&#x8BBE;&#x5907;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;adb&#x901A;&#x8FC7;WiFi&#x8FDE;&#x63A5;&#x8BBE;&#x5907;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">androidConnectWiFiDevice</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> wifiSerial<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Use Android `adb connect` to connect WiFi wireless devive
+
+    Args:
+        wifiSerial (str): android devivce WiFi serial, eg: 192.168.31.84:5555
+    Returns:
+        connect ok or not (bool)
+    Raises:
+    Examples:
+        input: &quot;192.168.31.84:5555&quot;
+        output: True
+    &quot;&quot;&quot;</span>
+    isConnectOk <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    adbConnectCmd <span class="token operator">=</span> <span class="token string">&quot;adb connect %s&quot;</span> <span class="token operator">%</span> wifiSerial
+    logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;Try connect Android device: %s&quot;</span><span class="token punctuation">,</span> adbConnectCmd<span class="token punctuation">)</span>
+    <span class="token comment"># os.system(adbConnectCmd) # when failed, will wait too long time: ~ 1 minutes</span>
+    cmdOutputStr <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>adbConnectCmd<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+    logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;console output: %s&quot;</span><span class="token punctuation">,</span> cmdOutputStr<span class="token punctuation">)</span>
+    <span class="token comment"># connected to 192.168.31.84:5555</span>
+    <span class="token comment"># already connected to 192.168.31.84:5555</span>
+    <span class="token comment"># failed to connect to &apos;192.168.31.84:5555&apos;: Operation timed out</span>
+    <span class="token comment"># &quot;failed to connect to &apos;192.168.31.84:5555&apos;: Connection refused\n&quot;</span>
+    <span class="token comment"># err=Command &apos;adb connect 192.168.31.84:5555&apos; timed out after 1 seconds when run cmd=adb connect 192.168.31.84:5555</span>
+    <span class="token keyword">if</span> cmdOutputStr<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token string">&quot;connected&quot;</span> <span class="token keyword">in</span> cmdOutputStr<span class="token punctuation">:</span>
+            isConnectOk <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token keyword">elif</span> <span class="token punctuation">(</span><span class="token string">&quot;failed&quot;</span> <span class="token keyword">in</span> cmdOutputStr<span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">(</span><span class="token string">&quot;timed out&quot;</span> <span class="token keyword">in</span> cmdOutputStr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            isConnectOk <span class="token operator">=</span> <span class="token boolean">False</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        isConnectOk <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    <span class="token keyword">return</span> isConnectOk
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">devWifiSerialId <span class="token operator">=</span> <span class="token string">&quot;192.168.31.84:5555&quot;</span>
+isWiFiConnected <span class="token operator">=</span> self<span class="token punctuation">.</span>androidConnectWiFiDevice<span class="token punctuation">(</span>devWifiSerialId<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;app&#x548C;&#x9875;&#x9762;activity"><a name="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;app&#x548C;&#x9875;&#x9762;activity" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;app&#x548C;&#x9875;&#x9762;activity"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;app&#x548C;&#x9875;&#x9762;activity</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_PackageActivity_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># adb&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6D3B;&#x8DC3;app&#x53CA;activity</span>
+    package<span class="token punctuation">,</span> activity <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span>
+    cmds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&apos;dumpsys activity |grep {}&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token keyword">for</span> item <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">&apos;mFocusedActivity&apos;</span><span class="token punctuation">,</span><span class="token string">&apos;mResumedActivity&apos;</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> cmd <span class="token keyword">in</span> cmds<span class="token punctuation">:</span>
+        output <span class="token operator">=</span> self<span class="token punctuation">.</span>driver<span class="token punctuation">.</span>shell<span class="token punctuation">(</span>cmd<span class="token punctuation">)</span><span class="token punctuation">.</span>output
+        result <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;u0(.*?)/&quot;</span><span class="token punctuation">,</span> output<span class="token punctuation">)</span>
+        package <span class="token operator">=</span> result<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> result <span class="token keyword">else</span> <span class="token string">&quot;&quot;</span>
+        result <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;/(.*?)\s&quot;</span><span class="token punctuation">,</span> output<span class="token punctuation">)</span>
+        activity <span class="token operator">=</span> result<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> result <span class="token keyword">else</span> <span class="token string">&quot;&quot;</span>
+        <span class="token keyword">if</span> package <span class="token keyword">and</span> activity<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> package<span class="token punctuation">,</span> activity
+    <span class="token keyword">return</span> package<span class="token punctuation">,</span> activity
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">package<span class="token punctuation">,</span> activity <span class="token operator">=</span> self<span class="token punctuation">.</span>get_PackageActivity<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x83B7;&#x53D6;&#x5DF2;&#x5B89;&#x88C5;app&#x5217;&#x8868;"><a name="&#x83B7;&#x53D6;&#x5DF2;&#x5B89;&#x88C5;app&#x5217;&#x8868;" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5DF2;&#x5B89;&#x88C5;app&#x5217;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5DF2;&#x5B89;&#x88C5;app&#x5217;&#x8868;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_packages</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># &#x83B7;&#x53D6;&#x5DF2;&#x5B89;&#x88C5;&#x7684;app&#x7684;appPackage&#x5217;&#x8868;</span>
+    <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>driver<span class="token punctuation">,</span> u2<span class="token punctuation">.</span>UIAutomatorServer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        text <span class="token operator">=</span> self<span class="token punctuation">.</span>driver<span class="token punctuation">.</span>shell<span class="token punctuation">(</span><span class="token string">&quot;pm list packages&quot;</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">return</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">&apos;:(.*?)\n&apos;</span><span class="token punctuation">,</span>text<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        cmd <span class="token operator">=</span> <span class="token string">&apos;adb -s {0} shell pm list packages&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+        lines <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>cmd<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">&quot;:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">packages <span class="token operator">=</span> self<span class="token punctuation">.</span>get_packages<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x5B89;&#x88C5;&#x5B89;&#x5353;app"><a name="&#x5B89;&#x88C5;&#x5B89;&#x5353;app" class="plugin-anchor" href="#&#x5B89;&#x88C5;&#x5B89;&#x5353;app"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B89;&#x88C5;&#x5B89;&#x5353;app</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">install_app_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> packages<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> packages <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        packages <span class="token operator">=</span> self<span class="token punctuation">.</span>get_packages<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">in</span> packages<span class="token punctuation">:</span>
+        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;AppName {0} is alread installed&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;start to install app in {}&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>basename<span class="token punctuation">(</span>self<span class="token punctuation">.</span>arg_options<span class="token punctuation">.</span>task<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">&quot;adb -s {0} install {1}&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">install_app</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">,</span> packages<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># &#x5B89;&#x88C5;app</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>isAndroid<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>install_app_Android<span class="token punctuation">(</span>item<span class="token punctuation">,</span> packages<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x5378;&#x8F7D;&#x5B89;&#x5353;app"><a name="&#x5378;&#x8F7D;&#x5B89;&#x5353;app" class="plugin-anchor" href="#&#x5378;&#x8F7D;&#x5B89;&#x5353;app"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5378;&#x8F7D;&#x5B89;&#x5353;app</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">uninstall_app</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># &#x5378;&#x8F7D;&#x5B89;&#x88C5;&#x5305;</span>
+    os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">&quot;adb -s {0} uninstall {1}&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;uninstall app {} end&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">    <span class="token keyword">if</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">in</span> packages<span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>uninstall_app<span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x5224;&#x65AD;&#x5C4F;&#x5E55;&#x662F;&#x5426;&#x5DF2;&#x89E3;&#x9501;"><a name="&#x5224;&#x65AD;&#x5C4F;&#x5E55;&#x662F;&#x5426;&#x5DF2;&#x89E3;&#x9501;" class="plugin-anchor" href="#&#x5224;&#x65AD;&#x5C4F;&#x5E55;&#x662F;&#x5426;&#x5DF2;&#x89E3;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5224;&#x65AD;&#x5C4F;&#x5E55;&#x662F;&#x5426;&#x5DF2;&#x89E3;&#x9501;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">is_device_unlock_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">&apos;adb -s {} shell input keyevent 3&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token comment"># cmds = [</span>
+    <span class="token comment">#     &apos;adb -s {} shell dumpsys window policy | grep isStatusBarKeyguard&apos;.format(device),</span>
+    <span class="token comment">#     &apos;adb -s {} shell dumpsys window policy | grep mShowingLockscreen&apos;.format(device),</span>
+    <span class="token comment">#     &apos;adb -s {} shell dumpsys window policy | grep mDreamingLockscreen&apos;.format(device),</span>
+    <span class="token comment"># ]</span>
+    <span class="token comment"># for cmd in cmds:</span>
+    <span class="token comment">#     text = CommonUtils.get_cmd_lines(cmd,text=True)</span>
+    <span class="token comment">#     if text and &quot;=true&quot; in text:</span>
+    <span class="token comment">#         logging.info(&quot;start to unlock device {}&quot;.format(device))</span>
+    <span class="token comment">#         return False</span>
+
+    <span class="token comment"># cmds = [</span>
+    <span class="token comment">#     &apos;adb -s {} shell dumpsys power | grep mHoldingDisplaySuspendBlocker&apos;.format(device),</span>
+    <span class="token comment"># ]</span>
+    <span class="token comment"># for cmd in cmds:</span>
+    <span class="token comment">#     text = CommonUtils.get_cmd_lines(cmd,text=True)</span>
+    <span class="token comment">#     if text and &quot;=false&quot; in text:</span>
+    <span class="token comment">#         # &apos;  mHoldingDisplaySuspendBlocker=false\n&apos;</span>
+    <span class="token comment">#         logging.info(&quot;start to unlock device {}&quot;.format(device))</span>
+    <span class="token comment">#         return False</span>
+
+    checkCmds <span class="token operator">=</span> <span class="token string">&apos;adb -s {} shell dumpsys window | grep mDreamingLockscreen&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+    text <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>checkCmds<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> text <span class="token keyword">and</span> <span class="token string">&quot;mDreamingLockscreen=true&quot;</span> <span class="token keyword">in</span> text<span class="token punctuation">:</span>
+        <span class="token comment"># &apos;    mShowingDream=false mDreamingLockscreen=true mDreamingSleepToken=null\n&apos;</span>
+        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;start to unlock device {}&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">False</span>
+
+    logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;device {} is already unlock&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token boolean">True</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">if</span> self<span class="token punctuation">.</span>isAndroid<span class="token punctuation">:</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">.</span>is_device_unlock_Android<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x7535;&#x91CF;"><a name="&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x7535;&#x91CF;" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x7535;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x7535;&#x91CF;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_device_electricity_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    shell_cmd <span class="token operator">=</span> <span class="token string">&apos;dumpsys battery | grep level&apos;</span>
+    adb_cmd <span class="token operator">=</span> <span class="token string">&apos;adb -s {0} shell {1}&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">,</span>shell_cmd<span class="token punctuation">)</span>
+    <span class="token comment"># level = self.driver.shell(shell_cmd).output if isinstance(self.driver, u2.UIAutomatorServer) else CommonUtils.get_cmd_lines(adb_cmd,text=True)</span>
+    level <span class="token operator">=</span> self<span class="token punctuation">.</span>driver<span class="token punctuation">.</span>shell<span class="token punctuation">(</span>shell_cmd<span class="token punctuation">)</span><span class="token punctuation">.</span>output <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>driver<span class="token punctuation">,</span> u2<span class="token punctuation">.</span>Device<span class="token punctuation">)</span> <span class="token keyword">else</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>adb_cmd<span class="token punctuation">,</span>text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    result <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;\d+&quot;</span><span class="token punctuation">,</span>level<span class="token punctuation">)</span>
+    ratio <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">if</span> result <span class="token keyword">else</span> <span class="token number">100</span>
+    <span class="token keyword">return</span> ratio
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python">batteryElectricityPercentInt <span class="token operator">=</span> self<span class="token punctuation">.</span>get_device_electricity_Android<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;"><a name="&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;" class="plugin-anchor" href="#&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x83B7;&#x53D6;&#x5B89;&#x5353;&#x624B;&#x673A;&#x540D;</h2>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">get_phone_name_Android</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># cmd = &apos;adb -s {} shell getprop ro.product.model&apos;.format(self.device)</span>
+    cmd <span class="token operator">=</span> <span class="token string">&apos;adb -s {} shell getprop ro.product.name&apos;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+    text <span class="token operator">=</span> CommonUtils<span class="token punctuation">.</span>get_cmd_lines<span class="token punctuation">(</span>cmd<span class="token punctuation">,</span>text<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token comment"># https://miuiver.com/xiaomi-device-codename/</span>
+    <span class="token comment">#     begonia -&gt; &#x7EA2;&#x7C73;Note 8&#x5185;&#x90E8;&#x4EE3;&#x53F7;&#x4E3A;&#x201C;begonia&#x201D;</span>
+    <span class="token keyword">return</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&quot;\s&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>text<span class="token punctuation">)</span>
+    <span class="token comment"># isRunCmdOk, outputText = self.getCommandOutput(cmd)</span>
+    <span class="token comment"># if isRunCmdOk:</span>
+    <span class="token comment">#     phoneName = outputText</span>
+    <span class="token comment"># else:</span>
+    <span class="token comment">#     phoneName = &quot;&quot;</span>
+    <span class="token comment"># return phoneName</span>
+</code></pre>
+<p>&#x8C03;&#x7528;&#xFF1A;</p>
+<pre class="language-"><code class="lang-python"><span class="token keyword">if</span> self<span class="token punctuation">.</span>isAndroid<span class="token punctuation">:</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">.</span>get_phone_name_Android<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-07-18 09:59:23
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="common_utils.html" class="navigation navigation-prev " aria-label="Previous page: 工具类函数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="device.html" class="navigation navigation-next " aria-label="Next page: 设备相关">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"adb相关","level":"1.8.2","depth":2,"next":{"title":"设备相关","level":"1.8.3","depth":2,"path":"common_code_snippet/device.md","ref":"common_code_snippet/device.md","articles":[]},"previous":{"title":"工具类函数","level":"1.8.1","depth":2,"path":"common_code_snippet/common_utils.md","ref":"common_code_snippet/common_utils.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/android_automation_uiautomator2/pdf/android_automation_uiautomator2.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/android_automation_uiautomator2/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"android_automation_uiautomator2","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"安卓自动化测试利器：uiautomator2","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"总结安卓设备自动化测试领域好用的库uiautomator2，包括简介；如何搭建环境；有哪些核心功能，比如监听、用xpath或driver传参等方式查找元素，且给出了具体的浏览器的输入框如何查找定位的例子、以及常见的操作元素，比如点击元素、输入内容等、如何获取当前屏幕的截图和xml源码；以及与u2相关的内容，比如辅助调试的weditor、adb、android-uiautomator-server、uiautomator；以及常见问题和经验，比如文字输入、NAF、long_click不工作、后台服务被杀掉等；以及一些源码分析；和通用代码段，包括工具类函数、adb相关、设备相关等；最后给出参考资料和文档。以及额外加上了很多实际案例，比如常见的确定类弹框按钮、自动关闭各大应用市场的广告类弹框、Vivo自动安装app、Vivo自动登录账号、奇虎360的自动登录账号。以及其他一些常见逻辑。"},"file":{"path":"common_code_snippet/adb.md","mtime":"2021-07-18T01:59:23.231Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-11T14:25:39.897Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
