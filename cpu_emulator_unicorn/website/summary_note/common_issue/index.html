@@ -1,0 +1,1271 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>常见错误 · CPU模拟利器：Unicorn</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="uc_err_map/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"cpu_emulator_unicorn","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../unicorn_overview/">
+            
+                <a href="../../unicorn_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Unicorn概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../init/">
+            
+                <a href="../../init/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    初始化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../init/download_install.html">
+            
+                <a href="../../init/download_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    下载安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../init/run_test_code.html">
+            
+                <a href="../../init/run_test_code.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    运行测试代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../how_use/">
+            
+                <a href="../../how_use/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    如何使用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../how_use/core_mind/">
+            
+                <a href="../../how_use/core_mind/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    概述Unicorn核心思路
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../how_use/background/">
+            
+                <a href="../../how_use/background/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../how_use/background/core_logic/">
+            
+                <a href="../../how_use/background/core_logic/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    程序运行的本质
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../how_use/background/core_logic/cpu_logic.html">
+            
+                <a href="../../how_use/background/core_logic/cpu_logic.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    CPU的核心逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2" data-path="../../how_use/background/core_logic/what_is_instruction.html">
+            
+                <a href="../../how_use/background/core_logic/what_is_instruction.html">
+            
+                    
+                        <b>1.4.2.1.2.</b>
+                    
+                    什么是指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../how_use/background/mem_layout/">
+            
+                <a href="../../how_use/background/mem_layout/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    内存布局
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../how_use/background/mem_layout/what_is.html">
+            
+                <a href="../../how_use/background/mem_layout/what_is.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    什么是内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../how_use/background/mem_layout/mem_addr_scope.html">
+            
+                <a href="../../how_use/background/mem_layout/mem_addr_scope.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    内存地址空间范围
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.3" data-path="../../how_use/background/mem_layout/typical_layout.html">
+            
+                <a href="../../how_use/background/mem_layout/typical_layout.html">
+            
+                    
+                        <b>1.4.2.2.3.</b>
+                    
+                    典型的内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../how_use/background/endian/">
+            
+                <a href="../../how_use/background/endian/">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    字节序endian
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../how_use/before_run/">
+            
+                <a href="../../how_use/before_run/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    运行前
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../how_use/before_run/set_code/">
+            
+                <a href="../../how_use/before_run/set_code/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    设置代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../how_use/before_run/set_other/">
+            
+                <a href="../../how_use/before_run/set_other/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    设置其他
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../../how_use/before_run/set_other/func_para.html">
+            
+                <a href="../../how_use/before_run/set_other/func_para.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    函数参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="../../how_use/before_run/set_other/related_data.html">
+            
+                <a href="../../how_use/before_run/set_other/related_data.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    相关数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.3" data-path="../../how_use/before_run/set_other/stack.html">
+            
+                <a href="../../how_use/before_run/set_other/stack.html">
+            
+                    
+                        <b>1.4.3.2.3.</b>
+                    
+                    Stack栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.4" data-path="../../how_use/before_run/set_other/heap.html">
+            
+                <a href="../../how_use/before_run/set_other/heap.html">
+            
+                    
+                        <b>1.4.3.2.4.</b>
+                    
+                    Heap堆
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../how_use/in_running/">
+            
+                <a href="../../how_use/in_running/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    运行中
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../how_use/in_running/start_running.html">
+            
+                <a href="../../how_use/in_running/start_running.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    开始运行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../how_use/in_running/debug_logic/">
+            
+                <a href="../../how_use/in_running/debug_logic/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    调试逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="../../how_use/in_running/debug_logic/hook/">
+            
+                <a href="../../how_use/in_running/debug_logic/hook/">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    hook
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1.1" data-path="../../how_use/in_running/debug_logic/hook/hook_code/">
+            
+                <a href="../../how_use/in_running/debug_logic/hook/hook_code/">
+            
+                    
+                        <b>1.4.4.2.1.1.</b>
+                    
+                    hook代码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1.1.1" data-path="../../how_use/in_running/debug_logic/hook/hook_code/instruction.html">
+            
+                <a href="../../how_use/in_running/debug_logic/hook/hook_code/instruction.html">
+            
+                    
+                        <b>1.4.4.2.1.1.1.</b>
+                    
+                    hook指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.1.2" data-path="../../how_use/in_running/debug_logic/hook/hook_mem.html">
+            
+                <a href="../../how_use/in_running/debug_logic/hook/hook_mem.html">
+            
+                    
+                        <b>1.4.4.2.1.2.</b>
+                    
+                    hook内存
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.1.3" data-path="../../how_use/in_running/debug_logic/hook/hook_exception.html">
+            
+                <a href="../../how_use/in_running/debug_logic/hook/hook_exception.html">
+            
+                    
+                        <b>1.4.4.2.1.3.</b>
+                    
+                    hook异常
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.2" data-path="../../how_use/in_running/debug_logic/log/">
+            
+                <a href="../../how_use/in_running/debug_logic/log/">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    打印日志
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.2.1" data-path="../../how_use/in_running/debug_logic/log/optimize_log.html">
+            
+                <a href="../../how_use/in_running/debug_logic/log/optimize_log.html">
+            
+                    
+                        <b>1.4.4.2.2.1.</b>
+                    
+                    优化日志输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="../../how_use/in_running/debug_logic/print_instruction/">
+            
+                <a href="../../how_use/in_running/debug_logic/print_instruction/">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    查看当前指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../how_use/after_run/">
+            
+                <a href="../../how_use/after_run/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    运行后
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../how_use/after_run/stop.html">
+            
+                <a href="../../how_use/after_run/stop.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    停止运行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../../how_use/after_run/get_result.html">
+            
+                <a href="../../how_use/after_run/get_result.html">
+            
+                    
+                        <b>1.4.5.2.</b>
+                    
+                    获取结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    经验和心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    常见错误
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="uc_err_map/">
+            
+                <a href="uc_err_map/">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    UC_ERR_MAP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1.1" data-path="uc_err_map/batch_fix_uc_err_map.html">
+            
+                <a href="uc_err_map/batch_fix_uc_err_map.html">
+            
+                    
+                        <b>1.5.1.1.1.</b>
+                    
+                    批量解决UC_ERR_MAP
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="uc_err_write_unmapped.html">
+            
+                <a href="uc_err_write_unmapped.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    UC_ERR_WRITE_UNMAPPED
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../manual_change_opcode.html">
+            
+                <a href="../manual_change_opcode.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    手动修改指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../value_convert.html">
+            
+                <a href="../value_convert.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    数值转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../arm64_arm64e.html">
+            
+                <a href="../arm64_arm64e.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    ARM64和arm64e
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../call_other_func/">
+            
+                <a href="../call_other_func/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    调用其他子函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../call_other_func/emu_func_impl.html">
+            
+                <a href="../call_other_func/emu_func_impl.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    模拟函数实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../other_use_unicorn.html">
+            
+                <a href="../other_use_unicorn.html">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    用到Unicorn的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../examples/">
+            
+                <a href="../../examples/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../examples/example_akd_symbol2575.html">
+            
+                <a href="../../examples/example_akd_symbol2575.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    模拟akd函数symbol2575
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../examples/other_unicorn_sample.html">
+            
+                <a href="../../examples/other_unicorn_sample.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    其他示例代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/unicorn_doc_refer.html">
+            
+                <a href="../../appendix/unicorn_doc_refer.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    Unicorn文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../appendix/unicorn_core_code.html">
+            
+                <a href="../../appendix/unicorn_core_code.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    Unicorn部分核心代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >常见错误</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="常见错误"><a name="常见错误" class="plugin-anchor" href="#常见错误"><i class="fa fa-link" aria-hidden="true"></i></a>常见错误</h1>
+<p>此处整理Unicorn调试期间常遇到的错误以及背后的原因和对应的解决办法：</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-06-09 22:28:02
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 经验和心得">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="uc_err_map/" class="navigation navigation-next " aria-label="Next page: UC_ERR_MAP">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"常见错误","level":"1.5.1","depth":2,"next":{"title":"UC_ERR_MAP","level":"1.5.1.1","depth":3,"path":"summary_note/common_issue/uc_err_map/README.md","ref":"summary_note/common_issue/uc_err_map/README.md","articles":[{"title":"批量解决UC_ERR_MAP","level":"1.5.1.1.1","depth":4,"path":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","ref":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","articles":[]}]},"previous":{"title":"经验和心得","level":"1.5","depth":1,"path":"summary_note/README.md","ref":"summary_note/README.md","articles":[{"title":"常见错误","level":"1.5.1","depth":2,"path":"summary_note/common_issue/README.md","ref":"summary_note/common_issue/README.md","articles":[{"title":"UC_ERR_MAP","level":"1.5.1.1","depth":3,"path":"summary_note/common_issue/uc_err_map/README.md","ref":"summary_note/common_issue/uc_err_map/README.md","articles":[{"title":"批量解决UC_ERR_MAP","level":"1.5.1.1.1","depth":4,"path":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","ref":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","articles":[]}]},{"title":"UC_ERR_WRITE_UNMAPPED","level":"1.5.1.2","depth":3,"path":"summary_note/common_issue/uc_err_write_unmapped.md","ref":"summary_note/common_issue/uc_err_write_unmapped.md","articles":[]}]},{"title":"手动修改指令","level":"1.5.2","depth":2,"path":"summary_note/manual_change_opcode.md","ref":"summary_note/manual_change_opcode.md","articles":[]},{"title":"数值转换","level":"1.5.3","depth":2,"path":"summary_note/value_convert.md","ref":"summary_note/value_convert.md","articles":[]},{"title":"ARM64和arm64e","level":"1.5.4","depth":2,"path":"summary_note/arm64_arm64e.md","ref":"summary_note/arm64_arm64e.md","articles":[]},{"title":"调用其他子函数","level":"1.5.5","depth":2,"path":"summary_note/call_other_func/README.md","ref":"summary_note/call_other_func/README.md","articles":[{"title":"模拟函数实现","level":"1.5.5.1","depth":3,"path":"summary_note/call_other_func/emu_func_impl.md","ref":"summary_note/call_other_func/emu_func_impl.md","articles":[]}]},{"title":"用到Unicorn的","level":"1.5.6","depth":2,"path":"summary_note/other_use_unicorn.md","ref":"summary_note/other_use_unicorn.md","articles":[]}]},"articles":[{"title":"UC_ERR_MAP","level":"1.5.1.1","depth":3,"path":"summary_note/common_issue/uc_err_map/README.md","ref":"summary_note/common_issue/uc_err_map/README.md","articles":[{"title":"批量解决UC_ERR_MAP","level":"1.5.1.1.1","depth":4,"path":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","ref":"summary_note/common_issue/uc_err_map/batch_fix_uc_err_map.md","articles":[]}]},{"title":"UC_ERR_WRITE_UNMAPPED","level":"1.5.1.2","depth":3,"path":"summary_note/common_issue/uc_err_write_unmapped.md","ref":"summary_note/common_issue/uc_err_write_unmapped.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/cpu_emulator_unicorn/pdf/cpu_emulator_unicorn.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/cpu_emulator_unicorn/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"cpu_emulator_unicorn","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"CPU模拟利器：Unicorn","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍如何用Unicorn去模拟CPU去执行函数的二进制代码而得到结果。先给出Unicorn的概览；再介绍如何初始Unicorn，包括下载和安装以及运行测试代码确保环境无误。接着详细介绍如何使用Unicorn，yo尤其是概述Unicorn核心思路，接着介绍背景知识，包括程序运行的本质，涉及到CPU的核心逻辑和搞懂什么是指令；以及内存布局相关内容，包括什么是内存布局、内存地址空间范围、典型的内存布局；以及字节序endian。接着介绍运行前的准备，包括设置代码和其他内容。其他内容包含函数参数、相关数据、Stack栈、heap堆；接着介绍运行中的内容，包括如何开始运行，如何调试逻辑，主要是hook，包括hook代码和指令、hook内存、hook异常等内容；以及打印日志，包括优化日志输出。然后是运行后的内容，包括停止运行的逻辑，以及获取结果。接着整理了大量的经验和心得，包括常见的错误，比如UC_ERR_MAP、UC_ERR_WRITE_UNMAPPED等，其中涉及到br间接跳转去混淆相关内容；其他心得还包括手动修改指令、内存读取和写入时的数值转换、如何调用其他子函数、以及具体的模拟malloc、free、vm_deallocate等具体函数实现；以及用到Unicorn的showcase。然后加上一些实际案例，比如模拟akd函数symbol2575和其他一些示例代码；最后附录整理一些Unicorn文档和资料以及Unicorn的部分核心代码。最后贴出引用资料。"},"file":{"path":"summary_note/common_issue/README.md","mtime":"2023-06-09T14:28:02.849Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-09-01T15:54:54.247Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

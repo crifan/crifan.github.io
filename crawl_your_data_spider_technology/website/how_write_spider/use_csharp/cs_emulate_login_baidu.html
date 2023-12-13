@@ -1,0 +1,1700 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>C#模拟登录百度首页 · 爬取你要的数据：爬虫技术</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.org>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../use_go/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"crawl_your_data_spider_technology","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../spider_intro/">
+            
+                <a href="../../spider_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    爬虫简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../spider_intro/spider_various_name.html">
+            
+                <a href="../../spider_intro/spider_various_name.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    爬虫的叫法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../spider_intro/why_called_spider/">
+            
+                <a href="../../spider_intro/why_called_spider/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    为何叫爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../spider_intro/spider_application.html">
+            
+                <a href="../../spider_intro/spider_application.html">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    爬虫应用领域
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../core_logic/">
+            
+                <a href="../../core_logic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    爬虫的核心逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../core_logic/core_process.html">
+            
+                <a href="../../core_logic/core_process.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    爬虫的核心流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../core_logic/main_step.html">
+            
+                <a href="../../core_logic/main_step.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    爬虫的核心步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../core_logic/typical_implement_type.html">
+            
+                <a href="../../core_logic/typical_implement_type.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    爬虫的典型实现方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../capture_package/">
+            
+                <a href="../../capture_package/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    抓包分析
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../capture_package/analysis_html/">
+            
+                <a href="../../capture_package/analysis_html/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    抓包分析网页
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../capture_package/analysis_html/static.html">
+            
+                <a href="../../capture_package/analysis_html/static.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    静态网页
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../capture_package/analysis_html/dynamic.html">
+            
+                <a href="../../capture_package/analysis_html/dynamic.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    动态网页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../capture_package/analysis_app.html">
+            
+                <a href="../../capture_package/analysis_app.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    抓包分析app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../spider_framework/">
+            
+                <a href="../../spider_framework/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    爬虫框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../spider_framework/why_need_framework.html">
+            
+                <a href="../../spider_framework/why_need_framework.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    为何需要爬虫框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../spider_framework/common_framework.html">
+            
+                <a href="../../spider_framework/common_framework.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    常见爬虫框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    如何写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../use_python.html">
+            
+                <a href="../use_python.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    用Python写爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    用C#写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.2.1" data-path="cs_emulate_login_baidu.html">
+            
+                <a href="cs_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    C#模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../use_go/">
+            
+                <a href="../use_go/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    用Go写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../use_go/go_emulate_login_baidu.html">
+            
+                <a href="../use_go/go_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    Go模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../use_java/">
+            
+                <a href="../use_java/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    用Java写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="../use_java/java_emulate_login_baidu.html">
+            
+                <a href="../use_java/java_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.4.1.</b>
+                    
+                    Java模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../use_php.html">
+            
+                <a href="../use_php.html">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    用PHP写爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/terminology_concept.html">
+            
+                <a href="../../appendix/terminology_concept.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    名词解释
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >C#模拟登录百度首页</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="c&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;"><a name="c&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;" class="plugin-anchor" href="#c&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;"><i class="fa fa-link" aria-hidden="true"></i></a>C#&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;</h1>
+<p>&#x4E4B;&#x524D;&#x7528;&#x8FC7;<code>C#</code>&#x5B9E;&#x73B0;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#xFF0C;&#x4E14;&#x6709;2&#x4E2A;&#x7248;&#x672C;&#x53CA;&#x5BF9;&#x5E94;&#x7684;&#x66F4;&#x65B0;&#x7248;&#x672C;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x8FC7;&#x7A0B;&#x8BE6;&#x89C1;&#xFF1A;</p>
+<ul>
+<li><a href="http://www.crifan.com/emulate_login_website_using_csharp/" target="_blank">&#x3010;&#x6559;&#x7A0B;&#x3011;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x7F51;&#x7AD9; &#x4E4B; C#&#x7248;&#xFF08;&#x5185;&#x542B;&#x4E24;&#x79CD;&#x7248;&#x672C;&#x7684;&#x5B8C;&#x6574;&#x7684;&#x53EF;&#x8FD0;&#x884C;&#x7684;&#x4EE3;&#x7801;&#xFF09;</a></li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x6574;&#x7406;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h4 id="c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;&#x7EAF;&#x5185;&#x7F6E;&#x5E93;&#x7248;"><a name="c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;&#x7EAF;&#x5185;&#x7F6E;&#x5E93;&#x7248;" class="plugin-anchor" href="#c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;&#x7EAF;&#x5185;&#x7F6E;&#x5E93;&#x7248;"><i class="fa fa-link" aria-hidden="true"></i></a>C#&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;&#x7EAF;&#x5185;&#x7F6E;&#x5E93;&#x7248;</h4>
+<pre class="language-"><code class="lang-cs"><span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>ComponentModel<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms<span class="token punctuation">;</span>
+
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Net<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>RegularExpressions<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Web<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> emulateLoginBaidu
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> frmEmulateLoginBaidu <span class="token punctuation">:</span> Form
+    <span class="token punctuation">{</span>
+        <span class="token class-name">CookieCollection</span> curCookies <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">bool</span> gotCookieBaiduid<span class="token punctuation">,</span> extractTokenValueOK<span class="token punctuation">,</span> loginBaiduOk<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token function">frmEmulateLoginBaidu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">frmEmulateLoginBaidu_Load</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//init</span>
+            curCookies <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            loginBaiduOk <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/******************************************************************************
+        functions in crifanLib.cs
+        *******************************************************************************/</span>
+
+        <span class="token comment">//quote the input dict values</span>
+        <span class="token comment">//note: the return result for first para no &apos;&amp;&apos;</span>
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">quoteParas</span><span class="token punctuation">(</span>Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> paras<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> quotedParas <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">bool</span> isFirst <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">string</span> val <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">string</span> para <span class="token keyword">in</span> paras<span class="token punctuation">.</span>Keys<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>paras<span class="token punctuation">.</span><span class="token function">TryGetValue</span><span class="token punctuation">(</span>para<span class="token punctuation">,</span> <span class="token keyword">out</span> val<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>isFirst<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        isFirst <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+                        quotedParas <span class="token operator">+=</span> para <span class="token operator">+</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">+</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlPathEncode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        quotedParas <span class="token operator">+=</span> <span class="token string">&quot;&amp;&quot;</span> <span class="token operator">+</span> para <span class="token operator">+</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">+</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlPathEncode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">return</span> quotedParas<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/******************************************************************************
+        Demo emulate login baidu related functions
+        *******************************************************************************/</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnGetBaiduid_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//http://www.baidu.com/</span>
+            <span class="token keyword">string</span> baiduMainUrl <span class="token operator">=</span> txbBaiduMainUrl<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+            <span class="token comment">//generate http request</span>
+            <span class="token class-name">HttpWebRequest</span> req <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebRequest<span class="token punctuation">)</span>WebRequest<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span>baiduMainUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//add follow code to handle cookies</span>
+            req<span class="token punctuation">.</span>CookieContainer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieContainer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            req<span class="token punctuation">.</span>CookieContainer<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>curCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            req<span class="token punctuation">.</span>Method <span class="token operator">=</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">;</span>
+            <span class="token comment">//use request to get response</span>
+            <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebResponse<span class="token punctuation">)</span>req<span class="token punctuation">.</span><span class="token function">GetResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> ck <span class="token keyword">in</span> resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">+=</span> <span class="token string">&quot;[&quot;</span> <span class="token operator">+</span> ck<span class="token punctuation">.</span>Name <span class="token operator">+</span> <span class="token string">&quot;]=&quot;</span> <span class="token operator">+</span> ck<span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>ck<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;BAIDUID&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">//store cookies</span>
+                curCookies <span class="token operator">=</span> resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x627E;&#x5230;cookie BAIDUID &#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnGetToken_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">string</span> getapiUrl <span class="token operator">=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?getapi&amp;class=login&amp;tpl=mn&amp;tangram=true&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">HttpWebRequest</span> req <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebRequest<span class="token punctuation">)</span>WebRequest<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span>getapiUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//add previously got cookies</span>
+                req<span class="token punctuation">.</span>CookieContainer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieContainer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>CookieContainer<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>curCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                req<span class="token punctuation">.</span>Method <span class="token operator">=</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebResponse<span class="token punctuation">)</span>req<span class="token punctuation">.</span><span class="token function">GetResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">StreamReader</span> sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span><span class="token function">GetResponseStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span> respHtml <span class="token operator">=</span> sr<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//bdPass.api.params.login_token=&apos;5ab690978812b0e7fbbe1bfc267b90b3&apos;;</span>
+                <span class="token keyword">string</span> tokenValP <span class="token operator">=</span> <span class="token string">@&quot;bdPass\.api\.params\.login_token=&apos;(?&lt;tokenVal&gt;\w+)&apos;;&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">Match</span> foundTokenVal <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Regex</span><span class="token punctuation">(</span>tokenValP<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Match</span><span class="token punctuation">(</span>respHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>foundTokenVal<span class="token punctuation">.</span>Success<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">//extracted the token value</span>
+                    txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> foundTokenVal<span class="token punctuation">.</span>Groups<span class="token punctuation">[</span><span class="token string">&quot;tokenVal&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+                    extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x627E;&#x5230;token&#x7684;&#x503C;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x83B7;&#x5F97;Cookie&#xFF1A;BAIDUID &#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnEmulateLoginBaidu_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid <span class="token operator">&amp;&amp;</span> extractTokenValueOK<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">string</span> staticpage <span class="token operator">=</span> <span class="token string">&quot;http://www.baidu.com/cache/user/html/jump.html&quot;</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//init post dict info</span>
+                Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">Dictionary</span><span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;ppui_logintime&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;charset&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;codestring&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;token&quot;</span><span class="token punctuation">,</span> txbExtractedTokenVal<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;isPhone&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;false&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;index&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;u&quot;, &quot;&quot;);</span>
+                <span class="token comment">//postDict.Add(&quot;safeflg&quot;, &quot;0&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;staticpage&quot;</span><span class="token punctuation">,</span> staticpage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;loginType&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;tpl&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;mn&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;callback&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;parent.bdPass.api.login._postCallback&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">,</span> txbBaiduUsername<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">,</span> txbBaiduPassword<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;verifycode&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;mem_pass&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;on&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">string</span> baiduMainLoginUrl <span class="token operator">=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?login&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">HttpWebRequest</span> req <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebRequest<span class="token punctuation">)</span>WebRequest<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span>baiduMainLoginUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//add cookie</span>
+                req<span class="token punctuation">.</span>CookieContainer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieContainer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>CookieContainer<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>curCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//set to POST</span>
+                req<span class="token punctuation">.</span>Method <span class="token operator">=</span> <span class="token string">&quot;POST&quot;</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>ContentType <span class="token operator">=</span> <span class="token string">&quot;application/x-www-form-urlencoded&quot;</span><span class="token punctuation">;</span>
+                <span class="token comment">//prepare post data</span>
+                <span class="token keyword">string</span> postDataStr <span class="token operator">=</span> <span class="token function">quoteParas</span><span class="token punctuation">(</span>postDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> postBytes <span class="token operator">=</span> Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>postDataStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>ContentLength <span class="token operator">=</span> postBytes<span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+                <span class="token comment">//send post data</span>
+                <span class="token class-name">Stream</span> postDataStream <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">GetRequestStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDataStream<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>postBytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> postBytes<span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDataStream<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//got response</span>
+                <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebResponse<span class="token punctuation">)</span>req<span class="token punctuation">.</span><span class="token function">GetResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//got returned html</span>
+                <span class="token class-name">StreamReader</span> sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span><span class="token function">GetResponseStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span> loginBaiduRespHtml <span class="token operator">=</span> sr<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//check whether got all expected cookies</span>
+                Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">bool</span><span class="token operator">&gt;</span> cookieCheckDict <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">Dictionary</span><span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">bool</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookiesNameList <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;BDUSS&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;PTOKEN&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;STOKEN&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SAVEUSERID&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">String</span> cookieToCheck <span class="token keyword">in</span> cookiesNameList<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    cookieCheckDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>cookieToCheck<span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> singleCookie <span class="token keyword">in</span> resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>cookieCheckDict<span class="token punctuation">.</span><span class="token function">ContainsKey</span><span class="token punctuation">(</span>singleCookie<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        cookieCheckDict<span class="token punctuation">[</span>singleCookie<span class="token punctuation">.</span>Name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">bool</span> allCookiesFound <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">bool</span> foundCurCookie <span class="token keyword">in</span> cookieCheckDict<span class="token punctuation">.</span>Values<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    allCookiesFound <span class="token operator">=</span> allCookiesFound <span class="token operator">&amp;&amp;</span> foundCurCookie<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+
+                loginBaiduOk <span class="token operator">=</span> allCookiesFound<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>loginBaiduOk<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x6210;&#x529F;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875; &#x5931;&#x8D25;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> <span class="token string">&quot;&#x6240;&#x8FD4;&#x56DE;&#x7684;Header&#x4FE1;&#x606F;&#x4E3A;&#xFF1A;&quot;</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> resp<span class="token punctuation">.</span>Headers<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> Environment<span class="token punctuation">.</span>NewLine<span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> <span class="token string">&quot;&#x6240;&#x8FD4;&#x56DE;&#x7684;HTML&#x6E90;&#x7801;&#x4E3A;&#xFF1A;&quot;</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> loginBaiduRespHtml<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x83B7;&#x5F97;Cookie BAIDUID &#x548C;/&#x6216; &#x6CA1;&#x6709;&#x6B63;&#x786E;&#x63D0;&#x53D6;&#x51FA;token&#x503C;&#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">lklEmulateLoginTutorialUrl_LinkClicked</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">LinkLabelLinkClickedEventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> emulateLoginTutorialUrl <span class="token operator">=</span> <span class="token string">&quot;https://www.crifan.com/emulate_login_website_using_csharp&quot;</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">.</span>Process<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span>emulateLoginTutorialUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnClearAll_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            curCookies <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            loginBaiduOk <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+
+            txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+            txbBaiduUsername<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbBaiduPassword<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x6210;&#x529F;&#x7684;&#x6548;&#x679C;&#x622A;&#x56FE;&#xFF1A;</p>
+<p><img src="../../assets/img/emulate_login_baidu_cs_ok.png" alt="emulate_login_baidu_cs_ok"></p>
+<p>&#x5B8C;&#x6574;&#x7684;C#&#x4EE3;&#x7801;&#xFF08;VS2010&#x9879;&#x76EE;&#xFF09;&#x4E0B;&#x8F7D;&#xFF1A;</p>
+<ul>
+<li><a href="http://book.crifan.com/books/crawl_your_data_spider_technology/website/assets/file/emulateLoginBaidu_csharp_2012-11-07.7z" target="_blank">emulateLoginBaidu_csharp_2012-11-07.7z</a></li>
+</ul>
+<p>&#x4EE5;&#x53CA;&#x540E;&#x7EED;&#x9488;&#x5BF9;<code>.NET 4.0</code>&#x4F18;&#x5316;&#x7248;&#x672C;&#xFF1A;</p>
+<ul>
+<li>&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x767B;&#x9646; &#x72EC;&#x7ACB;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x7248;&#x672C; .NET 4.0<ul>
+<li><a href="http://book.crifan.com/books/crawl_your_data_spider_technology/website/assets/file/emulateLoginBaidu_csharp_independentCodeVersion_2013-09-11.7z" target="_blank">emulateLoginBaidu_csharp_independentCodeVersion_2013-09-11.7z</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;crifanlibcs&#x7248;"><a name="c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;crifanlibcs&#x7248;" class="plugin-anchor" href="#c&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;crifanlibcs&#x7248;"><i class="fa fa-link" aria-hidden="true"></i></a>C#&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#x4E4B;crifanLib.cs&#x7248;</h4>
+<p>&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-cs"><span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>ComponentModel<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms<span class="token punctuation">;</span>
+
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Net<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>RegularExpressions<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Web<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> emulateLoginBaidu
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> frmEmulateLoginBaidu <span class="token punctuation">:</span> Form
+    <span class="token punctuation">{</span>
+        <span class="token class-name">CookieCollection</span> curCookies <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">bool</span> gotCookieBaiduid<span class="token punctuation">,</span> extractTokenValueOK<span class="token punctuation">,</span> loginBaiduOk<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token function">frmEmulateLoginBaidu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">frmEmulateLoginBaidu_Load</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>AcceptButton <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>btnEmulateLoginBaidu<span class="token punctuation">;</span>
+
+            <span class="token comment">//init for crifanLib.cs</span>
+            curCookies <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//init for demo login</span>
+            gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            loginBaiduOk <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/******************************************************************************
+        functions in crifanLib.cs
+        Online browser: http://code.google.com/p/crifanlib/source/browse/trunk/csharp/crifanLib.cs
+        Download:       http://code.google.com/p/crifanlib/
+        *******************************************************************************/</span>
+
+        <span class="token comment">//quote the input dict values</span>
+        <span class="token comment">//note: the return result for first para no &apos;&amp;&apos;</span>
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">quoteParas</span><span class="token punctuation">(</span>Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> paras<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> quotedParas <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">bool</span> isFirst <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">string</span> val <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">string</span> para <span class="token keyword">in</span> paras<span class="token punctuation">.</span>Keys<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>paras<span class="token punctuation">.</span><span class="token function">TryGetValue</span><span class="token punctuation">(</span>para<span class="token punctuation">,</span> <span class="token keyword">out</span> val<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>isFirst<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        isFirst <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+                        quotedParas <span class="token operator">+=</span> para <span class="token operator">+</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">+</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlPathEncode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        quotedParas <span class="token operator">+=</span> <span class="token string">&quot;&amp;&quot;</span> <span class="token operator">+</span> para <span class="token operator">+</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">+</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlPathEncode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">return</span> quotedParas<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+
+        <span class="token comment">/*********************************************************************/</span>
+        <span class="token comment">/* cookie */</span>
+        <span class="token comment">/*********************************************************************/</span>
+
+        <span class="token comment">//add a single cookie to cookies, if already exist, update its value</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addCookieToCookies</span><span class="token punctuation">(</span><span class="token class-name">Cookie</span> toAdd<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token class-name">CookieCollection</span> cookies<span class="token punctuation">,</span> <span class="token keyword">bool</span> overwriteDomain<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">bool</span> found <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cookies<span class="token punctuation">.</span>Count <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> originalCookie <span class="token keyword">in</span> cookies<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>originalCookie<span class="token punctuation">.</span>Name <span class="token operator">==</span> toAdd<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// !!! for different domain, cookie is not same,</span>
+                        <span class="token comment">// so should not set the cookie value here while their domains is not same</span>
+                        <span class="token comment">// only if it explictly need overwrite domain</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>originalCookie<span class="token punctuation">.</span>Domain <span class="token operator">==</span> toAdd<span class="token punctuation">.</span>Domain<span class="token punctuation">)</span> <span class="token operator">||</span>
+                            <span class="token punctuation">(</span><span class="token punctuation">(</span>originalCookie<span class="token punctuation">.</span>Domain <span class="token operator">!=</span> toAdd<span class="token punctuation">.</span>Domain<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> overwriteDomain<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token comment">//here can not force convert CookieCollection to HttpCookieCollection,</span>
+                            <span class="token comment">//then use .remove to remove this cookie then add</span>
+                            <span class="token comment">// so no good way to copy all field value</span>
+                            originalCookie<span class="token punctuation">.</span>Value <span class="token operator">=</span> toAdd<span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+
+                            originalCookie<span class="token punctuation">.</span>Domain <span class="token operator">=</span> toAdd<span class="token punctuation">.</span>Domain<span class="token punctuation">;</span>
+
+                            originalCookie<span class="token punctuation">.</span>Expires <span class="token operator">=</span> toAdd<span class="token punctuation">.</span>Expires<span class="token punctuation">;</span>
+                            originalCookie<span class="token punctuation">.</span>Version <span class="token operator">=</span> toAdd<span class="token punctuation">.</span>Version<span class="token punctuation">;</span>
+                            originalCookie<span class="token punctuation">.</span>Path <span class="token operator">=</span> toAdd<span class="token punctuation">.</span>Path<span class="token punctuation">;</span>
+
+                            <span class="token comment">//following fields seems should not change</span>
+                            <span class="token comment">//originalCookie.HttpOnly = toAdd.HttpOnly;</span>
+                            <span class="token comment">//originalCookie.Secure = toAdd.Secure;</span>
+
+                            found <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>found<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>toAdd<span class="token punctuation">.</span>Domain <span class="token operator">!=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// if add the null domain, will lead to follow req.CookieContainer.Add(cookies) failed !!!</span>
+                    cookies<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>toAdd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+        <span class="token punctuation">}</span><span class="token comment">//addCookieToCookies</span>
+
+        <span class="token comment">//add singel cookie to cookies, default no overwrite domain</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addCookieToCookies</span><span class="token punctuation">(</span><span class="token class-name">Cookie</span> toAdd<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token class-name">CookieCollection</span> cookies<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">addCookieToCookies</span><span class="token punctuation">(</span>toAdd<span class="token punctuation">,</span> <span class="token keyword">ref</span> cookies<span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">//check whether the cookies contains the ckToCheck cookie</span>
+        <span class="token comment">//support:</span>
+        <span class="token comment">//ckTocheck is Cookie/string</span>
+        <span class="token comment">//cookies is Cookie/string/CookieCollection/string[]</span>
+        <span class="token keyword">public</span> <span class="token keyword">bool</span> <span class="token function">isContainCookie</span><span class="token punctuation">(</span><span class="token keyword">object</span> ckToCheck<span class="token punctuation">,</span> <span class="token keyword">object</span> cookies<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">bool</span> isContain <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ckToCheck <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>cookies <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">string</span> ckName <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">Type</span> type <span class="token operator">=</span> ckToCheck<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//string typeStr = ckType.ToString();</span>
+
+                <span class="token comment">//if (ckType.FullName == &quot;System.string&quot;)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    ckName <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">)</span>ckToCheck<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;Cookie&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    ckName <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Cookie<span class="token punctuation">)</span>ckToCheck<span class="token punctuation">)</span><span class="token punctuation">.</span>Name<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>ckName <span class="token operator">!=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    type <span class="token operator">=</span> cookies<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// is single Cookie</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;Cookie&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>ckName <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Cookie<span class="token punctuation">)</span>cookies<span class="token punctuation">)</span><span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            isContain <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token comment">// is CookieCollection</span>
+                    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;CookieCollection&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> ck <span class="token keyword">in</span> <span class="token punctuation">(</span>CookieCollection<span class="token punctuation">)</span>cookies<span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>ckName <span class="token operator">==</span> ck<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                isContain <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                                <span class="token keyword">break</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token comment">// is single cookie name string</span>
+                    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>ckName <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">)</span>cookies<span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            isContain <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token comment">// is cookie name string[]</span>
+                    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;string[]&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">string</span> name <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>cookies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>ckName <span class="token operator">==</span> name<span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                isContain <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                                <span class="token keyword">break</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">return</span> isContain<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token comment">//isContainCookie</span>
+
+        <span class="token comment">// update cookiesToUpdate to localCookies</span>
+        <span class="token comment">// if omitUpdateCookies designated, then omit cookies of omitUpdateCookies in cookiesToUpdate</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateLocalCookies</span><span class="token punctuation">(</span><span class="token class-name">CookieCollection</span> cookiesToUpdate<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token class-name">CookieCollection</span> localCookies<span class="token punctuation">,</span> <span class="token keyword">object</span> omitUpdateCookies<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cookiesToUpdate<span class="token punctuation">.</span>Count <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>localCookies <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    localCookies <span class="token operator">=</span> cookiesToUpdate<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> newCookie <span class="token keyword">in</span> cookiesToUpdate<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isContainCookie</span><span class="token punctuation">(</span>newCookie<span class="token punctuation">,</span> omitUpdateCookies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token comment">// need omit process this</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token function">addCookieToCookies</span><span class="token punctuation">(</span>newCookie<span class="token punctuation">,</span> <span class="token keyword">ref</span> localCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token comment">//updateLocalCookies</span>
+
+        <span class="token comment">//update cookiesToUpdate to localCookies</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateLocalCookies</span><span class="token punctuation">(</span><span class="token class-name">CookieCollection</span> cookiesToUpdate<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token class-name">CookieCollection</span> localCookies<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">updateLocalCookies</span><span class="token punctuation">(</span>cookiesToUpdate<span class="token punctuation">,</span> <span class="token keyword">ref</span> localCookies<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/*********************************************************************/</span>
+        <span class="token comment">/* HTTP */</span>
+        <span class="token comment">/*********************************************************************/</span>
+
+        <span class="token comment">/* get url&apos;s response */</span>
+        <span class="token keyword">public</span> <span class="token class-name">HttpWebResponse</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span>
+                                        Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">,</span>
+                                        Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict<span class="token punctuation">,</span>
+                                        <span class="token keyword">int</span> timeout<span class="token punctuation">,</span>
+                                        <span class="token keyword">string</span> postDataStr<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//CookieCollection parsedCookies;</span>
+
+            <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">HttpWebRequest</span> req <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebRequest<span class="token punctuation">)</span>WebRequest<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            req<span class="token punctuation">.</span>AllowAutoRedirect <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            req<span class="token punctuation">.</span>Accept <span class="token operator">=</span> <span class="token string">&quot;*/*&quot;</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//const string gAcceptLanguage = &quot;en-US&quot;; // zh-CN/en-US</span>
+            <span class="token operator">/</span><span class="token operator">/</span>req<span class="token punctuation">.</span>Headers<span class="token punctuation">[</span><span class="token string">&quot;Accept-Language&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> gAcceptLanguage<span class="token punctuation">;</span>
+
+            req<span class="token punctuation">.</span>KeepAlive <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+
+            <span class="token operator">/</span><span class="token operator">/</span>IE8
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">const</span> <span class="token keyword">string</span> gUserAgent <span class="token operator">=</span> <span class="token string">&quot;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E&quot;</span><span class="token punctuation">;</span>
+            <span class="token operator">/</span><span class="token operator">/</span>IE9
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">const</span> <span class="token keyword">string</span> gUserAgent <span class="token operator">=</span> <span class="token string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)&quot;</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> x64
+            <span class="token keyword">const</span> <span class="token keyword">string</span> gUserAgent <span class="token operator">=</span> <span class="token string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)&quot;</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> x86
+            <span class="token operator">/</span><span class="token operator">/</span>Chrome
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">const</span> <span class="token keyword">string</span> gUserAgent <span class="token operator">=</span> <span class="token string">&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4&quot;</span><span class="token punctuation">;</span>
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token class-name">Mozilla</span> Firefox
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">const</span> <span class="token keyword">string</span> gUserAgent <span class="token operator">=</span> <span class="token string">&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6&quot;</span><span class="token punctuation">;</span>
+            req<span class="token punctuation">.</span>UserAgent <span class="token operator">=</span> gUserAgent<span class="token punctuation">;</span>
+
+            req<span class="token punctuation">.</span>Headers<span class="token punctuation">[</span><span class="token string">&quot;Accept-Encoding&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;gzip, deflate&quot;</span><span class="token punctuation">;</span>
+            req<span class="token punctuation">.</span>AutomaticDecompression <span class="token operator">=</span> DecompressionMethods<span class="token punctuation">.</span>GZip<span class="token punctuation">;</span>
+
+            req<span class="token punctuation">.</span>Proxy <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                req<span class="token punctuation">.</span>Timeout <span class="token operator">=</span> timeout<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>curCookies <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                req<span class="token punctuation">.</span>CookieContainer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieContainer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>CookieContainer<span class="token punctuation">.</span>PerDomainCapacity <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> following will exceed max <span class="token keyword">default</span> <span class="token number">20</span> cookie per domain
+                req<span class="token punctuation">.</span>CookieContainer<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>curCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>headerDict <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">string</span> header <span class="token keyword">in</span> headerDict<span class="token punctuation">.</span>Keys<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">string</span> headerValue <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>headerDict<span class="token punctuation">.</span><span class="token function">TryGetValue</span><span class="token punctuation">(</span>header<span class="token punctuation">,</span> <span class="token keyword">out</span> headerValue<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token operator">/</span><span class="token operator">/</span> following are allow the caller overwrite the <span class="token keyword">default</span> header setting
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;referer&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            req<span class="token punctuation">.</span>Referer <span class="token operator">=</span> headerValue<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;allowautoredirect&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">bool</span> isAllow <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">bool</span><span class="token punctuation">.</span><span class="token function">TryParse</span><span class="token punctuation">(</span>headerValue<span class="token punctuation">,</span> <span class="token keyword">out</span> isAllow<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                req<span class="token punctuation">.</span>AllowAutoRedirect <span class="token operator">=</span> isAllow<span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;accept&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            req<span class="token punctuation">.</span>Accept <span class="token operator">=</span> headerValue<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;keepalive&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">bool</span> isKeepAlive <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">bool</span><span class="token punctuation">.</span><span class="token function">TryParse</span><span class="token punctuation">(</span>headerValue<span class="token punctuation">,</span> <span class="token keyword">out</span> isKeepAlive<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                req<span class="token punctuation">.</span>KeepAlive <span class="token operator">=</span> isKeepAlive<span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;accept-language&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            req<span class="token punctuation">.</span>Headers<span class="token punctuation">[</span><span class="token string">&quot;Accept-Language&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> headerValue<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>header<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;useragent&quot;</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            req<span class="token punctuation">.</span>UserAgent <span class="token operator">=</span> headerValue<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span>
+                        <span class="token punctuation">{</span>
+                            req<span class="token punctuation">.</span>Headers<span class="token punctuation">[</span>header<span class="token punctuation">]</span> <span class="token operator">=</span> headerValue<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>postDict <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> postDataStr <span class="token operator">!=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                req<span class="token punctuation">.</span>Method <span class="token operator">=</span> <span class="token string">&quot;POST&quot;</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>ContentType <span class="token operator">=</span> <span class="token string">&quot;application/x-www-form-urlencoded&quot;</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>postDict <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    postDataStr <span class="token operator">=</span> <span class="token function">quoteParas</span><span class="token punctuation">(</span>postDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> postBytes <span class="token operator">=</span> Encoding<span class="token punctuation">.</span><span class="token function">GetEncoding</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>postData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> postBytes <span class="token operator">=</span> Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>postDataStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                req<span class="token punctuation">.</span>ContentLength <span class="token operator">=</span> postBytes<span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+
+                <span class="token class-name">Stream</span> postDataStream <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">GetRequestStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDataStream<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>postBytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> postBytes<span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDataStream<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                req<span class="token punctuation">.</span>Method <span class="token operator">=</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token operator">/</span><span class="token operator">/</span>may timeout<span class="token punctuation">,</span> has <span class="token keyword">fixed</span> <span class="token keyword">in</span><span class="token punctuation">:</span>
+            <span class="token operator">/</span><span class="token operator">/</span>https<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>crifan<span class="token punctuation">.</span>com<span class="token operator">/</span>fixed_problem_sometime_httpwebrequest_getresponse_timeout<span class="token operator">/</span>
+            resp <span class="token operator">=</span> <span class="token punctuation">(</span>HttpWebResponse<span class="token punctuation">)</span>req<span class="token punctuation">.</span><span class="token function">GetResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token function">updateLocalCookies</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">,</span> <span class="token keyword">ref</span> curCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> resp<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">HttpWebResponse</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span>
+                                    Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">,</span>
+                                    Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> postDict<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">HttpWebResponse</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token operator">/</span><span class="token operator">/</span> valid charset<span class="token punctuation">:</span><span class="token string">&quot;GB18030&quot;</span><span class="token operator">/</span><span class="token string">&quot;UTF-8&quot;</span><span class="token punctuation">,</span> invliad<span class="token punctuation">:</span><span class="token string">&quot;UTF8&quot;</span>
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span>
+                                        Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">,</span>
+                                        <span class="token keyword">string</span> charset<span class="token punctuation">,</span>
+                                        Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict<span class="token punctuation">,</span>
+                                        <span class="token keyword">int</span> timeout<span class="token punctuation">,</span>
+                                        <span class="token keyword">string</span> postDataStr<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> respHtml <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> postDict<span class="token punctuation">,</span> timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> postDict<span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> postDataStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token operator">/</span><span class="token operator">/</span><span class="token keyword">long</span> realRespLen <span class="token operator">=</span> resp<span class="token punctuation">.</span>ContentLength<span class="token punctuation">;</span>
+
+            <span class="token class-name">StreamReader</span> sr<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>charset <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>charset <span class="token operator">!=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token class-name">Encoding</span> htmlEncoding <span class="token operator">=</span> Encoding<span class="token punctuation">.</span><span class="token function">GetEncoding</span><span class="token punctuation">(</span>charset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span><span class="token function">GetResponseStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> htmlEncoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span><span class="token function">GetResponseStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            respHtml <span class="token operator">=</span> sr<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> respHtml<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span> Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">,</span> <span class="token keyword">string</span> charset<span class="token punctuation">,</span> Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict<span class="token punctuation">,</span> <span class="token keyword">string</span> postDataStr<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> charset<span class="token punctuation">,</span> postDict<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> postDataStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span> Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">,</span> Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> postDict<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span> Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> headerDict<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> headerDict<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span> <span class="token keyword">string</span> charset<span class="token punctuation">,</span> <span class="token keyword">int</span> timeout<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> charset<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">,</span> <span class="token keyword">string</span> charset<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> charset<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span><span class="token keyword">string</span> url<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+
+        <span class="token comment">/******************************************************************************
+        Demo emulate login baidu related functions
+        *******************************************************************************/</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnGetBaiduid_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//http://www.baidu.com/</span>
+            <span class="token keyword">string</span> baiduMainUrl <span class="token operator">=</span> txbBaiduMainUrl<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+            <span class="token class-name">HttpWebResponse</span> resp <span class="token operator">=</span> <span class="token function">getUrlResponse</span><span class="token punctuation">(</span>baiduMainUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> ck <span class="token keyword">in</span> resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">+=</span> <span class="token string">&quot;[&quot;</span> <span class="token operator">+</span> ck<span class="token punctuation">.</span>Name <span class="token operator">+</span> <span class="token string">&quot;]=&quot;</span> <span class="token operator">+</span> ck<span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>ck<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;BAIDUID&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">//store cookies</span>
+                curCookies <span class="token operator">=</span> resp<span class="token punctuation">.</span>Cookies<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x627E;&#x5230;cookie BAIDUID &#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnGetToken_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">string</span> getapiUrl <span class="token operator">=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?getapi&amp;class=login&amp;tpl=mn&amp;tangram=true&quot;</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span> respHtml <span class="token operator">=</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>getapiUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//bdPass.api.params.login_token=&apos;5ab690978812b0e7fbbe1bfc267b90b3&apos;;</span>
+                <span class="token keyword">string</span> tokenValP <span class="token operator">=</span> <span class="token string">@&quot;bdPass\.api\.params\.login_token=&apos;(?&lt;tokenVal&gt;\w+)&apos;;&quot;</span><span class="token punctuation">;</span>
+                <span class="token class-name">Match</span> foundTokenVal <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Regex</span><span class="token punctuation">(</span>tokenValP<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Match</span><span class="token punctuation">(</span>respHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>foundTokenVal<span class="token punctuation">.</span>Success<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">//extracted the token value</span>
+                    txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> foundTokenVal<span class="token punctuation">.</span>Groups<span class="token punctuation">[</span><span class="token string">&quot;tokenVal&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+                    extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x627E;&#x5230;token&#x7684;&#x503C;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x83B7;&#x5F97;Cookie&#xFF1A;BAIDUID &#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnEmulateLoginBaidu_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>gotCookieBaiduid <span class="token operator">&amp;&amp;</span> extractTokenValueOK<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">string</span> staticpage <span class="token operator">=</span> <span class="token string">&quot;http://www.baidu.com/cache/user/html/jump.html&quot;</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//init post dict info</span>
+                Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> postDict <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">Dictionary</span><span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;ppui_logintime&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;charset&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;codestring&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;token&quot;</span><span class="token punctuation">,</span> txbExtractedTokenVal<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;isPhone&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;false&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;index&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;u&quot;, &quot;&quot;);</span>
+                <span class="token comment">//postDict.Add(&quot;safeflg&quot;, &quot;0&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;staticpage&quot;</span><span class="token punctuation">,</span> staticpage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;loginType&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;tpl&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;mn&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;callback&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;parent.bdPass.api.login._postCallback&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">,</span> txbBaiduUsername<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">,</span> txbBaiduPassword<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//postDict.Add(&quot;verifycode&quot;, &quot;&quot;);</span>
+                postDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;mem_pass&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;on&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">string</span> baiduMainLoginUrl <span class="token operator">=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?login&quot;</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span> loginBaiduRespHtml <span class="token operator">=</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>baiduMainLoginUrl<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> postDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//check whether got all expected cookies</span>
+                Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">bool</span><span class="token operator">&gt;</span> cookieCheckDict <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">Dictionary</span><span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">bool</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookiesNameList <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;BDUSS&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;PTOKEN&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;STOKEN&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SAVEUSERID&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">String</span> cookieToCheck <span class="token keyword">in</span> cookiesNameList<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    cookieCheckDict<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>cookieToCheck<span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Cookie</span> singleCookie <span class="token keyword">in</span> curCookies<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>cookieCheckDict<span class="token punctuation">.</span><span class="token function">ContainsKey</span><span class="token punctuation">(</span>singleCookie<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        cookieCheckDict<span class="token punctuation">[</span>singleCookie<span class="token punctuation">.</span>Name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">bool</span> allCookiesFound <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+                <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">bool</span> foundCurCookie <span class="token keyword">in</span> cookieCheckDict<span class="token punctuation">.</span>Values<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    allCookiesFound <span class="token operator">=</span> allCookiesFound <span class="token operator">&amp;&amp;</span> foundCurCookie<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+
+                loginBaiduOk <span class="token operator">=</span> allCookiesFound<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>loginBaiduOk<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x6210;&#x529F;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875; &#x5931;&#x8D25;&#xFF01;&quot;</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> <span class="token string">&quot;&#x6240;&#x8FD4;&#x56DE;&#x7684;HTML&#x6E90;&#x7801;&#x4E3A;&#xFF1A;&quot;</span><span class="token punctuation">;</span>
+                    txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">+=</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">+</span> loginBaiduRespHtml<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">&quot;&#x9519;&#x8BEF;&#xFF1A;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x83B7;&#x5F97;Cookie BAIDUID &#x548C;/&#x6216; &#x6CA1;&#x6709;&#x6B63;&#x786E;&#x63D0;&#x53D6;&#x51FA;token&#x503C;&#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">lklEmulateLoginTutorialUrl_LinkClicked</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">LinkLabelLinkClickedEventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> emulateLoginTutorialUrl <span class="token operator">=</span> <span class="token string">&quot;https://www.crifan.com/emulate_login_website_using_csharp&quot;</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">.</span>Process<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span>emulateLoginTutorialUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">btnClearAll_Click</span><span class="token punctuation">(</span><span class="token keyword">object</span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            curCookies <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CookieCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            gotCookieBaiduid <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            extractTokenValueOK <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            loginBaiduOk <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+
+            txbGotBaiduid<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbExtractedTokenVal<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+            txbBaiduUsername<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbBaiduPassword<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+            txbEmulateLoginResult<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5B8C;&#x6574;&#x7684;C#&#x4EE3;&#x7801;&#xFF08;VS2010&#x9879;&#x76EE;&#xFF09;&#x4E0B;&#x8F7D;&#xFF1A;</p>
+<ul>
+<li><a href="http://book.crifan.com/books/crawl_your_data_spider_technology/website/assets/file/emulateLoginBaidu_csharp_crifanLibVersion_2012-11-07.7z" target="_blank">emulateLoginBaidu_csharp_crifanLibVersion_2012-11-07.7z</a></li>
+</ul>
+<p>&#x4EE5;&#x53CA;&#x540E;&#x7EED;&#x9488;&#x5BF9;<code>.NET 4.0</code>&#x4F18;&#x5316;&#x7248;&#x672C;&#xFF1A;</p>
+<ul>
+<li>&#x6A21;&#x62DF;&#x767E;&#x5EA6;&#x767B;&#x9646; &#xFF08;&#x5229;&#x7528;&#x6211;&#x81EA;&#x5DF1;&#x7684;&#xFF09;crifanLib&#x7248;&#x672C; .NET 4.0<ul>
+<li><a href="http://book.crifan.com/books/crawl_your_data_spider_technology/website/assets/file/emulateLoginBaidu_csharp_crifanLibVersion_2013-09-11.7z" target="_blank">emulateLoginBaidu_csharp_crifanLibVersion_2013-09-11.7z</a></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2020-07-30 20:35:18
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 用C#写爬虫">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../use_go/" class="navigation navigation-next " aria-label="Next page: 用Go写爬虫">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"C#模拟登录百度首页","level":"1.6.2.1","depth":3,"next":{"title":"用Go写爬虫","level":"1.6.3","depth":2,"path":"how_write_spider/use_go/README.md","ref":"how_write_spider/use_go/README.md","articles":[{"title":"Go模拟登录百度首页","level":"1.6.3.1","depth":3,"path":"how_write_spider/use_go/go_emulate_login_baidu.md","ref":"how_write_spider/use_go/go_emulate_login_baidu.md","articles":[]}]},"previous":{"title":"用C#写爬虫","level":"1.6.2","depth":2,"path":"how_write_spider/use_csharp/README.md","ref":"how_write_spider/use_csharp/README.md","articles":[{"title":"C#模拟登录百度首页","level":"1.6.2.1","depth":3,"path":"how_write_spider/use_csharp/cs_emulate_login_baidu.md","ref":"how_write_spider/use_csharp/cs_emulate_login_baidu.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/crawl_your_data_spider_technology/pdf/crawl_your_data_spider_technology.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/crawl_your_data_spider_technology/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"crawl_your_data_spider_technology","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.org>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"爬取你要的数据：爬虫技术","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"3.2.3","description":"整理爬虫技术的各种叫法，解释为何叫做爬虫，为何又被叫做模拟登陆，与爬虫有关的一些东西，总结爬虫的核心步骤和阶段，以及每一步的各种细节包括优缺点和其他涉及的内容，继续解释为何要用爬虫框架，总结常见语言的各种爬虫框架，总结实现爬虫的不同方式和爬虫的不同步骤之间的对应关系，用不同语言如何写爬虫，并且给出常见语言如Python、C#、Go、Java、PHP等的具体爬虫实例代码，最后总结爬虫相关名词和概念。"},"file":{"path":"how_write_spider/use_csharp/cs_emulate_login_baidu.md","mtime":"2020-07-30T12:35:18.713Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-18T06:11:18.080Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

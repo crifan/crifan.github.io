@@ -1,0 +1,1190 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Go模拟登录百度首页 · 爬取你要的数据：爬虫技术</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.org>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../use_java/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"crawl_your_data_spider_technology","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../spider_intro/">
+            
+                <a href="../../spider_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    爬虫简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../spider_intro/spider_various_name.html">
+            
+                <a href="../../spider_intro/spider_various_name.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    爬虫的叫法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../spider_intro/why_called_spider/">
+            
+                <a href="../../spider_intro/why_called_spider/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    为何叫爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../spider_intro/spider_application.html">
+            
+                <a href="../../spider_intro/spider_application.html">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    爬虫应用领域
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../core_logic/">
+            
+                <a href="../../core_logic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    爬虫的核心逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../core_logic/core_process.html">
+            
+                <a href="../../core_logic/core_process.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    爬虫的核心流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../core_logic/main_step.html">
+            
+                <a href="../../core_logic/main_step.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    爬虫的核心步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../core_logic/typical_implement_type.html">
+            
+                <a href="../../core_logic/typical_implement_type.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    爬虫的典型实现方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../capture_package/">
+            
+                <a href="../../capture_package/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    抓包分析
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../capture_package/analysis_html/">
+            
+                <a href="../../capture_package/analysis_html/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    抓包分析网页
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../capture_package/analysis_html/static.html">
+            
+                <a href="../../capture_package/analysis_html/static.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    静态网页
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../capture_package/analysis_html/dynamic.html">
+            
+                <a href="../../capture_package/analysis_html/dynamic.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    动态网页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../capture_package/analysis_app.html">
+            
+                <a href="../../capture_package/analysis_app.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    抓包分析app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../spider_framework/">
+            
+                <a href="../../spider_framework/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    爬虫框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../spider_framework/why_need_framework.html">
+            
+                <a href="../../spider_framework/why_need_framework.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    为何需要爬虫框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../spider_framework/common_framework.html">
+            
+                <a href="../../spider_framework/common_framework.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    常见爬虫框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    如何写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../use_python.html">
+            
+                <a href="../use_python.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    用Python写爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../use_csharp/">
+            
+                <a href="../use_csharp/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    用C#写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../use_csharp/cs_emulate_login_baidu.html">
+            
+                <a href="../use_csharp/cs_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    C#模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    用Go写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.3.1" data-path="go_emulate_login_baidu.html">
+            
+                <a href="go_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    Go模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../use_java/">
+            
+                <a href="../use_java/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    用Java写爬虫
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="../use_java/java_emulate_login_baidu.html">
+            
+                <a href="../use_java/java_emulate_login_baidu.html">
+            
+                    
+                        <b>1.6.4.1.</b>
+                    
+                    Java模拟登录百度首页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../use_php.html">
+            
+                <a href="../use_php.html">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    用PHP写爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/terminology_concept.html">
+            
+                <a href="../../appendix/terminology_concept.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    名词解释
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Go模拟登录百度首页</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="go&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;"><a name="go&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;" class="plugin-anchor" href="#go&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;"><i class="fa fa-link" aria-hidden="true"></i></a>Go&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;&#x9996;&#x9875;</h1>
+<p>&#x5F88;&#x4E45;&#x4E4B;&#x524D;&#x7528;<code>Go</code>&#x5B9E;&#x73B0;&#x4E86;&#x6A21;&#x62DF;&#x767B;&#x5F55;&#x767E;&#x5EA6;</p>
+<p>&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x4E3A;&#xFF1A;</p>
+<pre class="language-"><code class="lang-go"><span class="token comment">/*
+ * [File]
+ * EmulateLoginBaidu.go
+ *
+ * [Function]
+ * &#x3010;&#x8BB0;&#x5F55;&#x3011;&#x7528;go&#x8BED;&#x8A00;&#x5B9E;&#x73B0;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;
+ * https://www.crifan.com/emulate_login_baidu_using_go_language/
+ *
+ * [Version]
+ * 2013-09-21
+ *
+ * [Contact]
+ * https://www.crifan.com/about/me/
+ */</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token comment">//&quot;builtin&quot;</span>
+    <span class="token comment">//&quot;log&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;runtime&quot;</span>
+    <span class="token string">&quot;path&quot;</span>
+    <span class="token string">&quot;strings&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+    <span class="token comment">//&quot;io&quot;</span>
+    <span class="token string">&quot;io/ioutil&quot;</span>
+    <span class="token string">&quot;net/http&quot;</span>
+    <span class="token string">&quot;net/http/cookiejar&quot;</span>
+    <span class="token string">&quot;net/url&quot;</span>
+    <span class="token comment">//&quot;sync&quot;</span>
+    <span class="token comment">//&quot;net/url&quot;</span>
+    <span class="token string">&quot;regexp&quot;</span>
+    <span class="token comment">//&quot;bufio&quot;</span>
+    <span class="token string">&quot;bytes&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">//import l4g &quot;log4go.googlecode.com/hg&quot;</span>
+<span class="token comment">//import l4g &quot;code.google.com/p/log4go&quot;</span>
+<span class="token keyword">import</span> <span class="token string">&quot;code.google.com/p/log4go&quot;</span>
+
+<span class="token comment">/***************************************************************************************************
+    Global Variables
+***************************************************************************************************/</span>
+<span class="token keyword">var</span> gCurCookies <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>http<span class="token punctuation">.</span>Cookie<span class="token punctuation">;</span>
+<span class="token keyword">var</span> gCurCookieJar <span class="token operator">*</span>cookiejar<span class="token punctuation">.</span>Jar<span class="token punctuation">;</span>
+<span class="token keyword">var</span> gLogger log4go<span class="token punctuation">.</span>Logger<span class="token punctuation">;</span>
+
+<span class="token comment">/***************************************************************************************************
+    Functions
+***************************************************************************************************/</span>
+<span class="token comment">//do init before all others</span>
+<span class="token keyword">func</span> <span class="token function">initAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    gCurCookies <span class="token operator">=</span> <span class="token boolean">nil</span>
+    <span class="token comment">//var err error;</span>
+    gCurCookieJar<span class="token punctuation">,</span><span class="token boolean">_</span> <span class="token operator">=</span> cookiejar<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span>
+    gLogger <span class="token operator">=</span> <span class="token boolean">nil</span>
+
+    <span class="token function">initLogger</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">initCrifanLib</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//de-init for all</span>
+<span class="token keyword">func</span> <span class="token function">deinitAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    gCurCookies <span class="token operator">=</span> <span class="token boolean">nil</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token boolean">nil</span> <span class="token operator">==</span> gLogger<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//os.Stdout.Sync() //try manually flush, but can not fix log4go&apos;s flush bug</span>
+
+        gLogger <span class="token operator">=</span> <span class="token boolean">nil</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//do some init for crifanLib</span>
+<span class="token keyword">func</span> <span class="token function">initCrifanLib</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;init for crifanLib&quot;</span><span class="token punctuation">)</span>
+    gCurCookies <span class="token operator">=</span> <span class="token boolean">nil</span>
+    <span class="token keyword">return</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//init for logger</span>
+<span class="token keyword">func</span> <span class="token function">initLogger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> filenameOnly <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token function">GetCurFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> logFilename <span class="token builtin">string</span> <span class="token operator">=</span>  filenameOnly <span class="token operator">+</span> <span class="token string">&quot;.log&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//gLogger = log4go.NewLogger()</span>
+    <span class="token comment">//gLogger = make(log4go.Logger)</span>
+
+    <span class="token comment">//for console</span>
+    <span class="token comment">//gLogger.AddFilter(&quot;stdout&quot;, log4go.INFO, log4go.NewConsoleLogWriter())</span>
+    gLogger <span class="token operator">=</span> log4go<span class="token punctuation">.</span><span class="token function">NewDefaultLogger</span><span class="token punctuation">(</span>log4go<span class="token punctuation">.</span>INFO<span class="token punctuation">)</span>
+
+    <span class="token comment">//for log file</span>
+    <span class="token keyword">if</span> <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Stat</span><span class="token punctuation">(</span>logFilename<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token comment">//fmt.Printf(&quot;found old log file %s, now remove it\n&quot;, logFilename)</span>
+        os<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>logFilename<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//gLogger.AddFilter(&quot;logfile&quot;, log4go.FINEST, log4go.NewFileLogWriter(logFilename, true))</span>
+    <span class="token comment">//gLogger.AddFilter(&quot;logfile&quot;, log4go.FINEST, log4go.NewFileLogWriter(logFilename, false))</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">AddFilter</span><span class="token punctuation">(</span><span class="token string">&quot;log&quot;</span><span class="token punctuation">,</span> log4go<span class="token punctuation">.</span>FINEST<span class="token punctuation">,</span> log4go<span class="token punctuation">.</span><span class="token function">NewFileLogWriter</span><span class="token punctuation">(</span>logFilename<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Current time is : %s&quot;</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">&quot;15:04:05 MST 2006/01/02&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// GetCurFilename</span>
+<span class="token comment">// Get current file name, without suffix</span>
+<span class="token keyword">func</span> <span class="token function">GetCurFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token boolean">_</span><span class="token punctuation">,</span> fulleFilename<span class="token punctuation">,</span> <span class="token boolean">_</span><span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> runtime<span class="token punctuation">.</span><span class="token function">Caller</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token comment">//fmt.Println(fulleFilename)</span>
+    <span class="token keyword">var</span> filenameWithSuffix <span class="token builtin">string</span>
+    filenameWithSuffix <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">Base</span><span class="token punctuation">(</span>fulleFilename<span class="token punctuation">)</span>
+    <span class="token comment">//fmt.Println(&quot;filenameWithSuffix=&quot;, filenameWithSuffix)</span>
+    <span class="token keyword">var</span> fileSuffix <span class="token builtin">string</span>
+    fileSuffix <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">Ext</span><span class="token punctuation">(</span>filenameWithSuffix<span class="token punctuation">)</span>
+    <span class="token comment">//fmt.Println(&quot;fileSuffix=&quot;, fileSuffix)</span>
+
+    <span class="token keyword">var</span> filenameOnly <span class="token builtin">string</span>
+    filenameOnly <span class="token operator">=</span> strings<span class="token punctuation">.</span><span class="token function">TrimSuffix</span><span class="token punctuation">(</span>filenameWithSuffix<span class="token punctuation">,</span> fileSuffix<span class="token punctuation">)</span>
+    <span class="token comment">//fmt.Println(&quot;filenameOnly=&quot;, filenameOnly)</span>
+
+    <span class="token keyword">return</span> filenameOnly
+<span class="token punctuation">}</span>
+
+<span class="token comment">//get url response html</span>
+<span class="token keyword">func</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>strUrl <span class="token builtin">string</span><span class="token punctuation">,</span> postDict <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span><span class="token punctuation">{</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;in getUrlRespHtml, strUrl=%s&quot;</span><span class="token punctuation">,</span> strUrl<span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;postDict=%s&quot;</span><span class="token punctuation">,</span> postDict<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> respHtml <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+
+    httpClient <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">{</span>
+        <span class="token comment">//Transport:nil,</span>
+        <span class="token comment">//CheckRedirect: nil,</span>
+        Jar<span class="token punctuation">:</span>gCurCookieJar<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> httpReq <span class="token operator">*</span>http<span class="token punctuation">.</span>Request
+    <span class="token comment">//var newReqErr error</span>
+    <span class="token keyword">if</span> <span class="token boolean">nil</span> <span class="token operator">==</span> postDict <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;is GET&quot;</span><span class="token punctuation">)</span>
+        <span class="token comment">//httpReq, newReqErr = http.NewRequest(&quot;GET&quot;, strUrl, nil)</span>
+        httpReq<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span><span class="token string">&quot;GET&quot;</span><span class="token punctuation">,</span> strUrl<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
+        <span class="token comment">// ...</span>
+        <span class="token comment">//httpReq.Header.Add(&quot;If-None-Match&quot;, `W/&quot;wyzzy&quot;`)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">//&#x3010;&#x8BB0;&#x5F55;&#x3011;go&#x8BED;&#x8A00;&#x4E2D;&#x5B9E;&#x73B0;http&#x7684;POST&#x4E14;&#x4F20;&#x9012;&#x5BF9;&#x5E94;&#x7684;post data</span>
+        <span class="token comment">//https://www.crifan.com/go_language_http_do_post_pass_post_data</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;is POST&quot;</span><span class="token punctuation">)</span>
+        postValues <span class="token operator">:=</span> url<span class="token punctuation">.</span>Values<span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token keyword">for</span> postKey<span class="token punctuation">,</span> PostValue <span class="token operator">:=</span> <span class="token keyword">range</span> postDict<span class="token punctuation">{</span>
+            postValues<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span>postKey<span class="token punctuation">,</span> PostValue<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;postValues=%s&quot;</span><span class="token punctuation">,</span> postValues<span class="token punctuation">)</span>
+        postDataStr <span class="token operator">:=</span> postValues<span class="token punctuation">.</span><span class="token function">Encode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;postDataStr=%s&quot;</span><span class="token punctuation">,</span> postDataStr<span class="token punctuation">)</span>
+        postDataBytes <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>postDataStr<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;postDataBytes=%s&quot;</span><span class="token punctuation">,</span> postDataBytes<span class="token punctuation">)</span>
+        postBytesReader <span class="token operator">:=</span> bytes<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>postDataBytes<span class="token punctuation">)</span>
+        <span class="token comment">//httpReq, newReqErr = http.NewRequest(&quot;POST&quot;, strUrl, postBytesReader)</span>
+        httpReq<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span><span class="token string">&quot;POST&quot;</span><span class="token punctuation">,</span> strUrl<span class="token punctuation">,</span> postBytesReader<span class="token punctuation">)</span>
+        <span class="token comment">//httpReq.Header.Set(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded; param=value&quot;)</span>
+        httpReq<span class="token punctuation">.</span>Header<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;Content-Type&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;application/x-www-form-urlencoded&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    httpResp<span class="token punctuation">,</span> err <span class="token operator">:=</span> httpClient<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span>httpReq<span class="token punctuation">)</span>
+    <span class="token comment">// ...</span>
+
+    <span class="token comment">//httpResp, err := http.Get(strUrl)</span>
+    <span class="token comment">//gLogger.Info(&quot;http.Get done&quot;)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Warn</span><span class="token punctuation">(</span><span class="token string">&quot;http get strUrl=%s response error=%s\n&quot;</span><span class="token punctuation">,</span> strUrl<span class="token punctuation">,</span> err<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;httpResp.Header=%s&quot;</span><span class="token punctuation">,</span> httpResp<span class="token punctuation">.</span>Header<span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;httpResp.Status=%s&quot;</span><span class="token punctuation">,</span> httpResp<span class="token punctuation">.</span>Status<span class="token punctuation">)</span>
+
+    <span class="token keyword">defer</span> httpResp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// gLogger.Info(&quot;defer httpResp.Body.Close done&quot;)</span>
+
+    body<span class="token punctuation">,</span> errReadAll <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>httpResp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
+    <span class="token comment">//gLogger.Info(&quot;ioutil.ReadAll done&quot;)</span>
+    <span class="token keyword">if</span> errReadAll <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Warn</span><span class="token punctuation">(</span><span class="token string">&quot;get response for strUrl=%s got error=%s\n&quot;</span><span class="token punctuation">,</span> strUrl<span class="token punctuation">,</span> errReadAll<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//gLogger.Debug(&quot;body=%s\n&quot;, body)</span>
+
+    <span class="token comment">//gCurCookies = httpResp.Cookies()</span>
+    <span class="token comment">//gCurCookieJar = httpClient.Jar;</span>
+    gCurCookies <span class="token operator">=</span> gCurCookieJar<span class="token punctuation">.</span><span class="token function">Cookies</span><span class="token punctuation">(</span>httpReq<span class="token punctuation">.</span>URL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//gLogger.Info(&quot;httpResp.Cookies done&quot;)</span>
+
+    <span class="token comment">//respHtml = &quot;just for test log ok or not&quot;</span>
+    respHtml <span class="token operator">=</span> <span class="token function">string</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span>
+    <span class="token comment">//gLogger.Info(&quot;httpResp body []byte to string done&quot;)</span>
+
+    <span class="token keyword">return</span> respHtml
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">dbgPrintCurCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> cookieNum <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token function">len</span><span class="token punctuation">(</span>gCurCookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;cookieNum=%d&quot;</span><span class="token punctuation">,</span> cookieNum<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> cookieNum<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curCk <span class="token operator">*</span>http<span class="token punctuation">.</span>Cookie <span class="token operator">=</span> gCurCookies<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment">//gLogger.Debug(&quot;curCk.Raw=%s&quot;, curCk.Raw)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;------ Cookie [%d]------&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Name\t\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Value\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Value<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Path\t\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Path<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Domain\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Domain<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Expires\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Expires<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;RawExpires\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>RawExpires<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;MaxAge\t=%d&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>MaxAge<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Secure\t=%t&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Secure<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;HttpOnly\t=%t&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>HttpOnly<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Raw\t\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Raw<span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Unparsed\t=%s&quot;</span><span class="token punctuation">,</span> curCk<span class="token punctuation">.</span>Unparsed<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">initAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;============ &#x7A0B;&#x5E8F;&#x8BF4;&#x660E; ============&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x529F;&#x80FD;&#xFF1A;&#x672C;&#x7A0B;&#x5E8F;&#x662F;&#x7528;&#x6765;&#x6F14;&#x793A;&#x4F7F;&#x7528;Java&#x4EE3;&#x7801;&#x53BB;&#x5B9E;&#x73B0;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF1A;&#x90E8;&#x5206;&#x767E;&#x5EA6;&#x8D26;&#x6237;&#xFF0C;&#x5728;&#x767B;&#x9646;&#x65F6;&#x4F1A;&#x51FA;&#x73B0;&#xFF1A;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;1.&#x90E8;&#x5206;&#x767E;&#x5EA6;&#x8D26;&#x6237;&#xFF0C;&#x5728;&#x767B;&#x9646;&#x65F6;&#x4F1A;&#x51FA;&#x73B0;&#xFF1A;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7CFB;&#x7EDF;&#x68C0;&#x6D4B;&#x5230;&#x60A8;&#x7684;&#x5E10;&#x53F7;&#x7591;&#x4F3C;&#x88AB;&#x76D7;&#xFF0C;&#x5B58;&#x5728;&#x5B89;&#x5168;&#x98CE;&#x9669;&#x3002;&#x8BF7;&#x5C3D;&#x5FEB;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x3002;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6B64;&#x65F6;&#xFF0C;&#x672C;&#x7A0B;&#x5E8F;&#xFF0C;&#x65E0;&#x6CD5;&#x6210;&#x529F;&#x6A21;&#x62DF;&#x767B;&#x9646;&#xFF0C;&#x8BF7;&#x81EA;&#x884C;&#x6309;&#x7167;&#x63D0;&#x793A;&#x53BB;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x540E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//step1: access baidu url to get cookie BAIDUID</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;====== &#x6B65;&#x9AA4;1&#xFF1A;&#x83B7;&#x5F97;BAIDUID&#x7684;Cookie ======&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> baiduMainUrl <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">&quot;http://www.baidu.com/&quot;</span><span class="token punctuation">;</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;baiduMainUrl=%s&quot;</span><span class="token punctuation">,</span> baiduMainUrl<span class="token punctuation">)</span>
+    respHtml <span class="token operator">:=</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>baiduMainUrl<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;respHtml=%s&quot;</span><span class="token punctuation">,</span> respHtml<span class="token punctuation">)</span>
+    <span class="token function">dbgPrintCurCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//check cookie</span>
+    <span class="token keyword">var</span> bGotCookieBaiduid <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment">//var cookieNameListToCheck []string = [&quot;BAIDUID&quot;]</span>
+    <span class="token comment">//toCheckCookieNameList := [1]string{&quot;BAIDUID&quot;}</span>
+    toCheckCookieNameList <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">&quot;BAIDUID&quot;</span><span class="token punctuation">}</span>
+    toCheckCookieNum <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>toCheckCookieNameList<span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;toCheckCookieNum=%d&quot;</span><span class="token punctuation">,</span> toCheckCookieNum<span class="token punctuation">)</span>
+    curCookieNum <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>gCurCookies<span class="token punctuation">)</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;curCookieNum=%d&quot;</span><span class="token punctuation">,</span> curCookieNum<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> toCheckCookieNum<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        toCheckCkName <span class="token operator">:=</span> toCheckCookieNameList<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;[%d]toCheckCkName=%s&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> toCheckCkName<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> j <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> curCookieNum<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">{</span>
+            curCookie <span class="token operator">:=</span> gCurCookies<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>strings<span class="token punctuation">.</span><span class="token function">EqualFold</span><span class="token punctuation">(</span>toCheckCkName<span class="token punctuation">,</span> curCookie<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                bGotCookieBaiduid <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> bGotCookieBaiduid <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;Found cookie BAIDUID&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;Not found cookie BAIDUID&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//step2: login, pass paras, extract resp cookie</span>
+    gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;====== &#x6B65;&#x9AA4;2&#xFF1A;&#x63D0;&#x53D6;login_token ======&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bExtractTokenValueOK <span class="token operator">:=</span> <span class="token boolean">false</span>
+    strLoginToken <span class="token operator">:=</span> <span class="token string">&quot;&quot;</span>
+    <span class="token keyword">var</span> getApiRespHtml <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> bGotCookieBaiduid<span class="token punctuation">{</span>
+        <span class="token comment">//https://passport.baidu.com/v2/api/?getapi&amp;class=login&amp;tpl=mn&amp;tangram=true</span>
+        <span class="token keyword">var</span> getapiUrl <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?getapi&amp;class=login&amp;tpl=mn&amp;tangram=true&quot;</span><span class="token punctuation">;</span>
+        getApiRespHtml <span class="token operator">=</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>getapiUrl<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;getApiRespHtml=%s&quot;</span><span class="token punctuation">,</span> getApiRespHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">dbgPrintCurCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">//bdPass.api.params.login_token=&apos;278623fc5463aa25b0189ddd34165592&apos;;</span>
+        <span class="token comment">//use regex to extract login_token</span>
+        <span class="token comment">//&#x3010;&#x8BB0;&#x5F55;&#x3011;go&#x8BED;&#x8A00;&#x4E2D;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x67E5;&#x627E;&#x67D0;&#x4E2A;&#x503C;</span>
+        <span class="token comment">//https://www.crifan.com/go_language_regular_expression_find_value/</span>
+        loginTokenP<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> regexp<span class="token punctuation">.</span><span class="token function">Compile</span><span class="token punctuation">(</span><span class="token string">`bdPass\.api\.params\.login_token=&apos;(?P&lt;loginToken&gt;\w+)&apos;;`</span><span class="token punctuation">)</span>
+        <span class="token comment">//loginToken := loginTokenP.FindString(getApiRespHtml);</span>
+        <span class="token comment">//loginToken := loginTokenP.FindSubmatch(getApiRespHtml);</span>
+        foundLoginToken <span class="token operator">:=</span> loginTokenP<span class="token punctuation">.</span><span class="token function">FindStringSubmatch</span><span class="token punctuation">(</span>getApiRespHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;foundLoginToken=%s&quot;</span><span class="token punctuation">,</span> foundLoginToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token boolean">nil</span> <span class="token operator">!=</span> foundLoginToken <span class="token punctuation">{</span>
+            strLoginToken <span class="token operator">=</span> foundLoginToken<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token comment">//tmp go regexp not support named group, so use index here</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;found bdPass.api.params.login_token=%s&quot;</span><span class="token punctuation">,</span> strLoginToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            bExtractTokenValueOK <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Warn</span><span class="token punctuation">(</span><span class="token string">&quot; not found login_token from html=%s&quot;</span><span class="token punctuation">,</span> getApiRespHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//step3: verify returned cookies</span>
+    bLoginBaiduOk <span class="token operator">:=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> bGotCookieBaiduid <span class="token operator">&amp;&amp;</span> bExtractTokenValueOK <span class="token punctuation">{</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;======&#x6B65;&#x9AA4;3&#xFF1A;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x5E76;&#x68C0;&#x9A8C;&#x8FD4;&#x56DE;&#x7684;Cookie ======&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        staticPageUrl <span class="token operator">:=</span> <span class="token string">&quot;http://www.baidu.com/cache/user/html/jump.html&quot;</span><span class="token punctuation">;</span>
+
+        postDict <span class="token operator">:=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token comment">//postDict[&quot;ppui_logintime&quot;] = &quot;&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;charset&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;utf-8&quot;</span>
+        <span class="token comment">//postDict[&quot;codestring&quot;] = &quot;&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;token&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> strLoginToken
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;isPhone&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;false&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;index&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;0&quot;</span>
+        <span class="token comment">//postDict[&quot;u&quot;] = &quot;&quot;</span>
+        <span class="token comment">//postDict[&quot;safeflg&quot;] = &quot;0&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;staticpage&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> staticPageUrl
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;loginType&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;1&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;tpl&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;mn&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;callback&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;parent.bdPass.api.login._postCallback&quot;</span>
+
+        <span class="token comment">//&#x3010;&#x5DF2;&#x89E3;&#x51B3;&#x3011;go&#x8BED;&#x8A00;&#x4E2D;&#x83B7;&#x5F97;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x4E32;</span>
+        <span class="token comment">//https://www.crifan.com/go_language_get_console_input_string/</span>
+        strBaiduUsername <span class="token operator">:=</span> <span class="token string">&quot;&quot;</span>
+        strBaiduPassword <span class="token operator">:=</span> <span class="token string">&quot;&quot;</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;Plese input:&quot;</span><span class="token punctuation">)</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;Baidu Username:&quot;</span><span class="token punctuation">)</span>
+        <span class="token boolean">_</span><span class="token punctuation">,</span> err1 <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>strBaiduUsername<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token boolean">nil</span> <span class="token operator">==</span> err1 <span class="token punctuation">{</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;strBaiduUsername=%s&quot;</span><span class="token punctuation">,</span> strBaiduUsername<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;Baidu Password:&quot;</span><span class="token punctuation">)</span>
+        <span class="token boolean">_</span><span class="token punctuation">,</span> err2 <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>strBaiduPassword<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token boolean">nil</span> <span class="token operator">==</span> err2 <span class="token punctuation">{</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;strBaiduPassword=%s&quot;</span><span class="token punctuation">,</span> strBaiduPassword<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> strBaiduUsername
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> strBaiduPassword
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;verifycode&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+        postDict<span class="token punctuation">[</span><span class="token string">&quot;mem_pass&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;on&quot;</span>
+
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;postDict=%s&quot;</span><span class="token punctuation">,</span> postDict<span class="token punctuation">)</span>
+
+        baiduMainLoginUrl <span class="token operator">:=</span> <span class="token string">&quot;https://passport.baidu.com/v2/api/?login&quot;</span><span class="token punctuation">;</span>
+        loginBaiduRespHtml <span class="token operator">:=</span> <span class="token function">getUrlRespHtml</span><span class="token punctuation">(</span>baiduMainLoginUrl<span class="token punctuation">,</span> postDict<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;loginBaiduRespHtml=%s&quot;</span><span class="token punctuation">,</span> loginBaiduRespHtml<span class="token punctuation">)</span>
+        <span class="token function">dbgPrintCurCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//check resp cookies exist or not</span>
+        cookieNameDict <span class="token operator">:=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">bool</span><span class="token punctuation">{</span>
+            <span class="token string">&quot;BDUSS&quot;</span>     <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;PTOKEN&quot;</span>    <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;STOKEN&quot;</span>    <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token comment">//&quot;SAVEUSERID&quot;: false, //be deleted</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> cookieName<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token keyword">range</span> cookieNameDict <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> singleCookie <span class="token operator">:=</span> <span class="token keyword">range</span> gCurCookies <span class="token punctuation">{</span>
+                <span class="token comment">//if(strings.EqualFold(cookieName, singleCookie.Name)){</span>
+                <span class="token keyword">if</span> cookieName <span class="token operator">==</span> singleCookie<span class="token punctuation">.</span>Name <span class="token punctuation">{</span>
+                    cookieNameDict<span class="token punctuation">[</span>cookieName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;Found cookie %s&quot;</span><span class="token punctuation">,</span> cookieName<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        gLogger<span class="token punctuation">.</span><span class="token function">Debug</span><span class="token punctuation">(</span><span class="token string">&quot;After check resp cookie, cookieNameDict=%s&quot;</span><span class="token punctuation">,</span> cookieNameDict<span class="token punctuation">)</span>
+
+        bAllCookiesFound <span class="token operator">:=</span> <span class="token boolean">true</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> bIsExist <span class="token operator">:=</span> <span class="token keyword">range</span> cookieNameDict <span class="token punctuation">{</span>
+            bAllCookiesFound <span class="token operator">=</span> bAllCookiesFound <span class="token operator">&amp;&amp;</span> bIsExist
+        <span class="token punctuation">}</span>
+        bLoginBaiduOk <span class="token operator">=</span> bAllCookiesFound
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bLoginBaiduOk<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6210;&#x529F;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875;&#xFF01;&quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;&#x9996;&#x9875; &#x5931;&#x8D25;&#xFF01;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            gLogger<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6240;&#x8FD4;&#x56DE;&#x7684;HTML&#x6E90;&#x7801;&#x4E3A;&#xFF1A;&quot;</span> <span class="token operator">+</span> loginBaiduRespHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">deinitAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//&#x3010;workaround&#x3011;go&#x8BED;&#x8A00;&#x4E2D;&#x7528;log4go&#x8F93;&#x51FA;&#x4FE1;&#x606F;&#x65F6;&#x6709;bug&#xFF1A;&#x53EA;&#x8F93;&#x51FA;&#x90E8;&#x5206;&#x4FE1;&#x606F;&#xFF0C;&#x751A;&#x81F3;&#x662F;&#x65E0;&#x4EFB;&#x4F55;&#x8F93;&#x51FA;</span>
+    <span class="token comment">//https://www.crifan.com/go_language_log4go_only_output_part_info/</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">100</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6548;&#x679C;&#x622A;&#x56FE;&#xFF1A;</p>
+<p><img src="../../assets/img/emulate_login_baidu_go_output.png" alt="emulate_login_baidu_go_output"></p>
+<p>&#x5177;&#x4F53;&#x8FC7;&#x7A0B;&#x8BE6;&#x89C1;&#xFF1A;</p>
+<p><a href="http://www.crifan.com/emulate_login_baidu_using_go_language/" target="_blank">&#x3010;&#x8BB0;&#x5F55;&#x3011;&#x7528;go&#x8BED;&#x8A00;&#x5B9E;&#x73B0;&#x6A21;&#x62DF;&#x767B;&#x9646;&#x767E;&#x5EA6;</a></p>
+<footer class="page-footer"><span class="copyright">crifan.org&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2020-07-30 19:58:37
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 用Go写爬虫">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../use_java/" class="navigation navigation-next " aria-label="Next page: 用Java写爬虫">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Go模拟登录百度首页","level":"1.6.3.1","depth":3,"next":{"title":"用Java写爬虫","level":"1.6.4","depth":2,"path":"how_write_spider/use_java/README.md","ref":"how_write_spider/use_java/README.md","articles":[{"title":"Java模拟登录百度首页","level":"1.6.4.1","depth":3,"path":"how_write_spider/use_java/java_emulate_login_baidu.md","ref":"how_write_spider/use_java/java_emulate_login_baidu.md","articles":[]}]},"previous":{"title":"用Go写爬虫","level":"1.6.3","depth":2,"path":"how_write_spider/use_go/README.md","ref":"how_write_spider/use_go/README.md","articles":[{"title":"Go模拟登录百度首页","level":"1.6.3.1","depth":3,"path":"how_write_spider/use_go/go_emulate_login_baidu.md","ref":"how_write_spider/use_go/go_emulate_login_baidu.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/crawl_your_data_spider_technology/pdf/crawl_your_data_spider_technology.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/crawl_your_data_spider_technology/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"crawl_your_data_spider_technology","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.org>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"爬取你要的数据：爬虫技术","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"3.2.3","description":"整理爬虫技术的各种叫法，解释为何叫做爬虫，为何又被叫做模拟登陆，与爬虫有关的一些东西，总结爬虫的核心步骤和阶段，以及每一步的各种细节包括优缺点和其他涉及的内容，继续解释为何要用爬虫框架，总结常见语言的各种爬虫框架，总结实现爬虫的不同方式和爬虫的不同步骤之间的对应关系，用不同语言如何写爬虫，并且给出常见语言如Python、C#、Go、Java、PHP等的具体爬虫实例代码，最后总结爬虫相关名词和概念。"},"file":{"path":"how_write_spider/use_go/go_emulate_login_baidu.md","mtime":"2020-07-30T11:58:37.239Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-18T06:11:18.080Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
