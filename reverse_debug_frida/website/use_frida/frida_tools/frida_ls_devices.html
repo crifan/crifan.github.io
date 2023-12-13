@@ -1,0 +1,1549 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>frida-ls-devices · 逆向调试利器：Frida</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../other_related/" />
+    
+    
+    <link rel="prev" href="frida_ls.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../frida_overview/">
+            
+                <a href="../../frida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Frida概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../frida_overview/code_arch.html">
+            
+                <a href="../../frida_overview/code_arch.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    代码和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../frida_overview/doc_refer/">
+            
+                <a href="../../frida_overview/doc_refer/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../install_upgrade/">
+            
+                <a href="../../install_upgrade/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    安装和升级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../install_upgrade/install_frida.html">
+            
+                <a href="../../install_upgrade/install_frida.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    安装Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../install_upgrade/upgrade_frida.html">
+            
+                <a href="../../install_upgrade/upgrade_frida.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    升级Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    使用Frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../typical_logic/">
+            
+                <a href="../typical_logic/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Frida典型使用逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../frida_cli/">
+            
+                <a href="../frida_cli/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../frida_cli/debug_target.html">
+            
+                <a href="../frida_cli/debug_target.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    调试目标方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../frida_cli/js_script.html">
+            
+                <a href="../frida_cli/js_script.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    写js脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../frida_cli/typical_usage.html">
+            
+                <a href="../frida_cli/typical_usage.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    典型使用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../frida_cli/ios_objc/">
+            
+                <a href="../frida_cli/ios_objc/">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.4.1" data-path="../frida_cli/ios_objc/objc_para.html">
+            
+                <a href="../frida_cli/ios_objc/objc_para.html">
+            
+                    
+                        <b>1.4.2.4.1.</b>
+                    
+                    ObjC的参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4.2" data-path="../frida_cli/ios_objc/objc_var_type.html">
+            
+                <a href="../frida_cli/ios_objc/objc_var_type.html">
+            
+                    
+                        <b>1.4.2.4.2.</b>
+                    
+                    ObjC的变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../frida_cli/data_type/">
+            
+                <a href="../frida_cli/data_type/">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    数据类型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.5.1" data-path="../frida_cli/data_type/nativepointer.html">
+            
+                <a href="../frida_cli/data_type/nativepointer.html">
+            
+                    
+                        <b>1.4.2.5.1.</b>
+                    
+                    NativePointer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../frida_cli/frida_stalker.html">
+            
+                <a href="../frida_cli/frida_stalker.html">
+            
+                    
+                        <b>1.4.2.6.</b>
+                    
+                    Frida的Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../frida_trace/">
+            
+                <a href="../frida_trace/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    frida-tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="frida_ps.html">
+            
+                <a href="frida_ps.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    frida-ps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="frida_ls.html">
+            
+                <a href="frida_ls.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    frida-ls
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4.3" data-path="frida_ls_devices.html">
+            
+                <a href="frida_ls_devices.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    frida-ls-devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../other_related/">
+            
+                <a href="../other_related/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    其他相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../other_related/frida_server.html">
+            
+                <a href="../other_related/frida_server.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../frida_example/">
+            
+                <a href="../../frida_example/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida用法举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../frida_example/online_other_case/">
+            
+                <a href="../../frida_example/online_other_case/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    网上别人的案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../frida_example/online_other_case/frida_codeshare.html">
+            
+                <a href="../../frida_example/online_other_case/frida_codeshare.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Frida Codeshare
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../frida_example/frida/">
+            
+                <a href="../../frida_example/frida/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../frida_example/frida/ios_objc/">
+            
+                <a href="../../frida_example/frida/ios_objc/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../frida_example/frida/ios_objc/object/">
+            
+                <a href="../../frida_example/frida/ios_objc/object/">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    ObjC的Object
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1.1" data-path="../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                <a href="../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                    
+                        <b>1.5.2.1.1.1.</b>
+                    
+                    $methods和$ownMethods
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2" data-path="../../frida_example/frida/ios_objc/hook_func/">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/">
+            
+                    
+                        <b>1.5.2.1.2.</b>
+                    
+                    Interceptor=hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.2.1" data-path="../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                    
+                        <b>1.5.2.1.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.2" data-path="../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.2.</b>
+                    
+                    单个类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.3" data-path="../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.3.</b>
+                    
+                    所有类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3" data-path="../../frida_example/frida/ios_objc/apiresolver/">
+            
+                <a href="../../frida_example/frida/ios_objc/apiresolver/">
+            
+                    
+                        <b>1.5.2.1.3.</b>
+                    
+                    ApiResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.4" data-path="../../frida_example/frida/ios_objc/stalker/">
+            
+                <a href="../../frida_example/frida/ios_objc/stalker/">
+            
+                    
+                        <b>1.5.2.1.4.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.4.1" data-path="../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.5.2.1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../frida_example/frida_trace/">
+            
+                <a href="../../frida_example/frida_trace/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../frida_example/frida_trace/ios_objc/">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    akd中Apple账号验证过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.1.2" data-path="../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.2.</b>
+                    
+                    Preferences中Apple账号登录全过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../summary_note/">
+            
+                <a href="../../summary_note/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    经验心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../summary_note/hook_func/">
+            
+                <a href="../../summary_note/hook_func/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../summary_note/hook_func/frida/">
+            
+                <a href="../../summary_note/hook_func/frida/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../../summary_note/hook_func/frida/interceptor/">
+            
+                <a href="../../summary_note/hook_func/frida/interceptor/">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    Interceptor
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1.1" data-path="../../summary_note/hook_func/frida/interceptor/stalker.html">
+            
+                <a href="../../summary_note/hook_func/frida/interceptor/stalker.html">
+            
+                    
+                        <b>1.6.1.1.1.1.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../summary_note/hook_func/frida_trace.html">
+            
+                <a href="../../summary_note/hook_func/frida_trace.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../summary_note/hook_func/common_ios_func.html">
+            
+                <a href="../../summary_note/hook_func/common_ios_func.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    常用iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../summary_note/util_func/">
+            
+                <a href="../../summary_note/util_func/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../summary_note/util_func/common_js/">
+            
+                <a href="../../summary_note/util_func/common_js/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    通用js函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1.1" data-path="../../summary_note/util_func/common_js/frida_common.html">
+            
+                <a href="../../summary_note/util_func/common_js/frida_common.html">
+            
+                    
+                        <b>1.6.2.1.1.</b>
+                    
+                    Frida的js通用函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../summary_note/util_func/ios/">
+            
+                <a href="../../summary_note/util_func/ios/">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.2.1" data-path="../../summary_note/util_func/ios/callstack.html">
+            
+                <a href="../../summary_note/util_func/ios/callstack.html">
+            
+                    
+                        <b>1.6.2.2.1.</b>
+                    
+                    iOS函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../summary_note/util_func/android.html">
+            
+                <a href="../../summary_note/util_func/android.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    Android函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../summary_note/js/">
+            
+                <a href="../../summary_note/js/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    js
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../../summary_note/js/console_log.html">
+            
+                <a href="../../summary_note/js/console_log.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    console.log日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../summary_note/build_frida_server/">
+            
+                <a href="../../summary_note/build_frida_server/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    自己编译frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../../summary_note/common_issue/">
+            
+                <a href="../../summary_note/common_issue/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    常见问题和报错
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../frida_base_tool/">
+            
+                <a href="../../frida_base_tool/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    基于Frida的工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../frida_use_case/">
+            
+                <a href="../../frida_use_case/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    Frida的用途
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../frida_use_case/anti_debug.html">
+            
+                <a href="../../frida_use_case/anti_debug.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    反调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../frida_use_case/anti_obfuscation.html">
+            
+                <a href="../../frida_use_case/anti_obfuscation.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    辅助反混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../frida_use_case/bypass_encrypted_para.html">
+            
+                <a href="../../frida_use_case/bypass_encrypted_para.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    绕过参数加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../frida_use_case/reverse_app/">
+            
+                <a href="../../frida_use_case/reverse_app/">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    逆向app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >frida-ls-devices</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="frida-ls-devices"><a name="frida-ls-devices" class="plugin-anchor" href="#frida-ls-devices"><i class="fa fa-link" aria-hidden="true"></i></a>frida-ls-devices</h1>
+<ul>
+<li>官网文档：<a href="https://frida.re/docs/frida-ls-devices/" target="_blank">frida-ls-devices</a></li>
+</ul>
+<h2 id="举例"><a name="举例" class="plugin-anchor" href="#举例"><i class="fa fa-link" aria-hidden="true"></i></a>举例</h2>
+<pre class="language-"><code class="lang-bash">➜ frida-ls-devices
+Id                                        Type    Name                         OS
+----------------------------------------  ------  ---------------------------  --------------
+<span class="token builtin class-name">local</span>                                     <span class="token builtin class-name">local</span>   crifanlideMacBook-Pro.local  macOS <span class="token number">13.2</span>.1
+abdc0dd961c3cb96f5c4afe109de4eb48b88433a  usb     iPhone8_150                  iPhone OS <span class="token number">15.0</span>
+socket                                    remote  Local Socket
+</code></pre>
+<h2 id="语法help"><a name="语法help" class="plugin-anchor" href="#语法help"><i class="fa fa-link" aria-hidden="true"></i></a>语法help</h2>
+<pre class="language-"><code class="lang-bash">➜ frida-ls-devices <span class="token parameter variable">--help</span>
+usage: frida-ls-devices <span class="token punctuation">[</span>options<span class="token punctuation">]</span>
+
+options:
+  -h, <span class="token parameter variable">--help</span>            show this <span class="token builtin class-name">help</span> message and <span class="token builtin class-name">exit</span>
+  <span class="token parameter variable">-O</span> FILE, --options-file FILE
+                        text <span class="token function">file</span> containing additional <span class="token builtin class-name">command</span> line options
+  <span class="token parameter variable">--version</span>             show program&apos;s version number and <span class="token builtin class-name">exit</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-06-22 23:19:24
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="frida_ls.html" class="navigation navigation-prev " aria-label="Previous page: frida-ls">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../other_related/" class="navigation navigation-next " aria-label="Next page: 其他相关">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"frida-ls-devices","level":"1.4.4.3","depth":3,"next":{"title":"其他相关","level":"1.4.5","depth":2,"path":"use_frida/other_related/README.md","ref":"use_frida/other_related/README.md","articles":[{"title":"frida-server","level":"1.4.5.1","depth":3,"path":"use_frida/other_related/frida_server.md","ref":"use_frida/other_related/frida_server.md","articles":[]}]},"previous":{"title":"frida-ls","level":"1.4.4.2","depth":3,"path":"use_frida/frida_tools/frida_ls.md","ref":"use_frida/frida_tools/frida_ls.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着给出Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"use_frida/frida_tools/frida_ls_devices.md","mtime":"2023-06-22T15:19:24.429Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-24T10:57:44.397Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

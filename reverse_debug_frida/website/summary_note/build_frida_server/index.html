@@ -1,0 +1,2320 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>自己编译frida-server · 逆向调试利器：Frida</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../common_issue/" />
+    
+    
+    <link rel="prev" href="../js/console_log.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../frida_overview/">
+            
+                <a href="../../frida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Frida概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../frida_overview/code_arch.html">
+            
+                <a href="../../frida_overview/code_arch.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    代码和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../frida_overview/doc_refer/">
+            
+                <a href="../../frida_overview/doc_refer/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../install_upgrade/">
+            
+                <a href="../../install_upgrade/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    安装和升级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../install_upgrade/install_frida.html">
+            
+                <a href="../../install_upgrade/install_frida.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    安装Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../install_upgrade/upgrade_frida.html">
+            
+                <a href="../../install_upgrade/upgrade_frida.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    升级Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../use_frida/">
+            
+                <a href="../../use_frida/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    使用Frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../use_frida/typical_logic/">
+            
+                <a href="../../use_frida/typical_logic/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Frida典型使用逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../use_frida/frida_cli/">
+            
+                <a href="../../use_frida/frida_cli/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../use_frida/frida_cli/debug_target.html">
+            
+                <a href="../../use_frida/frida_cli/debug_target.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    调试目标方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../use_frida/frida_cli/js_script.html">
+            
+                <a href="../../use_frida/frida_cli/js_script.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    写js脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../use_frida/frida_cli/typical_usage.html">
+            
+                <a href="../../use_frida/frida_cli/typical_usage.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    典型使用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../../use_frida/frida_cli/ios_objc/">
+            
+                <a href="../../use_frida/frida_cli/ios_objc/">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.4.1" data-path="../../use_frida/frida_cli/ios_objc/objc_para.html">
+            
+                <a href="../../use_frida/frida_cli/ios_objc/objc_para.html">
+            
+                    
+                        <b>1.4.2.4.1.</b>
+                    
+                    ObjC的参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4.2" data-path="../../use_frida/frida_cli/ios_objc/objc_var_type.html">
+            
+                <a href="../../use_frida/frida_cli/ios_objc/objc_var_type.html">
+            
+                    
+                        <b>1.4.2.4.2.</b>
+                    
+                    ObjC的变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../../use_frida/frida_cli/data_type/">
+            
+                <a href="../../use_frida/frida_cli/data_type/">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    数据类型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.5.1" data-path="../../use_frida/frida_cli/data_type/nativepointer.html">
+            
+                <a href="../../use_frida/frida_cli/data_type/nativepointer.html">
+            
+                    
+                        <b>1.4.2.5.1.</b>
+                    
+                    NativePointer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../../use_frida/frida_cli/frida_stalker.html">
+            
+                <a href="../../use_frida/frida_cli/frida_stalker.html">
+            
+                    
+                        <b>1.4.2.6.</b>
+                    
+                    Frida的Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../use_frida/frida_trace/">
+            
+                <a href="../../use_frida/frida_trace/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../use_frida/frida_tools/">
+            
+                <a href="../../use_frida/frida_tools/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    frida-tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../use_frida/frida_tools/frida_ps.html">
+            
+                <a href="../../use_frida/frida_tools/frida_ps.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    frida-ps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../use_frida/frida_tools/frida_ls.html">
+            
+                <a href="../../use_frida/frida_tools/frida_ls.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    frida-ls
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../use_frida/frida_tools/frida_ls_devices.html">
+            
+                <a href="../../use_frida/frida_tools/frida_ls_devices.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    frida-ls-devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../use_frida/other_related/">
+            
+                <a href="../../use_frida/other_related/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    其他相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../use_frida/other_related/frida_server.html">
+            
+                <a href="../../use_frida/other_related/frida_server.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../frida_example/">
+            
+                <a href="../../frida_example/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida用法举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../frida_example/online_other_case/">
+            
+                <a href="../../frida_example/online_other_case/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    网上别人的案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../frida_example/online_other_case/frida_codeshare.html">
+            
+                <a href="../../frida_example/online_other_case/frida_codeshare.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Frida Codeshare
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../frida_example/frida/">
+            
+                <a href="../../frida_example/frida/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../frida_example/frida/ios_objc/">
+            
+                <a href="../../frida_example/frida/ios_objc/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../frida_example/frida/ios_objc/object/">
+            
+                <a href="../../frida_example/frida/ios_objc/object/">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    ObjC的Object
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1.1" data-path="../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                <a href="../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                    
+                        <b>1.5.2.1.1.1.</b>
+                    
+                    $methods和$ownMethods
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2" data-path="../../frida_example/frida/ios_objc/hook_func/">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/">
+            
+                    
+                        <b>1.5.2.1.2.</b>
+                    
+                    Interceptor=hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.2.1" data-path="../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                    
+                        <b>1.5.2.1.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.2" data-path="../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.2.</b>
+                    
+                    单个类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.3" data-path="../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                <a href="../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.3.</b>
+                    
+                    所有类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3" data-path="../../frida_example/frida/ios_objc/apiresolver/">
+            
+                <a href="../../frida_example/frida/ios_objc/apiresolver/">
+            
+                    
+                        <b>1.5.2.1.3.</b>
+                    
+                    ApiResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.4" data-path="../../frida_example/frida/ios_objc/stalker/">
+            
+                <a href="../../frida_example/frida/ios_objc/stalker/">
+            
+                    
+                        <b>1.5.2.1.4.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.4.1" data-path="../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.5.2.1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../frida_example/frida_trace/">
+            
+                <a href="../../frida_example/frida_trace/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../frida_example/frida_trace/ios_objc/">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    akd中Apple账号验证过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.1.2" data-path="../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                <a href="../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.2.</b>
+                    
+                    Preferences中Apple账号登录全过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    经验心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../hook_func/">
+            
+                <a href="../hook_func/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../hook_func/frida/">
+            
+                <a href="../hook_func/frida/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../hook_func/frida/interceptor/">
+            
+                <a href="../hook_func/frida/interceptor/">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    Interceptor
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1.1" data-path="../hook_func/frida/interceptor/stalker.html">
+            
+                <a href="../hook_func/frida/interceptor/stalker.html">
+            
+                    
+                        <b>1.6.1.1.1.1.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../hook_func/frida_trace.html">
+            
+                <a href="../hook_func/frida_trace.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../hook_func/common_ios_func.html">
+            
+                <a href="../hook_func/common_ios_func.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    常用iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../util_func/">
+            
+                <a href="../util_func/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../util_func/common_js/">
+            
+                <a href="../util_func/common_js/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    通用js函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1.1" data-path="../util_func/common_js/frida_common.html">
+            
+                <a href="../util_func/common_js/frida_common.html">
+            
+                    
+                        <b>1.6.2.1.1.</b>
+                    
+                    Frida的js通用函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../util_func/ios/">
+            
+                <a href="../util_func/ios/">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.2.1" data-path="../util_func/ios/callstack.html">
+            
+                <a href="../util_func/ios/callstack.html">
+            
+                    
+                        <b>1.6.2.2.1.</b>
+                    
+                    iOS函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../util_func/android.html">
+            
+                <a href="../util_func/android.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    Android函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../js/">
+            
+                <a href="../js/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    js
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../js/console_log.html">
+            
+                <a href="../js/console_log.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    console.log日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    自己编译frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../common_issue/">
+            
+                <a href="../common_issue/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    常见问题和报错
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../frida_base_tool/">
+            
+                <a href="../../frida_base_tool/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    基于Frida的工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../frida_use_case/">
+            
+                <a href="../../frida_use_case/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    Frida的用途
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../frida_use_case/anti_debug.html">
+            
+                <a href="../../frida_use_case/anti_debug.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    反调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../frida_use_case/anti_obfuscation.html">
+            
+                <a href="../../frida_use_case/anti_obfuscation.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    辅助反混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../frida_use_case/bypass_encrypted_para.html">
+            
+                <a href="../../frida_use_case/bypass_encrypted_para.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    绕过参数加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../frida_use_case/reverse_app/">
+            
+                <a href="../../frida_use_case/reverse_app/">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    逆向app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >自己编译frida-server</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="自己编译frida-server"><a name="自己编译frida-server" class="plugin-anchor" href="#自己编译frida-server"><i class="fa fa-link" aria-hidden="true"></i></a>自己编译frida-server</h1>
+<p><code>iPhone11</code>中，已用<code>XinaA15</code>进行了<code>rootless越狱</code>，然后去用<code>frida</code>：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~  frida <span class="token parameter variable">-U</span> <span class="token parameter variable">-f</span> com.apple.store.Jolly <span class="token parameter variable">-l</span> /Users/crifan/dev/dev_root/iosReverse/AppleStore/dynamicDebug/frida/hookNSFileManager.js
+     ____
+    / _  <span class="token operator">|</span>   Frida <span class="token number">16.0</span>.8 - A world-class dynamic instrumentation toolkit
+   <span class="token operator">|</span> <span class="token punctuation">(</span>_<span class="token operator">|</span> <span class="token operator">|</span>
+    <span class="token operator">&gt;</span> _  <span class="token operator">|</span>   Commands:
+   /_/ <span class="token operator">|</span>_<span class="token operator">|</span>       <span class="token builtin class-name">help</span>      -<span class="token operator">&gt;</span> Displays the <span class="token builtin class-name">help</span> system
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>       object?   -<span class="token operator">&gt;</span> Display information about <span class="token string">&apos;object&apos;</span>
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>       exit/quit -<span class="token operator">&gt;</span> Exit
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>   More info at https://frida.re/docs/home/
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+   <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>   Connected to iPhone <span class="token punctuation">(</span>id<span class="token operator">=</span>00008030-00011C49366B802E<span class="token punctuation">)</span>
+Failed to attach: missing gProcessInfo
+</code></pre>
+<p>结果报错：<code>Failed to attach missing gProcessInfo</code></p>
+<p>之后就是尝试解决此问题，最终涉及到：自己去编译frida-server的过程。</p>
+<p>此处记录相关内容和心得，供参考。</p>
+<h2 id="研究gprocessinfo的来源"><a name="研究gprocessinfo的来源" class="plugin-anchor" href="#研究gprocessinfo的来源"><i class="fa fa-link" aria-hidden="true"></i></a>研究gProcessInfo的来源</h2>
+<h3 id="之前frida-ios-dump也遇到类似问题"><a name="之前frida-ios-dump也遇到类似问题" class="plugin-anchor" href="#之前frida-ios-dump也遇到类似问题"><i class="fa fa-link" aria-hidden="true"></i></a>之前frida-ios-dump也遇到类似问题</h3>
+<p>而之前就见过此处的<code>missing gProcessInfo</code>，找到之前的：</p>
+<ul>
+<li>原因是：属于偶尔的bug</li>
+<li>解决办法：多试几次</li>
+</ul>
+<p>-》此处：继续尝试多次，始终无法规避，始终报错。</p>
+<h3 id="研究frida中是否存在导入外部变量gprocessinfo"><a name="研究frida中是否存在导入外部变量gprocessinfo" class="plugin-anchor" href="#研究frida中是否存在导入外部变量gprocessinfo"><i class="fa fa-link" aria-hidden="true"></i></a>研究frida中是否存在导入外部变量gProcessInfo</h3>
+<p>从报错信息<code>Failed to attach: missing gProcessInfo</code>中推测：</p>
+<p>gProcessInfo是（iOS的app启动阶段涉及到的）dyld中的变量</p>
+<p>怀疑是类似于：</p>
+<ul>
+<li>frida import 变量：gProcessInfo</li>
+<li>dyld export 变量：gProcessInfo</li>
+</ul>
+<p>这种机制</p>
+<p>所以去研究看看：</p>
+<p>frida中，是否有import的变量，叫做gProcessInfo</p>
+<p>后来确认，<code>missing gProcessInfo</code>来自iPhone端的<code>frida-server</code></p>
+<p>去导出<code>frida-server</code></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">scp</span> root@192.168.2.12:/var/sbin/frida-server frida-server
+</code></pre>
+<p>然后继续静态分析：</p>
+<pre class="language-"><code class="lang-bash">rabin2 <span class="token parameter variable">-i</span> frida-server <span class="token operator">&gt;</span> fridaServer_rabin2_i_imports.txt
+rabin2 <span class="token parameter variable">-E</span> frida-server <span class="token operator">&gt;</span> fridaServer_rabin2_E_exports.txt
+</code></pre>
+<p>没找到<code>gProcessInfo</code></p>
+<p>另外找到：</p>
+<ul>
+<li><code>dyld/dyldMain.cpp</code></li>
+</ul>
+<pre class="language-"><code class="lang-cpp"><span class="token keyword">namespace</span> dyld4 <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">TARGET_OS_OSX</span></span>
+<span class="token keyword">static</span> <span class="token keyword">void</span><span class="token operator">*</span> <span class="token function">getProcessInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gProcessInfo<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>而根据：</p>
+<p>【记录】dyld相关资料：启动过程</p>
+<p>知道了：</p>
+<ul>
+<li>dyld<ul>
+<li>之前是：dyld2</li>
+<li>后来是：dyld3</li>
+<li>此处是：dyld4</li>
+</ul>
+</li>
+</ul>
+<p>即：<code>dyld</code>有3个版本，<code>dyld2</code>、<code>dyld3</code>、<code>dyld4</code></p>
+<p>最后确认：</p>
+<p>不是Frida（的frida-server）引用了外部的变量：</p>
+<p><code>dyld</code>源码中的<code>gProcessInfo</code></p>
+<p>而是：</p>
+<p>frida源码中有gProcessInfo</p>
+<p>即：</p>
+<p><code>frida-core/src/fruity/injector.vala</code>中就有对应代码：</p>
+<pre class="language-"><code class="lang-c">ensure_libsystem_initialized_for_dyld_v4_and_above
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  throw new Error<span class="token punctuation">.</span><span class="token function">UNSUPPORTED</span> <span class="token punctuation">(</span><span class="token string">&quot;Missing gProcessInfo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="frida源码中找到了：gprocessinfo"><a name="frida源码中找到了：gprocessinfo" class="plugin-anchor" href="#frida源码中找到了：gprocessinfo"><i class="fa fa-link" aria-hidden="true"></i></a>Frida源码中找到了：gProcessInfo</h3>
+<p><code>missing gProcessInfo</code>相关完整的代码：</p>
+<p><img src="../../assets/img/frida_core_missing_gprocessinfo.png" alt="frida_core_missing_gprocessinfo"></p>
+<ul>
+<li><code>frida-core/src/fruity/injector.vala</code><pre class="language-"><code class="lang-c">private async <span class="token keyword">void</span> <span class="token function">ensure_libsystem_initialized_for_dyld_v4_and_above</span> <span class="token punctuation">(</span>uint64 libdyld_initialize<span class="token punctuation">,</span>
+        Cancellable<span class="token operator">?</span> cancellable<span class="token punctuation">)</span> throws GLib<span class="token punctuation">.</span>Error <span class="token punctuation">{</span>
+    uint64<span class="token operator">?</span> process_info_ptr <span class="token operator">=</span> dyld_symbols<span class="token punctuation">[</span><span class="token string">&quot;_gProcessInfo&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>process_info_ptr <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        throw new Error<span class="token punctuation">.</span><span class="token function">UNSUPPORTED</span> <span class="token punctuation">(</span><span class="token string">&quot;Missing gProcessInfo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+</li>
+</ul>
+<p>其他地方也有：</p>
+<ul>
+<li><p><code>frida-core/src/fruity/helpers/symbol-fetcher.c</code></p>
+<pre class="language-"><code class="lang-c"><span class="token class-name">size_t</span>
+<span class="token function">frida_fetch_dyld_symbols</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span> output_buffer<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span> dyld_load_address<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> dyld<span class="token punctuation">.</span>dysymtab<span class="token operator">-&gt;</span>ilocalsym<span class="token punctuation">;</span> i <span class="token operator">!=</span> dyld<span class="token punctuation">.</span>dysymtab<span class="token operator">-&gt;</span>nlocalsym<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">nlist_64</span> <span class="token operator">*</span> sym <span class="token operator">=</span> <span class="token operator">&amp;</span>symbols<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span> name <span class="token operator">=</span> strings <span class="token operator">+</span> sym<span class="token operator">-&gt;</span>n_un<span class="token punctuation">.</span>n_strx<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;libdyld_initialize&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;restartWithDyldInCache&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_equals</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;_gProcessInfo&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;launchWithClosure&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;initializeMainExecutable&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;registerThreadHelpers&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_has_prefix</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;_dlopen&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_has_prefix</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;_strcmp&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;doModInitFunctions&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">frida_str_contains</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">&quot;doGetDOFSections&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">frida_append_char</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>cursor<span class="token punctuation">,</span> <span class="token char">&apos;\n&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token function">frida_append_uint64</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>cursor<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">uint64_t</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">.</span>base <span class="token operator">+</span> sym<span class="token operator">-&gt;</span>n_value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">frida_append_char</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>cursor<span class="token punctuation">,</span> <span class="token char">&apos;\t&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">frida_append_string</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>cursor<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      n<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li><p><code>frida-core/src/darwin/frida-helper-backend-glue.m</code></p>
+</li>
+</ul>
+<pre class="language-"><code class="lang-c">modern_entry_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;__ZN5dyld44APIs19_libdyld_initializeEPKNS_16LibSystemHelpersE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+instance<span class="token operator">-&gt;</span>dyld_flavor <span class="token operator">=</span> <span class="token punctuation">(</span>modern_entry_address <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> FRIDA_DYLD_V4_PLUS <span class="token operator">:</span> FRIDA_DYLD_V3_MINUS<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token operator">-&gt;</span>dyld_flavor <span class="token operator">==</span> FRIDA_DYLD_V4_PLUS<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  instance<span class="token operator">-&gt;</span>modern_entry_address <span class="token operator">=</span> modern_entry_address<span class="token punctuation">;</span>
+  legacy_entry_address <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+
+  instance<span class="token operator">-&gt;</span>info_ptr_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;_gProcessInfo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token operator">-&gt;</span>info_ptr_address <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">goto</span> dyld_probe_failed<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  instance<span class="token operator">-&gt;</span>dlopen_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;_dlopen&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token operator">-&gt;</span>dlopen_address <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    instance<span class="token operator">-&gt;</span>dlopen_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;_dlopen_internal&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  instance<span class="token operator">-&gt;</span>register_helpers_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;__ZL21registerThreadHelpersPKN4dyld16LibSystemHelpersE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  instance<span class="token operator">-&gt;</span>dlerror_clear_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;__ZL12dlerrorClearv&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  instance<span class="token operator">-&gt;</span>info_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;__ZN4dyld12gProcessInfoE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  instance<span class="token operator">-&gt;</span>helpers_ptr_address <span class="token operator">=</span> <span class="token function">gum_darwin_module_resolve_symbol_address</span> <span class="token punctuation">(</span>dyld<span class="token punctuation">,</span> <span class="token string">&quot;__ZN4dyld17gLibSystemHelpersE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  instance<span class="token operator">-&gt;</span>do_modinit_strcmp_checks <span class="token operator">=</span> <span class="token function">frida_find_modinit_strcmp_checks</span> <span class="token punctuation">(</span>task<span class="token punctuation">,</span> dyld<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<p>心得：</p>
+<p>其中有很多这种：</p>
+<p>编译器编译后的固定的函数名：</p>
+<ul>
+<li><code>_dlopen</code></li>
+<li><code>_dlopen_internal</code></li>
+<li><code>__ZL21registerThreadHelpersPKN4dyld16LibSystemHelpersE</code></li>
+<li><code>__ZL12dlerrorClearv</code></li>
+<li><code>__ZN4dyld12gProcessInfoE</code><ul>
+<li>其中包含：<code>gProcessInfo</code></li>
+</ul>
+</li>
+<li><code>__ZN4dyld17gLibSystemHelpersE</code></li>
+</ul>
+<h3 id="研究frida中missing-gprocessinfo出错的逻辑和原因"><a name="研究frida中missing-gprocessinfo出错的逻辑和原因" class="plugin-anchor" href="#研究frida中missing-gprocessinfo出错的逻辑和原因"><i class="fa fa-link" aria-hidden="true"></i></a>研究Frida中Missing gProcessInfo出错的逻辑和原因</h3>
+<p>经过后续了解：
+【记录】dyld源码中的gProcessInfo</p>
+<p>应该把：</p>
+<ul>
+<li>只判断是否存在：_gProcessInfo</li>
+</ul>
+<p>改为：</p>
+<ul>
+<li>同时判断多种情况（先后顺序是）<ul>
+<li><code>_gProcessInfo</code><ul>
+<li>对应原始代码中：<code>gProcessInfo</code></li>
+</ul>
+</li>
+<li><code>__ZN5dyld412gProcessInfoE</code><ul>
+<li>对应原始代码中：<code>dyld4::gProcessInfo</code></li>
+</ul>
+</li>
+<li><code>__ZN4dyld12gProcessInfoE</code><ul>
+<li>对应原始代码中：<code>dyld::gProcessInfo</code>
+应该就可以了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="研究二进制usrlibdyld中是否包含或导出变量gprocessinfo"><a name="研究二进制usrlibdyld中是否包含或导出变量gprocessinfo" class="plugin-anchor" href="#研究二进制usrlibdyld中是否包含或导出变量gprocessinfo"><i class="fa fa-link" aria-hidden="true"></i></a>研究二进制/usr/lib/dyld中是否包含或导出变量_gProcessInfo</h3>
+<p>对于iPhone中的dyld：</p>
+<pre class="language-"><code class="lang-bash">iPhone11-151:~ root<span class="token comment"># ls -lh /usr/lib/dyld</span>
+-rwxr-xr-x <span class="token number">1</span> root wheel 630K Oct <span class="token number">15</span>  <span class="token number">2021</span> /usr/lib/dyld*
+</code></pre>
+<p>用：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">scp</span> root@192.168.2.12:/usr/lib/dyld dyld
+</code></pre>
+<p>导出后，再从dyld中导出符号：</p>
+<pre class="language-"><code class="lang-bash">rabin2 <span class="token parameter variable">-s</span> dyld <span class="token operator">&gt;</span> dyld_rabin2_s_symbols.txt
+</code></pre>
+<p>发现是有的：</p>
+<ul>
+<li><code>dyld_rabin2_s_symbols.txt</code></li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token number">2185</span> 0x00064008 0x00064008 LOCAL  FUNC <span class="token number">0</span>        dyld4::gProcessInfo
+</code></pre>
+<p><img src="../../assets/img/dyld_symbol_dyld4_gprocessonfo.png" alt="dyld_symbol_dyld4_gprocessonfo"></p>
+<p>另外，突然注意到：</p>
+<ul>
+<li><code>fromiPhone/dyld_rabin2_s_symbols.txt</code><pre class="language-"><code class="lang-bash"><span class="token number">891</span>  0x0002e500 0x0002e500 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::_dyld_shared_cache_optimized<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">892</span>  0x0002e57c 0x0002e57c LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::_dyld_register_for_image_loads<span class="token punctuation">(</span>void <span class="token punctuation">(</span>*<span class="token punctuation">)</span><span class="token punctuation">(</span>mach_header const*, char const*, bool<span class="token punctuation">))</span>
+<span class="token number">893</span>  0x0002e680 0x0002e680 LOCAL  FUNC <span class="token number">0</span>        ____ZN5dyld44APIs30_dyld_register_for_image_loadsEPFvPK11mach_headerPKcbE_block_invoke
+<span class="token number">894</span>  0x0002e76c 0x0002e76c LOCAL  FUNC <span class="token number">0</span>        ____ZN5dyld44APIs30_dyld_register_for_image_loadsEPFvPK11mach_headerPKcbE_block_invoke_2
+<span class="token number">895</span>  0x0002e7b4 0x0002e7b4 LOCAL  FUNC <span class="token number">0</span>        ____ZN5dyld44APIs35_dyld_register_for_bulk_image_loadsEPFvjPPK11mach_headerPPKcE_block_invoke_2
+<span class="token number">896</span>  0x0002e7c8 0x0002e7c8 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::dyld_shared_cache_file_path<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">897</span>  0x0002e810 0x0002e810 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::dyld_has_inserted_or_interposing_libraries<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">898</span>  0x0002e874 0x0002e874 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::dyld_shared_cache_find_iterate_text<span class="token punctuation">(</span>unsigned char const*, char const**, void <span class="token punctuation">(</span> block_pointer<span class="token punctuation">)</span><span class="token punctuation">(</span>dyld_shared_cache_dylib_text_info const*<span class="token punctuation">))</span>
+<span class="token number">899</span>  0x0002ea8c 0x0002ea8c LOCAL  FUNC <span class="token number">0</span>        dyld4::findCacheInDirAndMap<span class="token punctuation">(</span>dyld4::RuntimeState<span class="token operator">&amp;</span>, unsigned char const*, char const*, unsigned long<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+<span class="token number">900</span>  0x0002eb5c 0x0002eb5c LOCAL  FUNC <span class="token number">0</span>        ____ZN5dyld44APIs35dyld_shared_cache_find_iterate_textEPKhPPKcU13block_pointerFvPK33dyld_shared_cache_dylib_text_infoE_block_invoke.173
+<span class="token number">901</span>  0x0002ebe0 0x0002ebe0 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::dyld_shared_cache_iterate_text<span class="token punctuation">(</span>unsigned char const*, void <span class="token punctuation">(</span> block_pointer<span class="token punctuation">)</span><span class="token punctuation">(</span>dyld_shared_cache_dylib_text_info const*<span class="token punctuation">))</span>
+<span class="token number">902</span>  0x0002ec60 0x0002ec60 LOCAL  FUNC <span class="token number">0</span>        dyld4::APIs::_dyld_fork_child<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ul>
+<p>即：</p>
+<p>此处symbol中，也是有一些：</p>
+<ul>
+<li>____ZN5dyld44APIs30_dyld_register_for_image_loadsEPFvPK11mach_headerPKcbE_block_invoke</li>
+</ul>
+<p>这种编译后的函数名的值的</p>
+<p>同时，也有，编译前的，普通的函数名：</p>
+<ul>
+<li>dyld4::APIs::_dyld_register_for_image_loads(void (<em>)(mach_header const</em>, char const*, bool))</li>
+</ul>
+<p>-》所以突然想到：</p>
+<p>估计是，编译前的，普通函数名，是：</p>
+<p>此处rabin2，自动帮忙翻译的（因为其懂得编译和反编译函数名 symbol的内在逻辑？）</p>
+<p>-》所以去找找：</p>
+<p>是否有机会，让rabin2，只输出：</p>
+<p>编译后的symbol名字？</p>
+<p>这样就能找到，确认：</p>
+<p><code>dyld4::gProcessInfo</code></p>
+<p>是不是：</p>
+<p><code>__ZN5dyld44gProcessInfo</code></p>
+<p>了</p>
+<p>去找找看：</p>
+<p>rabin2的其他参数，能输出原始的symbol的？</p>
+<p>对了，或许也可以用另外的工具：<code>jtool2</code></p>
+<pre class="language-"><code class="lang-bash">jtool2 <span class="token parameter variable">-S</span> dyld <span class="token operator">&gt;</span> dyld_jtool2_S_symbol.txt
+</code></pre>
+<p>果然是我们希望的，原始的，编译后的，没有被解析的：<code>gProcessInfo</code></p>
+<ul>
+<li><code>dyld_jtool2_S_symbol.txt</code><pre class="language-"><code class="lang-bash">0000000000064008 d __ZN5dyld412gProcessInfoE
+</code></pre>
+</li>
+</ul>
+<p><img src="../../assets/img/dyld_symbol_jtool2___ZN5dyld412gProcessInfoE.png" alt="dyld_symbol_jtool2___ZN5dyld412gProcessInfoE"></p>
+<p>所以就是：</p>
+<ul>
+<li><code>dyld4::gProcessInfo</code><ul>
+<li>编译生成：<code>__ZN5dyld412gProcessInfoE</code></li>
+<li>不是我以为的：<code>__ZN5dyld44gProcessInfo</code></li>
+</ul>
+</li>
+</ul>
+<p>再去dyld源码中，多搜搜：</p>
+<p><code>namespace dyld4</code></p>
+<p>看看是否有其他新发现</p>
+<p><code>namespace dyld4</code></p>
+<ul>
+<li><code>/Users/crifan/dev/dev_src/ios_reverse/AppleOpenSource/dyld/dyld-dyld-1042.1/dyld/DebuggerSupport.h</code></li>
+</ul>
+<pre class="language-"><code class="lang-c">namespace dyld4 <span class="token punctuation">{</span>
+    using lsl<span class="token operator">::</span>Allocator<span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">addImagesToAllImages</span><span class="token punctuation">(</span>RuntimeState<span class="token operator">&amp;</span> state<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> infoCount<span class="token punctuation">,</span> <span class="token keyword">const</span> dyld_image_info info<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token class-name">uint32_t</span> initialImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">removeImageFromAllImages</span><span class="token punctuation">(</span><span class="token keyword">const</span> mach_header<span class="token operator">*</span> loadAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">extern</span> <span class="token string">&quot;C&quot;</span> <span class="token keyword">void</span> <span class="token function">lldb_image_notifier</span><span class="token punctuation">(</span><span class="token keyword">enum</span> <span class="token class-name">dyld_image_mode</span> mode<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> infoCount<span class="token punctuation">,</span> <span class="token keyword">const</span> dyld_image_info info<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">extern</span> dyld_all_image_infos<span class="token operator">*</span>        gProcessInfo<span class="token punctuation">;</span>
+</code></pre>
+<p>-&gt;也还是：<code>gProcessInfo</code></p>
+<p>-&gt;不是放在<code>namespace dyld4</code>中的</p>
+<ul>
+<li><code>/Users/crifan/dev/dev_src/ios_reverse/AppleOpenSource/dyld/dyld-dyld-1042.1/dyld/DyldAPIs.cpp</code></li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token comment">// internal libc.a variable that needs to be reset during fork()</span>
+<span class="token keyword">extern</span> <span class="token class-name">mach_port_t</span> mach_task_self_<span class="token punctuation">;</span>
+
+using dyld3<span class="token operator">::</span>MachOFile<span class="token punctuation">;</span>
+using dyld3<span class="token operator">::</span>MachOLoaded<span class="token punctuation">;</span>
+
+<span class="token keyword">extern</span> <span class="token keyword">const</span> dyld3<span class="token operator">::</span>MachOLoaded __dso_handle<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+namespace dyld4 <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>-》自己当前是dyld4的namespace，但是也会引用外部变量：</p>
+<ul>
+<li>其中也有：<ul>
+<li>没有namespace的：<ul>
+<li><code>extern mach_port_t mach_task_self_;</code></li>
+</ul>
+</li>
+<li>和另外的namespace的：<code>dyld3</code><ul>
+<li><code>extern const dyld3::MachOLoaded __dso_handle;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>然后去：</p>
+<p>【未解决】rabin2输出C++的未解析的原始的编译后的函数名mangle name</p>
+<p>所以去：</p>
+<p>【未解决】C++代码中函数变量编译生成符号symbol的规则</p>
+<p>期间去：</p>
+<p>【已解决】从C++的编译后的符号symbol得到原始的变量函数名</p>
+<p>另外，看看此处的dyld版本：</p>
+<pre class="language-"><code class="lang-bash">iPhone11-151:~ root<span class="token comment"># /usr/lib/dyld --version</span>
+-sh: /usr/lib/dyld: cannot execute binary file: Exec <span class="token function">format</span> error
+</code></pre>
+<p>无法查看。</p>
+<p>【已解决】iOS 13.3的iPhone7中/usr/lib/dyld的版本和gProcessInfo相关信息</p>
+<h3 id="也去研究：dyld源码中的gprocessinfo"><a name="也去研究：dyld源码中的gprocessinfo" class="plugin-anchor" href="#也去研究：dyld源码中的gprocessinfo"><i class="fa fa-link" aria-hidden="true"></i></a>也去研究：dyld源码中的gProcessInfo</h3>
+<p>至此找到：</p>
+<ul>
+<li><code>gProcessInfo</code><ul>
+<li>变量来源：<ul>
+<li><code>dyld/dyld-dyld-1042.1/dyld/DebuggerSupport.cpp</code><pre class="language-"><code class="lang-c"><span class="token keyword">struct</span> <span class="token class-name">dyld_all_image_infos</span><span class="token operator">*</span> gProcessInfo <span class="token operator">=</span> <span class="token operator">&amp;</span>dyld_all_image_infos<span class="token punctuation">;</span>
+</code></pre>
+以及：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>struct dyld_all_image_infos</code><ul>
+<li>定义<ul>
+<li><code>libdyld/dyld_process_info_internal.h</code><ul>
+<li><code>struct dyld_all_image_infos_32</code></li>
+<li><code>struct dyld_all_image_infos_64</code></li>
+</ul>
+</li>
+<li><code>include/mach-o/dyld_images.h</code><ul>
+<li><code>struct __attribute__((aligned(16))) dyld_all_image_infos</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>具体定义详见：</p>
+<p>（1）<code>include/mach-o/dyld_images.h</code></p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// Must be aligned to support atomic updates</span>
+<span class="token comment">// Note sim cannot assume alignment until all host dylds are new enough</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">TARGET_OS_SIMULATOR</span></span>
+<span class="token keyword">struct</span> <span class="token class-name">dyld_all_image_infos</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token keyword">struct</span> <span class="token keyword">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">aligned</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token class-name">dyld_all_image_infos</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span>                        version<span class="token punctuation">;</span>        <span class="token comment">/* 1 in Mac OS X 10.4 and 10.5 */</span>
+    <span class="token class-name">uint32_t</span>                        infoArrayCount<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token function">defined</span><span class="token punctuation">(</span>__cplusplus<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>BUILDING_LIBDYLD <span class="token operator">||</span> BUILDING_DYLD<span class="token punctuation">)</span></span></span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">dyld_image_info</span><span class="token operator">*</span><span class="token operator">&gt;</span>    infoArray<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">dyld_image_info</span><span class="token operator">*</span>    infoArray<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+    dyld_image_notifier                notification<span class="token punctuation">;</span>        
+    bool                            processDetachedFromSharedRegion<span class="token punctuation">;</span>
+    <span class="token comment">/* the following fields are only in version 2 (Mac OS X 10.6, iPhoneOS 2.0) and later */</span>
+    bool                            libSystemInitialized<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span>        dyldImageLoadAddress<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 3 (Mac OS X 10.6, iPhoneOS 3.0) and later */</span>
+    <span class="token keyword">void</span><span class="token operator">*</span>                            jitInfo<span class="token punctuation">;</span>
+    <span class="token comment">/* the following fields are only in version 5 (Mac OS X 10.6, iPhoneOS 3.0) and later */</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        dyldVersion<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        errorMessage<span class="token punctuation">;</span>
+    <span class="token class-name">uintptr_t</span>                        terminationFlags<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 6 (Mac OS X 10.6, iPhoneOS 3.1) and later */</span>
+    <span class="token keyword">void</span><span class="token operator">*</span>                            coreSymbolicationShmPage<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 7 (Mac OS X 10.6, iPhoneOS 3.1) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        systemOrderFlag<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 8 (Mac OS X 10.7, iPhoneOS 3.1) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        uuidArrayCount<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">dyld_uuid_info</span><span class="token operator">*</span>    uuidArray<span class="token punctuation">;</span>        <span class="token comment">/* only images not in dyld shared cache */</span>
+    <span class="token comment">/* the following field is only in version 9 (Mac OS X 10.7, iOS 4.0) and later */</span>
+    <span class="token keyword">struct</span> <span class="token class-name">dyld_all_image_infos</span><span class="token operator">*</span>    dyldAllImageInfosAddress<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 10 (Mac OS X 10.7, iOS 4.2) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        initialImageCount<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 11 (Mac OS X 10.7, iOS 4.2) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        errorKind<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        errorClientOfDylibPath<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        errorTargetDylibPath<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        errorSymbol<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 12 (Mac OS X 10.7, iOS 4.3) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        sharedCacheSlide<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 13 (Mac OS X 10.9, iOS 7.0) and later */</span>
+    <span class="token class-name">uint8_t</span>                            sharedCacheUUID<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 15 (macOS 10.12, iOS 10.0) and later */</span>
+    <span class="token class-name">uintptr_t</span>                        sharedCacheBaseAddress<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token function">defined</span><span class="token punctuation">(</span>__cplusplus<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>BUILDING_LIBDYLD <span class="token operator">||</span> BUILDING_DYLD<span class="token punctuation">)</span></span></span>
+    <span class="token comment">// We want this to be atomic in libdyld so that we can see updates when we map it shared</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>           infoArrayChangeTimestamp<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+    <span class="token class-name">uint64_t</span>                        infoArrayChangeTimestamp<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>                        dyldPath<span class="token punctuation">;</span>
+    <span class="token class-name">mach_port_t</span>                        notifyPorts<span class="token punctuation">[</span>DYLD_MAX_PROCESS_INFO_NOTIFY_COUNT<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">__LP64__</span></span>
+    <span class="token class-name">uintptr_t</span>                        reserved<span class="token punctuation">[</span><span class="token number">11</span><span class="token operator">-</span><span class="token punctuation">(</span>DYLD_MAX_PROCESS_INFO_NOTIFY_COUNT<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+    <span class="token class-name">uintptr_t</span>                        reserved<span class="token punctuation">[</span><span class="token number">9</span><span class="token operator">-</span>DYLD_MAX_PROCESS_INFO_NOTIFY_COUNT<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+    <span class="token comment">// The following fields were added in version 18 (previously they were reserved padding fields)</span>
+    <span class="token class-name">uint64_t</span>                        sharedCacheFSID<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                        sharedCacheFSObjID<span class="token punctuation">;</span>
+    <span class="token comment">/* the following field is only in version 16 (macOS 10.13, iOS 11.0) and later */</span>
+    <span class="token class-name">uintptr_t</span>                       compact_dyld_image_info_addr<span class="token punctuation">;</span>
+    <span class="token class-name">size_t</span>                          compact_dyld_image_info_size<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        platform<span class="token punctuation">;</span> <span class="token comment">// FIXME: really a dyld_platform_t, but those aren&apos;t exposed here.</span>
+
+
+    <span class="token comment">/* the following field is only in version 17 (macOS 10.16) and later */</span>
+    <span class="token class-name">uint32_t</span>                          aotInfoCount<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">dyld_aot_image_info</span><span class="token operator">*</span> aotInfoArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                          aotInfoArrayChangeTimestamp<span class="token punctuation">;</span>
+    <span class="token class-name">uintptr_t</span>                         aotSharedCacheBaseAddress<span class="token punctuation">;</span>
+    <span class="token class-name">uint8_t</span>                           aotSharedCacheUUID<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>（2）还有个分32和64的：</p>
+<ul>
+<li><code>struct dyld_all_image_infos_32</code></li>
+<li><code>struct dyld_all_image_infos_64</code></li>
+</ul>
+<p>-&gt;</p>
+<ul>
+<li><code>libdyld/dyld_process_info_internal.h</code></li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token keyword">struct</span> <span class="token class-name">dyld_all_image_infos_32</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span>                        version<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        infoArrayCount<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint32_t</span><span class="token operator">&gt;</span>           infoArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        notification<span class="token punctuation">;</span>
+    bool                            processDetachedFromSharedRegion<span class="token punctuation">;</span>
+    bool                            libSystemInitialized<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        dyldImageLoadAddress<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        jitInfo<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        dyldVersion<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        errorMessage<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        terminationFlags<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        coreSymbolicationShmPage<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        systemOrderFlag<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        uuidArrayCount<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        uuidArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        dyldAllImageInfosAddress<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        initialImageCount<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        errorKind<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        errorClientOfDylibPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        errorTargetDylibPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        errorSymbol<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        sharedCacheSlide<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token class-name">uint8_t</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token operator">&gt;</span>         sharedCacheUUID<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        sharedCacheBaseAddress<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>           infoArrayChangeTimestamp<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        dyldPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        notifyMachPorts<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        reserved<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                        sharedCacheFSID<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                        sharedCacheFSObjID<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        compact_dyld_image_info_addr<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        compact_dyld_image_info_size<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                        platform<span class="token punctuation">;</span>
+    <span class="token comment">// the aot fields below will not be set in the 32 bit case</span>
+    <span class="token class-name">uint32_t</span>                        aotInfoCount<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>           aotInfoArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                        aotInfoArrayChangeTimestamp<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                        aotSharedCacheBaseAddress<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token class-name">uint8_t</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token operator">&gt;</span>         aotSharedCacheUUID<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">struct</span> <span class="token class-name">dyld_all_image_infos_64</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint32_t</span>                version<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                infoArrayCount<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>   infoArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                notification<span class="token punctuation">;</span>
+    bool                    processDetachedFromSharedRegion<span class="token punctuation">;</span>
+    bool                    libSystemInitialized<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                paddingToMakeTheSizeCorrectOn32bitAndDoesntAffect64b<span class="token punctuation">;</span> <span class="token comment">// NOT PART OF DYLD_ALL_IMAGE_INFOS!</span>
+    <span class="token class-name">uint64_t</span>                dyldImageLoadAddress<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                jitInfo<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                dyldVersion<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                errorMessage<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                terminationFlags<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                coreSymbolicationShmPage<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                systemOrderFlag<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                uuidArrayCount<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                uuidArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                dyldAllImageInfosAddress<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                initialImageCount<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                errorKind<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                errorClientOfDylibPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                errorTargetDylibPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                errorSymbol<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                sharedCacheSlide<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token class-name">uint8_t</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token operator">&gt;</span> sharedCacheUUID<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                sharedCacheBaseAddress<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>   infoArrayChangeTimestamp<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                dyldPath<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                notifyMachPorts<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                reserved<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                sharedCacheFSID<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                sharedCacheFSObjID<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                compact_dyld_image_info_addr<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                compact_dyld_image_info_size<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                platform<span class="token punctuation">;</span>
+    <span class="token class-name">uint32_t</span>                aotInfoCount<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>atomic<span class="token operator">&lt;</span><span class="token class-name">uint64_t</span><span class="token operator">&gt;</span>   aotInfoArray<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                aotInfoArrayChangeTimestamp<span class="token punctuation">;</span>
+    <span class="token class-name">uint64_t</span>                aotSharedCacheBaseAddress<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token class-name">uint8_t</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token operator">&gt;</span> aotSharedCacheUUID<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后：</p>
+<p>【未解决】dyld-932.4中gProcessInfo编译后symbol却是__ZN5dyld412gProcessInfoE</p>
+<h2 id="自己编译arm64e版的frida"><a name="自己编译arm64e版的frida" class="plugin-anchor" href="#自己编译arm64e版的frida"><i class="fa fa-link" aria-hidden="true"></i></a>自己编译arm64e版的Frida</h2>
+<p>安装依赖库：</p>
+<pre class="language-"><code class="lang-bash">pip <span class="token function">install</span> colorama prompt-toolkit pygments
+</code></pre>
+<p>设置Python用新版<code>3.10.6</code></p>
+<pre class="language-"><code class="lang-bash">local再去设置为3.10.6的版本：
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida  pyenv versions
+  system
+  <span class="token number">3.5</span>.2
+  <span class="token number">3.6</span>.6
+  <span class="token number">3.7</span>.3
+* <span class="token number">3.9</span>.4 <span class="token punctuation">(</span>set by /Users/crifan/.pyenv/version<span class="token punctuation">)</span>
+  <span class="token number">3.10</span>.6
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida  pyenv <span class="token builtin class-name">local</span> <span class="token number">3.10</span>.6
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida  python <span class="token parameter variable">--version</span>
+Python <span class="token number">3.10</span>.6
+</code></pre>
+<p>clone frida的代码：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> clone --recurse-submodules https://github.com/frida/frida.git
+</code></pre>
+<p>先make看看有哪些编译选项：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token function">make</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Entering directory <span class="token string">&apos;/Users/crifan/dev/dev_src/ios_reverse/frida/frida&apos;</span>
+
+Usage: <span class="token function">make</span> TARGET <span class="token punctuation">[</span>VARIABLE<span class="token operator">=</span>value<span class="token punctuation">]</span>
+
+Where TARGET specifies one or <span class="token function">more</span> of:
+
+  /* gum */
+  gum-macos                  Build <span class="token keyword">for</span> macOS
+  gum-ios                    Build <span class="token keyword">for</span> iOS
+  gum-watchos                Build <span class="token keyword">for</span> watchOS
+  gum-tvos                   Build <span class="token keyword">for</span> tvOS
+  gum-android-x86            Build <span class="token keyword">for</span> Android/x86
+  gum-android-x86_64         Build <span class="token keyword">for</span> Android/x86-64
+  gum-android-arm            Build <span class="token keyword">for</span> Android/arm
+  gum-android-arm64          Build <span class="token keyword">for</span> Android/arm64
+  check-gum-macos            Run tests <span class="token keyword">for</span> macOS
+
+  /* core */
+  core-macos                 Build <span class="token keyword">for</span> macOS
+  core-ios                   Build <span class="token keyword">for</span> iOS
+  core-watchos               Build <span class="token keyword">for</span> watchOS
+  core-tvos                  Build <span class="token keyword">for</span> tvOS
+  core-android-x86           Build <span class="token keyword">for</span> Android/x86
+  core-android-x86_64        Build <span class="token keyword">for</span> Android/x86-64
+  core-android-arm           Build <span class="token keyword">for</span> Android/arm
+  core-android-arm64         Build <span class="token keyword">for</span> Android/arm64
+  check-core-macos           Run tests <span class="token keyword">for</span> macOS
+
+  /* python */
+  python-macos               Build Python bindings <span class="token keyword">for</span> macOS
+  check-python-macos         Test Python bindings <span class="token keyword">for</span> macOS
+
+  /* <span class="token function">node</span> */
+  node-macos                 Build Node.js bindings <span class="token keyword">for</span> macOS
+  check-node-macos           Test Node.js bindings <span class="token keyword">for</span> macOS
+
+  /* tools */
+  tools-macos                Build CLI tools <span class="token keyword">for</span> macOS
+  check-tools-macos          Test CLI tools <span class="token keyword">for</span> macOS
+
+And optionally also VARIABLE values:
+  PYTHON                     Absolute path of Python interpreter including version suffix
+  NODE                       Absolute path of Node.js binary
+
+For example:
+  $ <span class="token function">make</span> python-macos <span class="token assign-left variable">PYTHON</span><span class="token operator">=</span>/usr/local/bin/python3.6
+  $ <span class="token function">make</span> node-macos <span class="token assign-left variable">NODE</span><span class="token operator">=</span>/usr/local/bin/node
+
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Leaving directory <span class="token string">&apos;/Users/crifan/dev/dev_src/ios_reverse/frida/frida&apos;</span>
+</code></pre>
+<p>此处要去编译：<code>iOS</code>的，所以看起来是：</p>
+<p><code>core-ios                   Build for iOS</code></p>
+<p>所以最后去：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">make</span> core-ios
+</code></pre>
+<p>期间解决了证书问题：</p>
+<ul>
+<li>【已解决】Mac中编译frida-core报错：FAILED /usr/bin/codesign IOS_CERTID not set</li>
+</ul>
+<p>继续：</p>
+<pre class="language-"><code class="lang-bash">✘ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token builtin class-name">export</span> <span class="token assign-left variable">MACOS_CERTID</span><span class="token operator">=</span>frida-cert
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token builtin class-name">export</span> <span class="token assign-left variable">IOS_CERTID</span><span class="token operator">=</span>frida-cert
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token builtin class-name">export</span> <span class="token assign-left variable">WATCHOS_CERTID</span><span class="token operator">=</span>frida-cert
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token builtin class-name">export</span> <span class="token assign-left variable">TVOS_CERTID</span><span class="token operator">=</span>frida-cert
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token function">make</span> core-ios
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Entering directory <span class="token string">&apos;/Users/crifan/dev/dev_src/ios_reverse/frida/frida&apos;</span>
+<span class="token builtin class-name">.</span> build/frida-env-ios-arm64.rc<span class="token punctuation">;</span> <span class="token punctuation">\</span>
+<span class="token assign-left variable">builddir</span><span class="token operator">=</span>build/tmp-ios-arm64/frida-core<span class="token punctuation">;</span> <span class="token punctuation">\</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-f</span> <span class="token variable">$builddir</span>/build.ninja <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token punctuation">\</span>
+            <span class="token assign-left variable">meson_args</span><span class="token operator">=</span><span class="token string">&quot;--native-file build/frida-macos-x86_64.txt&quot;</span><span class="token punctuation">;</span> <span class="token keyword">if</span> <span class="token punctuation">[</span> ios-arm64 <span class="token operator">!=</span> macos-x86_64 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token assign-left variable">meson_args</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$meson_args</span> --cross-file build/frida-ios-arm64.txt&quot;</span><span class="token punctuation">;</span> <span class="token keyword">fi</span><span class="token punctuation">;</span> python3 /Users/crifan/dev/dev_src/ios_reverse/frida/frida/releng/meson/meson.py setup <span class="token variable">$meson_args</span> <span class="token punctuation">\</span>
+        <span class="token parameter variable">--prefix</span> /usr <span class="token punctuation">\</span>
+        --default-library static <span class="token parameter variable">-Doptimization</span><span class="token operator">=</span>s <span class="token parameter variable">-Db_ndebug</span><span class="token operator">=</span>true <span class="token parameter variable">--strip</span> <span class="token parameter variable">-Dconnectivity</span><span class="token operator">=</span>enabled <span class="token parameter variable">-Dmapper</span><span class="token operator">=</span>auto <span class="token punctuation">\</span>
+        <span class="token parameter variable">-Dassets</span><span class="token operator">=</span>installed <span class="token punctuation">\</span>
+        frida-core <span class="token variable">$builddir</span> <span class="token operator">||</span> <span class="token builtin class-name">exit</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">\</span>
+<span class="token keyword">fi</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> python3 /Users/crifan/dev/dev_src/ios_reverse/frida/frida/releng/meson/meson.py compile <span class="token parameter variable">-C</span> <span class="token variable">$builddir</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable">DESTDIR</span><span class="token operator">=</span><span class="token string">&quot;/Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64&quot;</span> python3 /Users/crifan/dev/dev_src/ios_reverse/frida/frida/releng/meson/meson.py <span class="token function">install</span> <span class="token parameter variable">-C</span> <span class="token variable">$builddir</span>
+INFO: autodetecting backend as ninja
+INFO: calculating backend <span class="token builtin class-name">command</span> to run: /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/toolchain-macos-x86_64/bin/ninja <span class="token parameter variable">-C</span> /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core
+ninja: Entering directory <span class="token variable"><span class="token variable">`</span>/Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core&apos;
+<span class="token punctuation">[</span><span class="token number">85</span>/85<span class="token punctuation">]</span> Generating lib/gadget/frida-gadget with a custom <span class="token builtin class-name">command</span>
+ninja: Entering directory <span class="token variable">`</span></span>/Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core<span class="token string">&apos;
+ninja: no work to do.
+Installing lib/base/libfrida-base-1.0.a to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib
+Installing lib/base/frida-base.h to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/include/frida-1.0
+Installing lib/base/frida-base-1.0.vapi to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/share/vala/vapi
+Installing lib/payload/libfrida-payload-1.0.a to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib
+Installing lib/payload/frida-payload.h to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/include/frida-1.0
+Installing lib/payload/frida-payload-1.0.vapi to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/share/vala/vapi
+Installing lib/agent/frida-agent.dylib to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/frida
+Installing lib/gadget/frida-gadget.dylib to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/frida
+Installing src/frida-helper to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/frida
+Installing src/api/frida-core.h to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/include/frida-1.0
+Installing src/api/frida-core-1.0.vapi to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/share/vala/vapi
+Installing src/api/frida-core-1.0.deps to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/share/vala/vapi
+Installing src/api/libfrida-core-1.0.a to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib
+Installing server/frida-server to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin
+Installing portal/frida-portal to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin
+Installing inject/frida-inject to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin
+Installing /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core/meson-private/frida-base-1.0.pc to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/pkgconfig
+Installing /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core/meson-private/frida-payload-1.0.pc to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/pkgconfig
+Installing /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/tmp-ios-arm64/frida-core/meson-private/frida-core-1.0.pc to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/lib/pkgconfig
+make[1]: Leaving directory &apos;</span>/Users/crifan/dev/dev_src/ios_reverse/frida/frida&apos;
+</code></pre>
+<p>即可：编译完成。</p>
+<p>我们要找到的：frida-server，貌似是：</p>
+<ul>
+<li>Installing server/frida-server to /Users/crifan/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin</li>
+</ul>
+<p>去看看build目录</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida   main  <span class="token builtin class-name">cd</span> build
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build   main  ll
+total <span class="token number">56</span>
+-rw-r--r--  <span class="token number">1</span> crifan  staff   190B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-env-ios-arm64.rc
+-rw-r--r--  <span class="token number">1</span> crifan  staff   193B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-env-macos-x86_64.rc
+drwxr-xr-x  <span class="token number">3</span> crifan  staff    96B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 frida-ios-arm64
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   430B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-ios-arm64-pkg-config
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">2</span>.9K  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-ios-arm64.txt
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   436B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-macos-x86_64-pkg-config
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">2</span>.9K  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 frida-macos-x86_64.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   217B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:44 frida-version.h
+drwxr-xr-x  <span class="token number">8</span> crifan  staff   256B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:45 sdk-ios-arm64
+drwxr-xr-x  <span class="token number">8</span> crifan  staff   256B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:44 sdk-macos-x86_64
+drwxr-xr-x  <span class="token number">4</span> crifan  staff   128B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 tmp-ios-arm64
+drwxr-xr-x  <span class="token number">8</span> crifan  staff   256B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:44 toolchain-macos-x86_64
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build   main  <span class="token builtin class-name">cd</span> frida-ios-arm64
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64   main  ll
+total <span class="token number">0</span>
+drwxr-xr-x  <span class="token number">6</span> crifan  staff   192B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 usr
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64   main  <span class="token builtin class-name">cd</span> usr
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr   main  ll
+total <span class="token number">0</span>
+drwxr-xr-x   <span class="token number">6</span> crifan  staff   192B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">15</span>:14 bin
+drwxr-xr-x   <span class="token number">3</span> crifan  staff    96B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 include
+drwxr-xr-x  <span class="token number">13</span> crifan  staff   416B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">15</span>:14 lib
+drwxr-xr-x   <span class="token number">3</span> crifan  staff    96B  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 share
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr   main  <span class="token builtin class-name">cd</span> bin
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin   main  ll
+total <span class="token number">40752</span>
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   <span class="token number">6</span>.2M  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">15</span>:13 frida-inject
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   <span class="token number">5</span>.2M  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">15</span>:13 frida-portal
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   <span class="token number">6</span>.4M  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">15</span>:13 frida-server
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   <span class="token number">2</span>.1M  <span class="token number">1</span> <span class="token number">16</span> <span class="token number">11</span>:47 gum-graft
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/frida/frida/build/frida-ios-arm64/usr/bin   main  <span class="token function">file</span> ./frida-server
+./frida-server: Mach-O <span class="token number">64</span>-bit executable arm64
+</code></pre>
+<p>的确是编译成功了</p>
+<p>回去看看之前frida-server的大小和file输出信息</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone11_151  ll
+total <span class="token number">55248</span>
+-rwxr-xr-x@ <span class="token number">1</span> crifan  staff   629K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:06 dyld
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">2</span>.5M  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:14 dyld.id0
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">1</span>.6M  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:13 dyld.id1
+-rw-r--r--  <span class="token number">1</span> crifan  staff    40K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:13 dyld.nam
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">1</span>.3K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:13 dyld.til
+-rw-r--r--  <span class="token number">1</span> crifan  staff   173K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:44 dyld_jtool2_S_symbol.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   277B  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:07 dyld_rabin2_E_exports.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   125B  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:07 dyld_rabin2_i_imports.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   249K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">21</span>:33 dyld_rabin2_s_r_symbols.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   381K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:13 dyld_rabin2_s_symbols.txt
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff    20M  <span class="token number">1</span> <span class="token number">12</span> <span class="token number">17</span>:55 frida-server
+-rw-r--r--  <span class="token number">1</span> crifan  staff   169B  <span class="token number">1</span> <span class="token number">12</span> <span class="token number">17</span>:58 fridaServer_rabin2_E_exports.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff    17K  <span class="token number">1</span> <span class="token number">12</span> <span class="token number">17</span>:58 fridaServer_rabin2_i_imports.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   <span class="token number">1</span>.9M  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">10</span>:18 fridaSever_rabin2_s_symbols.txt
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone11_151  <span class="token function">file</span> ./frida-server
+./frida-server: Mach-O universal binary with <span class="token number">3</span> architectures: <span class="token punctuation">[</span>arm64:Mach-O <span class="token number">64</span>-bit executable arm64<span class="token punctuation">]</span> <span class="token punctuation">[</span>arm64e<span class="token punctuation">]</span> <span class="token punctuation">[</span>arm64e<span class="token punctuation">]</span>
+./frida-server <span class="token punctuation">(</span>for architecture arm64<span class="token punctuation">)</span>:    Mach-O <span class="token number">64</span>-bit executable arm64
+./frida-server <span class="token punctuation">(</span>for architecture arm64e<span class="token punctuation">)</span>:    Mach-O <span class="token number">64</span>-bit executable arm64e
+./frida-server <span class="token punctuation">(</span>for architecture arm64e<span class="token punctuation">)</span>:    Mach-O <span class="token number">64</span>-bit executable arm64e
+</code></pre>
+<p>-》此处frida-server很大：20M</p>
+<p>不过明显是：FAT格式，包含多个架构：</p>
+<ul>
+<li><code>arm64</code></li>
+<li><code>arm64e</code></li>
+</ul>
+<p>那看起来，貌似有个问题：</p>
+<p>此处，从iPhone导出的真实在用的<code>frida-server</code>，支持：<code>arm64e</code></p>
+<p>而此处自己编译出来的，只支持<code>arm64</code>，不支持<code>arm64e</code></p>
+<p>而记得：此处的<code>iPhone</code>中的架构都是：<code>arm64e</code>的？</p>
+<p>感觉需要：</p>
+<ul>
+<li>确认<code>iOS 15.1</code>的<code>iPhone11</code>中，此处<code>arm</code>的架构是：<code>arm64e</code>还是<code>arm64</code><ul>
+<li>确定其中的<code>frida-server</code>是否需要支持<code>arm64e</code></li>
+</ul>
+</li>
+<li>如果需要支持<code>arm64e</code>，再去看：<code>frida</code>编译<code>core-ios</code>时，如何指定或加上<code>arm64e</code>的支持</li>
+</ul>
+<p>先去：</p>
+<p>【基本解决】iOS 15.1的iPhone11中frida-server所用架构是arm64e还是arm64</p>
+<p>-》<code>arm64</code>的二进制，是能放到<code>arm64e</code>的<code>A13</code>的<code>iPhone11</code>中运行的。</p>
+<p>那先继续看看：</p>
+<p>【未解决】自己编译出的arm64的frida-server能否在iPhone11正常运行</p>
+<hr>
+<p>其他过程详见：</p>
+<ul>
+<li>【未解决】用frida源码自己编译出frida的iOS的包含frida-server的deb安装包</li>
+<li>【未解决】自己编译出包含arm64和arm64e的FAT格式的frida-server二进制</li>
+<li>【未解决】自己修改编译frida-core源码以尝试解决Frida的Missing gProcessInfo问题</li>
+<li>【未解决】Frida中如何编译出iOS的arm64e的frida-server二进制</li>
+<li>【未解决】自己编译Frida的frida-core代码生成可用二进制frida-server</li>
+</ul>
+<h2 id="找arm64e版的frida"><a name="找arm64e版的frida" class="plugin-anchor" href="#找arm64e版的frida"><i class="fa fa-link" aria-hidden="true"></i></a>找arm64e版的Frida</h2>
+<h3 id="从frida源码和build中找"><a name="从frida源码和build中找" class="plugin-anchor" href="#从frida源码和build中找"><i class="fa fa-link" aria-hidden="true"></i></a>从Frida源码和build中找</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：从Frida源码和build中找</li>
+</ul>
+<h3 id="从frida的github中找"><a name="从frida的github中找" class="plugin-anchor" href="#从frida的github中找"><i class="fa fa-link" aria-hidden="true"></i></a>从Frida的github中找</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：从Frida的github中找</li>
+</ul>
+<h3 id="自己给make加echo打印日志调试"><a name="自己给make加echo打印日志调试" class="plugin-anchor" href="#自己给make加echo打印日志调试"><i class="fa fa-link" aria-hidden="true"></i></a>自己给make加echo打印日志调试</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：自己给make加echo打印日志调试</li>
+</ul>
+<h3 id="从github的ci的workflow中找arm64e"><a name="从github的ci的workflow中找arm64e" class="plugin-anchor" href="#从github的ci的workflow中找arm64e"><i class="fa fa-link" aria-hidden="true"></i></a>从github的ci的workflow中找arm64e</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：从github的ci的workflow中找arm64e</li>
+</ul>
+<h3 id="从编译日志中的downloading-ios-arm64入手"><a name="从编译日志中的downloading-ios-arm64入手" class="plugin-anchor" href="#从编译日志中的downloading-ios-arm64入手"><i class="fa fa-link" aria-hidden="true"></i></a>从编译日志中的Downloading ios-arm64入手</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：从编译日志中的Downloading ios-arm64入手</li>
+</ul>
+<h3 id="make时如何传入arm64e的arch参数"><a name="make时如何传入arm64e的arch参数" class="plugin-anchor" href="#make时如何传入arm64e的arch参数"><i class="fa fa-link" aria-hidden="true"></i></a>make时如何传入arm64e的arch参数</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：make时如何传入arm64e的arch参数</li>
+</ul>
+<h3 id="从make编译时的log日志入手"><a name="从make编译时的log日志入手" class="plugin-anchor" href="#从make编译时的log日志入手"><i class="fa fa-link" aria-hidden="true"></i></a>从make编译时的log日志入手</h3>
+<ul>
+<li>【未解决】找Frida中iOS的arm6e4：从make编译时的log日志入手</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-06-27 22:18:57
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../js/console_log.html" class="navigation navigation-prev " aria-label="Previous page: console.log日志">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../common_issue/" class="navigation navigation-next " aria-label="Next page: 常见问题和报错">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"自己编译frida-server","level":"1.6.4","depth":2,"next":{"title":"常见问题和报错","level":"1.6.5","depth":2,"path":"summary_note/common_issue/README.md","ref":"summary_note/common_issue/README.md","articles":[]},"previous":{"title":"console.log日志","level":"1.6.3.1","depth":3,"path":"summary_note/js/console_log.md","ref":"summary_note/js/console_log.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着给出Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"summary_note/build_frida_server/README.md","mtime":"2023-06-27T14:18:57.028Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-24T10:57:44.397Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

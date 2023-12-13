@@ -1,0 +1,2236 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>iOS函数调用堆栈 · 逆向调试利器：Frida</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../android.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../frida_overview/">
+            
+                <a href="../../../frida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Frida概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../frida_overview/code_arch.html">
+            
+                <a href="../../../frida_overview/code_arch.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    代码和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../../frida_overview/doc_refer/">
+            
+                <a href="../../../frida_overview/doc_refer/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../install_upgrade/">
+            
+                <a href="../../../install_upgrade/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    安装和升级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../install_upgrade/install_frida.html">
+            
+                <a href="../../../install_upgrade/install_frida.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    安装Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../install_upgrade/upgrade_frida.html">
+            
+                <a href="../../../install_upgrade/upgrade_frida.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    升级Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../use_frida/">
+            
+                <a href="../../../use_frida/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    使用Frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../use_frida/typical_logic/">
+            
+                <a href="../../../use_frida/typical_logic/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Frida典型使用逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../use_frida/frida_cli/">
+            
+                <a href="../../../use_frida/frida_cli/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../use_frida/frida_cli/debug_target.html">
+            
+                <a href="../../../use_frida/frida_cli/debug_target.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    调试目标方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../use_frida/frida_cli/js_script.html">
+            
+                <a href="../../../use_frida/frida_cli/js_script.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    写js脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../../use_frida/frida_cli/typical_usage.html">
+            
+                <a href="../../../use_frida/frida_cli/typical_usage.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    典型使用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../../../use_frida/frida_cli/ios_objc/">
+            
+                <a href="../../../use_frida/frida_cli/ios_objc/">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.4.1" data-path="../../../use_frida/frida_cli/ios_objc/objc_para.html">
+            
+                <a href="../../../use_frida/frida_cli/ios_objc/objc_para.html">
+            
+                    
+                        <b>1.4.2.4.1.</b>
+                    
+                    ObjC的参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4.2" data-path="../../../use_frida/frida_cli/ios_objc/objc_var_type.html">
+            
+                <a href="../../../use_frida/frida_cli/ios_objc/objc_var_type.html">
+            
+                    
+                        <b>1.4.2.4.2.</b>
+                    
+                    ObjC的变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../../../use_frida/frida_cli/data_type/">
+            
+                <a href="../../../use_frida/frida_cli/data_type/">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    数据类型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.5.1" data-path="../../../use_frida/frida_cli/data_type/nativepointer.html">
+            
+                <a href="../../../use_frida/frida_cli/data_type/nativepointer.html">
+            
+                    
+                        <b>1.4.2.5.1.</b>
+                    
+                    NativePointer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../../../use_frida/frida_cli/frida_stalker.html">
+            
+                <a href="../../../use_frida/frida_cli/frida_stalker.html">
+            
+                    
+                        <b>1.4.2.6.</b>
+                    
+                    Frida的Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../use_frida/frida_trace/">
+            
+                <a href="../../../use_frida/frida_trace/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../use_frida/frida_tools/">
+            
+                <a href="../../../use_frida/frida_tools/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    frida-tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../../use_frida/frida_tools/frida_ps.html">
+            
+                <a href="../../../use_frida/frida_tools/frida_ps.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    frida-ps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../../use_frida/frida_tools/frida_ls.html">
+            
+                <a href="../../../use_frida/frida_tools/frida_ls.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    frida-ls
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../../use_frida/frida_tools/frida_ls_devices.html">
+            
+                <a href="../../../use_frida/frida_tools/frida_ls_devices.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    frida-ls-devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../../use_frida/other_related/">
+            
+                <a href="../../../use_frida/other_related/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    其他相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../../use_frida/other_related/frida_server.html">
+            
+                <a href="../../../use_frida/other_related/frida_server.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../frida_example/">
+            
+                <a href="../../../frida_example/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida用法举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../frida_example/online_other_case/">
+            
+                <a href="../../../frida_example/online_other_case/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    网上别人的案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../frida_example/online_other_case/frida_codeshare.html">
+            
+                <a href="../../../frida_example/online_other_case/frida_codeshare.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Frida Codeshare
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../frida_example/frida/">
+            
+                <a href="../../../frida_example/frida/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../frida_example/frida/ios_objc/">
+            
+                <a href="../../../frida_example/frida/ios_objc/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../../frida_example/frida/ios_objc/object/">
+            
+                <a href="../../../frida_example/frida/ios_objc/object/">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    ObjC的Object
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1.1" data-path="../../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                    
+                        <b>1.5.2.1.1.1.</b>
+                    
+                    $methods和$ownMethods
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2" data-path="../../../frida_example/frida/ios_objc/hook_func/">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/">
+            
+                    
+                        <b>1.5.2.1.2.</b>
+                    
+                    Interceptor=hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.2.1" data-path="../../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                    
+                        <b>1.5.2.1.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.2" data-path="../../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.2.</b>
+                    
+                    单个类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.3" data-path="../../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.3.</b>
+                    
+                    所有类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3" data-path="../../../frida_example/frida/ios_objc/apiresolver/">
+            
+                <a href="../../../frida_example/frida/ios_objc/apiresolver/">
+            
+                    
+                        <b>1.5.2.1.3.</b>
+                    
+                    ApiResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.4" data-path="../../../frida_example/frida/ios_objc/stalker/">
+            
+                <a href="../../../frida_example/frida/ios_objc/stalker/">
+            
+                    
+                        <b>1.5.2.1.4.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.4.1" data-path="../../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.5.2.1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../frida_example/frida_trace/">
+            
+                <a href="../../../frida_example/frida_trace/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../frida_example/frida_trace/ios_objc/">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    akd中Apple账号验证过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.1.2" data-path="../../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.2.</b>
+                    
+                    Preferences中Apple账号登录全过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    经验心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../hook_func/">
+            
+                <a href="../../hook_func/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../hook_func/frida/">
+            
+                <a href="../../hook_func/frida/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../../hook_func/frida/interceptor/">
+            
+                <a href="../../hook_func/frida/interceptor/">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    Interceptor
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1.1" data-path="../../hook_func/frida/interceptor/stalker.html">
+            
+                <a href="../../hook_func/frida/interceptor/stalker.html">
+            
+                    
+                        <b>1.6.1.1.1.1.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../hook_func/frida_trace.html">
+            
+                <a href="../../hook_func/frida_trace.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../hook_func/common_ios_func.html">
+            
+                <a href="../../hook_func/common_ios_func.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    常用iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../common_js/">
+            
+                <a href="../common_js/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    通用js函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1.1" data-path="../common_js/frida_common.html">
+            
+                <a href="../common_js/frida_common.html">
+            
+                    
+                        <b>1.6.2.1.1.</b>
+                    
+                    Frida的js通用函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.2.2.1" data-path="callstack.html">
+            
+                <a href="callstack.html">
+            
+                    
+                        <b>1.6.2.2.1.</b>
+                    
+                    iOS函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../android.html">
+            
+                <a href="../android.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    Android函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../js/">
+            
+                <a href="../../js/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    js
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../../js/console_log.html">
+            
+                <a href="../../js/console_log.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    console.log日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../build_frida_server/">
+            
+                <a href="../../build_frida_server/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    自己编译frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../../common_issue/">
+            
+                <a href="../../common_issue/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    常见问题和报错
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../frida_base_tool/">
+            
+                <a href="../../../frida_base_tool/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    基于Frida的工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../frida_use_case/">
+            
+                <a href="../../../frida_use_case/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    Frida的用途
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../frida_use_case/anti_debug.html">
+            
+                <a href="../../../frida_use_case/anti_debug.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    反调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../../frida_use_case/anti_obfuscation.html">
+            
+                <a href="../../../frida_use_case/anti_obfuscation.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    辅助反混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../../frida_use_case/bypass_encrypted_para.html">
+            
+                <a href="../../../frida_use_case/bypass_encrypted_para.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    绕过参数加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../../frida_use_case/reverse_app/">
+            
+                <a href="../../../frida_use_case/reverse_app/">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    逆向app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >iOS函数调用堆栈</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="ios函数调用堆栈"><a name="ios函数调用堆栈" class="plugin-anchor" href="#ios函数调用堆栈"><i class="fa fa-link" aria-hidden="true"></i></a>iOS函数调用堆栈</h1>
+<p>对于Frida中，打印iOS函数调用堆栈，此处整理出2个函数：</p>
+<ul>
+<li>地址版本 = 精简版：<code>printFunctionCallStack_addr</code><ul>
+<li>解释：（尤其是对于自己的二进制）只能输出地址，无法输出完整精确的符号名<ul>
+<li>优点：代码简洁</li>
+<li>缺点：只有地址，没有符号，不够用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>符号版本 = 详细版：<code>printFunctionCallStack_symbol</code><ul>
+<li>解释：从地址解析后得到准确的符号=函数名的版本<ul>
+<li>优点：能看到函数名=解析后的符号名，更好用</li>
+<li>缺点：代码比较多比较复杂</li>
+</ul>
+</li>
+<li>说明<ul>
+<li>参考自<ul>
+<li><a href="https://github.com/4ch12dy/FridaLib/blob/master/iOS/iOSFridaLib.js" target="_blank">https://github.com/4ch12dy/FridaLib/blob/master/iOS/iOSFridaLib.js</a></li>
+</ul>
+</li>
+<li>且做了额外优化<ul>
+<li>加上cache缓存，提高解析速度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="printfunctioncallstackaddr"><a name="printfunctioncallstackaddr" class="plugin-anchor" href="#printfunctioncallstackaddr"><i class="fa fa-link" aria-hidden="true"></i></a>printFunctionCallStack_addr</h2>
+<pre class="language-"><code class="lang-js"><span class="token keyword">function</span> <span class="token function">printFunctionCallStack_addr</span><span class="token punctuation">(</span><span class="token parameter">curContext</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;Stack:\n&apos;</span> <span class="token operator">+</span>
+        Thread<span class="token punctuation">.</span><span class="token function">backtrace</span><span class="token punctuation">(</span>curContext<span class="token punctuation">,</span> Backtracer<span class="token punctuation">.</span><span class="token constant">ACCURATE</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>DebugSymbol<span class="token punctuation">.</span>fromAddress<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">&apos;\n&apos;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&apos;\n&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>用法举例：</p>
+<pre class="language-"><code class="lang-js">Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>curMethod<span class="token punctuation">.</span>implementation<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printFunctionCallStack_addr</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+</code></pre>
+<p>输出：</p>
+<pre class="language-"><code class="lang-bash">Stack:
+0x109afd910 SharedModules<span class="token operator">!</span>WAGetWCIHttpImpl
+0x106a14cb4 <span class="token operator">!</span>0x2304cb4 <span class="token punctuation">(</span>0x102304cb4<span class="token punctuation">)</span>
+0x1062e9ff4 <span class="token operator">!</span>0x1bd9ff4 <span class="token punctuation">(</span>0x101bd9ff4<span class="token punctuation">)</span>
+0x1062e9f80 <span class="token operator">!</span>0x1bd9f80 <span class="token punctuation">(</span>0x101bd9f80<span class="token punctuation">)</span>
+0x1069da1fc <span class="token operator">!</span>0x22ca1fc <span class="token punctuation">(</span>0x1022ca1fc<span class="token punctuation">)</span>
+0x1069d9ee4 <span class="token operator">!</span>0x22c9ee4 <span class="token punctuation">(</span>0x1022c9ee4<span class="token punctuation">)</span>
+0x1069d16a8 <span class="token operator">!</span>0x22c16a8 <span class="token punctuation">(</span>0x1022c16a8<span class="token punctuation">)</span>
+0x1952e99ac UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIApplication sendAction:to:from:forEvent:<span class="token punctuation">]</span>
+0x194d1ffbc UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIControl sendAction:to:forEvent:<span class="token punctuation">]</span>
+0x194d20320 UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIControl _sendActionsForEvents:withEvent:<span class="token punctuation">]</span>
+0x194d1f33c UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIControl touchesEnded:withEvent:<span class="token punctuation">]</span>
+0x195323050 UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIWindow _sendTouchesForEvent:<span class="token punctuation">]</span>
+0x195324390 UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIWindow sendEvent:<span class="token punctuation">]</span>
+0x195300a9c UIKitCore<span class="token operator">!</span>-<span class="token punctuation">[</span>UIApplication sendEvent:<span class="token punctuation">]</span>
+0x1061487b8 <span class="token operator">!</span>0x1a387b8 <span class="token punctuation">(</span>0x101a387b8<span class="token punctuation">)</span>
+0x195378c20 UIKitCore<span class="token operator">!</span>__dispatchPreprocessedEventFromEventQueue
+</code></pre>
+<h2 id="printfunctioncallstacksymbol"><a name="printfunctioncallstacksymbol" class="plugin-anchor" href="#printfunctioncallstacksymbol"><i class="fa fa-link" aria-hidden="true"></i></a>printFunctionCallStack_symbol</h2>
+<p>代码：</p>
+<pre class="language-"><code class="lang-js">
+<span class="token comment">/*******************************************************************************
+ * Config &amp;&amp; Settings
+*******************************************************************************/</span>
+
+<span class="token comment">// Print Function Stack Call</span>
+<span class="token keyword">let</span> isUseCache <span class="token operator">=</span> <span class="token boolean">true</span>
+
+<span class="token comment">// print only once stack for every function</span>
+<span class="token keyword">let</span> isPrintOnlyOnceStack <span class="token operator">=</span> <span class="token boolean">true</span>
+
+<span class="token keyword">let</span> cfgPrintOnceStackExceptionList <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;+[NSURLRequest requestWithURL:]&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+
+<span class="token comment">/*******************************************************************************
+ * Global Variables
+*******************************************************************************/</span>
+
+<span class="token keyword">var</span> gPrintedStackDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> gAddrToModuleInfoDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">var</span> gModulePathToSlideDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">var</span> gModulePathToClassesDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">var</span> gModulePathAddrToSymbolDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">var</span> gClassnameToAllMethodsDict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+
+<span class="token keyword">var</span> free <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> objc_getClass <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> class_copyMethodList <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> objc_getMetaClass <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> method_getName <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> dladdr <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> _dyld_image_count <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> _dyld_get_image_name <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> _dyld_get_image_vmaddr_slide <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">var</span> objc_copyClassNamesForImage <span class="token operator">=</span> <span class="token keyword">null</span>
+
+<span class="token comment">/******************** iOS Common Lib Functions ********************/</span>
+
+<span class="token keyword">function</span> <span class="token function">initCommonLibFunctions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Init common functions in common libs:&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// free</span>
+    free <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;free&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;void&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;free=&quot;</span> <span class="token operator">+</span> free<span class="token punctuation">)</span>
+
+    objc_getClass <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;objc_getClass&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;objc_getClass=&quot;</span> <span class="token operator">+</span> objc_getClass<span class="token punctuation">)</span>
+
+    class_copyMethodList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;class_copyMethodList&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;class_copyMethodList=&quot;</span> <span class="token operator">+</span> class_copyMethodList<span class="token punctuation">)</span>
+
+    objc_getMetaClass <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;objc_getMetaClass&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;objc_getMetaClass=&quot;</span> <span class="token operator">+</span> objc_getMetaClass<span class="token punctuation">)</span>
+
+    method_getName <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;method_getName&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;method_getName=&quot;</span> <span class="token operator">+</span> method_getName<span class="token punctuation">)</span>
+
+    <span class="token comment">/*
+    int dladdr(const void *, Dl_info *);
+
+    typedef struct dl_info {
+                    const char      *dli_fname;     // Pathname of shared object
+                    void            *dli_fbase;     // Base address of shared object
+                    const char      *dli_sname;     // Name of nearest symbol
+                    void            *dli_saddr;     // Address of nearest symbol
+    } Dl_info;
+
+    */</span>
+    dladdr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;dladdr&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;int&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;dladdr=&quot;</span> <span class="token operator">+</span> dladdr<span class="token punctuation">)</span>
+
+    <span class="token comment">// uint32_t  _dyld_image_count(void)</span>
+    _dyld_image_count <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;_dyld_image_count&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;uint32&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;_dyld_image_count=&quot;</span> <span class="token operator">+</span> _dyld_image_count<span class="token punctuation">)</span>
+
+    <span class="token comment">// const char*  _dyld_get_image_name(uint32_t image_index) </span>
+    _dyld_get_image_name <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;_dyld_get_image_name&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;uint32&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;_dyld_get_image_name=&quot;</span> <span class="token operator">+</span> _dyld_get_image_name<span class="token punctuation">)</span>
+
+
+    <span class="token comment">// intptr_t   _dyld_get_image_vmaddr_slide(uint32_t image_index)</span>
+    _dyld_get_image_vmaddr_slide <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;_dyld_get_image_vmaddr_slide&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;uint32&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;_dyld_get_image_vmaddr_slide=&quot;</span> <span class="token operator">+</span> _dyld_get_image_vmaddr_slide<span class="token punctuation">)</span>
+
+    <span class="token comment">// const char * objc_copyClassNamesForImage(const char *image, unsigned int *outCount)</span>
+    objc_copyClassNamesForImage <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NativeFunction</span><span class="token punctuation">(</span>
+        Module<span class="token punctuation">.</span><span class="token function">findExportByName</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&apos;objc_copyClassNamesForImage&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">&apos;pointer&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;pointer&apos;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;objc_copyClassNamesForImage=&quot;</span> <span class="token operator">+</span> objc_copyClassNamesForImage<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// https://github.com/4ch12dy/FridaLib/blob/master/iOS/iOSFridaLib.js</span>
+
+<span class="token comment">// xia0 log</span>
+<span class="token keyword">function</span> <span class="token constant">XLOG</span><span class="token punctuation">(</span><span class="token parameter">log</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;[*] &quot;</span> <span class="token operator">+</span> log<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// format string with width</span>
+<span class="token keyword">function</span> <span class="token function">format</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span>width</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    
+    str <span class="token operator">=</span> str <span class="token operator">+</span> <span class="token string">&quot;&quot;</span>
+    <span class="token keyword">var</span> len <span class="token operator">=</span> str<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>len <span class="token operator">&gt;</span> width<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> str
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> width<span class="token operator">-</span>len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            str <span class="token operator">+=</span> <span class="token string">&quot; &quot;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> str
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getExecFileName</span><span class="token punctuation">(</span><span class="token parameter">modulePath</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    modulePath <span class="token operator">+=</span> <span class="token string">&quot;&quot;</span>
+    <span class="token keyword">return</span> modulePath<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// get module info from address</span>
+<span class="token keyword">function</span> <span class="token function">get_info_form_address</span><span class="token punctuation">(</span><span class="token parameter">address</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> moduleInfoDict <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">var</span> needAddToCache <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isUseCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>address <span class="token keyword">in</span> gAddrToModuleInfoDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            moduleInfoDict <span class="token operator">=</span> gAddrToModuleInfoDict<span class="token punctuation">[</span>address<span class="token punctuation">]</span>
+            <span class="token comment">// XLOG(&quot;Found: address=&quot; + address + &quot; in gAddrToModuleInfoDict, moduleInfoDict=&quot; + toJsonStr(moduleInfoDict))</span>
+            <span class="token keyword">return</span> moduleInfoDict
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            needAddToCache <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> dl_info <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">alloc</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">dladdr</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">,</span> dl_info<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> dli_fname <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readCString</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>dl_info<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> dli_fbase <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>dl_info<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> dli_sname <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readCString</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>dl_info<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> dli_saddr <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>dl_info<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//XLOG(&quot;dli_fname:&quot;+dli_fname)</span>
+    <span class="token comment">//XLOG(&quot;dli_fbase:&quot;+dli_fbase)</span>
+    <span class="token comment">//XLOG(&quot;dli_sname:&quot;+dli_sname)</span>
+    <span class="token comment">//XLOG(&quot;dli_saddr:&quot;+dli_saddr)</span>
+
+    <span class="token comment">// var addrInfo = new Array();</span>
+
+    <span class="token comment">// addrInfo.push(dli_fname);</span>
+    <span class="token comment">// addrInfo.push(dli_fbase);</span>
+    <span class="token comment">// addrInfo.push(dli_sname);</span>
+    <span class="token comment">// addrInfo.push(dli_saddr);</span>
+
+    <span class="token comment">// //XLOG(addrInfo)</span>
+    <span class="token comment">// return addrInfo;</span>
+
+    moduleInfoDict <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">&quot;fileName&quot;</span><span class="token operator">:</span> dli_fname<span class="token punctuation">,</span>
+        <span class="token string-property property">&quot;fileAddress&quot;</span><span class="token operator">:</span> dli_fbase<span class="token punctuation">,</span>
+        <span class="token string-property property">&quot;symbolName&quot;</span><span class="token operator">:</span> dli_sname<span class="token punctuation">,</span>
+        <span class="token string-property property">&quot;symbolAddress&quot;</span><span class="token operator">:</span> dli_saddr<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>needAddToCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// XLOG(&quot;Add: address=&quot; + address + &quot;, moduleInfoDict=&quot; + toJsonStr(moduleInfoDict) + &quot; into cache gAddrToModuleInfoDict&quot;)</span>
+        gAddrToModuleInfoDict<span class="token punctuation">[</span>address<span class="token punctuation">]</span> <span class="token operator">=</span> moduleInfoDict
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> moduleInfoDict
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">get_image_vm_slide</span><span class="token punctuation">(</span><span class="token parameter">modulePath</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> moduleSlide <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">var</span> needAddToCache <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isUseCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>modulePath <span class="token keyword">in</span> gModulePathToSlideDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            moduleSlide <span class="token operator">=</span> gModulePathToSlideDict<span class="token punctuation">[</span>modulePath<span class="token punctuation">]</span>
+            <span class="token comment">// XLOG(&quot;Found: modulePath=&quot; + modulePath + &quot; in gModulePathToSlideDict, moduleSlide=&quot; + moduleSlide)</span>
+            <span class="token keyword">return</span> moduleSlide
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            needAddToCache <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> image_count <span class="token operator">=</span> <span class="token function">_dyld_image_count</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> image_count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> image_name_ptr <span class="token operator">=</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">var</span> image_silde_ptr <span class="token operator">=</span> <span class="token function">_dyld_get_image_vmaddr_slide</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">var</span> image_name <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readUtf8String</span><span class="token punctuation">(</span>image_name_ptr<span class="token punctuation">)</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>image_name <span class="token operator">==</span> modulePath<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">//XLOG(Memory.readUtf8String(image_name_ptr) + &quot; slide:&quot;+image_silde_ptr)</span>
+                    <span class="token comment">// return image_silde_ptr</span>
+                    moduleSlide <span class="token operator">=</span> image_silde_ptr
+                    <span class="token keyword">break</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//XLOG(Memory.readUtf8String(image_name_ptr) + &quot;slide:&quot;+image_silde_ptr)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// return 0</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>needAddToCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// XLOG(&quot;Add: modulePath=&quot; + modulePath + &quot;, moduleSlide=&quot; + moduleSlide + &quot; into cache gModulePathToSlideDict&quot;)</span>
+        gModulePathToSlideDict<span class="token punctuation">[</span>modulePath<span class="token punctuation">]</span> <span class="token operator">=</span> moduleSlide
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> moduleSlide
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">function</span> <span class="token function">get_all_objc_class</span><span class="token punctuation">(</span><span class="token parameter">modulePath</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> classes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> needAddToCache <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isUseCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>modulePath <span class="token keyword">in</span> gModulePathToClassesDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            classes <span class="token operator">=</span> gModulePathToClassesDict<span class="token punctuation">[</span>modulePath<span class="token punctuation">]</span>
+            <span class="token comment">// XLOG(&quot;Found: modulePath=&quot; + modulePath + &quot; in gModulePathToClassesDict, classes=&quot; + classes)</span>
+            <span class="token comment">// XLOG(&quot;Found: modulePath=&quot; + modulePath + &quot; in gModulePathToClassesDict, classes.length=&quot; + classes.length)</span>
+            <span class="token keyword">return</span> classes
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            needAddToCache <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// if given modulePath nil, default is mainBundle</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>modulePath<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> path <span class="token operator">=</span> ObjC<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>NSBundle<span class="token punctuation">.</span><span class="token function">mainBundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">executablePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UTF8String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> path <span class="token operator">=</span> modulePath
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// create args</span>
+    <span class="token keyword">var</span> pPath <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">allocUtf8String</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> p <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">alloc</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span>
+    Memory<span class="token punctuation">.</span><span class="token function">writeUInt</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> pClasses <span class="token operator">=</span> <span class="token function">objc_copyClassNamesForImage</span><span class="token punctuation">(</span>pPath<span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> count <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readUInt</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    classes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> pClassName <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>pClasses<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>i <span class="token operator">*</span> Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            classes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readUtf8String</span><span class="token punctuation">(</span>pClassName<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">free</span><span class="token punctuation">(</span>pClasses<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>needAddToCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// XLOG(&quot;Add: modulePath=&quot; + modulePath + &quot;, classes=&quot; + classes + &quot; into cache gModulePathToClassesDict&quot;)</span>
+        <span class="token comment">// XLOG(&quot;Add: modulePath=&quot; + modulePath + &quot;, classes.length=&quot; + classes.length + &quot; into cache gModulePathToClassesDict&quot;)</span>
+        gModulePathToClassesDict<span class="token punctuation">[</span>modulePath<span class="token punctuation">]</span> <span class="token operator">=</span> classes
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// XLOG(classes)</span>
+    <span class="token keyword">return</span> classes
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">function</span> <span class="token function">get_all_class_methods</span><span class="token punctuation">(</span><span class="token parameter">classname</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> allMethods <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> needAddToCache <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isUseCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>classname <span class="token keyword">in</span> gClassnameToAllMethodsDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            allMethods <span class="token operator">=</span> gClassnameToAllMethodsDict<span class="token punctuation">[</span>classname<span class="token punctuation">]</span>
+            <span class="token comment">// XLOG(&quot;Found: classname=&quot; + classname + &quot; in gClassnameToAllMethodsDict, allMethods=&quot; + toJsonStr(allMethods))</span>
+            <span class="token comment">// XLOG(&quot;Found: classname=&quot; + classname + &quot; in gClassnameToAllMethodsDict, allMethods.length=&quot; + allMethods.length)</span>
+            <span class="token keyword">return</span> allMethods
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            needAddToCache <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// get objclass and metaclass</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">allocUtf8String</span><span class="token punctuation">(</span>classname<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> objClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> metaClass <span class="token operator">=</span> <span class="token function">objc_getMetaClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+
+    <span class="token comment">// get obj class all methods</span>
+    <span class="token keyword">var</span> size_ptr <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">alloc</span><span class="token punctuation">(</span>Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span>
+    Memory<span class="token punctuation">.</span><span class="token function">writeUInt</span><span class="token punctuation">(</span>size_ptr<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> pObjMethods <span class="token operator">=</span> <span class="token function">class_copyMethodList</span><span class="token punctuation">(</span>objClass<span class="token punctuation">,</span> size_ptr<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> count <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readUInt</span><span class="token punctuation">(</span>size_ptr<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> allObjMethods <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// get obj class all methods name and IMP</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curObjMethod <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> pObjMethodSEL <span class="token operator">=</span> <span class="token function">method_getName</span><span class="token punctuation">(</span>pObjMethods<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>i <span class="token operator">*</span> Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> pObjMethodName <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readCString</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>pObjMethodSEL<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> objMethodIMP <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>pObjMethodSEL<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// XLOG(&quot;-[&quot;+classname+ &quot; &quot; + pObjMethodName+&quot;]&quot; + &quot;:&quot; + objMethodIMP)</span>
+        curObjMethod<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>pObjMethodName<span class="token punctuation">)</span>
+        curObjMethod<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>objMethodIMP<span class="token punctuation">)</span>
+        allObjMethods<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curObjMethod<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> allMetaMethods <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// get meta class all methods name and IMP</span>
+    <span class="token keyword">var</span> pMetaMethods <span class="token operator">=</span> <span class="token function">class_copyMethodList</span><span class="token punctuation">(</span>metaClass<span class="token punctuation">,</span> size_ptr<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> count <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readUInt</span><span class="token punctuation">(</span>size_ptr<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curMetaMethod <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">var</span> pMetaMethodSEL <span class="token operator">=</span> <span class="token function">method_getName</span><span class="token punctuation">(</span>pMetaMethods<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>i <span class="token operator">*</span> Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> pMetaMethodName <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readCString</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>pMetaMethodSEL<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> metaMethodIMP <span class="token operator">=</span> Memory<span class="token punctuation">.</span><span class="token function">readPointer</span><span class="token punctuation">(</span>pMetaMethodSEL<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>Process<span class="token punctuation">.</span>pointerSize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">//XLOG(&quot;+[&quot;+classname+ &quot; &quot; + pMetaMethodName+&quot;]&quot; + &quot;:&quot; + metaMethodIMP)</span>
+        curMetaMethod<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>pMetaMethodName<span class="token punctuation">)</span>
+        curMetaMethod<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>metaMethodIMP<span class="token punctuation">)</span>
+        allMetaMethods<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curMetaMethod<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    allMethods<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>allObjMethods<span class="token punctuation">)</span>
+    allMethods<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>allMetaMethods<span class="token punctuation">)</span>
+
+    <span class="token function">free</span><span class="token punctuation">(</span>pObjMethods<span class="token punctuation">)</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>pMetaMethods<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>needAddToCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// XLOG(&quot;Add: classname=&quot; + classname + &quot;, allMethods=&quot; + toJsonStr(allMethods) + &quot; into cache gClassnameToAllMethodsDict&quot;)</span>
+        <span class="token comment">// XLOG(&quot;Add: classname=&quot; + classname + &quot;, allMethods.length=&quot; + allMethods.length + &quot; into cache gClassnameToAllMethodsDict&quot;)</span>
+        gClassnameToAllMethodsDict<span class="token punctuation">[</span>classname<span class="token punctuation">]</span> <span class="token operator">=</span> allMethods
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> allMethods
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">find_symbol_from_address</span><span class="token punctuation">(</span><span class="token parameter">modulePath<span class="token punctuation">,</span> addr</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> symbol <span class="token operator">=</span> <span class="token string">&quot;???&quot;</span>
+    <span class="token keyword">var</span> modulePathAddr <span class="token operator">=</span> modulePath <span class="token operator">+</span> <span class="token string">&quot;|&quot;</span> <span class="token operator">+</span> addr
+
+    <span class="token keyword">var</span> needAddToCache <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isUseCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>modulePathAddr <span class="token keyword">in</span> gModulePathAddrToSymbolDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            symbol <span class="token operator">=</span> gModulePathAddrToSymbolDict<span class="token punctuation">[</span>modulePathAddr<span class="token punctuation">]</span>
+            <span class="token comment">// XLOG(&quot;Found: modulePathAddr=&quot; + modulePathAddr + &quot; in gModulePathAddrToSymbolDict, symbol=&quot; + symbol)</span>
+            <span class="token keyword">return</span> symbol
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            needAddToCache <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> frameAddr <span class="token operator">=</span> addr
+    <span class="token keyword">var</span> theDis <span class="token operator">=</span> <span class="token number">0xffffffffffffffff</span>
+    <span class="token keyword">var</span> tmpDis <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">var</span> theClass <span class="token operator">=</span> <span class="token string">&quot;None&quot;</span>
+    <span class="token keyword">var</span> theMethodName <span class="token operator">=</span> <span class="token string">&quot;None&quot;</span>
+    <span class="token keyword">var</span> theMethodType <span class="token operator">=</span> <span class="token string">&quot;-&quot;</span>
+    <span class="token keyword">var</span> theMethodIMP <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">var</span> allClassInfo <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> allClass <span class="token operator">=</span> <span class="token function">get_all_objc_class</span><span class="token punctuation">(</span>modulePath<span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> len <span class="token operator">=</span> allClass<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curClassName <span class="token operator">=</span> allClass<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token comment">// var mInfo = get_all_class_method(curClassName)</span>
+        <span class="token keyword">var</span> mInfo <span class="token operator">=</span> <span class="token function">get_all_class_methods</span><span class="token punctuation">(</span>curClassName<span class="token punctuation">)</span>
+
+        <span class="token keyword">var</span> objms <span class="token operator">=</span> mInfo<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> olen <span class="token operator">=</span> objms<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> olen<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">var</span> mname <span class="token operator">=</span> objms<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">var</span> mIMP <span class="token operator">=</span> objms<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>frameAddr <span class="token operator">&gt;=</span> mIMP<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">var</span> tmpDis <span class="token operator">=</span> frameAddr<span class="token operator">-</span>mIMP
+                <span class="token keyword">if</span><span class="token punctuation">(</span>tmpDis <span class="token operator">&lt;</span> theDis<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    theDis <span class="token operator">=</span> tmpDis
+                    theClass <span class="token operator">=</span> curClassName
+                    theMethodName <span class="token operator">=</span> mname
+                    theMethodIMP <span class="token operator">=</span> mIMP
+                    theMethodType <span class="token operator">=</span> <span class="token string">&quot;-&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">var</span> metams <span class="token operator">=</span> mInfo<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> mlen <span class="token operator">=</span> metams<span class="token punctuation">.</span>length<span class="token punctuation">;</span> k <span class="token operator">&lt;</span> mlen<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">var</span> mname <span class="token operator">=</span> metams<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">var</span> mIMP <span class="token operator">=</span> metams<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>frameAddr <span class="token operator">&gt;=</span> mIMP<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">var</span> tmpDis <span class="token operator">=</span> frameAddr<span class="token operator">-</span>mIMP
+                <span class="token keyword">if</span><span class="token punctuation">(</span>tmpDis <span class="token operator">&lt;</span> theDis<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    theDis <span class="token operator">=</span> tmpDis
+                    theClass <span class="token operator">=</span> curClassName
+                    theMethodName <span class="token operator">=</span> mname
+                    theMethodIMP <span class="token operator">=</span> mIMP
+                    theMethodType <span class="token operator">=</span> <span class="token string">&quot;+&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    symbol <span class="token operator">=</span> theMethodType<span class="token operator">+</span><span class="token string">&quot;[&quot;</span><span class="token operator">+</span>theClass<span class="token operator">+</span><span class="token string">&quot; &quot;</span><span class="token operator">+</span>theMethodName<span class="token operator">+</span><span class="token string">&quot;]&quot;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>symbol<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;.cxx&quot;</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            symbol <span class="token operator">=</span> <span class="token string">&quot;maybe C function?&quot;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// if distance &gt; 3000, maybe a c function</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>theDis <span class="token operator">&gt;</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            symbol <span class="token operator">=</span> <span class="token string">&quot;maybe C function? symbol:&quot;</span> <span class="token operator">+</span> symbol
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>needAddToCache<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// XLOG(&quot;Add: modulePathAddr=&quot; + modulePathAddr + &quot;, symbol=&quot; + symbol + &quot; into cache gModulePathAddrToSymbolDict&quot;)</span>
+        gModulePathAddrToSymbolDict<span class="token punctuation">[</span>modulePathAddr<span class="token punctuation">]</span> <span class="token operator">=</span> symbol
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> symbol
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">function</span> <span class="token function">generateFunctionCallStackList</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> functionCallList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> mainPath <span class="token operator">=</span> ObjC<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>NSBundle<span class="token punctuation">.</span><span class="token function">mainBundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">executablePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UTF8String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// XLOG(&quot;mainPath=&quot; + mainPath)</span>
+    <span class="token keyword">var</span> mainModuleName <span class="token operator">=</span> <span class="token function">getExecFileName</span><span class="token punctuation">(</span>mainPath<span class="token punctuation">)</span>
+    <span class="token comment">// XLOG(&quot;mainModuleName=&quot; + mainModuleName)</span>
+
+    <span class="token keyword">var</span> backtrace <span class="token operator">=</span> Thread<span class="token punctuation">.</span><span class="token function">backtrace</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> Backtracer<span class="token punctuation">.</span><span class="token constant">ACCURATE</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>DebugSymbol<span class="token punctuation">.</span>fromAddress<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> backtrace<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i <span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// curStackFrame=0x10a1d1910 SharedModules!WAGetWCIHttpImpl</span>
+        <span class="token comment">// curStackFrame=0x1070f0cb4 !0x2304cb4 (0x102304cb4)</span>
+        <span class="token comment">// curStackFrame=0x1944a9614 /System/Library/Frameworks/CFNetwork.framework/CFNetwork!+[NSURLRequest requestWithURL:]</span>
+        <span class="token keyword">var</span> curStackFrame <span class="token operator">=</span> backtrace<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&apos;&apos;</span>
+        <span class="token comment">// XLOG(&quot;curStackFrame=&quot; + curStackFrame)</span>
+
+        <span class="token comment">// var curSym = curStackFrame.split(&quot;!&quot;)[1]</span>
+        <span class="token keyword">var</span> stackFrameSplittedArr <span class="token operator">=</span> curStackFrame<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;!&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> curAddrAndModuleStr <span class="token operator">=</span> stackFrameSplittedArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;curAddrAndModuleStr=&quot; + curAddrAndModuleStr)</span>
+        <span class="token keyword">var</span> curSym <span class="token operator">=</span> stackFrameSplittedArr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;curSym=&quot; + curSym)</span>
+
+        <span class="token comment">// var curAddr = curStackFrame.split(&quot;!&quot;)[0].split(&quot; &quot;)[0]</span>
+        <span class="token keyword">var</span> curAddrAndModuleArr <span class="token operator">=</span> curAddrAndModuleStr<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+        <span class="token comment">// XLOG(&quot;curAddrAndModuleArr=&quot; + curAddrAndModuleArr)</span>
+        <span class="token keyword">var</span> curAddr <span class="token operator">=</span> curAddrAndModuleArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;curAddr=&quot; + curAddr)</span>
+        <span class="token comment">// var curModuleName = curStackFrame.split(&quot;!&quot;)[0].split(&quot; &quot;)[1]</span>
+        <span class="token keyword">var</span> curModuleName <span class="token operator">=</span> curAddrAndModuleArr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;curModuleName=&quot; + curModuleName)</span>
+
+        <span class="token keyword">var</span> moduleInfoDict <span class="token operator">=</span> <span class="token function">get_info_form_address</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// XLOG(&quot;moduleInfoDict=&quot; + toJsonStr(moduleInfoDict))</span>
+
+        <span class="token keyword">var</span> curModulePath <span class="token operator">=</span> moduleInfoDict<span class="token punctuation">[</span><span class="token string">&quot;fileName&quot;</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;curModulePath=&quot; + curModulePath)</span>
+        <span class="token keyword">var</span> fileAddress <span class="token operator">=</span> moduleInfoDict<span class="token punctuation">[</span><span class="token string">&quot;fileAddress&quot;</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;fileAddress=&quot; + fileAddress)</span>
+        <span class="token keyword">var</span> symbolName <span class="token operator">=</span> moduleInfoDict<span class="token punctuation">[</span><span class="token string">&quot;symbolName&quot;</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;symbolName=&quot; + symbolName)</span>
+        <span class="token keyword">var</span> symbolAddress <span class="token operator">=</span> moduleInfoDict<span class="token punctuation">[</span><span class="token string">&quot;symbolAddress&quot;</span><span class="token punctuation">]</span>
+        <span class="token comment">// XLOG(&quot;symbolAddress=&quot; + symbolAddress)</span>
+
+        <span class="token comment">// skip frida call stack</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>curModulePath<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token constant">XLOG</span><span class="token punctuation">(</span><span class="token string">&quot;! Omit for empty module path, parsed from curAddr=&quot;</span> <span class="token operator">+</span> curAddr <span class="token operator">+</span> <span class="token string">&quot;, moduleInfoDict=&quot;</span> <span class="token operator">+</span> moduleInfoDict<span class="token punctuation">)</span>
+            <span class="token keyword">continue</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// var fileAddr = curAddr - get_image_vm_slide(curModulePath);</span>
+        <span class="token keyword">var</span> curModuleSlide <span class="token operator">=</span> <span class="token function">get_image_vm_slide</span><span class="token punctuation">(</span>curModulePath<span class="token punctuation">)</span>
+        <span class="token comment">// XLOG(&quot;curModuleSlide=&quot; + curModuleSlide)</span>
+        <span class="token keyword">var</span> fileAddr <span class="token operator">=</span> curAddr <span class="token operator">-</span> curModuleSlide
+        <span class="token comment">// XLOG(&quot;fileAddr=&quot; + fileAddr)</span>
+
+        <span class="token comment">// is the image in app dir?</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>curModulePath<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>mainModuleName<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            curSym <span class="token operator">=</span> <span class="token function">find_symbol_from_address</span><span class="token punctuation">(</span>curModulePath<span class="token punctuation">,</span> curAddr<span class="token punctuation">)</span>
+            <span class="token comment">// XLOG(&quot;new curSym=&quot; + curSym)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">var</span> curFunctionCallDict <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token string-property property">&quot;curModulePath&quot;</span><span class="token operator">:</span> curModulePath<span class="token punctuation">,</span>
+            <span class="token string-property property">&quot;curAddr&quot;</span><span class="token operator">:</span> curAddr<span class="token punctuation">,</span>
+            <span class="token string-property property">&quot;fileAddr&quot;</span><span class="token operator">:</span> fileAddr<span class="token punctuation">,</span>
+            <span class="token string-property property">&quot;curSym&quot;</span><span class="token operator">:</span> curSym<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+        functionCallList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curFunctionCallDict<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> functionCallList
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">generateFunctionCallStackStr</span><span class="token punctuation">(</span><span class="token parameter">functionCallList</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> functionCallStackStr <span class="token operator">=</span> <span class="token string">&quot;------------------------ printFunctionCallStack_symbol  ------------------------&quot;</span>
+    functionCallStackStr <span class="token operator">+=</span> <span class="token string">&quot;\n&quot;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> functionCallList<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curFunctionCallDict <span class="token operator">=</span> functionCallList<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">var</span> curModulePath <span class="token operator">=</span> curFunctionCallDict<span class="token punctuation">[</span><span class="token string">&quot;curModulePath&quot;</span><span class="token punctuation">]</span>
+        <span class="token keyword">var</span> curAddr <span class="token operator">=</span> curFunctionCallDict<span class="token punctuation">[</span><span class="token string">&quot;curAddr&quot;</span><span class="token punctuation">]</span>
+        <span class="token keyword">var</span> fileAddr <span class="token operator">=</span> curFunctionCallDict<span class="token punctuation">[</span><span class="token string">&quot;fileAddr&quot;</span><span class="token punctuation">]</span>
+        <span class="token keyword">var</span> curSym <span class="token operator">=</span> curFunctionCallDict<span class="token punctuation">[</span><span class="token string">&quot;curSym&quot;</span><span class="token punctuation">]</span>
+        <span class="token keyword">var</span> executableFilename <span class="token operator">=</span> <span class="token function">getExecFileName</span><span class="token punctuation">(</span>curModulePath<span class="token punctuation">)</span>
+        <span class="token keyword">let</span> execMaxWidth <span class="token operator">=</span> <span class="token number">20</span>
+        <span class="token comment">// let execMaxWidth = 25</span>
+        <span class="token keyword">var</span> curFuncCallStr <span class="token operator">=</span> <span class="token function">format</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">format</span><span class="token punctuation">(</span>executableFilename<span class="token punctuation">,</span> execMaxWidth<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">&quot;mem:&quot;</span><span class="token operator">+</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">&quot;file:&quot;</span><span class="token operator">+</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>fileAddr<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">format</span><span class="token punctuation">(</span>curSym<span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">)</span>
+        functionCallStackStr <span class="token operator">+=</span> curFuncCallStr <span class="token operator">+</span> <span class="token string">&quot;\n&quot;</span>
+    <span class="token punctuation">}</span>
+    functionCallStackStr <span class="token operator">+=</span> <span class="token string">&quot;--------------------------------------------------------------------------------&quot;</span>
+    <span class="token keyword">return</span> functionCallStackStr
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printFunctionCallStack_symbol</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> functionCallStackList <span class="token operator">=</span> <span class="token function">generateFunctionCallStackList</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> functionCallStackStr <span class="token operator">=</span> <span class="token function">generateFunctionCallStackStr</span><span class="token punctuation">(</span>functionCallStackList<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>functionCallStackStr<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> functionCallStackStr
+<span class="token punctuation">}</span>
+</code></pre>
+<p>调用举例：</p>
+<pre class="language-"><code class="lang-js"><span class="token comment">/*******************************************************************************
+ * Main
+*******************************************************************************/</span>
+
+<span class="token function">initCommonLibFunctions</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token operator">...</span>
+                Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>curMethod<span class="token punctuation">.</span>implementation<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+                    <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token comment">// console.log(&quot;==================== [*] Detected call to: &quot; + iOSObjCallStr);</span>
+                        <span class="token keyword">var</span> logstr <span class="token operator">=</span> <span class="token string">&quot;Called: &quot;</span> <span class="token operator">+</span> iOSObjCallStr
+                        <span class="token keyword">var</span> lineStr <span class="token operator">=</span> <span class="token function">generateLineStr</span><span class="token punctuation">(</span>logstr<span class="token punctuation">)</span>
+                        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>lineStr<span class="token punctuation">)</span>
+
+                        <span class="token keyword">var</span> shouldPrintStack <span class="token operator">=</span> <span class="token boolean">true</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>iOSObjCallStr <span class="token keyword">in</span> gPrintedStackDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                            <span class="token comment">// console.log(&quot;iOSObjCallStr=&quot; + iOSObjCallStr + &quot; in gPrintedStackDict=&quot; + toJsonStr(gPrintedStackDict.keys))</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>isPrintOnlyOnceStack<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                                <span class="token comment">// if (iOSObjCallStr in cfgPrintOnceStackExceptionList){</span>
+                                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isItemInList</span><span class="token punctuation">(</span>iOSObjCallStr<span class="token punctuation">,</span> cfgPrintOnceStackExceptionList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                                    <span class="token comment">// console.log(&quot;iOSObjCallStr=&quot; + iOSObjCallStr + &quot; in cfgPrintOnceStackExceptionList=&quot; + toJsonStr(cfgPrintOnceStackExceptionList))</span>
+                                    shouldPrintStack <span class="token operator">=</span> <span class="token boolean">true</span>
+                                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                                    shouldPrintStack <span class="token operator">=</span> <span class="token boolean">false</span>
+                                <span class="token punctuation">}</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+
+                        <span class="token comment">// console.log(&quot;shouldPrintStack=&quot; + shouldPrintStack)</span>
+
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>shouldPrintStack<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token comment">// printFunctionCallStack_addr(this.context)</span>
+
+                            <span class="token comment">// printFunctionCallStack_symbol(this.context)</span>
+                            <span class="token keyword">var</span> functionCallStackList <span class="token operator">=</span> <span class="token function">generateFunctionCallStackList</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+                            <span class="token keyword">var</span> functionCallStackStr <span class="token operator">=</span> <span class="token function">generateFunctionCallStackStr</span><span class="token punctuation">(</span>functionCallStackList<span class="token punctuation">)</span>
+                            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>functionCallStackStr<span class="token punctuation">)</span>
+
+                            gPrintedStackDict<span class="token punctuation">[</span>iOSObjCallStr<span class="token punctuation">]</span> <span class="token operator">=</span> functionCallStackStr
+                        <span class="token punctuation">}</span>
+<span class="token operator">...</span>
+</code></pre>
+<p>（相关）输出：</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Called: +<span class="token punctuation">[</span>NSURLRequest requestWithURL:<span class="token punctuation">]</span>  <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+------------------------ printFunctionCallStack_symbol  ------------------------
+<span class="token number">0</span>   SharedModules       mem:0x1072fd910  file:0xc29910     +<span class="token punctuation">[</span>WACertPinning sharedPinnedWhatsAppCertificateWithoutDomainValidation<span class="token punctuation">]</span>
+<span class="token number">1</span>   WhatsApp            mem:0x104584cb4  file:0x102304cb4  +<span class="token punctuation">[</span>WARegistrationURLBuilder preChatdABPropURLRequestWithPhoneNumber:abHash:<span class="token punctuation">]</span>
+<span class="token number">2</span>   WhatsApp            mem:0x10458befc  file:0x10230befc  -<span class="token punctuation">[</span>WARegistrationManager requestPreChatdABPropsForPhoneNumber:userContext:completion:<span class="token punctuation">]</span>
+<span class="token number">3</span>   WhatsApp            mem:0x1045876a0  file:0x1023076a0  -<span class="token punctuation">[</span>WARegistrationManager performSameDeviceCheckForSession:updateRegistrationTokenIfNecessary:fetchPreChatdABProps:withCompletion:<span class="token punctuation">]</span>
+<span class="token number">4</span>   WhatsApp            mem:0x10455c220  file:0x1022dc220  -<span class="token punctuation">[</span>WAPhoneInputViewController performDeviceCheckForPhoneNumber:session:isFirstCheck:<span class="token punctuation">]</span>
+<span class="token number">5</span>   WhatsApp            mem:0x10455bff8  file:0x1022dbff8  -<span class="token punctuation">[</span>WAPhoneInputViewController performSameDeviceCheckForPhoneNumber:<span class="token punctuation">]</span>
+<span class="token number">6</span>   WhatsApp            mem:0x10455f658  file:0x1022df658  maybe C function?
+<span class="token number">7</span>   WhatsApp            mem:0x10453e038  file:0x1022be038  +<span class="token punctuation">[</span>WATwoFactorWipeToken tokenFromResponseDictionary:<span class="token punctuation">]</span>
+<span class="token number">8</span>   WhatsApp            mem:0x10455e834  file:0x1022de834  -<span class="token punctuation">[</span>WAPhoneInputViewController doneWithVideo:<span class="token punctuation">]</span>
+<span class="token number">9</span>   WhatsApp            mem:0x10455f758  file:0x1022df758  maybe C function?
+<span class="token number">10</span>  SharedModules       mem:0x106a775b0  file:0x3a35b0     -<span class="token punctuation">[</span>WDSButtonConfiguration setDidTap:<span class="token punctuation">]</span>
+<span class="token number">11</span>  SharedModules       mem:0x106b451e8  file:0x4711e8     +<span class="token punctuation">[</span>WDSViewCallback callback:<span class="token punctuation">]</span>
+<span class="token number">12</span>  SharedModules       mem:0x106aacb84  file:0x3d8b84     -<span class="token punctuation">[</span>_TtCC15UILibraryShared6Button12NativeButton intrinsicContentSize<span class="token punctuation">]</span>
+<span class="token number">13</span>  SharedModules       mem:0x106aacbc0  file:0x3d8bc0     -<span class="token punctuation">[</span>_TtCC15UILibraryShared6Button12NativeButton didTap<span class="token punctuation">]</span>
+<span class="token number">14</span>  UIKitCore           mem:0x1c14b99ac  file:0x1845199ac  -<span class="token punctuation">[</span>UIApplication sendAction:to:from:forEvent:<span class="token punctuation">]</span>
+<span class="token number">15</span>  UIKitCore           mem:0x1c0eeffbc  file:0x183f4ffbc  -<span class="token punctuation">[</span>UIControl sendAction:to:forEvent:<span class="token punctuation">]</span>
+--------------------------------------------------------------------------------
+argCount:  <span class="token number">1</span>
+---------------- <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token assign-left variable">curArgPtr</span><span class="token operator">=</span>0x283c61e00  ----------------
+curArgPtrObj: <span class="token assign-left variable">className</span><span class="token operator">=</span> NSURL, <span class="token assign-left variable">value</span><span class="token operator">=</span> https://v.whatsapp.net/v2/reg_onboard_abprop?cc<span class="token operator">=</span><span class="token number">1</span><span class="token operator">&amp;</span><span class="token assign-left variable">in</span><span class="token operator">=</span><span class="token number">8784650468</span><span class="token operator">&amp;</span><span class="token assign-left variable">rc</span><span class="token operator">=</span><span class="token number">0</span><span class="token operator">&amp;</span><span class="token assign-left variable">ab_hash</span><span class="token operator">=</span>1zduBG
+</code></pre>
+<ul>
+<li>截图<ul>
+<li>新<ul>
+<li><img src="../../../assets/img/frida_ios_call_stack_symbol.png" alt="frida_ios_call_stack_symbol"></li>
+</ul>
+</li>
+<li>旧<ul>
+<li><img src="../../../assets/img/frida_js_ios_callstack_detail_example.png" alt="frida_js_ios_callstack_detail_example"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-24 17:37:22
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: iOS函数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../android.html" class="navigation navigation-next " aria-label="Next page: Android函数">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"iOS函数调用堆栈","level":"1.6.2.2.1","depth":4,"next":{"title":"Android函数","level":"1.6.2.3","depth":3,"path":"summary_note/util_func/android.md","ref":"summary_note/util_func/android.md","articles":[]},"previous":{"title":"iOS函数","level":"1.6.2.2","depth":3,"path":"summary_note/util_func/ios/README.md","ref":"summary_note/util_func/ios/README.md","articles":[{"title":"iOS函数调用堆栈","level":"1.6.2.2.1","depth":4,"path":"summary_note/util_func/ios/callstack.md","ref":"summary_note/util_func/ios/callstack.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着给出Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"summary_note/util_func/ios/callstack.md","mtime":"2023-10-24T09:37:22.276Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-24T10:57:44.397Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

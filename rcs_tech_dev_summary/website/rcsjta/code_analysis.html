@@ -1,0 +1,1314 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>rcsjta源码分析 · RCS技术开发总结</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../appendix/" />
+    
+    
+    <link rel="prev" href="core_parameter.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"rcs_tech_dev_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../rcs_dev_overview/">
+            
+                <a href="../rcs_dev_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    RCS开发概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../rcs_dev_overview/evolution_history.html">
+            
+                <a href="../rcs_dev_overview/evolution_history.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    RCS演化历史
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../rcs_dev_basic/">
+            
+                <a href="../rcs_dev_basic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    RCS开发基础知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../rcs_dev_basic/rcs_arch/">
+            
+                <a href="../rcs_dev_basic/rcs_arch/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    RCS技术架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../rcs_dev_basic/rcs_org_spec.html">
+            
+                <a href="../rcs_dev_basic/rcs_org_spec.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    RCS相关组织和协议规范
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../rcs_dev_basic/rcs_org_spec/rcs_self.html">
+            
+                <a href="../rcs_dev_basic/rcs_org_spec/rcs_self.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    RCS自身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../rcs_dev_basic/rcs_org_spec/rcs_other.html">
+            
+                <a href="../rcs_dev_basic/rcs_org_spec/rcs_other.html">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    RCS和其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../rcs_dev_basic/rcs_org_spec/spec_download.html">
+            
+                <a href="../rcs_dev_basic/rcs_org_spec/spec_download.html">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    规范下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../rcs_dev_basic/versions/">
+            
+                <a href="../rcs_dev_basic/versions/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    RCS版本
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../rcs_dev_basic/versions/up.html">
+            
+                <a href="../rcs_dev_basic/versions/up.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    RCS UP
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../rcs_dev_basic/implementation.html">
+            
+                <a href="../rcs_dev_basic/implementation.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    RCS具体实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../rcs_related/">
+            
+                <a href="../rcs_related/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    RCS相关知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../rcs_dev/">
+            
+                <a href="../rcs_dev/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    RCS开发
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../rcs_dev/use_solution/">
+            
+                <a href="../rcs_dev/use_solution/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    找RCS服务商
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../rcs_dev/use_solution/juphoon.html">
+            
+                <a href="../rcs_dev/use_solution/juphoon.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    菊风
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../rcs_dev/use_solution/google.html">
+            
+                <a href="../rcs_dev/use_solution/google.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    Google
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../rcs_dev/from_scratch/">
+            
+                <a href="../rcs_dev/from_scratch/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    自己从头开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    rcsjta
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="docs.html">
+            
+                <a href="docs.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    rcsjta资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="dev.html">
+            
+                <a href="dev.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    rcsjta开发
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="download_src.html">
+            
+                <a href="download_src.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    下载代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="prepare_env.html">
+            
+                <a href="prepare_env.html">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    准备环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="compile_apk.html">
+            
+                <a href="compile_apk.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    编译apk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.4" data-path="run_apk.html">
+            
+                <a href="run_apk.html">
+            
+                    
+                        <b>1.6.2.4.</b>
+                    
+                    运行apk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.5" data-path="demo_rcs.html">
+            
+                <a href="demo_rcs.html">
+            
+                    
+                        <b>1.6.2.5.</b>
+                    
+                    演示RCS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.5.1" data-path="core_parameter.html">
+            
+                <a href="core_parameter.html">
+            
+                    
+                        <b>1.6.2.5.1.</b>
+                    
+                    核心参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="code_analysis.html">
+            
+                <a href="code_analysis.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    rcsjta源码分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/terminology/">
+            
+                <a href="../appendix/terminology/">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    名词术语
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../appendix/terminology/mno.html">
+            
+                <a href="../appendix/terminology/mno.html">
+            
+                    
+                        <b>1.7.1.1.</b>
+                    
+                    MNO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../appendix/terminology/msin.html">
+            
+                <a href="../appendix/terminology/msin.html">
+            
+                    
+                        <b>1.7.1.2.</b>
+                    
+                    MSIN
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../appendix/valuable_refer.html">
+            
+                <a href="../appendix/valuable_refer.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    有价值的资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >rcsjta源码分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="rcsjta&#x6E90;&#x7801;&#x5206;&#x6790;"><a name="rcsjta&#x6E90;&#x7801;&#x5206;&#x6790;" class="plugin-anchor" href="#rcsjta&#x6E90;&#x7801;&#x5206;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>rcsjta&#x6E90;&#x7801;&#x5206;&#x6790;</h1>
+<p>&#x6298;&#x817E;rcsjta&#x5F00;&#x53D1;&#x671F;&#x95F4;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5C1D;&#x8BD5;&#x5206;&#x6790;RCS&#x670D;&#x52A1;&#x4E3A;&#x4F55;&#x6CA1;&#x6709;&#x542F;&#x52A8;<code>The service is not available</code>&#x671F;&#x95F4;&#xFF0C;&#x7814;&#x7A76;&#x4E86;&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x6574;&#x7406;&#x5982;&#x4E0B;&#x4F9B;&#x53C2;&#x8003;&#x3002;</p>
+<h2 id="the-service-is-not-available-&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x903B;&#x8F91;"><a name="the-service-is-not-available-&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x903B;&#x8F91;" class="plugin-anchor" href="#the-service-is-not-available-&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x903B;&#x8F91;"><i class="fa fa-link" aria-hidden="true"></i></a>The service is not available &#x76F8;&#x5173;&#x4EE3;&#x7801;&#x903B;&#x8F91;</h2>
+<p>&#x641C;&#xFF1A;</p>
+<p>The service is not available</p>
+<p>&#x627E;&#x5230;&#x5F88;&#x591A;&#x4E2A;&#x3002;</p>
+<p>&#x5176;&#x4E2D;RI&#x4E2D;&#x7684;&#x662F;&#xFF1A;</p>
+<p><code>rcsjta/RI/res/values/strings.xml</code></p>
+<pre class="language-"><code class="lang-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>label_service_not_available<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>The service is not available. Please retry later.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p><img src="../assets/img/rcsjta_ri_strings_values.png" alt="rcsjta_ri_strings_values"></p>
+<p>&#x53BB;&#x627E;&#x627E;&#x4EE3;&#x7801;&#x4E2D;&#x54EA;&#x91CC;&#x7528;&#x5230;&#x4E86;&#xFF1A;<code>label_service_not_available</code></p>
+<p>&#x770B;&#x5230;&#x4E86; Capability&#x7684;&#x5BF9;&#x5E94;&#x4EE3;&#x7801;</p>
+<p><code>rcsjta/RI/src/com/gsma/rcs/ri/capabilities/MyCapabilities.java</code></p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyCapabilities</span> <span class="token keyword">extends</span> <span class="token class-name">RcsActivity</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token class-name">Bundle</span> savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setRequestedOrientation</span><span class="token punctuation">(</span><span class="token class-name">ActivityInfo</span><span class="token punctuation">.</span>SCREEN_ORIENTATION_PORTRAIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>layout<span class="token punctuation">.</span>capabilities_mine<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Register to API connection manager */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isServiceConnected</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">showMessageThenExit</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>string<span class="token punctuation">.</span>label_service_not_available<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">startMonitorServices</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/rcsjta_ri_capabilities_mycapabilities.png" alt="rcsjta_ri_capabilities_mycapabilities"></p>
+<p>&#x7EE7;&#x7EED;&#x53BB;&#x7814;&#x7A76;&#x4EE3;&#x7801;</p>
+<p>&#x641C;</p>
+<p><code>isServiceConnected(</code></p>
+<p>&#x627E;&#x5230;&#x591A;&#x5904;&#x5B9A;&#x4E49;</p>
+<p><img src="../assets/img/rcsjta_found_multiple_isserviceconnected.png" alt="rcsjta_found_multiple_isserviceconnected"></p>
+<p>&#x627E;&#x5230;&#x4E86;</p>
+<p><code>rcsjta/libs/api_cnx/src/main/java/com/gsma/rcs/api/connection/ConnectionManager.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * Check if services are connected
+     *
+     * @param services list of services
+     * @return true if all services of the list are connected
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isServiceConnected</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> services<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span> service <span class="token operator">:</span> services<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>mManagedServices<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>service<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;Service &quot;</span> <span class="token operator">+</span> service
+                        <span class="token operator">+</span> <span class="token string">&quot; does not belong to set of managed services!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>mConnectedServices<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>service<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/rcsjta_connectionmanager_isserviceconnected.png" alt="rcsjta_connectionmanager_isserviceconnected"></p>
+<p>&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x90FD;&#x662F;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;<code>ConnectionManager.java</code>&#x4E2D;&#x7684;<code>isServiceConnected</code></p>
+<p>&#x4E14;&#x5176;&#x4E2D;&#x7684;&#xFF1A;<code>mManagedServices</code> &#x662F;&#x5F00;&#x59CB;&#x521D;&#x59CB;&#x5316;&#x5305;&#x542B;&#x7684;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#xFF1A;</p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * The set of managed services
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">&gt;</span></span> mManagedServices<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Constructor
+     *
+     * @param context The context
+     * @param managedServices Set of managed services
+     * @param rcsServiceControl instance of RcsServiceControl
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">(</span><span class="token class-name">Context</span> context<span class="token punctuation">,</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">&gt;</span></span> managedServices<span class="token punctuation">,</span>
+            <span class="token class-name">RcsServiceControl</span> rcsServiceControl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mCtx <span class="token operator">=</span> context<span class="token punctuation">;</span>
+        mCnxIntent <span class="token operator">=</span> <span class="token class-name">PendingIntent</span><span class="token punctuation">.</span><span class="token function">getBroadcast</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Intent</span><span class="token punctuation">(</span>ACTION_CONNECT<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mAlarmManager <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">AlarmManager</span><span class="token punctuation">)</span> mCtx<span class="token punctuation">.</span><span class="token function">getSystemService</span><span class="token punctuation">(</span><span class="token class-name">Context</span><span class="token punctuation">.</span>ALARM_SERVICE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        mManagedServices <span class="token operator">=</span> managedServices<span class="token punctuation">;</span>
+        mRcsServiceControl <span class="token operator">=</span> rcsServiceControl<span class="token punctuation">;</span>
+        <span class="token comment">/* Construct list of connected services */</span>
+        mConnectedServices <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/* Construct list of clients to notify */</span>
+        mClientsToNotify <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/* Construct list of APIs */</span>
+        mApis <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>managedServices <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> managedServices<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">&quot;Incorrect parameter managedService!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">/* Instantiate APIs */</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span> service <span class="token operator">:</span> mManagedServices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>service<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">case</span> CAPABILITY<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">CapabilityService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CHAT<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CHAT<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ChatService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CHAT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CONTACT<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CONTACT<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ContactService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CONTACT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> FILE_TRANSFER<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_TRANSFER<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">FileTransferService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_TRANSFER<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> FILE_UPLOAD<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_UPLOAD<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">FileUploadService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_UPLOAD<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> GEOLOC_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>GEOLOC_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">GeolocSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>GEOLOC_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> HISTORY<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>HISTORY<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HistoryService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>HISTORY<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> IMAGE_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>IMAGE_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ImageSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>IMAGE_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> MULTIMEDIA<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>MULTIMEDIA<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">MultimediaSessionService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>MULTIMEDIA<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> VIDEO_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>VIDEO_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">VideoSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>VIDEO_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x5BB9;&#x6613;&#x770B;&#x51FA;&#x662F;&#x5404;&#x4E2A;&#x529F;&#x80FD;&#x548C;&#x670D;&#x52A1;&#x9879;&#x76EE;&#xFF1A;</p>
+<ul>
+<li>CAPABILITY</li>
+<li>CHAT</li>
+<li>CONTACT</li>
+<li>FILE_TRANSFER</li>
+<li>FILE_UPLOAD</li>
+<li>GEOLOC_SHARING</li>
+<li>HISTORY</li>
+<li>IMAGE_SHARING</li>
+<li>MULTIMEDIA</li>
+<li>VIDEO_SHARING</li>
+</ul>
+<p>&#x518D;&#x53BB;&#x770B;&#x770B;<code>mConnectedServices</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * Set of connected services
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">&gt;</span></span> mConnectedServices<span class="token punctuation">;</span>
+
+        mConnectedServices <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Create a RCS service listener to monitor API connection
+     *
+     * @param service the service to monitor
+     * @return the listener
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">RcsServiceListener</span> <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">RcsServiceName</span> service<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">RcsServiceListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onServiceConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                mConnectedServices<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>service<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">notifyConnection</span><span class="token punctuation">(</span>service<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onServiceDisconnected</span><span class="token punctuation">(</span><span class="token class-name">ReasonCode</span> error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                mConnectedServices<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>service<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">notifyDisconnection</span><span class="token punctuation">(</span>service<span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notifyConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>mListener <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>mConnectedServices<span class="token punctuation">.</span><span class="token function">containsAll</span><span class="token punctuation">(</span>mMonitoredServices<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">/* All monitored services are connected -&gt; notify connection */</span>
+                mListener<span class="token punctuation">.</span><span class="token function">onServiceConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                mRetryCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x7684;&#xFF1A;<code>newRcsServiceListener</code>&#xFF0C;&#x5C31;&#x662F;&#x524D;&#x9762;&#x8C03;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#x6CE8;&#x610F;&#x5230;&#x5F00;&#x59CB;&#x7684;<code>ConnectionManager()</code>&#x521D;&#x59CB;&#x5316;&#x671F;&#x95F4;&#xFF0C;&#x662F;&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684;<code>mManagedServices</code>&#x53BB;&#x521D;&#x59CB;&#x5316;&#x5BF9;&#x5E94;&#x670D;&#x52A1;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x8981;&#x518D;&#x53BB;&#x627E;&#x627E;&#x6709;&#x54EA;&#x4E9B;&#x5730;&#x65B9;&#x7528;&#x5230;&#x4E86;&#xFF1A;</p>
+<p><code>ConnectionManager(</code></p>
+<p>&#x53D1;&#x73B0;&#x53EA;&#x6709;&#x81EA;&#x5DF1;</p>
+<p><code>libs/api_cnx/src/main/java/com/gsma/rcs/api/connection/ConnectionManager.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * Get an instance of ConnectionManager.
+     *
+     * @param ctx the context
+     * @param rcsServiceControl instance of RcsServiceControl
+     * @param managedServices Set of managed services
+     * @return the singleton instance.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ConnectionManager</span> <span class="token function">createInstance</span><span class="token punctuation">(</span><span class="token class-name">Context</span> ctx<span class="token punctuation">,</span>
+            <span class="token class-name">RcsServiceControl</span> rcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">&gt;</span></span> managedServices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sInstance <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> sInstance<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>sInstance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>ctx <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;Context is null&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                sInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> managedServices<span class="token punctuation">,</span> rcsServiceControl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> sInstance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x7EE7;&#x7EED;&#x7814;&#x7A76;&#x539F;&#x56E0;&#x3002;</p>
+<p>&#x7EE7;&#x7EED;&#x627E;&#xFF1A;</p>
+<p><code>createInstance(</code></p>
+<p>&#x627E;&#x5230;&#xFF1A;</p>
+<p><code>libs/api_cnx/src/main/java/com/gsma/rcs/api/connection/ConnectionManager.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * Get an instance of ConnectionManager.
+     *
+     * @param context the context
+     * @param rcsServiceControl instance of RcsServiceControl
+     * @param services list of managed services
+     * @return the singleton instance.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ConnectionManager</span> <span class="token function">createInstance</span><span class="token punctuation">(</span><span class="token class-name">Context</span> context<span class="token punctuation">,</span>
+            <span class="token class-name">RcsServiceControl</span> rcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> services<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">&gt;</span></span> managedServices <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>managedServices<span class="token punctuation">,</span> services<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">createInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> rcsServiceControl<span class="token punctuation">,</span> managedServices<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x4EE5;&#x53CA;&#x771F;&#x6B63;&#x7684;&#x8C03;&#x7528;&#x53BB;&#x521D;&#x59CB;&#x5316;&#xFF1A;</p>
+<p><code>RI/src/com/gsma/rcs/ri/RiApplication.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+        mRcsServiceControl <span class="token operator">=</span> <span class="token class-name">RcsServiceControl</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span>mContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Starts the RCS service notification manager */</span>
+        <span class="token function">startService</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Intent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token class-name">RcsServiceNotifManager</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Do not execute the ConnectionManager on the main thread */</span>
+        <span class="token class-name">Handler</span> mainThreadHandler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Handler</span><span class="token punctuation">(</span><span class="token class-name">Looper</span><span class="token punctuation">.</span><span class="token function">getMainLooper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> <span class="token class-name">ConnectionManager</span> cnxManager <span class="token operator">=</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token function">createInstance</span><span class="token punctuation">(</span>mContext<span class="token punctuation">,</span>
+                mRcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">EnumSet</span><span class="token punctuation">.</span><span class="token function">allOf</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mainThreadHandler<span class="token punctuation">.</span><span class="token function">postDelayed</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    cnxManager<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sCnxManagerStarted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">RuntimeException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Log</span><span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>LOGTAG<span class="token punctuation">,</span> <span class="token string">&quot;Failed to start connection manager!&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> DELAY_FOR_STARTING_CNX_MANAGER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x548C;&#xFF1A;</p>
+<p><code>tools/settings/src/com/gsma/rcs/core/control/CoreControlApplication.java</code></p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CoreControlApplication</span> <span class="token keyword">extends</span> <span class="token class-name">Application</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Context</span> context <span class="token operator">=</span> <span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mRcsServiceControl <span class="token operator">=</span> <span class="token class-name">RcsServiceControl</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">final</span> <span class="token class-name">ConnectionManager</span> cnxManager <span class="token operator">=</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token function">createInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                mRcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_TRANSFER<span class="token punctuation">,</span> <span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CHAT<span class="token punctuation">,</span>
+                <span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CONTACT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Do not execute the ConnectionManager on the main thread */</span>
+        <span class="token class-name">Handler</span> mainThreadHandler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Handler</span><span class="token punctuation">(</span><span class="token class-name">Looper</span><span class="token punctuation">.</span><span class="token function">getMainLooper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        mainThreadHandler<span class="token punctuation">.</span><span class="token function">postDelayed</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                cnxManager<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                sCnxManagerStarted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> DELAY_FOR_STARTING_CNX_MANAGER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6B64;&#x5904;&#x5F88;&#x660E;&#x663E;<code>Core</code>&#x7684;<code>control</code>&#x7684;<code>application</code>&#x4E2D;&#xFF0C;&#x6700;&#x5F00;&#x59CB;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x53EA;&#x521D;&#x59CB;&#x5316;&#x4E86;&#xFF1A;</p>
+<ul>
+<li>FILE_TRANSFER</li>
+<li>CHAT</li>
+<li>CONTACT</li>
+</ul>
+<p>&#x5E76;&#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#x5176;&#x4ED6;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x6BD4;&#x5982;Capability&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x4F55;&#xFF1F;</p>
+<p>&#x53BB;&#x641C;&#x7D22;&#x5176;&#x4ED6;&#x7684;<code>RcsServiceName.CAPABILITY</code>&#xFF0C;&#x80FD;&#x627E;&#x5230;&#x5176;&#x4ED6;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x542F;&#x7528;&#x7684;&#x76F8;&#x5173;&#x903B;&#x8F91;</p>
+<p>&#x6240;&#x4EE5;&#x96BE;&#x602A;app&#x4E2D;&#x6CA1;&#x770B;&#x5230;&#x670D;&#x52A1;&#x542F;&#x52A8;</p>
+<p>&#x90A3;&#x5982;&#x4F55;&#x542F;&#x52A8;&#x5176;&#x4ED6;&#x5982;Capability&#x7684;&#x670D;&#x52A1;?</p>
+<p>&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x53BB;&#x52A0;&#x4E0A;&#xFF1F;</p>
+<p>&#x611F;&#x89C9;&#x597D;&#x50CF;&#x4E0D;&#x592A;&#x5BF9;&#x554A;&#xFF0C;&#x5E94;&#x8BE5;&#x662F;&#x54EA;&#x91CC;&#x6709;&#x914D;&#x7F6E;&#xFF0C;&#x6700;&#x5F00;&#x59CB;&#x542F;&#x52A8;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x624D;&#x5BF9;</p>
+<p>&#x53BB;<code>Core</code>&#x7684;<code>app</code>&#x4E2D;&#x770B;&#x770B;</p>
+<p>&#x4E0D;&#x8FC7;&#x624D;&#x6CE8;&#x610F;&#x5230;&#xFF1A;</p>
+<p><code>RI/src/com/gsma/rcs/ri/RiApplication.java</code></p>
+<p>&#x4E2D;&#x7684;&#xFF1A;</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">final</span> <span class="token class-name">ConnectionManager</span> cnxManager <span class="token operator">=</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token function">createInstance</span><span class="token punctuation">(</span>mContext<span class="token punctuation">,</span>
+                mRcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">EnumSet</span><span class="token punctuation">.</span><span class="token function">allOf</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x5C31;&#x662F;&#x542F;&#x52A8;&#x4E86;RcsServiceName&#x7684;&#x6240;&#x6709;&#x7684;&#x7C7B;&#x540D;</p>
+<p>&#x5C31;&#x662F;&#x542F;&#x52A8;&#x4E86;&#x6240;&#x6709;&#x7684;&#x670D;&#x52A1;&#x624D;&#x5BF9;</p>
+<p>&#x5373;RI&#x7684;&#x53C2;&#x8003;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x6700;&#x5F00;&#x59CB;&#x662F;&#x53BB;&#x542F;&#x52A8;&#x4E86;&#x6240;&#x6709;&#x7684;&#x670D;&#x52A1;&#x7684;</p>
+<p>&#x5BF9;&#x4E8E;<code>RcsServiceName</code>&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x627E;&#x4E86;&#x534A;&#x5929;&#x7EC8;&#x4E8E;&#x901A;&#x8FC7;&#x641C;&#xFF1A;</p>
+<p><code>package com.gsma.rcs.api</code></p>
+<p>&#x95F4;&#x63A5;&#x7684;&#xFF0C;&#x6700;&#x540E;&#x627E;&#x5230;&#x4E86;&#x4F4D;&#x7F6E;&#xFF0C;&#x662F;&#x5728;api_cnx&#x4E2D;&#x7684;&#xFF1A;</p>
+<p><code>libs/api_cnx/src/main/java/com/gsma/rcs/api/connection/ConnectionManager.java</code></p>
+<p>&#x800C;&#x4EE5;&#x4E3A;&#x80FD;&#x627E;&#x5230;&#x539F;&#x59CB;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<pre class="language-"><code class="lang-java">        <span class="token comment">/* Instantiate APIs */</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span> service <span class="token operator">:</span> mManagedServices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>service<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">case</span> CAPABILITY<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">CapabilityService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CAPABILITY<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CHAT<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CHAT<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ChatService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CHAT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CONTACT<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CONTACT<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ContactService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>CONTACT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> FILE_TRANSFER<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_TRANSFER<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">FileTransferService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_TRANSFER<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> FILE_UPLOAD<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_UPLOAD<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">FileUploadService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>FILE_UPLOAD<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> GEOLOC_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>GEOLOC_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">GeolocSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>GEOLOC_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> HISTORY<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>HISTORY<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HistoryService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>HISTORY<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> IMAGE_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>IMAGE_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ImageSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>IMAGE_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> MULTIMEDIA<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>MULTIMEDIA<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">MultimediaSessionService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>MULTIMEDIA<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> VIDEO_SHARING<span class="token operator">:</span>
+                    mApis<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>VIDEO_SHARING<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">VideoSharingService</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
+                            <span class="token function">newRcsServiceListener</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span>VIDEO_SHARING<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x53BB;&#x627E;&#x6700;&#x539F;&#x59CB;&#x7684;&#x5B9A;&#x4E49;&#x3002;&#x901A;&#x8FC7;<code>VIDEO_SHARING</code>&#x627E;&#x5230;&#xFF1A;</p>
+<p><code>core/src/com/gsma/rcs/provider/sharing/VideoSharingProvider.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">UriType</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">VideoSharing</span> <span class="token punctuation">{</span>
+            <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> VIDEO_SHARING <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> VIDEO_SHARING_WITH_ID <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">InternalVideoSharing</span> <span class="token punctuation">{</span>
+            <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> VIDEO_SHARING <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> VIDEO_SHARING_WITH_ID <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x770B;&#x6765;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x548C;&#x5B9E;&#x73B0;&#x4E2D;&#x6709;&#x6700;&#x539F;&#x59CB;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x4E14;&#x662F;<code>int</code>&#x503C;</p>
+<p>&#x4E0D;&#x8FC7;&#x540E;&#x6765;&#x7EC8;&#x4E8E;&#x627E;&#x5230;&#x4E86;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<p><code>libs/api_cnx/src/main/java/com/gsma/rcs/api/connection/ConnectionManager.java</code></p>
+<pre class="language-"><code class="lang-java">    <span class="token comment">/**
+     * Enumerated type for RCS service name
+     */</span>
+    <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">&quot;javadoc&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">RcsServiceName</span> <span class="token punctuation">{</span>
+        CAPABILITY<span class="token punctuation">,</span> CONTACT<span class="token punctuation">,</span> CHAT<span class="token punctuation">,</span> FILE_TRANSFER<span class="token punctuation">,</span> IMAGE_SHARING<span class="token punctuation">,</span> VIDEO_SHARING<span class="token punctuation">,</span> GEOLOC_SHARING<span class="token punctuation">,</span> FILE_UPLOAD<span class="token punctuation">,</span> MULTIMEDIA<span class="token punctuation">,</span> HISTORY
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5373;&#xFF1A;&#x8BE5;&#x6587;&#x4EF6;&#x4E2D;&#x662F;&#x6709;&#x5B9A;&#x4E49;&#x7684;&#x3002;</p>
+<p>&#x4E0D;&#x662F;&#x5728;&#x6BCF;&#x4E2A;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x524D;&#x9762;&#x7406;&#x89E3;&#x6709;&#x8BEF;&#x3002;</p>
+<p>&#x53CD;&#x63A8;&#x518D;&#x53BB;&#x641C;&#xFF1A;</p>
+<p><code>enum RcsServiceName</code></p>
+<p>&#x53EA;&#x80FD;&#x627E;&#x5230;&#x6B64;&#x5904;&#x8FD9;&#x4E00;&#x5904;&#xFF1A;</p>
+<p><img src="../assets/img/rcsjta_enum_rcsservicename.png" alt="rcsjta_enum_rcsservicename"></p>
+<p>&#x4E5F;&#x662F;&#x5BF9;&#x7684;&#x3002;</p>
+<p>&#x81F3;&#x6B64;&#x57FA;&#x672C;&#x4E0A;&#x786E;&#x5B9A;&#xFF0C;&#x4EE3;&#x7801;&#x903B;&#x8F91;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x5E94;&#x8BE5;&#x5C31;&#x662F;&#xFF1A;</p>
+<p><code>RI/src/com/gsma/rcs/ri/RiApplication.java</code></p>
+<pre class="language-"><code class="lang-java">        <span class="token comment">/* Do not execute the ConnectionManager on the main thread */</span>
+        <span class="token class-name">Handler</span> mainThreadHandler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Handler</span><span class="token punctuation">(</span><span class="token class-name">Looper</span><span class="token punctuation">.</span><span class="token function">getMainLooper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> <span class="token class-name">ConnectionManager</span> cnxManager <span class="token operator">=</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token function">createInstance</span><span class="token punctuation">(</span>mContext<span class="token punctuation">,</span>
+                mRcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">EnumSet</span><span class="token punctuation">.</span><span class="token function">allOf</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mainThreadHandler<span class="token punctuation">.</span><span class="token function">postDelayed</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    cnxManager<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sCnxManagerStarted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">RuntimeException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Log</span><span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>LOGTAG<span class="token punctuation">,</span> <span class="token string">&quot;Failed to start connection manager!&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> DELAY_FOR_STARTING_CNX_MANAGER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x8FD9;&#x53E5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-java"><span class="token keyword">final</span> <span class="token class-name">ConnectionManager</span> cnxManager <span class="token operator">=</span> <span class="token class-name">ConnectionManager</span><span class="token punctuation">.</span><span class="token function">createInstance</span><span class="token punctuation">(</span>mContext<span class="token punctuation">,</span>
+                mRcsServiceControl<span class="token punctuation">,</span> <span class="token class-name">EnumSet</span><span class="token punctuation">.</span><span class="token function">allOf</span><span class="token punctuation">(</span><span class="token class-name">RcsServiceName</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x53BB;&#x542F;&#x52A8;&#x4E86;RCS&#x6240;&#x6709;&#x7684;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x81F3;&#x4E8E;&#x540E;&#x7EED;&#x4E3A;&#x4F55;&#x670D;&#x52A1;&#x8FD8;&#x662F;&#x6CA1;&#x542F;&#x52A8;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x540E;&#x7EED;&#x6DF1;&#x5165;&#x8C03;&#x7814;&#x5176;&#x4ED6;&#x65B9;&#x9762;&#xFF0C;&#x624D;&#x53EF;&#x80FD;&#x627E;&#x5230;&#x539F;&#x56E0;&#x3002;</p>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2020-11-04 22:20:11
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="core_parameter.html" class="navigation navigation-prev " aria-label="Previous page: 核心参数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../appendix/" class="navigation navigation-next " aria-label="Next page: 附录">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"rcsjta源码分析","level":"1.6.3","depth":2,"next":{"title":"附录","level":"1.7","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"名词术语","level":"1.7.1","depth":2,"path":"appendix/terminology/README.md","ref":"appendix/terminology/README.md","articles":[{"title":"MNO","level":"1.7.1.1","depth":3,"path":"appendix/terminology/mno.md","ref":"appendix/terminology/mno.md","articles":[]},{"title":"MSIN","level":"1.7.1.2","depth":3,"path":"appendix/terminology/msin.md","ref":"appendix/terminology/msin.md","articles":[]}]},{"title":"有价值的资料","level":"1.7.2","depth":2,"path":"appendix/valuable_refer.md","ref":"appendix/valuable_refer.md","articles":[]},{"title":"参考资料","level":"1.7.3","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"核心参数","level":"1.6.2.5.1","depth":4,"path":"rcsjta/core_parameter.md","ref":"rcsjta/core_parameter.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/rcs_tech_dev_summary/pdf/rcs_tech_dev_summary.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/rcs_tech_dev_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"rcs_tech_dev_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"RCS技术开发总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"总结RCS技术开发相关知识，包括开发概述和RCS演化历史，和技术相关总结，比如RCS技术架构，RCS版本历史和UP版本详情，以及RCS具体实现；以及如何进行RCS开发，包括找RCS服务商，比如国外的Google，国内的菊风，或自己从头开发，比如参考开源项目rcsjta，以及详细开发步骤比如下载代码、准备环境、编译apk、运行apk、演示RCS功能及其中的核心参数设置、rcsjta的源码分析。"},"file":{"path":"rcsjta/code_analysis.md","mtime":"2020-11-04T14:20:11.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-17T04:04:16.771Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

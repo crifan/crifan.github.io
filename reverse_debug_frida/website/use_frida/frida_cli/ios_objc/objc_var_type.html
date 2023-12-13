@@ -1,0 +1,1737 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>ObjC的变量类型 · 逆向调试利器：Frida</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../data_type/" />
+    
+    
+    <link rel="prev" href="objc_para.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../frida_overview/">
+            
+                <a href="../../../frida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Frida概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../frida_overview/code_arch.html">
+            
+                <a href="../../../frida_overview/code_arch.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    代码和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../../frida_overview/doc_refer/">
+            
+                <a href="../../../frida_overview/doc_refer/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../install_upgrade/">
+            
+                <a href="../../../install_upgrade/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    安装和升级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../install_upgrade/install_frida.html">
+            
+                <a href="../../../install_upgrade/install_frida.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    安装Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../install_upgrade/upgrade_frida.html">
+            
+                <a href="../../../install_upgrade/upgrade_frida.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    升级Frida
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    使用Frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../typical_logic/">
+            
+                <a href="../../typical_logic/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Frida典型使用逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../debug_target.html">
+            
+                <a href="../debug_target.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    调试目标方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../js_script.html">
+            
+                <a href="../js_script.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    写js脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../typical_usage.html">
+            
+                <a href="../typical_usage.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    典型使用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.4.1" data-path="objc_para.html">
+            
+                <a href="objc_para.html">
+            
+                    
+                        <b>1.4.2.4.1.</b>
+                    
+                    ObjC的参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.2.4.2" data-path="objc_var_type.html">
+            
+                <a href="objc_var_type.html">
+            
+                    
+                        <b>1.4.2.4.2.</b>
+                    
+                    ObjC的变量类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../data_type/">
+            
+                <a href="../data_type/">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    数据类型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.5.1" data-path="../data_type/nativepointer.html">
+            
+                <a href="../data_type/nativepointer.html">
+            
+                    
+                        <b>1.4.2.5.1.</b>
+                    
+                    NativePointer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../frida_stalker.html">
+            
+                <a href="../frida_stalker.html">
+            
+                    
+                        <b>1.4.2.6.</b>
+                    
+                    Frida的Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../frida_trace/">
+            
+                <a href="../../frida_trace/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../frida_tools/">
+            
+                <a href="../../frida_tools/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    frida-tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../frida_tools/frida_ps.html">
+            
+                <a href="../../frida_tools/frida_ps.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    frida-ps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../frida_tools/frida_ls.html">
+            
+                <a href="../../frida_tools/frida_ls.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    frida-ls
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../frida_tools/frida_ls_devices.html">
+            
+                <a href="../../frida_tools/frida_ls_devices.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    frida-ls-devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../other_related/">
+            
+                <a href="../../other_related/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    其他相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../other_related/frida_server.html">
+            
+                <a href="../../other_related/frida_server.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../frida_example/">
+            
+                <a href="../../../frida_example/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida用法举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../frida_example/online_other_case/">
+            
+                <a href="../../../frida_example/online_other_case/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    网上别人的案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../frida_example/online_other_case/frida_codeshare.html">
+            
+                <a href="../../../frida_example/online_other_case/frida_codeshare.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Frida Codeshare
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../frida_example/frida/">
+            
+                <a href="../../../frida_example/frida/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../frida_example/frida/ios_objc/">
+            
+                <a href="../../../frida_example/frida/ios_objc/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../../frida_example/frida/ios_objc/object/">
+            
+                <a href="../../../frida_example/frida/ios_objc/object/">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    ObjC的Object
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1.1" data-path="../../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                    
+                        <b>1.5.2.1.1.1.</b>
+                    
+                    $methods和$ownMethods
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2" data-path="../../../frida_example/frida/ios_objc/hook_func/">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/">
+            
+                    
+                        <b>1.5.2.1.2.</b>
+                    
+                    Interceptor=hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.2.1" data-path="../../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                    
+                        <b>1.5.2.1.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.2" data-path="../../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.2.</b>
+                    
+                    单个类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.3" data-path="../../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                    
+                        <b>1.5.2.1.2.3.</b>
+                    
+                    所有类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3" data-path="../../../frida_example/frida/ios_objc/apiresolver/">
+            
+                <a href="../../../frida_example/frida/ios_objc/apiresolver/">
+            
+                    
+                        <b>1.5.2.1.3.</b>
+                    
+                    ApiResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.4" data-path="../../../frida_example/frida/ios_objc/stalker/">
+            
+                <a href="../../../frida_example/frida/ios_objc/stalker/">
+            
+                    
+                        <b>1.5.2.1.4.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.4.1" data-path="../../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../../frida_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.5.2.1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../frida_example/frida_trace/">
+            
+                <a href="../../../frida_example/frida_trace/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../frida_example/frida_trace/ios_objc/">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    akd中Apple账号验证过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.1.2" data-path="../../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                <a href="../../../frida_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                    
+                        <b>1.5.3.1.2.</b>
+                    
+                    Preferences中Apple账号登录全过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../summary_note/">
+            
+                <a href="../../../summary_note/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    经验心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../summary_note/hook_func/">
+            
+                <a href="../../../summary_note/hook_func/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../../summary_note/hook_func/frida/">
+            
+                <a href="../../../summary_note/hook_func/frida/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../../../summary_note/hook_func/frida/interceptor/">
+            
+                <a href="../../../summary_note/hook_func/frida/interceptor/">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    Interceptor
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1.1" data-path="../../../summary_note/hook_func/frida/interceptor/stalker.html">
+            
+                <a href="../../../summary_note/hook_func/frida/interceptor/stalker.html">
+            
+                    
+                        <b>1.6.1.1.1.1.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../../summary_note/hook_func/frida_trace.html">
+            
+                <a href="../../../summary_note/hook_func/frida_trace.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../../summary_note/hook_func/common_ios_func.html">
+            
+                <a href="../../../summary_note/hook_func/common_ios_func.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    常用iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../summary_note/util_func/">
+            
+                <a href="../../../summary_note/util_func/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../../summary_note/util_func/common_js/">
+            
+                <a href="../../../summary_note/util_func/common_js/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    通用js函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1.1" data-path="../../../summary_note/util_func/common_js/frida_common.html">
+            
+                <a href="../../../summary_note/util_func/common_js/frida_common.html">
+            
+                    
+                        <b>1.6.2.1.1.</b>
+                    
+                    Frida的js通用函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../../summary_note/util_func/ios/">
+            
+                <a href="../../../summary_note/util_func/ios/">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.2.1" data-path="../../../summary_note/util_func/ios/callstack.html">
+            
+                <a href="../../../summary_note/util_func/ios/callstack.html">
+            
+                    
+                        <b>1.6.2.2.1.</b>
+                    
+                    iOS函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../../summary_note/util_func/android.html">
+            
+                <a href="../../../summary_note/util_func/android.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    Android函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../../summary_note/js/">
+            
+                <a href="../../../summary_note/js/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    js
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../../../summary_note/js/console_log.html">
+            
+                <a href="../../../summary_note/js/console_log.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    console.log日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../../summary_note/build_frida_server/">
+            
+                <a href="../../../summary_note/build_frida_server/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    自己编译frida-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../../../summary_note/common_issue/">
+            
+                <a href="../../../summary_note/common_issue/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    常见问题和报错
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../frida_base_tool/">
+            
+                <a href="../../../frida_base_tool/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    基于Frida的工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../frida_use_case/">
+            
+                <a href="../../../frida_use_case/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    Frida的用途
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../frida_use_case/anti_debug.html">
+            
+                <a href="../../../frida_use_case/anti_debug.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    反调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../../frida_use_case/anti_obfuscation.html">
+            
+                <a href="../../../frida_use_case/anti_obfuscation.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    辅助反混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../../frida_use_case/bypass_encrypted_para.html">
+            
+                <a href="../../../frida_use_case/bypass_encrypted_para.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    绕过参数加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../../frida_use_case/reverse_app/">
+            
+                <a href="../../../frida_use_case/reverse_app/">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    逆向app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >ObjC的变量类型</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="frida中objc的变量类型"><a name="frida中objc的变量类型" class="plugin-anchor" href="#frida中objc的变量类型"><i class="fa fa-link" aria-hidden="true"></i></a>Frida中ObjC的变量类型</h1>
+<h2 id="通用逻辑"><a name="通用逻辑" class="plugin-anchor" href="#通用逻辑"><i class="fa fa-link" aria-hidden="true"></i></a>通用逻辑</h2>
+<ul>
+<li><p>获取ObjC的某个类</p>
+<ul>
+<li>写法：<code>ObjC.classes.someClassName</code> == <code>ObjC.classes[someClassName]</code></li>
+<li><p>举例</p>
+<pre class="language-"><code class="lang-bash">ObjC.classes.NSMutableData.data<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+ObjC.classes.NSString.stringWithString_<span class="token punctuation">(</span><span class="token string">&quot;Crifan Li&quot;</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="objc的object"><a name="objc的object" class="plugin-anchor" href="#objc的object"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Object</code></h2>
+<p>此处的第一个参数和后续的真正的函数的（第一个以及后续的其他）参数，往往是个（iOS中ObjC的）<code>Class</code>或<code>Instance</code>，在<code>Frida</code>中对应的叫做：</p>
+<ul>
+<li><code>ObjC</code>的<code>Object</code></li>
+</ul>
+<h3 id="objc的object的常见的操作"><a name="objc的object的常见的操作" class="plugin-anchor" href="#objc的object的常见的操作"><i class="fa fa-link" aria-hidden="true"></i></a>ObjC的Object的常见的操作</h3>
+<ul>
+<li><p>转换为ObjC的类</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> argSelf <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> argSelfObj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjC<span class="token punctuation">.</span>Object</span><span class="token punctuation">(</span>argSelf<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> args2 <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> args2Obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjC<span class="token punctuation">.</span>Object</span><span class="token punctuation">(</span>args2<span class="token punctuation">)</span>
+<span class="token comment">// const args2Obj = new ObjC.Object(ptr(args2))</span>
+</code></pre>
+</li>
+</ul>
+<p>以及紧接着的：</p>
+<ul>
+<li><p>打印类的信息</p>
+<pre class="language-"><code class="lang-js">  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;argSelfObj: &quot;</span><span class="token punctuation">,</span> argSelfObj<span class="token punctuation">)</span>
+
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;args2Obj: &quot;</span><span class="token punctuation">,</span> args2Obj<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li><p>典型log输出</p>
+<pre class="language-"><code class="lang-bash">argSelfObj:  <span class="token operator">&lt;</span>NSXPCConnection: 0x105744c0<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span> connection from pid <span class="token number">46847</span> on mach <span class="token function">service</span> named com.apple.ak.auth.xpc
+
+args2Obj:  <span class="token operator">&lt;</span>AKAppleIDAuthenticationService: 0x102d3e4d<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>以及，把<code>Object</code>转换成String字符串，再去打印<pre class="language-"><code class="lang-js">  <span class="token keyword">const</span> args2ObjStr <span class="token operator">=</span> args2Obj<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;args2ObjStr: &quot;</span><span class="token punctuation">,</span> args2ObjStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>典型log输出<pre class="language-"><code class="lang-bash">args2ObjStr:  <span class="token operator">&lt;</span>AKAppleIDAuthenticationService: 0x102d3e4d<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+</code></pre>
+<ul>
+<li>注：此处从调试输出类的信息的角度来说，往往<code>Object</code>转换成<code>String</code>后再输出的字符串，和上述直接打印<code>Object</code>的效果是一样的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="objc的object的特殊属性"><a name="objc的object的特殊属性" class="plugin-anchor" href="#objc的object的特殊属性"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Object</code>的<strong>特殊属性</strong></h3>
+<p>对于Frida中的ObjC的Object，有很多内置的特殊的属性：</p>
+<ul>
+<li><code>$kind</code></li>
+<li><code>$super</code></li>
+<li><code>$superClass</code></li>
+<li><code>$class</code></li>
+<li><code>$className</code></li>
+<li><code>$moduleName</code></li>
+<li><code>$protocols</code></li>
+<li><code>$methods</code></li>
+<li><code>$ownMethods</code></li>
+<li><code>$ivars</code></li>
+</ul>
+<p>所以，一些常见操作是：</p>
+<h4 id="classname"><a name="classname" class="plugin-anchor" href="#classname"><i class="fa fa-link" aria-hidden="true"></i></a>$className</h4>
+<ul>
+<li><p>查看（当前<code>Object</code>对象的）<code>类名</code>=<code>类的名字</code></p>
+<pre class="language-"><code class="lang-js">  <span class="token keyword">const</span> argSelfClassName <span class="token operator">=</span> argSelfObj<span class="token punctuation">.</span>$className<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;argSelfClassName: &quot;</span><span class="token punctuation">,</span> argSelfClassName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> args2ObjClassName <span class="token operator">=</span> args2Obj<span class="token punctuation">.</span>$className<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;args2ObjClassName: &quot;</span><span class="token punctuation">,</span> args2ObjClassName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>典型log输出<pre class="language-"><code class="lang-bash">    argSelfClassName:  NSXPCConnection
+    args2ObjClassName:  AKAppleIDAuthenticationService
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="kind"><a name="kind" class="plugin-anchor" href="#kind"><i class="fa fa-link" aria-hidden="true"></i></a><code>$kind</code></h4>
+<ul>
+<li>查看（当前<code>Object</code>对象的）类型<pre class="language-"><code class="lang-js">  <span class="token keyword">const</span> argSelfKind <span class="token operator">=</span> argSelfObj<span class="token punctuation">.</span>$kind<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;argSelfKind:&quot;</span><span class="token punctuation">,</span> argSelfKind<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>典型log输出<pre class="language-"><code class="lang-bash">argSelfKind: instance
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="methods和ownmethods"><a name="methods和ownmethods" class="plugin-anchor" href="#methods和ownmethods"><i class="fa fa-link" aria-hidden="true"></i></a><code>$methods</code>和<code>$ownMethods</code></h4>
+<ul>
+<li>注意<ul>
+<li>此处的<code>$methods</code>、<code>$ownMethods</code>中的<code>method</code><ul>
+<li><code>method</code>的英文单词本意是：<code>方法</code>=<code>函数</code></li>
+<li>但实际上此处：<code>method</code> = 类的<code>property</code> + 类的<code>method</code><ul>
+<li>注：<ul>
+<li><code>property</code>=<code>属性</code></li>
+<li><code>method</code>=<code>方法</code>=<code>函数</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例：<a href="../../../frida_example/frida/ios_objc/object/methods_ownMethods.html">$methods和$ownMethods</a></li>
+</ul>
+<h3 id="objc的object的自己类的属性"><a name="objc的object的自己类的属性" class="plugin-anchor" href="#objc的object的自己类的属性"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Object</code>的<strong>自己类的属性</strong></h3>
+<p>而对于本身<code>ObjC</code>的类的属性，也是支持访问的：</p>
+<ul>
+<li>访问<code>ObjC</code>的自己类的属性的方式：把属性当做函数访问 -》加上括号<code>()</code><ul>
+<li>语法：<code>iosObjcObj.propertyName()</code></li>
+<li>举例<ul>
+<li>获取<a href="https://developer.apple.com/documentation/foundation/nsxpcconnection/1413751-servicename" target="_blank">NSXPCConnection的serviceName</a><ul>
+<li>对于Objc的Object对象：<pre class="language-"><code class="lang-bash">argSelfObj:  <span class="token operator">&lt;</span>NSXPCConnection: 0x105744c0<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span> connection from pid <span class="token number">46847</span> on mach <span class="token function">service</span> named com.apple.ak.auth.xpc
+</code></pre>
+<ul>
+<li>去获取其serviceName属性的代码：<pre class="language-"><code class="lang-js">  <span class="token keyword">const</span> connnServiceNameNSStr <span class="token operator">=</span> argSelfObj<span class="token punctuation">.</span><span class="token function">serviceName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;connnServiceNameNSStr: &quot;</span><span class="token punctuation">,</span> connnServiceNameNSStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>输出log<pre class="language-"><code class="lang-bash">connnServiceNameNSStr:  com.apple.ak.auth.xpc
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>获取<a href="https://developer.apple.com/documentation/foundation/nsstring/1411189-utf8string?language=objc" target="_blank">NSString的UTF8String</a><ul>
+<li>代码：<pre class="language-"><code class="lang-js">  <span class="token keyword">const</span> connnServiceNameJsStr <span class="token operator">=</span> connnServiceNameNSStr<span class="token punctuation">.</span><span class="token function">UTF8String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;connnServiceNameJsStr: &quot;</span><span class="token punctuation">,</span> connnServiceNameJsStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>输出log<pre class="language-"><code class="lang-bash">connnServiceNameJsStr:  com.apple.ak.auth.xpc
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="objc的object的自己类的函数"><a name="objc的object的自己类的函数" class="plugin-anchor" href="#objc的object的自己类的函数"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Object</code>的<strong>自己类的函数</strong></h3>
+<p>Frida中，是可以调用Objc中类的函数的。</p>
+<h4 id="举例：nsstring-stringwithstring"><a name="举例：nsstring-stringwithstring" class="plugin-anchor" href="#举例：nsstring-stringwithstring"><i class="fa fa-link" aria-hidden="true"></i></a>举例：<code>+[NSString stringWithString:]</code></h4>
+<p><code>ObjC</code>中<code>NSString</code>的原始函数：</p>
+<pre class="language-"><code class="lang-objc"><span class="token operator">+</span><span class="token punctuation">[</span>NSString stringWithString<span class="token punctuation">:</span><span class="token string">@&quot;Hello World&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>根据规则：</p>
+<ul>
+<li>把<code>冒号</code>=<code>:</code>变成<code>下划线</code>=<code>_</code></li>
+<li>给函数加上括号<code>()</code></li>
+<li>把参数放到括号<code>()</code>中</li>
+</ul>
+<p>而变成：</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> NSString <span class="token punctuation">}</span> <span class="token operator">=</span> ObjC<span class="token punctuation">.</span>classes<span class="token punctuation">;</span>
+NSString<span class="token punctuation">.</span><span class="token function">stringWithString_</span><span class="token punctuation">(</span><span class="token string">&quot;Hello World&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>或另外一种写法：<pre class="language-"><code class="lang-js">ObjC<span class="token punctuation">.</span>classes<span class="token punctuation">.</span>NSString<span class="token punctuation">.</span><span class="token function">stringWithString_</span><span class="token punctuation">(</span><span class="token string">&quot;Hello World&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="举例：-nsstring-cstringusingencoding"><a name="举例：-nsstring-cstringusingencoding" class="plugin-anchor" href="#举例：-nsstring-cstringusingencoding"><i class="fa fa-link" aria-hidden="true"></i></a>举例：<code>-[NSString cStringUsingEncoding:]</code></h4>
+<ul>
+<li>ObjC的<a href="https://developer.apple.com/documentation/foundation/nsstring/1408489-cstringusingencoding?language=objc" target="_blank">函数</a>：<code>-[NSString cStringUsingEncoding:]</code><ul>
+<li>-&gt; Frida中的调用：<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> NSUTF8StringEncoding <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> curJsStr <span class="token operator">=</span> curNsStr<span class="token punctuation">.</span><span class="token function">cStringUsingEncoding_</span><span class="token punctuation">(</span>NSUTF8StringEncoding<span class="token punctuation">)</span>`
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="objc的selector"><a name="objc的selector" class="plugin-anchor" href="#objc的selector"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>selector</code></h2>
+<p><code>ObjC</code>中，有个稍微特殊一点的变量，叫做<code>SEL</code>=<code>selector</code></p>
+<p>也就是前面获取到的，第二个参数，类型是<code>SEL</code></p>
+<ul>
+<li><code>SEL</code>的常见操作之一就是：转换成字符串，再去打印<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> argSel <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> argSelStr <span class="token operator">=</span> ObjC<span class="token punctuation">.</span><span class="token function">selectorAsString</span><span class="token punctuation">(</span>argSel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;argSelStr: &quot;</span><span class="token punctuation">,</span> argSelStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>典型log输出<pre class="language-"><code class="lang-bash">    argSelStr:  setExportedObject:
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="objc的protocol"><a name="objc的protocol" class="plugin-anchor" href="#objc的protocol"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Protocol</code></h2>
+<h2 id="objc的block"><a name="objc的block" class="plugin-anchor" href="#objc的block"><i class="fa fa-link" aria-hidden="true"></i></a><code>ObjC</code>的<code>Block</code></h2>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-06-27 23:10:39
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="objc_para.html" class="navigation navigation-prev " aria-label="Previous page: ObjC的参数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../data_type/" class="navigation navigation-next " aria-label="Next page: 数据类型">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ObjC的变量类型","level":"1.4.2.4.2","depth":4,"next":{"title":"数据类型","level":"1.4.2.5","depth":3,"path":"use_frida/frida_cli/data_type/README.md","ref":"use_frida/frida_cli/data_type/README.md","articles":[{"title":"NativePointer","level":"1.4.2.5.1","depth":4,"path":"use_frida/frida_cli/data_type/nativepointer.md","ref":"use_frida/frida_cli/data_type/nativepointer.md","articles":[]}]},"previous":{"title":"ObjC的参数","level":"1.4.2.4.1","depth":4,"path":"use_frida/frida_cli/ios_objc/objc_para.md","ref":"use_frida/frida_cli/ios_objc/objc_para.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着给出Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"use_frida/frida_cli/ios_objc/objc_var_type.md","mtime":"2023-06-27T15:10:39.667Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-24T10:57:44.397Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

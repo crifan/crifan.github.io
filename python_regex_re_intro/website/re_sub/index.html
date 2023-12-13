@@ -1,0 +1,725 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>re.sub · Python中正则表达式：re模块详解</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../re_match/" />
+    
+    
+    <link rel="prev" href="../re_search/group/look_around.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"python_regex_re_intro","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../python_re_intro/">
+            
+                <a href="../python_re_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    re简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../re_search/">
+            
+                <a href="../re_search/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    re.search
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../re_search/group/">
+            
+                <a href="../re_search/group/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    分组group
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../re_search/group/named_group.html">
+            
+                <a href="../re_search/group/named_group.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    命名的组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../re_search/group/non_capture_group.html">
+            
+                <a href="../re_search/group/non_capture_group.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    非捕获组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../re_search/group/look_around.html">
+            
+                <a href="../re_search/group/look_around.html">
+            
+                    
+                        <b>1.3.1.3.</b>
+                    
+                    环视断言
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    re.sub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../re_match/">
+            
+                <a href="../re_match/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    re.match
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../re_findall/">
+            
+                <a href="../re_findall/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    re.findall
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../re_finditer/">
+            
+                <a href="../re_finditer/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    re.finditer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../re_diff/README.md">
+            
+                <span>
+            
+                    
+                        <b>1.8.</b>
+                    
+                    对比
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../re_diff/match_findall_finditer.html">
+            
+                <a href="../re_diff/match_findall_finditer.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    match vs findall vs finditer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../re_examples/">
+            
+                <a href="../re_examples/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    re应用举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../re_examples/re_search.html">
+            
+                <a href="../re_examples/re_search.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    re.search实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../re_examples/re_sub.html">
+            
+                <a href="../re_examples/re_sub.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    re.sub实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../re_examples/re_finditer.html">
+            
+                <a href="../re_examples/re_finditer.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    re.finditer实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../learn_re_summary/">
+            
+                <a href="../learn_re_summary/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    re学习心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.11.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.11.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >re.sub</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="resub"><a name="resub" class="plugin-anchor" href="#resub"><i class="fa fa-link" aria-hidden="true"></i></a>re.sub</h1>
+<p>&#x5B98;&#x7F51;&#x6587;&#x6863;&#xFF1A;</p>
+<ul>
+<li>&#x82F1;&#x6587;<ul>
+<li><a href="https://docs.python.org/3/library/re.html#re.sub" target="_blank">re.sub &#x2014; Regular expression operations &#x2014; Python 3 documentation</a><blockquote>
+<p><strong>re.sub(pattern, repl, string, count=0, flags=0)</strong></p>
+<p>Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl. If the pattern isn&#x2019;t found, string is returned unchanged. repl can be a string or a function; if it is a string, any backslash escapes in it are processed. That is, <code>\n</code> is converted to a single newline character, <code>\r</code> is converted to a carriage return, and so forth. Unknown escapes of ASCII letters are reserved for future use and treated as errors. Other unknown escapes such as <code>\&amp;</code> are left alone. Backreferences, such as <code>\6</code>, are replaced with the substring matched by group <code>6</code> in the pattern. For example:</p>
+<pre class="language-"><code class="lang-python"><span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r&apos;def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\):&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>        <span class="token string">r&apos;static PyObject*\npy_\1(void)\n{&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>        <span class="token string">&apos;def myfunc():&apos;</span><span class="token punctuation">)</span>
+<span class="token string">&apos;static PyObject*\npy_myfunc(void)\n{&apos;</span>
+</code></pre>
+<p>If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single <a href="https://docs.python.org/3/library/re.html#match-objects" target="_blank">match object</a> argument, and returns the replacement string. For example:</p>
+<pre class="language-"><code class="lang-python"><span class="token operator">&gt;&gt;</span> <span class="token keyword">def</span> <span class="token function">dashrepl</span><span class="token punctuation">(</span>matchobj<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     <span class="token keyword">if</span> matchobj<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;-&apos;</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">&apos; &apos;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">&apos;-&apos;</span>
+<span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&apos;-{1,2}&apos;</span><span class="token punctuation">,</span> dashrepl<span class="token punctuation">,</span> <span class="token string">&apos;pro----gram-files&apos;</span><span class="token punctuation">)</span>
+<span class="token string">&apos;pro--gram files&apos;</span>
+<span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r&apos;\sAND\s&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos; &amp; &apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;Baked Beans And Spam&apos;</span><span class="token punctuation">,</span> flags<span class="token operator">=</span>re<span class="token punctuation">.</span>IGNORECASE<span class="token punctuation">)</span>
+<span class="token string">&apos;Baked Beans &amp; Spam&apos;</span>
+</code></pre>
+<p>The pattern may be a string or a <a href="https://docs.python.org/3/library/re.html#re-objects" target="_blank">pattern object</a>.</p>
+<p>The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous empty match, so <code>sub(&apos;x*&apos;, &apos;-&apos;, &apos;abxd&apos;)</code> returns <code>&apos;-a-b--d-&apos;</code>.</p>
+<p>In string-type repl arguments, in addition to the character escapes and backreferences described above, <code>\g<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span></code> will use the substring matched by the group named <code>name</code>, as defined by the <code>(?P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>...)</code> syntax. <code>\g<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>number</span><span class="token punctuation">&gt;</span></span></code> uses the corresponding group number; <code>\g&lt;2&gt;</code> is therefore equivalent to <code>\2</code>, but isn&#x2019;t ambiguous in a replacement such as <code>\g&lt;2&gt;0</code>. <code>\20</code> would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character <code>&apos;0&apos;</code>. The backreference <code>\g&lt;0&gt;</code> substitutes in the entire substring matched by the RE.</p>
+<ul>
+<li>Change Log<ul>
+<li>Changed in version 3.1: Added the optional flags argument.</li>
+<li>Changed in version 3.5: Unmatched groups are replaced with an empty string.</li>
+<li>Changed in version 3.6: Unknown escapes in pattern consisting of <code>&apos;\&apos;</code> and an ASCII letter now are errors.</li>
+<li>Changed in version 3.7: Unknown escapes in repl consisting of <code>&apos;\&apos;</code> and an ASCII letter now are errors.</li>
+<li>Changed in version 3.7: Empty matches for the pattern are replaced when adjacent to a previous non-empty match.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>&#x4E2D;&#x6587;<ul>
+<li><a href="https://docs.python.org/zh-cn/3/library/re.html#re.sub" target="_blank">re.sub --- &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x64CD;&#x4F5C; &#x2014; Python 3 &#x6587;&#x6863;</a><blockquote>
+<p><strong>re.sub(pattern, repl, string, count=0, flags=0)</strong></p>
+<p>&#x8FD4;&#x56DE;&#x901A;&#x8FC7;&#x4F7F;&#x7528; <em>repl</em> &#x66FF;&#x6362;&#x5728; <em>string</em> &#x6700;&#x5DE6;&#x8FB9;&#x975E;&#x91CD;&#x53E0;&#x51FA;&#x73B0;&#x7684; <em>pattern</em> &#x800C;&#x83B7;&#x5F97;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002; &#x5982;&#x679C;&#x6837;&#x5F0F;&#x6CA1;&#x6709;&#x627E;&#x5230;&#xFF0C;&#x5219;&#x4E0D;&#x52A0;&#x6539;&#x53D8;&#x5730;&#x8FD4;&#x56DE; <em>string</em>&#x3002; <em>repl</em> &#x53EF;&#x4EE5;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x51FD;&#x6570;&#xFF1B;&#x5982;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5219;&#x5176;&#x4E2D;&#x4EFB;&#x4F55;&#x53CD;&#x659C;&#x6760;&#x8F6C;&#x4E49;&#x5E8F;&#x5217;&#x90FD;&#x4F1A;&#x88AB;&#x5904;&#x7406;&#x3002; &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;<code>\n</code> &#x4F1A;&#x88AB;&#x8F6C;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;&#xFF0C;<code>\r</code> &#x4F1A;&#x88AB;&#x8F6C;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x56DE;&#x8F66;&#x9644;&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#x3002; &#x672A;&#x77E5;&#x7684; <code>ASCII</code> &#x5B57;&#x7B26;&#x8F6C;&#x4E49;&#x5E8F;&#x5217;&#x4FDD;&#x7559;&#x5728;&#x672A;&#x6765;&#x4F7F;&#x7528;&#xFF0C;&#x4F1A;&#x88AB;&#x5F53;&#x4F5C;&#x9519;&#x8BEF;&#x6765;&#x5904;&#x7406;&#x3002; &#x5176;&#x4ED6;&#x672A;&#x77E5;&#x8F6C;&#x4E49;&#x5E8F;&#x5217;&#x4F8B;&#x5982; <code>\&amp;</code> &#x4F1A;&#x4FDD;&#x6301;&#x539F;&#x6837;&#x3002; &#x5411;&#x540E;&#x5F15;&#x7528;&#x50CF;&#x662F; <code>\6</code> &#x4F1A;&#x7528;&#x6837;&#x5F0F;&#x4E2D;&#x7B2C; 6 &#x7EC4;&#x6240;&#x5339;&#x914D;&#x5230;&#x7684;&#x5B50;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x66FF;&#x6362;&#x3002; &#x4F8B;&#x5982;:</p>
+<pre class="language-"><code class="lang-python"><span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r&apos;def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\):&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>        <span class="token string">r&apos;static PyObject*\npy_\1(void)\n{&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>        <span class="token string">&apos;def myfunc():&apos;</span><span class="token punctuation">)</span>
+<span class="token string">&apos;static PyObject*\npy_myfunc(void)\n{&apos;</span>
+</code></pre>
+<p>&#x5982;&#x679C; <em>repl</em> &#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x5B83;&#x4F1A;&#x5BF9;&#x6BCF;&#x4E2A;&#x975E;&#x91CD;&#x590D;&#x7684; <em>pattern</em> &#x7684;&#x60C5;&#x51B5;&#x8C03;&#x7528;&#x3002;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A; &#x5339;&#x914D;&#x5BF9;&#x8C61; &#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x66FF;&#x6362;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x6BD4;&#x5982;</p>
+<pre class="language-"><code class="lang-python"><span class="token operator">&gt;&gt;</span> <span class="token keyword">def</span> <span class="token function">dashrepl</span><span class="token punctuation">(</span>matchobj<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     <span class="token keyword">if</span> matchobj<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;-&apos;</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">&apos; &apos;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token string">&apos;-&apos;</span>
+<span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&apos;-{1,2}&apos;</span><span class="token punctuation">,</span> dashrepl<span class="token punctuation">,</span> <span class="token string">&apos;pro----gram-files&apos;</span><span class="token punctuation">)</span>
+<span class="token string">&apos;pro--gram files&apos;</span>
+<span class="token operator">&gt;&gt;</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r&apos;\sAND\s&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos; &amp; &apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;Baked Beans And Spam&apos;</span><span class="token punctuation">,</span> flags<span class="token operator">=</span>re<span class="token punctuation">.</span>IGNORECASE<span class="token punctuation">)</span>
+<span class="token string">&apos;Baked Beans &amp; Spam&apos;</span>
+</code></pre>
+<p>&#x6837;&#x5F0F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x8005;&#x4E00;&#x4E2A; <a href="https://docs.python.org/zh-cn/3/library/re.html#re-objects" target="_blank">&#x6837;&#x5F0F;&#x5BF9;&#x8C61;</a> &#x3002;</p>
+<p>&#x53EF;&#x9009;&#x53C2;&#x6570; <em>count</em> &#x662F;&#x8981;&#x66FF;&#x6362;&#x7684;&#x6700;&#x5927;&#x6B21;&#x6570;&#xFF1B;<em>count</em> &#x5FC5;&#x987B;&#x662F;&#x975E;&#x8D1F;&#x6574;&#x6570;&#x3002;&#x5982;&#x679C;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x6216;&#x8005;&#x8BBE;&#x7F6E;&#x4E3A;0&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5339;&#x914D;&#x90FD;&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x3002;&#x7A7A;&#x5339;&#x914D;&#x53EA;&#x5728;&#x4E0D;&#x76F8;&#x4E34;&#x8FDE;&#x7EED;&#x7684;&#x60C5;&#x51B5;&#x88AB;&#x66F4;&#x66FF;&#xFF0C;&#x6240;&#x4EE5; <code>sub(&apos;x*&apos;, &apos;-&apos;, &apos;abxd&apos;)</code> &#x8FD4;&#x56DE; <code>&apos;-a-b--d-&apos;</code> &#x3002;</p>
+<p>&#x5728;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x7684; <em>repl</em> &#x53C2;&#x6570;&#x91CC;&#xFF0C;&#x5982;&#x4E0A;&#x6240;&#x8FF0;&#x7684;&#x8F6C;&#x4E49;&#x548C;&#x5411;&#x540E;&#x5F15;&#x7528;&#x4E2D;&#xFF0C;<code>\g<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span></code> &#x4F1A;&#x4F7F;&#x7528;&#x547D;&#x540D;&#x7EC4;&#x5408; name&#xFF0C;&#xFF08;&#x5728; <code>(?P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>&#x2026;)</code> &#x8BED;&#x6CD5;&#x4E2D;&#x5B9A;&#x4E49;&#xFF09; <code>\g<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>number</span><span class="token punctuation">&gt;</span></span></code> &#x4F1A;&#x4F7F;&#x7528;&#x6570;&#x5B57;&#x7EC4;&#xFF1B;<code>\g&lt;2&gt;</code> &#x5C31;&#x662F; <code>\2</code>&#xFF0C;&#x4F46;&#x5B83;&#x907F;&#x514D;&#x4E86;&#x4E8C;&#x4E49;&#x6027;&#xFF0C;&#x5982; <code>\g&lt;2&gt;0</code>&#x3002; <code>\20</code> &#x5C31;&#x4F1A;&#x88AB;&#x89E3;&#x91CA;&#x4E3A;&#x7EC4;20&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7EC4;2&#x540E;&#x9762;&#x8DDF;&#x968F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26; <code>&apos;0&apos;</code>&#x3002;&#x5411;&#x540E;&#x5F15;&#x7528; <code>\g&lt;0&gt;</code> &#x628A; <em>pattern</em> &#x4F5C;&#x4E3A;&#x4E00;&#x6574;&#x4E2A;&#x7EC4;&#x8FDB;&#x884C;&#x5F15;&#x7528;&#x3002;</p>
+<ul>
+<li>&#x66F4;&#x65B0;&#x65E5;&#x5FD7;<ul>
+<li>&#x5728; 3.1 &#x7248;&#x66F4;&#x6539;: &#x589E;&#x52A0;&#x4E86;&#x53EF;&#x9009;&#x6807;&#x8BB0;&#x53C2;&#x6570;&#x3002;</li>
+<li>&#x5728; 3.5 &#x7248;&#x66F4;&#x6539;: &#x4E0D;&#x5339;&#x914D;&#x7684;&#x7EC4;&#x5408;&#x66FF;&#x6362;&#x4E3A;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#x3002;</li>
+<li>&#x5728; 3.6 &#x7248;&#x66F4;&#x6539;: <em>pattern</em> &#x4E2D;&#x7684;&#x672A;&#x77E5;&#x8F6C;&#x4E49;&#xFF08;&#x7531; <code>&apos;\&apos;</code> &#x548C;&#x4E00;&#x4E2A; <code>ASCII</code> &#x5B57;&#x7B26;&#x7EC4;&#x6210;&#xFF09;&#x88AB;&#x89C6;&#x4E3A;&#x9519;&#x8BEF;&#x3002;</li>
+<li>&#x5728; 3.7 &#x7248;&#x66F4;&#x6539;: <em>repl</em> &#x4E2D;&#x7684;&#x672A;&#x77E5;&#x8F6C;&#x4E49;&#xFF08;&#x7531; <code>&apos;\&apos;</code> &#x548C;&#x4E00;&#x4E2A; <code>ASCII</code> &#x5B57;&#x7B26;&#x7EC4;&#x6210;&#xFF09;&#x88AB;&#x89C6;&#x4E3A;&#x9519;&#x8BEF;&#x3002;</li>
+<li>&#x5728; 3.7 &#x7248;&#x66F4;&#x6539;: &#x6837;&#x5F0F;&#x4E2D;&#x7684;&#x7A7A;&#x5339;&#x914D;&#x76F8;&#x90BB;&#x63A5;&#x65F6;&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x3002;</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x4E3E;&#x4F8B;"><a name="&#x4E3E;&#x4F8B;" class="plugin-anchor" href="#&#x4E3E;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E3E;&#x4F8B;</h2>
+<p>&#x628A;</p>
+<pre class="language-"><code class="lang-markdown">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;<span class="token code keyword">`20190825`</span>
+</code></pre>
+<p>&#x4E2D;&#x7684;&#x65E5;&#x671F;&#x6362;&#x6210;&#x6700;&#x65B0;&#x7684;&#xFF0C;&#x6BD4;&#x5982;<code>20200919</code></p>
+<p>&#x5219;&#x53EF;&#x4EE5;&#x7528;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre class="language-"><code class="lang-py">oldReamdMdStr <span class="token operator">=</span> <span class="token string">&quot;&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;`20190825`&quot;</span>
+newLastUpdateStr <span class="token operator">=</span> <span class="token string">&quot;&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;`20200919`&quot;</span>
+newReamdMdStr <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&quot;&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;`\d+`&quot;</span><span class="token punctuation">,</span> newLastUpdateStr<span class="token punctuation">,</span> oldReamdMdStr<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x8BE6;&#x7EC6;&#x8FC7;&#x7A0B;&#x53EF;&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li>&#x3010;&#x5DF2;&#x89E3;&#x51B3;&#x3011;&#x7ED9;crifan&#x7684;gitbook&#x7684;template&#x6DFB;&#x52A0;&#x90E8;&#x7F72;&#x65F6;&#x66F4;&#x65B0;github.io&#x7684;README</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2020-09-23 19:53:44
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../re_search/group/look_around.html" class="navigation navigation-prev " aria-label="Previous page: 环视断言">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../re_match/" class="navigation navigation-next " aria-label="Next page: re.match">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"re.sub","level":"1.4","depth":1,"next":{"title":"re.match","level":"1.5","depth":1,"path":"re_match/README.md","ref":"re_match/README.md","articles":[]},"previous":{"title":"环视断言","level":"1.3.1.3","depth":3,"path":"re_search/group/look_around.md","ref":"re_search/group/look_around.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/python_regex_re_intro/pdf/python_regex_re_intro.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/python_regex_re_intro/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"python_regex_re_intro","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Python中正则表达式：re模块详解","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"整理Python中正则表达式re模块，解释常见正则函数的含义、语法，以及给出详细的例子详尽阐述具体如何使用。常见正则函数包括re.search、re.sub、re.match、re.findall、re.finditer等，最后总结出相关心得。以及详细对比re.search、re.findall、re.finditer的详细用法和区别。"},"file":{"path":"re_sub/README.md","mtime":"2020-09-23T11:53:44.459Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-17T04:00:21.643Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
