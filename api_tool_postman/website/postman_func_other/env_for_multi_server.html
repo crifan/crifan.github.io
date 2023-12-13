@@ -1,0 +1,845 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>用环境变量实现多服务器版本 · API开发利器：Postman</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="code_generation_tools.html" />
+    
+    
+    <link rel="prev" href="history.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"api_tool_postman","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../postman_intro/">
+            
+                <a href="../postman_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Postman简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../postman_download/">
+            
+                <a href="../postman_download/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Postman下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../postman_func_req/">
+            
+                <a href="../postman_func_req/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Postman功能：Request
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../postman_func_req/request.html">
+            
+                <a href="../postman_func_req/request.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    新建Request
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../postman_func_req/json_syntax.html">
+            
+                <a href="../postman_func_req/json_syntax.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    JSON语法检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../postman_func_req/get_multi_para.html">
+            
+                <a href="../postman_func_req/get_multi_para.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    GET的Request的多参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../postman_func_req/add_api_desc.html">
+            
+                <a href="../postman_func_req/add_api_desc.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    给接口添加描述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../postman_func_resp/">
+            
+                <a href="../postman_func_resp/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Postman功能：Response
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../postman_func_resp/resp_data_mode.html">
+            
+                <a href="../postman_func_resp/resp_data_mode.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Response数据显示模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../postman_func_resp/resp_other.html">
+            
+                <a href="../postman_func_resp/resp_other.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Response其他功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../postman_func_resp/save_multi_example.html">
+            
+                <a href="../postman_func_resp/save_multi_example.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    保存多个Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Postman功能：其他工具和功能
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="collection.html">
+            
+                <a href="collection.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    分组Collection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="history.html">
+            
+                <a href="history.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    历史记录History
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="env_for_multi_server.html">
+            
+                <a href="env_for_multi_server.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    用环境变量实现多服务器版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="code_generation_tools.html">
+            
+                <a href="code_generation_tools.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    代码生成工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="runner_test_api.html">
+            
+                <a href="runner_test_api.html">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    测试接口
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="mock_server.html">
+            
+                <a href="mock_server.html">
+            
+                    
+                        <b>1.6.6.</b>
+                    
+                    Mock Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../postman_func_ui_cfg/">
+            
+                <a href="../postman_func_ui_cfg/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    Postman功能：界面和配置
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../postman_func_ui_cfg/multi_tab.html">
+            
+                <a href="../postman_func_ui_cfg/multi_tab.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    多Tab分页
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../postman_func_ui_cfg/view_mode.html">
+            
+                <a href="../postman_func_ui_cfg/view_mode.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    界面查看模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../postman_func_ui_cfg/config_theme.html">
+            
+                <a href="../postman_func_ui_cfg/config_theme.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    多颜色主题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../postman_api_doc/">
+            
+                <a href="../postman_api_doc/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    Postman生成API文档
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../postman_api_doc/preview_publish_api_doc.html">
+            
+                <a href="../postman_api_doc/preview_publish_api_doc.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    预览和发布API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >用环境变量实现多服务器版本</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><a name="&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;" class="plugin-anchor" href="#&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;</h1>
+<h2 id="&#x73B0;&#x5B58;&#x95EE;&#x9898;"><a name="&#x73B0;&#x5B58;&#x95EE;&#x9898;" class="plugin-anchor" href="#&#x73B0;&#x5B58;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x73B0;&#x5B58;&#x95EE;&#x9898;</h2>
+<p>&#x5728;&#x6D4B;&#x8BD5;API&#x671F;&#x95F4;&#xFF0C;&#x5F80;&#x5F80;&#x5B58;&#x5728;&#x591A;&#x79CD;&#x73AF;&#x5883;&#xFF0C;&#x5BF9;&#x5E94;IP&#x5730;&#x5740;&#xFF08;&#x6216;&#x57DF;&#x540D;&#x4E5F;&#x4E0D;&#x540C;&#xFF09;</p>
+<p>&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li><strong>Prod</strong>: <code>http://116.62.25.57/ucows</code><ul>
+<li>&#x7528;&#x4E8E;&#x5F00;&#x53D1;&#x5B8C;&#x6210;&#x53D1;&#x5E03;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;</li>
+</ul>
+</li>
+<li><strong>Dev</strong>: <code>http://123.206.191.125/ucows</code><ul>
+<li>&#x7528;&#x4E8E;&#x5F00;&#x53D1;&#x671F;&#x95F4;&#x7684;&#x7EBF;&#x4E0A;&#x7684;Development&#x7684;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;</li>
+</ul>
+</li>
+<li><strong>LocalTest</strong>: <code>http://192.168.0.140:80/ucows</code><ul>
+<li>&#x7528;&#x4E8E;&#x5F00;&#x53D1;&#x671F;&#x95F4;&#x914D;&#x5408;&#x540E;&#x53F0;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x7684;&#x672C;&#x5730;&#x5C40;&#x57DF;&#x7F51;&#x5185;&#x7684;&#x672C;&#x5730;&#x73AF;&#x5883;&#xFF0C;&#x7528;&#x4E8E;&#x8054;&#x5408;&#x8C03;&#x8BD5;API&#x63A5;&#x53E3;</li>
+</ul>
+</li>
+</ul>
+<p>&#x800C;&#x5728;&#x6D4B;&#x8BD5;API&#x671F;&#x95F4;&#xFF0C;&#x5F80;&#x5F80;&#x9700;&#x8981;&#x624B;&#x52A8;&#x53BB;&#x4FEE;&#x6539;API&#x7684;&#x5730;&#x5740;&#xFF1A;</p>
+<p><img src="../assets/img/postman_edit_api_server_address.png" alt="Postman&#x4FEE;&#x6539;APi&#x63A5;&#x53E3;&#x4E2D;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;"></p>
+<p>&#x6548;&#x7387;&#x6BD4;&#x8F83;&#x4F4E;&#xFF0C;&#x4E14;&#x5730;&#x5740;&#x66F4;&#x6362;&#x540E;&#x4E4B;&#x524D;&#x5730;&#x5740;&#x5C31;&#x6CA1;&#x6CD5;&#x4FDD;&#x7559;&#x4E86;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x4E14;&#x6839;&#x636E;&#x4E0D;&#x540C;IP&#x5730;&#x5740;&#xFF08;&#x6216;&#x8005;&#x57DF;&#x540D;&#xFF09;&#x4E5F;&#x4E0D;&#x5BB9;&#x6613;&#x8BC6;&#x522B;&#x662F;&#x54EA;&#x5957;&#x73AF;&#x5883;&#x3002;</p>
+<h2 id="&#x89E3;&#x51B3;&#x529E;&#x6CD5;"><a name="&#x89E3;&#x51B3;&#x529E;&#x6CD5;" class="plugin-anchor" href="#&#x89E3;&#x51B3;&#x529E;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x51B3;&#x529E;&#x6CD5;</h2>
+<h3 id="&#x5C0F;&#x5E7A;&#x9E21;&#x7684;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x548C;&#x672C;&#x673A;&#x73AF;&#x5883;&#x7684;&#x5207;&#x6362;"><a name="&#x5C0F;&#x5E7A;&#x9E21;&#x7684;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x548C;&#x672C;&#x673A;&#x73AF;&#x5883;&#x7684;&#x5207;&#x6362;" class="plugin-anchor" href="#&#x5C0F;&#x5E7A;&#x9E21;&#x7684;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x548C;&#x672C;&#x673A;&#x73AF;&#x5883;&#x7684;&#x5207;&#x6362;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5C0F;&#x5E7A;&#x9E21;&#x7684;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x548C;&#x672C;&#x673A;&#x73AF;&#x5883;&#x7684;&#x5207;&#x6362;</h3>
+<p>&#x4E4B;&#x524D;&#x5F97;&#x77E5;<a href="http://www.xiaoyaoji.cn/" target="_blank">&#x5C0F;&#x5E7A;&#x9E21;&#xFF0C;&#x7B80;&#x5355;&#x597D;&#x7528;&#x7684;&#x63A5;&#x53E3;&#x6587;&#x6863;&#x7BA1;&#x7406;&#x5DE5;&#x5177;</a>
+-&#x300B;<a href="http://www.xiaoyaoji.cn/doc/17KoYodbDR" target="_blank">&#x53D1;&#x9001;JSON-&#x6F14;&#x793A;&#x9879;&#x76EE;</a>
+&#x4E2D;&#x6709;&#x4E2A;&#x597D;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF1A;</p>
+<p>&#x652F;&#x6301;&#x4E0D;&#x540C;&#x73AF;&#x5883;&#xFF1A;</p>
+<ul>
+<li>&#x7EBF;&#x4E0A;&#x73AF;&#x5883;</li>
+<li>&#x672C;&#x5730;&#x73AF;&#x5883;</li>
+</ul>
+<p>&#x7B49;&#xFF0C;&#x5F53;&#x65F6;&#x4EE5;&#x4E3A;Postman&#x4E0D;&#x652F;&#x6301;&#x5462;</p>
+<h3 id="postman&#x652F;&#x6301;&#x7528;environment&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53BB;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><a name="postman&#x652F;&#x6301;&#x7528;environment&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53BB;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;" class="plugin-anchor" href="#postman&#x652F;&#x6301;&#x7528;environment&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53BB;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>Postman&#x652F;&#x6301;&#x7528;Environment&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53BB;&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;</h3>
+<p>&#x540E;&#x6765;&#x53D1;&#x73B0;Postman&#x4E2D;&#xFF0C;&#x6709;Environment&#x548C;Global Variable&#xFF0C;&#x7528;&#x4E8E;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x73AF;&#x5883;&#x7684;&#x7BA1;&#x7406;&#xFF1A;</p>
+<p><img src="../assets/img/postman_environment_globals.png" alt="Postman&#x4E2D;Environment&#x548C;Globals"></p>
+<p>-&#x300B;&#x5F88;&#x660E;&#x663E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5B9E;&#x73B0;&#x4E0D;&#x7528;&#x624B;&#x52A8;&#x4FEE;&#x6539;url&#x4E2D;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#xFF0C;&#x4ECE;&#x800C;&#x52A8;&#x6001;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x652F;&#x6301;&#x4E0D;&#x540C;&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;:</p>
+<ul>
+<li>Production&#x751F;&#x4EA7;&#x73AF;&#x5883;</li>
+<li>Development&#x5F00;&#x53D1;&#x73AF;&#x5883;</li>
+<li>Local&#x672C;&#x5730;&#x5C40;&#x57DF;&#x7F51;&#x73AF;&#x5883;</li>
+</ul>
+<h4 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;enviroment&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;enviroment&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;" class="plugin-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;enviroment&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x4F7F;&#x7528;Enviroment&#x5B9E;&#x73B0;&#x591A;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;</h4>
+<p><img src="../assets/img/postman_eye_click_add.png" alt="Postman&#x4E2D;&#x70B9;&#x51FB;&#x1F440;&#x7684;Add"></p>
+<p>&#x6216;&#x8005;&#xFF1A;</p>
+<p><img src="../assets/img/postman_manage_environments.png" alt="Postman&#x4E2D;&#x70B9;&#x51FB;&#x8BBE;&#x7F6E;Manage Enviroments"></p>
+<p><img src="../assets/img/postman_manage_environments_add.png" alt="Postman&#x4E2D;Manage Enviroments&#x7684;Add"></p>
+<blockquote>
+<p>Environments are a group of variables &amp; values, that allow you to quickly switch the context for your requests and collections.</p>
+<p>Learn more about environments</p>
+<p>You can declare a variable in an environment and give it a starting value, then use it in a request by putting the variable name within curly-braces. Create an environment to get started.</p>
+</blockquote>
+<p>&#x8F93;&#x5165;Key&#x548C;value&#xFF1A;</p>
+<p><img src="../assets/img/postman_environment_key_value.png" alt="Postman&#x4E2D;Enviroment&#x8F93;&#x5165;key&#x548C;value"></p>
+<p>&#x70B9;&#x51FB;Add&#x540E;&#xFF1A;</p>
+<p><img src="../assets/img/postman_save_environment.png" alt="Postman&#x4FDD;&#x5B58;Enviroment"></p>
+<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title" id="&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x5730;&#x65B9;"><i class="fa fa-info"></i> &#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x5730;&#x65B9;</h3></div><div class="panel-body"><ul>
+<li>URL</li>
+<li>URL params</li>
+<li>Header values</li>
+<li>form-data/url-encoded values</li>
+<li>Raw body content</li>
+<li>Helper fields</li>
+<li>&#x5199;test&#x6D4B;&#x8BD5;&#x811A;&#x672C;&#x4E2D;<ul>
+<li>&#x901A;&#x8FC7;postman&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;</li>
+</ul>
+</li>
+</ul></div></div>
+<p>&#x6B64;&#x5904;&#x628A;&#x4E4B;&#x524D;&#x7684;&#x5728;url&#x4E2D;&#x7684;IP&#x5730;&#x5740;&#xFF08;&#x6216;&#x57DF;&#x540D;&#xFF09;&#x6362;&#x6210;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF1A;</p>
+<p><img src="../assets/img/postman_ip_to_environment_value.png" alt="Postman&#x628A;IP&#x6362;&#x6210;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></p>
+<p>&#x9F20;&#x6807;&#x79FB;&#x52A8;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E0A;&#xFF0C;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x663E;&#x793A;&#x51FA;&#x5177;&#x4F53;&#x7684;&#x503C;&#xFF1A;</p>
+<p><img src="../assets/img/postman_environment_value_mouse_tip.png" alt="Postman&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x9F20;&#x6807;&#x52A8;&#x6001;&#x63D0;&#x793A;"></p>
+<p>&#x518D;&#x53BB;&#x6DFB;&#x52A0;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF1A;</p>
+<p><img src="../assets/img/postman_add_dev_environment.png" alt="Postman&#x6DFB;&#x52A0;Dev&#x73AF;&#x5883;&#x53D8;&#x91CF;"></p>
+<p>&#x5219;&#x53EF;&#x6DFB;&#x52A0;&#x5B8C;2&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x8868;&#x793A;&#x4E24;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#xFF0C;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#xFF1A;</p>
+<p><img src="../assets/img/postman_added_two_environment.png" alt="Postman&#x5DF2;&#x6DFB;&#x52A0;2&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;"></p>
+<p>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x5207;&#x6362;&#x4E0D;&#x540C;&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#x4E86;&#xFF1A;</p>
+<p><img src="../assets/img/postman_switch_diff_server.png" alt="Postman&#x5207;&#x6362;&#x4E0D;&#x540C;&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;"></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x540C;&#x6837;&#x7684;&#x53D8;&#x91CF;server_address&#xFF0C;&#x5728;&#x5207;&#x6362;&#x540E;&#x5BF9;&#x5E94;IP&#x5730;&#x5740;&#x5C31;&#x53D8;&#x6210;&#x5E0C;&#x671B;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x7684;IP&#x4E86;&#xFF1A;</p>
+<p><img src="../assets/img/postman_see_dev_ip.png" alt="Postman&#x5207;&#x6362;&#x5230;Dev&#x7684;IP&#x5730;&#x5740;"></p>
+<h4 id="postman&#x5BFC;&#x51FA;api&#x6587;&#x6863;&#x4E2D;&#x591A;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x6548;&#x679C;"><a name="postman&#x5BFC;&#x51FA;api&#x6587;&#x6863;&#x4E2D;&#x591A;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x6548;&#x679C;" class="plugin-anchor" href="#postman&#x5BFC;&#x51FA;api&#x6587;&#x6863;&#x4E2D;&#x591A;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x6548;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>Postman&#x5BFC;&#x51FA;API&#x6587;&#x6863;&#x4E2D;&#x591A;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x6548;&#x679C;</h4>
+<p>&#x987A;&#x5E26;&#x4E5F;&#x53BB;&#x770B;&#x770B;&#xFF0C;&#x5BFC;&#x51FA;&#x4E3A;API&#x6587;&#x6863;&#x540E;&#xFF0C;&#x5E26;&#x4E86;&#x8FD9;&#x79CD;Environment&#x7684;&#x53D8;&#x91CF;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6587;&#x6863;&#x957F;&#x4EC0;&#x4E48;&#x6837;&#x5B50;&#xFF1A;</p>
+<p>&#x53D1;&#x73B0;&#x662F;&#x5728;&#x53D1;&#x5E03;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x9009;&#x62E9;&#x5BF9;&#x5E94;&#x7684;&#x73AF;&#x5883;&#x7684;&#xFF1A;</p>
+<p><img src="../assets/img/postman_select_env_before_publish.png" alt="Postman&#x53D1;&#x5E03;&#x524D;&#x8981;&#x9009;&#x62E9;&#x73AF;&#x5883;"></p>
+<p><img src="../assets/img/postman_select_some_env.png" alt="Postman&#x9009;&#x62E9;&#x67D0;&#x4E2A;&#x73AF;&#x5883;"></p>
+<p><img src="../assets/img/postman_selected_some_env.png" alt="Postman&#x5DF2;&#x9009;&#x62E9;&#x4E86;&#x67D0;&#x4E2A;&#x73AF;&#x5883;"></p>
+<p>&#x53D1;&#x5E03;&#x540E;&#x7684;&#x6587;&#x6863;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6240;&#x9009;&#x73AF;&#x5883;&#x548C;&#x5BF9;&#x5E94;&#x670D;&#x52A1;&#x5668;&#x7684;IP&#x7684;&#xFF1A;</p>
+<p><img src="../assets/img/postman_see_env_ip.png" alt="Postman&#x53D1;&#x5E03;&#x540E;&#x770B;&#x5230;&#x6240;&#x9009;&#x73AF;&#x5883;&#x7684;IP"></p>
+<p>&#x5F53;&#x7136;&#x53D1;&#x5E03;&#x6587;&#x6863;&#x540E;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x65F6;&#x5207;&#x6362;&#x73AF;&#x5883;&#xFF1A;</p>
+<p><img src="../assets/img/postman_published_can_switch_env.png" alt="Postman&#x53D1;&#x5E03;&#x540E;&#x53EF;&#x4EE5;&#x5207;&#x6362;&#x73AF;&#x5883;"></p>
+<p><img src="../assets/img/postman_switched_to_some_env_see_ip.png" alt="Postman&#x5207;&#x6362;&#x5230;&#x67D0;&#x4E2A;&#x73AF;&#x5883;&#x770B;&#x5230;IP"></p>
+<h4 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x597D;&#x5904;"><a name="&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x597D;&#x5904;" class="plugin-anchor" href="#&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x597D;&#x5904;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x597D;&#x5904;</h4>
+<p>&#x5F53;&#x66F4;&#x6362;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x53D8;&#x91CF;&#x7684;IP&#x5730;&#x5740;&#xFF1A;</p>
+<p><img src="../assets/img/postman_env_will_change_ip.png" alt="Postman&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x8981;&#x66F4;&#x6362;IP&#x5730;&#x5740;"></p>
+<p><img src="../assets/img/postman_env_changed_new_ip.png" alt="Postman&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x66F4;&#x6362;&#x4E3A;&#x65B0;IP"></p>
+<p>&#x5373;&#x53EF;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#xFF0C;&#x5F53;&#x9F20;&#x6807;&#x79FB;&#x52A8;&#x5230;&#x53D8;&#x91CF;&#x4E0A;&#x5373;&#x53EF;&#x770B;&#x5230;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="../assets/img/postman_mouse_move_show_new_ip.png" alt="Postman&#x9F20;&#x6807;&#x79FB;&#x52A8;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x663E;&#x793A;&#x65B0;IP"></p>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2018-06-16 12:44:52
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="history.html" class="navigation navigation-prev " aria-label="Previous page: 历史记录History">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="code_generation_tools.html" class="navigation navigation-next " aria-label="Next page: 代码生成工具">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"用环境变量实现多服务器版本","level":"1.6.3","depth":2,"next":{"title":"代码生成工具","level":"1.6.4","depth":2,"path":"postman_func_other/code_generation_tools.md","ref":"postman_func_other/code_generation_tools.md","articles":[]},"previous":{"title":"历史记录History","level":"1.6.2","depth":2,"path":"postman_func_other/history.md","ref":"postman_func_other/history.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/api_tool_postman/pdf/api_tool_postman.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/api_tool_postman/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"api_tool_postman","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"API开发利器：Postman","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"在涉及[HTTP](http://book.crifan.com/books/http_summary/website)方面的后台[REST API](http://book.crifan.com/books/http_restful_api/website)开发时，往往会需要调试API接口。这方面有很多工具，其中最好用的算是接下来要介绍的**Postman**了。"},"file":{"path":"postman_func_other/env_for_multi_server.md","mtime":"2018-06-16T04:44:52.776Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-16T15:53:49.775Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

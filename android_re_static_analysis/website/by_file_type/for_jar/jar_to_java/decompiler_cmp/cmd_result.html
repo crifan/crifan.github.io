@@ -1,0 +1,2008 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>对比结果 · Android逆向：静态分析</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../common_decompiler/" />
+    
+    
+    <link rel="prev" href="jd_gui_cfr_procyon_jadx.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../overview/">
+            
+                <a href="../../../../overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Android逆向静态分析概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../../by_layer/">
+            
+                <a href="../../../../by_layer/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    按层级
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    按文件格式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../for_apk/">
+            
+                <a href="../../../for_apk/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    针对apk
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../for_apk/check_apk_info/">
+            
+                <a href="../../../for_apk/check_apk_info/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    查看apk信息
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../../for_apk/check_apk_info/aapt.html">
+            
+                <a href="../../../for_apk/check_apk_info/aapt.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    aapt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../../for_apk/check_apk_info/apk_analyzer.html">
+            
+                <a href="../../../for_apk/check_apk_info/apk_analyzer.html">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    APK Analyzer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../../for_apk/check_apk_info/classyshark.html">
+            
+                <a href="../../../for_apk/check_apk_info/classyshark.html">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    ClassyShark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../for_apk/unpack_apk/">
+            
+                <a href="../../../for_apk/unpack_apk/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    apk解包
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../../for_apk/unpack_apk/apktool.html">
+            
+                <a href="../../../for_apk/unpack_apk/apktool.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    apktool
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../../../for_apk/apk_to_java/">
+            
+                <a href="../../../for_apk/apk_to_java/">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    apk转java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.3.1" data-path="../../../for_apk/apk_to_java/jadx/">
+            
+                <a href="../../../for_apk/apk_to_java/jadx/">
+            
+                    
+                        <b>1.4.1.3.1.</b>
+                    
+                    jadx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.2" data-path="../../../for_apk/apk_to_java/jeb.html">
+            
+                <a href="../../../for_apk/apk_to_java/jeb.html">
+            
+                    
+                        <b>1.4.1.3.2.</b>
+                    
+                    JEB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.3" data-path="../../../for_apk/apk_to_java/gda.html">
+            
+                <a href="../../../for_apk/apk_to_java/gda.html">
+            
+                    
+                        <b>1.4.1.3.3.</b>
+                    
+                    GDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../for_dex/">
+            
+                <a href="../../../for_dex/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    针对dex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../for_dex/crack_export_dex/">
+            
+                <a href="../../../for_dex/crack_export_dex/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    砸壳导出dex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../../for_dex/crack_export_dex/check_shell_provider.html">
+            
+                <a href="../../../for_dex/crack_export_dex/check_shell_provider.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    判断加固方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2" data-path="../../../for_dex/crack_export_dex/crack_tool/">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/">
+            
+                    
+                        <b>1.4.2.1.2.</b>
+                    
+                    砸壳工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.2.1" data-path="../../../for_dex/crack_export_dex/crack_tool/fdex2/">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/fdex2/">
+            
+                    
+                        <b>1.4.2.1.2.1.</b>
+                    
+                    FDex2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.2.1.1" data-path="../../../for_dex/crack_export_dex/crack_tool/fdex2/fdex2_export_dex.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/fdex2/fdex2_export_dex.html">
+            
+                    
+                        <b>1.4.2.1.2.1.1.</b>
+                    
+                    FDex2砸壳导出dex
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.2" data-path="../../../for_dex/crack_export_dex/crack_tool/dumpdex.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/dumpdex.html">
+            
+                    
+                        <b>1.4.2.1.2.2.</b>
+                    
+                    DumpDex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.3" data-path="../../../for_dex/crack_export_dex/crack_tool/dexextractor.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/dexextractor.html">
+            
+                    
+                        <b>1.4.2.1.2.3.</b>
+                    
+                    DexExtractor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.4" data-path="../../../for_dex/crack_export_dex/crack_tool/drizzleDumper.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/drizzleDumper.html">
+            
+                    
+                        <b>1.4.2.1.2.4.</b>
+                    
+                    drizzleDumper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.5" data-path="../../../for_dex/crack_export_dex/crack_tool/indroid.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/indroid.html">
+            
+                    
+                        <b>1.4.2.1.2.5.</b>
+                    
+                    InDroid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.6" data-path="../../../for_dex/crack_export_dex/crack_tool/dexhunter.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/dexhunter.html">
+            
+                    
+                        <b>1.4.2.1.2.6.</b>
+                    
+                    DexHunter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2.7" data-path="../../../for_dex/crack_export_dex/crack_tool/fart.html">
+            
+                <a href="../../../for_dex/crack_export_dex/crack_tool/fart.html">
+            
+                    
+                        <b>1.4.2.1.2.7.</b>
+                    
+                    FART
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../for_dex/decompile_dex/">
+            
+                <a href="../../../for_dex/decompile_dex/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    反编译dex
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../../for_dex/decompile_dex/dex_to_jar/">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_jar/">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    dex转jar
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1.1" data-path="../../../for_dex/decompile_dex/dex_to_jar/dex2jar/">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_jar/dex2jar/">
+            
+                    
+                        <b>1.4.2.2.1.1.</b>
+                    
+                    dex2jar
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1.1.1" data-path="../../../for_dex/decompile_dex/dex_to_jar/dex2jar_to_jar.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_jar/dex2jar_to_jar.html">
+            
+                    
+                        <b>1.4.2.2.1.1.1.</b>
+                    
+                    用dex2jar从dex导出jar
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.1.2" data-path="../../../for_dex/decompile_dex/dex_to_jar/enjarify.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_jar/enjarify.html">
+            
+                    
+                        <b>1.4.2.2.1.2.</b>
+                    
+                    Enjarify
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.1.3" data-path="../../../for_dex/decompile_dex/dex_to_jar/dedexer.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_jar/dedexer.html">
+            
+                    
+                        <b>1.4.2.2.1.3.</b>
+                    
+                    Dedexer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../../for_dex/decompile_dex/dex_to_smali/">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_smali/">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    dex转smali
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.2.1" data-path="../../../for_dex/decompile_dex/dex_to_smali/baksmali.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_smali/baksmali.html">
+            
+                    
+                        <b>1.4.2.2.2.1.</b>
+                    
+                    baksmali
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.3" data-path="../../../for_dex/decompile_dex/dex_to_java/">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_java/">
+            
+                    
+                        <b>1.4.2.2.3.</b>
+                    
+                    dex转java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.3.1" data-path="../../../for_dex/decompile_dex/dex_to_java/jadx.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_java/jadx.html">
+            
+                    
+                        <b>1.4.2.2.3.1.</b>
+                    
+                    jadx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.3.2" data-path="../../../for_dex/decompile_dex/dex_to_java/gda.html">
+            
+                <a href="../../../for_dex/decompile_dex/dex_to_java/gda.html">
+            
+                    
+                        <b>1.4.2.2.3.2.</b>
+                    
+                    GDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    针对jar
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    jar转java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    java反编译器对比
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1.1" data-path="common_ones.html">
+            
+                <a href="common_ones.html">
+            
+                    
+                        <b>1.4.3.1.1.1.</b>
+                    
+                    常用java反编译器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.1.2" data-path="jd_gui_cfr_procyon_jadx.html">
+            
+                <a href="jd_gui_cfr_procyon_jadx.html">
+            
+                    
+                        <b>1.4.3.1.1.2.</b>
+                    
+                    JD-GUI vs CFR vs Procyon vs Jadx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3.1.1.3" data-path="cmd_result.html">
+            
+                <a href="cmd_result.html">
+            
+                    
+                        <b>1.4.3.1.1.3.</b>
+                    
+                    对比结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2" data-path="../common_decompiler/">
+            
+                <a href="../common_decompiler/">
+            
+                    
+                        <b>1.4.3.1.2.</b>
+                    
+                    常见java反编译器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.2.1" data-path="../procyon/">
+            
+                <a href="../procyon/">
+            
+                    
+                        <b>1.4.3.1.2.1.</b>
+                    
+                    Procyon
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.2.1.1" data-path="../procyon/luyten.html">
+            
+                <a href="../procyon/luyten.html">
+            
+                    
+                        <b>1.4.3.1.2.1.1.</b>
+                    
+                    Luyten
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.2" data-path="../cfr.html">
+            
+                <a href="../cfr.html">
+            
+                    
+                        <b>1.4.3.1.2.2.</b>
+                    
+                    CFR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.3" data-path="../jd_gui.html">
+            
+                <a href="../jd_gui.html">
+            
+                    
+                        <b>1.4.3.1.2.3.</b>
+                    
+                    JD-GUI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.4" data-path="../krakatau.html">
+            
+                <a href="../krakatau.html">
+            
+                    
+                        <b>1.4.3.1.2.4.</b>
+                    
+                    Krakatau
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.5" data-path="../fernflower.html">
+            
+                <a href="../fernflower.html">
+            
+                    
+                        <b>1.4.3.1.2.5.</b>
+                    
+                    Fernflower
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.6" data-path="../dare.html">
+            
+                <a href="../dare.html">
+            
+                    
+                        <b>1.4.3.1.2.6.</b>
+                    
+                    Dare
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2.7" data-path="../jad.html">
+            
+                <a href="../jad.html">
+            
+                    
+                        <b>1.4.3.1.2.7.</b>
+                    
+                    JAD
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../for_so/">
+            
+                <a href="../../../for_so/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    针对so
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../../for_so/elf_format/">
+            
+                <a href="../../../for_so/elf_format/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    ELF文件格式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../../for_so/export_static_string/">
+            
+                <a href="../../../for_so/export_static_string/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    导出静态资源字符串
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="../../../for_so/export_static_string/readelf.html">
+            
+                <a href="../../../for_so/export_static_string/readelf.html">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    readelf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.2" data-path="../../../for_so/export_static_string/objdump.html">
+            
+                <a href="../../../for_so/export_static_string/objdump.html">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    objdump
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="../../../for_so/export_static_string/razbin2.html">
+            
+                <a href="../../../for_so/export_static_string/razbin2.html">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    razbin2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../../for_so/decompile_code/">
+            
+                <a href="../../../for_so/decompile_code/">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    反编译代码逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.3.1" data-path="../../../for_so/decompile_code/ida.html">
+            
+                <a href="../../../for_so/decompile_code/ida.html">
+            
+                    
+                        <b>1.4.4.3.1.</b>
+                    
+                    IDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3.2" data-path="../../../for_so/decompile_code/hopper.html">
+            
+                <a href="../../../for_so/decompile_code/hopper.html">
+            
+                    
+                        <b>1.4.4.3.2.</b>
+                    
+                    Hopper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3.3" data-path="../../../for_so/decompile_code/radare2.html">
+            
+                <a href="../../../for_so/decompile_code/radare2.html">
+            
+                    
+                        <b>1.4.4.3.3.</b>
+                    
+                    radare2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3.4" data-path="../../../for_so/decompile_code/ghidra.html">
+            
+                <a href="../../../for_so/decompile_code/ghidra.html">
+            
+                    
+                        <b>1.4.4.3.4.</b>
+                    
+                    Ghidra
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../related_items/">
+            
+                <a href="../../../../related_items/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    相关子项
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../../related_items/apk_file/">
+            
+                <a href="../../../../related_items/apk_file/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    apk文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../../related_items/apk_file/androidmanifest_xml/">
+            
+                <a href="../../../../related_items/apk_file/androidmanifest_xml/">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    AndroidManifest.xml
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1.1" data-path="../../../../related_items/apk_file/androidmanifest_xml/axmlprinter2.html">
+            
+                <a href="../../../../related_items/apk_file/androidmanifest_xml/axmlprinter2.html">
+            
+                    
+                        <b>1.5.1.1.1.</b>
+                    
+                    AXMLPrinter2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../../related_items/decompile/">
+            
+                <a href="../../../../related_items/decompile/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    反编译
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../../related_items/decompile/steps/">
+            
+                <a href="../../../../related_items/decompile/steps/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    反编译流程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../../../related_items/decompile/steps/crack_apk_to_java.html">
+            
+                <a href="../../../../related_items/decompile/steps/crack_apk_to_java.html">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    如何从apk破解出java源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../../../related_items/decompile/tools/">
+            
+                <a href="../../../../related_items/decompile/tools/">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    反编译工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.2.1" data-path="../../../../related_items/decompile/tools/jadx/">
+            
+                <a href="../../../../related_items/decompile/tools/jadx/">
+            
+                    
+                        <b>1.5.2.2.1.</b>
+                    
+                    jadx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2.2" data-path="../../../../related_items/decompile/tools/jeb/">
+            
+                <a href="../../../../related_items/decompile/tools/jeb/">
+            
+                    
+                        <b>1.5.2.2.2.</b>
+                    
+                    JEB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2.3" data-path="../../../../related_items/decompile/tools/gda/">
+            
+                <a href="../../../../related_items/decompile/tools/gda/">
+            
+                    
+                        <b>1.5.2.2.3.</b>
+                    
+                    GDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../../related_items/bin_editor/">
+            
+                <a href="../../../../related_items/bin_editor/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    二进制编辑器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../../related_items/bin_editor/010editor.html">
+            
+                <a href="../../../../related_items/bin_editor/010editor.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    010editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../../../related_items/bin_editor/everedit.html">
+            
+                <a href="../../../../related_items/bin_editor/everedit.html">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    EverEdit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../../../related_items/diverse_tool/">
+            
+                <a href="../../../../related_items/diverse_tool/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    综合类工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../../../../related_items/diverse_tool/dayanzai_android_killer.html">
+            
+                <a href="../../../../related_items/diverse_tool/dayanzai_android_killer.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    AndroidKiller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../../../../related_items/diverse_tool/crack_tool_mac.html">
+            
+                <a href="../../../../related_items/diverse_tool/crack_tool_mac.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    Android-Crack-Tool For Mac
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../../../../related_items/diverse_tool/bytecode_viewer.html">
+            
+                <a href="../../../../related_items/diverse_tool/bytecode_viewer.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    ByteCode Viewer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="../../../../related_items/diverse_tool/android_decompiler.html">
+            
+                <a href="../../../../related_items/diverse_tool/android_decompiler.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    Android Decompiler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="../../../../related_items/diverse_tool/decompile_apk.html">
+            
+                <a href="../../../../related_items/diverse_tool/decompile_apk.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    decompile-apk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.6" data-path="../../../../related_items/diverse_tool/dayanzai_android_hack.html">
+            
+                <a href="../../../../related_items/diverse_tool/dayanzai_android_hack.html">
+            
+                    
+                        <b>1.5.4.6.</b>
+                    
+                    Android逆向助手
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.7" data-path="../../../../related_items/diverse_tool/androguard.html">
+            
+                <a href="../../../../related_items/diverse_tool/androguard.html">
+            
+                    
+                        <b>1.5.4.7.</b>
+                    
+                    Androguard
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../../sub_fields/">
+            
+                <a href="../../../../sub_fields/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    涉及子领域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../../sub_fields/deobfuscation/">
+            
+                <a href="../../../../sub_fields/deobfuscation/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    反代码混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../../sub_books/">
+            
+                <a href="../../../../sub_books/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    系列子教程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../../appendix/">
+            
+                <a href="../../../../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../../appendix/reference.html">
+            
+                <a href="../../../../appendix/reference.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >对比结果</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="对比结果"><a name="对比结果" class="plugin-anchor" href="#对比结果"><i class="fa fa-link" aria-hidden="true"></i></a>对比结果</h1>
+<h2 id="luyten-vs-procyon"><a name="luyten-vs-procyon" class="plugin-anchor" href="#luyten-vs-procyon"><i class="fa fa-link" aria-hidden="true"></i></a>Luyten vs Procyon</h2>
+<p>从jar包导出代码：</p>
+<ul>
+<li>Luyten<ul>
+<li>带GUI图形界面：可直接查看代码</li>
+<li>也可用来Save all导出全部代码<ul>
+<li>但是速度比较慢<ul>
+<li>当代码很大时：几十分钟还没导出完毕</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Procyon<ul>
+<li>不带界面，只是一个jar包：<ul>
+<li><code>procyon-decompiler-0.5.34.jar</code></li>
+</ul>
+</li>
+<li>可直接用来从你的jar包导出源码<ul>
+<li>当代码很大时：速度很快，1分钟左右即可搞定</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="jd-gui-vs-基于procyon的luyten"><a name="jd-gui-vs-基于procyon的luyten" class="plugin-anchor" href="#jd-gui-vs-基于procyon的luyten"><i class="fa fa-link" aria-hidden="true"></i></a><code>JD-GUI</code> vs (基于<code>Procyon</code>的)<code>Luyten</code></h2>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>JD-GUI</th>
+<th>Luyten</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>流行程度</td>
+<td>比较广-&gt;大家用的比较多</td>
+<td>一般-&gt;相对使用的人不是很多</td>
+</tr>
+<tr>
+<td>jar转java的准确率</td>
+<td>高<br> -&gt;jd-gui代码转换出错Error <br><img src="../../../../assets/img/jd_gui_convert_error_ui.png" alt="jd_gui_convert_error_ui"></td>
+<td>很高<br>-&gt;Luyten中可正确解析显示源码：<br><img src="../../../../assets/img/luyten_convert_error_ui.png" alt></td>
+</tr>
+<tr>
+<td>显示：整体UI界面和代码高亮</td>
+<td>比较简单和朴素-&gt;不够炫酷和好看 <br> <img src="../../../../assets/img/jd_gui_ui_simple.png" alt="jd_gui_ui_simple"></td>
+<td>好看，而且支持多种语法高亮效果 -&gt; 更方便看代码 <br> <img src="../../../../assets/img/luyten_ui_syntax_highlight_good.png" alt="luyten_ui_syntax_highlight_good"></td>
+</tr>
+<tr>
+<td>显示：包/类的显示结构</td>
+<td>以目录的树状结构显示的 -&gt; 层次比较清晰 <br> <img src="../../../../assets/img/jd_gui_show_by_tree.png" alt="jd_gui_show_by_tree"></td>
+<td>（默认）平铺直叙，直接显示的 -&gt;层次结构不够清晰 <br> <img src="../../../../assets/img/luyten_default_show_direct.png" alt="luyten_default_show_direct"> <br><br>后记：<br>后来发现，把默认勾选的选项 <code>Operation</code>-&gt; <code>Package Explorer Style</code> 取消勾选，也可以按照树状显示类和包名了：<br><img src="../../../../assets/img/luyten_changed_show_tree.png" alt="luyten_changed_show_tree"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="jd-gui-vs-cfr-vs-procyon-vs-jadx-对比总结"><a name="jd-gui-vs-cfr-vs-procyon-vs-jadx-对比总结" class="plugin-anchor" href="#jd-gui-vs-cfr-vs-procyon-vs-jadx-对比总结"><i class="fa fa-link" aria-hidden="true"></i></a><code>JD-GUI</code> vs <code>CFR</code> vs <code>Procyon</code> vs <code>Jadx</code> 对比总结</h2>
+<p>下面从整体总结和对比这几个反编译的反编译的效果：</p>
+<table>
+<thead>
+<tr>
+<th><strong>java反编译器</strong></th>
+<th>JD-GUI</th>
+<th>CFR</th>
+<th>Procyon</th>
+<th>Jadx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>转换出错程度</strong></td>
+<td>比较多</td>
+<td>少许</td>
+<td>很少</td>
+<td>极少</td>
+</tr>
+<tr>
+<td><strong>出错状态和相关信息</strong></td>
+<td>会显示：<code>/* Error */ // Byte code</code></td>
+<td>输出转换期间出错的地方到文件：<code>summary.txt</code></td>
+<td>会显示：<br><code>This method could not be decompiled.</code><br><code>Original Bytecode</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>转换出的代码的质量</strong></td>
+<td>不是很好，细节不够好</td>
+<td>部分细节转换的略有瑕疵<br>但是还是可以看到基本代码逻辑的</td>
+<td>完美转换细节<br>代码中字符数组定义等内容可以正确转换，但是逻辑不清晰<br>比如只是能转换出常量解析后的字符串值，而无法识别出是常量的引用</td>
+<td>不仅转换完美无错，而且代码逻辑更准确和完整<br>代码中的常量的引用都能完美还原出来<br>代码中字符数组定义等内容可以完美转换</td>
+</tr>
+<tr>
+<td><strong>转换出的文件是否有标识</strong></td>
+<td>无</td>
+<td>有，顶部有标识：<br>Decompiled with CFR 0.141<br>并且还能列出具体出错的类：<br>Could not load the following classes<br></td>
+<td>有，顶部有标识：<br>Decompiled by Procyon v0.5.34</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>所以最终结论就是：</p>
+<ul>
+<li>以后<strong>尽量用</strong><code>Jadx</code><ul>
+<li>直接用jadx打开未加固的apk<ul>
+<li>即可查看和导出java源代码</li>
+</ul>
+</li>
+<li>打开（用FDex2从加固了的apk导出的）dex文件<ul>
+<li>查看和导出java源代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其次<strong>考虑用</strong><code>Procyon</code>（或基于Procyon的GUI工具<code>Luyten</code>）<ul>
+<li>查看代码：用基于Procyon的<code>Luyten</code>去查看代码</li>
+<li>导出代码：用Procyon去从jar反编译转换出java源代码</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-09-01 22:14:12
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="jd_gui_cfr_procyon_jadx.html" class="navigation navigation-prev " aria-label="Previous page: JD-GUI vs CFR vs Procyon vs Jadx">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../common_decompiler/" class="navigation navigation-next " aria-label="Next page: 常见java反编译器">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"对比结果","level":"1.4.3.1.1.3","depth":5,"next":{"title":"常见java反编译器","level":"1.4.3.1.2","depth":4,"path":"by_file_type/for_jar/jar_to_java/common_decompiler/README.md","ref":"by_file_type/for_jar/jar_to_java/common_decompiler/README.md","articles":[{"title":"Procyon","level":"1.4.3.1.2.1","depth":5,"path":"by_file_type/for_jar/jar_to_java/procyon/README.md","ref":"by_file_type/for_jar/jar_to_java/procyon/README.md","articles":[{"title":"Luyten","level":"1.4.3.1.2.1.1","depth":6,"path":"by_file_type/for_jar/jar_to_java/procyon/luyten.md","ref":"by_file_type/for_jar/jar_to_java/procyon/luyten.md","articles":[]}]},{"title":"CFR","level":"1.4.3.1.2.2","depth":5,"path":"by_file_type/for_jar/jar_to_java/cfr.md","ref":"by_file_type/for_jar/jar_to_java/cfr.md","articles":[]},{"title":"JD-GUI","level":"1.4.3.1.2.3","depth":5,"path":"by_file_type/for_jar/jar_to_java/jd_gui.md","ref":"by_file_type/for_jar/jar_to_java/jd_gui.md","articles":[]},{"title":"Krakatau","level":"1.4.3.1.2.4","depth":5,"path":"by_file_type/for_jar/jar_to_java/krakatau.md","ref":"by_file_type/for_jar/jar_to_java/krakatau.md","articles":[]},{"title":"Fernflower","level":"1.4.3.1.2.5","depth":5,"path":"by_file_type/for_jar/jar_to_java/fernflower.md","ref":"by_file_type/for_jar/jar_to_java/fernflower.md","articles":[]},{"title":"Dare","level":"1.4.3.1.2.6","depth":5,"path":"by_file_type/for_jar/jar_to_java/dare.md","ref":"by_file_type/for_jar/jar_to_java/dare.md","articles":[]},{"title":"JAD","level":"1.4.3.1.2.7","depth":5,"path":"by_file_type/for_jar/jar_to_java/jad.md","ref":"by_file_type/for_jar/jar_to_java/jad.md","articles":[]}]},"previous":{"title":"JD-GUI vs CFR vs Procyon vs Jadx","level":"1.4.3.1.1.2","depth":5,"path":"by_file_type/for_jar/jar_to_java/decompiler_cmp/jd_gui_cfr_procyon_jadx.md","ref":"by_file_type/for_jar/jar_to_java/decompiler_cmp/jd_gui_cfr_procyon_jadx.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_static_analysis/pdf/android_re_static_analysis.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_static_analysis/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：静态分析","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍安卓逆向之静态分析。包括先是概览；然后是相关子项，包括apk文件，以及其中的AndroidMenifest.xml，以及反编译，包括反编译的典型流程，以及如何从apk破解出java源码；常见反编译工具，包括jad、JEB、GDA等；以及常见的二进制编辑器，比如010editor、EverEdit等；接着是综合类工具，包括AndroidKiller、Android-Crack-Tool For Mac、ByteCode Viewer、Android Decompiler、decompile-apk、Android逆向助手、Androguard等；接着是按层级去介绍安卓静态分析所涉及的内容；以及再按文件格式去分相关内容；包括针对apk的，查看apk信息的aapt、APK Analyzer、ClassyShark等，apk解包的apktool，apk转java的jadx、JEB、GDA等；针对dex的，如何砸壳导出dex文件，包括判断哪家加固方案，砸壳工具FDex2以及如何用FDex2砸壳导出dex、DumpDex、DexExtractor、drizzleDumper、InDroid、DexHunter、FART等；接着是反编译dex，包括dex转jar、dex转smali、dex转java等。其中dex转jar包括dex2jar以及用法、Enjarify、Dedexer，dex转smali包括baksmali、dex转java包括jadx、GDA；针对jar的，jar转java，包括各种java反编译器的对比，以及常用的java反编译器，包括Procyon/Luyten、CFR、JD-GUI、Krakatau、Fernflower、Dare、JAD等；针对so的，ELF文件格式，以及如何从ELF的so导出静态资源供分析，常用工具有readelf、objdump、razbin2；以及如何反编译查看代码逻辑，常用工具有IDA、Hopper、radare2、Ghidra等；以及涉及到的子领域，包括反代码混淆，以及相关系列的子教程。"},"file":{"path":"by_file_type/for_jar/jar_to_java/decompiler_cmp/cmd_result.md","mtime":"2023-09-01T14:14:12.315Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-09-14T12:40:44.962Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

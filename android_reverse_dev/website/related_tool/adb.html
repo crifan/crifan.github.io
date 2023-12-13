@@ -1,0 +1,977 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>adb · Android逆向开发</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../related_summary/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_reverse_dev","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview/">
+            
+                <a href="../overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Android逆向开发概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../typical_process/">
+            
+                <a href="../typical_process/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Android逆向典型流程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../typical_process/anroid_root/">
+            
+                <a href="../typical_process/anroid_root/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    安卓root
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../typical_process/install_apk/">
+            
+                <a href="../typical_process/install_apk/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    安装apk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../typical_process/figure_out_logic/">
+            
+                <a href="../typical_process/figure_out_logic/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    搞懂逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../typical_process/figure_out_logic/static_analysis/">
+            
+                <a href="../typical_process/figure_out_logic/static_analysis/">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    静态分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../typical_process/figure_out_logic/dynamic_debug/">
+            
+                <a href="../typical_process/figure_out_logic/dynamic_debug/">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    动态调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../typical_process/reverse_output/">
+            
+                <a href="../typical_process/reverse_output/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    输出结果
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../typical_process/reverse_output/repack_apk/">
+            
+                <a href="../typical_process/reverse_output/repack_apk/">
+            
+                    
+                        <b>1.3.4.1.</b>
+                    
+                    重新打包apk
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    相关工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="adb.html">
+            
+                <a href="adb.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    adb
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../related_summary/">
+            
+                <a href="../related_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    相关心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../related_summary/file_manager/">
+            
+                <a href="../related_summary/file_manager/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    文件管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../related_summary/file_manager/file_manager_app.html">
+            
+                <a href="../related_summary/file_manager/file_manager_app.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    文件管理器
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../related_material/">
+            
+                <a href="../related_material/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    相关资料
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../related_material/api_level.html">
+            
+                <a href="../related_material/api_level.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    Android API Level
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../sub_tutorial/">
+            
+                <a href="../sub_tutorial/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    子教程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >adb</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="adb"><a name="adb" class="plugin-anchor" href="#adb"><i class="fa fa-link" aria-hidden="true"></i></a>adb</h1>
+<p>TODO：</p>
+<ul>
+<li>【整理】adb命令语法帮助信息</li>
+<li>【已解决】Mac中运行adb shell无需su超级用户即可正常运行输出结果</li>
+<li>【未解决】尝试解决adb只有su超级用户权限才能工作：adb版本</li>
+<li>【已解决】Android Studio和安卓设备Google Pixel3重启后adb shell再次异常：只有su超级用户权限才能正常运行命令</li>
+<li>【已解决】尝试解决adb没有su超级用户权限无法运行子命令：ps进程相关</li>
+<li>【已解决】Android Studio中对于ADB：Use existing manually managed server且指定adb端口</li>
+<li>【已解决】Mac中给adb start-server指定端口</li>
+<li>【已解决】Mac中adb shell子命令运行卡死无响应</li>
+<li>【已解决】安卓手机adb shell报错：Can&apos;t find service</li>
+<li>【已解决】安卓手机Google Pixel3中adb命令pm运行报错：cmd Can&apos;t find service: package</li>
+<li>【已解决】安卓手机adb shell service list报错：Found 0 services</li>
+<li>【已解决】安卓手机adb shell无法直接运行命令但是进入shell后su后却可以</li>
+<li>【已解决】adb shell带su超级用户权限去运行子命令</li>
+<li>【未解决】pm安装重签名的apk报错：Failure INSTALL_FAILED_UPDATE_INCOMPATIBLE</li>
+<li>【已解决】pm安装apktool重新打包的apk报错：Failure INSTALL_PARSE_FAILED_NO_CERTIFICATES</li>
+<li>【无需解决】安卓手机pm卸载app报错：Failure DELETE_FAILED_INTERNAL_ERROR</li>
+<li>【已解决】安卓手机中用adb shel中的pm去安装YouTube的apk</li>
+<li>【已解决】安卓手机Google Pixel3中用pm安装YouTube的apk报错：Failure INSTALL_FAILED_VERSION_DOWNGRADE</li>
+</ul>
+<hr>
+<h2 id="用adb安装apk"><a name="用adb安装apk" class="plugin-anchor" href="#用adb安装apk"><i class="fa fa-link" aria-hidden="true"></i></a>用adb安装apk</h2>
+<ul>
+<li><code>adb install xxx.apk</code> = <code>adb push xxx.apk somePath</code> + <code>pm install /somePath/xxx.apk</code></li>
+</ul>
+<p>举例：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/android/EdXposed  <span class="token builtin class-name">pwd</span>
+/Users/crifan/dev/dev_tool/android/EdXposed
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/android/EdXposed  ll
+total <span class="token number">8224</span>
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/android/EdXposed  adb <span class="token function">install</span> EdXposedManager-4.6.2-46200-org.meowcat.edxposed.manager-release.apk
+Performing Streamed Install
+Success
+</code></pre>
+<h2 id="adb-shell"><a name="adb-shell" class="plugin-anchor" href="#adb-shell"><i class="fa fa-link" aria-hidden="true"></i></a>adb shell</h2>
+<h3 id="命令提示符"><a name="命令提示符" class="plugin-anchor" href="#命令提示符"><i class="fa fa-link" aria-hidden="true"></i></a>命令提示符</h3>
+<p><code>adb shell</code>进入shell后：</p>
+<ul>
+<li>命令行提示符<ul>
+<li><code>#</code>=<code>井号</code>：<code>root</code>用户</li>
+<li><code>$</code>=<code>美元</code>符号：<code>普通</code>用户</li>
+</ul>
+</li>
+</ul>
+<p>另外，也可以通过：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">whoami</span>
+</code></pre>
+<p>查看当前用户是什么</p>
+<p>举例：</p>
+<ul>
+<li>root用户</li>
+</ul>
+<pre class="language-"><code class="lang-bash">blueline:/ <span class="token comment"># whoami</span>
+root
+</code></pre>
+<ul>
+<li>普通用户：<code>shell</code></li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token number">13</span><span class="token operator">|</span>blueline:/ $ <span class="token function">whoami</span>
+shell
+</code></pre>
+<h3 id="adb-shell命令行前面的数字"><a name="adb-shell命令行前面的数字" class="plugin-anchor" href="#adb-shell命令行前面的数字"><i class="fa fa-link" aria-hidden="true"></i></a>adb shell命令行前面的数字</h3>
+<p>正常情况，shell前面是没有数字的：</p>
+<pre class="language-"><code class="lang-bash"> adb shell
+blueline:/ <span class="token comment"># pwd</span>
+/
+</code></pre>
+<p>但是，如果前面出现一个数字加上竖杠，则表示：前一次命令执行的返回值，前一个命令运行出错了的出错码</p>
+<p>比如：</p>
+<pre class="language-"><code class="lang-bash">blueline:/ <span class="token comment"># pm --help</span>
+cmd: Can&apos;t <span class="token function">find</span> service: package
+<span class="token number">20</span><span class="token operator">|</span>blueline:/ <span class="token comment">#</span>
+</code></pre>
+<p>此处的 <code>20|</code> 就是<code>前一个命令运行出错的返回值</code>=<code>出错码</code></p>
+<p>而继续运行，如果后续命令正常运行，则出错码就消失了：</p>
+<pre class="language-"><code class="lang-bash"><span class="token number">20</span><span class="token operator">|</span>blueline:/ <span class="token comment"># which pm</span>
+/system/bin/pm
+blueline:/ <span class="token comment">#</span>
+</code></pre>
+<p>其实表示的是：</p>
+<ul>
+<li>上一个命令运行结果=返回值<ul>
+<li><code>0</code>：表示没有出错<ul>
+<li>所以就不显示出错码</li>
+</ul>
+</li>
+<li><code>非0</code>：就显示，提示你出错了</li>
+</ul>
+</li>
+</ul>
+<p><img src="../assets/img/adb_shell_prefix_number.png" alt="adb_shell_prefix_number"></p>
+<h2 id="adb常见命令"><a name="adb常见命令" class="plugin-anchor" href="#adb常见命令"><i class="fa fa-link" aria-hidden="true"></i></a>adb常见命令</h2>
+<p><img src="../assets/img/adb_commands_common.png" alt="adb_commands_common"></p>
+<ul>
+<li>相关<ul>
+<li>常用 Fastboot 命令<ul>
+<li><img src="../assets/img/fastboot_common_commands.png" alt="fastboot_common_commands"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="adb语法"><a name="adb语法" class="plugin-anchor" href="#adb语法"><i class="fa fa-link" aria-hidden="true"></i></a>adb语法</h2>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&gt;</span> adb <span class="token parameter variable">--help</span>
+Android Debug Bridge version <span class="token number">1.0</span>.41
+Version <span class="token number">33.0</span>.2-8557947
+Installed as /Users/crifan/dev/dev_tool/android/AndroidSDK/platform-tools/adb
+
+
+global options:
+ <span class="token parameter variable">-a</span>                       listen on all network interfaces, not just localhost
+ <span class="token parameter variable">-d</span>                       use USB device <span class="token punctuation">(</span>error <span class="token keyword">if</span> multiple devices connected<span class="token punctuation">)</span>
+ <span class="token parameter variable">-e</span>                       use TCP/IP device <span class="token punctuation">(</span>error <span class="token keyword">if</span> multiple TCP/IP devices available<span class="token punctuation">)</span>
+ <span class="token parameter variable">-s</span> SERIAL                use device with given serial <span class="token punctuation">(</span>overrides <span class="token variable">$ANDROID_SERIAL</span><span class="token punctuation">)</span>
+ <span class="token parameter variable">-t</span> ID                    use device with given transport <span class="token function">id</span>
+ <span class="token parameter variable">-H</span>                       name of adb server <span class="token function">host</span> <span class="token punctuation">[</span>default<span class="token operator">=</span>localhost<span class="token punctuation">]</span>
+ <span class="token parameter variable">-P</span>                       port of adb server <span class="token punctuation">[</span>default<span class="token operator">=</span><span class="token number">5037</span><span class="token punctuation">]</span>
+ <span class="token parameter variable">-L</span> SOCKET                listen on given socket <span class="token keyword">for</span> adb server <span class="token punctuation">[</span>default<span class="token operator">=</span>tcp:localhost:5037<span class="token punctuation">]</span>
+ --one-device SERIAL<span class="token operator">|</span>USB  only allowed with <span class="token string">&apos;start-server&apos;</span> or <span class="token string">&apos;server nodaemon&apos;</span>, server will only connect to one USB device, specified by a serial number or USB device address.
+ --exit-on-write-error    <span class="token builtin class-name">exit</span> <span class="token keyword">if</span> stdout is closed
+
+
+general commands:
+ devices <span class="token punctuation">[</span>-l<span class="token punctuation">]</span>             list connected devices <span class="token punctuation">(</span>-l <span class="token keyword">for</span> long output<span class="token punctuation">)</span>
+ <span class="token builtin class-name">help</span>                     show this <span class="token builtin class-name">help</span> message
+ version                  show version num
+
+
+networking:
+ connect HOST<span class="token punctuation">[</span>:PORT<span class="token punctuation">]</span>      connect to a device via TCP/IP <span class="token punctuation">[</span>default <span class="token assign-left variable">port</span><span class="token operator">=</span><span class="token number">5555</span><span class="token punctuation">]</span>
+ disconnect <span class="token punctuation">[</span>HOST<span class="token punctuation">[</span>:PORT<span class="token punctuation">]</span><span class="token punctuation">]</span>
+     disconnect from given TCP/IP device <span class="token punctuation">[</span>default <span class="token assign-left variable">port</span><span class="token operator">=</span><span class="token number">5555</span><span class="token punctuation">]</span>, or all
+ pair HOST<span class="token punctuation">[</span>:PORT<span class="token punctuation">]</span> <span class="token punctuation">[</span>PAIRING CODE<span class="token punctuation">]</span>
+     pair with a device <span class="token keyword">for</span> secure TCP/IP communication
+ forward <span class="token parameter variable">--list</span>           list all forward socket connections
+ forward <span class="token punctuation">[</span>--no-rebind<span class="token punctuation">]</span> LOCAL REMOTE
+     forward socket connection using:
+       tcp:<span class="token operator">&lt;</span>port<span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>local<span class="token operator">&gt;</span> may be <span class="token string">&quot;tcp:0&quot;</span> to pick any <span class="token function">open</span> port<span class="token punctuation">)</span>
+       localabstract:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+       localreserved:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+       localfilesystem:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+       jdwp:<span class="token operator">&lt;</span>process pid<span class="token operator">&gt;</span> <span class="token punctuation">(</span>remote only<span class="token punctuation">)</span>
+       vsock:<span class="token operator">&lt;</span>CID<span class="token operator">&gt;</span>:<span class="token operator">&lt;</span>port<span class="token operator">&gt;</span> <span class="token punctuation">(</span>remote only<span class="token punctuation">)</span>
+       acceptfd:<span class="token operator">&lt;</span>fd<span class="token operator">&gt;</span> <span class="token punctuation">(</span>listen only<span class="token punctuation">)</span>
+ forward <span class="token parameter variable">--remove</span> LOCAL   remove specific forward socket connection
+ forward --remove-all     remove all forward socket connections
+ ppp TTY <span class="token punctuation">[</span>PARAMETER<span class="token punctuation">..</span>.<span class="token punctuation">]</span>   run PPP over USB
+ reverse <span class="token parameter variable">--list</span>           list all reverse socket connections from device
+ reverse <span class="token punctuation">[</span>--no-rebind<span class="token punctuation">]</span> REMOTE LOCAL
+     reverse socket connection using:
+       tcp:<span class="token operator">&lt;</span>port<span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>remote<span class="token operator">&gt;</span> may be <span class="token string">&quot;tcp:0&quot;</span> to pick any <span class="token function">open</span> port<span class="token punctuation">)</span>
+       localabstract:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+       localreserved:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+       localfilesystem:<span class="token operator">&lt;</span>unix domain socket name<span class="token operator">&gt;</span>
+ reverse <span class="token parameter variable">--remove</span> REMOTE  remove specific reverse socket connection
+ reverse --remove-all     remove all reverse socket connections from device
+ mdns check               check <span class="token keyword">if</span> mdns discovery is available
+ mdns services            list all discovered services
+
+
+<span class="token function">file</span> transfer:
+ push <span class="token punctuation">[</span>--sync<span class="token punctuation">]</span> <span class="token punctuation">[</span>-z ALGORITHM<span class="token punctuation">]</span> <span class="token punctuation">[</span>-Z<span class="token punctuation">]</span> LOCAL<span class="token punctuation">..</span>. REMOTE
+     copy <span class="token builtin class-name">local</span> files/directories to device
+     --sync: only push files that are newer on the <span class="token function">host</span> than the device
+     -n: dry run: push files to device without storing to the filesystem
+     -z: <span class="token builtin class-name">enable</span> compression with a specified algorithm <span class="token punctuation">(</span>any/none/brotli/lz4/zstd<span class="token punctuation">)</span>
+     -Z: disable compression
+ pull <span class="token punctuation">[</span>-a<span class="token punctuation">]</span> <span class="token punctuation">[</span>-z ALGORITHM<span class="token punctuation">]</span> <span class="token punctuation">[</span>-Z<span class="token punctuation">]</span> REMOTE<span class="token punctuation">..</span>. LOCAL
+     copy files/dirs from device
+     -a: preserve <span class="token function">file</span> timestamp and mode
+     -z: <span class="token builtin class-name">enable</span> compression with a specified algorithm <span class="token punctuation">(</span>any/none/brotli/lz4/zstd<span class="token punctuation">)</span>
+     -Z: disable compression
+ <span class="token function">sync</span> <span class="token punctuation">[</span>-l<span class="token punctuation">]</span> <span class="token punctuation">[</span>-z ALGORITHM<span class="token punctuation">]</span> <span class="token punctuation">[</span>-Z<span class="token punctuation">]</span> <span class="token punctuation">[</span>all<span class="token operator">|</span>data<span class="token operator">|</span>odm<span class="token operator">|</span>oem<span class="token operator">|</span>product<span class="token operator">|</span>system<span class="token operator">|</span>system_ext<span class="token operator">|</span>vendor<span class="token punctuation">]</span>
+     <span class="token function">sync</span> a <span class="token builtin class-name">local</span> build from <span class="token variable">$ANDROID_PRODUCT_OUT</span> to the device <span class="token punctuation">(</span>default all<span class="token punctuation">)</span>
+     -n: dry run: push files to device without storing to the filesystem
+     -l: list files that would be copied, but don<span class="token string">&apos;t copy them
+     -z: enable compression with a specified algorithm (any/none/brotli/lz4/zstd)
+     -Z: disable compression
+
+
+shell:
+ shell [-e ESCAPE] [-n] [-Tt] [-x] [COMMAND...]
+     run remote shell command (interactive shell if no command given)
+     -e: choose escape character, or &quot;none&quot;; default &apos;</span>~<span class="token string">&apos;
+     -n: don&apos;</span>t <span class="token builtin class-name">read</span> from stdin
+     -T: disable pty allocation
+     -t: allocate a pty <span class="token keyword">if</span> on a <span class="token function">tty</span> <span class="token punctuation">(</span>-tt: force pty allocation<span class="token punctuation">)</span>
+     -x: disable remote <span class="token builtin class-name">exit</span> codes and stdout/stderr separation
+ emu COMMAND              run emulator console <span class="token builtin class-name">command</span>
+
+
+app installation <span class="token punctuation">(</span>see also <span class="token variable"><span class="token variable">`</span>adb shell cmd package <span class="token builtin class-name">help</span><span class="token variable">`</span></span><span class="token punctuation">)</span>:
+ <span class="token function">install</span> <span class="token punctuation">[</span>-lrtsdg<span class="token punctuation">]</span> <span class="token punctuation">[</span>--instant<span class="token punctuation">]</span> PACKAGE
+     push a single package to the device and <span class="token function">install</span> it
+ install-multiple <span class="token punctuation">[</span>-lrtsdpg<span class="token punctuation">]</span> <span class="token punctuation">[</span>--instant<span class="token punctuation">]</span> PACKAGE<span class="token punctuation">..</span>.
+     push multiple APKs to the device <span class="token keyword">for</span> a single package and <span class="token function">install</span> them
+ install-multi-package <span class="token punctuation">[</span>-lrtsdpg<span class="token punctuation">]</span> <span class="token punctuation">[</span>--instant<span class="token punctuation">]</span> PACKAGE<span class="token punctuation">..</span>.
+     push one or <span class="token function">more</span> packages to the device and <span class="token function">install</span> them atomically
+     -r: replace existing application
+     -t: allow <span class="token builtin class-name">test</span> packages
+     -d: allow version code downgrade <span class="token punctuation">(</span>debuggable packages only<span class="token punctuation">)</span>
+     -p: partial application <span class="token function">install</span> <span class="token punctuation">(</span>install-multiple only<span class="token punctuation">)</span>
+     -g: grant all runtime permissions
+     <span class="token parameter variable">--abi</span> ABI: override platform<span class="token string">&apos;s default ABI
+     --instant: cause the app to be installed as an ephemeral install app
+     --no-streaming: always push APK to device and invoke Package Manager as separate steps
+     --streaming: force streaming APK directly into Package Manager
+     --fastdeploy: use fast deploy
+     --no-fastdeploy: prevent use of fast deploy
+     --force-agent: force update of deployment agent when using fast deploy
+     --date-check-agent: update deployment agent when local version is newer and using fast deploy
+     --version-check-agent: update deployment agent when local version has different version code and using fast deploy
+     --local-agent: locate agent files from local source build (instead of SDK location)
+     (See also `adb shell pm help` for more options.)
+ uninstall [-k] PACKAGE
+     remove this app package from the device
+     &apos;</span>-k<span class="token string">&apos;: keep the data and cache directories
+
+
+debugging:
+ bugreport [PATH]
+     write bugreport to given PATH [default=bugreport.zip];
+     if PATH is a directory, the bug report is saved in that directory.
+     devices that don&apos;</span>t support zipped bug reports output to stdout.
+ jdwp                     list pids of processes hosting a JDWP transport
+ logcat                   show device log <span class="token punctuation">(</span>logcat <span class="token parameter variable">--help</span> <span class="token keyword">for</span> <span class="token function">more</span><span class="token punctuation">)</span>
+
+
+security:
+ disable-verity           disable dm-verity checking on userdebug builds
+ enable-verity            re-enable dm-verity checking on userdebug builds
+ keygen FILE
+     generate adb public/private key<span class="token punctuation">;</span> private key stored <span class="token keyword">in</span> FILE,
+
+
+scripting:
+ wait-for<span class="token punctuation">[</span>-TRANSPORT<span class="token punctuation">]</span>-STATE<span class="token punctuation">..</span>.
+     <span class="token function">wait</span> <span class="token keyword">for</span> device to be <span class="token keyword">in</span> a given state
+     STATE: device, recovery, rescue, sideload, bootloader, or disconnect
+     TRANSPORT: usb, local, or any <span class="token punctuation">[</span>default<span class="token operator">=</span>any<span class="token punctuation">]</span>
+ get-state                print offline <span class="token operator">|</span> bootloader <span class="token operator">|</span> device
+ get-serialno             print <span class="token operator">&lt;</span>serial-number<span class="token operator">&gt;</span>
+ get-devpath              print <span class="token operator">&lt;</span>device-path<span class="token operator">&gt;</span>
+ remount <span class="token punctuation">[</span>-R<span class="token punctuation">]</span>
+      remount partitions read-write. <span class="token keyword">if</span> a <span class="token function">reboot</span> is required, <span class="token parameter variable">-R</span> will
+      will automatically <span class="token function">reboot</span> the device.
+ <span class="token function">reboot</span> <span class="token punctuation">[</span>bootloader<span class="token operator">|</span>recovery<span class="token operator">|</span>sideload<span class="token operator">|</span>sideload-auto-reboot<span class="token punctuation">]</span>
+     <span class="token function">reboot</span> the device<span class="token punctuation">;</span> defaults to booting system image but
+     supports bootloader and recovery too. sideload reboots
+     into recovery and automatically starts sideload mode,
+     sideload-auto-reboot is the same but reboots after sideloading.
+ sideload OTAPACKAGE      sideload the given full OTA package
+ root                     restart adbd with root permissions
+ unroot                   restart adbd without root permissions
+ usb                      restart adbd listening on USB
+ tcpip PORT               restart adbd listening on TCP on PORT
+
+
+internal debugging:
+ start-server             ensure that there is a server running
+ kill-server              <span class="token function">kill</span> the server <span class="token keyword">if</span> it is running
+ reconnect                kick connection from <span class="token function">host</span> side to force reconnect
+ reconnect device         kick connection from device side to force reconnect
+ reconnect offline        reset offline/unauthorized devices to force reconnect
+
+
+usb:
+ attach                   attach a detached USB device
+ detach                   detach from a USB device to allow use by other processes
+environment variables:
+ <span class="token variable">$ADB_TRACE</span>
+     comma-separated list of debug info to log:
+     all,adb,sockets,packets,rwx,usb,sync,sysdeps,transport,jdwp
+ <span class="token variable">$ADB_VENDOR_KEYS</span>         colon-separated list of keys <span class="token punctuation">(</span>files or directories<span class="token punctuation">)</span>
+ <span class="token variable">$ANDROID_SERIAL</span>          serial number to connect to <span class="token punctuation">(</span>see -s<span class="token punctuation">)</span>
+ <span class="token variable">$ANDROID_LOG_TAGS</span>        tags to be used by logcat <span class="token punctuation">(</span>see logcat --help<span class="token punctuation">)</span>
+ <span class="token variable">$ADB_LOCAL_TRANSPORT_MAX_PORT</span> max emulator scan port <span class="token punctuation">(</span>default <span class="token number">5585</span>, <span class="token number">16</span> emus<span class="token punctuation">)</span>
+ <span class="token variable">$ADB_MDNS_AUTO_CONNECT</span>   comma-separated list of mdns services to allow auto-connect <span class="token punctuation">(</span>default adb-tls-connect<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="adb文档和资料"><a name="adb文档和资料" class="plugin-anchor" href="#adb文档和资料"><i class="fa fa-link" aria-hidden="true"></i></a>adb文档和资料</h2>
+<ul>
+<li>官网文档<ul>
+<li><a href="https://developer.android.com/studio/command-line/adb" target="_blank">Android 调试桥 (adb)  |  Android 开发者  |  Android Developers</a><ul>
+<li><img src="../assets/img/android_official_adb_doc.png" alt="android_official_adb_doc"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他资料<ul>
+<li><a href="http://adbcommand.com/" target="_blank">Home | Android Debug Bridge (ADB) Commands Manual (adbcommand.com)</a></li>
+</ul>
+</li>
+<li>Listing of adb Commands<ul>
+<li><a href="https://tool.oschina.net/uploads/apidocs/android/tools/help/adb.html" target="_blank">Android Debug Bridge | Android Developers (oschina.net)</a></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2022-11-10 14:49:22
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 相关工具">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../related_summary/" class="navigation navigation-next " aria-label="Next page: 相关心得">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"adb","level":"1.4.1","depth":2,"next":{"title":"相关心得","level":"1.5","depth":1,"path":"related_summary/README.md","ref":"related_summary/README.md","articles":[{"title":"文件管理","level":"1.5.1","depth":2,"path":"related_summary/file_manager/README.md","ref":"related_summary/file_manager/README.md","articles":[{"title":"文件管理器","level":"1.5.1.1","depth":3,"path":"related_summary/file_manager/file_manager_app.md","ref":"related_summary/file_manager/file_manager_app.md","articles":[]}]}]},"previous":{"title":"相关工具","level":"1.4","depth":1,"path":"related_tool/README.md","ref":"related_tool/README.md","articles":[{"title":"adb","level":"1.4.1","depth":2,"path":"related_tool/adb.md","ref":"related_tool/adb.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_reverse_dev/pdf/android_reverse_dev.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_reverse_dev/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_reverse_dev","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向开发","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发相关的内容。包括安卓逆向开发的典型流程图和脑图、安卓逆向的核心思路；以及Hook插件与开发，包括Xposed、Cydia Substrace，以及其插件Android-OpenDebug、Introspy-Android；以及其他心得，包括adb、文件管理、文件管理器、相关资料；以及其他相关子教程。"},"file":{"path":"related_tool/adb.md","mtime":"2022-11-10T06:49:22.000Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T08:30:28.507Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
