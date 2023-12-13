@@ -1,0 +1,973 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>复杂的https请求 · app抓包利器：Charles</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="mobile_install_ssl_ca/" />
+    
+    
+    <link rel="prev" href="../simple_http/mobile_proxy/ios.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"app_capture_package_tool_charles","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro_charles/">
+            
+                <a href="../../intro_charles/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    如何抓包app
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../simple_http/">
+            
+                <a href="../simple_http/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    普通http请求
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../simple_http/mobile_proxy/">
+            
+                <a href="../simple_http/mobile_proxy/">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    移动端设置代理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1.1" data-path="../simple_http/mobile_proxy/android.html">
+            
+                <a href="../simple_http/mobile_proxy/android.html">
+            
+                    
+                        <b>1.3.1.1.1.</b>
+                    
+                    Android端
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.1.2" data-path="../simple_http/mobile_proxy/ios.html">
+            
+                <a href="../simple_http/mobile_proxy/ios.html">
+            
+                    
+                        <b>1.3.1.1.2.</b>
+                    
+                    iOS端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    复杂的https请求
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="mobile_install_ssl_ca/">
+            
+                <a href="mobile_install_ssl_ca/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    移动端安装ssl证书
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="mobile_install_ssl_ca/android.html">
+            
+                <a href="mobile_install_ssl_ca/android.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    Android端
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="mobile_install_ssl_ca/ios.html">
+            
+                <a href="mobile_install_ssl_ca/ios.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    iOS端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="https_ssl_pinning/">
+            
+                <a href="https_ssl_pinning/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    破解https的SSL Pinning
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="https_ssl_pinning/android/">
+            
+                <a href="https_ssl_pinning/android/">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    Android端
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1.1" data-path="https_ssl_pinning/android/xposed_justtrustme.html">
+            
+                <a href="https_ssl_pinning/android/xposed_justtrustme.html">
+            
+                    
+                        <b>1.3.2.2.1.1.</b>
+                    
+                    Xposed+JustTrustMe
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="https_ssl_pinning/ios/">
+            
+                <a href="https_ssl_pinning/ios/">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    iOS端
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="https_ssl_pinning/more_complex.html">
+            
+                <a href="https_ssl_pinning/more_complex.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    更复杂的情况
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../capture_related_summary/">
+            
+                <a href="../../capture_related_summary/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    抓包相关心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../capture_related_summary/related_capture_tool.html">
+            
+                <a href="../../capture_related_summary/related_capture_tool.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    相关抓包工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../capture_related_summary/summary_capture_http.html">
+            
+                <a href="../../capture_related_summary/summary_capture_http.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    抓包http心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../capture_related_summary/install_ssl_summary/">
+            
+                <a href="../../capture_related_summary/install_ssl_summary/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    安装ssl证书心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../capture_related_summary/install_ssl_summary/android.html">
+            
+                <a href="../../capture_related_summary/install_ssl_summary/android.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    Android端
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../capture_related_summary/install_ssl_summary/ios.html">
+            
+                <a href="../../capture_related_summary/install_ssl_summary/ios.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    iOS端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../capture_related_summary/summary_capture_https.html">
+            
+                <a href="../../capture_related_summary/summary_capture_https.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    抓包https心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../capture_related_summary/crack_https_summary.html">
+            
+                <a href="../../capture_related_summary/crack_https_summary.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    破解https心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../function_related_summary/">
+            
+                <a href="../../function_related_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    功能相关心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../function_related_summary/filter_request.html">
+            
+                <a href="../../function_related_summary/filter_request.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    过滤请求
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../function_related_summary/display_mode_exchange.html">
+            
+                <a href="../../function_related_summary/display_mode_exchange.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    显示模式切换
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../other_summary/">
+            
+                <a href="../../other_summary/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >复杂的https请求</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="复杂的https请求"><a name="复杂的https请求" class="plugin-anchor" href="#复杂的https请求"><i class="fa fa-link" aria-hidden="true"></i></a>复杂的https请求</h1>
+<p>接着介绍如何用<code>Charles</code>配合其他相关工具，如<code>夜神</code>安卓模拟器，<code>Xposed框架</code>或<code>太极Magisk</code>框架，以及插件<code>JustTrustMe</code>等，去实现抓包app中加了密的https的请求，即绕过https，看到明文的数据。</p>
+<h2 id="charles抓包移动端app的https请求的流程"><a name="charles抓包移动端app的https请求的流程" class="plugin-anchor" href="#charles抓包移动端app的https请求的流程"><i class="fa fa-link" aria-hidden="true"></i></a>Charles抓包移动端app的https请求的流程</h2>
+<p>核心步骤和思路：</p>
+<ul>
+<li>电脑端<ul>
+<li>安装Charles的根证书<ul>
+<li>Mac<ul>
+<li>用钥匙串去信任Charles的根证书</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Charles中<ul>
+<li>启用 <code>Enable SSL Proxying</code><ul>
+<li>再设置对应的过滤api地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>手机端<ul>
+<li>安装Charles的根证书<ul>
+<li>Android<ul>
+<li>注意类型选择为：<code>VPN和应用</code><ul>
+<li>不要选择：WLAN</li>
+</ul>
+</li>
+<li>确保证书安装成功<ul>
+<li><code>受信任凭据 -&gt; 用户</code> 中可以看到已安装的Charles证书</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>iOS<ul>
+<li>安装证书后，<code>iOS 10.3+</code>还需要信任根证书</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面详细介绍如何操作。</p>
+<h3 id="charles中开启ssl代理"><a name="charles中开启ssl代理" class="plugin-anchor" href="#charles中开启ssl代理"><i class="fa fa-link" aria-hidden="true"></i></a>Charles中开启SSL代理</h3>
+<p><code>Proxy -&gt; SSL Proxying Settings -&gt; SSL Proxying -&gt; Enable SSL Proxying</code></p>
+<p><img src="../../assets/img/charles_enable_ssl_proxying_add_all.png" alt></p>
+<p>然后去点击<code>Add</code>，设置为：</p>
+<ul>
+<li>Host: <code>*</code></li>
+<li>Port: <code>*</code></li>
+</ul>
+<p>设置后是：</p>
+<ul>
+<li><code>Location</code>: <code>*:*</code><ul>
+<li>表示：针对所有的<code>https</code>的请求都<code>启用SSL代理</code><ul>
+<li>这样所有的https的请求，都可以看到解密后的明文了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="电脑中安装并信任charles根证书"><a name="电脑中安装并信任charles根证书" class="plugin-anchor" href="#电脑中安装并信任charles根证书"><i class="fa fa-link" aria-hidden="true"></i></a>电脑中安装并信任Charles根证书</h3>
+<p>此处以Mac为例，解释如何在Mac中安装Charles根证书，并设置信任。</p>
+<p>通过Charles中的帮助，把Charles的根证书安装到当前电脑中</p>
+<p>点击Charles的</p>
+<p><code>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate</code></p>
+<p><img src="../../assets/img/charles_help_install_root_certificate.png" alt></p>
+<p>会弹出 （调用Mac的）钥匙串KeyChain Access，去其中设置信任Charles的根证书：</p>
+<p><img src="../../assets/img/charles_keychain_access_trust_charles_ca.png" alt></p>
+<p>即可看到证书从<code>红色</code>变<code>蓝色➕</code>加号的：</p>
+<p><code>此证书已标记为受此账户信任</code></p>
+<h3 id="移动端安装charles的ssl证书"><a name="移动端安装charles的ssl证书" class="plugin-anchor" href="#移动端安装charles的ssl证书"><i class="fa fa-link" aria-hidden="true"></i></a>移动端安装Charles的ssl证书</h3>
+<p>接着就是去移动端的手机中安装Charles的ssl证书。</p>
+<p>概述：</p>
+<ul>
+<li>Android端<ul>
+<li>得到Charles的手机端的证书<ul>
+<li>有两种方式<ul>
+<li>自己下载<ul>
+<li>手机端打开 <a href="http://chls.pro/ssl" target="_blank">http://chls.pro/ssl</a> ，会自动弹框去下载得到ssl证书<ul>
+<li>比如：<code>charles-ssl-proxying-certificate.pem</code></li>
+<li>注意：事先要给手机端设置好Charles的代理，否则只能打开和看到普通网页，无法弹框下载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从别处拷贝<ul>
+<li>从PC端Charles导出手机端要安装的证书<ul>
+<li>比如：<code>charles-ssl-proxying-certificate.cer</code></li>
+</ul>
+</li>
+<li>别人下载好的 或 你自己之前下载好的，拷贝或发送到手机端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>去安装证书<ul>
+<li>直接点击即可开始安装<ul>
+<li>如果不行，则通过<code>从存储设备安装</code>去安装，确定是可以安装的</li>
+</ul>
+</li>
+<li>安装期间的设置<ul>
+<li>凭据类型：<code>VPN和应用</code><ul>
+<li>不能选<code>WLAN</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>安装完毕后确定安装成功<ul>
+<li><code>受信任的凭据 -&gt; 用户</code> 中可以看到已安装<code>XK72 Ltd Charles Proxy CA</code>字样的证书</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>iOS端<ul>
+<li>iPhone中打开 <a href="http://chls.pro/ssl" target="_blank">http://chls.pro/ssl</a> ，按照提示下载安装证书，以及信任证书</li>
+</ul>
+</li>
+</ul>
+<p>详解：</p>
+<p>详见后续章节：<a href="mobile_install_ssl_ca/">移动端安装ssl证书</a></p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-17 09:18:16
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../simple_http/mobile_proxy/ios.html" class="navigation navigation-prev " aria-label="Previous page: iOS端">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="mobile_install_ssl_ca/" class="navigation navigation-next " aria-label="Next page: 移动端安装ssl证书">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"复杂的https请求","level":"1.3.2","depth":2,"next":{"title":"移动端安装ssl证书","level":"1.3.2.1","depth":3,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/README.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/README.md","articles":[{"title":"Android端","level":"1.3.2.1.1","depth":4,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/android.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/android.md","articles":[]},{"title":"iOS端","level":"1.3.2.1.2","depth":4,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/ios.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/ios.md","articles":[]}]},"previous":{"title":"iOS端","level":"1.3.1.1.2","depth":4,"path":"how_capture_app/simple_http/mobile_proxy/ios.md","ref":"how_capture_app/simple_http/mobile_proxy/ios.md","articles":[]},"articles":[{"title":"移动端安装ssl证书","level":"1.3.2.1","depth":3,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/README.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/README.md","articles":[{"title":"Android端","level":"1.3.2.1.1","depth":4,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/android.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/android.md","articles":[]},{"title":"iOS端","level":"1.3.2.1.2","depth":4,"path":"how_capture_app/complex_https/mobile_install_ssl_ca/ios.md","ref":"how_capture_app/complex_https/mobile_install_ssl_ca/ios.md","articles":[]}]},{"title":"破解https的SSL Pinning","level":"1.3.2.2","depth":3,"path":"how_capture_app/complex_https/https_ssl_pinning/README.md","ref":"how_capture_app/complex_https/https_ssl_pinning/README.md","articles":[{"title":"Android端","level":"1.3.2.2.1","depth":4,"path":"how_capture_app/complex_https/https_ssl_pinning/android/README.md","ref":"how_capture_app/complex_https/https_ssl_pinning/android/README.md","articles":[{"title":"Xposed+JustTrustMe","level":"1.3.2.2.1.1","depth":5,"path":"how_capture_app/complex_https/https_ssl_pinning/android/xposed_justtrustme.md","ref":"how_capture_app/complex_https/https_ssl_pinning/android/xposed_justtrustme.md","articles":[]}]},{"title":"iOS端","level":"1.3.2.2.2","depth":4,"path":"how_capture_app/complex_https/https_ssl_pinning/ios/README.md","ref":"how_capture_app/complex_https/https_ssl_pinning/ios/README.md","articles":[]},{"title":"更复杂的情况","level":"1.3.2.2.3","depth":4,"path":"how_capture_app/complex_https/https_ssl_pinning/more_complex.md","ref":"how_capture_app/complex_https/https_ssl_pinning/more_complex.md","articles":[]}]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/app_capture_package_tool_charles/pdf/app_capture_package_tool_charles.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/app_capture_package_tool_charles/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"app_capture_package_tool_charles","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"app抓包利器：Charles","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍移动端app的主流抓包工具Charles，以及具体使用心得，如何抓包普通的http的请求，和更高级的加密的https的请求以看到明文数据。再介绍Charles使用期间的注意事项，常见的坑等。期间涉及到如何给安卓手机端安装Charles的ssl的CA证书，如何配合Xposed，JustTrustMe等框架、工具，ssl-kill-switch3、SSLBypass、SSL Kill Switch 2等插件等去实现绕过ssl证书绑定从而破解https，如何选择合适的可以用上JustTrustMe的安卓模拟器或者安卓真机。"},"file":{"path":"how_capture_app/complex_https/README.md","mtime":"2023-10-17T01:18:16.952Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-21T02:10:39.577Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

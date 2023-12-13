@@ -1,0 +1,1269 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Suricata · 防止被黑客攻击：Web安全</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="zeek.html" />
+    
+    
+    <link rel="prev" href="sonrt.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"avoid_hacker_attack_web_security","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../web_security_overview/">
+            
+                <a href="../../../web_security_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Web安全概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../web_security_overview/common_qa.html">
+            
+                <a href="../../../web_security_overview/common_qa.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../common_term/">
+            
+                <a href="../../../common_term/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Web攻防和常见术语
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../web_attack/">
+            
+                <a href="../../../web_attack/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Web攻击
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../web_attack/method/">
+            
+                <a href="../../../web_attack/method/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    攻击方式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../web_attack/method/dos/">
+            
+                <a href="../../../web_attack/method/dos/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    DoS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../../web_attack/method/dos/ddos/">
+            
+                <a href="../../../web_attack/method/dos/ddos/">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    DDoS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1.1" data-path="../../../web_attack/method/dos/ddos/ddos_protect.html">
+            
+                <a href="../../../web_attack/method/dos/ddos/ddos_protect.html">
+            
+                    
+                        <b>1.4.1.1.1.1.</b>
+                    
+                    DDoS防护
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Web防护
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../penetration_test.html">
+            
+                <a href="../../penetration_test.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    渗透测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../fuzz_test/">
+            
+                <a href="../../fuzz_test/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    模糊测试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../fuzz_test/tools/">
+            
+                <a href="../../fuzz_test/tools/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    模糊测试工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../../fuzz_test/tools/afl.html">
+            
+                <a href="../../fuzz_test/tools/afl.html">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    AFL
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    其他防护技术
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../firewall/">
+            
+                <a href="../firewall/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    防火墙
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../firewall/waf.html">
+            
+                <a href="../firewall/waf.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    WAF
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    IDS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.2.1" data-path="sonrt.html">
+            
+                <a href="sonrt.html">
+            
+                    
+                        <b>1.5.3.2.1.</b>
+                    
+                    Sonrt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3.2.2" data-path="suricata.html">
+            
+                <a href="suricata.html">
+            
+                    
+                        <b>1.5.3.2.2.</b>
+                    
+                    Suricata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2.3" data-path="zeek.html">
+            
+                <a href="zeek.html">
+            
+                    
+                        <b>1.5.3.2.3.</b>
+                    
+                    Zeek
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2.4" data-path="opnsense.html">
+            
+                <a href="opnsense.html">
+            
+                    
+                        <b>1.5.3.2.4.</b>
+                    
+                    OPNsense
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../honeypot.html">
+            
+                <a href="../honeypot.html">
+            
+                    
+                        <b>1.5.3.3.</b>
+                    
+                    蜜罐
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../web_tool_sys/">
+            
+                <a href="../../../web_tool_sys/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    工具和系统
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../web_tool_sys/security_os/">
+            
+                <a href="../../../web_tool_sys/security_os/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    安全操作系统
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../../web_tool_sys/security_os/kali_linux.html">
+            
+                <a href="../../../web_tool_sys/security_os/kali_linux.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    Kali Linux
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../web_tool_sys/analysis/">
+            
+                <a href="../../../web_tool_sys/analysis/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    网络分析工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../../web_tool_sys/analysis/wireshark.html">
+            
+                <a href="../../../web_tool_sys/analysis/wireshark.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    Wireshark
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../../web_tool_sys/analysis/capsa_free.html">
+            
+                <a href="../../../web_tool_sys/analysis/capsa_free.html">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    Capsa Free
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../../web_tool_sys/analysis/zenoss_core.html">
+            
+                <a href="../../../web_tool_sys/analysis/zenoss_core.html">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    Zenoss Core
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.4" data-path="../../../web_tool_sys/analysis/networkminer.html">
+            
+                <a href="../../../web_tool_sys/analysis/networkminer.html">
+            
+                    
+                        <b>1.6.2.4.</b>
+                    
+                    NetworkMiner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.5" data-path="../../../web_tool_sys/analysis/the_dude.html">
+            
+                <a href="../../../web_tool_sys/analysis/the_dude.html">
+            
+                    
+                        <b>1.6.2.5.</b>
+                    
+                    The Dude
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.6" data-path="../../../web_tool_sys/analysis/angry_ip_scanner.html">
+            
+                <a href="../../../web_tool_sys/analysis/angry_ip_scanner.html">
+            
+                    
+                        <b>1.6.2.6.</b>
+                    
+                    Angry IP Scanner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.7" data-path="../../../web_tool_sys/analysis/nimbus_threat_monitor.html">
+            
+                <a href="../../../web_tool_sys/analysis/nimbus_threat_monitor.html">
+            
+                    
+                        <b>1.6.2.7.</b>
+                    
+                    Nimbus Threat Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../../web_tool_sys/code_audit/">
+            
+                <a href="../../../web_tool_sys/code_audit/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    代码审计工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../../../web_tool_sys/code_audit/checkmarx_cxenterprise.html">
+            
+                <a href="../../../web_tool_sys/code_audit/checkmarx_cxenterprise.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    Checkmarx CxEnterprise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.2" data-path="../../../web_tool_sys/code_audit/armorize_codesecue.html">
+            
+                <a href="../../../web_tool_sys/code_audit/armorize_codesecue.html">
+            
+                    
+                        <b>1.6.3.2.</b>
+                    
+                    Armorize CodeSecue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.3" data-path="../../../web_tool_sys/code_audit/fortify.html">
+            
+                <a href="../../../web_tool_sys/code_audit/fortify.html">
+            
+                    
+                        <b>1.6.3.3.</b>
+                    
+                    Fortify
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.4" data-path="../../../web_tool_sys/code_audit/rips.html">
+            
+                <a href="../../../web_tool_sys/code_audit/rips.html">
+            
+                    
+                        <b>1.6.3.4.</b>
+                    
+                    RIPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../certificates/">
+            
+                <a href="../../../certificates/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    证书
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../certificates/security.html">
+            
+                <a href="../../../certificates/security.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    安全证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../../certificates/network.html">
+            
+                <a href="../../../certificates/network.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    网络证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../../certificates/other.html">
+            
+                <a href="../../../certificates/other.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    其他证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../security_organization/">
+            
+                <a href="../../../security_organization/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    安全组织
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../security_organization/owasp.html">
+            
+                <a href="../../../security_organization/owasp.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    OWASP
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../security_law/">
+            
+                <a href="../../../security_law/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    安全法规
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../security_law/network_security_law/">
+            
+                <a href="../../../security_law/network_security_law/">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    网络安全法和等保
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../security_standard/">
+            
+                <a href="../../../security_standard/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    安全标准
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../../security_standard/iso_27001.html">
+            
+                <a href="../../../security_standard/iso_27001.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    ISO27001
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../../../security_process/">
+            
+                <a href="../../../security_process/">
+            
+                    
+                        <b>1.11.</b>
+                    
+                    安全流程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../../security_process/sdl.html">
+            
+                <a href="../../../security_process/sdl.html">
+            
+                    
+                        <b>1.11.1.</b>
+                    
+                    SDL
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.12.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.12.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >Suricata</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="suricata"><a name="suricata" class="plugin-anchor" href="#suricata"><i class="fa fa-link" aria-hidden="true"></i></a>Suricata</h1>
+<ul>
+<li><code>Suricata</code><ul>
+<li>&#x662F;&#x4EC0;&#x4E48;&#xFF1A;Suricata &#x662F;<code>OISF</code>&#x4E3B;&#x5BFC;&#x548C;&#x652F;&#x6301;&#x7684;&#x4E00;&#x4E2A;&#x514D;&#x8D39;&#x3001;&#x5F00;&#x6E90;&#x3001;&#x6210;&#x719F;&#x3001;&#x9AD8;&#x6027;&#x80FD;&#x548C;&#x5065;&#x58EE;&#x7684;&#x7F51;&#x7EDC;&#x5A01;&#x80C1;&#x68C0;&#x6D4B;&#x5F15;&#x64CE;<ul>
+<li><code>OISF</code>=<code>Open Information Security Foundation</code>=<code>&#x975E;&#x76C8;&#x5229;&#x6027;&#x7EC4;&#x7EC7;&#x5F00;&#x653E;&#x4FE1;&#x606F;&#x5B89;&#x5168;&#x57FA;&#x91D1;&#x4F1A;</code></li>
+</ul>
+</li>
+<li>&#x529F;&#x80FD;<ul>
+<li>&#x5B9E;&#x65F6;&#x5165;&#x4FB5;&#x68C0;&#x6D4B;</li>
+<li>&#x5185;&#x8054;<ul>
+<li>IPS<ul>
+<li><code>IPS</code>=<code>Intrusion Prevention System</code>=<code>&#x5165;&#x4FB5;&#x4FDD;&#x62A4;</code></li>
+</ul>
+</li>
+<li>NSM<ul>
+<li><code>NSM</code>=<code>Network Security Monitoring</code>=<code>&#x7F51;&#x7EDC;&#x5B89;&#x5168;&#x76D1;&#x63A7;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x79BB;&#x7EBF;pcap&#x5904;&#x7406;</li>
+</ul>
+</li>
+<li>&#x4ECB;&#x7ECD;<ul>
+<li>Suricata &#x4F7F;&#x7528;&#x53EF;&#x6269;&#x5C55;&#x7684;&#x89C4;&#x5219;&#x548C;&#x7B7E;&#x540D;&#x8BED;&#x8A00;&#x6765;&#x68C0;&#x67E5;&#x7F51;&#x7EDC;&#xFF0C;&#x6D41;&#x91CF;&#xFF0C;&#x652F;&#x6301;&#x4F7F;&#x7528;Lua&#x811A;&#x672C;&#x8BED;&#x8A00;&#x68C0;&#x6D4B;&#x590D;&#x6742;&#x5A01;&#x80C1;&#x3002;</li>
+<li>Suricata &#x4F7F;&#x7528;&#x6807;&#x51C6; YAML &#x8F93;&#x5165;&#x683C;&#x5F0F;&#x548C; JSON &#x8F93;&#x51FA;&#x683C;&#x5F0F;&#xFF0C;&#x4F7F;&#x5F97;&#x548C;&#x7B2C;&#x4E09;&#x65B9;<code>SIEM</code>&#x5DE5;&#x5177;&#xFF08;&#x4F8B;&#x5982;<code>Splunk</code>&#x3001;<code>ELK</code>&#x548C;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x5E93;&#xFF09;&#x96C6;&#x6210;&#x5341;&#x5206;&#x5BB9;&#x6613;<ul>
+<li><code>SIEM</code>=<code>Security Information and Event Management</code>=<code>&#x5B89;&#x5168;&#x4FE1;&#x606F;&#x548C;&#x4E8B;&#x4EF6;&#x7BA1;&#x7406;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x56FE;<ul>
+<li>Suricata&#x4EA7;&#x751F;&#x7684;&#x62A5;&#x8B66;&#x65E5;&#x5FD7;&#x53EF;&#x89C6;&#x5316;&#x6548;&#x679C;&#x56FE;<ul>
+<li><img src="../../../assets/img/suricata_log_visualization.png" alt="suricata_log_visualization"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-06-08 22:33:53
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="sonrt.html" class="navigation navigation-prev " aria-label="Previous page: Sonrt">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="zeek.html" class="navigation navigation-next " aria-label="Next page: Zeek">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Suricata","level":"1.5.3.2.2","depth":4,"next":{"title":"Zeek","level":"1.5.3.2.3","depth":4,"path":"web_protect/other_protect/ids/zeek.md","ref":"web_protect/other_protect/ids/zeek.md","articles":[]},"previous":{"title":"Sonrt","level":"1.5.3.2.1","depth":4,"path":"web_protect/other_protect/ids/sonrt.md","ref":"web_protect/other_protect/ids/sonrt.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/avoid_hacker_attack_web_security/pdf/avoid_hacker_attack_web_security.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/avoid_hacker_attack_web_security/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"avoid_hacker_attack_web_security","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"防止被黑客攻击：Web安全","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"学习Web安全，以防止被黑客攻击。先对Web安全进行概述，且给出常见问题和解释，包括Web安全对比网络安全、Web安全对比渗透测试；再解释网络攻击，包括常见的DoS和DDoS，以及DDoS的防护方法；整理相关工具和系统，包括WAF、安全操作系统Kali、网络分析工具包括Wireshark、Capsa Free、Zenoss Core、NetworkMiner、The Dude、Angry IP Scanner、Nimbus Threat Monitor等；以及代码审计工具CxEnterprise、Armorize CodeSecue、Fortify、RIPS等；再整理证书相关内容，包括安全证书，如CISP、CISM、CISAW、CCSRP、CISSP等，以及网络证书，如CCIE、CCNA、CCNP等，以及其他证书，如CISA、CDP、CompTIA A +、MCSA、MTA、Oracle、PMP等；总结了安全相关标准，比如网络安全法和等级保护、ISO27001等；以及安全组织，比如OWASP等；最后给出参考资料。"},"file":{"path":"web_protect/other_protect/ids/suricata.md","mtime":"2021-06-08T14:33:53.346Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T14:40:40.181Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
