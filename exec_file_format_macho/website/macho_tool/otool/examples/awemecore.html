@@ -1,0 +1,2712 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>AwemeCore · 可执行文件格式：Mach-O</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="maskpro_dylib.html" />
+    
+    
+    <link rel="prev" href="aweme.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../macho_overview/">
+            
+                <a href="../../../macho_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Mach-O概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../macho_overview/background/">
+            
+                <a href="../../../macho_overview/background/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../../macho_overview/background/xnu.html">
+            
+                <a href="../../../macho_overview/background/xnu.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    XNU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../../macho_overview/background/compile_link_load.html">
+            
+                <a href="../../../macho_overview/background/compile_link_load.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    编译链接加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../../macho_overview/background/pic.html">
+            
+                <a href="../../../macho_overview/background/pic.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    PIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../macho_format/">
+            
+                <a href="../../../macho_format/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Mach-O格式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../macho_format/summary/">
+            
+                <a href="../../../macho_format/summary/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Mach-O结构概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../../macho_format/summary/macho_layout.html">
+            
+                <a href="../../../macho_format/summary/macho_layout.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    Mach-O结构图
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../macho_format/detail/">
+            
+                <a href="../../../macho_format/detail/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Mach-O结构详情
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../macho_format/detail/header/">
+            
+                <a href="../../../macho_format/detail/header/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Header
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../../macho_format/detail/header/magic.html">
+            
+                <a href="../../../macho_format/detail/header/magic.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    magic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                <a href="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    cputype和cpusubtype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.3" data-path="../../../macho_format/detail/header/filetype.html">
+            
+                <a href="../../../macho_format/detail/header/filetype.html">
+            
+                    
+                        <b>1.3.2.1.3.</b>
+                    
+                    filetype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.4" data-path="../../../macho_format/detail/header/flags.html">
+            
+                <a href="../../../macho_format/detail/header/flags.html">
+            
+                    
+                        <b>1.3.2.1.4.</b>
+                    
+                    flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../../macho_format/detail/load_commands/">
+            
+                <a href="../../../macho_format/detail/load_commands/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    Load Commands
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    LC_UUID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    LC_SEGMENT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    LC_SEGMENT_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.4" data-path="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                    
+                        <b>1.3.2.2.4.</b>
+                    
+                    LC_SYMTAB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.5" data-path="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.3.2.2.5.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.6" data-path="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                    
+                        <b>1.3.2.2.6.</b>
+                    
+                    LC_DYLD_EXPORTS_TRIE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../../../macho_format/detail/segment/">
+            
+                <a href="../../../macho_format/detail/segment/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    Segment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../../../macho_format/detail/segment/__text/">
+            
+                <a href="../../../macho_format/detail/segment/__text/">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    __TEXT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1.1" data-path="../../../macho_format/detail/segment/__text/__text.html">
+            
+                <a href="../../../macho_format/detail/segment/__text/__text.html">
+            
+                    
+                        <b>1.3.2.3.1.1.</b>
+                    
+                    __text
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../../../macho_format/detail/segment/__data/">
+            
+                <a href="../../../macho_format/detail/segment/__data/">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    __DATA
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.2.1" data-path="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                    
+                        <b>1.3.2.3.2.1.</b>
+                    
+                    __la_symbol_ptr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2.2" data-path="../../../macho_format/detail/segment/__data/__got.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__got.html">
+            
+                    
+                        <b>1.3.2.3.2.2.</b>
+                    
+                    __got
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.3" data-path="../../../macho_format/detail/segment/__import.html">
+            
+                <a href="../../../macho_format/detail/segment/__import.html">
+            
+                    
+                        <b>1.3.2.3.3.</b>
+                    
+                    __IMPORT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.4" data-path="../../../macho_format/detail/segment/__linkedit.html">
+            
+                <a href="../../../macho_format/detail/segment/__linkedit.html">
+            
+                    
+                        <b>1.3.2.3.4.</b>
+                    
+                    __LINKEDIT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.5" data-path="../../../macho_format/detail/segment/__objc.html">
+            
+                <a href="../../../macho_format/detail/segment/__objc.html">
+            
+                    
+                        <b>1.3.2.3.5.</b>
+                    
+                    __OBJC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../../../macho_format/detail/section/">
+            
+                <a href="../../../macho_format/detail/section/">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    Section
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.4.1" data-path="../../../macho_format/detail/section/symbol.html">
+            
+                <a href="../../../macho_format/detail/section/symbol.html">
+            
+                    
+                        <b>1.3.2.4.1.</b>
+                    
+                    symbol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4.2" data-path="../../../macho_format/detail/section/string.html">
+            
+                <a href="../../../macho_format/detail/section/string.html">
+            
+                    
+                        <b>1.3.2.4.2.</b>
+                    
+                    string
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../macho_format/fat/">
+            
+                <a href="../../../macho_format/fat/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    FAT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../../macho_format/fat/examples.html">
+            
+                <a href="../../../macho_format/fat/examples.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../../macho_format/fat/issues.html">
+            
+                <a href="../../../macho_format/fat/issues.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../../macho_format/fat/tools/">
+            
+                <a href="../../../macho_format/fat/tools/">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.3.1" data-path="../../../macho_format/fat/tools/lipo.html">
+            
+                <a href="../../../macho_format/fat/tools/lipo.html">
+            
+                    
+                        <b>1.3.3.3.1.</b>
+                    
+                    lipo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../../macho_format/codesign/">
+            
+                <a href="../../../macho_format/codesign/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../../macho_format/vm_addr/">
+            
+                <a href="../../../macho_format/vm_addr/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    虚拟地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../../macho_format/size_limit/">
+            
+                <a href="../../../macho_format/size_limit/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    大小限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Mach-O工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../machoview/">
+            
+                <a href="../../machoview/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    MachOView
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../machoview/examples/">
+            
+                <a href="../../machoview/examples/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../machoview/examples/main_arm64.html">
+            
+                <a href="../../machoview/examples/main_arm64.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    main_arm64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../machoview/examples/awemecore.html">
+            
+                <a href="../../machoview/examples/awemecore.html">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                <a href="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    zzzzHeiBaoLib.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../machoview/summary/">
+            
+                <a href="../../machoview/summary/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../machoview/summary/self_compile.html">
+            
+                <a href="../../machoview/summary/self_compile.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    自己编译
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../rabin2/">
+            
+                <a href="../../rabin2/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    rabin2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../rabin2/usage/">
+            
+                <a href="../../rabin2/usage/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../rabin2/examples/">
+            
+                <a href="../../rabin2/examples/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../rabin2/examples/awemecore.html">
+            
+                <a href="../../rabin2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../rabin2/examples/maskpro_dylib.html">
+            
+                <a href="../../rabin2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../rabin2/help.html">
+            
+                <a href="../../rabin2/help.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../jtool2/">
+            
+                <a href="../../jtool2/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    jtool2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../jtool2/usage/">
+            
+                <a href="../../jtool2/usage/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../jtool2/examples/">
+            
+                <a href="../../jtool2/examples/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../../jtool2/examples/awemecore.html">
+            
+                <a href="../../jtool2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="../../jtool2/examples/maskpro_dylib.html">
+            
+                <a href="../../jtool2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.3" data-path="../../jtool2/examples/akd.html">
+            
+                <a href="../../jtool2/examples/akd.html">
+            
+                    
+                        <b>1.4.3.2.3.</b>
+                    
+                    akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../jtool2/help.html">
+            
+                <a href="../../jtool2/help.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    otool
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../usage/">
+            
+                <a href="../usage/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="aweme.html">
+            
+                <a href="aweme.html">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    Aweme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4.2.2" data-path="awemecore.html">
+            
+                <a href="awemecore.html">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="maskpro_dylib.html">
+            
+                <a href="maskpro_dylib.html">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../help.html">
+            
+                <a href="../help.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../pagestuff/">
+            
+                <a href="../../pagestuff/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    pagestuff
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../pagestuff/help.html">
+            
+                <a href="../../pagestuff/help.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/doc_material.html">
+            
+                <a href="../../../appendix/doc_material.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Mach-O文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >AwemeCore</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="otool用法举例：awemecore"><a name="otool用法举例：awemecore" class="plugin-anchor" href="#otool用法举例：awemecore"><i class="fa fa-link" aria-hidden="true"></i></a>otool用法举例：AwemeCore</h1>
+<ul>
+<li><p>输入文件：</p>
+<pre class="language-"><code class="lang-bash">/Users/crifan/dev/DevRoot/iOSReverse/Aweme/exportFromiPhone/iPhone7P-1341/Aweme.app/Frameworks/AwemeCore.framework
+
+➜  AwemeCore.framework ll
+total <span class="token number">10208480</span>
+-rw-r--r--  <span class="token number">1</span> crifan  staff   230M  <span class="token number">1</span>  <span class="token number">8</span> 09:43 AwemeCore
+</code></pre>
+</li>
+</ul>
+<h2 id="l"><a name="l" class="plugin-anchor" href="#l"><i class="fa fa-link" aria-hidden="true"></i></a><code>-l</code></h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore.framework otool <span class="token parameter variable">-l</span> AwemeCore <span class="token operator">&gt;</span> otool_l_AwemeCore.txt
+</code></pre>
+<p>输出内容（很多，有2000多行）：</p>
+<pre class="language-"><code class="lang-bash">AwemeCore:
+Load <span class="token builtin class-name">command</span> <span class="token number">0</span>
+      cmd LC_SEGMENT_64
+  cmdsize <span class="token number">1752</span>
+  segname __TEXT
+   vmaddr 0x0000000000000000
+   vmsize 0x0000000000304000
+  fileoff <span class="token number">0</span>
+ filesize <span class="token number">3162112</span>
+  maxprot 0x00000005
+ initprot 0x00000005
+   nsects <span class="token number">21</span>
+    flags 0x0
+Section
+  sectname __stub_helper
+   segname __TEXT
+      addr 0x000000000000b9b0
+      size 0x00000000000084c0
+    offset <span class="token number">47536</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x80000400
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __const
+   segname __TEXT
+      addr 0x0000000000013e70
+      size 0x0000000000004020
+    offset <span class="token number">81520</span>
+     align <span class="token number">2</span>^4 <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __swift5_typeref
+   segname __TEXT
+      addr 0x0000000000017e90
+      size 0x0000000000002ef8
+    offset <span class="token number">97936</span>
+     align <span class="token number">2</span>^4 <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __swift5_fieldmd
+   segname __TEXT
+      addr 0x000000000001ad88
+      size 0x0000000000002988
+    offset <span class="token number">109960</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __swift5_proto
+   segname __TEXT
+      addr 0x000000000001d710
+      size 0x0000000000000338
+    offset <span class="token number">120592</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __swift5_types
+   segname __TEXT
+      addr 0x000000000001da48
+      size 0x000000000000028c
+    offset <span class="token number">121416</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __cstring
+   segname __TEXT
+      addr 0x000000000001dcd4
+      size 0x0000000000000000
+    offset <span class="token number">122068</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000002
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __objc_methname
+   segname __TEXT
+      addr 0x000000000001dcd4
+      size 0x0000000000000000
+    offset <span class="token number">122068</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000002
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __objc_classname
+   segname __TEXT
+      addr 0x000000000001dcd4
+      size 0x0000000000000000
+    offset <span class="token number">122068</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000002
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __objc_methtype
+   segname __TEXT
+      addr 0x000000000001dcd4
+      size 0x0000000000000000
+    offset <span class="token number">122068</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000002
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __gcc_except_tab
+   segname __TEXT
+      addr 0x000000000001dcd4
+      size 0x0000000000000068
+    offset <span class="token number">122068</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+<span class="token punctuation">..</span>.
+Section
+  sectname __PUZZLEMETHOD__
+   segname __DATA
+      addr 0x0000000000d627a8
+      size 0x0000000000000050
+    offset <span class="token number">14034856</span>
+     align <span class="token number">2</span>^3 <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname IESSLynxBridge
+   segname __DATA
+      addr 0x0000000000d627f8
+      size 0x0000000000000010
+    offset <span class="token number">14034936</span>
+     align <span class="token number">2</span>^3 <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname RxAnnotation
+   segname __DATA
+      addr 0x0000000000d62808
+      size 0x0000000000000050
+    offset <span class="token number">14034952</span>
+     align <span class="token number">2</span>^3 <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __objc_clsrefs
+   segname __DATA
+      addr 0x0000000000d62858
+      size 0x0000000000004850
+    offset <span class="token number">14035032</span>
+     align <span class="token number">2</span>^3 <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __thread_vars
+   segname __DATA
+      addr 0x0000000000d670a8
+      size 0x00000000000006c0
+    offset <span class="token number">14053544</span>
+     align <span class="token number">2</span>^3 <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000013
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+<span class="token punctuation">..</span>.
+Section
+  sectname _D_ustring
+   segname __DATA
+      addr 0x00000000047e5194
+      size 0x000000000007795a
+    offset <span class="token number">0</span>
+     align <span class="token number">2</span>^1 <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000001
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname _D_objc_methname
+   segname __DATA
+      addr 0x000000000485caee
+      size 0x0000000000ae06ba
+    offset <span class="token number">0</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000001
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname _D_objc_methtype
+   segname __DATA
+      addr 0x000000000533d1a8
+      size 0x00000000001ca962
+    offset <span class="token number">0</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000001
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __common
+   segname __DATA
+      addr 0x0000000005507c00
+      size 0x000000000017fc48
+    offset <span class="token number">0</span>
+     align <span class="token number">2</span>^10 <span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000001
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __bss
+   segname __DATA
+      addr 0x0000000005687900
+      size 0x000000000029b0ec
+    offset <span class="token number">0</span>
+     align <span class="token number">2</span>^8 <span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000001
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">2</span>
+      cmd LC_SEGMENT_64
+  cmdsize <span class="token number">232</span>
+  segname __BD_TEXT
+   vmaddr 0x0000000005924000
+   vmsize 0x000000000bb5c000
+  fileoff <span class="token number">16269312</span>
+ filesize <span class="token number">196460544</span>
+  maxprot 0x00000005
+ initprot 0x00000005
+   nsects <span class="token number">2</span>
+    flags 0x0
+Section
+  sectname __text
+   segname __BD_TEXT
+      addr 0x0000000005924000
+      size 0x000000000bb52a38
+    offset <span class="token number">16269312</span>
+     align <span class="token number">2</span>^14 <span class="token punctuation">(</span><span class="token number">16384</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x80000400
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __stubs
+   segname __BD_TEXT
+      addr 0x0000000011476a38
+      size 0x0000000000008508
+    offset <span class="token number">212691512</span>
+     align <span class="token number">2</span>^2 <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x80000408
+ reserved1 <span class="token number">4410</span> <span class="token punctuation">(</span>index into indirect symbol table<span class="token punctuation">)</span>
+ reserved2 <span class="token number">12</span> <span class="token punctuation">(</span>size of stubs<span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">3</span>
+      cmd LC_SEGMENT_64
+  cmdsize <span class="token number">712</span>
+  segname __LTC_DATA
+   vmaddr 0x0000000011480000
+   vmsize 0x00000000011e0000
+  fileoff <span class="token number">212729856</span>
+ filesize <span class="token number">18743296</span>
+  maxprot 0x00000001
+ initprot 0x00000001
+   nsects <span class="token number">8</span>
+    flags 0x0
+<span class="token punctuation">..</span>.
+Section
+  sectname _C_gcc_except_ta
+   segname __LTC_DATA
+      addr 0x000000001232e92d
+      size 0x000000000024ca15
+    offset <span class="token number">228124973</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Section
+  sectname __fix
+   segname __LTC_DATA
+      addr 0x000000001257b342
+      size 0x00000000000e1298
+    offset <span class="token number">230536002</span>
+     align <span class="token number">2</span>^0 <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    reloff <span class="token number">0</span>
+    nreloc <span class="token number">0</span>
+     flags 0x00000000
+ reserved1 <span class="token number">0</span>
+ reserved2 <span class="token number">0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">4</span>
+      cmd LC_SEGMENT_64
+  cmdsize <span class="token number">72</span>
+  segname __LINKEDIT
+   vmaddr 0x0000000012660000
+   vmsize 0x00000000008c8000
+  fileoff <span class="token number">231473152</span>
+ filesize <span class="token number">9193456</span>
+  maxprot 0x00000001
+ initprot 0x00000001
+   nsects <span class="token number">0</span>
+    flags 0x0
+Load <span class="token builtin class-name">command</span> <span class="token number">5</span>
+          cmd LC_ID_DYLIB
+      cmdsize <span class="token number">64</span>
+         name @rpath/AwemeCore.framework/AwemeCore <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">1</span> Thu Jan  <span class="token number">1</span> 08:00:01 <span class="token number">1970</span>
+      current version <span class="token number">1.0</span>.0
+compatibility version <span class="token number">1.0</span>.0
+Load <span class="token builtin class-name">command</span> <span class="token number">6</span>
+            cmd LC_DYLD_INFO_ONLY
+        cmdsize <span class="token number">48</span>
+     rebase_off <span class="token number">231473152</span>
+    rebase_size <span class="token number">350072</span>
+       bind_off <span class="token number">231823224</span>
+      bind_size <span class="token number">292520</span>
+  weak_bind_off <span class="token number">232115744</span>
+ weak_bind_size <span class="token number">296</span>
+  lazy_bind_off <span class="token number">232116040</span>
+ lazy_bind_size <span class="token number">101024</span>
+     export_off <span class="token number">232217064</span>
+    export_size <span class="token number">384</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">7</span>
+     cmd LC_SYMTAB
+ cmdsize <span class="token number">24</span>
+  symoff <span class="token number">234432864</span>
+   nsyms <span class="token number">5030</span>
+  stroff <span class="token number">234542336</span>
+ strsize <span class="token number">146360</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">8</span>
+            cmd LC_DYSYMTAB
+        cmdsize <span class="token number">80</span>
+      ilocalsym <span class="token number">0</span>
+      nlocalsym <span class="token number">1</span>
+     iextdefsym <span class="token number">1</span>
+     nextdefsym <span class="token number">0</span>
+      iundefsym <span class="token number">1</span>
+      nundefsym <span class="token number">5029</span>
+         tocoff <span class="token number">0</span>
+           ntoc <span class="token number">0</span>
+      modtaboff <span class="token number">0</span>
+        nmodtab <span class="token number">0</span>
+   extrefsymoff <span class="token number">0</span>
+    nextrefsyms <span class="token number">0</span>
+ indirectsymoff <span class="token number">234513344</span>
+  nindirectsyms <span class="token number">7248</span>
+      extreloff <span class="token number">0</span>
+        nextrel <span class="token number">0</span>
+      locreloff <span class="token number">0</span>
+        nlocrel <span class="token number">0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">9</span>
+     cmd LC_UUID
+ cmdsize <span class="token number">24</span>
+    uuid F1FCF15A-6465-31F0-9300-5BA1B8F91017
+Load <span class="token builtin class-name">command</span> <span class="token number">10</span>
+      cmd LC_VERSION_MIN_IPHONEOS
+  cmdsize <span class="token number">16</span>
+  version <span class="token number">10.0</span>
+      sdk <span class="token number">15.0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">11</span>
+      cmd LC_SOURCE_VERSION
+  cmdsize <span class="token number">16</span>
+  version <span class="token number">0.0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">12</span>
+          cmd LC_ENCRYPTION_INFO_64
+      cmdsize <span class="token number">24</span>
+     cryptoff <span class="token number">32768</span>
+    cryptsize <span class="token number">3112960</span>
+      cryptid <span class="token number">0</span>
+          pad <span class="token number">0</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">13</span>
+          cmd LC_LOAD_DYLIB
+      cmdsize <span class="token number">56</span>
+         name /usr/lib/libcompression.dylib <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+      current version <span class="token number">1.0</span>.0
+compatibility version <span class="token number">1.0</span>.0
+Load <span class="token builtin class-name">command</span> <span class="token number">14</span>
+          cmd LC_LOAD_DYLIB
+      cmdsize <span class="token number">72</span>
+         name @rpath/BDLRepairer.framework/BDLRepairer <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+      current version <span class="token number">1.0</span>.0
+compatibility version <span class="token number">1.0</span>.0
+Load <span class="token builtin class-name">command</span> <span class="token number">15</span>
+          cmd LC_LOAD_DYLIB
+      cmdsize <span class="token number">48</span>
+         name /usr/lib/libc++.1.dylib <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+      current version <span class="token number">1200.3</span>.0
+compatibility version <span class="token number">1.0</span>.0
+<span class="token punctuation">..</span>.
+Load <span class="token builtin class-name">command</span> <span class="token number">123</span>
+          cmd LC_LOAD_WEAK_DYLIB
+      cmdsize <span class="token number">48</span>
+         name @rpath/libswiftos.dylib <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+      current version <span class="token number">1021.0</span>.0
+compatibility version <span class="token number">1.0</span>.0
+Load <span class="token builtin class-name">command</span> <span class="token number">124</span>
+          cmd LC_LOAD_WEAK_DYLIB
+      cmdsize <span class="token number">56</span>
+         name @rpath/libswiftsimd.dylib <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+   <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+      current version <span class="token number">9.0</span>.0
+compatibility version <span class="token number">1.0</span>.0
+Load <span class="token builtin class-name">command</span> <span class="token number">125</span>
+          cmd LC_RPATH
+      cmdsize <span class="token number">32</span>
+         path /usr/lib/swift <span class="token punctuation">(</span>offset <span class="token number">12</span><span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">126</span>
+          cmd LC_RPATH
+      cmdsize <span class="token number">40</span>
+         path @executable_path/Frameworks <span class="token punctuation">(</span>offset <span class="token number">12</span><span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">127</span>
+          cmd LC_RPATH
+      cmdsize <span class="token number">40</span>
+         path @loader_path/Frameworks <span class="token punctuation">(</span>offset <span class="token number">12</span><span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">128</span>
+          cmd LC_RPATH
+      cmdsize <span class="token number">48</span>
+         path @executable_path/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/Frameworks <span class="token punctuation">(</span>offset <span class="token number">12</span><span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">129</span>
+          cmd LC_RPATH
+      cmdsize <span class="token number">40</span>
+         path @executable_path/Frameworks <span class="token punctuation">(</span>offset <span class="token number">12</span><span class="token punctuation">)</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">130</span>
+      cmd LC_FUNCTION_STARTS
+  cmdsize <span class="token number">16</span>
+  dataoff <span class="token number">232217448</span>
+ datasize <span class="token number">2214096</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">131</span>
+      cmd LC_DATA_IN_CODE
+  cmdsize <span class="token number">16</span>
+  dataoff <span class="token number">234431544</span>
+ datasize <span class="token number">1320</span>
+Load <span class="token builtin class-name">command</span> <span class="token number">132</span>
+      cmd LC_CODE_SIGNATURE
+  cmdsize <span class="token number">16</span>
+  dataoff <span class="token number">234688704</span>
+ datasize <span class="token number">5977904</span>
+</code></pre>
+<h2 id="ov"><a name="ov" class="plugin-anchor" href="#ov"><i class="fa fa-link" aria-hidden="true"></i></a><code>-oV</code></h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore.framework otool <span class="token parameter variable">-oV</span> AwemeCore <span class="token operator">&gt;</span> otool_oV_AwemeCore.txt
+</code></pre>
+<p>输出（共16万行）：</p>
+<p><img src="../../../assets/img/otool_awemecore_ov_1.png" alt="otool_awemecore_ov_1"></p>
+<p><img src="../../../assets/img/otool_awemecore_ov_2.png" alt="otool_awemecore_ov_2"></p>
+<pre class="language-"><code class="lang-bash">AwemeCore:
+Contents of <span class="token punctuation">(</span>__DATA,__objc_classlist<span class="token punctuation">)</span> section
+00000000003221c8 0x9acaf0
+    isa        0x9acac8
+    superclass 0x0 _OBJC_CLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+    vtable     0x0
+    data       0x37f798
+        flags          0x0
+        instanceStart  <span class="token number">8</span>
+        instanceSize   <span class="token number">12</span>
+        reserved       0x0
+        ivarLayout     0x0
+        name           0xe1100a BDLDecompressor_AwemeCore
+        baseMethods    0x37f708
+            entsize <span class="token number">24</span>
+            count   <span class="token number">3</span>
+            name    0xd86870 copyWithZone:
+            types   0xdf3478 @24@0:8^<span class="token punctuation">{</span>_NSZone<span class="token operator">=</span><span class="token punctuation">}</span><span class="token number">16</span>
+            imp     0x5babaf0
+            name    0xd84267 foo
+            types   0xdf34a7 i16@0:8
+            imp     0x5bac0a0
+            name    0xd84298 setFoo:
+            types   0xdf34af v20@0:8i16
+            imp     0x5bac0a8
+        baseProtocols  0x37f6a8
+            count    <span class="token number">1</span>
+            list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  0x9bd758
+                isa       0x0
+                name      0xe11497 NSCopying
+                protocols 0x0
+                instanceMethods 0x38ffe8
+                    entsize <span class="token number">24</span>
+                    count   <span class="token number">1</span>
+                    name    0xd86870 copyWithZone:
+                    types   0xdf3478 @24@0:8^<span class="token punctuation">{</span>_NSZone<span class="token operator">=</span><span class="token punctuation">}</span><span class="token number">16</span>
+                    imp     0x0
+                classMethods 0x0
+                optionalInstanceMethods 0x0
+                optionalClassMethods 0x0
+                instanceProperties 0x0
+        ivars          0x37f758
+            entsize   <span class="token number">32</span>
+            count     <span class="token number">1</span>
+            offset    0x9ab740 <span class="token number">8</span>
+            name      0xd842a0 _foo
+            <span class="token builtin class-name">type</span>      0xdf34ba i
+            alignment <span class="token number">2</span>
+            size      <span class="token number">4</span>
+        weakIvarLayout 0x0
+        baseProperties 0x37f780
+            entsize    <span class="token number">16</span>
+            count      <span class="token number">1</span>
+            name       0xd84267 foo
+            attributes 0xd842a5 Ti,N,V_foo
+Meta Class
+    isa        0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    superclass 0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+<span class="token punctuation">..</span>.
+000000000037f630 0xd54b90
+    isa       0x0
+    name      0xf4bbac BDXVideoCorePlayerDelegate
+    protocols 0x0
+    instanceMethods 0x0
+    classMethods 0x0
+    optionalInstanceMethods 0x0
+    optionalClassMethods 0x0
+    instanceProperties 0x0
+000000000037f638 0xd54bf0
+    isa       0x0
+    name      0xf4bbc7 BDXVideoPlayProgressDelegate
+    protocols 0x0
+    instanceMethods 0x0
+    classMethods 0x0
+    optionalInstanceMethods 0x0
+    optionalClassMethods 0x0
+    instanceProperties 0x0
+000000000037f640 0xd54d90
+    isa       0x0
+    name      0xf4bc44 BDXVideoFullScreenPlayer
+    protocols 0x0
+    instanceMethods 0x0
+    classMethods 0x0
+    optionalInstanceMethods 0x0
+    optionalClassMethods 0x0
+    instanceProperties 0x0
+000000000037f648 0xd55890
+    isa       0x0
+    name      0xf4bf19 YYWebImageOperation
+    protocols 0x0
+    instanceMethods 0x0
+    classMethods 0x0
+    optionalInstanceMethods 0x0
+    optionalClassMethods 0x0
+    instanceProperties 0x0
+Contents of <span class="token punctuation">(</span>__DATA,__objc_selrefs<span class="token punctuation">)</span> section
+    0xd84267 foo
+Contents of <span class="token punctuation">(</span>__DATA,__objc_imageinfo<span class="token punctuation">)</span> section
+    version <span class="token number">0</span>
+    flags   0x5010700 Swift <span class="token number">5</span> or later
+</code></pre>
+<h3 id="输出内容分析"><a name="输出内容分析" class="plugin-anchor" href="#输出内容分析"><i class="fa fa-link" aria-hidden="true"></i></a>输出内容分析</h3>
+<p>其中也有AWECloudJailBreakUtility：</p>
+<pre class="language-"><code class="lang-bash">0000000000322a18 0x9bf000
+    isa        0x9befd8
+    superclass 0x0 _OBJC_CLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+    vtable     0x0
+    data       0x3921f8
+        flags          0x80
+        instanceStart  <span class="token number">8</span>
+        instanceSize   <span class="token number">8</span>
+        reserved       0x0
+        ivarLayout     0x0
+        name           0xe12aaf AWECloudJailBreakUtility
+        baseMethods    0x0
+        baseProtocols  0x0
+        ivars          0x0
+        weakIvarLayout 0x0
+        baseProperties 0x0
+Meta Class
+    isa        0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    superclass 0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+    vtable     0x0
+    data       0x3921b0
+        flags          0x81 RO_META
+        instanceStart  <span class="token number">40</span>
+        instanceSize   <span class="token number">40</span>
+        reserved       0x0
+        ivarLayout     0x0
+        name           0xe12aaf AWECloudJailBreakUtility
+        baseMethods    0x0
+        baseProtocols  0x0
+        ivars          0x0
+        weakIvarLayout 0x0
+        baseProperties 0x0
+</code></pre>
+<p>且信息更全：</p>
+<ul>
+<li>父类=superclass是：<code>_OBJC_METACLASS_$_NSObject</code></li>
+</ul>
+<p>对于：</p>
+<ul>
+<li><code>name           0xe12aaf AWECloudJailBreakUtility</code><ul>
+<li>-&gt;好像是：<code>AWECloudJailBreakUtility</code>这个类的位置是<code>0xe12aaf</code></li>
+</ul>
+</li>
+</ul>
+<p>-》如果是：则就是我们之前，曾想要的：</p>
+<p>通过类名字：<code>AWECloudJailBreakUtility</code></p>
+<p>去寻找其具体地址：<code>0xe12aaf</code></p>
+<p>-&gt; 用于去后续（lldb、XCode等）调试中，去打断点</p>
+<p>另外搜：<code>jail</code></p>
+<p>也是能搜到，类似于strings找到的几个：</p>
+<p><img src="../../../assets/img/otool_awemecore_jail_str.png" alt="otool_awemecore_jail_str"></p>
+<pre class="language-"><code class="lang-bash">Meta Class
+    isa        0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    superclass 0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+    vtable     0x0
+    data       0x3a71e0
+        flags          0x81 RO_META
+        instanceStart  <span class="token number">40</span>
+        instanceSize   <span class="token number">40</span>
+        reserved       0x0
+        ivarLayout     0x0
+        name           0xe163f6 BDInstallNetworkUtility
+        baseMethods    0x3a70e8
+            entsize <span class="token number">24</span>
+            count   <span class="token number">10</span>
+            name    0xd842dd load
+            types   0xdf33c3 v16@0:8
+            imp     0x5927654
+            name    0xd8dbc6 onTheFlyParameter
+            types   0xdf33de @16@0:8
+            imp     0x5f8d0dc
+            name    0xd8dc1d commonURLParameters
+            types   0xdf33de @16@0:8
+            imp     0x5f8e628
+            name    0xd8dc31 buildQueryFromDictionary:
+            types   0xdf3380 @24@0:8@16
+            imp     0x5f8edf4
+            name    0xd8dc83 isUpgradeUser
+            types   0xdf3410 B16@0:8
+            imp     0x5f8f07c
+            name    0xd8c1d2 isJailBroken
+            types   0xdf3410 B16@0:8
+            imp     0x5f8f23c
+            name    0xd8dc91 decodeBase64String:
+            types   0xdf3380 @24@0:8@16
+            imp     0x5f8f3c8
+            name    0xd8c1df resolutionString
+            types   0xdf33de @16@0:8
+            imp     0x5f8f44c
+            name    0xd8c2a6 appDisplayName
+            types   0xdf33de @16@0:8
+            imp     0x5f8f528
+            name    0xd8dc7a platform
+            types   0xdf33de @16@0:8
+            imp     0x5f8f62c
+        baseProtocols  0x0
+        ivars          0x0
+        weakIvarLayout 0x0
+        baseProperties 0x0
+</code></pre>
+<p>-》很明显，信息更全：</p>
+<p>可以知道：</p>
+<ul>
+<li>symbol=符号=函数=function：<code>isJailBroken</code><ul>
+<li>所属的类是：<code>BDInstallNetworkUtility</code><ul>
+<li><code>name           0xe163f6 BDInstallNetworkUtility</code><ul>
+<li><code>superclass 0x0 _OBJC_METACLASS_$_NSObject</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其他还有一个：<code>isJailBroken</code></p>
+<pre class="language-"><code class="lang-bash">Meta Class
+    isa        0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    superclass 0x0 _OBJC_METACLASS_<span class="token variable">$_NSObject</span>
+    cache      0x0 __objc_empty_cache
+    vtable     0x0
+    data       0x5f3678
+        flags          0x81 RO_META
+        instanceStart  <span class="token number">40</span>
+        instanceSize   <span class="token number">40</span>
+        reserved       0x0
+        ivarLayout     0x0
+        name           0xe8e38c TTInstallUtil
+        baseMethods    0x5f34c0
+            entsize <span class="token number">24</span>
+            count   <span class="token number">18</span>
+            name    0xdc6a5b generateMockDeviceInfo
+            types   0xdf33c3 v16@0:8
+            imp     0x92ee848
+            name    0xdc6a72 setResetMode:
+            types   0xdf339e v20@0:8B16
+            imp     0x92ee988
+            name    0xdc6a80 isResetMode
+            types   0xdf3410 B16@0:8
+            imp     0x92eeab0
+            name    0xd8fa16 setAutoReset:
+            types   0xdf339e v20@0:8B16
+            imp     0x92eeb1c
+            name    0xd8fa24 isAutoReset
+            types   0xdf3410 B16@0:8
+            imp     0x92eeb74
+            name    0xdc6a1e clearAllUserDefaultsData
+            types   0xdf33c3 v16@0:8
+            imp     0x92eebd0
+            name    0xd842dd load
+            types   0xdf33c3 v16@0:8
+            imp     0x5927238
+            name    0xd8bb2a uuid
+            types   0xdf33de @16@0:8
+            imp     0x92ec3f0
+            name    0xd8dbc6 onTheFlyParameter
+            types   0xdf33de @16@0:8
+            imp     0x92ec444
+            name    0xdc69ef isInHouseVersion
+            types   0xdf3410 B16@0:8
+            imp     0x5981a34
+            name    0xd8dc1d commonURLParameters
+            types   0xdf33de @16@0:8
+            imp     0x92ed7e4
+            name    0xd8dc31 buildQueryFromDictionary:
+            types   0xdf3380 @24@0:8@16
+            imp     0x92ee034
+            name    0xd8dc83 isUpgradeUser
+            types   0xdf3410 B16@0:8
+            imp     0x92ee2bc
+            name    0xdc6a00 loadUserDefaultsStringForKey:
+            types   0xdf3380 @24@0:8@16
+            imp     0x92ee4b0
+            name    0xd8c1df resolutionString
+            types   0xdf33de @16@0:8
+            imp     0x92ee534
+            name    0xd8c1d2 isJailBroken
+            types   0xdf3410 B16@0:8
+            imp     0x92ee610
+            name    0xd8dc7a platform
+            types   0xdf33de @16@0:8
+            imp     0x92ee6f0
+            name    0xd86653 authorizationStatus
+            types   0xdf3437 Q16@0:8
+            imp     0x92ee788
+        baseProtocols  0x0
+        ivars          0x0
+        weakIvarLayout 0x0
+        baseProperties 0x0
+</code></pre>
+<p>-》</p>
+<ul>
+<li>name    0xd8c1d2 isJailBroken<ul>
+<li>name           0xe8e38c TTInstallUtil<ul>
+<li>data       0x5f3678</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其他几个：</p>
+<pre class="language-"><code class="lang-bash">000000000036aa78 0x3cd4a0
+    name      0xe1bc2c BDXAdditions
+    cls       0x0 _OBJC_CLASS_<span class="token variable">$_UIDevice</span>
+    instanceMethods 0x0
+    classMethods 0x3cd150
+        entsize <span class="token number">24</span>
+        count   <span class="token number">35</span>
+        name    0xd98274 bdx_runningProcesses
+        types   0xdf33de @16@0:8
+        imp     0x62225dc
+        name    0xd98227 getSysInfoByName:
+        types   0xe05b74 @24@0:8*16
+        imp     0x62228e8
+        name    0xd98239 bdx_platform
+        types   0xdf33de @16@0:8
+        imp     0x6222960
+        name    0xd98289 bdx_hwmodel
+        types   0xdf33de @16@0:8
+        imp     0x6222974
+        name    0xd98246 bdx_platformType
+        types   0xdf3437 Q16@0:8
+        imp     0x6222988
+        name    0xd981c1 bdx_platformName
+        types   0xdf33de @16@0:8
+        imp     0x62234c0
+        name    0xd98295 bdx_platformString
+        types   0xdf33de @16@0:8
+        imp     0x622350c
+        name    0xd98257 bdx_OSVersion
+        types   0xdf33de @16@0:8
+        imp     0x6223a28
+        name    0xd982a8 bdx_OSVersionNumber
+        types   0xdf34c8 f16@0:8
+        imp     0x6223a74
+        name    0xd982bc bdx_currentLanguage
+        types   0xdf33de @16@0:8
+        imp     0x6223ac0
+        name    0xd982d0 bdx_currentRegion
+        types   0xdf33de @16@0:8
+        imp     0x6223b10
+        name    0xd982e2 bdx_isJailBroken
+        types   0xdf3410 B16@0:8
+        imp     0x6223b68
+        name    0xd982f3 bdx_carrierName
+        types   0xdf33de @16@0:8
+        imp     0x6223bfc
+        name    0xd98303 bdx_carrierMCC
+        types   0xdf33de @16@0:8
+        imp     0x6223c64
+        name    0xd98312 bdx_carrierMNC
+        types   0xdf33de @16@0:8
+        imp     0x6223ccc
+        name    0xd98321 bdx_poorDevice
+        types   0xdf3410 B16@0:8
+        imp     0x6223d34
+        name    0xd98330 bdx_screenScale
+        types   0xdf3396 d16@0:8
+        imp     0x6223dec
+        name    0xd98340 bdx_is480Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223e38
+        name    0xd98350 bdx_is568Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223e90
+        name    0xd98360 bdx_is667Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223ee8
+        name    0xd98370 bdx_is736Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223f40
+        name    0xd98380 bdx_is812Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223f98
+        name    0xd98390 bdx_is896Screen
+        types   0xdf3410 B16@0:8
+        imp     0x6223ff0
+        name    0xd983a0 bdx_isScreenWidthLarge320
+        types   0xdf3410 B16@0:8
+        imp     0x6224048
+        name    0xd96d2c bdx_isIPhoneXSeries
+        types   0xdf3410 B16@0:8
+        imp     0x62240ac
+        name    0xd983ba bdx_screenSize
+        types   0xdf420a <span class="token punctuation">{</span>CGSize<span class="token operator">=</span>dd<span class="token punctuation">}</span><span class="token number">16</span>@0:8
+        imp     0x6224310
+        name    0xd983c9 bdx_screenWidth
+        types   0xdf3396 d16@0:8
+        imp     0x622436c
+        name    0xd983d9 bdx_screenHeight
+        types   0xdf3396 d16@0:8
+        imp     0x62243b8
+        name    0xd983ea bdx_isPadDevice
+        types   0xdf3410 B16@0:8
+        imp     0x6224404
+        name    0xd98265 bdx_resolution
+        types   0xdf420a <span class="token punctuation">{</span>CGSize<span class="token operator">=</span>dd<span class="token punctuation">}</span><span class="token number">16</span>@0:8
+        imp     0x6224454
+        name    0xd983fa bdx_resolutionString
+        types   0xdf33de @16@0:8
+        imp     0x62244e8
+        name    0xd9840f bdx_onePixel
+        types   0xdf3396 d16@0:8
+        imp     0x6224534
+        name    0xd9841c bdx_deviceWidthType
+        types   0xdf3437 Q16@0:8
+        imp     0x62245a4
+        name    0xd98430 bdx_getTotalDiskSpace
+        types   0xdf3302 q16@0:8
+        imp     0x62246f4
+        name    0xd98446 bdx_getFreeDiskSpace
+        types   0xdf3302 q16@0:8
+        imp     0x62247b0
+    protocols 0x0
+    instanceProperties 0x0
+</code></pre>
+<p>-》</p>
+<ul>
+<li><code>name    0xd982e2 bdx_isJailBroken</code><ul>
+<li><code>name      0xe1bc2c BDXAdditions</code></li>
+<li><code>cls       0x0 _OBJC_CLASS_$_UIDevice</code><ul>
+<li><code>000000000036aa78 0x3cd4a0</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以及：</p>
+<pre class="language-"><code class="lang-bash">000000000036aba8 0x3d60e0
+    name      0xe1ce54 BTDAdditions
+    cls       0x0 _OBJC_CLASS_<span class="token variable">$_UIDevice</span>
+    instanceMethods 0x0
+    classMethods 0x3d5d90
+        entsize <span class="token number">24</span>
+        count   <span class="token number">35</span>
+        name    0xd99a94 btd_runningProcesses
+        types   0xdf33de @16@0:8
+        imp     0x62a5ec0
+        name    0xd98227 getSysInfoByName:
+        types   0xe05b74 @24@0:8*16
+        imp     0x59911f8
+        name    0xd8df0a btd_platform
+        types   0xdf33de @16@0:8
+        imp     0x59911e4
+        name    0xd99aa9 btd_hwmodel
+        types   0xdf33de @16@0:8
+        imp     0x62a6230
+        name    0xd99a74 btd_platformType
+        types   0xdf3437 Q16@0:8
+        imp     0x62a6244
+        name    0xd8d746 btd_platformName
+        types   0xdf33de @16@0:8
+        imp     0x62a718c
+        name    0xd8d733 btd_platformString
+        types   0xdf33de @16@0:8
+        imp     0x62a71e8
+        name    0xd8c129 btd_OSVersion
+        types   0xdf33de @16@0:8
+        imp     0x5991188
+        name    0xd99ab5 btd_OSVersionNumber
+        types   0xdf34c8 f16@0:8
+        imp     0x5b74794
+        name    0xd8d757 btd_currentLanguage
+        types   0xdf33de @16@0:8
+        imp     0x62a75e4
+        name    0xd99ac9 btd_currentRegion
+        types   0xdf33de @16@0:8
+        imp     0x62a7644
+        name    0xd99adb btd_isJailBroken
+        types   0xdf3410 B16@0:8
+        imp     0x62a76ac
+        name    0xd99aec btd_carrierName
+        types   0xdf33de @16@0:8
+        imp     0x62a7760
+        name    0xd99afc btd_carrierMCC
+        types   0xdf33de @16@0:8
+        imp     0x62a77e0
+        name    0xd99b0b btd_carrierMNC
+        types   0xdf33de @16@0:8
+        imp     0x62a7860
+        name    0xd99b1a btd_poorDevice
+        types   0xdf3410 B16@0:8
+        imp     0x62a78e0
+        name    0xd99b29 btd_screenScale
+        types   0xdf3396 d16@0:8
+        imp     0x62a79d4
+        name    0xd99b39 btd_is480Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7a30
+        name    0xd99b49 btd_is568Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7aa0
+        name    0xd99b59 btd_is667Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7b10
+        name    0xd99b69 btd_is736Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7b80
+        name    0xd99b79 btd_is812Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7bf0
+        name    0xd99b89 btd_is896Screen
+        types   0xdf3410 B16@0:8
+        imp     0x62a7c60
+        name    0xd99b99 btd_isScreenWidthLarge320
+        types   0xdf3410 B16@0:8
+        imp     0x62a7cd0
+        name    0xd8cbb0 btd_isIPhoneXSeries
+        types   0xdf3410 B16@0:8
+        imp     0x62a7d44
+        name    0xd99bb3 btd_screenSize
+        types   0xdf420a <span class="token punctuation">{</span>CGSize<span class="token operator">=</span>dd<span class="token punctuation">}</span><span class="token number">16</span>@0:8
+        imp     0x62a8004
+        name    0xd99bc2 btd_screenWidth
+        types   0xdf3396 d16@0:8
+        imp     0x5991320
+        name    0xd99bd2 btd_screenHeight
+        types   0xdf3396 d16@0:8
+        imp     0x599137c
+        name    0xd99be3 btd_isPadDevice
+        types   0xdf3410 B16@0:8
+        imp     0x5b1743c
+        name    0xd99a85 btd_resolution
+        types   0xdf420a <span class="token punctuation">{</span>CGSize<span class="token operator">=</span>dd<span class="token punctuation">}</span><span class="token number">16</span>@0:8
+        imp     0x5a03198
+        name    0xd99bf3 btd_resolutionString
+        types   0xdf33de @16@0:8
+        imp     0x62a8068
+        name    0xd99c08 btd_onePixel
+        types   0xdf3396 d16@0:8
+        imp     0x5b19920
+        name    0xd99c15 btd_deviceWidthType
+        types   0xdf3437 Q16@0:8
+        imp     0x62a80b4
+        name    0xd99c29 btd_getTotalDiskSpace
+        types   0xdf3302 q16@0:8
+        imp     0x62a8224
+        name    0xd99c3f btd_getFreeDiskSpace
+        types   0xdf3302 q16@0:8
+        imp     0x62a8324
+    protocols 0x0
+    instanceProperties 0x0
+</code></pre>
+<p>-》</p>
+<ul>
+<li>name    0xd99adb btd_isJailBroken<ul>
+<li>name      0xe1ce54 BTDAdditions</li>
+<li>cls       0x0 <em>OBJC_CLASS</em>$_UIDevice</li>
+</ul>
+</li>
+</ul>
+<p>-》前面2个：</p>
+<ul>
+<li>BDXAdditions</li>
+<li>BTDAdditions</li>
+</ul>
+<p>都是属于：</p>
+<ul>
+<li><code>cls       0x0 _OBJC_CLASS_$_UIDevice</code></li>
+</ul>
+<p>-》估计都是：</p>
+<ul>
+<li>集成自 = 父类是：UIDevice</li>
+</ul>
+<p>另外：</p>
+<ul>
+<li>BTDAdditions<ul>
+<li>btd_carrierName</li>
+<li>btd_carrierMCC</li>
+<li>btd_carrierMNC</li>
+<li>btd_poorDevice</li>
+</ul>
+</li>
+</ul>
+<p>等，好像和：</p>
+<ul>
+<li>检测当前设备信息</li>
+<li>改机参数</li>
+</ul>
+<p>有关 -》 也算是，和检测越狱有关？</p>
+<h2 id="tv"><a name="tv" class="plugin-anchor" href="#tv"><i class="fa fa-link" aria-hidden="true"></i></a><code>-tV</code></h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore.framework otool <span class="token parameter variable">-tV</span> AwemeCore <span class="token operator">&gt;</span> otool_tV_AwemeCore.txt
+</code></pre>
+<p>输出：</p>
+<pre class="language-"><code class="lang-bash">AwemeCore:
+<span class="token punctuation">(</span>__TEXT,__text<span class="token punctuation">)</span> section
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-07 11:22:52
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="aweme.html" class="navigation navigation-prev " aria-label="Previous page: Aweme">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="maskpro_dylib.html" class="navigation navigation-next " aria-label="Next page: MaskPro.dylib">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"AwemeCore","level":"1.4.4.2.2","depth":4,"next":{"title":"MaskPro.dylib","level":"1.4.4.2.3","depth":4,"path":"macho_tool/otool/examples/maskpro_dylib.md","ref":"macho_tool/otool/examples/maskpro_dylib.md","articles":[]},"previous":{"title":"Aweme","level":"1.4.4.2.1","depth":4,"path":"macho_tool/otool/examples/aweme.md","ref":"macho_tool/otool/examples/aweme.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/exec_file_format_macho/pdf/exec_file_format_macho.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/exec_file_format_macho/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"可执行文件格式：Mach-O","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Mac和iOS等Apple苹果系统的常见可执行文件格式：Mach-O；先是Mach-O概览；包括背景知识的XNU、编译链接加载过程、PIC等；然后介绍Mach-O格式，包括结构概述和结构图，以及结构详情，包括Header、Load Commands和Segment的data；其中Header包括magic、cputype和cpusubtype、filetype、flags；Load Commands包括LC_UUID、LC_SEGMENT、LC_SEGMENT_64、LC_SYMTAB、LC_DYLD_CHAINED_FIXUPS、LC_DYLD_EXPORTS_TRIE等；Segment包括__TEXT、__DATA、__IMPORT、__LINKEDIT、__OBJC；以及各个Segment的section，比如symbol、strings等；然后是Mach-O格式的子项，包括FAT、codesign、虚拟地址、大小限制等；然后整理Mach-O的各种工具，包括MachOView、rabin2、jtool2、otool、pagestuff，以及每个工具的用法、举例、help语法等；"},"file":{"path":"macho_tool/otool/examples/awemecore.md","mtime":"2023-10-07T03:22:52.557Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-07T15:27:55.016Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

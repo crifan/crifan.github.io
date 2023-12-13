@@ -1,0 +1,2440 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>AwemeCore · 可执行文件格式：Mach-O</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="maskpro_dylib.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../macho_overview/">
+            
+                <a href="../../../macho_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Mach-O概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../macho_overview/background/">
+            
+                <a href="../../../macho_overview/background/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../../macho_overview/background/xnu.html">
+            
+                <a href="../../../macho_overview/background/xnu.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    XNU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../../macho_overview/background/compile_link_load.html">
+            
+                <a href="../../../macho_overview/background/compile_link_load.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    编译链接加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../../macho_overview/background/pic.html">
+            
+                <a href="../../../macho_overview/background/pic.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    PIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../macho_format/">
+            
+                <a href="../../../macho_format/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Mach-O格式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../macho_format/summary/">
+            
+                <a href="../../../macho_format/summary/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Mach-O结构概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../../macho_format/summary/macho_layout.html">
+            
+                <a href="../../../macho_format/summary/macho_layout.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    Mach-O结构图
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../macho_format/detail/">
+            
+                <a href="../../../macho_format/detail/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Mach-O结构详情
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../macho_format/detail/header/">
+            
+                <a href="../../../macho_format/detail/header/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Header
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../../macho_format/detail/header/magic.html">
+            
+                <a href="../../../macho_format/detail/header/magic.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    magic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                <a href="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    cputype和cpusubtype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.3" data-path="../../../macho_format/detail/header/filetype.html">
+            
+                <a href="../../../macho_format/detail/header/filetype.html">
+            
+                    
+                        <b>1.3.2.1.3.</b>
+                    
+                    filetype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.4" data-path="../../../macho_format/detail/header/flags.html">
+            
+                <a href="../../../macho_format/detail/header/flags.html">
+            
+                    
+                        <b>1.3.2.1.4.</b>
+                    
+                    flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../../macho_format/detail/load_commands/">
+            
+                <a href="../../../macho_format/detail/load_commands/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    Load Commands
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    LC_UUID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    LC_SEGMENT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    LC_SEGMENT_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.4" data-path="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                    
+                        <b>1.3.2.2.4.</b>
+                    
+                    LC_SYMTAB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.5" data-path="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.3.2.2.5.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.6" data-path="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                    
+                        <b>1.3.2.2.6.</b>
+                    
+                    LC_DYLD_EXPORTS_TRIE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../../../macho_format/detail/segment/">
+            
+                <a href="../../../macho_format/detail/segment/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    Segment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../../../macho_format/detail/segment/__text/">
+            
+                <a href="../../../macho_format/detail/segment/__text/">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    __TEXT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1.1" data-path="../../../macho_format/detail/segment/__text/__text.html">
+            
+                <a href="../../../macho_format/detail/segment/__text/__text.html">
+            
+                    
+                        <b>1.3.2.3.1.1.</b>
+                    
+                    __text
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../../../macho_format/detail/segment/__data/">
+            
+                <a href="../../../macho_format/detail/segment/__data/">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    __DATA
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.2.1" data-path="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                    
+                        <b>1.3.2.3.2.1.</b>
+                    
+                    __la_symbol_ptr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2.2" data-path="../../../macho_format/detail/segment/__data/__got.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__got.html">
+            
+                    
+                        <b>1.3.2.3.2.2.</b>
+                    
+                    __got
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.3" data-path="../../../macho_format/detail/segment/__import.html">
+            
+                <a href="../../../macho_format/detail/segment/__import.html">
+            
+                    
+                        <b>1.3.2.3.3.</b>
+                    
+                    __IMPORT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.4" data-path="../../../macho_format/detail/segment/__linkedit.html">
+            
+                <a href="../../../macho_format/detail/segment/__linkedit.html">
+            
+                    
+                        <b>1.3.2.3.4.</b>
+                    
+                    __LINKEDIT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.5" data-path="../../../macho_format/detail/segment/__objc.html">
+            
+                <a href="../../../macho_format/detail/segment/__objc.html">
+            
+                    
+                        <b>1.3.2.3.5.</b>
+                    
+                    __OBJC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../../../macho_format/detail/section/">
+            
+                <a href="../../../macho_format/detail/section/">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    Section
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.4.1" data-path="../../../macho_format/detail/section/symbol.html">
+            
+                <a href="../../../macho_format/detail/section/symbol.html">
+            
+                    
+                        <b>1.3.2.4.1.</b>
+                    
+                    symbol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4.2" data-path="../../../macho_format/detail/section/string.html">
+            
+                <a href="../../../macho_format/detail/section/string.html">
+            
+                    
+                        <b>1.3.2.4.2.</b>
+                    
+                    string
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../macho_format/fat/">
+            
+                <a href="../../../macho_format/fat/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    FAT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../../macho_format/fat/examples.html">
+            
+                <a href="../../../macho_format/fat/examples.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../../macho_format/fat/issues.html">
+            
+                <a href="../../../macho_format/fat/issues.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../../macho_format/fat/tools/">
+            
+                <a href="../../../macho_format/fat/tools/">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.3.1" data-path="../../../macho_format/fat/tools/lipo.html">
+            
+                <a href="../../../macho_format/fat/tools/lipo.html">
+            
+                    
+                        <b>1.3.3.3.1.</b>
+                    
+                    lipo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../../macho_format/codesign/">
+            
+                <a href="../../../macho_format/codesign/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../../macho_format/vm_addr/">
+            
+                <a href="../../../macho_format/vm_addr/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    虚拟地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../../macho_format/size_limit/">
+            
+                <a href="../../../macho_format/size_limit/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    大小限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Mach-O工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../machoview/">
+            
+                <a href="../../machoview/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    MachOView
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../machoview/examples/">
+            
+                <a href="../../machoview/examples/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../machoview/examples/main_arm64.html">
+            
+                <a href="../../machoview/examples/main_arm64.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    main_arm64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../machoview/examples/awemecore.html">
+            
+                <a href="../../machoview/examples/awemecore.html">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                <a href="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    zzzzHeiBaoLib.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../machoview/summary/">
+            
+                <a href="../../machoview/summary/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../machoview/summary/self_compile.html">
+            
+                <a href="../../machoview/summary/self_compile.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    自己编译
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    rabin2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../usage/">
+            
+                <a href="../usage/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.2.2.1" data-path="awemecore.html">
+            
+                <a href="awemecore.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="maskpro_dylib.html">
+            
+                <a href="maskpro_dylib.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../help.html">
+            
+                <a href="../help.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../jtool2/">
+            
+                <a href="../../jtool2/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    jtool2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../jtool2/usage/">
+            
+                <a href="../../jtool2/usage/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../jtool2/examples/">
+            
+                <a href="../../jtool2/examples/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../../jtool2/examples/awemecore.html">
+            
+                <a href="../../jtool2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="../../jtool2/examples/maskpro_dylib.html">
+            
+                <a href="../../jtool2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.3" data-path="../../jtool2/examples/akd.html">
+            
+                <a href="../../jtool2/examples/akd.html">
+            
+                    
+                        <b>1.4.3.2.3.</b>
+                    
+                    akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../jtool2/help.html">
+            
+                <a href="../../jtool2/help.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../otool/">
+            
+                <a href="../../otool/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    otool
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../otool/usage/">
+            
+                <a href="../../otool/usage/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../otool/examples/">
+            
+                <a href="../../otool/examples/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="../../otool/examples/aweme.html">
+            
+                <a href="../../otool/examples/aweme.html">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    Aweme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.2" data-path="../../otool/examples/awemecore.html">
+            
+                <a href="../../otool/examples/awemecore.html">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="../../otool/examples/maskpro_dylib.html">
+            
+                <a href="../../otool/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../otool/help.html">
+            
+                <a href="../../otool/help.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../pagestuff/">
+            
+                <a href="../../pagestuff/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    pagestuff
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../pagestuff/help.html">
+            
+                <a href="../../pagestuff/help.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/doc_material.html">
+            
+                <a href="../../../appendix/doc_material.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Mach-O文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >AwemeCore</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="rabin2用法举例：awemecore"><a name="rabin2用法举例：awemecore" class="plugin-anchor" href="#rabin2用法举例：awemecore"><i class="fa fa-link" aria-hidden="true"></i></a>rabin2用法举例：AwemeCore</h1>
+<p>用rabin2查看抖音AwemeCore二进制的信息：</p>
+<p>概述：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> File Identification
+rabin2 <span class="token parameter variable">-I</span> AwemeCore
+
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> Entrypoint
+rabin2 <span class="token parameter variable">-e</span> AwemeCore
+
+<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> Imports
+rabin2 <span class="token parameter variable">-i</span> AwemeCore
+
+<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> Exports
+rabin2 <span class="token parameter variable">-E</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_E.txt
+
+<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> Symbols
+rabin2 <span class="token parameter variable">-s</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_s.txt
+rabin2 <span class="token parameter variable">-sr</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_sr.txt
+
+<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> Libraries
+rabin2 <span class="token parameter variable">-l</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_l.txt
+
+<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span> Strings
+rabin2 <span class="token parameter variable">-z</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_z.txt
+rabin2 <span class="token parameter variable">-zr</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_zr.txt
+
+<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span> Program Sections
+rabin2 <span class="token parameter variable">-S</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_S_section.txt
+rabin2 <span class="token parameter variable">-Sr</span> AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_Sr_section.txt
+</code></pre>
+<p>详解：</p>
+<h2 id="i-file-identification"><a name="i-file-identification" class="plugin-anchor" href="#i-file-identification"><i class="fa fa-link" aria-hidden="true"></i></a><code>-I</code>: File Identification</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-I</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+arch     arm
+baddr    0x0
+binsz    <span class="token number">240666608</span>
+bintype  mach0
+bits     <span class="token number">64</span>
+canary   <span class="token boolean">true</span>
+class    MACH064
+crypto   <span class="token boolean">false</span>
+endian   little
+havecode <span class="token boolean">true</span>
+laddr    0x0
+lang     swift
+linenum  <span class="token boolean">false</span>
+lsyms    <span class="token boolean">false</span>
+machine  all
+maxopsz  <span class="token number">16</span>
+minopsz  <span class="token number">1</span>
+nx       <span class="token boolean">false</span>
+os       ios
+pcalign  <span class="token number">0</span>
+pic      <span class="token boolean">false</span>
+relocs   <span class="token boolean">false</span>
+sanitiz  <span class="token boolean">false</span>
+static   <span class="token boolean">false</span>
+stripped <span class="token boolean">true</span>
+subsys   darwin
+va       <span class="token boolean">true</span>
+</code></pre>
+<h3 id="ir"><a name="ir" class="plugin-anchor" href="#ir"><i class="fa fa-link" aria-hidden="true"></i></a><code>-Ir</code></h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-Ir</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+e <span class="token assign-left variable">cfg.bigendian</span><span class="token operator">=</span>false
+e <span class="token assign-left variable">asm.bits</span><span class="token operator">=</span><span class="token number">64</span>
+e <span class="token assign-left variable">asm.dwarf</span><span class="token operator">=</span>true
+e <span class="token assign-left variable">bin.lang</span><span class="token operator">=</span>swift
+e <span class="token assign-left variable">file.type</span><span class="token operator">=</span>mach0
+e <span class="token assign-left variable">asm.os</span><span class="token operator">=</span>ios
+e <span class="token assign-left variable">asm.arch</span><span class="token operator">=</span>arm
+e <span class="token assign-left variable">asm.pcalign</span><span class="token operator">=</span><span class="token number">0</span>
+</code></pre>
+<h2 id="e：-entrypoint"><a name="e：-entrypoint" class="plugin-anchor" href="#e：-entrypoint"><i class="fa fa-link" aria-hidden="true"></i></a><code>-e</code>： Entrypoint</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-e</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+<span class="token punctuation">[</span>Entrypoints<span class="token punctuation">]</span>
+<span class="token assign-left variable">vaddr</span><span class="token operator">=</span>0x00023448 <span class="token assign-left variable">paddr</span><span class="token operator">=</span>0x00023448 <span class="token assign-left variable">haddr</span><span class="token operator">=</span>-1 <span class="token assign-left variable">type</span><span class="token operator">=</span>program
+
+<span class="token number">1</span> entrypoints
+</code></pre>
+<h3 id="er"><a name="er" class="plugin-anchor" href="#er"><i class="fa fa-link" aria-hidden="true"></i></a><code>-er</code></h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-er</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+fs symbols
+<span class="token string">&quot;f entry0 1 0x00023448&quot;</span>
+<span class="token string">&quot;f entry0_haddr 1 0xffffffffffffffff&quot;</span>
+<span class="token string">&quot;s entry0&quot;</span>
+</code></pre>
+<h2 id="i-imports"><a name="i-imports" class="plugin-anchor" href="#i-imports"><i class="fa fa-link" aria-hidden="true"></i></a><code>-i</code>: Imports</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-i</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_i.txt
+</code></pre>
+<p>输出内容：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>Imports<span class="token punctuation">]</span>
+nth  vaddr      <span class="token builtin class-name">bind</span> <span class="token builtin class-name">type</span>           lib name
+――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">0</span>    0x11476a38 NONE FUNC               sym.imp.Foundation.NSNotFound.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">1</span>    0x11476a44 NONE FUNC               sym.imp.static Foundation.CharacterSet.whitespacesAndNewlines.getter <span class="token builtin class-name">:</span> Foundation.CharacterSet
+<span class="token number">2</span>    0x11476a50 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.CharacterSet
+<span class="token number">3</span>    0x11476a5c NONE FUNC               sym.imp.static Foundation.Notification._unconditionallyBridgeFromObjectiveC<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSNotification<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.Notification
+<span class="token number">4</span>    0x11476a68 NONE FUNC               sym.imp.Foundation.Notification.object.getter <span class="token builtin class-name">:</span> Swift.Optional<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span>
+<span class="token number">5</span>    0x11476a74 NONE FUNC               sym.imp.Foundation.Notification.userInfo.getter <span class="token builtin class-name">:</span> Swift.Optional<span class="token operator">&lt;</span>Swift.Dictionary<span class="token operator">&lt;</span>Swift.AnyHashable, Any<span class="token operator">&gt;&gt;</span>
+<span class="token number">6</span>    0x11476a80 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.Notification
+<span class="token number">7</span>    0x11476a8c NONE FUNC               sym.imp.Foundation._convertErrorToNSError<span class="token punctuation">(</span>Swift.Error<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSError
+<span class="token number">8</span>    0x11476a98 NONE FUNC               sym.imp.Foundation._convertNSErrorToError<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSError<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Swift.Error
+<span class="token number">9</span>    0x11476aa4 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.NSFastEnumerationIterator
+<span class="token number">10</span>   0x00000000 NONE FUNC               sym.imp.protocol conformance descriptor <span class="token keyword">for</span> Foundation.NSFastEnumerationIterator <span class="token builtin class-name">:</span> Swift.IteratorProtocol <span class="token keyword">in</span> Foundation
+<span class="token number">11</span>   0x11476ab0 NONE FUNC               sym.imp.Foundation.URL.absoluteString.getter <span class="token builtin class-name">:</span> Swift.String
+<span class="token number">12</span>   0x11476abc NONE FUNC               sym.imp.Foundation.URL._bridgeToObjectiveC<span class="token punctuation">(</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSURL
+<span class="token number">13</span>   0x11476ac8 NONE FUNC               sym.imp.static Foundation.URL._unconditionallyBridgeFromObjectiveC<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSURL<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.URL
+<span class="token number">14</span>   0x11476ad4 NONE FUNC               sym.imp.Foundation.URL.scheme.getter <span class="token builtin class-name">:</span> Swift.Optional<span class="token operator">&lt;</span>Swift.String<span class="token operator">&gt;</span>
+<span class="token number">15</span>   0x11476ae0 NONE FUNC               sym.imp.Foundation.URL.init<span class="token punctuation">(</span>string: __shared Swift.String<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Swift.Optional<span class="token operator">&lt;</span>Foundation.URL<span class="token operator">&gt;</span>
+<span class="token number">16</span>   0x11476aec NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.URL
+<span class="token number">17</span>   0x00000000 NONE FUNC               sym.imp.nominal <span class="token builtin class-name">type</span> descriptor <span class="token keyword">for</span> Foundation.URL
+<span class="token number">18</span>   0x11476af8 NONE FUNC               sym.imp.Foundation.Data._copyContents<span class="token punctuation">(</span>initializing: Swift.UnsafeMutableBufferPointer<span class="token operator">&lt;</span>Swift.UInt<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token punctuation">(</span>Foundation.Data.Iterator, Swift.Int<span class="token punctuation">)</span>
+<span class="token number">19</span>   0x11476b04 NONE FUNC               sym.imp.Foundation.Data._bridgeToObjectiveC<span class="token punctuation">(</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSData
+<span class="token number">20</span>   0x11476b10 NONE FUNC               sym.imp.static Foundation.Data._unconditionallyBridgeFromObjectiveC<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSData<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.Data
+<span class="token number">21</span>   0x11476b1c NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.Data.Iterator
+<span class="token number">22</span>   0x00000000 NONE FUNC               sym.imp.type metadata <span class="token keyword">for</span> Foundation.Data
+<span class="token number">23</span>   0x11476b28 NONE FUNC               sym.imp.static Foundation.Date.distantPast.getter <span class="token builtin class-name">:</span> Foundation.Date
+<span class="token number">24</span>   0x11476b34 NONE FUNC               sym.imp.Foundation.Date.timeIntervalSince<span class="token punctuation">(</span>Foundation.Date<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Swift.Double
+<span class="token number">25</span>   0x11476b40 NONE FUNC               sym.imp.Foundation.Date._bridgeToObjectiveC<span class="token punctuation">(</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSDate
+<span class="token number">26</span>   0x11476b4c NONE FUNC               sym.imp.static Foundation.Date.<span class="token operator">&gt;</span> infix<span class="token punctuation">(</span>Foundation.Date, Foundation.Date<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Swift.Bool
+<span class="token number">27</span>   0x11476b58 NONE FUNC               sym.imp.Foundation.Date.init<span class="token punctuation">(</span>timeIntervalSinceNow: Swift.Double<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.Date
+<span class="token number">28</span>   0x11476b64 NONE FUNC               sym.imp.Foundation.Date.init<span class="token punctuation">(</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.Date
+<span class="token number">29</span>   0x11476b70 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.Date
+<span class="token number">30</span>   0x00000000 NONE FUNC               sym.imp.nominal <span class="token builtin class-name">type</span> descriptor <span class="token keyword">for</span> Foundation.Date
+<span class="token number">31</span>   0x11476b7c NONE FUNC               sym.imp.Foundation.UUID.uuidString.getter <span class="token builtin class-name">:</span> Swift.String
+<span class="token number">32</span>   0x11476b88 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.UUID
+<span class="token number">33</span>   0x11476b94 NONE FUNC               sym.imp.Foundation.IndexPath._bridgeToObjectiveC<span class="token punctuation">(</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSIndexPath
+<span class="token number">34</span>   0x11476ba0 NONE FUNC               sym.imp.static Foundation.IndexPath._unconditionallyBridgeFromObjectiveC<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSIndexPath<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.IndexPath
+<span class="token number">35</span>   0x11476bac NONE FUNC               sym.imp.<span class="token punctuation">(</span>extension <span class="token keyword">in</span> UIKit<span class="token punctuation">)</span>:Foundation.IndexPath.init<span class="token punctuation">(</span>row: Swift.Int, section: Swift.Int<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.IndexPath
+<span class="token number">36</span>   0x11476bb8 NONE FUNC               sym.imp.<span class="token punctuation">(</span>extension <span class="token keyword">in</span> UIKit<span class="token punctuation">)</span>:Foundation.IndexPath.row.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">37</span>   0x11476bc4 NONE FUNC               sym.imp.<span class="token punctuation">(</span>extension <span class="token keyword">in</span> UIKit<span class="token punctuation">)</span>:Foundation.IndexPath.init<span class="token punctuation">(</span>item: Swift.Int, section: Swift.Int<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.IndexPath
+<span class="token number">38</span>   0x11476bd0 NONE FUNC               sym.imp.<span class="token punctuation">(</span>extension <span class="token keyword">in</span> UIKit<span class="token punctuation">)</span>:Foundation.IndexPath.item.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">39</span>   0x11476bdc NONE FUNC               sym.imp.<span class="token punctuation">(</span>extension <span class="token keyword">in</span> UIKit<span class="token punctuation">)</span>:Foundation.IndexPath.section.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">40</span>   0x11476be8 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.IndexPath
+<span class="token number">41</span>   0x00000000 NONE FUNC               sym.imp.nominal <span class="token builtin class-name">type</span> descriptor <span class="token keyword">for</span> Foundation.IndexPath
+<span class="token punctuation">..</span>.
+<span class="token number">4922</span> 0x1147ea84 NONE FUNC               vImageConverter_CreateWithCGImageFormat
+<span class="token number">4923</span> 0x1147ea90 NONE FUNC               vImageConverter_Release
+<span class="token number">4924</span> 0x1147ea9c NONE FUNC               vImageCreateCGImageFromBuffer
+<span class="token number">4925</span> 0x1147eaa8 NONE FUNC               vImageHorizontalReflect_ARGB8888
+<span class="token number">4926</span> 0x1147eab4 NONE FUNC               vImageMatrixMultiply_ARGB8888
+<span class="token number">4927</span> 0x1147eac0 NONE FUNC               vImageMatrixMultiply_ARGB8888ToPlanar8
+<span class="token number">4928</span> 0x1147eacc NONE FUNC               vImagePermuteChannels_ARGB8888
+<span class="token number">4929</span> 0x1147ead8 NONE FUNC               vImagePremultiplyData_RGBA8888
+<span class="token number">4930</span> 0x1147eae4 NONE FUNC               vImageRotate90_ARGB8888
+<span class="token number">4931</span> 0x1147eaf0 NONE FUNC               vImageRotate90_Planar16U
+<span class="token number">4932</span> 0x1147eafc NONE FUNC               vImageRotate90_Planar8
+<span class="token number">4933</span> 0x1147eb08 NONE FUNC               vImageScale_ARGB8888
+<span class="token number">4934</span> 0x1147eb14 NONE FUNC               vImageScale_Planar16U
+<span class="token number">4935</span> 0x1147eb20 NONE FUNC               vImageScale_Planar8
+<span class="token number">4936</span> 0x1147eb2c NONE FUNC               vImageTentConvolve_ARGB8888
+<span class="token number">4937</span> 0x1147eb38 NONE FUNC               vImageUnpremultiplyData_ARGB8888
+<span class="token number">4938</span> 0x1147eb44 NONE FUNC               vImageUnpremultiplyData_RGBA8888
+<span class="token number">4939</span> 0x1147eb50 NONE FUNC               vImageVerticalReflect_ARGB8888
+<span class="token number">4940</span> 0x1147eb5c NONE FUNC               vasprintf
+<span class="token number">4941</span> 0x1147eb68 NONE FUNC               vfprintf
+<span class="token number">4942</span> 0x1147eb74 NONE FUNC               vm_allocate
+<span class="token number">4943</span> 0x1147eb80 NONE FUNC               vm_deallocate
+<span class="token number">4944</span> 0x00000000 NONE FUNC               vm_kernel_page_size
+<span class="token number">4945</span> 0x1147eb8c NONE FUNC               vm_map_page_query
+<span class="token number">4946</span> 0x00000000 NONE FUNC               vm_page_mask
+<span class="token number">4947</span> 0x00000000 NONE FUNC               vm_page_size
+<span class="token number">4948</span> 0x1147eb98 NONE FUNC               vm_protect
+<span class="token number">4949</span> 0x1147eba4 NONE FUNC               vm_read
+<span class="token number">4950</span> 0x1147ebb0 NONE FUNC               vm_read_overwrite
+<span class="token number">4951</span> 0x1147ebbc NONE FUNC               vm_region_64
+<span class="token number">4952</span> 0x1147ebc8 NONE FUNC               vm_region_recurse_64
+<span class="token number">4953</span> 0x1147ebd4 NONE FUNC               vm_remap
+<span class="token number">4954</span> 0x1147ebe0 NONE FUNC               vprintf
+<span class="token number">4955</span> 0x1147ebec NONE FUNC               vsnprintf
+<span class="token number">4956</span> 0x1147ebf8 NONE FUNC               vsprintf
+<span class="token number">4957</span> 0x1147ec04 NONE FUNC               vvexpf
+<span class="token number">4958</span> 0x1147ec10 NONE FUNC               vvsqrt
+<span class="token number">4959</span> 0x00000000 NONE FUNC               <span class="token function">wait</span>
+<span class="token number">4960</span> 0x1147ec1c NONE FUNC               wcscat
+<span class="token number">4961</span> 0x1147ec28 NONE FUNC               wcschr
+<span class="token number">4962</span> 0x1147ec34 NONE FUNC               wcscmp
+<span class="token number">4963</span> 0x1147ec40 NONE FUNC               wcscpy
+<span class="token number">4964</span> 0x1147ec4c NONE FUNC               wcsftime
+<span class="token number">4965</span> 0x1147ec58 NONE FUNC               wcslen
+<span class="token number">4966</span> 0x1147ec64 NONE FUNC               wcsncat
+<span class="token number">4967</span> 0x1147ec70 NONE FUNC               wcsncpy
+<span class="token number">4968</span> 0x1147ec7c NONE FUNC               wcstok
+<span class="token number">4969</span> 0x1147ec88 NONE FUNC               wcstombs
+<span class="token number">4970</span> 0x1147ec94 NONE FUNC               wmemcmp
+<span class="token number">4971</span> 0x1147eca0 NONE FUNC               wmemcpy
+<span class="token number">4972</span> 0x1147ecac NONE FUNC               <span class="token function">write</span>
+<span class="token number">4973</span> 0x1147ecb8 NONE FUNC               writev
+<span class="token number">4974</span> 0x1147ecc4 NONE FUNC               xmlAddChild
+<span class="token number">4975</span> 0x1147ecd0 NONE FUNC               xmlBufferContent
+<span class="token number">4976</span> 0x1147ecdc NONE FUNC               xmlBufferCreate
+<span class="token number">4977</span> 0x1147ece8 NONE FUNC               xmlBufferFree
+<span class="token number">4978</span> 0x1147ecf4 NONE FUNC               xmlBufferLength
+<span class="token number">4979</span> 0x1147ed00 NONE FUNC               xmlCheckVersion
+<span class="token number">4980</span> 0x1147ed0c NONE FUNC               xmlCleanupParser
+<span class="token number">4981</span> 0x1147ed18 NONE FUNC               xmlCopyNode
+<span class="token number">4982</span> 0x1147ed24 NONE FUNC               xmlCreatePushParserCtxt
+<span class="token number">4983</span> 0x1147ed30 NONE FUNC               xmlDocDumpMemory
+<span class="token number">4984</span> 0x1147ed3c NONE FUNC               xmlDocGetRootElement
+<span class="token number">4985</span> 0x1147ed48 NONE FUNC               xmlDocSetRootElement
+<span class="token number">4986</span> 0x1147ed54 NONE FUNC               xmlFirstElementChild
+<span class="token number">4987</span> 0x00000000 NONE FUNC               xmlFree
+<span class="token number">4988</span> 0x1147ed60 NONE FUNC               xmlFreeDoc
+<span class="token number">4989</span> 0x1147ed6c NONE FUNC               xmlFreeNode
+<span class="token number">4990</span> 0x1147ed78 NONE FUNC               xmlFreeNs
+<span class="token number">4991</span> 0x1147ed84 NONE FUNC               xmlFreeNsList
+<span class="token number">4992</span> 0x1147ed90 NONE FUNC               xmlFreeParserCtxt
+<span class="token number">4993</span> 0x1147ed9c NONE FUNC               xmlGetProp
+<span class="token number">4994</span> 0x1147eda8 NONE FUNC               xmlHasNsProp
+<span class="token number">4995</span> 0x1147edb4 NONE FUNC               xmlHasProp
+<span class="token number">4996</span> 0x1147edc0 NONE FUNC               xmlInitParser
+<span class="token number">4997</span> 0x1147edcc NONE FUNC               xmlNewDoc
+<span class="token number">4998</span> 0x1147edd8 NONE FUNC               xmlNewNode
+<span class="token number">4999</span> 0x1147ede4 NONE FUNC               xmlNewNs
+<span class="token number">5000</span> 0x1147edf0 NONE FUNC               xmlNewNsProp
+<span class="token number">5001</span> 0x1147edfc NONE FUNC               xmlNewProp
+<span class="token number">5002</span> 0x1147ee08 NONE FUNC               xmlNewText
+<span class="token number">5003</span> 0x1147ee14 NONE FUNC               xmlNextElementSibling
+<span class="token number">5004</span> 0x1147ee20 NONE FUNC               xmlNodeDump
+<span class="token number">5005</span> 0x1147ee2c NONE FUNC               xmlNodeGetContent
+<span class="token number">5006</span> 0x1147ee38 NONE FUNC               xmlNodeListGetString
+<span class="token number">5007</span> 0x1147ee44 NONE FUNC               xmlNodeSetContent
+<span class="token number">5008</span> 0x1147ee50 NONE FUNC               xmlNodeSetName
+<span class="token number">5009</span> 0x1147ee5c NONE FUNC               xmlParseChunk
+<span class="token number">5010</span> 0x1147ee68 NONE FUNC               xmlReadMemory
+<span class="token number">5011</span> 0x1147ee74 NONE FUNC               xmlSearchNs
+<span class="token number">5012</span> 0x1147ee80 NONE FUNC               xmlSearchNsByHref
+<span class="token number">5013</span> 0x1147ee8c NONE FUNC               xmlSetNs
+<span class="token number">5014</span> 0x1147ee98 NONE FUNC               xmlSetTreeDoc
+<span class="token number">5015</span> 0x1147eea4 NONE FUNC               xmlStrEqual
+<span class="token number">5016</span> 0x1147eeb0 NONE FUNC               xmlStrcmp
+<span class="token number">5017</span> 0x1147eebc NONE FUNC               xmlStrdup
+<span class="token number">5018</span> 0x1147eec8 NONE FUNC               xmlStrlen
+<span class="token number">5019</span> 0x1147eed4 NONE FUNC               xmlStrsub
+<span class="token number">5020</span> 0x1147eee0 NONE FUNC               xmlUnlinkNode
+<span class="token number">5021</span> 0x1147eeec NONE FUNC               xmlXPathEval
+<span class="token number">5022</span> 0x1147eef8 NONE FUNC               xmlXPathFreeContext
+<span class="token number">5023</span> 0x1147ef04 NONE FUNC               xmlXPathFreeObject
+<span class="token number">5024</span> 0x1147ef10 NONE FUNC               xmlXPathNewContext
+<span class="token number">5025</span> 0x1147ef1c NONE FUNC               xmlXPathRegisterNs
+<span class="token number">5026</span> 0x1147ef28 NONE FUNC               zlibCompileFlags
+<span class="token number">5027</span> 0x1147ef34 NONE FUNC               zlibVersion
+<span class="token number">5028</span> 0x00000000 NONE FUNC               dyld_stub_binder
+</code></pre>
+<h3 id="结果分析"><a name="结果分析" class="plugin-anchor" href="#结果分析"><i class="fa fa-link" aria-hidden="true"></i></a>结果分析</h3>
+<ul>
+<li>对比1：内容很像是nm输出的结果<ul>
+<li><code>rabin2 -i</code><pre class="language-"><code class="lang-bash"><span class="token number">5024</span> 0x1147ef10 NONE FUNC               xmlXPathNewContext
+<span class="token number">5025</span> 0x1147ef1c NONE FUNC               xmlXPathRegisterNs
+<span class="token number">5026</span> 0x1147ef28 NONE FUNC               zlibCompileFlags
+<span class="token number">5027</span> 0x1147ef34 NONE FUNC               zlibVersion
+<span class="token number">5028</span> 0x00000000 NONE FUNC               dyld_stub_binder
+</code></pre>
+</li>
+<li><code>nm</code><pre class="language-"><code class="lang-bash">U _xmlXPathNewContext
+U _xmlXPathRegisterNs
+U _zlibCompileFlags
+U _zlibVersion
+U dyld_stub_binder
+</code></pre>
+</li>
+</ul>
+</li>
+<li>对比2：rabin2比nm的更加易懂<ul>
+<li><code>rabin2 -i</code><pre class="language-"><code class="lang-bash"><span class="token number">0</span>    0x11476a38 NONE FUNC               sym.imp.Foundation.NSNotFound.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">1</span>    0x11476a44 NONE FUNC               sym.imp.static Foundation.CharacterSet.whitespacesAndNewlines.getter <span class="token builtin class-name">:</span> Foundation.CharacterSet
+<span class="token number">2</span>    0x11476a50 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.CharacterSet
+<span class="token number">3</span>    0x11476a5c NONE FUNC               sym.imp.static Foundation.Notification._unconditionallyBridgeFromObjectiveC<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSNotification<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Foundation.Notification
+<span class="token number">4</span>    0x11476a68 NONE FUNC               sym.imp.Foundation.Notification.object.getter <span class="token builtin class-name">:</span> Swift.Optional<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span>
+<span class="token number">5</span>    0x11476a74 NONE FUNC               sym.imp.Foundation.Notification.userInfo.getter <span class="token builtin class-name">:</span> Swift.Optional<span class="token operator">&lt;</span>Swift.Dictionary<span class="token operator">&lt;</span>Swift.AnyHashable, Any<span class="token operator">&gt;&gt;</span>
+<span class="token number">6</span>    0x11476a80 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.Notification
+<span class="token number">7</span>    0x11476a8c NONE FUNC               sym.imp.Foundation._convertErrorToNSError<span class="token punctuation">(</span>Swift.Error<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> __C.NSError
+<span class="token number">8</span>    0x11476a98 NONE FUNC               sym.imp.Foundation._convertNSErrorToError<span class="token punctuation">(</span>Swift.Optional<span class="token operator">&lt;</span>__C.NSError<span class="token operator">&gt;</span><span class="token punctuation">)</span> -<span class="token operator">&gt;</span> Swift.Error
+<span class="token number">9</span>    0x11476aa4 NONE FUNC               sym.imp.type metadata accessor <span class="token keyword">for</span> Foundation.NSFastEnumerationIterator
+</code></pre>
+</li>
+<li><code>nm</code><pre class="language-"><code class="lang-bash">U _<span class="token variable">$s10Foundation10NSNotFoundSivg</span>
+U _<span class="token variable">$s10Foundation12CharacterSetV22whitespacesAndNewlinesACvgZ</span>
+U _<span class="token variable">$s10Foundation12CharacterSetVMa</span>
+U _<span class="token variable">$s10Foundation12NotificationV36_unconditionallyBridgeFromObjectiveCyACSo14NSNotificationCSgFZ</span>
+U _<span class="token variable">$s10Foundation12NotificationV6objectypSgvg</span>
+U _<span class="token variable">$s10Foundation12NotificationV8userInfoSDys11AnyHashableVypGSgvg</span>
+U _<span class="token variable">$s10Foundation12NotificationVMa</span>
+U _<span class="token variable">$s10Foundation22_convertErrorToNSErrorySo0E0Cs0C0_pF</span>
+U _<span class="token variable">$s10Foundation22_convertNSErrorToErrorys0E0_pSo0C0CSgF</span>
+U _<span class="token variable">$s10Foundation25NSFastEnumerationIteratorVMa</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="e-exports"><a name="e-exports" class="plugin-anchor" href="#e-exports"><i class="fa fa-link" aria-hidden="true"></i></a><code>-E</code>: Exports</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-E</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_E.txt
+
+<span class="token punctuation">[</span>Exports<span class="token punctuation">]</span>
+
+nth  paddr       vaddr      <span class="token builtin class-name">bind</span>   <span class="token builtin class-name">type</span> size lib name
+―――――――――――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">2840</span>  0x00b8e0b8 0x00b8e0b8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntentResponse</span>
+<span class="token number">2841</span>  0x00b8e0e0 0x00b8e0e0 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsActivityWidgetLandingPageResolutionResult</span>
+<span class="token number">2842</span>  0x00b8e130 0x00b8e130 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsWidgetsColorSchemeResolutionResult</span>
+<span class="token number">2843</span>  0x00b8e068 0x00b8e068 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntent</span>
+<span class="token number">2844</span>  0x00b8e090 0x00b8e090 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntentResponse</span>
+<span class="token number">2845</span>  0x00b8e108 0x00b8e108 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetLandingPageResolutionResult</span>
+<span class="token number">2846</span>  0x00b8e158 0x00b8e158 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsWidgetsColorSchemeResolutionResult</span>
+<span class="token number">2847</span>  0x0c46ffcc 0x10e0ffcc GLOBAL FUNC <span class="token number">0</span>        _awemeMain
+</code></pre>
+<h2 id="s-symbols"><a name="s-symbols" class="plugin-anchor" href="#s-symbols"><i class="fa fa-link" aria-hidden="true"></i></a><code>-s</code>: Symbols</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-s</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_s.txt
+
+<span class="token punctuation">[</span>Symbols<span class="token punctuation">]</span>
+
+nth     paddr       vaddr      <span class="token builtin class-name">bind</span>   <span class="token builtin class-name">type</span> size lib name
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">0</span>        0x05614542 0x05614542 LOCAL  FUNC <span class="token number">0</span>        radr://5614542
+<span class="token number">1</span>        0x0cad6a38 0x11476a38 LOCAL  FUNC <span class="token number">0</span>        Foundation.NSNotFound.getter <span class="token builtin class-name">:</span> Swift.Int
+<span class="token number">2</span>        0x0cad6a44 0x11476a44 LOCAL  FUNC <span class="token number">0</span>        static Foundation.CharacterSet.whitespacesAndNewlines.getter <span class="token builtin class-name">:</span> Foundation.CharacterSet
+<span class="token number">3</span>        0x0cad6a50 0x11476a50 LOCAL  FUNC <span class="token number">0</span>        <span class="token builtin class-name">type</span> metadata accessor <span class="token keyword">for</span> Foundation.CharacterSet
+<span class="token punctuation">..</span>.
+<span class="token number">2836</span>     0x0cadef1c 0x1147ef1c LOCAL  FUNC <span class="token number">0</span>        imp.xmlXPathRegisterNs
+<span class="token number">2837</span>     0x0cadef28 0x1147ef28 LOCAL  FUNC <span class="token number">0</span>        imp.zlibCompileFlags
+<span class="token number">2838</span>     0x0cadef34 0x1147ef34 LOCAL  FUNC <span class="token number">0</span>        imp.zlibVersion
+<span class="token number">2839</span>     0x00b8e040 0x00b8e040 GLOBAL FUNC <span class="token number">0</span>        imp._OBJC_METACLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntent</span>
+<span class="token number">2840</span>     0x00b8e0b8 0x00b8e0b8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntentResponse</span>
+<span class="token number">2841</span>     0x00b8e0e0 0x00b8e0e0 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsActivityWidgetLandingPageResolutionResult</span>
+<span class="token number">2842</span>     0x00b8e130 0x00b8e130 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_AWEFriendsWidgetsColorSchemeResolutionResult</span>
+<span class="token number">2843</span>     0x00b8e068 0x00b8e068 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntent</span>
+<span class="token number">2844</span>     0x00b8e090 0x00b8e090 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetConfigurationIntentResponse</span>
+<span class="token number">2845</span>     0x00b8e108 0x00b8e108 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsActivityWidgetLandingPageResolutionResult</span>
+<span class="token number">2846</span>     0x00b8e158 0x00b8e158 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_AWEFriendsWidgetsColorSchemeResolutionResult</span>
+<span class="token number">2847</span>     0x0c46ffcc 0x10e0ffcc GLOBAL FUNC <span class="token number">0</span>        _awemeMain
+<span class="token number">2848</span>     0x05924000 0x05924000 LOCAL  FUNC <span class="token number">0</span>        func.05924000
+<span class="token number">2849</span>     0x05924290 0x05924290 LOCAL  FUNC <span class="token number">0</span>        func.05924290
+<span class="token punctuation">..</span>.
+<span class="token number">1873257</span>  0x11476844 0x11476844 LOCAL  FUNC <span class="token number">0</span>        func.11476844
+<span class="token number">1873258</span>  0x11476888 0x11476888 LOCAL  FUNC <span class="token number">0</span>        func.11476888
+<span class="token number">1873259</span>  0x114768cc 0x114768cc LOCAL  FUNC <span class="token number">0</span>        func.114768cc
+<span class="token number">1873260</span>  0x11476910 0x11476910 LOCAL  FUNC <span class="token number">0</span>        func.11476910
+<span class="token number">1873261</span>  0x11476948 0x11476948 LOCAL  FUNC <span class="token number">0</span>        func.11476948
+<span class="token number">1873262</span>  0x11476970 0x11476970 LOCAL  FUNC <span class="token number">0</span>        func.11476970
+</code></pre>
+<p><img src="../../../assets/img/rabin2_awemecore_symbol_1.jpg" alt="rabin2_awemecore_symbol_1"></p>
+<p><img src="../../../assets/img/rabin2_awemecore_symbol_2.jpg" alt="rabin2_awemecore_symbol_2"></p>
+<h3 id="sr"><a name="sr" class="plugin-anchor" href="#sr"><i class="fa fa-link" aria-hidden="true"></i></a><code>-sr</code></h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-sr</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_sr.txt
+
+fs symbols
+<span class="token string">&quot;f sym.radr:__5614542 0 0x05614542&quot;</span>
+fs imports
+<span class="token string">&quot;f sym.Foundation.NSNotFound.getter_:_Swift.Int 0 0x11476a38&quot;</span>
+<span class="token string">&quot;f sym.static_Foundation.CharacterSet.whitespacesAndNewlines.getter_:_Foundation.CharacterSet 0 0x11476a44&quot;</span>
+<span class="token string">&quot;f sym.type_metadata_accessor_for_Foundation.CharacterSet 0 0x11476a50&quot;</span>
+<span class="token string">&quot;f sym.static_Foundation.Notification._unconditionallyBridgeFromObjectiveC_Swift.Optional___C.NSNotification______Foundation.Notific 0 0x11476a5c&quot;</span>
+<span class="token string">&quot;f sym.Foundation.Notification.object.getter_:_Swift.Optional_Any 0 0x11476a68&quot;</span>
+<span class="token string">&quot;f sym.Foundation.Notification.userInfo.getter_:_Swift.Optional_Swift.Dictionary_Swift.AnyHashable__Any 0 0x11476a74&quot;</span>
+<span class="token string">&quot;f sym.type_metadata_accessor_for_Foundation.Notification 0 0x11476a80&quot;</span>
+<span class="token string">&quot;f sym.Foundation._convertErrorToNSError_Swift.Error_______C.NSError 0 0x11476a8c&quot;</span>
+<span class="token string">&quot;f sym.Foundation._convertNSErrorToError_Swift.Optional___C.NSError______Swift.Error 0 0x11476a98&quot;</span>
+<span class="token punctuation">..</span>.
+<span class="token string">&quot;f sym.func.11476888 0 0x11476888&quot;</span>
+<span class="token string">&quot;f sym.func.114768cc 0 0x114768cc&quot;</span>
+<span class="token string">&quot;f sym.func.11476910 0 0x11476910&quot;</span>
+<span class="token string">&quot;f sym.func.11476948 0 0x11476948&quot;</span>
+<span class="token string">&quot;f sym.func.11476970 0 0x11476970&quot;</span>
+</code></pre>
+<h2 id="l-libraries"><a name="l-libraries" class="plugin-anchor" href="#l-libraries"><i class="fa fa-link" aria-hidden="true"></i></a><code>-l</code>: Libraries</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-l</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_l.txt
+
+<span class="token punctuation">[</span>Linked libraries<span class="token punctuation">]</span>
+/usr/lib/libcompression.dylib
+@rpath/BDLRepairer.framework/BDLRepairer
+/usr/lib/libc++.1.dylib
+/System/Library/Frameworks/AdServices.framework/AdServices
+/System/Library/Frameworks/AppTrackingTransparency.framework/AppTrackingTransparency
+/System/Library/Frameworks/AuthenticationServices.framework/AuthenticationServices
+/System/Library/Frameworks/CoreHaptics.framework/CoreHaptics
+/System/Library/Frameworks/CoreTelephony.framework/CoreTelephony
+/System/Library/Frameworks/MetalKit.framework/MetalKit
+/System/Library/Frameworks/MetalPerformanceShaders.framework/MetalPerformanceShaders
+/System/Library/Frameworks/MetricKit.framework/MetricKit
+/System/Library/Frameworks/StoreKit.framework/StoreKit
+@rpath/VolcEngineRTC.framework/VolcEngineRTC
+@rpath/byteaudio.framework/byteaudio
+/usr/lib/libbz2.1.0.dylib
+/usr/lib/libc++abi.dylib
+/usr/lib/libiconv.2.dylib
+/usr/lib/libicucore.A.dylib
+/usr/lib/liblzma.5.dylib
+/usr/lib/libSystem.B.dylib
+/usr/lib/libresolv.9.dylib
+/usr/lib/libsqlite3.dylib
+/usr/lib/libxml2.2.dylib
+/usr/lib/libz.1.dylib
+/System/Library/Frameworks/ARKit.framework/ARKit
+/System/Library/Frameworks/AVFoundation.framework/AVFoundation
+/System/Library/Frameworks/AVKit.framework/AVKit
+/System/Library/Frameworks/Accelerate.framework/Accelerate
+/System/Library/Frameworks/AdSupport.framework/AdSupport
+/System/Library/Frameworks/AddressBook.framework/AddressBook
+/System/Library/Frameworks/AssetsLibrary.framework/AssetsLibrary
+/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+/System/Library/Frameworks/CFNetwork.framework/CFNetwork
+/System/Library/Frameworks/Contacts.framework/Contacts
+/System/Library/Frameworks/ContactsUI.framework/ContactsUI
+/System/Library/Frameworks/CoreAudio.framework/CoreAudio
+/System/Library/Frameworks/CoreAudioKit.framework/CoreAudioKit
+/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+/System/Library/Frameworks/CoreImage.framework/CoreImage
+/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+/System/Library/Frameworks/CoreML.framework/CoreML
+/System/Library/Frameworks/CoreMedia.framework/CoreMedia
+/System/Library/Frameworks/CoreMotion.framework/CoreMotion
+/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
+/System/Library/Frameworks/CoreSpotlight.framework/CoreSpotlight
+/System/Library/Frameworks/CoreText.framework/CoreText
+/System/Library/Frameworks/CoreVideo.framework/CoreVideo
+/System/Library/Frameworks/EventKit.framework/EventKit
+/System/Library/Frameworks/Foundation.framework/Foundation
+/System/Library/Frameworks/GLKit.framework/GLKit
+/System/Library/Frameworks/GameplayKit.framework/GameplayKit
+/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+/System/Library/Frameworks/ImageIO.framework/ImageIO
+/System/Library/Frameworks/Intents.framework/Intents
+/System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore
+/System/Library/Frameworks/LocalAuthentication.framework/LocalAuthentication
+/System/Library/Frameworks/MapKit.framework/MapKit
+/System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility
+/System/Library/Frameworks/MediaPlayer.framework/MediaPlayer
+/System/Library/Frameworks/MediaToolbox.framework/MediaToolbox
+/System/Library/Frameworks/MessageUI.framework/MessageUI
+/System/Library/Frameworks/Metal.framework/Metal
+/System/Library/Frameworks/NetworkExtension.framework/NetworkExtension
+/System/Library/Frameworks/OpenAL.framework/OpenAL
+/System/Library/Frameworks/OpenGLES.framework/OpenGLES
+/System/Library/Frameworks/Photos.framework/Photos
+/System/Library/Frameworks/PhotosUI.framework/PhotosUI
+/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+/System/Library/Frameworks/ReplayKit.framework/ReplayKit
+/System/Library/Frameworks/SafariServices.framework/SafariServices
+/System/Library/Frameworks/Security.framework/Security
+/System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
+/System/Library/Frameworks/UIKit.framework/UIKit
+/System/Library/Frameworks/VideoToolbox.framework/VideoToolbox
+/System/Library/Frameworks/WebKit.framework/WebKit
+/System/Library/Frameworks/iAd.framework/iAd
+/System/Library/Frameworks/QuickLook.framework/QuickLook
+/usr/lib/libobjc.A.dylib
+/System/Library/Frameworks/Combine.framework/Combine
+/System/Library/Frameworks/GroupActivities.framework/GroupActivities
+/System/Library/Frameworks/IOSurface.framework/IOSurface
+/System/Library/Frameworks/UserNotifications.framework/UserNotifications
+/System/Library/Frameworks/WidgetKit.framework/WidgetKit
+/usr/lib/swift/libswiftCoreMIDI.dylib
+/usr/lib/swift/libswiftDataDetection.dylib
+/usr/lib/swift/libswiftFileProvider.dylib
+/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib
+/usr/lib/swift/libswiftWebKit.dylib
+/usr/lib/swift/libswift_Concurrency.dylib
+@rpath/libswiftAVFoundation.dylib
+@rpath/libswiftCore.dylib
+@rpath/libswiftCoreAudio.dylib
+@rpath/libswiftCoreData.dylib
+@rpath/libswiftCoreFoundation.dylib
+@rpath/libswiftCoreGraphics.dylib
+@rpath/libswiftCoreImage.dylib
+@rpath/libswiftCoreLocation.dylib
+@rpath/libswiftCoreMedia.dylib
+@rpath/libswiftDarwin.dylib
+@rpath/libswiftDispatch.dylib
+@rpath/libswiftFoundation.dylib
+@rpath/libswiftIntents.dylib
+@rpath/libswiftMapKit.dylib
+@rpath/libswiftMetal.dylib
+@rpath/libswiftNetwork.dylib
+@rpath/libswiftObjectiveC.dylib
+@rpath/libswiftPhotos.dylib
+@rpath/libswiftQuartzCore.dylib
+@rpath/libswiftUIKit.dylib
+@rpath/libswiftos.dylib
+@rpath/libswiftsimd.dylib
+
+<span class="token number">112</span> libraries
+</code></pre>
+<h2 id="z-strings"><a name="z-strings" class="plugin-anchor" href="#z-strings"><i class="fa fa-link" aria-hidden="true"></i></a><code>-z</code>: Strings</h2>
+<ul>
+<li><code>-z</code>参数含义<ul>
+<li>The -z option is used to list readable strings found in the .rodata section of ELF binaries, or the .text section of PE files.</li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-z</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_z.txt
+
+<span class="token punctuation">[</span>Strings<span class="token punctuation">]</span>
+nth    paddr      vaddr      len  size section                      <span class="token builtin class-name">type</span>    string
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">0</span>      0x00013e7f 0x00013e7f <span class="token number">5</span>    <span class="token number">6</span>    <span class="token number">1</span>.__TEXT.__const             ascii   <span class="token number">7</span><span class="token punctuation">\</span>rW?<span class="token operator">&lt;</span>
+<span class="token number">1</span>      0x00013e89 0x00013e89 <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">1</span>.__TEXT.__const             ascii   <span class="token punctuation">\</span>a<span class="token punctuation">)</span>FA
+<span class="token number">2</span>      0x00013eb0 0x00013eb0 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentSwiftImpl
+<span class="token number">3</span>      0x00013ed0 0x00013ed0 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">1</span>.__TEXT.__const             ascii   ActionViewLayoutDelegate
+<span class="token number">4</span>      0x00013f20 0x00013f20 <span class="token number">10</span>   <span class="token number">11</span>   <span class="token number">1</span>.__TEXT.__const             ascii   ActionView
+<span class="token number">5</span>      0x00013f48 0x00013f48 <span class="token number">4</span>    <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             utf32le D:<span class="token punctuation">\</span>v<span class="token punctuation">\</span>n
+<span class="token number">6</span>      0x000140f0 0x000140f0 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentColorMode
+<span class="token number">7</span>      0x00014124 0x00014124 <span class="token number">13</span>   <span class="token number">14</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentTab
+<span class="token number">8</span>      0x00014160 0x00014160 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWEModernFeedEventSource
+<span class="token number">9</span>      0x000141a0 0x000141a0 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWEAwemeModelCommentType
+<span class="token number">10</span>     0x000141e0 0x000141e0 <span class="token number">21</span>   <span class="token number">22</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWEUserFollowerStatus
+<span class="token number">11</span>     0x00014220 0x00014220 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWEUserFollowStatus
+<span class="token number">12</span>     0x00014260 0x00014260 <span class="token number">23</span>   <span class="token number">24</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentCellSceneType
+<span class="token number">13</span>     0x000142a0 0x000142a0 <span class="token number">20</span>   <span class="token number">21</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentReplyStyle
+<span class="token number">14</span>     0x000142e0 0x000142e0 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentPostState
+<span class="token number">15</span>     0x00014320 0x00014320 <span class="token number">17</span>   <span class="token number">18</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentTagType
+<span class="token number">16</span>     0x00014354 0x00014354 <span class="token number">11</span>   <span class="token number">12</span>   <span class="token number">1</span>.__TEXT.__const             ascii   ActionStyle
+<span class="token number">17</span>     0x0001437c 0x0001437c <span class="token number">10</span>   <span class="token number">11</span>   <span class="token number">1</span>.__TEXT.__const             ascii   ActionType
+<span class="token number">18</span>     0x000143b0 0x000143b0 <span class="token number">27</span>   <span class="token number">28</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentBaseListViewModel
+<span class="token number">19</span>     0x00014430 0x00014430 <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">1</span>.__TEXT.__const             ascii   Weak
+<span class="token number">20</span>     0x000144e2 0x000144e2 <span class="token number">11</span>   <span class="token number">12</span>   <span class="token number">1</span>.__TEXT.__const             ascii   stIndexPath
+<span class="token number">21</span>     0x00014510 0x00014510 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentSwiftImpl
+<span class="token number">22</span>     0x00014530 0x00014530 <span class="token number">8</span>    <span class="token number">9</span>    <span class="token number">1</span>.__TEXT.__const             ascii   BaseCell
+<span class="token number">23</span>     0x00014560 0x00014560 <span class="token number">4</span>    <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             utf32le A<span class="token punctuation">\</span>nKÎ <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Basic Latin,Latin-1 Supplement
+<span class="token number">24</span>     0x00014be0 0x00014be0 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">1</span>.__TEXT.__const             ascii   BaseListSectionViewModel
+<span class="token number">25</span>     0x00014c70 0x00014c70 <span class="token number">11</span>   <span class="token number">12</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentCell
+<span class="token number">26</span>     0x00014c80 0x00014c80 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentSwiftImpl
+<span class="token number">27</span>     0x00014cc0 0x00014cc0 <span class="token number">5</span>    <span class="token number">24</span>   <span class="token number">1</span>.__TEXT.__const             utf32le <span class="token number">2</span><span class="token punctuation">\</span>fęĥ<span class="token operator">&amp;</span> <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Basic Latin,Latin Extended-A
+<span class="token number">28</span>     0x00014e20 0x00014e20 <span class="token number">35</span>   <span class="token number">36</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentContainerInnerViewController
+<span class="token number">29</span>     0x00015030 0x00015030 <span class="token number">31</span>   <span class="token number">32</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentContainerInnerViewHolder
+<span class="token number">30</span>     0x000150d0 0x000150d0 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentContainerProtocol
+<span class="token number">31</span>     0x00015120 0x00015120 <span class="token number">19</span>   <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             ascii   AWECommentSwiftImpl
+<span class="token number">32</span>     0x00015140 0x00015140 <span class="token number">30</span>   <span class="token number">31</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentContainerViewController
+<span class="token number">33</span>     0x00015184 0x00015184 <span class="token number">4</span>    <span class="token number">20</span>   <span class="token number">1</span>.__TEXT.__const             utf32le <span class="token number">2</span><span class="token punctuation">\</span>n<span class="token operator">&lt;</span>¡ <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Basic Latin,Latin-1 Supplement
+<span class="token number">34</span>     0x000156a0 0x000156a0 <span class="token number">25</span>   <span class="token number">26</span>   <span class="token number">1</span>.__TEXT.__const             ascii   CommentContainerViewModel
+<span class="token punctuation">..</span>.
+<span class="token number">39595</span>  0x00f17294 0x00f17294 <span class="token number">23</span>   <span class="token number">24</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   AWEVideoMergeTransParam
+<span class="token number">39596</span>  0x00f172ac 0x00f172ac <span class="token number">35</span>   <span class="token number">36</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   AWEVideoNewPublishCircleTagItemCell
+<span class="token number">39597</span>  0x00f172d0 0x00f172d0 <span class="token number">38</span>   <span class="token number">39</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   AWEVideoNewPublishTagRecommendItemCell
+<span class="token number">39598</span>  0x00f172f7 0x00f172f7 <span class="token number">43</span>   <span class="token number">44</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   AWEVideoNewPublishTagRecommendTableViewCell
+<span class="token number">39599</span>  0x00f17323 0x00f17323 <span class="token number">12</span>   <span class="token number">13</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   LVAudioFrame
+<span class="token number">39600</span>  0x00f17330 0x00f17330 <span class="token number">11</span>   <span class="token number">12</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   Performance
+<span class="token number">39601</span>  0x00f1733c 0x00f1733c <span class="token number">12</span>   <span class="token number">13</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   VoiceChanger
+<span class="token number">39602</span>  0x00f17349 0x00f17349 <span class="token number">32</span>   <span class="token number">33</span>   <span class="token number">89</span>.__DATA.__objc_classname   ascii   AWEVideoNewPublishViewController
+<span class="token punctuation">..</span>.
+<span class="token number">119537</span> 0x0d7521ea 0x120f21ea <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    ascii   <span class="token punctuation">\</span>t<span class="token punctuation">\</span>bC<span class="token operator">!</span>
+<span class="token number">119538</span> 0x0d752209 0x120f2209 <span class="token number">7</span>    <span class="token number">9</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    utf8    ٺITjpS4 <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Arabic,Basic Latin
+<span class="token number">119539</span> 0x0d752246 0x120f2246 <span class="token number">7</span>    <span class="token number">9</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    utf8    ǌ~O<span class="token punctuation">{</span>P<span class="token punctuation">\</span>fc <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Latin Extended-B,Basic Latin
+<span class="token number">119540</span> 0x0d752252 0x120f2252 <span class="token number">5</span>    <span class="token number">7</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    utf8    ЀFyr&apos; <span class="token assign-left variable">blocks</span><span class="token operator">=</span>Cyrillic,Basic Latin
+<span class="token number">119541</span> 0x0d75226f 0x120f226f <span class="token number">5</span>    <span class="token number">6</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    ascii   RS<span class="token punctuation">\</span>rcJ
+<span class="token number">119542</span> 0x0d752292 0x120f2292 <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    ascii   o3PR
+<span class="token number">119543</span> 0x0d7522da 0x120f22da <span class="token number">4</span>    <span class="token number">4</span>    <span class="token number">111</span>.__LTC_DATA._C_cstring    ascii   bvx$
+</code></pre>
+<h3 id="zr"><a name="zr" class="plugin-anchor" href="#zr"><i class="fa fa-link" aria-hidden="true"></i></a><code>-zr</code></h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-zr</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_zr.txt
+
+fs strings
+f str.7__W <span class="token number">6</span> 0x00013e7f
+Cs <span class="token number">6</span> @ 0x00013e7f
+f str.FA <span class="token number">5</span> 0x00013e89
+Cs <span class="token number">5</span> @ 0x00013e89
+f str.AWECommentSwiftImpl <span class="token number">20</span> 0x00013eb0
+Cs <span class="token number">20</span> @ 0x00013eb0
+f str.ActionViewLayoutDelegate <span class="token number">25</span> 0x00013ed0
+Cs <span class="token number">25</span> @ 0x00013ed0
+f str.ActionView <span class="token number">11</span> 0x00013f20
+Cs <span class="token number">11</span> @ 0x00013f20
+f str.D: <span class="token number">20</span> 0x00013f48
+Cs <span class="token number">20</span> @ 0x00013f48
+f str.AWECommentColorMode <span class="token number">20</span> 0x000140f0
+Cs <span class="token number">20</span> @ 0x000140f0
+f str.AWECommentTab <span class="token number">14</span> 0x00014124
+Cs <span class="token number">14</span> @ 0x00014124
+f str.AWEModernFeedEventSource <span class="token number">25</span> 0x00014160
+Cs <span class="token number">25</span> @ 0x00014160
+f str.AWEAwemeModelCommentType <span class="token number">25</span> 0x000141a0
+Cs <span class="token number">25</span> @ 0x000141a0
+f str.AWEUserFollowerStatus <span class="token number">22</span> 0x000141e0
+Cs <span class="token number">22</span> @ 0x000141e0
+f str.AWEUserFollowStatus <span class="token number">20</span> 0x00014220
+Cs <span class="token number">20</span> @ 0x00014220
+f str.AWECommentCellSceneType <span class="token number">24</span> 0x00014260
+<span class="token punctuation">..</span>.
+f str.ITjpS4 <span class="token number">9</span> 0x120f2209
+Cs <span class="token number">9</span> @ 0x120f2209
+f str.O_P__c <span class="token number">9</span> 0x120f2246
+Cs <span class="token number">9</span> @ 0x120f2246
+f str.Fyr <span class="token number">7</span> 0x120f2252
+Cs <span class="token number">7</span> @ 0x120f2252
+f str.RS__cJ <span class="token number">6</span> 0x120f226f
+Cs <span class="token number">6</span> @ 0x120f226f
+f str.o3PR <span class="token number">5</span> 0x120f2292
+Cs <span class="token number">5</span> @ 0x120f2292
+f str.bvx <span class="token number">4</span> 0x120f22da
+Cs <span class="token number">4</span> @ 0x120f22da
+</code></pre>
+<h2 id="s-program-sections"><a name="s-program-sections" class="plugin-anchor" href="#s-program-sections"><i class="fa fa-link" aria-hidden="true"></i></a><code>-S</code>: Program Sections</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-S</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_S_section.txt
+
+<span class="token punctuation">[</span>Sections<span class="token punctuation">]</span>
+
+nth paddr            size vaddr           vsize perm name
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">0</span>   0x0000b9b0     0x84c0 0x0000b9b0     0x84c0 -r-x <span class="token number">0</span>.__TEXT.__stub_helper
+<span class="token number">1</span>   0x00013e70     0x4020 0x00013e70     0x4020 -r-x <span class="token number">1</span>.__TEXT.__const
+<span class="token number">2</span>   0x00017e90     0x2ef8 0x00017e90     0x2ef8 -r-x <span class="token number">2</span>.__TEXT.__swift5_typeref
+<span class="token number">3</span>   0x0001ad88     0x2988 0x0001ad88     0x2988 -r-x <span class="token number">3</span>.__TEXT.__swift5_fieldmd
+<span class="token number">4</span>   0x0001d710      0x338 0x0001d710      0x338 -r-x <span class="token number">4</span>.__TEXT.__swift5_proto
+<span class="token number">5</span>   0x0001da48      0x28c 0x0001da48      0x28c -r-x <span class="token number">5</span>.__TEXT.__swift5_types
+<span class="token number">6</span>   0x0001dcd4        0x0 0x0001dcd4        0x0 -r-x <span class="token number">6</span>.__TEXT.__cstring
+<span class="token number">7</span>   0x0001dcd4        0x0 0x0001dcd4        0x0 -r-x <span class="token number">7</span>.__TEXT.__objc_methname
+<span class="token number">8</span>   0x0001dcd4        0x0 0x0001dcd4        0x0 -r-x <span class="token number">8</span>.__TEXT.__objc_classname
+<span class="token number">9</span>   0x0001dcd4        0x0 0x0001dcd4        0x0 -r-x <span class="token number">9</span>.__TEXT.__objc_methtype
+<span class="token number">10</span>  0x0001dcd4       0x68 0x0001dcd4       0x68 -r-x <span class="token number">10</span>.__TEXT.__gcc_except_tab
+<span class="token number">11</span>  0x0001dd40     0x362c 0x0001dd40     0x362c -r-x <span class="token number">11</span>.__TEXT.__swift5_reflstr
+<span class="token number">12</span>  0x0002136c      0x1b8 0x0002136c      0x1b8 -r-x <span class="token number">12</span>.__TEXT.__swift5_builtin
+<span class="token number">13</span>  0x00021524      0x2b8 0x00021524      0x2b8 -r-x <span class="token number">13</span>.__TEXT.__swift5_assocty
+<span class="token number">14</span>  0x000217dc     0x1c0c 0x000217dc     0x1c0c -r-x <span class="token number">14</span>.__TEXT.__swift5_capture
+<span class="token number">15</span>  0x000233e8       0x60 0x000233e8       0x60 -r-x <span class="token number">15</span>.__TEXT.__swift5_protos
+<span class="token number">16</span>  0x00023448        0x0 0x00023448        0x0 -r-x <span class="token number">16</span>.__TEXT.__ustring
+<span class="token number">17</span>  0x00023448        0x0 0x00023448        0x0 -r-x <span class="token number">17</span>.__TEXT.__text
+<span class="token number">18</span>  0x00023448   0x2a4b70 0x00023448   0x2a4b70 -r-x <span class="token number">18</span>.__TEXT.__unwind_info
+<span class="token number">19</span>  0x002c7fb8    0x38040 0x002c7fb8    0x38040 -r-x <span class="token number">19</span>.__TEXT.__eh_frame
+<span class="token number">20</span>  0x00300000       0x1b 0x00300000       0x1b -r-x <span class="token number">20</span>.__TEXT.__oslogstring
+<span class="token number">21</span>  0x00304000     0x3120 0x00304000     0x3120 -rw- <span class="token number">21</span>.__DATA.__got
+<span class="token number">22</span>  0x00307120     0x58b0 0x00307120     0x58b0 -rw- <span class="token number">22</span>.__DATA.__la_symbol_ptr
+<span class="token number">23</span>  0x0030c9d0     0x3d28 0x0030c9d0     0x3d28 -rw- <span class="token number">23</span>.__DATA.__mod_init_func
+<span class="token number">24</span>  0x00310700    0x11068 0x00310700    0x11068 -rw- <span class="token number">24</span>.__DATA.__const
+<span class="token number">25</span>  0x00321768      0xa60 0x00321768      0xa60 -rw- <span class="token number">25</span>.__DATA.__cfstring
+<span class="token number">26</span>  0x003221c8    0x47a08 0x003221c8    0x47a08 -rw- <span class="token number">26</span>.__DATA.__objc_classlist
+<span class="token number">27</span>  0x00369bd0      0x678 0x00369bd0      0x678 -rw- <span class="token number">27</span>.__DATA.__objc_nlclslist
+<span class="token number">28</span>  0x0036a248     0x37f0 0x0036a248     0x37f0 -rw- <span class="token number">28</span>.__DATA.__objc_catlist
+<span class="token number">29</span>  0x0036da38      0x120 0x0036da38      0x120 -rw- <span class="token number">29</span>.__DATA.__objc_nlcatlist
+<span class="token number">30</span>  0x0036db58    0x11af8 0x0036db58    0x11af8 -rw- <span class="token number">30</span>.__DATA.__objc_protolist
+<span class="token number">31</span>  0x0037f650        0x8 0x0037f650        0x8 -rw- <span class="token number">31</span>.__DATA.__objc_imageinfo
+<span class="token number">32</span>  0x0037f658   0x5c2148 0x0037f658   0x5c2148 -rw- <span class="token number">32</span>.__DATA.__objc_const
+<span class="token number">33</span>  0x009417a0        0x8 0x009417a0        0x8 -rw- <span class="token number">33</span>.__DATA.__objc_selrefs
+<span class="token number">34</span>  0x009417a8     0x6700 0x009417a8     0x6700 -rw- <span class="token number">34</span>.__DATA.__objc_protorefs
+<span class="token number">35</span>  0x00947ea8    0x40350 0x00947ea8    0x40350 -rw- <span class="token number">35</span>.__DATA.__objc_classrefs
+<span class="token number">36</span>  0x009881f8    0x23548 0x009881f8    0x23548 -rw- <span class="token number">36</span>.__DATA.__objc_superrefs
+<span class="token number">37</span>  0x009ab740     0x1388 0x009ab740     0x1388 -rw- <span class="token number">37</span>.__DATA.__objc_ivar
+<span class="token number">38</span>  0x009acac8   0x3a9058 0x009acac8   0x3a9058 -rw- <span class="token number">38</span>.__DATA.__objc_data
+<span class="token number">39</span>  0x00d55b20     0x4f10 0x00d55b20     0x4f10 -rw- <span class="token number">39</span>.__DATA.__data
+<span class="token number">40</span>  0x00d5aa30       0xf8 0x00d5aa30       0xf8 -rw- <span class="token number">40</span>.__DATA.__HTSLifeCycle
+<span class="token number">41</span>  0x00d5ab28       0x18 0x00d5ab28       0x18 -rw- <span class="token number">41</span>.__DATA.__objc_stublist
+<span class="token number">42</span>  0x00d5ab40       0x18 0x00d5ab40       0x18 -rw- <span class="token number">42</span>.__DATA.RewardedADJSB
+<span class="token number">43</span>  0x00d5ab58      0x1c8 0x00d5ab58      0x1c8 -rw- <span class="token number">43</span>.__DATA.HGTimorLaunch
+<span class="token number">44</span>  0x00d5ad20       0x68 0x00d5ad20       0x68 -rw- <span class="token number">44</span>.__DATA.HGTimorLoad
+<span class="token number">45</span>  0x00d5ad88      0x2f8 0x00d5ad88      0x2f8 -rw- <span class="token number">45</span>.__DATA.TimorLaunch
+<span class="token number">46</span>  0x00d5b080       0xc0 0x00d5b080       0xc0 -rw- <span class="token number">46</span>.__DATA.TimorLoad
+<span class="token number">47</span>  0x00d5b140       0xf0 0x00d5b140       0xf0 -rw- <span class="token number">47</span>.__DATA.RSDHCampaign
+<span class="token number">48</span>  0x00d5b230      0x280 0x00d5b230      0x280 -rw- <span class="token number">48</span>.__DATA.XBMExternal
+<span class="token number">49</span>  0x00d5b4b0       0xc0 0x00d5b4b0       0xc0 -rw- <span class="token number">49</span>.__DATA.LazyRegHeader
+<span class="token number">50</span>  0x00d5b570       0x10 0x00d5b570       0x10 -rw- <span class="token number">50</span>.__DATA.AWELynxBridge
+<span class="token number">51</span>  0x00d5b580       0x30 0x00d5b580       0x30 -rw- <span class="token number">51</span>.__DATA.PremainCode
+<span class="token number">52</span>  0x00d5b5b0     0x4f60 0x00d5b5b0     0x4f60 -rw- <span class="token number">52</span>.__DATA.LazyRegData
+<span class="token number">53</span>  0x00d60510      0xe80 0x00d60510      0xe80 -rw- <span class="token number">53</span>.__DATA.__GAIA__SECTION
+<span class="token number">54</span>  0x00d61390      0x120 0x00d61390      0x120 -rw- <span class="token number">54</span>.__DATA.XBMDefault
+<span class="token number">55</span>  0x00d614b0       0xc8 0x00d614b0       0xc8 -rw- <span class="token number">55</span>.__DATA.HMDModule
+<span class="token number">56</span>  0x00d61578       0x18 0x00d61578       0x18 -rw- <span class="token number">56</span>.__DATA.HMDLocalModule
+<span class="token number">57</span>  0x00d61590      0x180 0x00d61590      0x180 -rw- <span class="token number">57</span>.__DATA.IESLiveBridge
+<span class="token number">58</span>  0x00d61710      0xa28 0x00d61710      0xa28 -rw- <span class="token number">58</span>.__DATA.__bd_timsdk
+<span class="token number">59</span>  0x00d62138       0xf0 0x00d62138       0xf0 -rw- <span class="token number">59</span>.__DATA.IESLiveTemplate
+<span class="token number">60</span>  0x00d62228       0xe0 0x00d62228       0xe0 -rw- <span class="token number">60</span>.__DATA.__LIVESEI
+<span class="token number">61</span>  0x00d62308      0x360 0x00d62308      0x360 -rw- <span class="token number">61</span>.__DATA.__LIVESCHEMA
+<span class="token number">62</span>  0x00d62668       0x60 0x00d62668       0x60 -rw- <span class="token number">62</span>.__DATA.__LSCHEMEMODEL
+<span class="token number">63</span>  0x00d626c8       0x10 0x00d626c8       0x10 -rw- <span class="token number">63</span>.__DATA.__ENTERROOMSEC
+<span class="token number">64</span>  0x00d626d8       0xd0 0x00d626d8       0xd0 -rw- <span class="token number">64</span>.__DATA.__VSUSERCARD
+<span class="token number">65</span>  0x00d627a8       0x50 0x00d627a8       0x50 -rw- <span class="token number">65</span>.__DATA.__PUZZLEMETHOD
+<span class="token number">66</span>  0x00d627f8       0x10 0x00d627f8       0x10 -rw- <span class="token number">66</span>.__DATA.IESSLynxBridge
+<span class="token number">67</span>  0x00d62808       0x50 0x00d62808       0x50 -rw- <span class="token number">67</span>.__DATA.RxAnnotation
+<span class="token number">68</span>  0x00d62858     0x4850 0x00d62858     0x4850 -rw- <span class="token number">68</span>.__DATA.__objc_clsrefs
+<span class="token number">69</span>  0x00d670a8      0x6c0 0x00d670a8      0x6c0 -rw- <span class="token number">69</span>.__DATA.__thread_vars
+<span class="token number">70</span>  0x00d67768      0x2c0 0x00d67768      0x2c0 -rw- <span class="token number">70</span>.__DATA.IESECSettingReg
+<span class="token number">71</span>  0x00d67a28       0xb8 0x00d67a28       0xb8 -rw- <span class="token number">71</span>.__DATA.__swift_hooks
+<span class="token number">72</span>  0x00d67ae0       0xb8 0x00d67ae0       0xb8 -rw- <span class="token number">72</span>.__DATA.__swift51_hooks
+<span class="token number">73</span>  0x00d67b98      0x670 0x00d67b98      0x670 -rw- <span class="token number">73</span>.__DATA.__HTSService
+<span class="token number">74</span>  0x00d68208       0xf0 0x00d68208       0xf0 -rw- <span class="token number">74</span>.__DATA.__HTSDyServImpl
+<span class="token number">75</span>  0x00d682f8      0x620 0x00d682f8      0x620 -rw- <span class="token number">75</span>.__DATA.__HTSMsgAsc
+<span class="token number">76</span>  0x00d68918      0x450 0x00d68918      0x450 -rw- <span class="token number">76</span>.__DATA.AWERunModernFeed
+<span class="token number">77</span>  0x00d68d68      0x230 0x00d68d68      0x230 -rw- <span class="token number">77</span>.__DATA.AWERunShare
+<span class="token number">78</span>  0x00d68f98       0x90 0x00d68f98       0x90 -rw- <span class="token number">78</span>.__DATA.__HTSDyServ
+<span class="token number">79</span>  0x00d69028       0x80 0x00d69028       0x80 -rw- <span class="token number">79</span>.__DATA.__HTSMsg
+<span class="token number">80</span>  0x00d690a8     0xc058 0x00d690a8     0xc058 -rw- <span class="token number">80</span>.__DATA.RxInjector
+<span class="token number">81</span>  0x00d75100      0x118 0x00d75100      0x118 -rw- <span class="token number">81</span>.__DATA.RxAppService
+<span class="token number">82</span>  0x00d75218       0x30 0x00d75218       0x30 -rw- <span class="token number">82</span>.__DATA.__HTSNoti
+<span class="token number">83</span>  0x00d75248       0x80 0x00d75248       0x80 -rw- <span class="token number">83</span>.__DATA.AWERunShareSVC
+<span class="token number">84</span>  0x00d752c8     0x19a0 0x00d752c8     0x19a0 -rw- <span class="token number">84</span>.__DATA.StudioConfigMock
+<span class="token number">85</span>  0x00d76c68       0xc0 0x00d76c68       0xc0 -rw- <span class="token number">85</span>.__DATA.XBMInternal
+<span class="token number">86</span>  0x00d76d30     0xd537 0x00d76d30     0xd537 -rw- <span class="token number">86</span>.__DATA.__cstring
+<span class="token number">87</span>  0x00d84267    0x6f09b 0x00d84267    0x6f09b -rw- <span class="token number">87</span>.__DATA.__objc_methname
+<span class="token number">88</span>  0x00df3302    0x1dd08 0x00df3302    0x1dd08 -rw- <span class="token number">88</span>.__DATA.__objc_methtype
+<span class="token number">89</span>  0x00e1100a   0x13affc 0x00e1100a   0x13affc -rw- <span class="token number">89</span>.__DATA.__objc_classname
+<span class="token number">90</span>  0x00f4c008    0x34840 0x00f4c008    0x34840 -rw- <span class="token number">90</span>.__DATA.__thread_bss
+<span class="token number">91</span>  0x00000000        0x0 0x00f80860   0x2d6fe0 -rw- <span class="token number">91</span>.__DATA._D_tconst
+<span class="token number">92</span>  0x00000000        0x0 0x01257840   0x3c3558 -rw- <span class="token number">92</span>.__DATA._D_dconst
+<span class="token number">93</span>  0x00000000        0x0 0x0161c000   0x1225fc -rw- <span class="token number">93</span>.__DATA._D_ddata
+<span class="token number">94</span>  0x00000000        0x0 0x0173e600   0x499b00 -rw- <span class="token number">94</span>.__DATA._D_cfstring
+<span class="token number">95</span>  0x00000000        0x0 0x01bd8100  0x1c10870 -rw- <span class="token number">95</span>.__DATA._D_objc_const
+<span class="token number">96</span>  0x00000000        0x0 0x037e8970    0xaaee4 -rw- <span class="token number">96</span>.__DATA._D_objc_ivar
+<span class="token number">97</span>  0x00000000        0x0 0x03893858   0x2054c8 -rw- <span class="token number">97</span>.__DATA._D_objc_selrefs
+<span class="token number">98</span>  0x00000000        0x0 0x03a98d20   0x4b5df0 -rw- <span class="token number">98</span>.__DATA._D_gcc_except_ta
+<span class="token number">99</span>  0x00000000        0x0 0x03f4eb10   0x896683 -rw- <span class="token number">99</span>.__DATA._D_cstring
+<span class="token number">100</span> 0x00000000        0x0 0x047e5194    0x7795a -rw- <span class="token number">100</span>.__DATA._D_ustring
+<span class="token number">101</span> 0x00000000        0x0 0x0485caee   0xae06ba -rw- <span class="token number">101</span>.__DATA._D_objc_methname
+<span class="token number">102</span> 0x00000000        0x0 0x0533d1a8   0x1ca962 -rw- <span class="token number">102</span>.__DATA._D_objc_methtype
+<span class="token number">103</span> 0x00000000        0x0 0x05507c00   0x17fc48 -rw- <span class="token number">103</span>.__DATA.__common
+<span class="token number">104</span> 0x00000000        0x0 0x05687900   0x29b0ec -rw- <span class="token number">104</span>.__DATA.__bss
+<span class="token number">105</span> 0x00f84000  0xbb52a38 0x05924000  0xbb52a38 -r-x <span class="token number">105</span>.__BD_TEXT.__text
+<span class="token number">106</span> 0x0cad6a38     0x8508 0x11476a38     0x8508 -r-x <span class="token number">106</span>.__BD_TEXT.__stubs
+<span class="token number">107</span> 0x0cae0000      0x208 0x11480000      0x208 -r-- <span class="token number">107</span>.__LTC_DATA.__meta
+<span class="token number">108</span> 0x0cae0208       0x10 0x11480208       0x10 -r-- <span class="token number">108</span>.__LTC_DATA.__deco
+<span class="token number">109</span> 0x0cae0218   0x6d4b3f 0x11480218   0x6d4b3f -r-- <span class="token number">109</span>.__LTC_DATA._C_objc_const
+<span class="token number">110</span> 0x0d1b4d57    0x19d88 0x11b54d57    0x19d88 -r-- <span class="token number">110</span>.__LTC_DATA._C_objc_ivar
+<span class="token number">111</span> 0x0d1ceadf   0x5837ff 0x11b6eadf   0x5837ff -r-- <span class="token number">111</span>.__LTC_DATA._C_cstring
+<span class="token number">112</span> 0x0d7522de   0x23c64f 0x120f22de   0x23c64f -r-- <span class="token number">112</span>.__LTC_DATA._C_tconst
+<span class="token number">113</span> 0x0d98e92d   0x24ca15 0x1232e92d   0x24ca15 -r-- <span class="token number">113</span>.__LTC_DATA._C_gcc_except_ta
+<span class="token number">114</span> 0x0dbdb342    0xe1298 0x1257b342    0xe1298 -r-- <span class="token number">114</span>.__LTC_DATA.__fix
+</code></pre>
+<h3 id="sr"><a name="sr" class="plugin-anchor" href="#sr"><i class="fa fa-link" aria-hidden="true"></i></a><code>-Sr</code></h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore rabin2 <span class="token parameter variable">-Sr</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_rabin2_Sr_section.txt
+
+fs sections
+<span class="token string">&quot;f section.0.__TEXT.__stub_helper 1 0x0000b9b0&quot;</span>
+<span class="token string">&quot;f section.1.__TEXT.__const 1 0x00013e70&quot;</span>
+<span class="token string">&quot;f section.2.__TEXT.__swift5_typeref 1 0x00017e90&quot;</span>
+<span class="token string">&quot;f section.3.__TEXT.__swift5_fieldmd 1 0x0001ad88&quot;</span>
+<span class="token string">&quot;f section.4.__TEXT.__swift5_proto 1 0x0001d710&quot;</span>
+<span class="token string">&quot;f section.5.__TEXT.__swift5_types 1 0x0001da48&quot;</span>
+<span class="token string">&quot;f section.6.__TEXT.__cstring 1 0x0001dcd4&quot;</span>
+<span class="token string">&quot;f section.7.__TEXT.__objc_methname 1 0x0001dcd4&quot;</span>
+<span class="token string">&quot;f section.8.__TEXT.__objc_classname 1 0x0001dcd4&quot;</span>
+<span class="token string">&quot;f section.9.__TEXT.__objc_methtype 1 0x0001dcd4&quot;</span>
+<span class="token string">&quot;f section.10.__TEXT.__gcc_except_tab 1 0x0001dcd4&quot;</span>
+<span class="token string">&quot;f section.11.__TEXT.__swift5_reflstr 1 0x0001dd40&quot;</span>
+<span class="token string">&quot;f section.12.__TEXT.__swift5_builtin 1 0x0002136c&quot;</span>
+<span class="token string">&quot;f section.13.__TEXT.__swift5_assocty 1 0x00021524&quot;</span>
+<span class="token string">&quot;f section.14.__TEXT.__swift5_capture 1 0x000217dc&quot;</span>
+<span class="token string">&quot;f section.15.__TEXT.__swift5_protos 1 0x000233e8&quot;</span>
+<span class="token string">&quot;f section.16.__TEXT.__ustring 1 0x00023448&quot;</span>
+<span class="token string">&quot;f section.17.__TEXT.__text 1 0x00023448&quot;</span>
+<span class="token string">&quot;f section.18.__TEXT.__unwind_info 1 0x00023448&quot;</span>
+<span class="token string">&quot;f section.19.__TEXT.__eh_frame 1 0x002c7fb8&quot;</span>
+<span class="token string">&quot;f section.20.__TEXT.__oslogstring 1 0x00300000&quot;</span>
+<span class="token string">&quot;f section.21.__DATA.__got 1 0x00304000&quot;</span>
+<span class="token string">&quot;f section.22.__DATA.__la_symbol_ptr 1 0x00307120&quot;</span>
+<span class="token string">&quot;f section.23.__DATA.__mod_init_func 1 0x0030c9d0&quot;</span>
+<span class="token string">&quot;f section.24.__DATA.__const 1 0x00310700&quot;</span>
+<span class="token string">&quot;f section.25.__DATA.__cfstring 1 0x00321768&quot;</span>
+<span class="token string">&quot;f section.26.__DATA.__objc_classlist 1 0x003221c8&quot;</span>
+<span class="token string">&quot;f section.27.__DATA.__objc_nlclslist 1 0x00369bd0&quot;</span>
+<span class="token string">&quot;f section.28.__DATA.__objc_catlist 1 0x0036a248&quot;</span>
+<span class="token string">&quot;f section.29.__DATA.__objc_nlcatlist 1 0x0036da38&quot;</span>
+<span class="token string">&quot;f section.30.__DATA.__objc_protolist 1 0x0036db58&quot;</span>
+<span class="token string">&quot;f section.31.__DATA.__objc_imageinfo 1 0x0037f650&quot;</span>
+<span class="token string">&quot;f section.32.__DATA.__objc_const 1 0x0037f658&quot;</span>
+<span class="token string">&quot;f section.33.__DATA.__objc_selrefs 1 0x009417a0&quot;</span>
+<span class="token string">&quot;f section.34.__DATA.__objc_protorefs 1 0x009417a8&quot;</span>
+<span class="token string">&quot;f section.35.__DATA.__objc_classrefs 1 0x00947ea8&quot;</span>
+<span class="token string">&quot;f section.36.__DATA.__objc_superrefs 1 0x009881f8&quot;</span>
+<span class="token string">&quot;f section.37.__DATA.__objc_ivar 1 0x009ab740&quot;</span>
+<span class="token string">&quot;f section.38.__DATA.__objc_data 1 0x009acac8&quot;</span>
+<span class="token string">&quot;f section.39.__DATA.__data 1 0x00d55b20&quot;</span>
+<span class="token string">&quot;f section.40.__DATA.__HTSLifeCycle 1 0x00d5aa30&quot;</span>
+<span class="token string">&quot;f section.41.__DATA.__objc_stublist 1 0x00d5ab28&quot;</span>
+<span class="token string">&quot;f section.42.__DATA.RewardedADJSB 1 0x00d5ab40&quot;</span>
+<span class="token string">&quot;f section.43.__DATA.HGTimorLaunch 1 0x00d5ab58&quot;</span>
+<span class="token string">&quot;f section.44.__DATA.HGTimorLoad 1 0x00d5ad20&quot;</span>
+<span class="token string">&quot;f section.45.__DATA.TimorLaunch 1 0x00d5ad88&quot;</span>
+<span class="token string">&quot;f section.46.__DATA.TimorLoad 1 0x00d5b080&quot;</span>
+<span class="token string">&quot;f section.47.__DATA.RSDHCampaign 1 0x00d5b140&quot;</span>
+<span class="token string">&quot;f section.48.__DATA.XBMExternal 1 0x00d5b230&quot;</span>
+<span class="token string">&quot;f section.49.__DATA.LazyRegHeader 1 0x00d5b4b0&quot;</span>
+<span class="token string">&quot;f section.50.__DATA.AWELynxBridge 1 0x00d5b570&quot;</span>
+<span class="token string">&quot;f section.51.__DATA.PremainCode 1 0x00d5b580&quot;</span>
+<span class="token string">&quot;f section.52.__DATA.LazyRegData 1 0x00d5b5b0&quot;</span>
+<span class="token string">&quot;f section.53.__DATA.__GAIA__SECTION 1 0x00d60510&quot;</span>
+<span class="token string">&quot;f section.54.__DATA.XBMDefault 1 0x00d61390&quot;</span>
+<span class="token string">&quot;f section.55.__DATA.HMDModule 1 0x00d614b0&quot;</span>
+<span class="token string">&quot;f section.56.__DATA.HMDLocalModule 1 0x00d61578&quot;</span>
+<span class="token string">&quot;f section.57.__DATA.IESLiveBridge 1 0x00d61590&quot;</span>
+<span class="token string">&quot;f section.58.__DATA.__bd_timsdk 1 0x00d61710&quot;</span>
+<span class="token string">&quot;f section.59.__DATA.IESLiveTemplate 1 0x00d62138&quot;</span>
+<span class="token string">&quot;f section.60.__DATA.__LIVESEI 1 0x00d62228&quot;</span>
+<span class="token string">&quot;f section.61.__DATA.__LIVESCHEMA 1 0x00d62308&quot;</span>
+<span class="token string">&quot;f section.62.__DATA.__LSCHEMEMODEL 1 0x00d62668&quot;</span>
+<span class="token string">&quot;f section.63.__DATA.__ENTERROOMSEC 1 0x00d626c8&quot;</span>
+<span class="token string">&quot;f section.64.__DATA.__VSUSERCARD 1 0x00d626d8&quot;</span>
+<span class="token string">&quot;f section.65.__DATA.__PUZZLEMETHOD 1 0x00d627a8&quot;</span>
+<span class="token string">&quot;f section.66.__DATA.IESSLynxBridge 1 0x00d627f8&quot;</span>
+<span class="token string">&quot;f section.67.__DATA.RxAnnotation 1 0x00d62808&quot;</span>
+<span class="token string">&quot;f section.68.__DATA.__objc_clsrefs 1 0x00d62858&quot;</span>
+<span class="token string">&quot;f section.69.__DATA.__thread_vars 1 0x00d670a8&quot;</span>
+<span class="token string">&quot;f section.70.__DATA.IESECSettingReg 1 0x00d67768&quot;</span>
+<span class="token string">&quot;f section.71.__DATA.__swift_hooks 1 0x00d67a28&quot;</span>
+<span class="token string">&quot;f section.72.__DATA.__swift51_hooks 1 0x00d67ae0&quot;</span>
+<span class="token string">&quot;f section.73.__DATA.__HTSService 1 0x00d67b98&quot;</span>
+<span class="token string">&quot;f section.74.__DATA.__HTSDyServImpl 1 0x00d68208&quot;</span>
+<span class="token string">&quot;f section.75.__DATA.__HTSMsgAsc 1 0x00d682f8&quot;</span>
+<span class="token string">&quot;f section.76.__DATA.AWERunModernFeed 1 0x00d68918&quot;</span>
+<span class="token string">&quot;f section.77.__DATA.AWERunShare 1 0x00d68d68&quot;</span>
+<span class="token string">&quot;f section.78.__DATA.__HTSDyServ 1 0x00d68f98&quot;</span>
+<span class="token string">&quot;f section.79.__DATA.__HTSMsg 1 0x00d69028&quot;</span>
+<span class="token string">&quot;f section.80.__DATA.RxInjector 1 0x00d690a8&quot;</span>
+<span class="token string">&quot;f section.81.__DATA.RxAppService 1 0x00d75100&quot;</span>
+<span class="token string">&quot;f section.82.__DATA.__HTSNoti 1 0x00d75218&quot;</span>
+<span class="token string">&quot;f section.83.__DATA.AWERunShareSVC 1 0x00d75248&quot;</span>
+<span class="token string">&quot;f section.84.__DATA.StudioConfigMock 1 0x00d752c8&quot;</span>
+<span class="token string">&quot;f section.85.__DATA.XBMInternal 1 0x00d76c68&quot;</span>
+<span class="token string">&quot;f section.86.__DATA.__cstring 1 0x00d76d30&quot;</span>
+<span class="token string">&quot;f section.87.__DATA.__objc_methname 1 0x00d84267&quot;</span>
+<span class="token string">&quot;f section.88.__DATA.__objc_methtype 1 0x00df3302&quot;</span>
+<span class="token string">&quot;f section.89.__DATA.__objc_classname 1 0x00e1100a&quot;</span>
+<span class="token string">&quot;f section.90.__DATA.__thread_bss 1 0x00f4c008&quot;</span>
+<span class="token string">&quot;f section.91.__DATA._D_tconst 1 0x00f80860&quot;</span>
+<span class="token string">&quot;f section.92.__DATA._D_dconst 1 0x01257840&quot;</span>
+<span class="token string">&quot;f section.93.__DATA._D_ddata 1 0x0161c000&quot;</span>
+<span class="token string">&quot;f section.94.__DATA._D_cfstring 1 0x0173e600&quot;</span>
+<span class="token string">&quot;f section.95.__DATA._D_objc_const 1 0x01bd8100&quot;</span>
+<span class="token string">&quot;f section.96.__DATA._D_objc_ivar 1 0x037e8970&quot;</span>
+<span class="token string">&quot;f section.97.__DATA._D_objc_selrefs 1 0x03893858&quot;</span>
+<span class="token string">&quot;f section.98.__DATA._D_gcc_except_ta 1 0x03a98d20&quot;</span>
+<span class="token string">&quot;f section.99.__DATA._D_cstring 1 0x03f4eb10&quot;</span>
+<span class="token string">&quot;f section.100.__DATA._D_ustring 1 0x047e5194&quot;</span>
+<span class="token string">&quot;f section.101.__DATA._D_objc_methname 1 0x0485caee&quot;</span>
+<span class="token string">&quot;f section.102.__DATA._D_objc_methtype 1 0x0533d1a8&quot;</span>
+<span class="token string">&quot;f section.103.__DATA.__common 1 0x05507c00&quot;</span>
+<span class="token string">&quot;f section.104.__DATA.__bss 1 0x05687900&quot;</span>
+<span class="token string">&quot;f section.105.__BD_TEXT.__text 1 0x05924000&quot;</span>
+<span class="token string">&quot;f section.106.__BD_TEXT.__stubs 1 0x11476a38&quot;</span>
+<span class="token string">&quot;f section.107.__LTC_DATA.__meta 1 0x11480000&quot;</span>
+<span class="token string">&quot;f section.108.__LTC_DATA.__deco 1 0x11480208&quot;</span>
+<span class="token string">&quot;f section.109.__LTC_DATA._C_objc_const 1 0x11480218&quot;</span>
+<span class="token string">&quot;f section.110.__LTC_DATA._C_objc_ivar 1 0x11b54d57&quot;</span>
+<span class="token string">&quot;f section.111.__LTC_DATA._C_cstring 1 0x11b6eadf&quot;</span>
+<span class="token string">&quot;f section.112.__LTC_DATA._C_tconst 1 0x120f22de&quot;</span>
+<span class="token string">&quot;f section.113.__LTC_DATA._C_gcc_except_ta 1 0x1232e92d&quot;</span>
+<span class="token string">&quot;f section.114.__LTC_DATA.__fix 1 0x1257b342&quot;</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-07 23:18:59
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 举例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="maskpro_dylib.html" class="navigation navigation-next " aria-label="Next page: MaskPro.dylib">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"AwemeCore","level":"1.4.2.2.1","depth":4,"next":{"title":"MaskPro.dylib","level":"1.4.2.2.2","depth":4,"path":"macho_tool/rabin2/examples/maskpro_dylib.md","ref":"macho_tool/rabin2/examples/maskpro_dylib.md","articles":[]},"previous":{"title":"举例","level":"1.4.2.2","depth":3,"path":"macho_tool/rabin2/examples/README.md","ref":"macho_tool/rabin2/examples/README.md","articles":[{"title":"AwemeCore","level":"1.4.2.2.1","depth":4,"path":"macho_tool/rabin2/examples/awemecore.md","ref":"macho_tool/rabin2/examples/awemecore.md","articles":[]},{"title":"MaskPro.dylib","level":"1.4.2.2.2","depth":4,"path":"macho_tool/rabin2/examples/maskpro_dylib.md","ref":"macho_tool/rabin2/examples/maskpro_dylib.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/exec_file_format_macho/pdf/exec_file_format_macho.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/exec_file_format_macho/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"可执行文件格式：Mach-O","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Mac和iOS等Apple苹果系统的常见可执行文件格式：Mach-O；先是Mach-O概览；包括背景知识的XNU、编译链接加载过程、PIC等；然后介绍Mach-O格式，包括结构概述和结构图，以及结构详情，包括Header、Load Commands和Segment的data；其中Header包括magic、cputype和cpusubtype、filetype、flags；Load Commands包括LC_UUID、LC_SEGMENT、LC_SEGMENT_64、LC_SYMTAB、LC_DYLD_CHAINED_FIXUPS、LC_DYLD_EXPORTS_TRIE等；Segment包括__TEXT、__DATA、__IMPORT、__LINKEDIT、__OBJC；以及各个Segment的section，比如symbol、strings等；然后是Mach-O格式的子项，包括FAT、codesign、虚拟地址、大小限制等；然后整理Mach-O的各种工具，包括MachOView、rabin2、jtool2、otool、pagestuff，以及每个工具的用法、举例、help语法等；"},"file":{"path":"macho_tool/rabin2/examples/awemecore.md","mtime":"2023-10-07T15:18:59.914Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-07T15:27:55.016Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

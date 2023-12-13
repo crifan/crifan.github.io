@@ -1,0 +1,1664 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Section · 可执行文件格式：Mach-O</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="symbol.html" />
+    
+    
+    <link rel="prev" href="../segment/__objc.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../macho_overview/">
+            
+                <a href="../../../macho_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Mach-O概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../macho_overview/background/">
+            
+                <a href="../../../macho_overview/background/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../../macho_overview/background/xnu.html">
+            
+                <a href="../../../macho_overview/background/xnu.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    XNU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../../macho_overview/background/compile_link_load.html">
+            
+                <a href="../../../macho_overview/background/compile_link_load.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    编译链接加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../../macho_overview/background/pic.html">
+            
+                <a href="../../../macho_overview/background/pic.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    PIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Mach-O格式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../summary/">
+            
+                <a href="../../summary/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Mach-O结构概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../summary/macho_layout.html">
+            
+                <a href="../../summary/macho_layout.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    Mach-O结构图
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Mach-O结构详情
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../header/">
+            
+                <a href="../header/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Header
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../header/magic.html">
+            
+                <a href="../header/magic.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    magic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../header/cputype_cpusubtype.html">
+            
+                <a href="../header/cputype_cpusubtype.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    cputype和cpusubtype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.3" data-path="../header/filetype.html">
+            
+                <a href="../header/filetype.html">
+            
+                    
+                        <b>1.3.2.1.3.</b>
+                    
+                    filetype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.4" data-path="../header/flags.html">
+            
+                <a href="../header/flags.html">
+            
+                    
+                        <b>1.3.2.1.4.</b>
+                    
+                    flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../load_commands/">
+            
+                <a href="../load_commands/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    Load Commands
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../load_commands/lc_uuid.html">
+            
+                <a href="../load_commands/lc_uuid.html">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    LC_UUID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../load_commands/lc_segment.html">
+            
+                <a href="../load_commands/lc_segment.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    LC_SEGMENT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="../load_commands/lc_segment_64.html">
+            
+                <a href="../load_commands/lc_segment_64.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    LC_SEGMENT_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.4" data-path="../load_commands/lc_symtab.html">
+            
+                <a href="../load_commands/lc_symtab.html">
+            
+                    
+                        <b>1.3.2.2.4.</b>
+                    
+                    LC_SYMTAB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.5" data-path="../load_commands/lc_dyld_chained_fixups.html">
+            
+                <a href="../load_commands/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.3.2.2.5.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.6" data-path="../load_commands/lc_dyld_exports_trie.html">
+            
+                <a href="../load_commands/lc_dyld_exports_trie.html">
+            
+                    
+                        <b>1.3.2.2.6.</b>
+                    
+                    LC_DYLD_EXPORTS_TRIE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../segment/">
+            
+                <a href="../segment/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    Segment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../segment/__text/">
+            
+                <a href="../segment/__text/">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    __TEXT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1.1" data-path="../segment/__text/__text.html">
+            
+                <a href="../segment/__text/__text.html">
+            
+                    
+                        <b>1.3.2.3.1.1.</b>
+                    
+                    __text
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../segment/__data/">
+            
+                <a href="../segment/__data/">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    __DATA
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.2.1" data-path="../segment/__data/__la_symbol_ptr.html">
+            
+                <a href="../segment/__data/__la_symbol_ptr.html">
+            
+                    
+                        <b>1.3.2.3.2.1.</b>
+                    
+                    __la_symbol_ptr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2.2" data-path="../segment/__data/__got.html">
+            
+                <a href="../segment/__data/__got.html">
+            
+                    
+                        <b>1.3.2.3.2.2.</b>
+                    
+                    __got
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.3" data-path="../segment/__import.html">
+            
+                <a href="../segment/__import.html">
+            
+                    
+                        <b>1.3.2.3.3.</b>
+                    
+                    __IMPORT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.4" data-path="../segment/__linkedit.html">
+            
+                <a href="../segment/__linkedit.html">
+            
+                    
+                        <b>1.3.2.3.4.</b>
+                    
+                    __LINKEDIT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.5" data-path="../segment/__objc.html">
+            
+                <a href="../segment/__objc.html">
+            
+                    
+                        <b>1.3.2.3.5.</b>
+                    
+                    __OBJC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    Section
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.4.1" data-path="symbol.html">
+            
+                <a href="symbol.html">
+            
+                    
+                        <b>1.3.2.4.1.</b>
+                    
+                    symbol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4.2" data-path="string.html">
+            
+                <a href="string.html">
+            
+                    
+                        <b>1.3.2.4.2.</b>
+                    
+                    string
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../fat/">
+            
+                <a href="../../fat/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    FAT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../fat/examples.html">
+            
+                <a href="../../fat/examples.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../fat/issues.html">
+            
+                <a href="../../fat/issues.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../fat/tools/">
+            
+                <a href="../../fat/tools/">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.3.1" data-path="../../fat/tools/lipo.html">
+            
+                <a href="../../fat/tools/lipo.html">
+            
+                    
+                        <b>1.3.3.3.1.</b>
+                    
+                    lipo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../codesign/">
+            
+                <a href="../../codesign/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../vm_addr/">
+            
+                <a href="../../vm_addr/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    虚拟地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../size_limit/">
+            
+                <a href="../../size_limit/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    大小限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../macho_tool/">
+            
+                <a href="../../../macho_tool/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Mach-O工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../macho_tool/machoview/">
+            
+                <a href="../../../macho_tool/machoview/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    MachOView
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../macho_tool/machoview/examples/">
+            
+                <a href="../../../macho_tool/machoview/examples/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../../macho_tool/machoview/examples/main_arm64.html">
+            
+                <a href="../../../macho_tool/machoview/examples/main_arm64.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    main_arm64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../../macho_tool/machoview/examples/awemecore.html">
+            
+                <a href="../../../macho_tool/machoview/examples/awemecore.html">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../../macho_tool/machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                <a href="../../../macho_tool/machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    zzzzHeiBaoLib.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../macho_tool/machoview/summary/">
+            
+                <a href="../../../macho_tool/machoview/summary/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../../macho_tool/machoview/summary/self_compile.html">
+            
+                <a href="../../../macho_tool/machoview/summary/self_compile.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    自己编译
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../macho_tool/rabin2/">
+            
+                <a href="../../../macho_tool/rabin2/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    rabin2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../macho_tool/rabin2/usage/">
+            
+                <a href="../../../macho_tool/rabin2/usage/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../macho_tool/rabin2/examples/">
+            
+                <a href="../../../macho_tool/rabin2/examples/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../../macho_tool/rabin2/examples/awemecore.html">
+            
+                <a href="../../../macho_tool/rabin2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../../macho_tool/rabin2/examples/maskpro_dylib.html">
+            
+                <a href="../../../macho_tool/rabin2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../../macho_tool/rabin2/help.html">
+            
+                <a href="../../../macho_tool/rabin2/help.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../macho_tool/jtool2/">
+            
+                <a href="../../../macho_tool/jtool2/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    jtool2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../../macho_tool/jtool2/usage/">
+            
+                <a href="../../../macho_tool/jtool2/usage/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../../macho_tool/jtool2/examples/">
+            
+                <a href="../../../macho_tool/jtool2/examples/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../../../macho_tool/jtool2/examples/awemecore.html">
+            
+                <a href="../../../macho_tool/jtool2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="../../../macho_tool/jtool2/examples/maskpro_dylib.html">
+            
+                <a href="../../../macho_tool/jtool2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.3" data-path="../../../macho_tool/jtool2/examples/akd.html">
+            
+                <a href="../../../macho_tool/jtool2/examples/akd.html">
+            
+                    
+                        <b>1.4.3.2.3.</b>
+                    
+                    akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../../macho_tool/jtool2/help.html">
+            
+                <a href="../../../macho_tool/jtool2/help.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../macho_tool/otool/">
+            
+                <a href="../../../macho_tool/otool/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    otool
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../../macho_tool/otool/usage/">
+            
+                <a href="../../../macho_tool/otool/usage/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../../macho_tool/otool/examples/">
+            
+                <a href="../../../macho_tool/otool/examples/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="../../../macho_tool/otool/examples/aweme.html">
+            
+                <a href="../../../macho_tool/otool/examples/aweme.html">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    Aweme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.2" data-path="../../../macho_tool/otool/examples/awemecore.html">
+            
+                <a href="../../../macho_tool/otool/examples/awemecore.html">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="../../../macho_tool/otool/examples/maskpro_dylib.html">
+            
+                <a href="../../../macho_tool/otool/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../../macho_tool/otool/help.html">
+            
+                <a href="../../../macho_tool/otool/help.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../../macho_tool/pagestuff/">
+            
+                <a href="../../../macho_tool/pagestuff/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    pagestuff
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../../macho_tool/pagestuff/help.html">
+            
+                <a href="../../../macho_tool/pagestuff/help.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/doc_material.html">
+            
+                <a href="../../../appendix/doc_material.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Mach-O文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >Section</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="section节"><a name="section节" class="plugin-anchor" href="#section节"><i class="fa fa-link" aria-hidden="true"></i></a>section节</h1>
+<h2 id="section定义"><a name="section定义" class="plugin-anchor" href="#section定义"><i class="fa fa-link" aria-hidden="true"></i></a>section定义</h2>
+<p><a href="https://opensource.apple.com/source/xnu/xnu-2050.18.24/EXTERNAL_HEADERS/mach-o/loader.h" target="_blank">源码定义</a>：</p>
+<pre class="language-"><code class="lang-c"><span class="token comment">/*
+ * A segment is made up of zero or more sections.  Non-MH_OBJECT files have
+ * all of their segments with the proper sections in each, and padded to the
+ * specified segment alignment when produced by the link editor.  The first
+ * segment of a MH_EXECUTE and MH_FVMLIB format file contains the mach_header
+ * and load commands of the object file before its first section.  The zero
+ * fill sections are always last in their segment (in all formats).  This
+ * allows the zeroed segment padding to be mapped into memory where zero fill
+ * sections might be. The gigabyte zero fill sections, those with the section
+ * type S_GB_ZEROFILL, can only be in a segment with sections of this type.
+ * These segments are then placed after all other segments.
+ *
+ * The MH_OBJECT format has all of its sections in one segment for
+ * compactness.  There is no padding to a specified segment boundary and the
+ * mach_header and load commands are not part of the segment.
+ *
+ * Sections with the same section name, sectname, going into the same segment,
+ * segname, are combined by the link editor.  The resulting section is aligned
+ * to the maximum alignment of the combined sections and is the new section&apos;s
+ * alignment.  The combined sections are aligned to their original alignment in
+ * the combined section.  Any padded bytes to get the specified alignment are
+ * zeroed.
+ *
+ * The format of the relocation entries referenced by the reloff and nreloc
+ * fields of the section structure for mach object files is described in the
+ * header file &lt;reloc.h&gt;.
+ */</span>
+<span class="token keyword">struct</span> <span class="token class-name">section</span> <span class="token punctuation">{</span> <span class="token comment">/* for 32-bit architectures */</span>
+    <span class="token keyword">char</span>        sectname<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">/* name of this section */</span>
+    <span class="token keyword">char</span>        segname<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">/* segment this section goes in */</span>
+    <span class="token class-name">uint32_t</span>    addr<span class="token punctuation">;</span>        <span class="token comment">/* memory address of this section */</span>
+    <span class="token class-name">uint32_t</span>    size<span class="token punctuation">;</span>        <span class="token comment">/* size in bytes of this section */</span>
+    <span class="token class-name">uint32_t</span>    offset<span class="token punctuation">;</span>        <span class="token comment">/* file offset of this section */</span>
+    <span class="token class-name">uint32_t</span>    align<span class="token punctuation">;</span>        <span class="token comment">/* section alignment (power of 2) */</span>
+    <span class="token class-name">uint32_t</span>    reloff<span class="token punctuation">;</span>        <span class="token comment">/* file offset of relocation entries */</span>
+    <span class="token class-name">uint32_t</span>    nreloc<span class="token punctuation">;</span>        <span class="token comment">/* number of relocation entries */</span>
+    <span class="token class-name">uint32_t</span>    flags<span class="token punctuation">;</span>        <span class="token comment">/* flags (section type and attributes)*/</span>
+    <span class="token class-name">uint32_t</span>    reserved1<span class="token punctuation">;</span>    <span class="token comment">/* reserved (for offset or index) */</span>
+    <span class="token class-name">uint32_t</span>    reserved2<span class="token punctuation">;</span>    <span class="token comment">/* reserved (for count or sizeof) */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">section_64</span> <span class="token punctuation">{</span> <span class="token comment">/* for 64-bit architectures */</span>
+    <span class="token keyword">char</span>        sectname<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">/* name of this section */</span>
+    <span class="token keyword">char</span>        segname<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">/* segment this section goes in */</span>
+    <span class="token class-name">uint64_t</span>    addr<span class="token punctuation">;</span>        <span class="token comment">/* memory address of this section */</span>
+    <span class="token class-name">uint64_t</span>    size<span class="token punctuation">;</span>        <span class="token comment">/* size in bytes of this section */</span>
+    <span class="token class-name">uint32_t</span>    offset<span class="token punctuation">;</span>        <span class="token comment">/* file offset of this section */</span>
+    <span class="token class-name">uint32_t</span>    align<span class="token punctuation">;</span>        <span class="token comment">/* section alignment (power of 2) */</span>
+    <span class="token class-name">uint32_t</span>    reloff<span class="token punctuation">;</span>        <span class="token comment">/* file offset of relocation entries */</span>
+    <span class="token class-name">uint32_t</span>    nreloc<span class="token punctuation">;</span>        <span class="token comment">/* number of relocation entries */</span>
+    <span class="token class-name">uint32_t</span>    flags<span class="token punctuation">;</span>        <span class="token comment">/* flags (section type and attributes)*/</span>
+    <span class="token class-name">uint32_t</span>    reserved1<span class="token punctuation">;</span>    <span class="token comment">/* reserved (for offset or index) */</span>
+    <span class="token class-name">uint32_t</span>    reserved2<span class="token punctuation">;</span>    <span class="token comment">/* reserved (for count or sizeof) */</span>
+    <span class="token class-name">uint32_t</span>    reserved3<span class="token punctuation">;</span>    <span class="token comment">/* reserved */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-06 16:28:56
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../segment/__objc.html" class="navigation navigation-prev " aria-label="Previous page: __OBJC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="symbol.html" class="navigation navigation-next " aria-label="Next page: symbol">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Section","level":"1.3.2.4","depth":3,"next":{"title":"symbol","level":"1.3.2.4.1","depth":4,"path":"macho_format/detail/section/symbol.md","ref":"macho_format/detail/section/symbol.md","articles":[]},"previous":{"title":"__OBJC","level":"1.3.2.3.5","depth":4,"path":"macho_format/detail/segment/__objc.md","ref":"macho_format/detail/segment/__objc.md","articles":[]},"articles":[{"title":"symbol","level":"1.3.2.4.1","depth":4,"path":"macho_format/detail/section/symbol.md","ref":"macho_format/detail/section/symbol.md","articles":[]},{"title":"string","level":"1.3.2.4.2","depth":4,"path":"macho_format/detail/section/string.md","ref":"macho_format/detail/section/string.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/exec_file_format_macho/pdf/exec_file_format_macho.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/exec_file_format_macho/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"可执行文件格式：Mach-O","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Mac和iOS等Apple苹果系统的常见可执行文件格式：Mach-O；先是Mach-O概览；包括背景知识的XNU、编译链接加载过程、PIC等；然后介绍Mach-O格式，包括结构概述和结构图，以及结构详情，包括Header、Load Commands和Segment的data；其中Header包括magic、cputype和cpusubtype、filetype、flags；Load Commands包括LC_UUID、LC_SEGMENT、LC_SEGMENT_64、LC_SYMTAB、LC_DYLD_CHAINED_FIXUPS、LC_DYLD_EXPORTS_TRIE等；Segment包括__TEXT、__DATA、__IMPORT、__LINKEDIT、__OBJC；以及各个Segment的section，比如symbol、strings等；然后是Mach-O格式的子项，包括FAT、codesign、虚拟地址、大小限制等；然后整理Mach-O的各种工具，包括MachOView、rabin2、jtool2、otool、pagestuff，以及每个工具的用法、举例、help语法等；"},"file":{"path":"macho_format/detail/section/README.md","mtime":"2023-10-06T08:28:56.329Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-07T15:27:55.016Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

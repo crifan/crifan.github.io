@@ -1,0 +1,2385 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>AwemeCore · 可执行文件格式：Mach-O</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="maskpro_dylib.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../macho_overview/">
+            
+                <a href="../../../macho_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Mach-O概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../macho_overview/background/">
+            
+                <a href="../../../macho_overview/background/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../../macho_overview/background/xnu.html">
+            
+                <a href="../../../macho_overview/background/xnu.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    XNU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../../macho_overview/background/compile_link_load.html">
+            
+                <a href="../../../macho_overview/background/compile_link_load.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    编译链接加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../../macho_overview/background/pic.html">
+            
+                <a href="../../../macho_overview/background/pic.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    PIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../macho_format/">
+            
+                <a href="../../../macho_format/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Mach-O格式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../macho_format/summary/">
+            
+                <a href="../../../macho_format/summary/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Mach-O结构概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../../macho_format/summary/macho_layout.html">
+            
+                <a href="../../../macho_format/summary/macho_layout.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    Mach-O结构图
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../macho_format/detail/">
+            
+                <a href="../../../macho_format/detail/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Mach-O结构详情
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../macho_format/detail/header/">
+            
+                <a href="../../../macho_format/detail/header/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Header
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../../macho_format/detail/header/magic.html">
+            
+                <a href="../../../macho_format/detail/header/magic.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    magic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                <a href="../../../macho_format/detail/header/cputype_cpusubtype.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    cputype和cpusubtype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.3" data-path="../../../macho_format/detail/header/filetype.html">
+            
+                <a href="../../../macho_format/detail/header/filetype.html">
+            
+                    
+                        <b>1.3.2.1.3.</b>
+                    
+                    filetype
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.4" data-path="../../../macho_format/detail/header/flags.html">
+            
+                <a href="../../../macho_format/detail/header/flags.html">
+            
+                    
+                        <b>1.3.2.1.4.</b>
+                    
+                    flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../../macho_format/detail/load_commands/">
+            
+                <a href="../../../macho_format/detail/load_commands/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    Load Commands
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_uuid.html">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    LC_UUID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    LC_SEGMENT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_segment_64.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    LC_SEGMENT_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.4" data-path="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_symtab.html">
+            
+                    
+                        <b>1.3.2.2.4.</b>
+                    
+                    LC_SYMTAB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.5" data-path="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.3.2.2.5.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.6" data-path="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                <a href="../../../macho_format/detail/load_commands/lc_dyld_exports_trie.html">
+            
+                    
+                        <b>1.3.2.2.6.</b>
+                    
+                    LC_DYLD_EXPORTS_TRIE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../../../macho_format/detail/segment/">
+            
+                <a href="../../../macho_format/detail/segment/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    Segment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../../../macho_format/detail/segment/__text/">
+            
+                <a href="../../../macho_format/detail/segment/__text/">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    __TEXT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1.1" data-path="../../../macho_format/detail/segment/__text/__text.html">
+            
+                <a href="../../../macho_format/detail/segment/__text/__text.html">
+            
+                    
+                        <b>1.3.2.3.1.1.</b>
+                    
+                    __text
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../../../macho_format/detail/segment/__data/">
+            
+                <a href="../../../macho_format/detail/segment/__data/">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    __DATA
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.2.1" data-path="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__la_symbol_ptr.html">
+            
+                    
+                        <b>1.3.2.3.2.1.</b>
+                    
+                    __la_symbol_ptr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2.2" data-path="../../../macho_format/detail/segment/__data/__got.html">
+            
+                <a href="../../../macho_format/detail/segment/__data/__got.html">
+            
+                    
+                        <b>1.3.2.3.2.2.</b>
+                    
+                    __got
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.3" data-path="../../../macho_format/detail/segment/__import.html">
+            
+                <a href="../../../macho_format/detail/segment/__import.html">
+            
+                    
+                        <b>1.3.2.3.3.</b>
+                    
+                    __IMPORT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.4" data-path="../../../macho_format/detail/segment/__linkedit.html">
+            
+                <a href="../../../macho_format/detail/segment/__linkedit.html">
+            
+                    
+                        <b>1.3.2.3.4.</b>
+                    
+                    __LINKEDIT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.5" data-path="../../../macho_format/detail/segment/__objc.html">
+            
+                <a href="../../../macho_format/detail/segment/__objc.html">
+            
+                    
+                        <b>1.3.2.3.5.</b>
+                    
+                    __OBJC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../../../macho_format/detail/section/">
+            
+                <a href="../../../macho_format/detail/section/">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    Section
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.4.1" data-path="../../../macho_format/detail/section/symbol.html">
+            
+                <a href="../../../macho_format/detail/section/symbol.html">
+            
+                    
+                        <b>1.3.2.4.1.</b>
+                    
+                    symbol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4.2" data-path="../../../macho_format/detail/section/string.html">
+            
+                <a href="../../../macho_format/detail/section/string.html">
+            
+                    
+                        <b>1.3.2.4.2.</b>
+                    
+                    string
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../macho_format/fat/">
+            
+                <a href="../../../macho_format/fat/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    FAT
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../../macho_format/fat/examples.html">
+            
+                <a href="../../../macho_format/fat/examples.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../../macho_format/fat/issues.html">
+            
+                <a href="../../../macho_format/fat/issues.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../../macho_format/fat/tools/">
+            
+                <a href="../../../macho_format/fat/tools/">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.3.1" data-path="../../../macho_format/fat/tools/lipo.html">
+            
+                <a href="../../../macho_format/fat/tools/lipo.html">
+            
+                    
+                        <b>1.3.3.3.1.</b>
+                    
+                    lipo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../../macho_format/codesign/">
+            
+                <a href="../../../macho_format/codesign/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../../macho_format/vm_addr/">
+            
+                <a href="../../../macho_format/vm_addr/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    虚拟地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../../macho_format/size_limit/">
+            
+                <a href="../../../macho_format/size_limit/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    大小限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Mach-O工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../machoview/">
+            
+                <a href="../../machoview/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    MachOView
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../machoview/examples/">
+            
+                <a href="../../machoview/examples/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../machoview/examples/main_arm64.html">
+            
+                <a href="../../machoview/examples/main_arm64.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    main_arm64
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../machoview/examples/awemecore.html">
+            
+                <a href="../../machoview/examples/awemecore.html">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                <a href="../../machoview/examples/zzzzheibaoLib_dylib.html">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    zzzzHeiBaoLib.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../machoview/summary/">
+            
+                <a href="../../machoview/summary/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../machoview/summary/self_compile.html">
+            
+                <a href="../../machoview/summary/self_compile.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    自己编译
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../rabin2/">
+            
+                <a href="../../rabin2/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    rabin2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../rabin2/usage/">
+            
+                <a href="../../rabin2/usage/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../rabin2/examples/">
+            
+                <a href="../../rabin2/examples/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../rabin2/examples/awemecore.html">
+            
+                <a href="../../rabin2/examples/awemecore.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../rabin2/examples/maskpro_dylib.html">
+            
+                <a href="../../rabin2/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../rabin2/help.html">
+            
+                <a href="../../rabin2/help.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    jtool2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../usage/">
+            
+                <a href="../usage/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.3.2.1" data-path="awemecore.html">
+            
+                <a href="awemecore.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="maskpro_dylib.html">
+            
+                <a href="maskpro_dylib.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.3" data-path="akd.html">
+            
+                <a href="akd.html">
+            
+                    
+                        <b>1.4.3.2.3.</b>
+                    
+                    akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../help.html">
+            
+                <a href="../help.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../otool/">
+            
+                <a href="../../otool/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    otool
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../otool/usage/">
+            
+                <a href="../../otool/usage/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../../otool/examples/">
+            
+                <a href="../../otool/examples/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.2.1" data-path="../../otool/examples/aweme.html">
+            
+                <a href="../../otool/examples/aweme.html">
+            
+                    
+                        <b>1.4.4.2.1.</b>
+                    
+                    Aweme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.2" data-path="../../otool/examples/awemecore.html">
+            
+                <a href="../../otool/examples/awemecore.html">
+            
+                    
+                        <b>1.4.4.2.2.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2.3" data-path="../../otool/examples/maskpro_dylib.html">
+            
+                <a href="../../otool/examples/maskpro_dylib.html">
+            
+                    
+                        <b>1.4.4.2.3.</b>
+                    
+                    MaskPro.dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../../otool/help.html">
+            
+                <a href="../../otool/help.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../pagestuff/">
+            
+                <a href="../../pagestuff/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    pagestuff
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../pagestuff/help.html">
+            
+                <a href="../../pagestuff/help.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/doc_material.html">
+            
+                <a href="../../../appendix/doc_material.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Mach-O文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >AwemeCore</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="jtool2用法举例：awemecore"><a name="jtool2用法举例：awemecore" class="plugin-anchor" href="#jtool2用法举例：awemecore"><i class="fa fa-link" aria-hidden="true"></i></a>jtool2用法举例：AwemeCore</h1>
+<h2 id="h：查看header头信息"><a name="h：查看header头信息" class="plugin-anchor" href="#h：查看header头信息"><i class="fa fa-link" aria-hidden="true"></i></a>-h：查看header头信息</h2>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore jtool2 <span class="token parameter variable">-h</span> v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+Magic:    <span class="token number">64</span>-bit MachO <span class="token punctuation">(</span>Little Endian<span class="token punctuation">)</span>
+Type:    dylib
+CPU:    ARM64 <span class="token punctuation">(</span>ARMv8<span class="token punctuation">)</span>
+Cmds:    <span class="token number">133</span>
+Size:    <span class="token number">18720</span>
+Flags:    0x910085
+</code></pre>
+<h2 id="l-list列出段"><a name="l-list列出段" class="plugin-anchor" href="#l-list列出段"><i class="fa fa-link" aria-hidden="true"></i></a>-l: list列出段</h2>
+<pre class="language-"><code class="lang-bash">jtool2 <span class="token parameter variable">-l</span> v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+</code></pre>
+<p>输出内容：</p>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore jtool2 <span class="token parameter variable">-l</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+LC 00: LC_SEGMENT_64              Mem: 0x000000000-0x304000    __TEXT
+    Mem: 0x00000b9b0-0x000013e70        __TEXT.__stub_helper    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x000013e70-0x000017e90        __TEXT.__const
+    Mem: 0x000017e90-0x00001ad88        __TEXT.__swift5_typeref
+    Mem: 0x00001ad88-0x00001d710        __TEXT.__swift5_fieldmd
+    Mem: 0x00001d710-0x00001da48        __TEXT.__swift5_proto
+    Mem: 0x00001da48-0x00001dcd4        __TEXT.__swift5_types
+    Mem: 0x00001dcd4-0x00001dcd4        __TEXT.__cstring    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x00001dcd4-0x00001dcd4        __TEXT.__objc_methname    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x00001dcd4-0x00001dcd4        __TEXT.__objc_classname    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x00001dcd4-0x00001dcd4        __TEXT.__objc_methtype    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x00001dcd4-0x00001dd3c        __TEXT.__gcc_except_tab
+    Mem: 0x00001dd40-0x00002136c        __TEXT.__swift5_reflstr
+    Mem: 0x00002136c-0x000021524        __TEXT.__swift5_builtin
+    Mem: 0x000021524-0x0000217dc        __TEXT.__swift5_assocty
+    Mem: 0x0000217dc-0x0000233e8        __TEXT.__swift5_capture
+    Mem: 0x0000233e8-0x000023448        __TEXT.__swift5_protos
+    Mem: 0x000023448-0x000023448        __TEXT.__ustring
+    Mem: 0x000023448-0x000023448        __TEXT.__text
+    Mem: 0x000023448-0x0002c7fb8        __TEXT.__unwind_info
+    Mem: 0x0002c7fb8-0x0002ffff8        __TEXT.__eh_frame
+    Mem: 0x000300000-0x00030001b        __TEXT.__oslogstring    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+LC 01: LC_SEGMENT_64              Mem: 0x000304000-0x5924000    __DATA
+    Mem: 0x000304000-0x000307120        __DATA.__got    <span class="token punctuation">(</span>Non-Lazy Symbol Ptrs<span class="token punctuation">)</span>
+    Mem: 0x000307120-0x00030c9d0        __DATA.__la_symbol_ptr    <span class="token punctuation">(</span>Lazy Symbol Ptrs<span class="token punctuation">)</span>
+    Mem: 0x00030c9d0-0x0003106f8        __DATA.__mod_init_func    <span class="token punctuation">(</span>Module Init Function Ptrs<span class="token punctuation">)</span>
+    Mem: 0x000310700-0x000321768        __DATA.__const
+    Mem: 0x000321768-0x0003221c8        __DATA.__cfstring
+    Mem: 0x0003221c8-0x000369bd0        __DATA.__objc_classlist    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x000369bd0-0x00036a248        __DATA.__objc_nlclslist    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x00036a248-0x00036da38        __DATA.__objc_catlist    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x00036da38-0x00036db58        __DATA.__objc_nlcatlist    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x00036db58-0x00037f650        __DATA.__objc_protolist
+    Mem: 0x00037f650-0x00037f658        __DATA.__objc_imageinfo
+    Mem: 0x00037f658-0x0009417a0        __DATA.__objc_const
+    Mem: 0x0009417a0-0x0009417a8        __DATA.__objc_selrefs    <span class="token punctuation">(</span>Literal Pointers<span class="token punctuation">)</span>
+    Mem: 0x0009417a8-0x000947ea8        __DATA.__objc_protorefs
+    Mem: 0x000947ea8-0x0009881f8        __DATA.__objc_classrefs    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x0009881f8-0x0009ab740        __DATA.__objc_superrefs    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x0009ab740-0x0009acac8        __DATA.__objc_ivar
+    Mem: 0x0009acac8-0x000d55b20        __DATA.__objc_data
+    Mem: 0x000d55b20-0x000d5aa30        __DATA.__data
+    Mem: 0x000d5aa30-0x000d5ab28        __DATA.__HTSLifeCycle
+    Mem: 0x000d5ab28-0x000d5ab40        __DATA.__objc_stublist
+    Mem: 0x000d5ab40-0x000d5ab58        __DATA.RewardedADJSB
+    Mem: 0x000d5ab58-0x000d5ad20        __DATA.HGTimorLaunch
+    Mem: 0x000d5ad20-0x000d5ad88        __DATA.HGTimorLoad
+    Mem: 0x000d5ad88-0x000d5b080        __DATA.TimorLaunch
+    Mem: 0x000d5b080-0x000d5b140        __DATA.TimorLoad
+    Mem: 0x000d5b140-0x000d5b230        __DATA.RSDHCampaign
+    Mem: 0x000d5b230-0x000d5b4b0        __DATA.XBMExternal
+    Mem: 0x000d5b4b0-0x000d5b570        __DATA.LazyRegHeader
+    Mem: 0x000d5b570-0x000d5b580        __DATA.AWELynxBridge
+    Mem: 0x000d5b580-0x000d5b5b0        __DATA.PremainCode
+    Mem: 0x000d5b5b0-0x000d60510        __DATA.LazyRegData
+    Mem: 0x000d60510-0x000d61390        __DATA.__GAIA__SECTION
+    Mem: 0x000d61390-0x000d614b0        __DATA.XBMDefault
+    Mem: 0x000d614b0-0x000d61578        __DATA.HMDModule
+    Mem: 0x000d61578-0x000d61590        __DATA.HMDLocalModule
+    Mem: 0x000d61590-0x000d61710        __DATA.IESLiveBridge
+    Mem: 0x000d61710-0x000d62138        __DATA.__bd_timsdk
+    Mem: 0x000d62138-0x000d62228        __DATA.IESLiveTemplate
+    Mem: 0x000d62228-0x000d62308        __DATA.__LIVESEI__
+    Mem: 0x000d62308-0x000d62668        __DATA.__LIVESCHEMA__
+    Mem: 0x000d62668-0x000d626c8        __DATA.__LSCHEMEMODEL__
+    Mem: 0x000d626c8-0x000d626d8        __DATA.__ENTERROOMSEC__
+    Mem: 0x000d626d8-0x000d627a8        __DATA.__VSUSERCARD__
+    Mem: 0x000d627a8-0x000d627f8        __DATA.__PUZZLEMETHOD__
+    Mem: 0x000d627f8-0x000d62808        __DATA.IESSLynxBridge
+    Mem: 0x000d62808-0x000d62858        __DATA.RxAnnotation
+    Mem: 0x000d62858-0x000d670a8        __DATA.__objc_clsrefs
+    Mem: 0x000d670a8-0x000d67768        __DATA.__thread_vars    <span class="token punctuation">(</span>TLV descriptors<span class="token punctuation">)</span>
+    Mem: 0x000d67768-0x000d67a28        __DATA.IESECSettingReg
+    Mem: 0x000d67a28-0x000d67ae0        __DATA.__swift_hooks
+    Mem: 0x000d67ae0-0x000d67b98        __DATA.__swift51_hooks
+    Mem: 0x000d67b98-0x000d68208        __DATA.__HTSService
+    Mem: 0x000d68208-0x000d682f8        __DATA.__HTSDyServImpl
+    Mem: 0x000d682f8-0x000d68918        __DATA.__HTSMsgAsc
+    Mem: 0x000d68918-0x000d68d68        __DATA.AWERunModernFeed
+    Mem: 0x000d68d68-0x000d68f98        __DATA.AWERunShare
+    Mem: 0x000d68f98-0x000d69028        __DATA.__HTSDyServ
+    Mem: 0x000d69028-0x000d690a8        __DATA.__HTSMsg
+    Mem: 0x000d690a8-0x000d75100        __DATA.RxInjector
+    Mem: 0x000d75100-0x000d75218        __DATA.RxAppService
+    Mem: 0x000d75218-0x000d75248        __DATA.__HTSNoti
+    Mem: 0x000d75248-0x000d752c8        __DATA.AWERunShareSVC
+    Mem: 0x000d752c8-0x000d76c68        __DATA.StudioConfigMock
+    Mem: 0x000d76c68-0x000d76d28        __DATA.XBMInternal
+    Mem: 0x000d76d30-0x000d84267        __DATA.__cstring    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x000d84267-0x000df3302        __DATA.__objc_methname    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x000df3302-0x000e1100a        __DATA.__objc_methtype    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x000e1100a-0x000f4c006        __DATA.__objc_classname    <span class="token punctuation">(</span>C-String Literals<span class="token punctuation">)</span>
+    Mem: 0x000f4c008-0x000f80848        __DATA.__thread_bss    <span class="token punctuation">(</span>Thread <span class="token builtin class-name">local</span> zerofill<span class="token punctuation">)</span>
+    Mem: 0x000f80860-0x001257840        __DATA._D_tconst    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x001257840-0x00161ad98        __DATA._D_dconst    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x00161c000-0x00173e5fc        __DATA._D_ddata    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x00173e600-0x001bd8100        __DATA._D_cfstring    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x001bd8100-0x0037e8970        __DATA._D_objc_const    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x0037e8970-0x003893854        __DATA._D_objc_ivar    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x003893858-0x003a98d20        __DATA._D_objc_selrefs    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x003a98d20-0x003f4eb10        __DATA._D_gcc_except_ta    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x003f4eb10-0x0047e5193        __DATA._D_cstring    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x0047e5194-0x00485caee        __DATA._D_ustring    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x00485caee-0x00533d1a8        __DATA._D_objc_methname    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x00533d1a8-0x005507b0a        __DATA._D_objc_methtype    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x005507c00-0x005687848        __DATA.__common    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+    Mem: 0x005687900-0x0059229ec        __DATA.__bss    <span class="token punctuation">(</span>Zero Fill<span class="token punctuation">)</span>
+LC 02: LC_SEGMENT_64              Mem: 0x005924000-0x11480000    __BD_TEXT
+    Mem: 0x005924000-0x011476a38        __BD_TEXT.__text    <span class="token punctuation">(</span>Normal<span class="token punctuation">)</span>
+    Mem: 0x011476a38-0x01147ef40        __BD_TEXT.__stubs    <span class="token punctuation">(</span>Symbol Stubs<span class="token punctuation">)</span>
+LC 03: LC_SEGMENT_64              Mem: 0x011480000-0x12660000    __LTC_DATA
+    Mem: 0x011480000-0x011480208        __LTC_DATA.__meta
+    Mem: 0x011480208-0x011480218        __LTC_DATA.__deco
+    Mem: 0x011480218-0x011b54d57        __LTC_DATA._C_objc_const
+    Mem: 0x011b54d57-0x011b6eadf        __LTC_DATA._C_objc_ivar
+    Mem: 0x011b6eadf-0x0120f22de        __LTC_DATA._C_cstring
+    Mem: 0x0120f22de-0x01232e92d        __LTC_DATA._C_tconst
+    Mem: 0x01232e92d-0x01257b342        __LTC_DATA._C_gcc_except_ta
+    Mem: 0x01257b342-0x01265c5da        __LTC_DATA.__fix
+LC 04: LC_SEGMENT_64              Mem: 0x012660000-0x12f28000    __LINKEDIT
+LC 05: LC_ID_DYLIB               @rpath/AwemeCore.framework/AwemeCore
+LC 06: LC_DYLD_INFO
+       Rebase info: <span class="token number">350072</span> bytes at offset <span class="token number">231473152</span> <span class="token punctuation">(</span>0xdcc0000-0xdd15778<span class="token punctuation">)</span>
+       Bind info:   <span class="token number">292520</span> bytes at offset <span class="token number">231823224</span> <span class="token punctuation">(</span>0xdd15778-0xdd5ce20<span class="token punctuation">)</span>
+       Weak info:   <span class="token number">296</span>   bytes at offset 0xdd5ce20
+       Lazy info:   <span class="token number">101024</span> bytes at offset <span class="token number">232116040</span> <span class="token punctuation">(</span>0xdd5cf48-0xdd759e8<span class="token punctuation">)</span>
+       Export info: <span class="token number">384</span>   bytes at offset <span class="token number">232217064</span> <span class="token punctuation">(</span>0xdd759e8-0xdd75b68<span class="token punctuation">)</span>
+LC 07: LC_SYMTAB
+LC 08: LC_DYSYMTAB
+        <span class="token number">1</span> <span class="token builtin class-name">local</span> symbols at index     <span class="token number">0</span>
+       No external symbols
+     <span class="token number">5029</span> undefined symbols at index <span class="token number">1</span>
+       No TOC
+       No modtab
+     <span class="token number">7248</span> Indirect symbols at offset 0xdfa63c0
+LC 09: LC_UUID                   UUID: F1FCF15A-6465-31F0-9300-5BA1B8F91017
+LC <span class="token number">10</span>: LC_VERSION_MIN_IPHONEOS    Minimum iOS version:    <span class="token number">10.0</span>.0
+LC <span class="token number">11</span>: LC_SOURCE_VERSION         Source Version:          <span class="token number">0.0</span>.0.0.0
+LC <span class="token number">12</span>: LC_ENCRYPTION_INFO_64     Encryption: <span class="token number">0</span> from offset <span class="token number">32768</span> spanning <span class="token number">3112960</span> bytes
+LC <span class="token number">13</span>: LC_LOAD_DYLIB             /usr/lib/libcompression.dylib
+LC <span class="token number">14</span>: LC_LOAD_DYLIB             @rpath/BDLRepairer.framework/BDLRepairer
+LC <span class="token number">15</span>: LC_LOAD_DYLIB             /usr/lib/libc++.1.dylib
+LC <span class="token number">16</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/AdServices.framework/AdServices
+LC <span class="token number">17</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/AppTrackingTransparency.framework/AppTrackingTransparency
+LC <span class="token number">18</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/AuthenticationServices.framework/AuthenticationServices
+LC <span class="token number">19</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/CoreHaptics.framework/CoreHaptics
+LC <span class="token number">20</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/CoreTelephony.framework/CoreTelephony
+LC <span class="token number">21</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/MetalKit.framework/MetalKit
+LC <span class="token number">22</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/MetalPerformanceShaders.framework/MetalPerformanceShaders
+LC <span class="token number">23</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/MetricKit.framework/MetricKit
+LC <span class="token number">24</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/StoreKit.framework/StoreKit
+LC <span class="token number">25</span>: LC_LOAD_DYLIB             @rpath/VolcEngineRTC.framework/VolcEngineRTC
+LC <span class="token number">26</span>: LC_LOAD_DYLIB             @rpath/byteaudio.framework/byteaudio
+LC <span class="token number">27</span>: LC_LOAD_DYLIB             /usr/lib/libbz2.1.0.dylib
+LC <span class="token number">28</span>: LC_LOAD_DYLIB             /usr/lib/libc++abi.dylib
+LC <span class="token number">29</span>: LC_LOAD_DYLIB             /usr/lib/libiconv.2.dylib
+LC <span class="token number">30</span>: LC_LOAD_DYLIB             /usr/lib/libicucore.A.dylib
+LC <span class="token number">31</span>: LC_LOAD_DYLIB             /usr/lib/liblzma.5.dylib
+LC <span class="token number">32</span>: LC_LOAD_DYLIB             /usr/lib/libSystem.B.dylib
+LC <span class="token number">33</span>: LC_LOAD_DYLIB             /usr/lib/libresolv.9.dylib
+LC <span class="token number">34</span>: LC_LOAD_DYLIB             /usr/lib/libsqlite3.dylib
+LC <span class="token number">35</span>: LC_LOAD_DYLIB             /usr/lib/libxml2.2.dylib
+LC <span class="token number">36</span>: LC_LOAD_DYLIB             /usr/lib/libz.1.dylib
+LC <span class="token number">37</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/ARKit.framework/ARKit
+LC <span class="token number">38</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AVFoundation.framework/AVFoundation
+LC <span class="token number">39</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AVKit.framework/AVKit
+LC <span class="token number">40</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Accelerate.framework/Accelerate
+LC <span class="token number">41</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AdSupport.framework/AdSupport
+LC <span class="token number">42</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AddressBook.framework/AddressBook
+LC <span class="token number">43</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AssetsLibrary.framework/AssetsLibrary
+LC <span class="token number">44</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+LC <span class="token number">45</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CFNetwork.framework/CFNetwork
+LC <span class="token number">46</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Contacts.framework/Contacts
+LC <span class="token number">47</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/ContactsUI.framework/ContactsUI
+LC <span class="token number">48</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreAudio.framework/CoreAudio
+LC <span class="token number">49</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreAudioKit.framework/CoreAudioKit
+LC <span class="token number">50</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+LC <span class="token number">51</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+LC <span class="token number">52</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreImage.framework/CoreImage
+LC <span class="token number">53</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreLocation.framework/CoreLocation
+LC <span class="token number">54</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/CoreML.framework/CoreML
+LC <span class="token number">55</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreMedia.framework/CoreMedia
+LC <span class="token number">56</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreMotion.framework/CoreMotion
+LC <span class="token number">57</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
+LC <span class="token number">58</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreSpotlight.framework/CoreSpotlight
+LC <span class="token number">59</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreText.framework/CoreText
+LC <span class="token number">60</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreVideo.framework/CoreVideo
+LC <span class="token number">61</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/EventKit.framework/EventKit
+LC <span class="token number">62</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Foundation.framework/Foundation
+LC <span class="token number">63</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/GLKit.framework/GLKit
+LC <span class="token number">64</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/GameplayKit.framework/GameplayKit
+LC <span class="token number">65</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+LC <span class="token number">66</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/ImageIO.framework/ImageIO
+LC <span class="token number">67</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Intents.framework/Intents
+LC <span class="token number">68</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore
+LC <span class="token number">69</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/LocalAuthentication.framework/LocalAuthentication
+LC <span class="token number">70</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MapKit.framework/MapKit
+LC <span class="token number">71</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility
+LC <span class="token number">72</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MediaPlayer.framework/MediaPlayer
+LC <span class="token number">73</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MediaToolbox.framework/MediaToolbox
+LC <span class="token number">74</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/MessageUI.framework/MessageUI
+LC <span class="token number">75</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Metal.framework/Metal
+LC <span class="token number">76</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/NetworkExtension.framework/NetworkExtension
+LC <span class="token number">77</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/OpenAL.framework/OpenAL
+LC <span class="token number">78</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/OpenGLES.framework/OpenGLES
+LC <span class="token number">79</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Photos.framework/Photos
+LC <span class="token number">80</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/PhotosUI.framework/PhotosUI
+LC <span class="token number">81</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/QuartzCore.framework/QuartzCore
+LC <span class="token number">82</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/ReplayKit.framework/ReplayKit
+LC <span class="token number">83</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/SafariServices.framework/SafariServices
+LC <span class="token number">84</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/Security.framework/Security
+LC <span class="token number">85</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
+LC <span class="token number">86</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/UIKit.framework/UIKit
+LC <span class="token number">87</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/VideoToolbox.framework/VideoToolbox
+LC <span class="token number">88</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/WebKit.framework/WebKit
+LC <span class="token number">89</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/iAd.framework/iAd
+LC <span class="token number">90</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/QuickLook.framework/QuickLook
+LC <span class="token number">91</span>: LC_LOAD_DYLIB             /usr/lib/libobjc.A.dylib
+LC <span class="token number">92</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/Combine.framework/Combine
+LC <span class="token number">93</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/GroupActivities.framework/GroupActivities
+LC <span class="token number">94</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/IOSurface.framework/IOSurface
+LC <span class="token number">95</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/UserNotifications.framework/UserNotifications
+LC <span class="token number">96</span>: LC_LOAD_WEAK_DYLIB        /System/Library/Frameworks/WidgetKit.framework/WidgetKit
+LC <span class="token number">97</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswiftCoreMIDI.dylib
+LC <span class="token number">98</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswiftDataDetection.dylib
+LC <span class="token number">99</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswiftFileProvider.dylib
+LC <span class="token number">100</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswiftUniformTypeIdentifiers.dylib
+LC <span class="token number">101</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswiftWebKit.dylib
+LC <span class="token number">102</span>: LC_LOAD_WEAK_DYLIB        /usr/lib/swift/libswift_Concurrency.dylib
+LC <span class="token number">103</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftAVFoundation.dylib
+LC <span class="token number">104</span>: LC_LOAD_DYLIB             @rpath/libswiftCore.dylib
+LC <span class="token number">105</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreAudio.dylib
+LC <span class="token number">106</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreData.dylib
+LC <span class="token number">107</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreFoundation.dylib
+LC <span class="token number">108</span>: LC_LOAD_DYLIB             @rpath/libswiftCoreGraphics.dylib
+LC <span class="token number">109</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreImage.dylib
+LC <span class="token number">110</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreLocation.dylib
+LC <span class="token number">111</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftCoreMedia.dylib
+LC <span class="token number">112</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftDarwin.dylib
+LC <span class="token number">113</span>: LC_LOAD_DYLIB             @rpath/libswiftDispatch.dylib
+LC <span class="token number">114</span>: LC_LOAD_DYLIB             @rpath/libswiftFoundation.dylib
+LC <span class="token number">115</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftIntents.dylib
+LC <span class="token number">116</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftMapKit.dylib
+LC <span class="token number">117</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftMetal.dylib
+LC <span class="token number">118</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftNetwork.dylib
+LC <span class="token number">119</span>: LC_LOAD_DYLIB             @rpath/libswiftObjectiveC.dylib
+LC <span class="token number">120</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftPhotos.dylib
+LC <span class="token number">121</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftQuartzCore.dylib
+LC <span class="token number">122</span>: LC_LOAD_DYLIB             @rpath/libswiftUIKit.dylib
+LC <span class="token number">123</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftos.dylib
+LC <span class="token number">124</span>: LC_LOAD_WEAK_DYLIB        @rpath/libswiftsimd.dylib
+LC <span class="token number">125</span>: LC_RPATH                  /usr/lib/swift
+LC <span class="token number">126</span>: LC_RPATH                  @executable_path/Frameworks
+LC <span class="token number">127</span>: LC_RPATH                  @loader_path/Frameworks
+LC <span class="token number">128</span>: LC_RPATH                  @executable_path/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/Frameworks
+LC <span class="token number">129</span>: LC_RPATH                  @executable_path/Frameworks
+LC <span class="token number">130</span>: LC_FUNCTION_STARTS        Offset: <span class="token number">232217448</span>, Size: <span class="token number">2214096</span> <span class="token punctuation">(</span>0xdd75b68-0xdf92438<span class="token punctuation">)</span>
+LC <span class="token number">131</span>: LC_DATA_IN_CODE           Offset: <span class="token number">234431544</span>, Size:   <span class="token number">1320</span> <span class="token punctuation">(</span>0xdf92438-0xdf92960<span class="token punctuation">)</span>
+LC <span class="token number">132</span>: LC_CODE_SIGNATURE         Offset: <span class="token number">234688704</span>, Size: <span class="token number">5977904</span> <span class="token punctuation">(</span>0xdfd10c0-0xe5847f0<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="l：查看使用了哪些共享库library"><a name="l：查看使用了哪些共享库library" class="plugin-anchor" href="#l：查看使用了哪些共享库library"><i class="fa fa-link" aria-hidden="true"></i></a>-L：查看使用了哪些共享库Library</h2>
+<pre class="language-"><code class="lang-bash">jtool2 <span class="token parameter variable">-L</span> v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+</code></pre>
+<p>输出内容：</p>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore jtool2 <span class="token parameter variable">-L</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+Warning<span class="token operator">!</span> Too many symbols<span class="token operator">!</span> This can easily be fixed by J - tell him, please
+<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore:
+    /usr/lib/libcompression.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    @rpath/BDLRepairer.framework/BDLRepairer <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libc++.1.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1200.3</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AdServices.framework/AdServices <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AppTrackingTransparency.framework/AppTrackingTransparency <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AuthenticationServices.framework/AuthenticationServices <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">612.1</span>.27<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreHaptics.framework/CoreHaptics <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreTelephony.framework/CoreTelephony <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">0.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MetalKit.framework/MetalKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">153.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MetalPerformanceShaders.framework/MetalPerformanceShaders <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">125.0</span>.31<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MetricKit.framework/MetricKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/StoreKit.framework/StoreKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    @rpath/VolcEngineRTC.framework/VolcEngineRTC <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">323.0</span>.0<span class="token punctuation">)</span>
+    @rpath/byteaudio.framework/byteaudio <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.1<span class="token punctuation">)</span>
+    /usr/lib/libbz2.1.0.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.8<span class="token punctuation">)</span>
+    /usr/lib/libc++abi.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1200.3</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libiconv.2.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">7.0</span>.0, current version <span class="token number">7.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libicucore.A.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">68.2</span>.0<span class="token punctuation">)</span>
+    /usr/lib/liblzma.5.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">6.0</span>.0, current version <span class="token number">6.3</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libSystem.B.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1311.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libresolv.9.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libsqlite3.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">9.0</span>.0, current version <span class="token number">329.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libxml2.2.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">10.0</span>.0, current version <span class="token number">10.9</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libz.1.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.2</span>.11<span class="token punctuation">)</span>
+    /System/Library/Frameworks/ARKit.framework/ARKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AVFoundation.framework/AVFoundation <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AVKit.framework/AVKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Accelerate.framework/Accelerate <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">4.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AdSupport.framework/AdSupport <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AddressBook.framework/AddressBook <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AssetsLibrary.framework/AssetsLibrary <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/AudioToolbox.framework/AudioToolbox <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1000.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CFNetwork.framework/CFNetwork <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1312.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Contacts.framework/Contacts <span class="token punctuation">(</span>compatibility version <span class="token number">0.0</span>.0, current version <span class="token number">3529.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/ContactsUI.framework/ContactsUI <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1141.1</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreAudio.framework/CoreAudio <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreAudioKit.framework/CoreAudioKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation <span class="token punctuation">(</span>compatibility version <span class="token number">150.0</span>.0, current version <span class="token number">1854.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics <span class="token punctuation">(</span>compatibility version <span class="token number">64.0</span>.0, current version <span class="token number">1548.1</span>.3<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreImage.framework/CoreImage <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">5.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreLocation.framework/CoreLocation <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2663.0</span>.3<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreML.framework/CoreML <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreMedia.framework/CoreMedia <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreMotion.framework/CoreMotion <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2663.0</span>.3<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1141.1</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreSpotlight.framework/CoreSpotlight <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreText.framework/CoreText <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/CoreVideo.framework/CoreVideo <span class="token punctuation">(</span>compatibility version <span class="token number">1.2</span>.0, current version <span class="token number">1.5</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/EventKit.framework/EventKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1716.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Foundation.framework/Foundation <span class="token punctuation">(</span>compatibility version <span class="token number">300.0</span>.0, current version <span class="token number">1854.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/GLKit.framework/GLKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">126.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/GameplayKit.framework/GameplayKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">96.1</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">275.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/ImageIO.framework/ImageIO <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Intents.framework/Intents <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">612.1</span>.27<span class="token punctuation">)</span>
+    /System/Library/Frameworks/LocalAuthentication.framework/LocalAuthentication <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">984.10</span>.2<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MapKit.framework/MapKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">14.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">62.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MediaPlayer.framework/MediaPlayer <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MediaToolbox.framework/MediaToolbox <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/MessageUI.framework/MessageUI <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">3693.0</span>.2<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Metal.framework/Metal <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">257.25</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/NetworkExtension.framework/NetworkExtension <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/OpenAL.framework/OpenAL <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/OpenGLES.framework/OpenGLES <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Photos.framework/Photos <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">402.5</span>.140<span class="token punctuation">)</span>
+    /System/Library/Frameworks/PhotosUI.framework/PhotosUI <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">402.5</span>.140<span class="token punctuation">)</span>
+    /System/Library/Frameworks/QuartzCore.framework/QuartzCore <span class="token punctuation">(</span>compatibility version <span class="token number">1.2</span>.0, current version <span class="token number">1.11</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/ReplayKit.framework/ReplayKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/SafariServices.framework/SafariServices <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Security.framework/Security <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">60157.12</span>.1<span class="token punctuation">)</span>
+    /System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1163.10</span>.2<span class="token punctuation">)</span>
+    /System/Library/Frameworks/UIKit.framework/UIKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">5067.3</span>.107<span class="token punctuation">)</span>
+    /System/Library/Frameworks/VideoToolbox.framework/VideoToolbox <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/WebKit.framework/WebKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">612.1</span>.27<span class="token punctuation">)</span>
+    /System/Library/Frameworks/iAd.framework/iAd <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/QuickLook.framework/QuickLook <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">846.1</span>.0<span class="token punctuation">)</span>
+    /usr/lib/libobjc.A.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">228.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/Combine.framework/Combine <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">276.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/GroupActivities.framework/GroupActivities <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/IOSurface.framework/IOSurface <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/UserNotifications.framework/UserNotifications <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+    /System/Library/Frameworks/WidgetKit.framework/WidgetKit <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">181.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/swift/libswiftCoreMIDI.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">5.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/swift/libswiftDataDetection.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">694.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/swift/libswiftFileProvider.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">374.1</span>.2<span class="token punctuation">)</span>
+    /usr/lib/swift/libswiftUniformTypeIdentifiers.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">718.0</span>.0<span class="token punctuation">)</span>
+    /usr/lib/swift/libswiftWebKit.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">612.1</span>.27<span class="token punctuation">)</span>
+    /usr/lib/swift/libswift_Concurrency.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1300.0</span>.29<span class="token punctuation">)</span>
+    @rpath/libswiftAVFoundation.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2036.25</span>.1<span class="token punctuation">)</span>
+    @rpath/libswiftCore.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1300.0</span>.29<span class="token punctuation">)</span>
+    @rpath/libswiftCoreAudio.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.1</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreData.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">18.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreFoundation.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">14.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreGraphics.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">3.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreImage.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreLocation.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">6.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftCoreMedia.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2896.25</span>.1<span class="token punctuation">)</span>
+    @rpath/libswiftDarwin.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">0.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftDispatch.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">9.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftFoundation.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">69.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftIntents.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">11.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftMapKit.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">3.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftMetal.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">257.25</span>.1<span class="token punctuation">)</span>
+    @rpath/libswiftNetwork.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2736.12</span>.1<span class="token punctuation">)</span>
+    @rpath/libswiftObjectiveC.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">2.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftPhotos.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">402.5</span>.140<span class="token punctuation">)</span>
+    @rpath/libswiftQuartzCore.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">3.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftUIKit.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">5038.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftos.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1021.0</span>.0<span class="token punctuation">)</span>
+    @rpath/libswiftsimd.dylib <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">9.0</span>.0<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="s-列出符号表symbol--nm"><a name="s-列出符号表symbol--nm" class="plugin-anchor" href="#s-列出符号表symbol--nm"><i class="fa fa-link" aria-hidden="true"></i></a>-S: 列出符号表Symbol == nm</h2>
+<pre class="language-"><code class="lang-bash">jtool2 <span class="token parameter variable">-S</span> v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore <span class="token operator">&gt;</span> AwemeCore_jtool2_S.txt
+</code></pre>
+<p>输出内容：</p>
+<p><img src="../../../assets/img/jtool2_awemecore_s_symbol.png" alt="jtool2_awemecore_s_symbol"></p>
+<h2 id="-analyze-分析analyze---导出类和函数名等"><a name="-analyze-分析analyze---导出类和函数名等" class="plugin-anchor" href="#-analyze-分析analyze---导出类和函数名等"><i class="fa fa-link" aria-hidden="true"></i></a>--analyze: 分析analyze -&gt; 导出类和函数名等</h2>
+<pre class="language-"><code class="lang-bash">jtool2 <span class="token parameter variable">--analyze</span> v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+</code></pre>
+<p>输出log：</p>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore jtool2 <span class="token parameter variable">--analyze</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/已脱壳/v18.9.0/Payload/Aweme.app/Frameworks/AwemeCore.framework/AwemeCore
+Analyzing file<span class="token punctuation">..</span>.
+Warning<span class="token operator">!</span> Too many symbols<span class="token operator">!</span> This can easily be fixed by J - tell him, please
+Resolving stubs<span class="token punctuation">..</span>
+Processing __DATA<span class="token punctuation">..</span>
+opened companion <span class="token function">file</span> ./AwemeCore.ARM64.F1FCF15A-6465-31F0-9300-5BA1B8F91017
+Dumping symbol cache to <span class="token function">file</span>
+Symbolicated <span class="token number">144477</span> symbols and <span class="token number">355043</span> functions
+</code></pre>
+<p>输出内容：</p>
+<pre class="language-"><code class="lang-bash">0x8<span class="token operator">|</span>_<span class="token variable">$s10Foundation25NSFastEnumerationIteratorVStAAMc</span><span class="token operator">|</span>
+0x10<span class="token operator">|</span>_<span class="token variable">$s10Foundation3URLVMn</span><span class="token operator">|</span>
+0x18<span class="token operator">|</span>_<span class="token variable">$s10Foundation4DataVN</span><span class="token operator">|</span>
+<span class="token punctuation">..</span>.
+0x20<span class="token operator">|</span>_<span class="token variable">$s10Foundation4DateVMn</span><span class="token operator">|</span>
+0x28<span class="token operator">|</span>_<span class="token variable">$s10Foundation9IndexPathVMa</span><span class="token operator">|</span>
+0x30<span class="token operator">|</span>_<span class="token variable">$s10Foundation9IndexPathVMn</span><span class="token operator">|</span>
+0x38<span class="token operator">|</span>_<span class="token variable">$s10Foundation9IndexPathVSEAAMc</span><span class="token operator">|</span>
+0x40<span class="token operator">|</span>_<span class="token variable">$s10Foundation9IndexPathVSQAAMc</span><span class="token operator">|</span>
+0x48<span class="token operator">|</span>_<span class="token variable">$s10Foundation9IndexPathVSeAAMc</span><span class="token operator">|</span>
+0x50<span class="token operator">|</span>_<span class="token variable">$s10ObjectiveC8ObjCBoolVMn</span><span class="token operator">|</span>
+0x58<span class="token operator">|</span>_<span class="token variable">$s12CoreGraphics14CGPathFillRuleO7windingyA2CmFWC</span><span class="token operator">|</span>
+0x60<span class="token operator">|</span>_<span class="token variable">$s12CoreGraphics7CGFloatVMn</span><span class="token operator">|</span>
+0x68<span class="token operator">|</span>_<span class="token variable">$s12CoreGraphics7CGFloatVN</span><span class="token operator">|</span>
+0xd8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A13StateObserverCMn</span><span class="token operator">|</span>
+0xe0<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16ActivityMetadataVMa</span><span class="token operator">|</span>
+0xe8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16ActivityMetadataVMn</span><span class="token operator">|</span>
+0xf0<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16ActivityMetadataVSEAAMc</span><span class="token operator">|</span>
+0xf8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16ActivityMetadataVSeAAMc</span><span class="token operator">|</span>
+0x100<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC14MessageContextVMn</span><span class="token operator">|</span>
+0x108<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC4send_2toyx_AA12ParticipantsOtYaKSeRzSERzlFTu</span><span class="token operator">|</span>
+0x110<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesV8IteratorVMa</span><span class="token operator">|</span>
+0x118<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesV8IteratorVMn</span><span class="token operator">|</span>
+0x120<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesV8IteratorVy_x_GScIAAMc</span><span class="token operator">|</span>
+0x128<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesVMa</span><span class="token operator">|</span>
+0x130<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesVMn</span><span class="token operator">|</span>
+0x138<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerC8MessagesVy_xGSciAAMc</span><span class="token operator">|</span>
+0x140<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A16SessionMessengerCMn</span><span class="token operator">|</span>
+0x148<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A24ActivityActivationResultO18activationDisabledyA2CmFWC</span><span class="token operator">|</span>
+0x150<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A24ActivityActivationResultO19activationPreferredyA2CmFWC</span><span class="token operator">|</span>
+0x158<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A24ActivityActivationResultO9cancelledyA2CmFWC</span><span class="token operator">|</span>
+0x160<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionC3endyyF</span><span class="token operator">|</span>
+0x168<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionC5StateO11invalidatedyAEyx_Gs5Error_p_tcAGmAA0A8ActivityRzlFWC</span><span class="token operator">|</span>
+0x170<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionC5leaveyyF</span><span class="token operator">|</span>
+0x178<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionC8SessionsV8IteratorVyx__GScIAAMc</span><span class="token operator">|</span>
+0x180<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionC8SessionsVyx_GSciAAMc</span><span class="token operator">|</span>
+0x188<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionCMa</span><span class="token operator">|</span>
+0x190<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A7SessionCMn</span><span class="token operator">|</span>
+0x1a0<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A8ActivityPAAE20prepareForActivationAA0acF6ResultOyYaFTu</span><span class="token operator">|</span>
+0x1a8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities0A8ActivityPAAE8activateSbyYaKFTu</span><span class="token operator">|</span>
+0x1b0<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities11ParticipantVMa</span><span class="token operator">|</span>
+0x1b8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities11ParticipantVMn</span><span class="token operator">|</span>
+0x1c0<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities11ParticipantVSHAAMc</span><span class="token operator">|</span>
+0x1c8<span class="token operator">|</span>_<span class="token variable">$s15GroupActivities12ParticipantsO3allyA2CmFWC</span><span class="token operator">|</span>
+0x348<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO16RemoveDuplicatesVMn</span><span class="token operator">|</span>
+0x350<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO16RemoveDuplicatesVy_xGAA9PublisherAAMc</span><span class="token operator">|</span>
+0x358<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO3MapVMn</span><span class="token operator">|</span>
+0x360<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO3MapVy_xq_GAA9PublisherAAMc</span><span class="token operator">|</span>
+0x368<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO4DropVMn</span><span class="token operator">|</span>
+0x370<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO4DropVy_xGAA9PublisherAAMc</span><span class="token operator">|</span>
+0x378<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO9ReceiveOnVMn</span><span class="token operator">|</span>
+0x380<span class="token operator">|</span>_<span class="token variable">$s7Combine10PublishersO9ReceiveOnVy_xq_GAA9PublisherAAMc</span><span class="token operator">|</span>
+0x388<span class="token operator">|</span>_<span class="token variable">$s7Combine14AnyCancellableCMn</span><span class="token operator">|</span>
+0x390<span class="token operator">|</span>_<span class="token variable">$s7Combine9PublishedV9PublisherVMa</span><span class="token operator">|</span>
+0x398<span class="token operator">|</span>_<span class="token variable">$s7Combine9PublishedV9PublisherVMn</span><span class="token operator">|</span>
+0x3a0<span class="token operator">|</span>_<span class="token variable">$s7Combine9PublishedV9PublisherVyx_GAadAMc</span><span class="token operator">|</span>
+0x3a8<span class="token operator">|</span>_<span class="token variable">$s7Combine9PublishedVMa</span><span class="token operator">|</span>
+0x3b0<span class="token operator">|</span>_<span class="token variable">$s7Combine9PublishedVMn</span><span class="token operator">|</span>
+0x3c8<span class="token operator">|</span>_<span class="token variable">$s8Dispatch0A12TimeIntervalO12millisecondsyACSicACmFWC</span><span class="token operator">|</span>
+0x3d0<span class="token operator">|</span>_<span class="token variable">$s8Dispatch0A13WorkItemFlagsVMa</span><span class="token operator">|</span>
+0x3d8<span class="token operator">|</span>_<span class="token variable">$s8Dispatch0A13WorkItemFlagsVMn</span><span class="token operator">|</span>
+0x3e0<span class="token operator">|</span>_<span class="token variable">$s8Dispatch0A13WorkItemFlagsVs10SetAlgebraAAMc</span><span class="token operator">|</span>
+0x3e8<span class="token operator">|</span>_<span class="token variable">$s8Dispatch0A3QoSV0B6SClassO7defaultyA2EmFWC</span><span class="token operator">|</span>
+0x400<span class="token operator">|</span>_<span class="token variable">$sBbWV</span><span class="token operator">|</span>
+0x410<span class="token operator">|</span>_<span class="token variable">$sSDMn</span><span class="token operator">|</span>
+<span class="token punctuation">..</span>.
+0xc1ae6f8<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier IMSI<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae704<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier IMEI<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae710<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier TID<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae71c<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier deviceFingerprint<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae728<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier UTDID<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae734<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier setUTDID:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae73c<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier UUID<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae748<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier setUUID:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae750<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier AWID<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae75c<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier clientId<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc1ae768<span class="token operator">|</span>-<span class="token punctuation">[</span>APMobileIdentifier .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc5e5bc8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setAdInfoDict:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc5e5bd8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView adInfoDict<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc94fb00<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView model<span class="token punctuation">]</span><span class="token operator">|</span>
+0xc94fb04<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setModel:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xe20a878<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView awelynx_initWithBuilderBlock:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea2140c<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasAPI measureText:fontSize:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea21570<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasAPI drawSync:actions:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea21684<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasAPI release:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea23408<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasViewManager view<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea23504<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasViewManager set_nativeID:forView:withDefaultView:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea235e8<span class="token operator">|</span>-<span class="token punctuation">[</span>CanvasViewManager set_actions:forView:withDefaultView:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38bd4<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager init<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38c54<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager showToast:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38c74<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager logCrash:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38d20<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager logEventV1:label:value:extraValue:extras:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38de0<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager logEventV3:parameters:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38e60<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager getUserInfo:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea38e78<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager getRequestDomain:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3904c<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager getNetworkParams:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3918c<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager getLocale:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea39298<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager request:info:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a0dc<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager openScene:sceneName:initProperties:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a274<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager openH5Page:URLString:controlFlags:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a41c<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager openSchema:schemeURL:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a7fc<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager pushViewController:withReactID:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a910<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager closeWithResult:result:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a92c<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager close:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3a938<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager closeReactID:callback:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b048<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager darkMode:enable:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b180<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager componentDidMount:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b268<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager webVCWithRouterParams:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b2c8<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager getUserInfoWithCallBack:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b600<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager schemaHandler<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b608<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager setSchemaHandler:<span class="token punctuation">]</span><span class="token operator">|</span>
+0xea3b614<span class="token operator">|</span>-<span class="token punctuation">[</span>AWERCTFoundationAPIManager .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+0xf56fd94<span class="token operator">|</span>-<span class="token punctuation">[</span>WCTDatabase studio_recoverFromPath:withPageSize:backupCipher:databaseCipher:error:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105b540c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView lynxBridgeContext<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105b5418<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setLynxBridgeContext:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105e25a4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView bdx_engineType<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105e25ec<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView bdx_dealloc<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105f0d50<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView isBDXCreated<span class="token punctuation">]</span><span class="token operator">|</span>
+0x105f0d94<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setIsBDXCreated:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227850<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode turboNativeLayoutNode<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227974<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode adoptNativeLayoutNode:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112279e8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode setMeasureDelegate:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a24<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode updateLayoutWithFrame:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a4c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode setNeedsLayout<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a68<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode needsLayout<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a7c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode layoutDidStart<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a80<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode layoutDidUpdate<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a84<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode hasCustomLayout<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227a8c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode frame<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227aa4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode padding<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227abc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode margin<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227ad4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode border<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227aec<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode style<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227afc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode measureDelegate<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11227b1c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxLayoutNode .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112350a0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUI drawParameter<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11235150<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUI enableAsyncDisplay<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11235210<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUI displayAsynchronously<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123539c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUI displayComplexBackgroundAsynchronouslyWithDisplay:completion:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123559c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUI displayAsyncWithCompletionBlock:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11239d48<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage init<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11239dfc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage createView<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11239e68<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage onImageReady:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123a44c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage updateLayerMaskOnFrameChangedInner:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123a934<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage updateLayerMaskOnFrameChanged<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123a9b0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage frameDidChange<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123aa00<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage propsDidUpdate<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123aa50<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage enableAsyncDisplay<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123aa64<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage requestImage<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123aab4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage getEnableImageDownsampling<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123ab48<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage requestImage:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123b9ec<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage reportURLSrcError:type:source:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123bd38<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage resetImage<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123be74<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setSrc:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c0c4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPlaceholder:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c220<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setMode:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c378<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCoverStart:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c420<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setBlurRadius:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c678<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setInnerCapInsets:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c92c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCapInsets:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123c9c0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCapInsetsScale:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123ca8c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setLoopCount:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123cb28<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPreFetchWidth:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123cc7c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPreFetchHeight:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123cdd0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setDownsampling:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123ce6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setAutoSize:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123ce80<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage toCapInsetValue:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d010<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage frameSize<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d038<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage drawParameter<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d758<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage restartAnimation<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d7a8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage isAnimated<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d804<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage enableAccessibilityByDefault<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d80c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage startAnimating<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d84c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage measureNode:withWidth:widthMode:height:heightMode:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d9dc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage accessibilityTraitsByDefault<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d9ec<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage resizeMode<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123d9fc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setResizeMode:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da0c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage coverStart<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da1c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCoverStart:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da2c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage src<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da3c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setSrc:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da50<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage placeholder<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da60<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPlaceholder:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da74<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage blurRadius<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da84<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setBlurRadius:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123da94<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage capInsets<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123daac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCapInsets:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dac4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage capInsetsScale<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dad4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCapInsetsScale:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dae4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage image<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123daf4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setImage:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db08<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage cancelBlocks<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db18<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setCancelBlocks:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db2c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage loopCount<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db3c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setLoopCount:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db4c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage preFetchWidth<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db5c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPreFetchWidth:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage preFetchHeight<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db7c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setPreFetchHeight:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db8c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage downsampling<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123db9c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setDownsampling:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dbac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage autoSize<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dbbc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage setAutoSize:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123dbcc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIImage .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123fe18<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller init<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123fe94<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller createView<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1123ff6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller adjustContentOffsetForRTL<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240148<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller layoutDidFinished<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112401a0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller updateContentSize<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112405e4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller contentOffset<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240640<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollY:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124065c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollX:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124067c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollYReverse:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112407c8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollXReverse:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240918<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollLeft:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112409c8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollTop:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240a6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollToIndex:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240c34<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setScrollBarEnable:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240cbc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setBounces:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240d04<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setEnableScroll:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240d4c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setUpperThreshold:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240d64<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setLowerThreshold:requestReset:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240d7c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller getHitTestPoint:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11240eac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller eventDidSet<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124106c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller onScrollSticky:withOffsetY:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124118c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller sendScrollEvent:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124149c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollViewDidScroll:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11241598<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollViewDidEndDecelerating:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11241680<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollViewDidEndDragging:willDecelerate:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124176c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollInto:isSmooth:blockType:inlineType:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11241c64<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller sendScrollEvent:scrollTop:scollleft:scrollHeight:scrollWidth:deltaX:deltaY:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11241f30<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller contentSizeDidChanged<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124213c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller clampScrollToPosition:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124224c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollTo:withResult:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112424cc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller autoScroll:withResult:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112425ac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller startAutoScrollWithRate:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112426d4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller stopAutoScroll<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242734<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller dealloc<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112427b0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller frameDidChange<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124286c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollLeftLimit<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242900<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollRightLimit<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112429fc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollUpLimit<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242a90<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollDownLimit<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242b8c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller canScroll:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242cb8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scroll:direction:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242e04<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollByX:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242e14<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller scrollByY:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11242e24<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller flick:direction:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11243054<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller flickX:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11243064<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller flickY:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11243074<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller enableSticky<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11243084<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setEnableSticky:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11243094<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller enableScrollY<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112430a4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller setEnableScrollY:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112430b4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxUIScroller .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124518c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView initWithCoder:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245224<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView onLongPress<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245250<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView init<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245260<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView initWithFrame:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112452d8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView initWithBuilderBlock:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245434<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView initWithoutRender<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245524<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView getLifecycleDispatcher<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245534<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView requestLayoutWhenSafepointEnable<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245538<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateScreenMetricsWithWidth:height:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245550<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateFontScale:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245570<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView initLifecycleDispatcher<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245644<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView loadTemplate:withURL:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245654<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView loadTemplateFromURL:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245664<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView loadTemplate:withURL:initData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112457a8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView dispatchError:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112458e0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView loadTemplateFromURL:initData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112459f8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView hotModuleReplace:withPaths:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245ad4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView findUIByIndex:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245b08<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setGlobalPropsWithDictionary:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245b7c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setGlobalPropsWithTemplateData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245bf0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateDataWithString:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245c00<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateDataWithString:processorName:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245ca0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateDataWithDictionary:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245cb0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateDataWithDictionary:processorName:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245d50<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateDataWithTemplateData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245dc4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView resetDataWithTemplateData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245e38<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView getCurrentData<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245e6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView onEnterForeground<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245f24<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView onEnterBackground<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11245fd8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView sendGlobalEvent:withParams:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246078<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView sendGlobalEventToLepus:withParams:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246118<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setFrame:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124614c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView layoutSubviews<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112461bc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView invalidateIntrinsicContentSize<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246208<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView triggerLayout<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246234<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setEnableRadonCompatible:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246244<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setEnableTextNonContiguousLayout:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246254<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView enableTextNonContiguousLayout<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112462cc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView intrinsicContentSize<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112462e0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setIntrinsicContentSize:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246334<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateViewport<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246360<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateViewportWithPreferredLayoutWidth:preferredLayoutHeight:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246370<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView updateViewportWithPreferredLayoutWidth:preferredLayoutHeight:needLayout:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112463f4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView client<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246428<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setClient:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112465d4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setImageFetcher:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246664<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setResourceFetcher:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112466f4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView reset<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246824<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView dispatchViewDidStartLoading<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112468c4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView willMoveToWindow:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124696c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView didMoveToWindow<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112469dc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView tapOnUICalloutBarButton:withEvent:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11246de0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView hitTest:withEvent:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112471cc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView clearForDestroy<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112474a8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView dealloc<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124759c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView viewWithName:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247618<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView findViewWithName:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247694<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView uiWithName:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247710<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView viewWithIdSelector:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124778c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView uiWithIdSelector:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247808<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView cardVersion<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124783c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView lynxConfigInfo<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124788c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView forceGetPerf<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247894<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView getJSModule:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247910<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView getLynxRuntimeId<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247944<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView pauseRootLayoutAnimation<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247970<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView resumeRootLayoutAnimation<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124799c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView addLifecycleClient:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112479fc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setTheme:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247a70<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView theme<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247aa4<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setEnableAsyncDisplay:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247ad0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView enableAsyncDisplay<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247af0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView resetAnimation<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247b1c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView restartAnimation<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247b48<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView layoutHeightMode<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247b6c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setLayoutHeightMode:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247b98<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView layoutWidthMode<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247bbc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setLayoutWidthMode:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247be8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView preferredMaxLayoutWidth<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247c0c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setPreferredMaxLayoutWidth:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247c38<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView preferredMaxLayoutHeight<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247c5c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setPreferredMaxLayoutHeight:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247c88<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView preferredLayoutWidth<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247cac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setPreferredLayoutWidth:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247cd8<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView preferredLayoutHeight<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247cfc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setPreferredLayoutHeight:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247d28<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView url<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247d5c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView baseInspectorOwner<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247e0c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView detachRender<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247e24<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView attachTemplateRender:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247ec0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView processLayout:withURL:initData:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11247fa0<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView processRender<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248144<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView isLayoutFinish<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124815c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView resetViewAndLayer<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248230<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView getAllJsSource<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248264<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView rootWidth<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248288<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView rootHeight<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112482ac<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView isUIRunningMode<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112482bc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView imageFetcher<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112482dc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView resourceFetcher<span class="token punctuation">]</span><span class="token operator">|</span>
+0x112482fc<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView catchAllException<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124830c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setCatchAllException:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124831c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView attached<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124832c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setAttached:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124833c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView lifecycleDispatcher<span class="token punctuation">]</span><span class="token operator">|</span>
+0x1124834c<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setLifecycleDispatcher:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248360<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView templateRender<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248370<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView setTemplateRender:<span class="token punctuation">]</span><span class="token operator">|</span>
+0x11248384<span class="token operator">|</span>-<span class="token punctuation">[</span>LynxView .cxx_destruct<span class="token punctuation">]</span><span class="token operator">|</span>
+</code></pre>
+<p>总体来说，还是有点用的。尤其是<code>--analyze</code></p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-07 11:40:54
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 举例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="maskpro_dylib.html" class="navigation navigation-next " aria-label="Next page: MaskPro.dylib">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"AwemeCore","level":"1.4.3.2.1","depth":4,"next":{"title":"MaskPro.dylib","level":"1.4.3.2.2","depth":4,"path":"macho_tool/jtool2/examples/maskpro_dylib.md","ref":"macho_tool/jtool2/examples/maskpro_dylib.md","articles":[]},"previous":{"title":"举例","level":"1.4.3.2","depth":3,"path":"macho_tool/jtool2/examples/README.md","ref":"macho_tool/jtool2/examples/README.md","articles":[{"title":"AwemeCore","level":"1.4.3.2.1","depth":4,"path":"macho_tool/jtool2/examples/awemecore.md","ref":"macho_tool/jtool2/examples/awemecore.md","articles":[]},{"title":"MaskPro.dylib","level":"1.4.3.2.2","depth":4,"path":"macho_tool/jtool2/examples/maskpro_dylib.md","ref":"macho_tool/jtool2/examples/maskpro_dylib.md","articles":[]},{"title":"akd","level":"1.4.3.2.3","depth":4,"path":"macho_tool/jtool2/examples/akd.md","ref":"macho_tool/jtool2/examples/akd.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/exec_file_format_macho/pdf/exec_file_format_macho.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/exec_file_format_macho/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"exec_file_format_macho","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"可执行文件格式：Mach-O","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Mac和iOS等Apple苹果系统的常见可执行文件格式：Mach-O；先是Mach-O概览；包括背景知识的XNU、编译链接加载过程、PIC等；然后介绍Mach-O格式，包括结构概述和结构图，以及结构详情，包括Header、Load Commands和Segment的data；其中Header包括magic、cputype和cpusubtype、filetype、flags；Load Commands包括LC_UUID、LC_SEGMENT、LC_SEGMENT_64、LC_SYMTAB、LC_DYLD_CHAINED_FIXUPS、LC_DYLD_EXPORTS_TRIE等；Segment包括__TEXT、__DATA、__IMPORT、__LINKEDIT、__OBJC；以及各个Segment的section，比如symbol、strings等；然后是Mach-O格式的子项，包括FAT、codesign、虚拟地址、大小限制等；然后整理Mach-O的各种工具，包括MachOView、rabin2、jtool2、otool、pagestuff，以及每个工具的用法、举例、help语法等；"},"file":{"path":"macho_tool/jtool2/examples/awemecore.md","mtime":"2023-10-07T03:40:54.954Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-07T15:27:55.016Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

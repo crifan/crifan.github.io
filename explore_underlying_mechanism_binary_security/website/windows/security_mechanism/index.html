@@ -1,0 +1,1272 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>安全机制 · 探究底层机制：二进制安全</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="cfg.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"explore_underlying_mechanism_binary_security","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../bin_security_overview/">
+            
+                <a href="../../bin_security_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    二进制安全概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../basic_knowledge/">
+            
+                <a href="../../basic_knowledge/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../basic_knowledge/language/">
+            
+                <a href="../../basic_knowledge/language/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    编程语言
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../basic_knowledge/language/assembly/">
+            
+                <a href="../../basic_knowledge/language/assembly/">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    汇编语言
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1.1" data-path="../../basic_knowledge/language/assembly/x86.html">
+            
+                <a href="../../basic_knowledge/language/assembly/x86.html">
+            
+                    
+                        <b>1.3.1.1.1.</b>
+                    
+                    X86
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.1.2" data-path="../../basic_knowledge/language/assembly/arm.html">
+            
+                <a href="../../basic_knowledge/language/assembly/arm.html">
+            
+                    
+                        <b>1.3.1.1.2.</b>
+                    
+                    ARM
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../basic_knowledge/system_arch/">
+            
+                <a href="../../basic_knowledge/system_arch/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    体系架构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../basic_knowledge/system_arch/register.html">
+            
+                <a href="../../basic_knowledge/system_arch/register.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    寄存器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../basic_knowledge/system_arch/x86.html">
+            
+                <a href="../../basic_knowledge/system_arch/x86.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    X86
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../basic_knowledge/system_arch/arm.html">
+            
+                <a href="../../basic_knowledge/system_arch/arm.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    ARM
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../basic_knowledge/system_arch/heap_stack.html">
+            
+                <a href="../../basic_knowledge/system_arch/heap_stack.html">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../basic_knowledge/executable_file/">
+            
+                <a href="../../basic_knowledge/executable_file/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    可执行文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Windows
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    安全机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="cfg.html">
+            
+                <a href="cfg.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    CFG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="dep.html">
+            
+                <a href="dep.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    DEP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="gs.html">
+            
+                <a href="gs.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    GS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="safeseh.html">
+            
+                <a href="safeseh.html">
+            
+                    
+                        <b>1.4.1.4.</b>
+                    
+                    SafeSEH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.5" data-path="sehop.html">
+            
+                <a href="sehop.html">
+            
+                    
+                        <b>1.4.1.5.</b>
+                    
+                    SEHOP
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../attack_tech/">
+            
+                <a href="../attack_tech/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    攻击技术
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../attack_tech/buffer_overrun.html">
+            
+                <a href="../attack_tech/buffer_overrun.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    缓冲区溢出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../attack_tech/rop.html">
+            
+                <a href="../attack_tech/rop.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    ROP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../attack_tech/heap_spray.html">
+            
+                <a href="../attack_tech/heap_spray.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    Heap Spray
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../attack_tech/shell_code.html">
+            
+                <a href="../attack_tech/shell_code.html">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    Shellcode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../tools/">
+            
+                <a href="../tools/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../tools/executable_tool/disassembler/">
+            
+                <a href="../tools/executable_tool/disassembler/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    反汇编器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="../tools/executable_tool/disassembler/udis86.html">
+            
+                <a href="../tools/executable_tool/disassembler/udis86.html">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    udis86
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../tools/executable_tool/decompiler/">
+            
+                <a href="../tools/executable_tool/decompiler/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    反编译器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../tools/executable_tool/decompiler/dnspy.html">
+            
+                <a href="../tools/executable_tool/decompiler/dnspy.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    dnSpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2.2" data-path="../tools/executable_tool/decompiler/ilspy.html">
+            
+                <a href="../tools/executable_tool/decompiler/ilspy.html">
+            
+                    
+                        <b>1.4.3.2.2.</b>
+                    
+                    ILSpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../tools/static_detect/">
+            
+                <a href="../tools/static_detect/">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    静态安全检工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.3.1" data-path="../tools/static_detect/winchecksec.html">
+            
+                <a href="../tools/static_detect/winchecksec.html">
+            
+                    
+                        <b>1.4.3.3.1.</b>
+                    
+                    winchecksec
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../tools/executable_tool/">
+            
+                <a href="../tools/executable_tool/">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    可执行文件工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.4.1" data-path="../tools/executable_tool/exeinfo_pe.html">
+            
+                <a href="../tools/executable_tool/exeinfo_pe.html">
+            
+                    
+                        <b>1.4.3.4.1.</b>
+                    
+                    ExeInfo PE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="../tools/detect_packer/">
+            
+                <a href="../tools/detect_packer/">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    查壳工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.5.1" data-path="../tools/detect_packer/detect_it_easy.html">
+            
+                <a href="../tools/detect_packer/detect_it_easy.html">
+            
+                    
+                        <b>1.4.3.5.1.</b>
+                    
+                    Detect It Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5.2" data-path="../tools/detect_packer/peid.html">
+            
+                <a href="../tools/detect_packer/peid.html">
+            
+                    
+                        <b>1.4.3.5.2.</b>
+                    
+                    PEiD
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="../tools/reverse_engine/">
+            
+                <a href="../tools/reverse_engine/">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    逆向工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.6.1" data-path="../tools/reverse_engine/ida.html">
+            
+                <a href="../tools/reverse_engine/ida.html">
+            
+                    
+                        <b>1.4.3.6.1.</b>
+                    
+                    IDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6.2" data-path="../tools/reverse_engine/ollydbg.html">
+            
+                <a href="../tools/reverse_engine/ollydbg.html">
+            
+                    
+                        <b>1.4.3.6.2.</b>
+                    
+                    Ollydbg
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6.3" data-path="../tools/reverse_engine/windbg.html">
+            
+                <a href="../tools/reverse_engine/windbg.html">
+            
+                    
+                        <b>1.4.3.6.3.</b>
+                    
+                    WinDbg
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7" data-path="../tools/modify_memory/">
+            
+                <a href="../tools/modify_memory/">
+            
+                    
+                        <b>1.4.3.7.</b>
+                    
+                    内存修改工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.7.1" data-path="../tools/modify_memory/ce.html">
+            
+                <a href="../tools/modify_memory/ce.html">
+            
+                    
+                        <b>1.4.3.7.1.</b>
+                    
+                    CE
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7.2" data-path="../tools/modify_memory/mhs.html">
+            
+                <a href="../tools/modify_memory/mhs.html">
+            
+                    
+                        <b>1.4.3.7.2.</b>
+                    
+                    MHS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7.3" data-path="../tools/modify_memory/modifymemory.html">
+            
+                <a href="../tools/modify_memory/modifymemory.html">
+            
+                    
+                        <b>1.4.3.7.3.</b>
+                    
+                    ModifyMemory
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.8" data-path="../tools/bin_tool/">
+            
+                <a href="../tools/bin_tool/">
+            
+                    
+                        <b>1.4.3.8.</b>
+                    
+                    二进制编辑工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.8.1" data-path="../tools/bin_tool/010editor.html">
+            
+                <a href="../tools/bin_tool/010editor.html">
+            
+                    
+                        <b>1.4.3.8.1.</b>
+                    
+                    010Editor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../multi_plat/">
+            
+                <a href="../../multi_plat/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    跨平台
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../multi_plat/security_mechanism/">
+            
+                <a href="../../multi_plat/security_mechanism/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    安全机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../multi_plat/security_mechanism/aslr.html">
+            
+                <a href="../../multi_plat/security_mechanism/aslr.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    ASLR
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >安全机制</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="windows的安全机制"><a name="windows的安全机制" class="plugin-anchor" href="#windows的安全机制"><i class="fa fa-link" aria-hidden="true"></i></a>Windows的安全机制</h1>
+<p>此处介绍关于Windows的相关安全机制，也对应着Windows相关的漏洞攻防技术。</p>
+<ul>
+<li>Windows的漏洞安全<ul>
+<li>概述<ul>
+<li>在过去的二十多年当中，微软在提高操作系统的安全性方面一直做着不懈的努力。</li>
+<li>从Win98到WinXP、Vista、Win7再到最新的Win10，每个版本的发布都会带来安全性质的飞跃。</li>
+<li>除了在安全功能的保护下大大提高了系统安全性，微软还在内存保护方面做了很多的工作，来提高内存保护的安全性<ul>
+<li>堆栈保护机制：GS</li>
+<li>异常处理保护：SafeSEH</li>
+<li>数据执行保护：DEP</li>
+<li>地址空间分布随机化：ASLR</li>
+<li>结构化异常覆盖保护：SEHOP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a name="心得" class="plugin-anchor" href="#心得"><i class="fa fa-link" aria-hidden="true"></i></a>心得</h2>
+<ul>
+<li>在用<code>VS</code>较高版本编译程序测试溢出等的时候，注意要关闭保护功能(如常见的<code>DEP</code>以及<code>ASLR</code>)<ul>
+<li>在项目菜单的属性里面设置</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-09-01 23:08:00
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Windows">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="cfg.html" class="navigation navigation-next " aria-label="Next page: CFG">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"安全机制","level":"1.4.1","depth":2,"next":{"title":"CFG","level":"1.4.1.1","depth":3,"path":"windows/security_mechanism/cfg.md","ref":"windows/security_mechanism/cfg.md","articles":[]},"previous":{"title":"Windows","level":"1.4","depth":1,"path":"windows/README.md","ref":"windows/README.md","articles":[{"title":"安全机制","level":"1.4.1","depth":2,"path":"windows/security_mechanism/README.md","ref":"windows/security_mechanism/README.md","articles":[{"title":"CFG","level":"1.4.1.1","depth":3,"path":"windows/security_mechanism/cfg.md","ref":"windows/security_mechanism/cfg.md","articles":[]},{"title":"DEP","level":"1.4.1.2","depth":3,"path":"windows/security_mechanism/dep.md","ref":"windows/security_mechanism/dep.md","articles":[]},{"title":"GS","level":"1.4.1.3","depth":3,"path":"windows/security_mechanism/gs.md","ref":"windows/security_mechanism/gs.md","articles":[]},{"title":"SafeSEH","level":"1.4.1.4","depth":3,"path":"windows/security_mechanism/safeseh.md","ref":"windows/security_mechanism/safeseh.md","articles":[]},{"title":"SEHOP","level":"1.4.1.5","depth":3,"path":"windows/security_mechanism/sehop.md","ref":"windows/security_mechanism/sehop.md","articles":[]}]},{"title":"攻击技术","level":"1.4.2","depth":2,"path":"windows/attack_tech/README.md","ref":"windows/attack_tech/README.md","articles":[{"title":"缓冲区溢出","level":"1.4.2.1","depth":3,"path":"windows/attack_tech/buffer_overrun.md","ref":"windows/attack_tech/buffer_overrun.md","articles":[]},{"title":"ROP","level":"1.4.2.2","depth":3,"path":"windows/attack_tech/rop.md","ref":"windows/attack_tech/rop.md","articles":[]},{"title":"Heap Spray","level":"1.4.2.3","depth":3,"path":"windows/attack_tech/heap_spray.md","ref":"windows/attack_tech/heap_spray.md","articles":[]},{"title":"Shellcode","level":"1.4.2.4","depth":3,"path":"windows/attack_tech/shell_code.md","ref":"windows/attack_tech/shell_code.md","articles":[]}]},{"title":"工具","level":"1.4.3","depth":2,"path":"windows/tools/README.md","ref":"windows/tools/README.md","articles":[{"title":"反汇编器","level":"1.4.3.1","depth":3,"path":"windows/tools/executable_tool/disassembler/README.md","ref":"windows/tools/executable_tool/disassembler/README.md","articles":[{"title":"udis86","level":"1.4.3.1.1","depth":4,"path":"windows/tools/executable_tool/disassembler/udis86.md","ref":"windows/tools/executable_tool/disassembler/udis86.md","articles":[]}]},{"title":"反编译器","level":"1.4.3.2","depth":3,"path":"windows/tools/executable_tool/decompiler/README.md","ref":"windows/tools/executable_tool/decompiler/README.md","articles":[{"title":"dnSpy","level":"1.4.3.2.1","depth":4,"path":"windows/tools/executable_tool/decompiler/dnspy.md","ref":"windows/tools/executable_tool/decompiler/dnspy.md","articles":[]},{"title":"ILSpy","level":"1.4.3.2.2","depth":4,"path":"windows/tools/executable_tool/decompiler/ilspy.md","ref":"windows/tools/executable_tool/decompiler/ilspy.md","articles":[]}]},{"title":"静态安全检工具","level":"1.4.3.3","depth":3,"path":"windows/tools/static_detect/README.md","ref":"windows/tools/static_detect/README.md","articles":[{"title":"winchecksec","level":"1.4.3.3.1","depth":4,"path":"windows/tools/static_detect/winchecksec.md","ref":"windows/tools/static_detect/winchecksec.md","articles":[]}]},{"title":"可执行文件工具","level":"1.4.3.4","depth":3,"path":"windows/tools/executable_tool/README.md","ref":"windows/tools/executable_tool/README.md","articles":[{"title":"ExeInfo PE","level":"1.4.3.4.1","depth":4,"path":"windows/tools/executable_tool/exeinfo_pe.md","ref":"windows/tools/executable_tool/exeinfo_pe.md","articles":[]}]},{"title":"查壳工具","level":"1.4.3.5","depth":3,"path":"windows/tools/detect_packer/README.md","ref":"windows/tools/detect_packer/README.md","articles":[{"title":"Detect It Easy","level":"1.4.3.5.1","depth":4,"path":"windows/tools/detect_packer/detect_it_easy.md","ref":"windows/tools/detect_packer/detect_it_easy.md","articles":[]},{"title":"PEiD","level":"1.4.3.5.2","depth":4,"path":"windows/tools/detect_packer/peid.md","ref":"windows/tools/detect_packer/peid.md","articles":[]}]},{"title":"逆向工具","level":"1.4.3.6","depth":3,"path":"windows/tools/reverse_engine/README.md","ref":"windows/tools/reverse_engine/README.md","articles":[{"title":"IDA","level":"1.4.3.6.1","depth":4,"path":"windows/tools/reverse_engine/ida.md","ref":"windows/tools/reverse_engine/ida.md","articles":[]},{"title":"Ollydbg","level":"1.4.3.6.2","depth":4,"path":"windows/tools/reverse_engine/ollydbg.md","ref":"windows/tools/reverse_engine/ollydbg.md","articles":[]},{"title":"WinDbg","level":"1.4.3.6.3","depth":4,"path":"windows/tools/reverse_engine/windbg.md","ref":"windows/tools/reverse_engine/windbg.md","articles":[]}]},{"title":"内存修改工具","level":"1.4.3.7","depth":3,"path":"windows/tools/modify_memory/README.md","ref":"windows/tools/modify_memory/README.md","articles":[{"title":"CE","level":"1.4.3.7.1","depth":4,"path":"windows/tools/modify_memory/ce.md","ref":"windows/tools/modify_memory/ce.md","articles":[]},{"title":"MHS","level":"1.4.3.7.2","depth":4,"path":"windows/tools/modify_memory/mhs.md","ref":"windows/tools/modify_memory/mhs.md","articles":[]},{"title":"ModifyMemory","level":"1.4.3.7.3","depth":4,"path":"windows/tools/modify_memory/modifymemory.md","ref":"windows/tools/modify_memory/modifymemory.md","articles":[]}]},{"title":"二进制编辑工具","level":"1.4.3.8","depth":3,"path":"windows/tools/bin_tool/README.md","ref":"windows/tools/bin_tool/README.md","articles":[{"title":"010Editor","level":"1.4.3.8.1","depth":4,"path":"windows/tools/bin_tool/010editor.md","ref":"windows/tools/bin_tool/010editor.md","articles":[]}]}]}]},"articles":[{"title":"CFG","level":"1.4.1.1","depth":3,"path":"windows/security_mechanism/cfg.md","ref":"windows/security_mechanism/cfg.md","articles":[]},{"title":"DEP","level":"1.4.1.2","depth":3,"path":"windows/security_mechanism/dep.md","ref":"windows/security_mechanism/dep.md","articles":[]},{"title":"GS","level":"1.4.1.3","depth":3,"path":"windows/security_mechanism/gs.md","ref":"windows/security_mechanism/gs.md","articles":[]},{"title":"SafeSEH","level":"1.4.1.4","depth":3,"path":"windows/security_mechanism/safeseh.md","ref":"windows/security_mechanism/safeseh.md","articles":[]},{"title":"SEHOP","level":"1.4.1.5","depth":3,"path":"windows/security_mechanism/sehop.md","ref":"windows/security_mechanism/sehop.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/explore_underlying_mechanism_binary_security/pdf/explore_underlying_mechanism_binary_security.pdf","icon":"fa-file-pdf-o"},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/explore_underlying_mechanism_binary_security/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"explore_underlying_mechanism_binary_security","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"探究底层机制：二进制安全","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理二进制安全，即PWN；先对二进制安全概述；再介绍相关基础知识，比如编程语言，包括汇编语言X86、ARM等；体系架构的寄存器X86、ARM和堆栈，以及可执行文件；再总结Windows相关的二进制安全，包括安全机制的CFG、DEP、GS、SafeSEH、SEHOP，和攻击技术，包括缓冲区溢出、ROP、Heap spray、Shellcode等；再整理二进制相关工具，包括反编译器的dnSpy、ILSpy，静态安全检工具的winchecksec，可执行文件工具的Exeinfo PE，查壳工具的Detect It Easy、PEiD，逆向工具的IDA、Ollydbg、WinDbg，内存修改工具的CE、MHS、ModifyMemory；以及通用的知识，比如安全机制中的ASLR最后附上参考资料。"},"file":{"path":"windows/security_mechanism/README.md","mtime":"2023-09-01T15:08:00.663Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-09-01T16:09:35.953Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1756 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>举例 · 可执行文件格式：ELF</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../help/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"exec_file_format_elf","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../../">
+            
+                <a href="../../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../../elf_overview/">
+            
+                <a href="../../../../../elf_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    ELF概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../../../elf_overview/elf_file_format.html">
+            
+                <a href="../../../../../elf_overview/elf_file_format.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    ELF文件类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../../../../elf_overview/term_concept.html">
+            
+                <a href="../../../../../elf_overview/term_concept.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    ELF术语和概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../../../elf_detail/">
+            
+                <a href="../../../../../elf_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    ELF结构详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../../../elf_detail/two_views.html">
+            
+                <a href="../../../../../elf_detail/two_views.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    ELF的2种视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../../../elf_overview/layout_detail.html">
+            
+                <a href="../../../../../elf_overview/layout_detail.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    ELF结构图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../../../elf_overview/link_exec_process.html">
+            
+                <a href="../../../../../elf_overview/link_exec_process.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    ELF链接和执行过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../../../../elf_overview/section/">
+            
+                <a href="../../../../../elf_overview/section/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    section节
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../../../../../elf_overview/section/bss.html">
+            
+                <a href="../../../../../elf_overview/section/bss.html">
+            
+                    
+                        <b>1.3.4.1.</b>
+                    
+                    .bss
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../../../../elf_overview/segment.html">
+            
+                <a href="../../../../../elf_overview/segment.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    segment段
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    ELF解析工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    读取信息
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    Linux通用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../readelf/">
+            
+                <a href="../../readelf/">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    readelf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1.1" data-path="../../readelf/install.html">
+            
+                <a href="../../readelf/install.html">
+            
+                    
+                        <b>1.4.1.1.1.1.</b>
+                    
+                    安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.1.2" data-path="../../readelf/usage/">
+            
+                <a href="../../readelf/usage/">
+            
+                    
+                        <b>1.4.1.1.1.2.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1.2.1" data-path="../../readelf/usage/example.html">
+            
+                <a href="../../readelf/usage/example.html">
+            
+                    
+                        <b>1.4.1.1.1.2.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.1.3" data-path="../../readelf/help.html">
+            
+                <a href="../../readelf/help.html">
+            
+                    
+                        <b>1.4.1.1.1.3.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    objdump
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.1.1.2.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1.1.2.1.1" data-path="example.html">
+            
+                <a href="example.html">
+            
+                    
+                        <b>1.4.1.1.2.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2.2" data-path="../help/">
+            
+                <a href="../help/">
+            
+                    
+                        <b>1.4.1.1.2.2.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.2.2.1" data-path="../help/man.html">
+            
+                <a href="../help/man.html">
+            
+                    
+                        <b>1.4.1.1.2.2.1.</b>
+                    
+                    man
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../rabin2/">
+            
+                <a href="../../rabin2/">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    rabin2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.3.1" data-path="../../rabin2/usage/">
+            
+                <a href="../../rabin2/usage/">
+            
+                    
+                        <b>1.4.1.1.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.3.1.1" data-path="../../rabin2/usage/example.html">
+            
+                <a href="../../rabin2/usage/example.html">
+            
+                    
+                        <b>1.4.1.1.3.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3.2" data-path="../../rabin2/help/">
+            
+                <a href="../../rabin2/help/">
+            
+                    
+                        <b>1.4.1.1.3.2.</b>
+                    
+                    help
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.3.2.1" data-path="../../rabin2/help/man.html">
+            
+                <a href="../../rabin2/help/man.html">
+            
+                    
+                        <b>1.4.1.1.3.2.1.</b>
+                    
+                    man
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../android/">
+            
+                <a href="../../../android/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    Android专用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../../android/jeb.html">
+            
+                <a href="../../../android/jeb.html">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    JEB
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../../parse_edit/">
+            
+                <a href="../../../../parse_edit/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    解析修改
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../../parse_edit/lief.html">
+            
+                <a href="../../../../parse_edit/lief.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    LIEF
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../../android_elf/">
+            
+                <a href="../../../../../android_elf/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Android中的ELF
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../../../appendix/">
+            
+                <a href="../../../../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../../../appendix/reference.html">
+            
+                <a href="../../../../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../../.." >举例</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="objdump用法举例"><a name="objdump用法举例" class="plugin-anchor" href="#objdump用法举例"><i class="fa fa-link" aria-hidden="true"></i></a>objdump用法举例</h1>
+<ul>
+<li>输入文件：ELF格式的<code>libtacker.so</code></li>
+</ul>
+<p>用objdump读取解析ELF的<code>libtacker.so</code>的效果：</p>
+<h2 id="a：显示存档文件头信息"><a name="a：显示存档文件头信息" class="plugin-anchor" href="#a：显示存档文件头信息"><i class="fa fa-link" aria-hidden="true"></i></a>-a：显示存档文件头信息</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-a</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+</code></pre>
+<h2 id="f：显示全部文件头信息"><a name="f：显示全部文件头信息" class="plugin-anchor" href="#f：显示全部文件头信息"><i class="fa fa-link" aria-hidden="true"></i></a>-f：显示全部文件头信息</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-f</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+architecture: aarch64
+start address: 0x000000000001a5c0
+</code></pre>
+<h2 id="h：显示节的头信息"><a name="h：显示节的头信息" class="plugin-anchor" href="#h：显示节的头信息"><i class="fa fa-link" aria-hidden="true"></i></a>-h：显示节的头信息</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-h</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+
+Sections:
+Idx Name                Size     VMA              Type
+  <span class="token number">0</span>                     00000000 0000000000000000
+  <span class="token number">1</span> .note.android.ident 00000098 0000000000000238
+  <span class="token number">2</span> .note.gnu.build-id  00000024 00000000000002d0
+  <span class="token number">3</span> .dynsym             00000b10 00000000000002f8
+  <span class="token number">4</span> .gnu.version        000000ec 0000000000000e08
+  <span class="token number">5</span> .gnu.version_r      00000040 0000000000000ef4
+  <span class="token number">6</span> .gnu.hash           000001ec 0000000000000f38
+  <span class="token number">7</span> .hash               000003b8 0000000000001124
+  <span class="token number">8</span> .dynstr             00000c19 00000000000014dc
+  <span class="token number">9</span> .rela.dyn           00008850 00000000000020f8
+ <span class="token number">10</span> .rela.plt           00000450 000000000000a948
+ <span class="token number">11</span> .gcc_except_table   00001960 000000000000ad98 DATA
+ <span class="token number">12</span> .rodata             00003434 000000000000c6f8 DATA
+ <span class="token number">13</span> .eh_frame_hdr       00001dbc 000000000000fb2c DATA
+ <span class="token number">14</span> .eh_frame           00008cd4 00000000000118e8 DATA
+ <span class="token number">15</span> .text               000aec60 000000000001a5c0 TEXT
+ <span class="token number">16</span> .plt                00000300 00000000000c9220 TEXT
+ <span class="token number">17</span> .data.rel.ro        00002eb8 00000000000ca520 DATA
+ <span class="token number">18</span> .fini_array         00000010 00000000000cd3d8
+ <span class="token number">19</span> .init_array         00000230 00000000000cd3e8
+ <span class="token number">20</span> .dynamic            000001d0 00000000000cd618
+ <span class="token number">21</span> .got                000000c0 00000000000cd7e8 DATA
+ <span class="token number">22</span> .got.plt            00000188 00000000000cd8a8 DATA
+ <span class="token number">23</span> .data               000025d8 00000000000cea30 DATA
+ <span class="token number">24</span> .bss                00000ad0 00000000000d1010 BSS
+ <span class="token number">25</span> .comment            000000c6 0000000000000000
+ <span class="token number">26</span> .shstrtab           00000104 0000000000000000
+</code></pre>
+<h2 id="x：显示全部头信息"><a name="x：显示全部头信息" class="plugin-anchor" href="#x：显示全部头信息"><i class="fa fa-link" aria-hidden="true"></i></a>-x：显示全部头信息</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-x</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+architecture: aarch64
+start address: 0x000000000001a5c0
+
+Program Header:
+    PHDR off    0x0000000000000040 vaddr 0x0000000000000040 paddr 0x0000000000000040 align <span class="token number">2</span>**3
+         filesz 0x00000000000001f8 memsz 0x00000000000001f8 flags r--
+    LOAD off    0x0000000000000000 vaddr 0x0000000000000000 paddr 0x0000000000000000 align <span class="token number">2</span>**12
+         filesz 0x00000000000c9520 memsz 0x00000000000c9520 flags r-x
+    LOAD off    0x00000000000c9520 vaddr 0x00000000000ca520 paddr 0x00000000000ca520 align <span class="token number">2</span>**12
+         filesz 0x0000000000003510 memsz 0x0000000000003510 flags rw-
+    LOAD off    0x00000000000cca30 vaddr 0x00000000000cea30 paddr 0x00000000000cea30 align <span class="token number">2</span>**12
+         filesz 0x00000000000025d8 memsz 0x00000000000030b0 flags rw-
+ DYNAMIC off    0x00000000000cc618 vaddr 0x00000000000cd618 paddr 0x00000000000cd618 align <span class="token number">2</span>**3
+         filesz 0x00000000000001d0 memsz 0x00000000000001d0 flags rw-
+   RELRO off    0x00000000000c9520 vaddr 0x00000000000ca520 paddr 0x00000000000ca520 align <span class="token number">2</span>**0
+         filesz 0x0000000000003510 memsz 0x0000000000003ae0 flags r--
+EH_FRAME off    0x000000000000fb2c vaddr 0x000000000000fb2c paddr 0x000000000000fb2c align <span class="token number">2</span>**2
+         filesz 0x0000000000001dbc memsz 0x0000000000001dbc flags r--
+   STACK off    0x0000000000000000 vaddr 0x0000000000000000 paddr 0x0000000000000000 align <span class="token number">2</span>**64
+         filesz 0x0000000000000000 memsz 0x0000000000000000 flags rw-
+    NOTE off    0x0000000000000238 vaddr 0x0000000000000238 paddr 0x0000000000000238 align <span class="token number">2</span>**2
+         filesz 0x00000000000000bc memsz 0x00000000000000bc flags r--
+
+Dynamic Section:
+  NEEDED       liblog.so
+  NEEDED       libm.so
+  NEEDED       libdl.so
+  NEEDED       libc.so
+  SONAME       libforce.so
+  FLAGS        0x0000000000000008
+  FLAGS_1      0x0000000000000001
+  RELA         0x00000000000020f8
+  RELASZ       0x0000000000008850
+  RELAENT      0x0000000000000018
+  RELACOUNT    0x0000000000000568
+  JMPREL       0x000000000000a948
+  PLTRELSZ     0x0000000000000450
+  PLTGOT       0x00000000000cd8a8
+  PLTREL       0x0000000000000007
+  SYMTAB       0x00000000000002f8
+  SYMENT       0x0000000000000018
+  STRTAB       0x00000000000014dc
+  STRSZ        0x0000000000000c19
+  GNU_HASH     0x0000000000000f38
+  HASH         0x0000000000001124
+  INIT_ARRAY   0x00000000000cd3e8
+  INIT_ARRAYSZ 0x0000000000000230
+  FINI_ARRAY   0x00000000000cd3d8
+  FINI_ARRAYSZ 0x0000000000000010
+  VERSYM       0x0000000000000e08
+  VERNEED      0x0000000000000ef4
+  VERNEEDNUM   0x0000000000000002
+
+Version References:
+  required from libdl.so:
+    0x00050d63 0x00 03 LIBC
+  required from libc.so:
+    0x00050d63 0x00 02 LIBC
+
+Sections:
+Idx Name                Size     VMA              Type
+  <span class="token number">0</span>                     00000000 0000000000000000
+  <span class="token number">1</span> .note.android.ident 00000098 0000000000000238
+  <span class="token number">2</span> .note.gnu.build-id  00000024 00000000000002d0
+  <span class="token number">3</span> .dynsym             00000b10 00000000000002f8
+  <span class="token number">4</span> .gnu.version        000000ec 0000000000000e08
+  <span class="token number">5</span> .gnu.version_r      00000040 0000000000000ef4
+  <span class="token number">6</span> .gnu.hash           000001ec 0000000000000f38
+  <span class="token number">7</span> .hash               000003b8 0000000000001124
+  <span class="token number">8</span> .dynstr             00000c19 00000000000014dc
+  <span class="token number">9</span> .rela.dyn           00008850 00000000000020f8
+ <span class="token number">10</span> .rela.plt           00000450 000000000000a948
+ <span class="token number">11</span> .gcc_except_table   00001960 000000000000ad98 DATA
+ <span class="token number">12</span> .rodata             00003434 000000000000c6f8 DATA
+ <span class="token number">13</span> .eh_frame_hdr       00001dbc 000000000000fb2c DATA
+ <span class="token number">14</span> .eh_frame           00008cd4 00000000000118e8 DATA
+ <span class="token number">15</span> .text               000aec60 000000000001a5c0 TEXT
+ <span class="token number">16</span> .plt                00000300 00000000000c9220 TEXT
+ <span class="token number">17</span> .data.rel.ro        00002eb8 00000000000ca520 DATA
+ <span class="token number">18</span> .fini_array         00000010 00000000000cd3d8
+ <span class="token number">19</span> .init_array         00000230 00000000000cd3e8
+ <span class="token number">20</span> .dynamic            000001d0 00000000000cd618
+ <span class="token number">21</span> .got                000000c0 00000000000cd7e8 DATA
+ <span class="token number">22</span> .got.plt            00000188 00000000000cd8a8 DATA
+ <span class="token number">23</span> .data               000025d8 00000000000cea30 DATA
+ <span class="token number">24</span> .bss                00000ad0 00000000000d1010 BSS
+ <span class="token number">25</span> .comment            000000c6 0000000000000000
+ <span class="token number">26</span> .shstrtab           00000104 0000000000000000
+
+SYMBOL TABLE:
+</code></pre>
+<h2 id="d：反汇编可执行指令的内容"><a name="d：反汇编可执行指令的内容" class="plugin-anchor" href="#d：反汇编可执行指令的内容"><i class="fa fa-link" aria-hidden="true"></i></a>-d：反汇编可执行指令的内容</h2>
+<h3 id="text段反汇编"><a name="text段反汇编" class="plugin-anchor" href="#text段反汇编"><i class="fa fa-link" aria-hidden="true"></i></a>text段反汇编</h3>
+<p>相关参数：</p>
+<pre class="language-"><code class="lang-bash">       <span class="token parameter variable">-d</span>
+       <span class="token parameter variable">--disassemble</span>
+       <span class="token parameter variable">--disassemble</span><span class="token operator">=</span>symbol
+           Display the assembler mnemonics <span class="token keyword">for</span> the machine instructions
+           from the input file.  This option only disassembles those
+           sections <span class="token function">which</span> are expected to contain instructions.  If the
+           optional symbol argument is given, <span class="token keyword">then</span> display the assembler
+           mnemonics starting at symbol.  If symbol is a <span class="token keyword">function</span> name
+           <span class="token keyword">then</span> disassembly will stop at the end of the function,
+           otherwise it will stop when the next symbol is encountered.
+           If there are no matches <span class="token keyword">for</span> symbol <span class="token keyword">then</span> nothing will be
+           displayed.
+
+           Note <span class="token keyword">if</span> the <span class="token parameter variable">--dwarf</span><span class="token operator">=</span>follow-links option is enabled <span class="token keyword">then</span> any
+           symbol tables <span class="token keyword">in</span> linked debug info files will be <span class="token builtin class-name">read</span> <span class="token keyword">in</span> and
+           used when disassembling.
+
+       <span class="token parameter variable">-j</span> name
+       <span class="token parameter variable">--section</span><span class="token operator">=</span>name
+           Display information only <span class="token keyword">for</span> section name.
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-d</span> <span class="token parameter variable">-j</span> .text libtacker.so
+<span class="token punctuation">..</span>.
+   c8e54: <span class="token number">60</span> ca 00 <span class="token number">39</span>      strb    w0, <span class="token punctuation">[</span>x19, <span class="token comment">#50]</span>
+   c8e58: e8 02 <span class="token number">40</span> <span class="token number">39</span>      ldrb    w8, <span class="token punctuation">[</span>x23<span class="token punctuation">]</span>
+   c8e5c: 1f e9 01 <span class="token number">71</span>      <span class="token function">cmp</span>    w8, <span class="token comment">#122</span>
+   c8e60: <span class="token number">80</span> 01 00 <span class="token number">54</span>      b.eq    0xc8e90 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e4bc<span class="token operator">&gt;</span>
+   c8e64: <span class="token number">44</span> 00 00 <span class="token number">14</span>      b    0xc8f74 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e5a<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   c8e68: <span class="token number">20</span> fa ff <span class="token number">90</span>      adrp    x0, 0xc000 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e1a<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   c8e6c: 00 ec 3d <span class="token number">91</span>      <span class="token function">add</span>    x0, x0, <span class="token comment">#3963</span>
+   c8e70: <span class="token number">46</span> 00 00 <span class="token number">14</span>      b    0xc8f88 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e5b<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   c8e74: a0 <span class="token number">63</span> 00 <span class="token number">91</span>      <span class="token function">add</span>    x0, x29, <span class="token comment">#24</span>
+   c8e78: e1 03 <span class="token number">16</span> aa      mov    x1, x22
+   c8e7c: b5 fa ff <span class="token number">97</span>      bl    0xc7950 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1cf7c<span class="token operator">&gt;</span>
+   c8e80: <span class="token number">60</span> ca 00 <span class="token number">39</span>      strb    w0, <span class="token punctuation">[</span>x19, <span class="token comment">#50]</span>
+   c8e84: e8 02 <span class="token number">40</span> <span class="token number">39</span>      ldrb    w8, <span class="token punctuation">[</span>x23<span class="token punctuation">]</span>
+   c8e88: 1f e9 01 <span class="token number">71</span>      <span class="token function">cmp</span>    w8, <span class="token comment">#122</span>
+   c8e8c: <span class="token number">41</span> 07 00 <span class="token number">54</span>      b.ne    0xc8f74 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e5a<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   c8e90: a0 <span class="token number">63</span> 00 <span class="token number">91</span>      <span class="token function">add</span>    x0, x29, <span class="token comment">#24</span>
+   c8e94: e1 03 <span class="token number">16</span> aa      mov    x1, x22
+   c8e98: ae fa ff <span class="token number">97</span>      bl    0xc7950 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1cf7c<span class="token operator">&gt;</span>
+   c8e9c: <span class="token number">38</span> fa ff f0      adrp    x24, 0xf000 <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e1e<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   c8ea0: <span class="token number">18</span> <span class="token number">73</span> <span class="token number">25</span> <span class="token number">91</span>      <span class="token function">add</span>    x24, x24, <span class="token comment">#2396</span>
+   c8ea4: <span class="token number">39</span> 00 <span class="token number">80</span> <span class="token number">52</span>      mov    w25, <span class="token comment">#1</span>
+   c8ea8: 05 00 00 <span class="token number">14</span>      b    0xc8ebc <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1e4e<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span>
+   c8eac: 9f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#36</span>
+   c8eb0: <span class="token number">79</span> ce 00 <span class="token number">39</span>      strb    w25, <span class="token punctuation">[</span>x19, <span class="token comment">#51]</span>
+   c8eb4: 9f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#36</span>
+   c8eb8: f7 06 00 <span class="token number">91</span>      <span class="token function">add</span>    x23, x23, <span class="token comment">#1</span>
+<span class="token punctuation">..</span>.
+   c9174: <span class="token number">10</span> 7c <span class="token number">40</span> f9      ldr    x16, <span class="token punctuation">[</span>x0, <span class="token comment">#248]</span>
+   c9178: 00 04 <span class="token number">40</span> a9      ldp    x0, x1, <span class="token punctuation">[</span>x0<span class="token punctuation">]</span>
+   c917c: 1f 02 00 <span class="token number">91</span>      mov    sp, x16
+   c9180: c0 03 5f d6      ret
+   c9184: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   c9188: 00 04 00 a9      stp    x0, x1, <span class="token punctuation">[</span>x0<span class="token punctuation">]</span>
+   c918c: 02 0c 01 a9      stp    x2, x3, <span class="token punctuation">[</span>x0, <span class="token comment">#16]</span>
+   c9190: 04 <span class="token number">14</span> 02 a9      stp    x4, x5, <span class="token punctuation">[</span>x0, <span class="token comment">#32]</span>
+   c9194: 06 1c 03 a9      stp    x6, x7, <span class="token punctuation">[</span>x0, <span class="token comment">#48]</span>
+   c9198: 08 <span class="token number">24</span> 04 a9      stp    x8, x9, <span class="token punctuation">[</span>x0, <span class="token comment">#64]</span>
+   c919c: 0a 2c 05 a9      stp    x10, x11, <span class="token punctuation">[</span>x0, <span class="token comment">#80]</span>
+   c91a0: 0c <span class="token number">34</span> 06 a9      stp    x12, x13, <span class="token punctuation">[</span>x0, <span class="token comment">#96]</span>
+   c91a4: 0e 3c 07 a9      stp    x14, x15, <span class="token punctuation">[</span>x0, <span class="token comment">#112]</span>
+   c91a8: <span class="token number">10</span> <span class="token number">44</span> 08 a9      stp    x16, x17, <span class="token punctuation">[</span>x0, <span class="token comment">#128]</span>
+   c91ac: <span class="token number">12</span> 4c 09 a9      stp    x18, x19, <span class="token punctuation">[</span>x0, <span class="token comment">#144]</span>
+   c91b0: <span class="token number">14</span> <span class="token number">54</span> 0a a9      stp    x20, x21, <span class="token punctuation">[</span>x0, <span class="token comment">#160]</span>
+   c91b4: <span class="token number">16</span> 5c 0b a9      stp    x22, x23, <span class="token punctuation">[</span>x0, <span class="token comment">#176]</span>
+   c91b8: <span class="token number">18</span> <span class="token number">64</span> 0c a9      stp    x24, x25, <span class="token punctuation">[</span>x0, <span class="token comment">#192]</span>
+   c91bc: 1a 6c 0d a9      stp    x26, x27, <span class="token punctuation">[</span>x0, <span class="token comment">#208]</span>
+   c91c0: 1c <span class="token number">74</span> 0e a9      stp    x28, x29, <span class="token punctuation">[</span>x0, <span class="token comment">#224]</span>
+   c91c4: 1e <span class="token number">78</span> 00 f9      str    x30, <span class="token punctuation">[</span>x0, <span class="token comment">#240]</span>
+   c91c8: e1 03 00 <span class="token number">91</span>      mov    x1, sp
+   c91cc: 01 7c 00 f9      str    x1, <span class="token punctuation">[</span>x0, <span class="token comment">#248]</span>
+   c91d0: 1e <span class="token number">80</span> 00 f9      str    x30, <span class="token punctuation">[</span>x0, <span class="token comment">#256]</span>
+   c91d4: 00 04 <span class="token number">11</span> 6d      stp    d0, d1, <span class="token punctuation">[</span>x0, <span class="token comment">#272]</span>
+   c91d8: 02 0c <span class="token number">12</span> 6d      stp    d2, d3, <span class="token punctuation">[</span>x0, <span class="token comment">#288]</span>
+   c91dc: 04 <span class="token number">14</span> <span class="token number">13</span> 6d      stp    d4, d5, <span class="token punctuation">[</span>x0, <span class="token comment">#304]</span>
+   c91e0: 06 1c <span class="token number">14</span> 6d      stp    d6, d7, <span class="token punctuation">[</span>x0, <span class="token comment">#320]</span>
+   c91e4: 08 <span class="token number">24</span> <span class="token number">15</span> 6d      stp    d8, d9, <span class="token punctuation">[</span>x0, <span class="token comment">#336]</span>
+   c91e8: 0a 2c <span class="token number">16</span> 6d      stp    d10, d11, <span class="token punctuation">[</span>x0, <span class="token comment">#352]</span>
+   c91ec: 0c <span class="token number">34</span> <span class="token number">17</span> 6d      stp    d12, d13, <span class="token punctuation">[</span>x0, <span class="token comment">#368]</span>
+   c91f0: 0e 3c <span class="token number">18</span> 6d      stp    d14, d15, <span class="token punctuation">[</span>x0, <span class="token comment">#384]</span>
+   c91f4: <span class="token number">10</span> <span class="token number">44</span> <span class="token number">19</span> 6d      stp    d16, d17, <span class="token punctuation">[</span>x0, <span class="token comment">#400]</span>
+   c91f8: <span class="token number">12</span> 4c 1a 6d      stp    d18, d19, <span class="token punctuation">[</span>x0, <span class="token comment">#416]</span>
+   c91fc: <span class="token number">14</span> <span class="token number">54</span> 1b 6d      stp    d20, d21, <span class="token punctuation">[</span>x0, <span class="token comment">#432]</span>
+   c9200: <span class="token number">16</span> 5c 1c 6d      stp    d22, d23, <span class="token punctuation">[</span>x0, <span class="token comment">#448]</span>
+   c9204: <span class="token number">18</span> <span class="token number">64</span> 1d 6d      stp    d24, d25, <span class="token punctuation">[</span>x0, <span class="token comment">#464]</span>
+   c9208: 1a 6c 1e 6d      stp    d26, d27, <span class="token punctuation">[</span>x0, <span class="token comment">#480]</span>
+   c920c: 1c <span class="token number">74</span> 1f 6d      stp    d28, d29, <span class="token punctuation">[</span>x0, <span class="token comment">#496]</span>
+   c9210: 1e 00 01 fd      str    d30, <span class="token punctuation">[</span>x0, <span class="token comment">#512]</span>
+   c9214: 1f 04 01 fd      str    d31, <span class="token punctuation">[</span>x0, <span class="token comment">#520]</span>
+   c9218: 00 00 <span class="token number">80</span> d2      mov    x0, <span class="token comment">#0</span>
+   c921c: c0 03 5f d6      ret
+</code></pre>
+<p>内容太多了。</p>
+<p>看来是把全部的汇编都反编译了。</p>
+<h3 id="reloc段反汇编"><a name="reloc段反汇编" class="plugin-anchor" href="#reloc段反汇编"><i class="fa fa-link" aria-hidden="true"></i></a>reloc段反汇编</h3>
+<p>相关参数：</p>
+<pre class="language-"><code class="lang-bash">       <span class="token parameter variable">-d</span>
+       <span class="token parameter variable">--disassemble</span>
+       <span class="token parameter variable">--disassemble</span><span class="token operator">=</span>symbol
+           Display the assembler mnemonics <span class="token keyword">for</span> the machine instructions
+           from the input file.  This option only disassembles those
+           sections <span class="token function">which</span> are expected to contain instructions.  If the
+           optional symbol argument is given, <span class="token keyword">then</span> display the assembler
+           mnemonics starting at symbol.  If symbol is a <span class="token keyword">function</span> name
+           <span class="token keyword">then</span> disassembly will stop at the end of the function,
+           otherwise it will stop when the next symbol is encountered.
+           If there are no matches <span class="token keyword">for</span> symbol <span class="token keyword">then</span> nothing will be
+           displayed.
+
+
+           Note <span class="token keyword">if</span> the <span class="token parameter variable">--dwarf</span><span class="token operator">=</span>follow-links option is enabled <span class="token keyword">then</span> any
+           symbol tables <span class="token keyword">in</span> linked debug info files will be <span class="token builtin class-name">read</span> <span class="token keyword">in</span> and
+           used when disassembling.
+
+
+       <span class="token parameter variable">-r</span>
+       <span class="token parameter variable">--reloc</span>
+           Print the relocation entries of the file.  If used with <span class="token parameter variable">-d</span> or
+           -D, the relocations are printed interspersed with the
+           disassembly.
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-d</span> <span class="token parameter variable">-r</span> libtacker.so <span class="token operator">&gt;</span> libtacker_objdump_d_r.coffee
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+
+000000000001a5c0 <span class="token operator">&lt;</span>.text<span class="token operator">&gt;</span>:
+   1a5c0: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   1a5c4: <span class="token number">80</span> 05 00 <span class="token number">90</span>      adrp    x0, 0xca000 <span class="token operator">&lt;</span>.text+0x2c<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   1a5c8: 00 <span class="token number">80</span> <span class="token number">14</span> <span class="token number">91</span>      <span class="token function">add</span>    x0, x0, <span class="token comment">#1312</span>
+   1a5cc: 1d bb 02 <span class="token number">14</span>      b    0xc9240 <span class="token operator">&lt;</span>__cxa_finalize@plt<span class="token operator">&gt;</span>
+   1a5d0: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   1a5d4: c0 03 5f d6      ret
+   1a5d8: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   1a5dc: ac a9 02 <span class="token number">14</span>      b    0xc4c8c <span class="token operator">&lt;</span>.datadiv_decode2444497212690810360+0x1a2b<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span>
+   1a5e0: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   1a5e4: <span class="token number">60</span> 00 00 b4      cbz    x0, 0x1a5f0 <span class="token operator">&lt;</span>.text+0x3<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   1a5e8: f0 03 00 aa      mov    x16, x0
+   1a5ec: 00 02 1f d6      br    x16
+   1a5f0: c0 03 5f d6      ret
+   1a5f4: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   1a5f8: 08 00 00 <span class="token number">90</span>      adrp    x8, 0x1a000 <span class="token operator">&lt;</span>.text+0x3<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span>
+   1a5fc: 08 <span class="token number">81</span> <span class="token number">17</span> <span class="token number">91</span>      <span class="token function">add</span>    x8, x8, <span class="token comment">#1504</span>
+   1a600: <span class="token number">82</span> 05 00 <span class="token number">90</span>      adrp    x2, 0xca000 <span class="token operator">&lt;</span>.text+0x30<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   1a604: <span class="token number">42</span> <span class="token number">80</span> <span class="token number">14</span> <span class="token number">91</span>      <span class="token function">add</span>    x2, x2, <span class="token comment">#1312</span>
+<span class="token punctuation">..</span>.
+   2e11c: 08 b6 b3 <span class="token number">72</span>      movk    w8, <span class="token comment">#40368, lsl #16</span>
+   2e120: 1f 01 <span class="token number">17</span> 6b      <span class="token function">cmp</span>    w8, w23
+   2e124: <span class="token number">60</span> 01 00 <span class="token number">54</span>      b.eq    0x2e150 <span class="token operator">&lt;</span>.datadiv_decode17838636323198310142+0x282<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   2e128: 1f 01 <span class="token number">16</span> 6b      <span class="token function">cmp</span>    w8, w22
+   2e12c: a1 ff ff <span class="token number">54</span>      b.ne    0x2e120 <span class="token operator">&lt;</span>.datadiv_decode17838636323198310142+0x27f<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   2e130: e0 03 <span class="token number">14</span> aa      mov    x0, x20
+   2e134: e1 03 <span class="token number">13</span> aa      mov    x1, x19
+   2e138: e2 03 <span class="token number">15</span> 2a      mov    w2, w21
+   2e13c: e3 03 1f 2a      mov    w3, wzr
+   2e140: 03 08 00 <span class="token number">94</span>      bl    0x3014c <span class="token operator">&lt;</span>.datadiv_decode8952246851265070369+0x6b<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   2e144: <span class="token number">28</span> <span class="token number">95</span> <span class="token number">94</span> <span class="token number">52</span>      mov    w8, <span class="token comment">#42153</span>
+   2e148: a8 a2 a4 <span class="token number">72</span>      movk    w8, <span class="token comment">#9493, lsl #16</span>
+   2e14c: f5 ff ff <span class="token number">17</span>      b    0x2e120 <span class="token operator">&lt;</span>.datadiv_decode17838636323198310142+0x27f<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   2e150: f4 4f <span class="token number">43</span> a9      ldp    x20, x19, <span class="token punctuation">[</span>sp, <span class="token comment">#48]</span>
+   2e154: f6 <span class="token number">57</span> <span class="token number">42</span> a9      ldp    x22, x21, <span class="token punctuation">[</span>sp, <span class="token comment">#32]</span>
+   2e158: f7 0b <span class="token number">40</span> f9      ldr    x23, <span class="token punctuation">[</span>sp, <span class="token comment">#16]</span>
+   2e15c: fd 7b c4 a8      ldp    x29, x30, <span class="token punctuation">[</span>sp<span class="token punctuation">]</span>, <span class="token comment">#64</span>
+   2e160: c0 03 5f d6      ret
+   2e164: ff <span class="token number">43</span> 01 d1      sub    sp, sp, <span class="token comment">#80</span>
+   2e168: fd 7b 02 a9      stp    x29, x30, <span class="token punctuation">[</span>sp, <span class="token comment">#32]</span>
+   2e16c: fd <span class="token number">83</span> 00 <span class="token number">91</span>      <span class="token function">add</span>    x29, sp, <span class="token comment">#32</span>
+<span class="token punctuation">..</span>.
+
+
+000000000002e2bc <span class="token operator">&lt;</span>.datadiv_decode1832841752945454700<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>:
+   2e2bc: fd 7b ba a9      stp    x29, x30, <span class="token punctuation">[</span>sp, <span class="token comment">#-96]!</span>
+   2e2c0: fc 6f 01 a9      stp    x28, x27, <span class="token punctuation">[</span>sp, <span class="token comment">#16]</span>
+   2e2c4: fa <span class="token number">67</span> 02 a9      stp    x26, x25, <span class="token punctuation">[</span>sp, <span class="token comment">#32]</span>
+   2e2c8: f8 5f 03 a9      stp    x24, x23, <span class="token punctuation">[</span>sp, <span class="token comment">#48]</span>
+   2e2cc: f6 <span class="token number">57</span> 04 a9      stp    x22, x21, <span class="token punctuation">[</span>sp, <span class="token comment">#64]</span>
+   2e2d0: f4 4f 05 a9      stp    x20, x19, <span class="token punctuation">[</span>sp, <span class="token comment">#80]</span>
+   2e2d4: 01 05 00 <span class="token number">90</span>      adrp    x1, 0xce000 <span class="token operator">&lt;</span>.datadiv_decode18328417529454547004+0x29<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span>
+   2e2d8: d1 0e <span class="token number">80</span> <span class="token number">52</span>      mov    w17, <span class="token comment">#118</span>
+   2e2dc: <span class="token number">21</span> c0 <span class="token number">33</span> <span class="token number">91</span>      <span class="token function">add</span>    x1, x1, <span class="token comment">#3312</span>
+   2e2e0: <span class="token number">69</span> 0b <span class="token number">80</span> <span class="token number">52</span>      mov    w9, <span class="token comment">#91</span>
+   2e2e4: 6f 0b <span class="token number">80</span> <span class="token number">12</span>      mov    w15, <span class="token comment">#-92</span>
+   2e2e8: a0 05 <span class="token number">80</span> <span class="token number">12</span>      mov    w0, <span class="token comment">#-46</span>
+   2e2ec: d0 0e <span class="token number">80</span> <span class="token number">12</span>      mov    w16, <span class="token comment">#-119</span>
+   2e2f0: <span class="token builtin class-name">cd</span> 02 <span class="token number">80</span> <span class="token number">52</span>      mov    w13, <span class="token comment">#22</span>
+   2e2f4: <span class="token number">28</span> 00 <span class="token number">40</span> <span class="token number">39</span>      ldrb    w8, <span class="token punctuation">[</span>x1<span class="token punctuation">]</span>
+   2e2f8: <span class="token number">85</span> 0d <span class="token number">80</span> <span class="token number">12</span>      mov    w5, <span class="token comment">#-109</span>
+   2e2fc: <span class="token number">95</span> 0d <span class="token number">80</span> <span class="token number">52</span>      mov    w21, <span class="token comment">#108</span>
+   2e300: <span class="token number">27</span> 0e <span class="token number">80</span> <span class="token number">52</span>      mov    w7, <span class="token comment">#113</span>
+   2e304: <span class="token number">43</span> 0f <span class="token number">80</span> <span class="token number">52</span>      mov    w3, <span class="token comment">#122</span>
+   2e308: <span class="token number">19</span> 0d <span class="token number">80</span> <span class="token number">52</span>      mov    w25, <span class="token comment">#104</span>
+   2e30c: ea 03 <span class="token number">28</span> 2a      mvn    w10, w8
+   2e310: 0b 01 <span class="token number">28</span> 0a      bic    w11, w8, w8
+   2e314: 0c 05 1a <span class="token number">12</span>      and    w12, w8, <span class="token comment">#0xc0</span>
+<span class="token punctuation">..</span>.
+
+
+   c913c: 06 1c <span class="token number">54</span> 6d      ldp    d6, d7, <span class="token punctuation">[</span>x0, <span class="token comment">#320]</span>
+   c9140: 08 <span class="token number">24</span> <span class="token number">55</span> 6d      ldp    d8, d9, <span class="token punctuation">[</span>x0, <span class="token comment">#336]</span>
+   c9144: 0a 2c <span class="token number">56</span> 6d      ldp    d10, d11, <span class="token punctuation">[</span>x0, <span class="token comment">#352]</span>
+   c9148: 0c <span class="token number">34</span> <span class="token number">57</span> 6d      ldp    d12, d13, <span class="token punctuation">[</span>x0, <span class="token comment">#368]</span>
+   c914c: 0e 3c <span class="token number">58</span> 6d      ldp    d14, d15, <span class="token punctuation">[</span>x0, <span class="token comment">#384]</span>
+   c9150: <span class="token number">10</span> <span class="token number">44</span> <span class="token number">59</span> 6d      ldp    d16, d17, <span class="token punctuation">[</span>x0, <span class="token comment">#400]</span>
+   c9154: <span class="token number">12</span> 4c 5a 6d      ldp    d18, d19, <span class="token punctuation">[</span>x0, <span class="token comment">#416]</span>
+   c9158: <span class="token number">14</span> <span class="token number">54</span> 5b 6d      ldp    d20, d21, <span class="token punctuation">[</span>x0, <span class="token comment">#432]</span>
+   c915c: <span class="token number">16</span> 5c 5c 6d      ldp    d22, d23, <span class="token punctuation">[</span>x0, <span class="token comment">#448]</span>
+   c9160: <span class="token number">18</span> <span class="token number">64</span> 5d 6d      ldp    d24, d25, <span class="token punctuation">[</span>x0, <span class="token comment">#464]</span>
+   c9164: 1a 6c 5e 6d      ldp    d26, d27, <span class="token punctuation">[</span>x0, <span class="token comment">#480]</span>
+   c9168: 1c <span class="token number">74</span> 5f 6d      ldp    d28, d29, <span class="token punctuation">[</span>x0, <span class="token comment">#496]</span>
+   c916c: 1e 00 <span class="token number">41</span> fd      ldr    d30, <span class="token punctuation">[</span>x0, <span class="token comment">#512]</span>
+   c9170: 1f 04 <span class="token number">41</span> fd      ldr    d31, <span class="token punctuation">[</span>x0, <span class="token comment">#520]</span>
+   c9174: <span class="token number">10</span> 7c <span class="token number">40</span> f9      ldr    x16, <span class="token punctuation">[</span>x0, <span class="token comment">#248]</span>
+   c9178: 00 04 <span class="token number">40</span> a9      ldp    x0, x1, <span class="token punctuation">[</span>x0<span class="token punctuation">]</span>
+   c917c: 1f 02 00 <span class="token number">91</span>      mov    sp, x16
+   c9180: c0 03 5f d6      ret
+   c9184: 5f <span class="token number">24</span> 03 d5      hint    <span class="token comment">#34</span>
+   c9188: 00 04 00 a9      stp    x0, x1, <span class="token punctuation">[</span>x0<span class="token punctuation">]</span>
+   c918c: 02 0c 01 a9      stp    x2, x3, <span class="token punctuation">[</span>x0, <span class="token comment">#16]</span>
+   c9190: 04 <span class="token number">14</span> 02 a9      stp    x4, x5, <span class="token punctuation">[</span>x0, <span class="token comment">#32]</span>
+   c9194: 06 1c 03 a9      stp    x6, x7, <span class="token punctuation">[</span>x0, <span class="token comment">#48]</span>
+   c9198: 08 <span class="token number">24</span> 04 a9      stp    x8, x9, <span class="token punctuation">[</span>x0, <span class="token comment">#64]</span>
+   c919c: 0a 2c 05 a9      stp    x10, x11, <span class="token punctuation">[</span>x0, <span class="token comment">#80]</span>
+   c91a0: 0c <span class="token number">34</span> 06 a9      stp    x12, x13, <span class="token punctuation">[</span>x0, <span class="token comment">#96]</span>
+   c91a4: 0e 3c 07 a9      stp    x14, x15, <span class="token punctuation">[</span>x0, <span class="token comment">#112]</span>
+   c91a8: <span class="token number">10</span> <span class="token number">44</span> 08 a9      stp    x16, x17, <span class="token punctuation">[</span>x0, <span class="token comment">#128]</span>
+   c91ac: <span class="token number">12</span> 4c 09 a9      stp    x18, x19, <span class="token punctuation">[</span>x0, <span class="token comment">#144]</span>
+   c91b0: <span class="token number">14</span> <span class="token number">54</span> 0a a9      stp    x20, x21, <span class="token punctuation">[</span>x0, <span class="token comment">#160]</span>
+   c91b4: <span class="token number">16</span> 5c 0b a9      stp    x22, x23, <span class="token punctuation">[</span>x0, <span class="token comment">#176]</span>
+   c91b8: <span class="token number">18</span> <span class="token number">64</span> 0c a9      stp    x24, x25, <span class="token punctuation">[</span>x0, <span class="token comment">#192]</span>
+   c91bc: 1a 6c 0d a9      stp    x26, x27, <span class="token punctuation">[</span>x0, <span class="token comment">#208]</span>
+   c91c0: 1c <span class="token number">74</span> 0e a9      stp    x28, x29, <span class="token punctuation">[</span>x0, <span class="token comment">#224]</span>
+   c91c4: 1e <span class="token number">78</span> 00 f9      str    x30, <span class="token punctuation">[</span>x0, <span class="token comment">#240]</span>
+   c91c8: e1 03 00 <span class="token number">91</span>      mov    x1, sp
+   c91cc: 01 7c 00 f9      str    x1, <span class="token punctuation">[</span>x0, <span class="token comment">#248]</span>
+   c91d0: 1e <span class="token number">80</span> 00 f9      str    x30, <span class="token punctuation">[</span>x0, <span class="token comment">#256]</span>
+   c91d4: 00 04 <span class="token number">11</span> 6d      stp    d0, d1, <span class="token punctuation">[</span>x0, <span class="token comment">#272]</span>
+   c91d8: 02 0c <span class="token number">12</span> 6d      stp    d2, d3, <span class="token punctuation">[</span>x0, <span class="token comment">#288]</span>
+   c91dc: 04 <span class="token number">14</span> <span class="token number">13</span> 6d      stp    d4, d5, <span class="token punctuation">[</span>x0, <span class="token comment">#304]</span>
+   c91e0: 06 1c <span class="token number">14</span> 6d      stp    d6, d7, <span class="token punctuation">[</span>x0, <span class="token comment">#320]</span>
+   c91e4: 08 <span class="token number">24</span> <span class="token number">15</span> 6d      stp    d8, d9, <span class="token punctuation">[</span>x0, <span class="token comment">#336]</span>
+   c91e8: 0a 2c <span class="token number">16</span> 6d      stp    d10, d11, <span class="token punctuation">[</span>x0, <span class="token comment">#352]</span>
+   c91ec: 0c <span class="token number">34</span> <span class="token number">17</span> 6d      stp    d12, d13, <span class="token punctuation">[</span>x0, <span class="token comment">#368]</span>
+   c91f0: 0e 3c <span class="token number">18</span> 6d      stp    d14, d15, <span class="token punctuation">[</span>x0, <span class="token comment">#384]</span>
+   c91f4: <span class="token number">10</span> <span class="token number">44</span> <span class="token number">19</span> 6d      stp    d16, d17, <span class="token punctuation">[</span>x0, <span class="token comment">#400]</span>
+   c91f8: <span class="token number">12</span> 4c 1a 6d      stp    d18, d19, <span class="token punctuation">[</span>x0, <span class="token comment">#416]</span>
+   c91fc: <span class="token number">14</span> <span class="token number">54</span> 1b 6d      stp    d20, d21, <span class="token punctuation">[</span>x0, <span class="token comment">#432]</span>
+   c9200: <span class="token number">16</span> 5c 1c 6d      stp    d22, d23, <span class="token punctuation">[</span>x0, <span class="token comment">#448]</span>
+   c9204: <span class="token number">18</span> <span class="token number">64</span> 1d 6d      stp    d24, d25, <span class="token punctuation">[</span>x0, <span class="token comment">#464]</span>
+   c9208: 1a 6c 1e 6d      stp    d26, d27, <span class="token punctuation">[</span>x0, <span class="token comment">#480]</span>
+   c920c: 1c <span class="token number">74</span> 1f 6d      stp    d28, d29, <span class="token punctuation">[</span>x0, <span class="token comment">#496]</span>
+   c9210: 1e 00 01 fd      str    d30, <span class="token punctuation">[</span>x0, <span class="token comment">#512]</span>
+   c9214: 1f 04 01 fd      str    d31, <span class="token punctuation">[</span>x0, <span class="token comment">#520]</span>
+   c9218: 00 00 <span class="token number">80</span> d2      mov    x0, <span class="token comment">#0</span>
+   c921c: c0 03 5f d6      ret
+
+
+Disassembly of section .plt:
+
+
+00000000000c9220 <span class="token operator">&lt;</span>.plt<span class="token operator">&gt;</span>:
+   c9220: f0 7b bf a9      stp    x16, x30, <span class="token punctuation">[</span>sp, <span class="token comment">#-16]!</span>
+   c9224: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>.plt+0x1<span class="token operator"><span class="token file-descriptor important">4</span>&gt;</span>
+   c9228: <span class="token number">11</span> 5e <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2232]</span>
+   c922c: <span class="token number">10</span> e2 <span class="token number">22</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2232</span>
+   c9230: <span class="token number">20</span> 02 1f d6      br    x17
+   c9234: 1f <span class="token number">20</span> 03 d5      nop
+   c9238: 1f <span class="token number">20</span> 03 d5      nop
+   c923c: 1f <span class="token number">20</span> 03 d5      nop
+
+
+00000000000c9240 <span class="token operator">&lt;</span>__cxa_finalize@plt<span class="token operator">&gt;</span>:
+   c9240: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>__cxa_atexit@plt<span class="token operator">&gt;</span>
+   c9244: <span class="token number">11</span> <span class="token number">62</span> <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2240]</span>
+   c9248: <span class="token number">10</span> 02 <span class="token number">23</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2240</span>
+   c924c: <span class="token number">20</span> 02 1f d6      br    x17
+
+<span class="token punctuation">..</span>.
+
+00000000000c9370 <span class="token operator">&lt;</span>strlen@plt<span class="token operator">&gt;</span>:
+   c9370: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>realloc@plt<span class="token operator">&gt;</span>
+   c9374: <span class="token number">11</span> ae <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2392]</span>
+   c9378: <span class="token number">10</span> <span class="token number">62</span> <span class="token number">25</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2392</span>
+   c937c: <span class="token number">20</span> 02 1f d6      br    x17
+
+<span class="token punctuation">..</span>.
+
+00000000000c9480 <span class="token operator">&lt;</span>getauxval@plt<span class="token operator">&gt;</span>:
+   c9480: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>__system_property_get@plt<span class="token operator">&gt;</span>
+   c9484: <span class="token number">11</span> f2 <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2528]</span>
+   c9488: <span class="token number">10</span> <span class="token number">82</span> <span class="token number">27</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2528</span>
+   c948c: <span class="token number">20</span> 02 1f d6      br    x17
+
+
+00000000000c9490 <span class="token operator">&lt;</span>__system_property_get@plt<span class="token operator">&gt;</span>:
+   c9490: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>strncmp@plt<span class="token operator">&gt;</span>
+   c9494: <span class="token number">11</span> f6 <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2536]</span>
+   c9498: <span class="token number">10</span> a2 <span class="token number">27</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2536</span>
+   c949c: <span class="token number">20</span> 02 1f d6      br    x17
+
+
+00000000000c94a0 <span class="token operator">&lt;</span>strncmp@plt<span class="token operator">&gt;</span>:
+   c94a0: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>fprintf@plt<span class="token operator">&gt;</span>
+   c94a4: <span class="token number">11</span> fa <span class="token number">44</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2544]</span>
+   c94a8: <span class="token number">10</span> c2 <span class="token number">27</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2544</span>
+   c94ac: <span class="token number">20</span> 02 1f d6      br    x17
+
+<span class="token punctuation">..</span>.
+
+00000000000c94e0 <span class="token operator">&lt;</span>pthread_rwlock_unlock@plt<span class="token operator">&gt;</span>:
+   c94e0: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>dl_iterate_phdr@plt<span class="token operator">&gt;</span>
+   c94e4: <span class="token number">11</span> 0a <span class="token number">45</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2576]</span>
+   c94e8: <span class="token number">10</span> <span class="token number">42</span> <span class="token number">28</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2576</span>
+   c94ec: <span class="token number">20</span> 02 1f d6      br    x17
+
+
+00000000000c94f0 <span class="token operator">&lt;</span>dl_iterate_phdr@plt<span class="token operator">&gt;</span>:
+   c94f0: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>pthread_rwlock_rdlock@plt<span class="token operator">&gt;</span>
+   c94f4: <span class="token number">11</span> 0e <span class="token number">45</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2584]</span>
+   c94f8: <span class="token number">10</span> <span class="token number">62</span> <span class="token number">28</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2584</span>
+   c94fc: <span class="token number">20</span> 02 1f d6      br    x17
+
+
+00000000000c9500 <span class="token operator">&lt;</span>pthread_rwlock_rdlock@plt<span class="token operator">&gt;</span>:
+   c9500: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>fwrite@plt<span class="token operator">&gt;</span>
+   c9504: <span class="token number">11</span> <span class="token number">12</span> <span class="token number">45</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2592]</span>
+   c9508: <span class="token number">10</span> <span class="token number">82</span> <span class="token number">28</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2592</span>
+   c950c: <span class="token number">20</span> 02 1f d6      br    x17
+
+
+00000000000c9510 <span class="token operator">&lt;</span>fwrite@plt<span class="token operator">&gt;</span>:
+   c9510: <span class="token number">30</span> 00 00 <span class="token number">90</span>      adrp    x16, 0xcd000 <span class="token operator">&lt;</span>fwrite@plt+0x1<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+   c9514: <span class="token number">11</span> <span class="token number">16</span> <span class="token number">45</span> f9      ldr    x17, <span class="token punctuation">[</span>x16, <span class="token comment">#2600]</span>
+   c9518: <span class="token number">10</span> a2 <span class="token number">28</span> <span class="token number">91</span>      <span class="token function">add</span>    x16, x16, <span class="token comment">#2600</span>
+   c951c: <span class="token number">20</span> 02 1f d6      br    x17
+</code></pre>
+<h2 id="s：显示每个节的内容"><a name="s：显示每个节的内容" class="plugin-anchor" href="#s：显示每个节的内容"><i class="fa fa-link" aria-hidden="true"></i></a>-s：显示每个节的内容</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-s</span> libtacker.so <span class="token operator">&gt;</span> libtacker_objdump_s.coffee
+<span class="token punctuation">..</span>.
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+Contents of section .note.android.ident:
+ 0238 08000000 <span class="token number">84000000</span> 01000000 416e6472  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>Andr
+ 0248 6f696400 <span class="token number">15000000</span> <span class="token number">72323400</span> 00000000  oid<span class="token punctuation">..</span><span class="token punctuation">..</span>.r24<span class="token punctuation">..</span><span class="token punctuation">..</span>.
+ 0258 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0268 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0278 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0288 00000000 00000000 <span class="token number">38323135</span> <span class="token number">38383800</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token number">8215888</span>.
+ 0298 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 02a8 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 02b8 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 02c8 00000000 00000000                    <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+Contents of section .note.gnu.build-id:
+ 02d0 04000000 <span class="token number">14000000</span> 03000000 474e5500  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>GNU.
+ 02e0 3a269496 ef440c78 5356664f <span class="token number">89464681</span>  <span class="token builtin class-name">:</span><span class="token operator">&amp;</span><span class="token punctuation">..</span>.D.xSVfO.FF.
+ 02f0 5d3c61ad                             <span class="token punctuation">]</span><span class="token operator">&lt;</span>a.
+Contents of section .dynsym:
+ 02f8 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0308 00000000 00000000 01000000 <span class="token number">12000000</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0318 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0328 <span class="token number">10000000</span> <span class="token number">12000000</span> 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0338 00000000 00000000 1d000000 <span class="token number">12000000</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ 0348 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+。。。
+ d0f70 5a565416 5f564b5a 5c165849 <span class="token number">49165550</span>  ZVT._VKZ<span class="token punctuation">\</span>.XII.UP
+ d0f80 5b167758 4d504f5c 715c5549 5c4b3900  <span class="token punctuation">[</span>.wXMPO<span class="token punctuation">\</span>q<span class="token punctuation">\</span>UI<span class="token punctuation">\</span>K9.
+ d0f90 a9cde0ef e5f3eee8 e5aee0f1 f1aec0f1  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0fa0 f1ede8e2 e0f5e8ee efbaa8d7 <span class="token number">81000000</span>  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0fb0 <span class="token number">10000000</span> 00000000 08000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0fc0 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0fd0 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0fe0 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d0ff0 00000000 00000000 00000000 00000000  <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ d1000 00000000 00000000                    <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+Contents of section .bss:
+<span class="token operator">&lt;</span>skipping contents of bss section at <span class="token punctuation">[</span>d1010, d1ae0<span class="token punctuation">)</span><span class="token operator">&gt;</span>
+Contents of section .comment:
+ 0000 4c696e6b 65723a20 4c4c4420 31342e30  Linker: LLD <span class="token number">14.0</span>
+ 0010 2e310063 6c616e67 <span class="token number">20766572</span> 73696f6e  .1.clang version
+ 0020 2031342e 302e3000 416e6472 6f696420   <span class="token number">14.0</span>.0.Android 
+ 0030 <span class="token number">28383037</span> <span class="token number">35313738</span> 2c206261 <span class="token number">73656420</span>  <span class="token punctuation">(</span><span class="token number">8075178</span>, based 
+ 0040 6f6e2072 <span class="token number">34333731</span> <span class="token number">31326229</span> 20636c61  on r437112b<span class="token punctuation">)</span> cla
+ 0050 6e672076 <span class="token number">65727369</span> 6f6e2031 342e302e  ng version <span class="token number">14.0</span>.
+ 0060 <span class="token number">31202868</span> <span class="token number">74747073</span> 3a2f2f61 6e64726f  <span class="token number">1</span> <span class="token punctuation">(</span>https://andro
+ 0070 69642e67 6f6f676c 65736f75 7263652e  id.googlesource.
+ 0080 636f6d2f 746f6f6c <span class="token number">63686169</span> 6e2f6c6c  com/toolchain/ll
+ 0090 766d2d70 726f6a65 <span class="token number">63742038</span> <span class="token number">36373133</span>  vm-project <span class="token number">86713</span>
+ 00a0 <span class="token number">34386238</span> <span class="token number">31623935</span> <span class="token number">66633630</span> <span class="token number">33353035</span>  48b81b95fc603505
+ 00b0 <span class="token number">64666338</span> <span class="token number">38316234</span> <span class="token number">35313033</span> <span class="token number">62656531</span>  dfc881b45103bee1
+ 00c0 <span class="token number">37333129</span> 0000                        <span class="token number">731</span><span class="token punctuation">)</span><span class="token punctuation">..</span>
+Contents of section .shstrtab:
+ 0000 002e696e 69745f61 <span class="token number">72726179</span> 002e6669  <span class="token punctuation">..</span>init_array<span class="token punctuation">..</span>fi
+ 0010 6e695f61 <span class="token number">72726179</span> 002e7465 7874002e  ni_array<span class="token punctuation">..</span>text<span class="token punctuation">..</span>
+ 0020 676f7400 2e636f6d 6d656e74 002e6e6f  got<span class="token punctuation">..</span>comment<span class="token punctuation">..</span>no
+ 0030 74652e61 6e64726f 69642e69 64656e74  te.android.ident
+ 0040 002e676f 742e706c 74002e72 656c612e  <span class="token punctuation">..</span>got.plt<span class="token punctuation">..</span>rela.
+ 0050 706c7400 2e627373 002e6479 6e737472  plt<span class="token punctuation">..</span>bss<span class="token punctuation">..</span>dynstr
+ 0060 002e6568 5f667261 6d655f68 6472002e  <span class="token punctuation">..</span>eh_frame_hdr<span class="token punctuation">..</span>
+ 0070 676e752e <span class="token number">76657273</span> 696f6e5f 72002e64  gnu.version_r<span class="token punctuation">..</span>d
+ 0080 6174612e 72656c2e 726f002e 72656c61  ata.rel.ro<span class="token punctuation">..</span>rela
+ 0090 2e64796e 002e676e 752e7665 7273696f  .dyn<span class="token punctuation">..</span>gnu.versio
+ 00a0 6e002e64 796e7379 6d002e67 6e752e68  n<span class="token punctuation">..</span>dynsym<span class="token punctuation">..</span>gnu.h
+ 00b0 <span class="token number">61736800</span> 2e65685f 6672616d 65002e67  ash<span class="token punctuation">..</span>eh_frame<span class="token punctuation">..</span>g
+ 00c0 63635f65 <span class="token number">78636570</span> 745f7461 626c6500  cc_except_table.
+ 00d0 2e6e6f74 652e676e 752e6275 696c642d  .note.gnu.build-
+ 00e0 6964002e 64796e61 6d696300 2e736873  id<span class="token punctuation">..</span>dynamic<span class="token punctuation">..</span>shs
+ 00f0 <span class="token number">74727461</span> 62002e72 6f646174 61002e64  trtab<span class="token punctuation">..</span>rodata<span class="token punctuation">..</span>d
+ 0100 <span class="token number">61746100</span>                             ata.
+</code></pre>
+<h2 id="t：显示符号表"><a name="t：显示符号表" class="plugin-anchor" href="#t：显示符号表"><i class="fa fa-link" aria-hidden="true"></i></a>-t：显示符号表</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-t</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+
+SYMBOL TABLE:
+</code></pre>
+<h2 id="t：显示动态符号表"><a name="t：显示动态符号表" class="plugin-anchor" href="#t：显示动态符号表"><i class="fa fa-link" aria-hidden="true"></i></a>-T：显示动态符号表</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-T</span> libtacker.so
+
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+
+
+DYNAMIC SYMBOL TABLE:
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __cxa_finalize
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __cxa_atexit
+0000000000000000      DF *UND*    0000000000000000              __android_log_print
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __stack_chk_fail
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       memset
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       strncpy
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       strncat
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_self
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       malloc
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       <span class="token function">free</span>
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       posix_memalign
+0000000000000000      DO *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __sF
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       vfprintf
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       fputc
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       vasprintf
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       android_set_abort_message
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       openlog
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       syslog
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       closelog
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       abort
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       strlen
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       realloc
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       memmove
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __memmove_chk
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __strlen_chk
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       memchr
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __vsnprintf_chk
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       memcpy
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_mutex_lock
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_mutex_unlock
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       calloc
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       strcmp
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_getspecific
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_once
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_setspecific
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_key_delete
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_key_create
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       getauxval
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       __system_property_get
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       strncmp
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       fprintf
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       fflush
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_rwlock_wrlock
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_rwlock_unlock
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       dl_iterate_phdr
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       pthread_rwlock_rdlock
+0000000000000000      DF *UND*    0000000000000000 <span class="token punctuation">(</span>LIBC<span class="token punctuation">)</span>       fwrite
+0000000000044ce8 g    DF .text    00000000000019d0              .datadiv_decode16117807209816376729
+0000000000078a04 g    DF .text    0000000000000a88              .datadiv_decode9901940071257331957
+00000000000a8a58 g    DF .text    0000000000000f34              .datadiv_decode14716202181486223822
+0000000000076128 g    DF .text    0000000000000870              .datadiv_decode4891596974783633952
+<span class="token punctuation">..</span>.
+00000000000a8884 g    DF .text    0000000000000004              .datadiv_decode11706101414295225912
+00000000000aa438 g    DF .text    000000000000059c              JNI_OnLoad
+0000000000026d98 g    DF .text    00000000000048e0              .datadiv_decode12335027288954124723
+<span class="token punctuation">..</span>.
+000000000005c790 g    DF .text    0000000000000004              .datadiv_decode1552205700074701063
+000000000005ed50 g    DF .text    00000000000018a0              .datadiv_decode15147620753704794795
+00000000000a5e74 g    DF .text    0000000000000004              .datadiv_decode5454406552017557296
+</code></pre>
+<h2 id="r：显示静态重定位入口"><a name="r：显示静态重定位入口" class="plugin-anchor" href="#r：显示静态重定位入口"><i class="fa fa-link" aria-hidden="true"></i></a>-r：显示静态重定位入口</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-r</span> libtacker.so
+
+libtacker.so:    <span class="token function">file</span> <span class="token function">format</span> elf64-littleaarch64
+</code></pre>
+<h2 id="r：显示动态重定位入口"><a name="r：显示动态重定位入口" class="plugin-anchor" href="#r：显示动态重定位入口"><i class="fa fa-link" aria-hidden="true"></i></a>-R：显示动态重定位入口</h2>
+<pre class="language-"><code class="lang-bash">➜  arm64-v8a objdump <span class="token parameter variable">-R</span> libtacker.so
+<span class="token punctuation">..</span>.
+
+
+00000000000cd858 R_AARCH64_RELATIVE       *ABS*+0xcc650
+00000000000cd860 R_AARCH64_RELATIVE       *ABS*+0xf3b9
+00000000000cd868 R_AARCH64_RELATIVE       *ABS*+0xcc668
+00000000000cd870 R_AARCH64_RELATIVE       *ABS*+0xf3b0
+00000000000cd878 R_AARCH64_RELATIVE       *ABS*+0xcc680
+00000000000cd880 R_AARCH64_RELATIVE       *ABS*+0xcc698
+00000000000cd888 R_AARCH64_RELATIVE       *ABS*+0xcd1a8
+00000000000cd890 R_AARCH64_RELATIVE       *ABS*+0xcd1d0
+00000000000cd898 R_AARCH64_RELATIVE       *ABS*+0xcd2a0
+00000000000cd8a0 R_AARCH64_RELATIVE       *ABS*+0xcd2c8
+00000000000cece8 R_AARCH64_RELATIVE       *ABS*+0xc206c
+00000000000d0fd0 R_AARCH64_RELATIVE       *ABS*+0xacb9c
+00000000000d0fd8 R_AARCH64_RELATIVE       *ABS*+0xaccbc
+00000000000d0fe0 R_AARCH64_RELATIVE       *ABS*+0xd4a7
+00000000000d0fe8 R_AARCH64_RELATIVE       *ABS*+0xd12a1
+00000000000d0ff0 R_AARCH64_RELATIVE       *ABS*+0xd12e0
+00000000000d0ff8 R_AARCH64_RELATIVE       *ABS*+0xd12e0
+00000000000d1000 R_AARCH64_RELATIVE       *ABS*+0xd1ae0
+00000000000cd828 R_AARCH64_GLOB_DAT       __sF
+00000000000cd460 R_AARCH64_ABS64          .datadiv_decode16117807209816376729
+00000000000cd500 R_AARCH64_ABS64          .datadiv_decode9901940071257331957
+00000000000cd5f8 R_AARCH64_ABS64          .datadiv_decode14716202181486223822
+00000000000cd4e8 R_AARCH64_ABS64          .datadiv_decode4891596974783633952
+00000000000cd570 R_AARCH64_ABS64          .datadiv_decode9339716730803528690
+00000000000cd488 R_AARCH64_ABS64          .datadiv_decode13183548145838600894
+00000000000cd490 R_AARCH64_ABS64          .datadiv_decode3525000441545555282
+00000000000cd4a0 R_AARCH64_ABS64          .datadiv_decode8298916886736451040
+00000000000cd4e0 R_AARCH64_ABS64          .datadiv_decode6610309240369344955
+00000000000cd5b8 R_AARCH64_ABS64          .datadiv_decode5742785139195766122
+00000000000cd410 R_AARCH64_ABS64          .datadiv_decode12946686905750037712
+00000000000cd4c0 R_AARCH64_ABS64          .datadiv_decode12620377358555187834
+00000000000cd520 R_AARCH64_ABS64          .datadiv_decode15294134973280561020
+00000000000cd578 R_AARCH64_ABS64          .datadiv_decode123525175395121774
+00000000000cd598 R_AARCH64_ABS64          .datadiv_decode17486258817593906496
+00000000000cd470 R_AARCH64_ABS64          .datadiv_decode15789135661111847785
+00000000000cd508 R_AARCH64_ABS64          .datadiv_decode9708024290202508361
+00000000000cd550 R_AARCH64_ABS64          .datadiv_decode12389017544255092540
+00000000000cd5a8 R_AARCH64_ABS64          .datadiv_decode8646520184225136992
+00000000000cd528 R_AARCH64_ABS64          .datadiv_decode5555087159661513939
+00000000000cd538 R_AARCH64_ABS64          .datadiv_decode18018071361702630102
+00000000000cd548 R_AARCH64_ABS64          .datadiv_decode11327300974587163078
+00000000000cd568 R_AARCH64_ABS64          .datadiv_decode13214095259256631718
+00000000000cd428 R_AARCH64_ABS64          .datadiv_decode3631146530348700705
+00000000000cd4d0 R_AARCH64_ABS64          .datadiv_decode8050698040297613930
+00000000000cd5f0 R_AARCH64_ABS64          .datadiv_decode11706101414295225912
+00000000000cd3e8 R_AARCH64_ABS64          .datadiv_decode12335027288954124723
+00000000000cd418 R_AARCH64_ABS64          .datadiv_decode18261546535841772752
+00000000000cd450 R_AARCH64_ABS64          .datadiv_decode5616837089396308971
+00000000000cd4f8 R_AARCH64_ABS64          .datadiv_decode13827763977763901235
+00000000000cd458 R_AARCH64_ABS64          .datadiv_decode14151120317447827231
+00000000000cd480 R_AARCH64_ABS64          .datadiv_decode11770512853690929982
+00000000000cd5c0 R_AARCH64_ABS64          .datadiv_decode14401673864441325462
+00000000000cd400 R_AARCH64_ABS64          .datadiv_decode8952246851265070369
+00000000000cd478 R_AARCH64_ABS64          .datadiv_decode5074647643595886391
+00000000000cd4a8 R_AARCH64_ABS64          .datadiv_decode11553230420239584337
+00000000000cd4d8 R_AARCH64_ABS64          .datadiv_decode11784788714666544642
+00000000000cd4f0 R_AARCH64_ABS64          .datadiv_decode15357274442415173716
+00000000000cd510 R_AARCH64_ABS64          .datadiv_decode16313801769778548889
+00000000000cd580 R_AARCH64_ABS64          .datadiv_decode18380577887196024106
+00000000000cd3f8 R_AARCH64_ABS64          .datadiv_decode18328417529454547004
+00000000000cd518 R_AARCH64_ABS64          .datadiv_decode12121706469311219939
+00000000000cd540 R_AARCH64_ABS64          .datadiv_decode4193671268968804409
+00000000000cd5c8 R_AARCH64_ABS64          .datadiv_decode6405721680354649260
+00000000000cd5e8 R_AARCH64_ABS64          .datadiv_decode8316381480288167535
+00000000000cd468 R_AARCH64_ABS64          .datadiv_decode12672127785521407892
+00000000000cd530 R_AARCH64_ABS64          .datadiv_decode1095597082262436137
+00000000000cd558 R_AARCH64_ABS64          .datadiv_decode11689284992262612148
+00000000000cd588 R_AARCH64_ABS64          .datadiv_decode17940233878698364930
+00000000000cd448 R_AARCH64_ABS64          .datadiv_decode1771790552069125206
+00000000000cd4c8 R_AARCH64_ABS64          .datadiv_decode12950792008805936966
+00000000000cd560 R_AARCH64_ABS64          .datadiv_decode6931257938975476985
+00000000000cd5a0 R_AARCH64_ABS64          .datadiv_decode15620942718649555403
+00000000000cd600 R_AARCH64_ABS64          .datadiv_decode8758840755024801160
+00000000000cd408 R_AARCH64_ABS64          .datadiv_decode8010288038339893607
+00000000000cd4b8 R_AARCH64_ABS64          .datadiv_decode2175705720332001599
+00000000000cd590 R_AARCH64_ABS64          .datadiv_decode256915654516018196
+00000000000cd5b0 R_AARCH64_ABS64          .datadiv_decode16710377636940783008
+00000000000cd5d0 R_AARCH64_ABS64          .datadiv_decode1639262728706781308
+00000000000cd5e0 R_AARCH64_ABS64          .datadiv_decode5533236249192328355
+00000000000cd608 R_AARCH64_ABS64          .datadiv_decode2444497212690810360
+00000000000cd420 R_AARCH64_ABS64          .datadiv_decode15481956303235929690
+00000000000cd438 R_AARCH64_ABS64          .datadiv_decode17677705362567080649
+00000000000cd440 R_AARCH64_ABS64          .datadiv_decode7614718738418908679
+00000000000cd3f0 R_AARCH64_ABS64          .datadiv_decode17838636323198310142
+00000000000cd430 R_AARCH64_ABS64          .datadiv_decode17330405497468958994
+00000000000cd498 R_AARCH64_ABS64          .datadiv_decode1552205700074701063
+00000000000cd4b0 R_AARCH64_ABS64          .datadiv_decode15147620753704794795
+00000000000cd5d8 R_AARCH64_ABS64          .datadiv_decode5454406552017557296
+00000000000cd8c0 R_AARCH64_JUMP_SLOT      __cxa_finalize
+00000000000cd8c8 R_AARCH64_JUMP_SLOT      __cxa_atexit
+00000000000cd8d0 R_AARCH64_JUMP_SLOT      __android_log_print
+00000000000cd8d8 R_AARCH64_JUMP_SLOT      __stack_chk_fail
+00000000000cd8e0 R_AARCH64_JUMP_SLOT      memset
+00000000000cd8e8 R_AARCH64_JUMP_SLOT      strncpy
+00000000000cd8f0 R_AARCH64_JUMP_SLOT      strncat
+00000000000cd8f8 R_AARCH64_JUMP_SLOT      pthread_self
+00000000000cd900 R_AARCH64_JUMP_SLOT      malloc
+00000000000cd908 R_AARCH64_JUMP_SLOT      <span class="token function">free</span>
+00000000000cd910 R_AARCH64_JUMP_SLOT      posix_memalign
+00000000000cd918 R_AARCH64_JUMP_SLOT      vfprintf
+00000000000cd920 R_AARCH64_JUMP_SLOT      fputc
+00000000000cd928 R_AARCH64_JUMP_SLOT      vasprintf
+00000000000cd930 R_AARCH64_JUMP_SLOT      android_set_abort_message
+00000000000cd938 R_AARCH64_JUMP_SLOT      openlog
+00000000000cd940 R_AARCH64_JUMP_SLOT      syslog
+00000000000cd948 R_AARCH64_JUMP_SLOT      closelog
+00000000000cd950 R_AARCH64_JUMP_SLOT      abort
+00000000000cd958 R_AARCH64_JUMP_SLOT      strlen
+00000000000cd960 R_AARCH64_JUMP_SLOT      realloc
+00000000000cd968 R_AARCH64_JUMP_SLOT      memmove
+00000000000cd970 R_AARCH64_JUMP_SLOT      __memmove_chk
+00000000000cd978 R_AARCH64_JUMP_SLOT      __strlen_chk
+00000000000cd980 R_AARCH64_JUMP_SLOT      memchr
+00000000000cd988 R_AARCH64_JUMP_SLOT      __vsnprintf_chk
+00000000000cd990 R_AARCH64_JUMP_SLOT      memcpy
+00000000000cd998 R_AARCH64_JUMP_SLOT      pthread_mutex_lock
+00000000000cd9a0 R_AARCH64_JUMP_SLOT      pthread_mutex_unlock
+00000000000cd9a8 R_AARCH64_JUMP_SLOT      calloc
+00000000000cd9b0 R_AARCH64_JUMP_SLOT      strcmp
+00000000000cd9b8 R_AARCH64_JUMP_SLOT      pthread_getspecific
+00000000000cd9c0 R_AARCH64_JUMP_SLOT      pthread_once
+00000000000cd9c8 R_AARCH64_JUMP_SLOT      pthread_setspecific
+00000000000cd9d0 R_AARCH64_JUMP_SLOT      pthread_key_delete
+00000000000cd9d8 R_AARCH64_JUMP_SLOT      pthread_key_create
+00000000000cd9e0 R_AARCH64_JUMP_SLOT      getauxval
+00000000000cd9e8 R_AARCH64_JUMP_SLOT      __system_property_get
+00000000000cd9f0 R_AARCH64_JUMP_SLOT      strncmp
+00000000000cd9f8 R_AARCH64_JUMP_SLOT      fprintf
+00000000000cda00 R_AARCH64_JUMP_SLOT      fflush
+00000000000cda08 R_AARCH64_JUMP_SLOT      pthread_rwlock_wrlock
+00000000000cda10 R_AARCH64_JUMP_SLOT      pthread_rwlock_unlock
+00000000000cda18 R_AARCH64_JUMP_SLOT      dl_iterate_phdr
+00000000000cda20 R_AARCH64_JUMP_SLOT      pthread_rwlock_rdlock
+00000000000cda28 R_AARCH64_JUMP_SLOT      fwrite
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-02 23:09:26
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 用法">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../help/" class="navigation navigation-next " aria-label="Next page: help">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"举例","level":"1.4.1.1.2.1.1","depth":6,"next":{"title":"help","level":"1.4.1.1.2.2","depth":5,"path":"elf_parse_tool/read_info/linux_common/objdump/help/README.md","ref":"elf_parse_tool/read_info/linux_common/objdump/help/README.md","articles":[{"title":"man","level":"1.4.1.1.2.2.1","depth":6,"path":"elf_parse_tool/read_info/linux_common/objdump/help/man.md","ref":"elf_parse_tool/read_info/linux_common/objdump/help/man.md","articles":[]}]},"previous":{"title":"用法","level":"1.4.1.1.2.1","depth":5,"path":"elf_parse_tool/read_info/linux_common/objdump/usage/README.md","ref":"elf_parse_tool/read_info/linux_common/objdump/usage/README.md","articles":[{"title":"举例","level":"1.4.1.1.2.1.1","depth":6,"path":"elf_parse_tool/read_info/linux_common/objdump/usage/example.md","ref":"elf_parse_tool/read_info/linux_common/objdump/usage/example.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/exec_file_format_elf/pdf/exec_file_format_elf.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/exec_file_format_elf/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"exec_file_format_elf","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"可执行文件格式：ELF","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍常见的可执行文件格式：ELF。主要是Linux和Android的常见格式。先是ELF概览，包括ELF文件类型和术语和概念；然后是ELF结构详解，包括两种视图、结构图、链接和执行过程以及section节和segment段；然后介绍ELF的解析工具，包括读取信息的和解析修改的；读取信息的有Linux通用的readelf、objdump、rabin2等和Android专用的JEB等。且都有详细的安装、用法和举例；解析工具包括LIEF；然后专门介绍Android中的ELF格式。"},"file":{"path":"elf_parse_tool/read_info/linux_common/objdump/usage/example.md","mtime":"2023-10-02T15:09:26.918Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T14:01:28.723Z"},"basePath":"../../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
