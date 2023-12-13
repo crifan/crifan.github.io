@@ -1,0 +1,827 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>HTTP内部流程 · HTTP知识总结</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch4_http_basic_logic.html" />
+    
+    
+    <link rel="prev" href="ch2_http_intro.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    HTTP简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ch1_http_learn_purpose.html">
+            
+                <a href="ch1_http_learn_purpose.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    HTTP学习目的
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="ch2_http_intro.html">
+            
+                <a href="ch2_http_intro.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    HTTP简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.3" data-path="ch3_http_internal_process.html">
+            
+                <a href="ch3_http_internal_process.html">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    HTTP内部流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="ch4_http_basic_logic.html">
+            
+                <a href="ch4_http_basic_logic.html">
+            
+                    
+                        <b>1.2.4.</b>
+                    
+                    HTTP基本逻辑总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../http_detail/">
+            
+                <a href="../http_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    HTTP详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../http_detail/ch1_http_structure.html">
+            
+                <a href="../http_detail/ch1_http_structure.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    HTTP的典型结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../http_detail/ch2_http_header.html">
+            
+                <a href="../http_detail/ch2_http_header.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    HTTP的Header头
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../http_detail/ch3_http_req_param_encode.html">
+            
+                <a href="../http_detail/ch3_http_req_param_encode.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    HTTP的请求参数和编码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../http_detail/ch4_http_resp_status_code.html">
+            
+                <a href="../http_detail/ch4_http_resp_status_code.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    HTTP的响应的状态码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../http_detail/ch5_http_resp_data_format_json.html">
+            
+                <a href="../http_detail/ch5_http_resp_data_format_json.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    HTTP的响应数据格式JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../http_related/">
+            
+                <a href="../http_related/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    HTTP相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../http_related/tool_lib/">
+            
+                <a href="../http_related/tool_lib/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    HTTP的工具和库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../http_related/tool_lib/tool.html">
+            
+                <a href="../http_related/tool_lib/tool.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    HTTP工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../http_related/tool_lib/lib.html">
+            
+                <a href="../http_related/tool_lib/lib.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    HTTP库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../http_related/ch2_http_api_design.html">
+            
+                <a href="../http_related/ch2_http_api_design.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    HTTP的后台API设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../http_related/ch3_http_note_summary.html">
+            
+                <a href="../http_related/ch3_http_note_summary.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    HTTP相关心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../http_related/ch4_http_file_upload.html">
+            
+                <a href="../http_related/ch4_http_file_upload.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    HTTP的文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../http_related/ch5_mixed_content.html">
+            
+                <a href="../http_related/ch5_mixed_content.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    混合内容
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../appendix/good_tutorial.html">
+            
+                <a href="../appendix/good_tutorial.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    优质教程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >HTTP内部流程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="http内部流程"><a name="http内部流程" class="plugin-anchor" href="#http内部流程"><i class="fa fa-link" aria-hidden="true"></i></a>HTTP内部流程</h1>
+<p>其实内部都是通用的HTTP的逻辑：</p>
+<ul>
+<li>发送HTTP的请求</li>
+<li>接受到响应后<ul>
+<li>解析并显示出对应的内容</li>
+<li>解析得到所需要的数据</li>
+</ul>
+</li>
+</ul>
+<p>那如何才能看到内部的HTTP的请求和响应到底是什么样的呢？
+有很多方式可以实现查看内部到底发送了什么样的HTTP请求，和接收到了什么样的响应：</p>
+<ul>
+<li>对于浏览器访问网页<ul>
+<li>可以用<code>Chrome</code>/<code>Safari</code>/<code>Firefox</code>等浏览器自带的调试工具：<code>开发者工具</code></li>
+<li>可以用其他工具去模拟<ul>
+<li>比如：命令行工具<code>curl</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对于写代码调用后台接口<ul>
+<li>可以用postman去模拟和查看</li>
+</ul>
+</li>
+</ul>
+<p>下面详细介绍如何查看内部的具体流程：</p>
+<h2 id="用chrome的开发者工具去查看"><a name="用chrome的开发者工具去查看" class="plugin-anchor" href="#用chrome的开发者工具去查看"><i class="fa fa-link" aria-hidden="true"></i></a>用Chrome的开发者工具去查看</h2>
+<p>先去打开：
+右上角 三个点-》更多工具-》开发者工具
+<img src="../assets/img/9EED85A6-83B3-42DB-85D5-2B3B3E5F06A5.png" alt></p>
+<p>点击到Network列，然后再去访问地址 www.baidu.com</p>
+<p>就可以看到会有一堆的内容列出来，点击第一个 www.baidu.com 的Header</p>
+<p>即可看到，对应的Request和Response的信息：</p>
+<p><img src="../assets/img/681BB8D6-73BC-4EAD-804E-4014E5C12299.png" alt></p>
+<p>通过点击Request Headers和Response Headers的view source可以看到未被解析之前的原始内容：
+<img src="../assets/img/B7221FAE-3275-4973-88BC-D4E79EB59875.png" alt>
+<img src="../assets/img/58E15E6F-F862-4DFA-B248-EA981AB89FE6.png" alt></p>
+<p>对应的原始内容为：</p>
+<p>Request请求：</p>
+<pre class="language-"><code class="lang-bash">GET / HTTP/1.1
+Host: www.baidu.com
+Connection: keep-alive
+Cache-Control: max-age<span class="token operator">=</span><span class="token number">0</span>
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Macintosh<span class="token punctuation">;</span> Intel Mac OS X 10_12_6<span class="token punctuation">)</span> AppleWebKit/537.36 <span class="token punctuation">(</span>KHTML, like Gecko<span class="token punctuation">)</span> Chrome/61.0.3163.100 Safari/537.36
+Upgrade-Insecure-Requests: <span class="token number">1</span>
+Accept: text/html,application/xhtml+xml,application/xml<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.9</span>,image/webp,image/apng,*/*<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.8</span>
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.8</span>,en<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.6</span>
+Cookie: <span class="token assign-left variable">BAIDUID</span><span class="token operator">=</span>6720BF4EAED8C8448EB6540DAF83BE56:FG<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token assign-left variable">BIDUPSID</span><span class="token operator">=</span>6720BF4EAED8C8448EB6540DAF83BE56<span class="token punctuation">;</span> <span class="token assign-left variable">PSTM</span><span class="token operator">=</span><span class="token number">1449798993</span><span class="token punctuation">;</span> <span class="token assign-left variable">MCITY</span><span class="token operator">=</span>-224%3A<span class="token punctuation">;</span> <span class="token assign-left variable">BD_CK_SAM</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token assign-left variable">PSINO</span><span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token assign-left variable">BD_HOME</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token assign-left variable">H_PS_PSSID</span><span class="token operator">=</span>1430_24568_21116_24880_20929<span class="token punctuation">;</span> <span class="token assign-left variable">BD_UPN</span><span class="token operator">=</span><span class="token number">123253</span>
+</code></pre>
+<p>Response响应：</p>
+<pre class="language-"><code class="lang-bash">HTTP/1.1 <span class="token number">200</span> OK
+Bdpagetype: <span class="token number">1</span>
+Bdqid: 0xd4bdc47c00000909
+Bduserid: <span class="token number">0</span>
+Cache-Control: private
+Connection: Keep-Alive
+Content-Encoding: <span class="token function">gzip</span>
+Content-Type: text/html<span class="token punctuation">;</span> <span class="token assign-left variable">charset</span><span class="token operator">=</span>utf-8
+Cxy_all: baidu+1ea6be4d211f802306f9e10940507eba
+Date: Mon, <span class="token number">13</span> Nov <span class="token number">2017</span> 01:32:41 GMT
+Expires: Mon, <span class="token number">13</span> Nov <span class="token number">2017</span> 01:32:06 GMT
+Server: BWS/1.1
+Set-Cookie: <span class="token assign-left variable">BDSVRTM</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/
+Set-Cookie: <span class="token assign-left variable">BD_HOME</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/
+Set-Cookie: <span class="token assign-left variable">H_PS_PSSID</span><span class="token operator">=</span>1430_24568_21116_24880_20929<span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/<span class="token punctuation">;</span> <span class="token assign-left variable">domain</span><span class="token operator">=</span>.baidu.com
+Strict-Transport-Security: max-age<span class="token operator">=</span><span class="token number">172800</span>
+Vary: Accept-Encoding
+X-Powered-By: HPHP
+X-Ua-Compatible: <span class="token assign-left variable">IE</span><span class="token operator">=</span>Edge,chrome<span class="token operator">=</span><span class="token number">1</span>
+Transfer-Encoding: chunked
+</code></pre>
+<h2 id="用curl工具去模拟浏览器访问百度的过程"><a name="用curl工具去模拟浏览器访问百度的过程" class="plugin-anchor" href="#用curl工具去模拟浏览器访问百度的过程"><i class="fa fa-link" aria-hidden="true"></i></a>用curl工具去模拟浏览器访问百度的过程</h2>
+<p>在命令行中输入：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">curl</span> <span class="token parameter variable">-v</span> www.baidu.com
+</code></pre>
+<p>返回的结果是：</p>
+<pre class="language-"><code class="lang-bash">➜  ~ <span class="token function">curl</span> <span class="token parameter variable">-v</span> www.baidu.com
+* Rebuilt URL to: www.baidu.com/
+*   Trying <span class="token number">180.97</span>.33.107<span class="token punctuation">..</span>.
+* TCP_NODELAY <span class="token builtin class-name">set</span>
+* Connected to www.baidu.com <span class="token punctuation">(</span><span class="token number">180.97</span>.33.107<span class="token punctuation">)</span> port <span class="token number">80</span> <span class="token punctuation">(</span><span class="token comment">#0)</span>
+<span class="token operator">&gt;</span> GET / HTTP/1.1
+<span class="token operator">&gt;</span> Host: www.baidu.com
+<span class="token operator">&gt;</span> User-Agent: curl/7.54.0
+<span class="token operator">&gt;</span> Accept: */*
+<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span> HTTP/1.1 <span class="token number">200</span> OK
+<span class="token operator">&lt;</span> Server: bfe/1.0.8.18
+<span class="token operator">&lt;</span> Date: Mon, <span class="token number">13</span> Nov <span class="token number">2017</span> 01:35:55 GMT
+<span class="token operator">&lt;</span> Content-Type: text/html
+<span class="token operator">&lt;</span> Content-Length: <span class="token number">2381</span>
+<span class="token operator">&lt;</span> Last-Modified: Mon, <span class="token number">23</span> Jan <span class="token number">2017</span> <span class="token number">13</span>:28:24 GMT
+<span class="token operator">&lt;</span> Connection: Keep-Alive
+<span class="token operator">&lt;</span> ETag: <span class="token string">&quot;588604f8-94d&quot;</span>
+<span class="token operator">&lt;</span> Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+<span class="token operator">&lt;</span> Pragma: no-cache
+<span class="token operator">&lt;</span> Set-Cookie: <span class="token assign-left variable">BDORZ</span><span class="token operator">=</span><span class="token number">27315</span><span class="token punctuation">;</span> max-age<span class="token operator">=</span><span class="token number">86400</span><span class="token punctuation">;</span> <span class="token assign-left variable">domain</span><span class="token operator">=</span>.baidu.com<span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/
+<span class="token operator">&lt;</span> Accept-Ranges: bytes
+<span class="token operator">&lt;</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>--STATUS OK--<span class="token operator">&gt;</span><span class="token operator">&lt;</span>html<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span><span class="token operator">&lt;</span>meta http-equiv<span class="token operator">=</span>content-type <span class="token assign-left variable">content</span><span class="token operator">=</span>text/html<span class="token punctuation">;</span><span class="token assign-left variable">charset</span><span class="token operator">=</span>utf-<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span><span class="token operator">&lt;</span>meta http-equiv<span class="token operator">=</span>X-UA-Compatible <span class="token assign-left variable">content</span><span class="token operator">=</span>IE<span class="token operator">=</span>Edge<span class="token operator">&gt;</span><span class="token operator">&lt;</span>meta <span class="token assign-left variable">content</span><span class="token operator">=</span>always <span class="token assign-left variable">name</span><span class="token operator">=</span>referrer<span class="token operator">&gt;</span><span class="token operator">&lt;</span>link <span class="token assign-left variable">rel</span><span class="token operator">=</span>stylesheet <span class="token assign-left variable">type</span><span class="token operator">=</span>text/css <span class="token assign-left variable">href</span><span class="token operator">=</span>http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css<span class="token operator">&gt;</span><span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>百度一下，你就知道<span class="token operator">&lt;</span>/title<span class="token operator">&gt;</span><span class="token operator">&lt;</span>/head<span class="token operator">&gt;</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span>body <span class="token assign-left variable">link</span><span class="token operator">=</span><span class="token comment">#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; .............. &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt;; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;</span>
+* Connection <span class="token comment">#0 to host www.baidu.com left intact</span>
+</code></pre>
+<p><img src="../assets/img/1D928B86-A1C2-404B-A682-48332C1F71DF.png" alt></p>
+<h2 id="用postman去模拟前面的调用后台接口的登录过程"><a name="用postman去模拟前面的调用后台接口的登录过程" class="plugin-anchor" href="#用postman去模拟前面的调用后台接口的登录过程"><i class="fa fa-link" aria-hidden="true"></i></a>用<code>postman</code>去模拟前面的调用后台接口的登录过程</h2>
+<p><img src="../assets/img/4ACF224B-4768-406B-B28D-50F8131C38C4.png" alt></p>
+<p>其中内部发送的HTTP请求，可以通过Code查看：
+<img src="../assets/img/523C7AA5-AF8F-477A-A7CF-BA415AC37F8F.png" alt></p>
+<pre class="language-"><code class="lang-bash">POST /v1/skr/login HTTP/1.1
+Host: <span class="token number">123.206</span>.101.36:9090
+Content-Type: application/json<span class="token punctuation">;</span> <span class="token assign-left variable">charset</span><span class="token operator">=</span>UTF-8
+authorization: Bearer mum5emp17q28st6v36ajltfvf3
+Cache-Control: no-cache
+Postman-Token: deb6784d-3689-32ce-ac01-687c22ad1b6e
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;user&quot;</span> <span class="token builtin class-name">:</span> <span class="token string">&quot;13429&quot;</span>,
+    <span class="token string">&quot;password&quot;</span> <span class="token builtin class-name">:</span> <span class="token string">&quot;666666&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-12-13 15:43:36
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch2_http_intro.html" class="navigation navigation-prev " aria-label="Previous page: HTTP简介">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch4_http_basic_logic.html" class="navigation navigation-next " aria-label="Next page: HTTP基本逻辑总结">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"HTTP内部流程","level":"1.2.3","depth":2,"next":{"title":"HTTP基本逻辑总结","level":"1.2.4","depth":2,"path":"http_intro/ch4_http_basic_logic.md","ref":"http_intro/ch4_http_basic_logic.md","articles":[]},"previous":{"title":"HTTP简介","level":"1.2.2","depth":2,"path":"http_intro/ch2_http_intro.md","ref":"http_intro/ch2_http_intro.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/http_summary/pdf/http_summary.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/http_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP知识总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"总结HTTP技术相关内容。先进行了HTTP的简介，介绍了学习HTTP的目的，以及典型的HTTP的内部流程，以及总结了基本的逻辑。再进行HTTP的详细介绍，包括字段和结构，Header头，请求参数和编码，响应的状态码，响应数据的JSON格式等。再整理HTTP相关的一些内容，比如工具和不同语言的HTTP的网络库，以及如何进行后台HTTP相关的api接口设计，总结了一些相关心得，文件上传、混合内容等。最后附上一些HTTP相关的教程资料。"},"file":{"path":"http_intro/ch3_http_internal_process.md","mtime":"2023-12-13T07:43:36.352Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-13T07:51:23.218Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

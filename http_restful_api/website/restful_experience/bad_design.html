@@ -1,0 +1,722 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>不好的设计风格 · HTTP后台端：RESTful API接口设计</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="resp_data_style.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"http_restful_api","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../restful_intro/">
+            
+                <a href="../restful_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    RESTful API简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../restful_intro/example.html">
+            
+                <a href="../restful_intro/example.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../restful_rule/">
+            
+                <a href="../restful_rule/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    RESTful API通用设计规则
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../restful_rule/rule.html">
+            
+                <a href="../restful_rule/rule.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    通用设计规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../restful_rule/hateoas.html">
+            
+                <a href="../restful_rule/hateoas.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    HATEOAS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../restful_tool/">
+            
+                <a href="../restful_tool/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    RESTful API工具和库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../restful_tool/test_tool.html">
+            
+                <a href="../restful_tool/test_tool.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    开发测试工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../restful_tool/framework_lib.html">
+            
+                <a href="../restful_tool/framework_lib.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    框架和库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../restful_doc/">
+            
+                <a href="../restful_doc/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    RESTful API如何写接口文档
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../restful_doc/use_markdown.html">
+            
+                <a href="../restful_doc/use_markdown.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    用Markdown写API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../restful_doc/use_postman.html">
+            
+                <a href="../restful_doc/use_postman.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    用Postman生成API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../restful_doc/use_swagger.html">
+            
+                <a href="../restful_doc/use_swagger.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    用Swagger生成API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    RESTful API心得和经验
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.1" data-path="bad_design.html">
+            
+                <a href="bad_design.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    不好的设计风格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="resp_data_style.html">
+            
+                <a href="resp_data_style.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    返回数据的格式和风格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="pagination.html">
+            
+                <a href="pagination.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    分页设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="experience_other.html">
+            
+                <a href="experience_other.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >不好的设计风格</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E0D;&#x597D;&#x7684;api&#x8BBE;&#x8BA1;&#x98CE;&#x683C;"><a name="&#x4E0D;&#x597D;&#x7684;api&#x8BBE;&#x8BA1;&#x98CE;&#x683C;" class="plugin-anchor" href="#&#x4E0D;&#x597D;&#x7684;api&#x8BBE;&#x8BA1;&#x98CE;&#x683C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0D;&#x597D;&#x7684;API&#x8BBE;&#x8BA1;&#x98CE;&#x683C;</h1>
+<h2 id="&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#xFF0C;&#x90FD;&#x7528;post"><a name="&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#xFF0C;&#x90FD;&#x7528;post" class="plugin-anchor" href="#&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#xFF0C;&#x90FD;&#x7528;post"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#xFF0C;&#x90FD;&#x7528;<code>POST</code></h2>
+<p>&#x542C;&#x8BF4;&#x8FC7;&#xFF0C;&#x6709;&#x4E9B;&#x5077;&#x61D2;&#x7684;&#x4EBA;&#xFF0C;&#x6709;&#x574F;&#x4E60;&#x60EF;&#x7684;&#x4EBA;&#xFF0C;&#x7ADF;&#x7136;&#x4E3A;&#x4E86;&#x7701;&#x4E8B;&#x800C;&#x53BB;&#xFF1A;<strong>&#x628A;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#x90FD;&#x7528;<code>POST</code></strong></p>
+<p>&#x800C;&#x4E0D;&#x53BB;&#x7BA1;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x5E94;&#x8BE5;&#x7528;<code>GET</code>&#x3001;<code>PUT</code>&#x3001;<code>DELETE</code>&#x7B49;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x4E0D;&#x8BBA;&#x4F60;&#x4E4B;&#x524D;&#x662F;&#x5426;&#x6709;&#x8FD9;&#x4E2A;&#x574F;&#x4E60;&#x60EF;&#xFF0C;&#x90FD;&#x4E0D;&#x8981;&#x7EE7;&#x7EED;&#x518D;&#x6709;&#x8FD9;&#x79CD;&#x574F;&#x4E60;&#x60EF;&#x548C;&#x574F;&#x505A;&#x6CD5;&#x4E86;&#x3002;</p>
+<p>&#x800C;&#x662F;&#x5E94;&#x8BE5;&#x6839;&#x636E;&#x8D44;&#x6E90;&#x7684;&#x5185;&#x5BB9;&#x548C;&#x64CD;&#x4F5C;&#x7684;&#x76EE;&#x7684;&#xFF0C;&#x5206;&#x522B;&#x7528;&#x5BF9;&#x5E94;&#x7684;<code>HTTP</code>&#x7684;&#x5408;&#x9002;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;<code>GET</code>&#x3001;<code>POST</code>&#x3001;<code>PUT</code>&#x3001;<code>DELETE</code></p>
+<h2 id="&#x5728;&#x63A5;&#x53E3;&#x4E2D;&#x6DFB;&#x52A0;getupdate&#x7B49;&#x52A8;&#x8BCD;"><a name="&#x5728;&#x63A5;&#x53E3;&#x4E2D;&#x6DFB;&#x52A0;getupdate&#x7B49;&#x52A8;&#x8BCD;" class="plugin-anchor" href="#&#x5728;&#x63A5;&#x53E3;&#x4E2D;&#x6DFB;&#x52A0;getupdate&#x7B49;&#x52A8;&#x8BCD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5728;&#x63A5;&#x53E3;&#x4E2D;&#x6DFB;&#x52A0;GET/UPDATE&#x7B49;&#x52A8;&#x8BCD;</h2>
+<p>&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li><code>GET /getUser</code></li>
+<li><code>POST /updateUser</code></li>
+<li><code>POST /cowfarm/cowfarmemp/new</code></li>
+<li><code>POST /cowfarm/cowfarmemp/update</code></li>
+<li><code>POST /cowfarm/cowfarmemp/delete/{id}</code><ul>
+<li>&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x5305;&#x542B;&#x4E86;data&#x548C;&#x5BF9;&#x5E94;&#x7684;&#x5B57;&#x6BB5;</li>
+</ul>
+</li>
+</ul>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x4E0D;&#x5E94;&#x8BE5;&#x5728;&#x63A5;&#x53E3;&#x4E2D;&#x52A0;&#x8FD9;&#x4E9B;&#x52A8;&#x8BCD;&#xFF0C;&#x800C;&#x5E94;&#x8BE5;&#x901A;&#x8FC7;&#x63A5;&#x53E3;&#x7684;HTTP&#x65B9;&#x6CD5;&#xFF0C;GET/UPDATE&#xFF0C;&#x6765;&#x8868;&#x793A;&#x63A5;&#x53E3;&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x6BD4;&#x5982;&#x6539;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li><code>GET /user</code><ul>
+<li><strong>&#x83B7;&#x53D6;</strong>&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x4FE1;&#x606F;</li>
+</ul>
+</li>
+<li><code>PUT /user</code><ul>
+<li><strong>&#x66F4;&#x65B0;</strong>&#x7528;&#x6237;&#x7684;&#x4FE1;&#x606F;</li>
+</ul>
+</li>
+<li><code>POST /cowfarm/employee</code><ul>
+<li>&#x8868;&#x793A; <strong>&#x65B0;&#x5EFA;</strong> &#x4E00;&#x4E2A;&#x519C;&#x573A;&#x7684;&#x96C7;&#x5458;/&#x5458;&#x5DE5;</li>
+</ul>
+</li>
+<li><code>PUT /cowfarm/employee</code><ul>
+<li>&#x8868;&#x793A; <strong>&#x66F4;&#x65B0;</strong> &#x519C;&#x573A;&#x96C7;&#x5458;/&#x5458;&#x5DE5;&#x7684;&#x4FE1;&#x606F;</li>
+</ul>
+</li>
+<li><code>DELETE /cowfarm/employee</code><ul>
+<li>body&#x4E2D;&#x5305;&#x542B;json&#x53C2;&#x6570;<ul>
+<li><code>{&quot;id&quot;: xxx}</code></li>
+</ul>
+</li>
+<li>&#x8868;&#x793A; <strong>&#x5220;&#x9664;</strong> &#x7528;&#x6237;</li>
+<li>&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#xFF0C;message&#xFF0C;code&#x5E94;&#x8BE5;&#x6B63;&#x5E38;&#x8FD4;&#x56DE;&#xFF0C;data&#x5C31;&#x6CA1;&#x5FC5;&#x8981;&#x8FD4;&#x56DE;&#x4E86;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x975E;&#x6539;&#x52A8;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x5374;&#x8BBE;&#x8BA1;&#x4E3A;postput&#x7B49;&#x65B9;&#x6CD5;"><a name="&#x975E;&#x6539;&#x52A8;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x5374;&#x8BBE;&#x8BA1;&#x4E3A;postput&#x7B49;&#x65B9;&#x6CD5;" class="plugin-anchor" href="#&#x975E;&#x6539;&#x52A8;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x5374;&#x8BBE;&#x8BA1;&#x4E3A;postput&#x7B49;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x975E;&#x6539;&#x52A8;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x5374;&#x8BBE;&#x8BA1;&#x4E3A;POST/PUT&#x7B49;&#x65B9;&#x6CD5;</h2>
+<p>&#x5BF9;&#x4E8E;&#x6CA1;&#x6709;&#x65B0;&#x589E;/&#x66F4;&#x65B0;/&#x5220;&#x9664;&#x7B49;&#x53BB;&#x6539;&#x52A8;&#x548C;&#x5F71;&#x54CD;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;HTTP&#x7684;&#x65B9;&#x6CD5;&#x5374;&#x8BBE;&#x8BA1;&#x4E3A;POST/PUT&#x7B49;</p>
+<ul>
+<li>&#x5F88;&#x591A;&#x516C;&#x53F8;&#x7684;&#x540E;&#x53F0;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#xFF0C;&#x4E3A;&#x4E86;&#x5077;&#x61D2;&#x7701;&#x4E8B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x63A5;&#x53E3;&#x90FD;&#x7528;POST&#xFF0C;&#x5305;&#x62EC;&#x672C;&#x5E94;&#x8BE5;&#x7528;GET&#x7684;&#x63A5;&#x53E3;</li>
+<li>&#x6216;&#x8005;&#x662F;&#xFF0C;&#x5BF9;API&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#x89C4;&#x8303;&#x4E0D;&#x4E86;&#x89E3;&#xFF0C;&#x628A;&#x4EC5;&#x4EC5;&#x662F;&#x83B7;&#x53D6;&#x3001;&#x67E5;&#x8BE2;&#x8D44;&#x6E90;&#xFF0C;&#x4E0D;&#x4F1A;&#x6539;&#x52A8;&#x8D44;&#x6E90;&#x7684;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#x6210;POST</li>
+</ul>
+<p>&#x6BD4;&#x5982;&#xFF0C;&#x4E0D;&#x597D;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>&#x901A;&#x8FC7;id&#x83B7;&#x53D6;task&#x4FE1;&#x606F;&#xFF1A;<code>POST /task</code><ul>
+<li>body&#x53C2;&#x6570;&#xFF1A;<code>{ &quot;id&quot;: &quot;1234&quot; }</code></li>
+</ul>
+</li>
+<li>&#x67E5;&#x8BE2;&#x51FA;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x4EFB;&#x52A1;&#xFF1A;<code>POST /task/query</code><ul>
+<li>&#x53C2;&#x6570;&#x653E;&#x5728;body&#x4E2D; <code>{&quot;keyword&#x201D;:&#x201D;xxx&#x201D;, &#x201C;start&#x201D;: 0, &#x201C;limit&#x201D;: 10}</code>
+&#x5E94;&#x8BE5;&#x6539;&#x4E3A;&#x6B63;&#x5E38;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</li>
+</ul>
+</li>
+<li><code>GET /task/{id}</code><ul>
+<li>&#x6216;&#xFF1A;<code>GET /task?id=1234</code></li>
+</ul>
+</li>
+<li><code>GET /task/query?keyword=xxxx&amp;start=0&amp;limit=10</code><ul>
+<li>&#x5176;&#x4E2D;GET&#x7684;query string&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x8C03;&#x7528;API&#x63A5;&#x53E3;&#x65F6;&#xFF0C;&#x5F80;&#x5F80;&#x4E0D;&#x662F;&#x624B;&#x52A8;&#x52A0;&#x4E0A;&#x53BB;</li>
+<li>&#x800C;&#x662F;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x5B57;&#x5178;&#x53D8;&#x91CF;&#xFF0C;&#x7136;&#x540E;&#x7528;&#x76F8;&#x5173;&#x7684;encode&#x51FD;&#x6570;&#x53BB;&#x7F16;&#x7801;&#x51FA;&#x6765;&#x7684;</li>
+<li>&#x8BE6;&#x89C1;&#xFF1A;<a href="http://book.crifan.com/books/http_summary/website/" target="_blank">HTTP&#x77E5;&#x8BC6;&#x603B;&#x7ED3;</a></li>
+<li>&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x786E;&#x4FDD;&#x53C2;&#x6570;&#x4E2D;&#x5305;&#x542B;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4E5F;&#x80FD;&#x6B63;&#x5E38;&#x63A5;&#x53D7;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<ul>
+<li>&#x7A7A;&#x683C; -&gt; <code>%20</code></li>
+<li>&#x4E2D;&#x6587;&quot;&#x674E;&#x8302;&quot; -&gt; &#x88AB;UTF-8&#x7F16;&#x7801;&#x4E3A; -&gt; <code>%e6%9d%8e%e8%8c%82</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2018-06-19 22:40:35
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: RESTful API心得和经验">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="resp_data_style.html" class="navigation navigation-next " aria-label="Next page: 返回数据的格式和风格">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"不好的设计风格","level":"1.6.1","depth":2,"next":{"title":"返回数据的格式和风格","level":"1.6.2","depth":2,"path":"restful_experience/resp_data_style.md","ref":"restful_experience/resp_data_style.md","articles":[]},"previous":{"title":"RESTful API心得和经验","level":"1.6","depth":1,"path":"restful_experience/README.md","ref":"restful_experience/README.md","articles":[{"title":"不好的设计风格","level":"1.6.1","depth":2,"path":"restful_experience/bad_design.md","ref":"restful_experience/bad_design.md","articles":[]},{"title":"返回数据的格式和风格","level":"1.6.2","depth":2,"path":"restful_experience/resp_data_style.md","ref":"restful_experience/resp_data_style.md","articles":[]},{"title":"分页设计","level":"1.6.3","depth":2,"path":"restful_experience/pagination.md","ref":"restful_experience/pagination.md","articles":[]},{"title":"其他心得","level":"1.6.4","depth":2,"path":"restful_experience/experience_other.md","ref":"restful_experience/experience_other.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/http_restful_api/pdf/http_restful_api.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/http_restful_api/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"http_restful_api","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP后台端：RESTful API接口设计","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"整理过[HTTP知识总结](http://book.crifan.com/books/http_summary/website)后，继续去整理`HTTP`的**后台**相关的技术。在服务器后台进行设计API接口时，目前最流行的风格（原则/标准/规范）就是`RESTful`，常简称为`REST`接口。"},"file":{"path":"restful_experience/bad_design.md","mtime":"2018-06-19T14:40:35.278Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-16T16:17:16.808Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

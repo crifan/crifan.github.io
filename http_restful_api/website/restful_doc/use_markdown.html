@@ -1,0 +1,800 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>用Markdown写API文档 · HTTP后台端：RESTful API接口设计</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="use_postman.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"http_restful_api","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../restful_intro/">
+            
+                <a href="../restful_intro/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    RESTful API简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../restful_intro/example.html">
+            
+                <a href="../restful_intro/example.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../restful_rule/">
+            
+                <a href="../restful_rule/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    RESTful API通用设计规则
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../restful_rule/rule.html">
+            
+                <a href="../restful_rule/rule.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    通用设计规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../restful_rule/hateoas.html">
+            
+                <a href="../restful_rule/hateoas.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    HATEOAS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../restful_tool/">
+            
+                <a href="../restful_tool/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    RESTful API工具和库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../restful_tool/test_tool.html">
+            
+                <a href="../restful_tool/test_tool.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    开发测试工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../restful_tool/framework_lib.html">
+            
+                <a href="../restful_tool/framework_lib.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    框架和库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    RESTful API如何写接口文档
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="use_markdown.html">
+            
+                <a href="use_markdown.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    用Markdown写API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="use_postman.html">
+            
+                <a href="use_postman.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    用Postman生成API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="use_swagger.html">
+            
+                <a href="use_swagger.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    用Swagger生成API文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../restful_experience/">
+            
+                <a href="../restful_experience/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    RESTful API心得和经验
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../restful_experience/bad_design.html">
+            
+                <a href="../restful_experience/bad_design.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    不好的设计风格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../restful_experience/resp_data_style.html">
+            
+                <a href="../restful_experience/resp_data_style.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    返回数据的格式和风格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../restful_experience/pagination.html">
+            
+                <a href="../restful_experience/pagination.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    分页设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../restful_experience/experience_other.html">
+            
+                <a href="../restful_experience/experience_other.html">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >用Markdown写API文档</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7528;markdown&#x5199;api&#x6587;&#x6863;"><a name="&#x7528;markdown&#x5199;api&#x6587;&#x6863;" class="plugin-anchor" href="#&#x7528;markdown&#x5199;api&#x6587;&#x6863;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;Markdown&#x5199;API&#x6587;&#x6863;</h1>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;
+&#x4E00;&#x4E2A;GET&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x9A8C;&#x8BC1;&#x7801;&#x7684;&#x63A5;&#x53E3;&#xFF1A;
+&#x5728;postman&#x4E2D;&#x5DF2;&#x7ECF;&#x8C03;&#x8BD5;&#x5B8C;&#x6BD5;&#xFF1A;</p>
+<p><img src="../assets/img/postman_debug_api.png" alt="">
+&#x7136;&#x540E;&#x53BB;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#x6709;&#x9053;&#x4E91;&#x7B14;&#x8BB0;&#x4E2D;&#x7F16;&#x5199;markdown&#xFF1A;</p>
+<pre class="language-"><code class="lang-markdown"><span class="token title important"><span class="token punctuation">#</span> API&#x63A5;&#x53E3;</span>
+
+<span class="token title important"><span class="token punctuation">##</span> &#x6CE8;&#x518C;</span>
+
+<span class="token title important"><span class="token punctuation">###</span> &#x83B7;&#x53D6;&#x9A8C;&#x8BC1;&#x7801;</span>
+
+&#x76EE;&#x524D;&#x6709;4&#x79CD;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;type&#x662F;&#xFF1A;
+<span class="token list punctuation">-</span> &#x6CE8;&#x518C;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#xFF1A; register
+<span class="token list punctuation">-</span> &#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;: changePassword
+<span class="token list punctuation">-</span> &#x4FEE;&#x6539;&#x624B;&#x673A;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;: changePhoneNumber
+<span class="token list punctuation">-</span> &#x9A8C;&#x8BC1;&#x624B;&#x673A;&#x53F7;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;: verifyPhoneNumber
+<span class="token title important"><span class="token punctuation">####</span> Request</span>
+<span class="token list punctuation">-</span> Method: <span class="token bold"><span class="token punctuation">**</span>GET<span class="token punctuation">**</span></span>
+<span class="token list punctuation">-</span> URL:  <span class="token code keyword">```/v1.0/open/smscode?type={type}&amp;phone={phone}``</span>`
+<span class="token code keyword">    - register for new user:  ```/v1.0/open/smscode?type=register&amp;phone=13811119999```</span>
+<span class="token code keyword">    - forgot password: ```/v1.0/open/smscode?type=changePassword&amp;phone=13822224444```</span>
+<span class="token list punctuation">-</span> Headers&#xFF1A;
+<span class="token list punctuation">-</span> Body:
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token punctuation">```</span></span>
+
+<span class="token title important"><span class="token punctuation">####</span> Response</span>
+<span class="token list punctuation">-</span> Body
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+  &quot;code&quot;: 200,
+  &quot;data&quot;: &quot;730781&quot;,
+  &quot;message&quot;: &quot;OK&quot;
+}</span>
+<span class="token punctuation">```</span></span>
+
+&#x6CE8;&#x610F;&#xFF1A;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x88AB;&#x6EE5;&#x7528;&#xFF0C;&#x77ED;&#x4FE1;&#x5982;&#x679C;&#x53D1;&#x9001;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x9694;60s&#x624D;&#x80FD;&#x91CD;&#x65B0;&#x53D1;&#x9001;&#x3002;
+</code></pre>
+<p>&#x5BF9;&#x5E94;&#x7684;&#x6548;&#x679C;&#xFF1A;
+<img src="../assets/img/youdao_markdown_preview_1.png" alt="">
+<img src="../assets/img/youdao_markdown_preview_2.png" alt=""></p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x518D;&#x4E3E;&#x4E2A;&#x6709;request&#x4E5F;&#x6709;response&#x7684;POST&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre class="language-"><code class="lang-markdown"><span class="token title important"><span class="token punctuation">###</span> &#x521B;&#x5EFA;&#x65B0;&#x7528;&#x6237;</span>
+<span class="token title important"><span class="token punctuation">####</span> Reuqest</span>
+
+<span class="token list punctuation">-</span> Method: <span class="token bold"><span class="token punctuation">**</span>POST<span class="token punctuation">**</span></span>
+<span class="token list punctuation">-</span> URL: <span class="token code keyword">```/v1.0/open/register``</span>`
+<span class="token list punctuation">-</span> Headers&#xFF1A; Content-Type:application/json
+<span class="token list punctuation">-</span> Body:
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+    &quot;phone&quot; : &quot;13511112222&quot;,
+    &quot;smsCode&quot; : &quot;730781&quot;,
+    &quot;email&quot; : &quot;crifan@webonn.com&quot;,
+    &quot;firstName&quot; : &quot;crifan&quot;,
+    &quot;lastName&quot; : &quot;Li&quot;,
+    &quot;password&quot; : &quot;654321&quot;,
+    &quot;facebookUserId&quot; : &quot;123907074803456&quot;
+}</span>
+<span class="token punctuation">```</span></span>
+
+<span class="token title important"><span class="token punctuation">####</span> Response</span>
+<span class="token list punctuation">-</span> Body
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+  &quot;code&quot;: 200,
+  &quot;data&quot;: {
+    &quot;avatarUrl&quot;: &quot;&quot;,
+    &quot;createdAt&quot;: &quot;2016-10-24T20:39:46&quot;,
+    &quot;curRole&quot;: &quot;IdleNoRole&quot;,
+    &quot;email&quot;: &quot;crifan@webonn.com&quot;,
+    &quot;errandorRating&quot;: 0,
+    &quot;facebookUserId&quot;: &quot;123907074803456&quot;,
+    &quot;firstName&quot;: &quot;crifan&quot;,
+    &quot;id&quot;: &quot;user-4d51faba-97ff-4adf-b256-40d7c9c68103&quot;,
+    &quot;isOnline&quot;: false,
+    &quot;lastName&quot;: &quot;Li&quot;,
+    &quot;location&quot;: {
+      &quot;createdAt&quot;: null,
+      &quot;fullStr&quot;: null,
+      &quot;id&quot;: null,
+      &quot;latitude&quot;: null,
+      &quot;longitude&quot;: null,
+      &quot;shortStr&quot;: null,
+      &quot;updatedAt&quot;: null
+    },
+    &quot;locationId&quot;: null,
+    &quot;password&quot;: &quot;654321&quot;,
+    &quot;phone&quot;: &quot;13511112222&quot;,
+    &quot;shareCodeCount&quot;: 0,
+    &quot;updatedAt&quot;: &quot;2016-10-24T20:39:46&quot;
+  },
+  &quot;message&quot;: &quot;new user has created&quot;
+}</span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<p>markdown&#x751F;&#x6210;&#x6587;&#x6863;&#x7684;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="../assets/img/create_new_md_preview_1.png" alt=""></p>
+<p><img src="../assets/img/create_new_md_preview_2.png" alt=""></p>
+<p>&#x6240;&#x4EE5;&#x540E;&#x7EED;&#x5176;&#x4ED6;&#x63A5;&#x53E3;&#xFF0C;&#x5747;&#x53EF;&#x53C2;&#x8003;&#x4E0A;&#x9762;&#x7684;GET/POST&#x7B49;&#x63A5;&#x53E3;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x53BB;&#x5199;&#x51FA;&#x5BF9;&#x5E94;&#x7684;markdown&#x7684;&#x6E90;&#x6587;&#x4EF6;&#xFF0C;&#x751F;&#x6210;API&#x6587;&#x6863;&#x540E;&#xFF0C;&#x6548;&#x679C;&#x8FD8;&#x662F;&#x4E0D;&#x9519;&#x7684;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x5176;&#x4ED6;Markdown&#x7F16;&#x8F91;&#x5668;&#x53BB;&#x5199;md&#x6587;&#x4EF6;&#xFF0C;&#x53BB;&#x751F;&#x6210;&#x5BF9;&#x5E94;API&#x6587;&#x6863;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x518D;&#x9644;&#x4E0A;&#xFF0C;&#x5728;&#x5199;&#x5177;&#x4F53;&#x5355;&#x4E2A;API&#x63A5;&#x53E3;&#x4E4B;&#x524D;&#x7684;&#x58F0;&#x660E;&#x7684;&#x90E8;&#x5206;&#xFF1A;</p>
+<pre class="language-"><code class="lang-markdown"><span class="token title important"><span class="token punctuation">#</span> &#x6587;&#x6863;&#x8BF4;&#x660E;</span>
+<span class="token title important"><span class="token punctuation">##</span> &#x670D;&#x52A1;&#x5668;API&#x5730;&#x5740;</span>
+&#x524D;&#x7F00;&#xFF1A;
+<span class="token code keyword">```http://115.29.173.126:21084/runningfast/api``</span>`
+
+
+&#x5B8C;&#x6574;&#x7684;API&#x5730;&#x5740;&#x4E3A;&#xFF1A;<span class="token code keyword">```&#x524D;&#x7F00;``</span><span class="token code keyword">`+`</span><span class="token code keyword">``&#x5177;&#x4F53;&#x63A5;&#x53E3;&#x8DEF;&#x5F84;``</span>`
+
+&#x6BD4;&#x5982;&#xFF0C;&#x83B7;&#x53D6;&#x9A8C;&#x8BC1;&#x7801;&#x90FD;&#x63A5;&#x53E3;&#x4E3A;&#xFF1A;
+<span class="token code keyword">```http://115.29.173.126:21084/runningfast/api``</span><span class="token code keyword">` + `</span><span class="token code keyword">``/v1.0/open/smscode``</span>`
+
+-&gt;
+
+<span class="token code keyword">```http://115.29.173.126:21084/runningfast/api/v1.0/open/smscode``</span>`
+
+<span class="token title important"><span class="token punctuation">##</span> &#x8C03;&#x7528;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</span>
+<span class="token list punctuation">-</span> &#x5982;&#x679C;&#x53C2;&#x6570;&#x683C;&#x5F0F;&#x662F;==JSON==&#x7684;&#x8BDD;&#xFF1A;&#x63D0;&#x4EA4;request&#x8BF7;&#x6C42;&#x65F6;&#x5FC5;&#x987B;&#x6DFB;&#x52A0;header&#x5934;&#xFF1A;==Content-Type:application/json==
+<span class="token list punctuation">-</span> &#x8BF7;&#x6C42;&#x4E2D;&#x662F;&#x5426;&#x8981;&#x5305;&#x542B;&#x5934;&#x4FE1;&#x606F;&#xFF1A;==Authorization:{accesstoken}==
+<span class="token code keyword">    - &#x63A5;&#x53E3;&#x4E2D;==&#x5305;&#x542B;==```/open/```&#x7684;&#xFF1A;&#x4E0D;&#x9700;&#x8981;&#x6DFB;&#x52A0;</span>
+<span class="token code keyword">    - &#x63A5;&#x53E3;&#x4E2D;==&#x4E0D;&#x5305;&#x542B;==```/open/```&#xFF1A;&#x9700;&#x8981;&#x6DFB;&#x52A0;</span>
+<span class="token code keyword">        - &#x8BF4;&#x660E;&#x8BE5;&#x63A5;&#x53E3;&#x90FD;&#x9700;&#x8981;&#x5BF9;&#x5E94;&#x7684;&#x6743;&#x9650;&#x624D;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5728;&#x8BF7;&#x6C42;&#x4E2D;&#x5305;&#x542B;&#x5934;&#x4FE1;&#x606F;&#xFF1A;```Authorization:{accesstoken}```</span>
+<span class="token code keyword">    - &#x5F53;access token&#x65E0;&#x6548;&#x6216;&#x8005;&#x5DF2;&#x8FC7;&#x671F;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#xFF1A;</span>
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+  &quot;code&quot;: 401,
+  &quot;message&quot;: &quot;invalid access token: wrong or expired&quot;
+}</span>
+<span class="token punctuation">```</span></span>
+
+<span class="token list punctuation">-</span> &#x6240;&#x6709;&#x7684;&#x63A5;&#x53E3;&#x7684;&#x8FD4;&#x56DE;&#x5F62;&#x5F0F;&#x90FD;&#x662F;&#x7EDF;&#x4E00;&#x4E3A;&#xFF1A;
+<span class="token code keyword">    - &#x6B63;&#x5E38;&#x8FD4;&#x56DE;</span>
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+  &quot;code&quot;: 200,
+  &quot;message&quot;: &quot;OK&quot;,
+  &quot;data&quot;: &#x67D0;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x6570;&#x5B57;&#xFF0C;&#x5B57;&#x5178;&#x7B49;&#x7B49;
+}</span>
+<span class="token punctuation">```</span></span>
+<span class="token code keyword">    - &#x9519;&#x8BEF;&#x8FD4;&#x56DE;</span>
+
+<span class="token code"><span class="token punctuation">```</span>
+<span class="token code-block">{
+  &quot;code&quot;: &#x5177;&#x4F53;&#x7684;&#x9519;&#x8BEF;&#x7801;,
+  &quot;message&quot;: &quot;&#x5177;&#x4F53;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x5B57;&#x7B26;&#x4E32;&quot;
+}</span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<p>&#x6587;&#x6863;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="../assets/img/youdao_markdown_explain_preview_1.png" alt="">
+<img src="../assets/img/youdao_markdown_explain_preview_2.png" alt=""></p>
+<ul>
+<li>&#x4F18;&#x70B9;&#xFF1A;&#x7B80;&#x5355;&#x6613;&#x4E0A;&#x624B;</li>
+<li>&#x7F3A;&#x70B9;&#xFF1A;&#x540E;&#x7EED;API&#x66F4;&#x65B0;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x53CA;&#x65F6;&#x66F4;&#x65B0;markdown&#x7684;&#x6587;&#x6863;&#x5185;&#x5BB9;</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2017-12-14 14:19:25
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: RESTful API如何写接口文档">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="use_postman.html" class="navigation navigation-next " aria-label="Next page: 用Postman生成API文档">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"用Markdown写API文档","level":"1.5.1","depth":2,"next":{"title":"用Postman生成API文档","level":"1.5.2","depth":2,"path":"restful_doc/use_postman.md","ref":"restful_doc/use_postman.md","articles":[]},"previous":{"title":"RESTful API如何写接口文档","level":"1.5","depth":1,"path":"restful_doc/README.md","ref":"restful_doc/README.md","articles":[{"title":"用Markdown写API文档","level":"1.5.1","depth":2,"path":"restful_doc/use_markdown.md","ref":"restful_doc/use_markdown.md","articles":[]},{"title":"用Postman生成API文档","level":"1.5.2","depth":2,"path":"restful_doc/use_postman.md","ref":"restful_doc/use_postman.md","articles":[]},{"title":"用Swagger生成API文档","level":"1.5.3","depth":2,"path":"restful_doc/use_swagger.md","ref":"restful_doc/use_swagger.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/http_restful_api/pdf/http_restful_api.pdf","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/http_restful_api/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"http_restful_api","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP后台端：RESTful API接口设计","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"整理过[HTTP知识总结](http://book.crifan.com/books/http_summary/website)后，继续去整理`HTTP`的**后台**相关的技术。在服务器后台进行设计API接口时，目前最流行的风格（原则/标准/规范）就是`RESTful`，常简称为`REST`接口。"},"file":{"path":"restful_doc/use_markdown.md","mtime":"2017-12-14T06:19:25.413Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-16T16:17:16.808Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

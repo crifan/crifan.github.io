@@ -1,0 +1,768 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>HTTP基本逻辑总结 · HTTP知识总结</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../http_detail/" />
+    
+    
+    <link rel="prev" href="ch3_http_internal_process.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    HTTP简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ch1_http_learn_purpose.html">
+            
+                <a href="ch1_http_learn_purpose.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    HTTP学习目的
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="ch2_http_intro.html">
+            
+                <a href="ch2_http_intro.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    HTTP简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="ch3_http_internal_process.html">
+            
+                <a href="ch3_http_internal_process.html">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    HTTP内部流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="ch4_http_basic_logic.html">
+            
+                <a href="ch4_http_basic_logic.html">
+            
+                    
+                        <b>1.2.4.</b>
+                    
+                    HTTP基本逻辑总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../http_detail/">
+            
+                <a href="../http_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    HTTP详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../http_detail/ch1_http_structure.html">
+            
+                <a href="../http_detail/ch1_http_structure.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    HTTP的典型结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../http_detail/ch2_http_header.html">
+            
+                <a href="../http_detail/ch2_http_header.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    HTTP的Header头
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../http_detail/ch3_http_req_param_encode.html">
+            
+                <a href="../http_detail/ch3_http_req_param_encode.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    HTTP的请求参数和编码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../http_detail/ch4_http_resp_status_code.html">
+            
+                <a href="../http_detail/ch4_http_resp_status_code.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    HTTP的响应的状态码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../http_detail/ch5_http_resp_data_format_json.html">
+            
+                <a href="../http_detail/ch5_http_resp_data_format_json.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    HTTP的响应数据格式JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../http_related/">
+            
+                <a href="../http_related/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    HTTP相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../http_related/tool_lib/">
+            
+                <a href="../http_related/tool_lib/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    HTTP的工具和库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../http_related/tool_lib/tool.html">
+            
+                <a href="../http_related/tool_lib/tool.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    HTTP工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../http_related/tool_lib/lib.html">
+            
+                <a href="../http_related/tool_lib/lib.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    HTTP库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../http_related/ch2_http_api_design.html">
+            
+                <a href="../http_related/ch2_http_api_design.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    HTTP的后台API设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../http_related/ch3_http_note_summary.html">
+            
+                <a href="../http_related/ch3_http_note_summary.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    HTTP相关心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../http_related/ch4_http_file_upload.html">
+            
+                <a href="../http_related/ch4_http_file_upload.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    HTTP的文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../http_related/ch5_mixed_content.html">
+            
+                <a href="../http_related/ch5_mixed_content.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    混合内容
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../appendix/good_tutorial.html">
+            
+                <a href="../appendix/good_tutorial.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    优质教程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >HTTP基本逻辑总结</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="http基本逻辑总结"><a name="http基本逻辑总结" class="plugin-anchor" href="#http基本逻辑总结"><i class="fa fa-link" aria-hidden="true"></i></a>HTTP基本逻辑总结</h1>
+<p>上述的所有用浏览器访问网页，用代码调用后台接口去登录等等，其内部的HTTP的基本逻辑和核心流程都是一样的：</p>
+<h2 id="（客户端）发送请求request"><a name="（客户端）发送请求request" class="plugin-anchor" href="#（客户端）发送请求request"><i class="fa fa-link" aria-hidden="true"></i></a>（客户端）发送请求Request</h2>
+<p>HTTP协议规定request的格式：
+<img src="../assets/img/DB7AD0DA-1C42-4504-B8C5-D8DFCE4444A4.png" alt></p>
+<p>此处：</p>
+<pre class="language-"><code class="lang-bash">GET / HTTP/1.1
+<span class="token punctuation">..</span>.
+User-Agent: curl/7.54.0
+Accept: */*
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><code>GET</code>：方法类型，HTTP/1.1表示HTTP协议的版本是1.1<ul>
+<li>使用第三方库时，也需要制定对应的GET／POST／。。。</li>
+<li>现在多数的HTTP协议都是使用的1.1</li>
+</ul>
+</li>
+<li><code>User-Agent</code>：用户代理，表示自己的客户端的类型是curl<ul>
+<li>使用第三方库时，一般不需要设置此参数<ul>
+<li>第三方库会自动帮你设置</li>
+</ul>
+</li>
+<li>如果是浏览器的话，不同浏览器对应不同的预设值<ul>
+<li>比如上面的Chrome此处是：<ul>
+<li>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Accept</code>：声明自己接收的信息的类型为<em>/</em>，表示所有类型内容都运行<ul>
+<li>如果调用服务器接口时，往往设置为：application/json</li>
+</ul>
+</li>
+</ul>
+<h2 id="获得（服务器返回的）响应response"><a name="获得（服务器返回的）响应response" class="plugin-anchor" href="#获得（服务器返回的）响应response"><i class="fa fa-link" aria-hidden="true"></i></a>获得（服务器返回的）响应Response</h2>
+<p>HTTP协议规定的响应的格式：
+<img src="../assets/img/4DDE8C10-6593-4BFD-8BBC-A15A79698C25.png" alt></p>
+<p>举例：
+<img src="../assets/img/8495B70C-58BC-4786-940A-FC5834B12343.jpg" alt></p>
+<p>此处的：</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&lt;</span> HTTP/1.1 <span class="token number">200</span> OK
+。。。
+<span class="token operator">&lt;</span> Content-Type: text/html
+<span class="token operator">&lt;</span> Content-Length: <span class="token number">2381</span>
+。。。。
+<span class="token operator">&lt;</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>--STATUS OK--<span class="token operator">&gt;</span><span class="token operator">&lt;</span>html<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span><span class="token operator">&lt;</span>meta http-equiv<span class="token operator">=</span>content-type <span class="token assign-left variable">content</span><span class="token operator">=</span>text/html<span class="token punctuation">;</span><span class="token assign-left variable">charset</span><span class="token operator">=</span>utf-<span class="token operator"><span class="token file-descriptor important">8</span>&gt;</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span> <span class="token operator">&lt;</span>/body<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>/html<span class="token operator">&gt;</span>
+* Connection <span class="token comment">#0 to host www.baidu.com left intact</span>
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>HTTP/1.1 200 OK：表示1.1版本的HTTP协议，返回状态为200，表示正常<ul>
+<li>其他典型的，不正常的，有问题的状态有很多，比如404找不到，500服务器内部错误等等</li>
+</ul>
+</li>
+<li>Content-Type: text/html：内容的类型为html</li>
+<li>Content-Length: 2381：内容的长度为2381字节</li>
+<li>&lt;!DOCTYPE html&gt;...：html的内容，浏览器加载此内容后，即可显示出你所看到的网页</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-12-13 15:43:36
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch3_http_internal_process.html" class="navigation navigation-prev " aria-label="Previous page: HTTP内部流程">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../http_detail/" class="navigation navigation-next " aria-label="Next page: HTTP详解">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"HTTP基本逻辑总结","level":"1.2.4","depth":2,"next":{"title":"HTTP详解","level":"1.3","depth":1,"path":"http_detail/README.md","ref":"http_detail/README.md","articles":[{"title":"HTTP的典型结构","level":"1.3.1","depth":2,"path":"http_detail/ch1_http_structure.md","ref":"http_detail/ch1_http_structure.md","articles":[]},{"title":"HTTP的Header头","level":"1.3.2","depth":2,"path":"http_detail/ch2_http_header.md","ref":"http_detail/ch2_http_header.md","articles":[]},{"title":"HTTP的请求参数和编码","level":"1.3.3","depth":2,"path":"http_detail/ch3_http_req_param_encode.md","ref":"http_detail/ch3_http_req_param_encode.md","articles":[]},{"title":"HTTP的响应的状态码","level":"1.3.4","depth":2,"path":"http_detail/ch4_http_resp_status_code.md","ref":"http_detail/ch4_http_resp_status_code.md","articles":[]},{"title":"HTTP的响应数据格式JSON","level":"1.3.5","depth":2,"path":"http_detail/ch5_http_resp_data_format_json.md","ref":"http_detail/ch5_http_resp_data_format_json.md","articles":[]}]},"previous":{"title":"HTTP内部流程","level":"1.2.3","depth":2,"path":"http_intro/ch3_http_internal_process.md","ref":"http_intro/ch3_http_internal_process.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/http_summary/pdf/http_summary.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/http_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP知识总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"总结HTTP技术相关内容。先进行了HTTP的简介，介绍了学习HTTP的目的，以及典型的HTTP的内部流程，以及总结了基本的逻辑。再进行HTTP的详细介绍，包括字段和结构，Header头，请求参数和编码，响应的状态码，响应数据的JSON格式等。再整理HTTP相关的一些内容，比如工具和不同语言的HTTP的网络库，以及如何进行后台HTTP相关的api接口设计，总结了一些相关心得，文件上传、混合内容等。最后附上一些HTTP相关的教程资料。"},"file":{"path":"http_intro/ch4_http_basic_logic.md","mtime":"2023-12-13T07:43:36.352Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-13T07:51:23.218Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
