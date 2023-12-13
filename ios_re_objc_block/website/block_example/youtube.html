@@ -1,0 +1,1296 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>YouTube逆向 · iOS逆向开发：Block匿名函数</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../block_summary/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_objc_block","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../block_overview/">
+            
+                <a href="../block_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Block概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../block_detail/">
+            
+                <a href="../block_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Block详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../block_detail/block_dev.html">
+            
+                <a href="../block_detail/block_dev.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Block正向开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../block_detail/block_layout/">
+            
+                <a href="../block_detail/block_layout/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Block定义
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../block_detail/block_layout/type.html">
+            
+                <a href="../block_detail/block_layout/type.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Block类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../block_detail/block_layout/flags.html">
+            
+                <a href="../block_detail/block_layout/flags.html">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../block_detail/block_layout/invoke/">
+            
+                <a href="../block_detail/block_layout/invoke/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    invoke
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../block_detail/block_layout/invoke/signature.html">
+            
+                <a href="../block_detail/block_layout/invoke/signature.html">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    signature
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../block_detail/block_layout/descriptor.html">
+            
+                <a href="../block_detail/block_layout/descriptor.html">
+            
+                    
+                        <b>1.3.2.4.</b>
+                    
+                    descriptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.5" data-path="../block_detail/block_layout/imported_variables.html">
+            
+                <a href="../block_detail/block_layout/imported_variables.html">
+            
+                    
+                        <b>1.3.2.5.</b>
+                    
+                    imported variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Block分析实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="youtube.html">
+            
+                <a href="youtube.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    YouTube逆向
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../block_summary/">
+            
+                <a href="../block_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Block心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../block_summary/debug_block.html">
+            
+                <a href="../block_summary/debug_block.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    动态调试Block
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../block_summary/objc_func.html">
+            
+                <a href="../block_summary/objc_func.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    相关objc函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >YouTube逆向</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="youtube逆向"><a name="youtube逆向" class="plugin-anchor" href="#youtube逆向"><i class="fa fa-link" aria-hidden="true"></i></a>YouTube逆向</h1>
+<p>此处通过具体实例来说明：</p>
+<p>iOS逆向<code>YouTube</code>期间，如何搞懂<code>Block</code>异步函数调用，包括如何传递参数<code>引用变量</code>=<code>imported variables</code>。</p>
+<p>YouTube的函数调用逻辑是：</p>
+<pre class="language-"><code class="lang-bash">当 去掉广告过滤 时，调用到 MLServerABRLoader onesieDataLoader:didCompleteChunks:withError: 的顺序：
+
+-<span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:<span class="token punctuation">]</span>
+    sub_10380F8 <span class="token operator">=</span> -<span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:<span class="token punctuation">]</span>_block
+        sub_10381F8 <span class="token operator">=</span> -<span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:<span class="token punctuation">]</span>_block_block + <span class="token number">344</span> <span class="token operator">=</span> 
+            -<span class="token punctuation">[</span>HAMBaseChunkLoadTask didCompleteWithError:<span class="token punctuation">]</span> + <span class="token number">412</span>
+                -<span class="token punctuation">[</span>MLServerABROnesieDataLoader chunks:didCompleteLoadingWithError:<span class="token punctuation">]</span> + <span class="token number">92</span>
+                    MLServerABRLoader onesieDataLoader:didCompleteChunks:withError:
+                        参数举例：
+                            <span class="token punctuation">[</span>case <span class="token number">1</span><span class="token punctuation">]</span>: 
+                                <span class="token assign-left variable">arg1</span><span class="token operator">=</span>0x0000000282b42000,
+                                <span class="token assign-left variable">arg2</span><span class="token operator">=</span><span class="token number">1</span> element,
+                                <span class="token assign-left variable">arg3</span><span class="token operator">=</span>domain: <span class="token string">&quot;com.google.ios.hamplayer&quot;</span> - code: <span class="token number">10000</span>
+                            <span class="token punctuation">[</span>case <span class="token number">2</span><span class="token punctuation">]</span>: 
+                                <span class="token assign-left variable">arg1</span><span class="token operator">=</span><span class="token operator">&lt;</span>MLServerABROnesieDataLoader: 0x282bd5e8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>, 
+                                <span class="token assign-left variable">arg2</span><span class="token operator">=</span><span class="token operator">&lt;</span>__NSSingleObjectArrayI 0x2807d151<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span><span class="token punctuation">(</span>
+                                        <span class="token operator">&lt;</span>HAMMP4InitializationChunk: 0x282bc3b8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+                                    <span class="token punctuation">)</span>
+                                <span class="token assign-left variable">arg3</span><span class="token operator">=</span>NULL
+</code></pre>
+<p>其中的：</p>
+<ul>
+<li><code>sub_10380F8</code> = <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></li>
+</ul>
+<p>就是函数：</p>
+<ul>
+<li><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]</code> 的 <code>Block</code>回调函数<ul>
+<li>后续会异步执行</li>
+</ul>
+</li>
+</ul>
+<p>而后续继续调用了其他的Block回调函数：</p>
+<ul>
+<li><code>sub_10381F8</code> = <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block_block</code></li>
+</ul>
+<p>下面就从对应的IDA伪代码中，去分析和解释具体逻辑和过程：</p>
+<h2 id="block通过invoke调用子函数"><a name="block通过invoke调用子函数" class="plugin-anchor" href="#block通过invoke调用子函数"><i class="fa fa-link" aria-hidden="true"></i></a>Block通过invoke调用子函数</h2>
+<h3 id="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencylogger"><a name="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencylogger" class="plugin-anchor" href="#mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencylogger"><i class="fa fa-link" aria-hidden="true"></i></a><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]</code></h3>
+<p>第一层：<code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]</code></p>
+<p>IDA伪代码：</p>
+<pre class="language-"><code class="lang-c">MLOnesieChunkLoadTask <span class="token operator">*</span>__cdecl <span class="token operator">-</span><span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange<span class="token operator">:</span>chunks<span class="token operator">:</span>dataBuffer<span class="token operator">:</span>cache<span class="token operator">:</span>delegate<span class="token operator">:</span>queue<span class="token operator">:</span>latencyLogger<span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>MLOnesieChunkLoadTask <span class="token operator">*</span>self<span class="token punctuation">,</span> SEL a2<span class="token punctuation">,</span> id a3<span class="token punctuation">,</span> id a4<span class="token punctuation">,</span> id a5<span class="token punctuation">,</span> id a6<span class="token punctuation">,</span> id a7<span class="token punctuation">,</span> id a8<span class="token punctuation">,</span> id a9<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  id StackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-C0h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-B8h]</span>
+  <span class="token function">__int64</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">,</span> __int64<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+30h] [xbp-B0h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+38h] [xbp-A8h]</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  StackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10380F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2F8<span class="token punctuation">;</span>
+  v21 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v19<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  StackBlock_ <span class="token operator">=</span> <span class="token function">objc_retainBlock_3E842F8</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>StackBlock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v17<span class="token punctuation">,</span> <span class="token string">&quot;requestDataWithRange:dataBlock:&quot;</span><span class="token punctuation">,</span> v25<span class="token punctuation">,</span> StackBlock_<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_caller_MLOnesieChunkLoadTask.jpg" alt="block_caller_MLOnesieChunkLoadTask"></p>
+<p>而其中的Block中被调用的，后续会异步执行的函数是：</p>
+<ul>
+<li><code>sub_10380F8</code></li>
+</ul>
+<p>就是此处的，iOS逆向期间，调试找出的，函数调用堆栈中的：</p>
+<ul>
+<li><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></li>
+</ul>
+<p>对应的真正触发调用子函数的代码是：</p>
+<pre class="language-"><code class="lang-c"><span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v17<span class="token punctuation">,</span> <span class="token string">&quot;requestDataWithRange:dataBlock:&quot;</span><span class="token punctuation">,</span> v25<span class="token punctuation">,</span> StackBlock_<span class="token punctuation">)</span>
+</code></pre>
+<p>对应的<code>v17 requestDataWithRange:dataBlock:</code>的内部，会有<code>dispatch_async</code>之类的真正触发调用此处的<code>Block</code>的<code>invoke</code>函数</p>
+<h3 id="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblock"><a name="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblock" class="plugin-anchor" href="#mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblock"><i class="fa fa-link" aria-hidden="true"></i></a><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></h3>
+<p>第二层：<code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></p>
+<p>IDA伪代码是：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10380F8</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span>a1<span class="token punctuation">,</span> __int64 a2<span class="token punctuation">,</span> <span class="token keyword">char</span> a3<span class="token punctuation">,</span> <span class="token keyword">char</span> a4<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v7<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  id stackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-88h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-80h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>__int64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-78h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-70h]</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  stackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10381F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2C8<span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  v7 <span class="token operator">=</span> v6<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token function">dispatch_async_3E82B64</span><span class="token punctuation">(</span>v7<span class="token punctuation">,</span> <span class="token operator">&amp;</span>stackBlock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_invoke_sub_10380F8.jpg" alt="block_invoke_sub_10380F8"></p>
+<p>而此Block中被调用的函数是：</p>
+<ul>
+<li><code>sub_10381F8</code></li>
+</ul>
+<p>也正好对应着，调试时通过函数调用堆栈找到的：</p>
+<ul>
+<li><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block_block</code></li>
+</ul>
+<p>而真正触发子函数调用的代码是：</p>
+<ul>
+<li><code>dispatch_async_3E82B64(v7, &amp;stackBlock);</code></li>
+</ul>
+<h3 id="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblockblock"><a name="mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblockblock" class="plugin-anchor" href="#mlonesiechunkloadtask-initwithrangechunksdatabuffercachedelegatequeuelatencyloggerblockblock"><i class="fa fa-link" aria-hidden="true"></i></a><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block_block</code></h3>
+<p>第三层：<code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block_block</code></p>
+<p>IDA伪代码是：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10381F8</span><span class="token punctuation">(</span>__int64 a1<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  __int64 v1<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>v2<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 v3<span class="token punctuation">;</span> <span class="token comment">// x2</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v4<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  id v5<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v6<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v7<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v9<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v10<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 v11<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __objc2_class <span class="token operator">*</span>v12<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+  __int64 v13<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-30h]</span>
+  __objc2_class <span class="token operator">*</span>v14<span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-28h]</span>
+
+
+  v1 <span class="token operator">=</span> a1<span class="token punctuation">;</span>
+  v2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>a1 <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> v2 <span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">72</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">24LL</span><span class="token punctuation">)</span> <span class="token operator">+=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v2<span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v3 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v13 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v14 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>v13<span class="token punctuation">,</span> <span class="token string">&quot;didReceiveData:error:&quot;</span><span class="token punctuation">,</span> v3<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">48</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">80</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        v4 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">56</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;firstObject&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v5 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v6 <span class="token operator">=</span> v5<span class="token punctuation">;</span>
+        v7 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v5<span class="token punctuation">,</span> <span class="token string">&quot;format&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v8 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v7<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;logLatencyTick:format:&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">48</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">81</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;isBounded&quot;</span><span class="token punctuation">)</span>
+      <span class="token operator">&amp;&amp;</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">72</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">24LL</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      v9 <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+      v10 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>OBJC_CLASS___NSError<span class="token punctuation">,</span> <span class="token string">&quot;HAMErrorWithCode:&quot;</span><span class="token punctuation">,</span> <span class="token number">10000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      v9 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    v11 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v12 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>v11<span class="token punctuation">,</span> <span class="token string">&quot;didCompleteWithError:&quot;</span><span class="token punctuation">,</span> v9<span class="token punctuation">,</span> v11<span class="token punctuation">,</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_invoke_sub_10381F8.jpg" alt="block_invoke_sub_10381F8"></p>
+<p>进一步的，从伪代码中，可以看出此函数的大概逻辑是：</p>
+<ul>
+<li>判断收到的数据？是否出错，如果出错，则报错。</li>
+</ul>
+<p>-》由此实现，iOS逆向期间，一点点找到被调用的函数，期间可能会涉及到Block的异步调用，搞懂函数的代码逻辑。</p>
+<h2 id="block通过imported-variables传递参数"><a name="block通过imported-variables传递参数" class="plugin-anchor" href="#block通过imported-variables传递参数"><i class="fa fa-link" aria-hidden="true"></i></a>Block通过imported variables传递参数</h2>
+<p>接下来继续分析：Block的引用变量的传递过程</p>
+<p>而如何搞懂此处Block的函数异步调用时，传递了哪些额外参数= imported variables=引用变量？</p>
+<p>核心思路是：</p>
+<ul>
+<li>从<code>block+0x20</code>往后，如果有连续的变量赋值，那基本上就是对应所引用的参数<ul>
+<li>同时，也去被调用的函数中，互相对照，才能确定<ul>
+<li>被调用函数中，如果从<code>block+0x20</code>之后位置获取值，也就是，获取对应的<code>imported variables</code>，就的确表示对应的值是引用的变量了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>对应此处具体的过程就是：</p>
+<h3 id="mlonesiechunkloadtask-initwithrange传递给sub10380f8"><a name="mlonesiechunkloadtask-initwithrange传递给sub10380f8" class="plugin-anchor" href="#mlonesiechunkloadtask-initwithrange传递给sub10380f8"><i class="fa fa-link" aria-hidden="true"></i></a>MLOnesieChunkLoadTask initWithRange传递给sub_10380F8</h3>
+<p>先确认<code>block+0x20</code>的位置</p>
+<p>先从<code>Block</code>的起始位置去算起：</p>
+<pre class="language-"><code class="lang-c">MLOnesieChunkLoadTask <span class="token operator">*</span>__cdecl <span class="token operator">-</span><span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange<span class="token operator">:</span>chunks<span class="token operator">:</span>dataBuffer<span class="token operator">:</span>cache<span class="token operator">:</span>delegate<span class="token operator">:</span>queue<span class="token operator">:</span>latencyLogger<span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>MLOnesieChunkLoadTask <span class="token operator">*</span>self<span class="token punctuation">,</span> SEL a2<span class="token punctuation">,</span> id a3<span class="token punctuation">,</span> id a4<span class="token punctuation">,</span> id a5<span class="token punctuation">,</span> id a6<span class="token punctuation">,</span> id a7<span class="token punctuation">,</span> id a8<span class="token punctuation">,</span> id a9<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  id StackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-C0h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-B8h]</span>
+  <span class="token keyword">void</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">,</span> __int64<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+30h] [xbp-B0h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+38h] [xbp-A8h]</span>
+
+  StackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10380F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2F8<span class="token punctuation">;</span>
+  StackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+</code></pre>
+<p>可以算出：</p>
+<ul>
+<li><code>[block+0x0]</code> = <code>Block</code>自身 = <code>_NSConcreteStackBlock</code><ul>
+<li>此处：<code>[xsp+20h]</code> == <code>sp+0x20</code></li>
+</ul>
+</li>
+<li><code>[block+0x08]</code> = <code>flags</code> = <code>0xC2000000LL</code><ul>
+<li>此处：<code>[xsp+28h]</code> == <code>sp+0x28</code></li>
+</ul>
+</li>
+<li><code>[block+0x10]</code> = <code>invoke</code> = <code>sub_10380F8</code><ul>
+<li>此处：<code>[xsp+30h]</code> == <code>sp+0x30</code></li>
+</ul>
+</li>
+<li><code>[block+0x18]</code> = <code>descriptor</code> = <code>&amp;unk_4EDE2F8</code><ul>
+<li>此处：<code>[xsp+38h]</code> == <code>sp+0x38</code></li>
+</ul>
+</li>
+</ul>
+<p>继续计算出<code>imported variable</code>：</p>
+<ul>
+<li><code>[block+0x20]</code> = 第<strong>1</strong>个引用变量<ul>
+<li>此处：<code>[xsp+40h]</code> = <code>sp+0x40</code> 的 <code>v39</code></li>
+</ul>
+</li>
+<li><code>[block+0x28]</code> = 第<strong>2</strong>个引用变量<ul>
+<li>此处：<code>[xsp+48h]</code> = <code>sp+0x48</code> 的 <code>v40</code></li>
+</ul>
+</li>
+<li><code>[block+0x30]</code> = 第<strong>3</strong>个引用变量<ul>
+<li>此处：<code>[xsp+50h]</code> = <code>sp+0x50</code> 的 <code>v41</code></li>
+</ul>
+</li>
+<li><code>[block+0x38]</code> = 第<strong>4</strong>个引用变量<ul>
+<li>此处：<code>[xsp+58h]</code> = <code>sp+0x58</code> 的 <code>v42</code></li>
+</ul>
+</li>
+<li><code>[block+0x40]</code> = 第<strong>5</strong>个引用变量<ul>
+<li>此处：<code>[xsp+60h]</code> = <code>sp+0x60</code> 的 <code>object</code><ul>
+<li>注：此处变量名之所以叫<code>object</code>，而不是叫做<code>v43</code>，其实是反编译器尝试理解代码逻辑，并给变量命令，结果由于（本身就很难）完全猜出代码逻辑，所以变量名命名的不是很合适，此种情况属于正常现象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>[block+0x48]</code> = 第<strong>6</strong>个引用变量<ul>
+<li>此处：<code>[xsp+68h]</code> = <code>sp+0x68</code> 的 <code>v44</code></li>
+</ul>
+</li>
+<li><code>[block+0x50]</code> = 第<strong>7</strong>个引用变量<ul>
+<li>此处：<code>[xsp+70h]</code> = <code>sp+0x70</code> 的 <code>v45</code></li>
+</ul>
+</li>
+<li><code>[block+0x58]</code> = 第<strong>8</strong>个引用变量<ul>
+<li>此处：<code>[xsp+78h]</code> = <code>sp+0x78</code> 的 <code>v46</code></li>
+</ul>
+</li>
+<li><code>[block+0x60]</code> = 第<strong>9</strong>个引用变量<ul>
+<li>此处：<code>[xsp+80h]</code> = <code>sp+0x80</code> 的 <code>v47</code></li>
+</ul>
+</li>
+<li><code>[block+0x68]</code> = 第<strong>10</strong>个引用变量<ul>
+<li>此处：<code>[xsp+88h]</code> = <code>sp+0x88</code> 的 <code>v48</code></li>
+</ul>
+</li>
+</ul>
+<p>需要说明的是，一般Block的引用变量的个数，也就<strong>2</strong>，<strong>3</strong>个左右，此处看起来引用变量多达<strong>10</strong>个</p>
+<p>而目前暂时不是完全确定，后续变量的确是引用这么多变量</p>
+<p>-&gt;需要后续看Block中被调用函数的实际使用情况，才能确定，到底引用了几个变量</p>
+<p>继续分析Block的引用变量：</p>
+<p>代码稍微优化（改名）后是：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10380F8</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span>inputBlock<span class="token punctuation">,</span> __int64 a2<span class="token punctuation">,</span> <span class="token keyword">char</span> a3<span class="token punctuation">,</span> <span class="token keyword">char</span> a4<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">char</span> v4<span class="token punctuation">;</span> <span class="token comment">// w19</span>
+  <span class="token keyword">char</span> v5<span class="token punctuation">;</span> <span class="token comment">// w20</span>
+  _QWORD <span class="token operator">*</span>curBlock<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v7<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  id stackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-88h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-80h]</span>
+  <span class="token keyword">void</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>__int64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-78h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-70h]</span>
+  id v13<span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-68h]</span>
+  id v14<span class="token punctuation">;</span> <span class="token comment">// [xsp+30h] [xbp-60h]</span>
+  id v15<span class="token punctuation">;</span> <span class="token comment">// [xsp+38h] [xbp-58h]</span>
+  id v16<span class="token punctuation">;</span> <span class="token comment">// [xsp+40h] [xbp-50h]</span>
+  id object<span class="token punctuation">;</span> <span class="token comment">// [xsp+48h] [xbp-48h]</span>
+  __int64 v18<span class="token punctuation">;</span> <span class="token comment">// [xsp+50h] [xbp-40h]</span>
+  <span class="token keyword">char</span> v19<span class="token punctuation">;</span> <span class="token comment">// [xsp+58h] [xbp-38h]</span>
+  <span class="token keyword">char</span> v20<span class="token punctuation">;</span> <span class="token comment">// [xsp+59h] [xbp-37h]</span>
+
+  v4 <span class="token operator">=</span> a4<span class="token punctuation">;</span>
+  v5 <span class="token operator">=</span> a3<span class="token punctuation">;</span>
+  curBlock <span class="token operator">=</span> inputBlock<span class="token punctuation">;</span>
+  stackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10381F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2C8<span class="token punctuation">;</span>
+  v13 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v18 <span class="token operator">=</span> curBlock<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v7 <span class="token operator">=</span> curBlock<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v14 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v15 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v19 <span class="token operator">=</span> v4<span class="token punctuation">;</span>
+  v16 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v20 <span class="token operator">=</span> v5<span class="token punctuation">;</span>
+  object <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v8 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">dispatch_async_3E82B64</span><span class="token punctuation">(</span>v7<span class="token punctuation">,</span> <span class="token operator">&amp;</span>stackBlock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>此处可以看出其中的：</p>
+<ul>
+<li>curBlock[4]</li>
+<li>curBlock[5]</li>
+<li>curBlock[6]</li>
+<li>curBlock[7]</li>
+<li>curBlock[8]</li>
+<li>curBlock[9]</li>
+</ul>
+<p>就是：</p>
+<ul>
+<li>来自上层的Block所传入的引用变量=<code>imported variables</code></li>
+</ul>
+<p>同时也要清楚，为何是从<code>curBlock[4]</code>的<strong>4</strong>开始，而不是从<strong>0</strong>开始，则是因为：</p>
+<ul>
+<li>从<code>0</code>开始的<code>0</code>到<code>3</code>，都是<code>Block</code>相关的属性<ul>
+<li>curBlock[0] = block + 0x0 = Block</li>
+<li>curBlock[1] = block + 0x8 = flags</li>
+<li>curBlock[2] = block + 0x10 = invoke</li>
+<li>curBlock[3] = block + 0x18 = descriptor</li>
+</ul>
+</li>
+</ul>
+<p>所以后续的<code>imported variables</code>才是：</p>
+<ul>
+<li>curBlock[4] = block + 0x20</li>
+<li>curBlock[5] = block + 0x28</li>
+<li>curBlock[6] = block + 0x30</li>
+<li>curBlock[7] = block + 0x38</li>
+<li>curBlock[8] = block + 0x40</li>
+<li>curBlock[9] = block + 0x48</li>
+</ul>
+<p>至此，就清楚了，从：</p>
+<ul>
+<li><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]</code></li>
+</ul>
+<p>调用了Block，其中：</p>
+<ul>
+<li>被调用的函数是：<code>sub_10380F8</code><ul>
+<li>== <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></li>
+</ul>
+</li>
+<li>传入的参数=引用的变量<ul>
+<li>[block+0x20] = 第1个 引用变量 ：当时的  [xsp+40h] = sp +0x40 的 v39<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[4] </li>
+</ul>
+</li>
+<li>[block+0x28] = 第2个引用变量 ：当时的  [xsp+48h] = sp +0x48 的 v40<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[5]</li>
+</ul>
+</li>
+<li>[block+0x30] = 第3个引用变量  ：当时的  [xsp+50h] = sp +0x50 的 v41<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[6]</li>
+</ul>
+</li>
+<li>[block+0x38] = 第4个引用变量  ：当时的  [xsp+58h] = sp +0x58 的 v42<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[7]</li>
+</ul>
+</li>
+<li>[block+0x40] = 第5个引用变量  ：当时的  [xsp+60h] = sp +0x60 的 object<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[8]</li>
+</ul>
+</li>
+<li>[block+0x48] = 第6个引用变量  ：当时的  [xsp+68h] = sp +0x68 的 v44<ul>
+<li>被调用函数sub_10380F8中所引用的：curBlock[9]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>至此，其中函数调用的大体逻辑，就清楚了：</p>
+<ul>
+<li><code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]</code><ul>
+<li>其中用Block回调了函数：<code>sub_10380F8</code> （= <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code> ）<ul>
+<li>且通过<code>imported variables</code>传入了<code>6</code>个参数变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="优化ida伪代码"><a name="优化ida伪代码" class="plugin-anchor" href="#优化ida伪代码"><i class="fa fa-link" aria-hidden="true"></i></a>优化IDA伪代码</h2>
+<p>接着，也就可以继续去优化代码了：</p>
+<p>给对应的变量改名字-》变成人类易读的代码-》让看代码的你自己更容易读懂代码逻辑</p>
+<h3 id="mlonesiechunkloadtask-initwithrange"><a name="mlonesiechunkloadtask-initwithrange" class="plugin-anchor" href="#mlonesiechunkloadtask-initwithrange"><i class="fa fa-link" aria-hidden="true"></i></a>MLOnesieChunkLoadTask initWithRange</h3>
+<pre class="language-"><code class="lang-c">MLOnesieChunkLoadTask <span class="token operator">*</span>__cdecl <span class="token operator">-</span><span class="token punctuation">[</span>MLOnesieChunkLoadTask initWithRange<span class="token operator">:</span>chunks<span class="token operator">:</span>dataBuffer<span class="token operator">:</span>cache<span class="token operator">:</span>delegate<span class="token operator">:</span>queue<span class="token operator">:</span>latencyLogger<span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>MLOnesieChunkLoadTask <span class="token operator">*</span>self<span class="token punctuation">,</span> SEL a2<span class="token punctuation">,</span> id a3<span class="token punctuation">,</span> id a4<span class="token punctuation">,</span> id a5<span class="token punctuation">,</span> id a6<span class="token punctuation">,</span> id a7<span class="token punctuation">,</span> id a8<span class="token punctuation">,</span> id a9<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  id StackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-C0h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-B8h]</span>
+  <span class="token keyword">void</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">,</span> __int64<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+30h] [xbp-B0h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+38h] [xbp-A8h]</span>
+  id importedVar1<span class="token punctuation">;</span> <span class="token comment">// [xsp+40h] [xbp-A0h]</span>
+  id importedVar2<span class="token punctuation">;</span> <span class="token comment">// [xsp+48h] [xbp-98h]</span>
+  id importedVar3<span class="token punctuation">;</span> <span class="token comment">// [xsp+50h] [xbp-90h]</span>
+  id importedVar4<span class="token punctuation">;</span> <span class="token comment">// [xsp+58h] [xbp-88h]</span>
+  id importedVar5<span class="token punctuation">;</span> <span class="token comment">// [xsp+60h] [xbp-80h]</span>
+  __int64 <span class="token operator">*</span>importedVar6<span class="token punctuation">;</span> <span class="token comment">// [xsp+68h] [xbp-78h]</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  StackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10380F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2F8<span class="token punctuation">;</span>
+  v21 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v19<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  importedVar1 <span class="token operator">=</span> v21<span class="token punctuation">;</span>
+  importedVar6 <span class="token operator">=</span> <span class="token operator">&amp;</span>v45<span class="token punctuation">;</span>
+  v22 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v14<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  importedVar2 <span class="token operator">=</span> v22<span class="token punctuation">;</span>
+  v23 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v20<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  importedVar3 <span class="token operator">=</span> v23<span class="token punctuation">;</span>
+  v24 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v16<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  importedVar4 <span class="token operator">=</span> v24<span class="token punctuation">;</span>
+  v25 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v15<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  importedVar5 <span class="token operator">=</span> v25<span class="token punctuation">;</span>
+  StackBlock_ <span class="token operator">=</span> <span class="token function">objc_retainBlock_3E842F8</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>StackBlock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_optimized_MLOnesieChunkLoadTask.jpg" alt="block_optimized_MLOnesieChunkLoadTask"></p>
+<h3 id="sub10380f8"><a name="sub10380f8" class="plugin-anchor" href="#sub10380f8"><i class="fa fa-link" aria-hidden="true"></i></a>sub_10380F8</h3>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10380F8</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span>inputBlock<span class="token punctuation">,</span> __int64 a2<span class="token punctuation">,</span> <span class="token keyword">char</span> a3<span class="token punctuation">,</span> <span class="token keyword">char</span> a4<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  _QWORD <span class="token operator">*</span>curBlock<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>inputImportedVar1<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  id stackBlock<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-88h]</span>
+  __int64 blockFlags<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-80h]</span>
+  <span class="token keyword">void</span> <span class="token punctuation">(</span>__fastcall <span class="token operator">*</span>blockInvoke<span class="token punctuation">)</span><span class="token punctuation">(</span>__int64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-78h]</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>blockDescriptor<span class="token punctuation">;</span> <span class="token comment">// [xsp+20h] [xbp-70h]</span>
+  id v13<span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-68h]</span>
+  id inputImportedVar2<span class="token punctuation">;</span> <span class="token comment">// [xsp+30h] [xbp-60h]</span>
+  id inputImportedVar3<span class="token punctuation">;</span> <span class="token comment">// [xsp+38h] [xbp-58h]</span>
+  id inputImportedVar4<span class="token punctuation">;</span> <span class="token comment">// [xsp+40h] [xbp-50h]</span>
+  id inputImportedVar5<span class="token punctuation">;</span> <span class="token comment">// [xsp+48h] [xbp-48h]</span>
+  __int64 inputImportedVar6<span class="token punctuation">;</span> <span class="token comment">// [xsp+50h] [xbp-40h]</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  curBlock <span class="token operator">=</span> inputBlock<span class="token punctuation">;</span>
+  stackBlock <span class="token operator">=</span> _NSConcreteStackBlock<span class="token punctuation">;</span>
+  blockFlags <span class="token operator">=</span> <span class="token number">0xC2000000LL</span><span class="token punctuation">;</span>
+  blockInvoke <span class="token operator">=</span> sub_10381F8<span class="token punctuation">;</span>
+  blockDescriptor <span class="token operator">=</span> <span class="token operator">&amp;</span>unk_4EDE2C8<span class="token punctuation">;</span>
+  v13 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  inputImportedVar6 <span class="token operator">=</span> curBlock<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  inputImportedVar1 <span class="token operator">=</span> curBlock<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  inputImportedVar2 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  inputImportedVar3 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v19 <span class="token operator">=</span> v4<span class="token punctuation">;</span>
+  inputImportedVar4 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v20 <span class="token operator">=</span> v5<span class="token punctuation">;</span>
+  inputImportedVar5 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>curBlock<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v8 <span class="token operator">=</span> <span class="token function">objc_retain_3E842C8</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">dispatch_async_3E82B64</span><span class="token punctuation">(</span>inputImportedVar1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>stackBlock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_optimzied_sub_10380F8.jpg" alt="block_optimzied_sub_10380F8"></p>
+<h3 id="sub10381f8"><a name="sub10381f8" class="plugin-anchor" href="#sub10381f8"><i class="fa fa-link" aria-hidden="true"></i></a>sub_10381F8</h3>
+<p>以及，用上述同样的方法去分析，之后的</p>
+<ul>
+<li><code>sub_10380F8</code><ul>
+<li>= <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block</code></li>
+</ul>
+</li>
+</ul>
+<p>所调用的Block函数：</p>
+<ul>
+<li><code>sub_10381F8</code><ul>
+<li>= <code>-[MLOnesieChunkLoadTask initWithRange:chunks:dataBuffer:cache:delegate:queue:latencyLogger:]_block_block</code></li>
+</ul>
+</li>
+</ul>
+<p>中的Block引用变量，然后分析完毕后，再去优化代码，效果是这样的：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10381F8</span><span class="token punctuation">(</span>__int64 inputBlock<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  __int64 curBlock<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>importedVar1_<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 importedVar1<span class="token punctuation">;</span> <span class="token comment">// x2</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v4<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  id v5<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v6<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v7<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v9<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v10<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 importedVar2_<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __objc2_class <span class="token operator">*</span>v12<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+  __int64 importedVar2<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-30h]</span>
+  __objc2_class <span class="token operator">*</span>v14<span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-28h]</span>
+
+
+  curBlock <span class="token operator">=</span> inputBlock<span class="token punctuation">;</span>
+  importedVar1_ <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>inputBlock <span class="token operator">+</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> importedVar1_ <span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x48</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0x18LL</span><span class="token punctuation">)</span> <span class="token operator">+=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>importedVar1_<span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    importedVar1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    importedVar2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v14 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>importedVar2<span class="token punctuation">,</span> <span class="token string">&quot;didReceiveData:error:&quot;</span><span class="token punctuation">,</span> importedVar1<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x30</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>                   <span class="token comment">// = importedVar3</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x50</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>                 <span class="token comment">// importedVar7</span>
+      <span class="token punctuation">{</span>
+        v4 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x38</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;firstObject&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// importedVar4</span>
+        v5 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v6 <span class="token operator">=</span> v5<span class="token punctuation">;</span>
+        v7 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v5<span class="token punctuation">,</span> <span class="token string">&quot;format&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v8 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v7<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;logLatencyTick:format:&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x30</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x51</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x40</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;isBounded&quot;</span><span class="token punctuation">)</span><span class="token comment">// importedVar5</span>
+      <span class="token operator">&amp;&amp;</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x40</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x48</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">24LL</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token comment">// curBlock + 0x48 = importedVar6</span>
+    <span class="token punctuation">{</span>
+      v9 <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+      v10 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>OBJC_CLASS___NSError<span class="token punctuation">,</span> <span class="token string">&quot;HAMErrorWithCode:&quot;</span><span class="token punctuation">,</span> <span class="token number">10000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      v9 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    importedVar2_ <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v12 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>importedVar2_<span class="token punctuation">,</span> <span class="token string">&quot;didCompleteWithError:&quot;</span><span class="token punctuation">,</span> v9<span class="token punctuation">,</span> importedVar2_<span class="token punctuation">,</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_optimzied_sub_10381F8.jpg" alt="block_optimzied_sub_10381F8"></p>
+<h4 id="sub10381f8进一步优化"><a name="sub10381f8进一步优化" class="plugin-anchor" href="#sub10381f8进一步优化"><i class="fa fa-link" aria-hidden="true"></i></a>sub_10381F8进一步优化</h4>
+<p>以及，在满足条件：</p>
+<ul>
+<li>对于objc_msgSend等逻辑一定的了解</li>
+<li>加上此处YouTube的头文件的配合：查找相关函数，可以确定是哪个类</li>
+<li>其他相关知识</li>
+</ul>
+<p>可以进一步优化为：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> __fastcall <span class="token function">sub_10381F8</span><span class="token punctuation">(</span>__int64 inputBlock<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  __int64 curBlock<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  <span class="token keyword">void</span> <span class="token operator">*</span>receivedData<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 receivedData_<span class="token punctuation">;</span> <span class="token comment">// x2</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v4<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  id v5<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v6<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v7<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>v8<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>newHamError_<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  <span class="token keyword">struct</span> <span class="token class-name">objc_object</span> <span class="token operator">*</span>newHamError<span class="token punctuation">;</span> <span class="token comment">// x0</span>
+  __int64 curMLOnesieChunkLoadTask_<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __objc2_class <span class="token operator">*</span>v12<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+  __int64 curMLOnesieChunkLoadTask<span class="token punctuation">;</span> <span class="token comment">// [xsp+10h] [xbp-30h]</span>
+  __objc2_class <span class="token operator">*</span>v14<span class="token punctuation">;</span> <span class="token comment">// [xsp+18h] [xbp-28h]</span>
+
+
+  curBlock <span class="token operator">=</span> inputBlock<span class="token punctuation">;</span>
+  receivedData <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>inputBlock <span class="token operator">+</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> receivedData <span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x48</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0x18LL</span><span class="token punctuation">)</span> <span class="token operator">+=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>receivedData<span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    receivedData_ <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    curMLOnesieChunkLoadTask <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v14 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>curMLOnesieChunkLoadTask<span class="token punctuation">,</span> <span class="token string">&quot;didReceiveData:error:&quot;</span><span class="token punctuation">,</span> receivedData_<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x30</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>                   <span class="token comment">// = importedVar3 = LatencyTick</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x50</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>                 <span class="token comment">// importedVar7</span>
+      <span class="token punctuation">{</span>
+        v4 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x38</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;firstObject&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// importedVar4</span>
+        v5 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v6 <span class="token operator">=</span> v5<span class="token punctuation">;</span>
+        v7 <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v5<span class="token punctuation">,</span> <span class="token string">&quot;format&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        v8 <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>v7<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;logLatencyTick:format:&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x30</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x51</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>                     <span class="token comment">// importedVar8</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x40</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;isBounded&quot;</span><span class="token punctuation">)</span><span class="token comment">// importedVar5 = HAMRange</span>
+      <span class="token operator">&amp;&amp;</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x40</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;length&quot;</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x48</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">8LL</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0x18LL</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token comment">// curBlock + 0x48 = importedVar6</span>
+    <span class="token punctuation">{</span>
+      newHamError_ <span class="token operator">=</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+      newHamError <span class="token operator">=</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>OBJC_CLASS___NSError<span class="token punctuation">,</span> <span class="token string">&quot;HAMErrorWithCode:&quot;</span><span class="token punctuation">,</span> <span class="token number">10000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      newHamError_ <span class="token operator">=</span> <span class="token function">objc_retainAutoreleasedReturnValue_3E842EC</span><span class="token punctuation">(</span>newHamError<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    curMLOnesieChunkLoadTask_ <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>curBlock <span class="token operator">+</span> <span class="token number">0x28</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v12 <span class="token operator">=</span> <span class="token operator">&amp;</span>OBJC_CLASS___MLOnesieChunkLoadTask<span class="token punctuation">;</span>
+    <span class="token function">objc_msgSendSuper2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>curMLOnesieChunkLoadTask_<span class="token punctuation">,</span> <span class="token string">&quot;didCompleteWithError:&quot;</span><span class="token punctuation">,</span> newHamError_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">objc_release_3E842BC</span><span class="token punctuation">(</span>newHamError_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../assets/img/block_add_logic_sub_10381F8.jpg" alt="block_add_logic_sub_10381F8"></p>
+<p>相对来说，更加明确了代码大概的逻辑：</p>
+<ul>
+<li>判断接受到的<code>data</code>数据，是否为空<ul>
+<li>如果不为空，继续处理<ul>
+<li>如果有错误，则log记录延迟？lantency的tick</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果<code>curBlock + 0x51</code>不为空<ul>
+<li>处理HAMRange相关的，判断是isBounded 且length长度符合预期<ul>
+<li>则表示error为空</li>
+</ul>
+</li>
+<li>否则表示有error错误<ul>
+<li>则继续去生成错误，错误码是<code>10000</code></li>
+<li>并报错：<code>MLOnesieChunkLoadTask_ didCompleteWithError:</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>-》如果加上前后文和相关代码逻辑，就会越加的，逐渐的，彻底搞懂：代码逻辑。</p>
+<p>如此，iOS逆向中，研究函数调用时，常会用到Block：（匿名的）异步函数调用</p>
+<p>加上imported variables，搞清楚参数的传递</p>
+<p>和上下文代码的逻辑和类、函数等内容</p>
+<p>才能真正的，一点点的，搞懂代码逻辑调用，和具体函数参数等详细的代码逻辑。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2022-10-25 16:27:09
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Block分析实例">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../block_summary/" class="navigation navigation-next " aria-label="Next page: Block心得">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"YouTube逆向","level":"1.4.1","depth":2,"next":{"title":"Block心得","level":"1.5","depth":1,"path":"block_summary/README.md","ref":"block_summary/README.md","articles":[{"title":"动态调试Block","level":"1.5.1","depth":2,"path":"block_summary/debug_block.md","ref":"block_summary/debug_block.md","articles":[]},{"title":"相关objc函数","level":"1.5.2","depth":2,"path":"block_summary/objc_func.md","ref":"block_summary/objc_func.md","articles":[]}]},"previous":{"title":"Block分析实例","level":"1.4","depth":1,"path":"block_example/README.md","ref":"block_example/README.md","articles":[{"title":"YouTube逆向","level":"1.4.1","depth":2,"path":"block_example/youtube.md","ref":"block_example/youtube.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_block/pdf/ios_re_objc_block.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_block/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_block","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：Block匿名函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间会涉及到的Block匿名回调函数。先解释为何要研究Block；再详细介绍Block，包括正向开发时的如何写Block代码，然后是逆向时Block的结构定义，包括定义的代码和定义的结构图，再分别介绍每一部分的含义，包括Block类型、flags、invoke，以及其中的signature函数签名，以及descriptor、imported variables引用的量；再介绍iOS逆向期间所涉及到的Block最核心的内容是哪些，然后举例详细阐述如何通过Block搞懂函数调用逻辑，以及导入变量的参数传递，顺带介绍如何优化IDA伪代码。然后再整理Block相关的心得，比如动态调试期间，如何查看Block信息、和Block相关的objc函数。"},"file":{"path":"block_example/youtube.md","mtime":"2022-10-25T08:27:09.000Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-07T01:47:24.842Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

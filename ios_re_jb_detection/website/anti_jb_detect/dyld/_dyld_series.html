@@ -1,0 +1,1899 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>_dyld系列 · iOS逆向开发：越狱检测和反越狱检测</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="dylib.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_jb_detection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../ios_jb_detecton_overview/">
+            
+                <a href="../../ios_jb_detecton_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS越狱检测概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../jb_detection/">
+            
+                <a href="../../jb_detection/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    iOS越狱检测
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../jb_detection/url_scheme.html">
+            
+                <a href="../../jb_detection/url_scheme.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    URL Scheme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../jb_detection/file/">
+            
+                <a href="../../jb_detection/file/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../jb_detection/file/attributes.html">
+            
+                <a href="../../jb_detection/file/attributes.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    文件属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../jb_detection/file/open/">
+            
+                <a href="../../jb_detection/file/open/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    文件打开
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../../jb_detection/file/open/c_func/">
+            
+                <a href="../../jb_detection/file/open/c_func/">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1.1" data-path="../../jb_detection/file/open/c_func/syscall.html">
+            
+                <a href="../../jb_detection/file/open/c_func/syscall.html">
+            
+                    
+                        <b>1.3.2.2.1.1.</b>
+                    
+                    syscall
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.1.2" data-path="../../jb_detection/file/open/c_func/svc_0x80_asm.html">
+            
+                <a href="../../jb_detection/file/open/c_func/svc_0x80_asm.html">
+            
+                    
+                        <b>1.3.2.2.1.2.</b>
+                    
+                    svc 0x80内联汇编
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../../jb_detection/file/open/ios_func.html">
+            
+                <a href="../../jb_detection/file/open/ios_func.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../../jb_detection/file/write/">
+            
+                <a href="../../jb_detection/file/write/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    文件写入
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../../jb_detection/file/write/c_func.html">
+            
+                <a href="../../jb_detection/file/write/c_func.html">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../../jb_detection/file/write/ios_func.html">
+            
+                <a href="../../jb_detection/file/write/ios_func.html">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../jb_detection/env.html">
+            
+                <a href="../../jb_detection/env.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    环境变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../jb_detection/debuggable.html">
+            
+                <a href="../../jb_detection/debuggable.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    是否可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../jb_detection/system.html">
+            
+                <a href="../../jb_detection/system.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../jb_detection/sandbox.html">
+            
+                <a href="../../jb_detection/sandbox.html">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    沙箱完整性校验
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../../jb_detection/jb_processes.html">
+            
+                <a href="../../jb_detection/jb_processes.html">
+            
+                    
+                        <b>1.3.7.</b>
+                    
+                    越狱相关进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../../jb_detection/dyld/">
+            
+                <a href="../../jb_detection/dyld/">
+            
+                    
+                        <b>1.3.8.</b>
+                    
+                    dyld动态库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.8.1" data-path="../../jb_detection/dyld/_dyld_series.html">
+            
+                <a href="../../jb_detection/dyld/_dyld_series.html">
+            
+                    
+                        <b>1.3.8.1.</b>
+                    
+                    _dyld系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8.2" data-path="../../jb_detection/dyld/dylib.html">
+            
+                <a href="../../jb_detection/dyld/dylib.html">
+            
+                    
+                        <b>1.3.8.2.</b>
+                    
+                    dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../../jb_detection/objc_runtime.html">
+            
+                <a href="../../jb_detection/objc_runtime.html">
+            
+                    
+                        <b>1.3.9.</b>
+                    
+                    ObjC运行时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../../jb_detection/app_self.html">
+            
+                <a href="../../jb_detection/app_self.html">
+            
+                    
+                        <b>1.3.10.</b>
+                    
+                    app本身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../../jb_detection/installed_app.html">
+            
+                <a href="../../jb_detection/installed_app.html">
+            
+                    
+                        <b>1.3.11.</b>
+                    
+                    已安装app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../../jb_detection/ssh.html">
+            
+                <a href="../../jb_detection/ssh.html">
+            
+                    
+                        <b>1.3.12.</b>
+                    
+                    SSH相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../../jb_detection/getsectiondata.html">
+            
+                <a href="../../jb_detection/getsectiondata.html">
+            
+                    
+                        <b>1.3.13.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    iOS反越狱检测
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../url_scheme.html">
+            
+                <a href="../url_scheme.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    URL Scheme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../file/">
+            
+                <a href="../file/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../file/open/">
+            
+                <a href="../file/open/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    文件打开
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../file/open/c_func/">
+            
+                <a href="../file/open/c_func/">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1.1" data-path="../file/open/c_func/syscall.html">
+            
+                <a href="../file/open/c_func/syscall.html">
+            
+                    
+                        <b>1.4.2.1.1.1.</b>
+                    
+                    syscall
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.1.2" data-path="../file/open/c_func/svc_0x80_asm.html">
+            
+                <a href="../file/open/c_func/svc_0x80_asm.html">
+            
+                    
+                        <b>1.4.2.1.1.2.</b>
+                    
+                    svc 0x80内联汇编
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2" data-path="../file/open/ios_func.html">
+            
+                <a href="../file/open/ios_func.html">
+            
+                    
+                        <b>1.4.2.1.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../file/write/">
+            
+                <a href="../file/write/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    文件写入
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../file/write/c_func.html">
+            
+                <a href="../file/write/c_func.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../file/write/ios_func.html">
+            
+                <a href="../file/write/ios_func.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../env.html">
+            
+                <a href="../env.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    环境变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../debuggable.html">
+            
+                <a href="../debuggable.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    是否可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../system.html">
+            
+                <a href="../system.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../sandbox.html">
+            
+                <a href="../sandbox.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    沙箱完整性校验
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../jb_processes.html">
+            
+                <a href="../jb_processes.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    越狱相关进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    dyld动态库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.8.1" data-path="_dyld_series.html">
+            
+                <a href="_dyld_series.html">
+            
+                    
+                        <b>1.4.8.1.</b>
+                    
+                    _dyld系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.2" data-path="dylib.html">
+            
+                <a href="dylib.html">
+            
+                    
+                        <b>1.4.8.2.</b>
+                    
+                    dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../objc_runtime.html">
+            
+                <a href="../objc_runtime.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    ObjC运行时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../app_self.html">
+            
+                <a href="../app_self.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    app本身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../getsectiondata.html">
+            
+                <a href="../getsectiondata.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../kernel_level.html">
+            
+                <a href="../kernel_level.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    内核级反越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../detect_common/">
+            
+                <a href="../../detect_common/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    通用内容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../detect_common/app_load_process.html">
+            
+                <a href="../../detect_common/app_load_process.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    app启动过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../detect_common/jb_path/">
+            
+                <a href="../../detect_common/jb_path/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    越狱路径相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../detect_common/jb_path/jb_file_list.html">
+            
+                <a href="../../detect_common/jb_path/jb_file_list.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    越狱文件列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../other_summary/">
+            
+                <a href="../../other_summary/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >_dyld系列</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="dyld系列"><a name="dyld系列" class="plugin-anchor" href="#dyld系列"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld系列</h1>
+<p>TODO：</p>
+<ul>
+<li>【已解决】iOS反越狱检测：优化findRealImageCount改为调用_dyld_get_image_vmaddr_slide计算逻辑</li>
+<li>【已解决】iOS反越狱检测：_dyld_image_count和_dyld_get_image_name返回hook后的值</li>
+<li>【已解决】iOS反越狱检测：如何hook绕过_dyld_image_count和_dyld_get_image_name</li>
+<li>【已解决】iOS反越狱检测：优化findRealImageCount改为调用_dyld_get_image_vmaddr_slide计算逻辑</li>
+<li>【已解决】iOS反越狱检测：_dyld_get_image_name的hook绕过</li>
+<li>【已解决】iOS反越狱检测：_dyld_image_count和_dyld_get_image_name改为普通hook逻辑</li>
+<li>【已解决】iOS反越狱检测：dyld的_dyld_image_count和_dyld_get_image_name</li>
+<li>【已解决】iOS反越狱检测：_dyld_register_func_for_add_image和_dyld_register_func_for_remove_image</li>
+<li></li>
+<li>【已解决】反越狱检测测试抖音：优化dyld的hook逻辑</li>
+</ul>
+<hr>
+<h2 id="相关工具函数"><a name="相关工具函数" class="plugin-anchor" href="#相关工具函数"><i class="fa fa-link" aria-hidden="true"></i></a>相关工具函数</h2>
+<pre class="language-"><code class="lang-c"><span class="token comment">/*==============================================================================
+Hook: _dyld_image_count(), _dyld_get_image_name(), _dyld_get_image_header(), _dyld_get_image_vmaddr_slide()
+==============================================================================*/</span>
+
+<span class="token comment">/*
+https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/dyld.3.html
+   _dyld_image_count,
+   _dyld_get_image_header,
+   _dyld_get_image_vmaddr_slide,
+   _dyld_get_image_name,
+   _dyld_register_func_for_add_image,
+   _dyld_register_func_for_remove_image,
+   NSVersionOfRunTimeLibrary,
+   NSVersionOfLinkTimeLibrary,
+   _NSGetExecutablePath
+*/</span>
+
+<span class="token class-name">uint32_t</span> <span class="token function">_dyld_image_count</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//uint32_t orig__dyld_image_count(void);</span>
+<span class="token comment">//uint32_t _logos_orig$_ungrouped$_dyld_image_count(void);</span>
+<span class="token comment">//uint32_t (*_logos_orig$_ungrouped$_dyld_image_count)(void);</span>
+<span class="token comment">//static uint32_t (*_logos_orig$_ungrouped$_dyld_image_count)(void);</span>
+
+<span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> <span class="token function">_dyld_get_image_header</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">intptr_t</span> <span class="token function">_dyld_get_image_vmaddr_slide</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">_dyld_register_func_for_add_image</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> mh<span class="token punctuation">,</span> <span class="token class-name">intptr_t</span> vmaddr_slide<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">_dyld_register_func_for_remove_image</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> mh<span class="token punctuation">,</span> <span class="token class-name">intptr_t</span> vmaddr_slide<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">int32_t</span> <span class="token function">NSVersionOfRunTimeLibrary</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> libraryName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">int32_t</span> <span class="token function">NSVersionOfLinkTimeLibrary</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> libraryName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">_NSGetExecutablePath</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span><span class="token operator">*</span> bufsize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> IMAGE_INDEX_FAKE_END <span class="token operator">=</span> IMAGE_INDEX_FAKE_START <span class="token operator">+</span> IMAGE_INDEX_MAX_VALID_NUMBER<span class="token punctuation">;</span>
+
+<span class="token comment">// Global Variable</span>
+<span class="token keyword">int</span> gOrigImageCount <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> gHookedImageCount <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> gRealOrigImageCount <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// after hooked, image name/header/slide got hooked image count -&gt; so need find real original image count</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> gJbDylibIdxList <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> gJbDylibIdxListLen <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> gHookedImgIdxList <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> gHookedImgIdxListLen <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">generateFakeImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> origImageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">int</span> fakeImgIdx <span class="token operator">=</span> origImageIndex <span class="token operator">+</span> IMAGE_INDEX_FAKE_START<span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;generateFakeImageIndex: origImageIndex=%d -&gt; fakeImgIdx=%d&quot;</span><span class="token punctuation">,</span> origImageIndex<span class="token punctuation">,</span> fakeImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> fakeImgIdx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> bool <span class="token function">isFakeImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> curImageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   bool isFakeIdx <span class="token operator">=</span> <span class="token punctuation">(</span>curImageIndex <span class="token operator">&gt;=</span> IMAGE_INDEX_FAKE_START<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>curImageIndex <span class="token operator">&lt;</span> IMAGE_INDEX_FAKE_END<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;curImageIndex=%d -&gt; isFakeIdx=%s&quot;</span><span class="token punctuation">,</span> curImageIndex<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isFakeIdx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> isFakeIdx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">fakeToRealImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> fakeImgageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">int</span> realImageIndex <span class="token operator">=</span> fakeImgageIndex <span class="token operator">-</span> IMAGE_INDEX_FAKE_START<span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;fakeImgageIndex=%d -&gt; realImageIndex=%d&quot;</span><span class="token punctuation">,</span> fakeImgageIndex<span class="token punctuation">,</span> realImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> realImageIndex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">dbgPrintImgIdxList</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> imgIdxList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;imgIdxList=%p&quot;</span><span class="token punctuation">,</span> imgIdxList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> imgIdxList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">int</span> curListIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+       <span class="token keyword">int</span> curIdxValue <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+       curIdxValue <span class="token operator">=</span> imgIdxList<span class="token punctuation">[</span>curListIdx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>DYLD_IMAGE_INDEX_INVALID <span class="token operator">==</span> curIdxValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;[%d] %d&quot;</span><span class="token punctuation">,</span> curListIdx<span class="token punctuation">,</span> curIdxValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token keyword">while</span><span class="token punctuation">(</span>DYLD_IMAGE_INDEX_INVALID <span class="token operator">!=</span> curIdxValue<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;[%d] %d&quot;</span><span class="token punctuation">,</span> curListIdx<span class="token punctuation">,</span> curIdxValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+           <span class="token operator">++</span>curListIdx<span class="token punctuation">;</span>
+           curIdxValue <span class="token operator">=</span> imgIdxList<span class="token punctuation">[</span>curListIdx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token keyword">int</span> listCount <span class="token operator">=</span> curListIdx<span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;end listCount=%d&quot;</span><span class="token punctuation">,</span> listCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">getJbDylibImgIdxList</span><span class="token punctuation">(</span><span class="token keyword">int</span> origImageCount<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span> outJbDylibIdxList<span class="token punctuation">,</span>  <span class="token keyword">int</span><span class="token operator">*</span> jbDylibIdxListLen<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;origImageCount=%d&quot;</span><span class="token punctuation">,</span> origImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> intSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> mallocCount <span class="token operator">=</span> IMAGE_INDEX_MAX_JAILBREAK <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> mallocSize <span class="token operator">=</span> intSize <span class="token operator">*</span> mallocCount<span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;intSize=%d, mallocCount=%d, mallocSize=%d&quot;</span><span class="token punctuation">,</span> intSize<span class="token punctuation">,</span> mallocCount<span class="token punctuation">,</span> mallocSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> curListIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span><span class="token operator">*</span> jbDylibIdxList <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>mallocSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;jbDylibIdxList=%p&quot;</span><span class="token punctuation">,</span> jbDylibIdxList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> jbDylibIdxList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> origImgIdx <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> origImgIdx <span class="token operator">&lt;</span> origImageCount<span class="token punctuation">;</span> <span class="token operator">++</span>origImgIdx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token keyword">int</span> fakeImgIdx <span class="token operator">=</span> <span class="token function">generateFakeImageIndex</span><span class="token punctuation">(</span>origImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;origImgIdx=%d, fakeImgIdx=%d&quot;</span><span class="token punctuation">,</span> origImgIdx<span class="token punctuation">,</span> fakeImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> curImageName <span class="token operator">=</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span>fakeImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;curImageName=%{public}s&quot;</span><span class="token punctuation">,</span> curImageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+           bool isJbDylib <span class="token operator">=</span> <span class="token function">isJailbreakDylib</span><span class="token punctuation">(</span>curImageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;isJbDylib=%s&quot;</span><span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+           <span class="token keyword">if</span><span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               jbDylibIdxList<span class="token punctuation">[</span>curListIdx<span class="token punctuation">]</span> <span class="token operator">=</span> origImgIdx<span class="token punctuation">;</span>
+               <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;curImageName=%{public}s -&gt; origImgIdx=%d, jbDylibIdxList[%d]=%d&quot;</span><span class="token punctuation">,</span> curImageName<span class="token punctuation">,</span> origImgIdx<span class="token punctuation">,</span> curListIdx<span class="token punctuation">,</span> jbDylibIdxList<span class="token punctuation">[</span>curListIdx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token operator">++</span>curListIdx<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token keyword">int</span> curListCount <span class="token operator">=</span> curListIdx<span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>jbDylibIdxListLen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token operator">*</span>jbDylibIdxListLen <span class="token operator">=</span> curListCount<span class="token punctuation">;</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;*jbDylibIdxListLen=%d&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span>jbDylibIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token keyword">int</span> curListEndIdx <span class="token operator">=</span> curListCount<span class="token punctuation">;</span>
+       jbDylibIdxList<span class="token punctuation">[</span>curListEndIdx<span class="token punctuation">]</span> <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;list end, jbDylibIdxList[%d]=%d&quot;</span><span class="token punctuation">,</span> curListEndIdx<span class="token punctuation">,</span> jbDylibIdxList<span class="token punctuation">[</span>curListEndIdx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token function">dbgPrintImgIdxList</span><span class="token punctuation">(</span>jbDylibIdxList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>outJbDylibIdxList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token comment">// Note: here for 0 jailbreak dylib, also means get OK</span>
+           <span class="token operator">*</span>outJbDylibIdxList <span class="token operator">=</span> jbDylibIdxList<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;origImageCount=%d -&gt; outJbDylibIdxList=%p, *outJbDylibIdxList=%p, jbDylibIdxList=%p, *jbDylibIdxListLen=%d&quot;</span><span class="token punctuation">,</span> origImageCount<span class="token punctuation">,</span> outJbDylibIdxList<span class="token punctuation">,</span> outJbDylibIdxList <span class="token operator">?</span> <span class="token operator">*</span>outJbDylibIdxList <span class="token operator">:</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> jbDylibIdxList<span class="token punctuation">,</span> jbDylibIdxListLen <span class="token operator">?</span> <span class="token operator">*</span>jbDylibIdxListLen <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">initDylibImageIdxList</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">// init for _dyld_image_count and related</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_COMPLEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token function">getJbDylibImgIdxList</span><span class="token punctuation">(</span>gOrigImageCount<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gJbDylibIdxList<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gJbDylibIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       gHookedImageCount <span class="token operator">=</span> gOrigImageCount <span class="token operator">-</span> gJbDylibIdxListLen<span class="token punctuation">;</span>
+       <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;gOrigImageCount=%d, gJbDylibIdxList=%p, gJbDylibIdxListLen=%d -&gt; gHookedImageCount=%d&quot;</span><span class="token punctuation">,</span> gOrigImageCount<span class="token punctuation">,</span> gJbDylibIdxList<span class="token punctuation">,</span> gJbDylibIdxListLen<span class="token punctuation">,</span> gHookedImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">generateHookedImageIndexList</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> jbDylibIdxList<span class="token punctuation">,</span> <span class="token keyword">int</span> jbDylibIdxListLen<span class="token punctuation">,</span> <span class="token keyword">int</span> origImgageCount<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span> outHookedImgIdxList<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> outHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">int</span><span class="token operator">*</span> hookedImgIdxList <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>origImgageCount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> curListIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> curImgIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> curImgIdx <span class="token operator">&lt;</span> origImgageCount<span class="token punctuation">;</span> curImgIdx<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       bool isJbDylibIdx <span class="token operator">=</span> false<span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>jbDylibIdxListLen <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+           isJbDylibIdx <span class="token operator">=</span> <span class="token function">isIntInList</span><span class="token punctuation">(</span>curImgIdx<span class="token punctuation">,</span> jbDylibIdxList<span class="token punctuation">,</span> jbDylibIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;curImgIdx=%d, isJbDylibIdx=%s&quot;</span><span class="token punctuation">,</span> curImgIdx<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isJbDylibIdx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isJbDylibIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           hookedImgIdxList<span class="token punctuation">[</span>curListIdx<span class="token punctuation">]</span> <span class="token operator">=</span> curImgIdx<span class="token punctuation">;</span>
+           <span class="token operator">++</span>curListIdx<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">int</span> hookedImgIdxListLen <span class="token operator">=</span> curListIdx<span class="token punctuation">;</span>
+   <span class="token comment">// set end</span>
+   <span class="token keyword">int</span> hookedImgIdxListEndIdx <span class="token operator">=</span> hookedImgIdxListLen<span class="token punctuation">;</span>
+   hookedImgIdxList<span class="token punctuation">[</span>hookedImgIdxListEndIdx<span class="token punctuation">]</span> <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+
+   <span class="token function">dbgPrintImgIdxList</span><span class="token punctuation">(</span>hookedImgIdxList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// return result</span>
+   <span class="token operator">*</span>outHookedImgIdxList <span class="token operator">=</span> hookedImgIdxList<span class="token punctuation">;</span>
+   <span class="token operator">*</span>outHookedImgIdxListLen <span class="token operator">=</span> hookedImgIdxListLen<span class="token punctuation">;</span>
+
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;-&gt; outHookedImgIdxList=%p, *outHookedImgIdxList=%p, *outHookedImgIdxListLen=%d&quot;</span><span class="token punctuation">,</span> outHookedImgIdxList<span class="token punctuation">,</span> <span class="token operator">*</span>outHookedImgIdxList<span class="token punctuation">,</span> <span class="token operator">*</span>outHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">reInitImgCountIfNeed</span><span class="token punctuation">(</span><span class="token keyword">int</span> curOrigCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>curOrigCount <span class="token operator">!=</span> gOrigImageCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;curOrigCount=%d != gOrigImageCount=%d, need init&quot;</span><span class="token punctuation">,</span> curOrigCount<span class="token punctuation">,</span> gOrigImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       gOrigImageCount <span class="token operator">=</span> curOrigCount<span class="token punctuation">;</span>
+       <span class="token function">initDylibImageIdxList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       bool foundJbLib <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> gJbDylibIdxList<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>gJbDylibIdxListLen <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>foundJbLib<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token function">generateHookedImageIndexList</span><span class="token punctuation">(</span>gJbDylibIdxList<span class="token punctuation">,</span> gJbDylibIdxListLen<span class="token punctuation">,</span> gOrigImageCount<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gHookedImgIdxList<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// static int hookedToOrigImageIndex(int hookedImageIndex, int* jbDylibIdxList, int jbDylibIdxListLen, int origImgageCount){</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">hookedToOrigImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> hookedImageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">int</span> origImgIdx <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+
+   <span class="token comment">// int* hookedImgIdxList = NULL;</span>
+   <span class="token comment">// int hookedImgIdxListLen = 0;</span>
+   <span class="token comment">// generateHookedImageIndexList(jbDylibIdxList, jbDylibIdxListLen, origImgageCount, &amp;hookedImgIdxList, &amp;hookedImgIdxListLen);</span>
+
+   <span class="token comment">// int hookedImgIdxListMaxIdx = hookedImgIdxListLen - 1;</span>
+   <span class="token keyword">int</span> hookedImgIdxListMaxIdx <span class="token operator">=</span> gHookedImgIdxListLen <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImgIdxListMaxIdx=%d&quot;</span><span class="token punctuation">,</span> hookedImgIdxListMaxIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>hookedImageIndex <span class="token operator">&lt;=</span> hookedImgIdxListMaxIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token comment">// origImgIdx = hookedImgIdxList[hookedImageIndex];</span>
+       origImgIdx <span class="token operator">=</span> gHookedImgIdxList<span class="token punctuation">[</span>hookedImageIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImageIndex=%d &lt;= hookedImgIdxListMaxIdx=%d -&gt; origImgIdx=%d&quot;</span><span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">,</span> hookedImgIdxListMaxIdx<span class="token punctuation">,</span> origImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       origImgIdx <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImageIndex=%d &gt; hookedImgIdxListMaxIdx=%d -&gt; origImgIdx=%d&quot;</span><span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">,</span> hookedImgIdxListMaxIdx<span class="token punctuation">,</span> origImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// if (NULL != hookedImgIdxList){</span>
+   <span class="token comment">//     free(hookedImgIdxList);</span>
+   <span class="token comment">// }</span>
+
+   <span class="token keyword">return</span> origImgIdx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">findRealImageCount</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%s&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> realImageCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> hookedImageCount <span class="token operator">=</span> <span class="token function">_dyld_image_count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        int origImageCount = orig__dyld_image_count();</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImageCount=%d&quot;</span><span class="token punctuation">,</span> hookedImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// find real count</span>
+   <span class="token keyword">int</span> curImgIdx <span class="token operator">=</span> hookedImageCount<span class="token punctuation">;</span>
+
+   <span class="token comment">// use: _dyld_get_image_vmaddr_slide</span>
+
+   <span class="token keyword">long</span> retSlide <span class="token operator">=</span> <span class="token function">_dyld_get_image_vmaddr_slide</span><span class="token punctuation">(</span><span class="token function">generateFakeImageIndex</span><span class="token punctuation">(</span>curImgIdx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;[%d] -&gt; retSlide=%ld&quot;</span><span class="token punctuation">,</span> curImgIdx<span class="token punctuation">,</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">while</span><span class="token punctuation">(</span>DYLD_IMAGE_SLIDE_INVALID <span class="token operator">!=</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token operator">++</span>curImgIdx<span class="token punctuation">;</span>
+       retSlide <span class="token operator">=</span> <span class="token function">_dyld_get_image_vmaddr_slide</span><span class="token punctuation">(</span><span class="token function">generateFakeImageIndex</span><span class="token punctuation">(</span>curImgIdx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;[%d] -&gt; retSlide=%ld&quot;</span><span class="token punctuation">,</span> curImgIdx<span class="token punctuation">,</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// // use: _dyld_get_image_name</span>
+   <span class="token comment">// const char* retImgName = _dyld_get_image_name(generateFakeImageIndex(curImgIdx));</span>
+   <span class="token comment">// iosLogDebug(&quot;[%d] -&gt; retImgName=%s&quot;, curImgIdx, retImgName);</span>
+   <span class="token comment">// while(NULL != retImgName){</span>
+   <span class="token comment">//     ++curImgIdx;</span>
+   <span class="token comment">//     retImgName = _dyld_get_image_name(generateFakeImageIndex(curImgIdx));</span>
+   <span class="token comment">//     iosLogDebug(&quot;[%d] -&gt; retImgName=%s&quot;, curImgIdx, retImgName);</span>
+   <span class="token comment">// }</span>
+
+   <span class="token comment">// // use: _dyld_get_image_header</span>
+   <span class="token comment">// const struct mach_header* retImgHeader = _dyld_get_image_header(generateFakeImageIndex(curImgIdx));</span>
+   <span class="token comment">// iosLogDebug(&quot;[%d] -&gt; retImgHeader=%p&quot;, curImgIdx, retImgHeader);</span>
+   <span class="token comment">// while(NULL != retImgHeader){</span>
+   <span class="token comment">//     ++curImgIdx;</span>
+   <span class="token comment">//     retImgHeader = _dyld_get_image_header(generateFakeImageIndex(curImgIdx));</span>
+   <span class="token comment">//     iosLogDebug(&quot;[%d] -&gt; retImgHeader=%p&quot;, curImgIdx, retImgHeader);</span>
+   <span class="token comment">// }</span>
+
+   realImageCount <span class="token operator">=</span> curImgIdx<span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;realImageCount=%d&quot;</span><span class="token punctuation">,</span> realImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> realImageCount<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">reInitAllRelated</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">// if (gRealOrigImageCount &lt;= 0) {</span>
+   <span class="token comment">//     // invalid, need reinit</span>
+   <span class="token comment">//     gRealOrigImageCount = findRealImageCount();</span>
+   <span class="token comment">//     iosLogInfo(&quot;gRealOrigImageCount=%d&quot;, gRealOrigImageCount);</span>
+   <span class="token comment">// }</span>
+
+   <span class="token keyword">int</span> curOrigCount <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> curHookedImageCount <span class="token operator">=</span> <span class="token function">_dyld_image_count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>gJbDylibIdxListLen <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       curOrigCount <span class="token operator">=</span> curHookedImageCount <span class="token operator">+</span> gJbDylibIdxListLen<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       curOrigCount <span class="token operator">=</span> <span class="token function">findRealImageCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;curHookedImageCount=%d, gJbDylibIdxListLen=%d -&gt; curOrigCount=%d&quot;</span><span class="token punctuation">,</span> curHookedImageCount<span class="token punctuation">,</span> gJbDylibIdxListLen<span class="token punctuation">,</span> curOrigCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>curOrigCount <span class="token operator">!=</span> gOrigImageCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;curOrigCount=%d != gOrigImageCount=%d -&gt; reinit image index list&quot;</span><span class="token punctuation">,</span> curOrigCount<span class="token punctuation">,</span> gOrigImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token function">reInitImgCountIfNeed</span><span class="token punctuation">(</span>curOrigCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;after reinit, gOrigImageCount=%d, gHookedImgIdxList=%p, gHookedImgIdxListLen=%d&quot;</span><span class="token punctuation">,</span> gOrigImageCount<span class="token punctuation">,</span> gHookedImgIdxList<span class="token punctuation">,</span> gHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;gJbDylibIdxList=%p, gJbDylibIdxListLen=%d, gHookedImgIdxList=%p, gHookedImgIdxListLen=%d&quot;</span><span class="token punctuation">,</span> gJbDylibIdxList<span class="token punctuation">,</span> gJbDylibIdxListLen<span class="token punctuation">,</span> gHookedImgIdxList<span class="token punctuation">,</span> gHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> gJbDylibIdxList<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>gJbDylibIdxListLen <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token function">reInitImgCountIfNeed</span><span class="token punctuation">(</span>curOrigCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> gHookedImgIdxList<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>gHookedImgIdxListLen <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token function">generateHookedImageIndexList</span><span class="token punctuation">(</span>gJbDylibIdxList<span class="token punctuation">,</span> gJbDylibIdxListLen<span class="token punctuation">,</span> curOrigCount<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gHookedImgIdxList<span class="token punctuation">,</span> <span class="token operator">&amp;</span>gHookedImgIdxListLen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">getOrigImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> hookedImageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImageIndex=%d&quot;</span><span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> origImgIdx <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+
+   <span class="token comment">// uint32_t origImageCount_byLogos = (*_logos_orig$_ungrouped$_dyld_image_count)();</span>
+   <span class="token comment">// os_log(OS_LOG_DEFAULT, &quot;hook_dyld getOrigImageIndex: origImageCount_byLogos=%d&quot;, origImageCount_byLogos);</span>
+
+<span class="token comment">//     uint32_t origImageCount = findRealImageCount();</span>
+<span class="token comment">//     iosLogDebug(&quot;origImageCount=%d&quot;, origImageCount);</span>
+<span class="token comment">//</span>
+<span class="token comment">//    int* jbDylibImgIdxList = NULL;</span>
+<span class="token comment">//    int jbDylibImgIdxListLen = -1;</span>
+<span class="token comment">//    getJbDylibImgIdxList(origImageCount, &amp;jbDylibImgIdxList, &amp;jbDylibImgIdxListLen);</span>
+<span class="token comment">//    iosLogDebug(&quot;jbDylibImgIdxList=%p,jbDylibImgIdxListLen=%d&quot;, jbDylibImgIdxList, jbDylibImgIdxListLen);</span>
+
+   <span class="token function">reInitAllRelated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// if (jbDylibImgIdxListLen &gt; 0){</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>gJbDylibIdxListLen <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token comment">// check input image index validation</span>
+       <span class="token comment">// int origImgMaxIdx = origImageCount - 1;</span>
+       <span class="token comment">// int origImgMaxIdx = gRealOrigImageCount - 1;</span>
+       <span class="token keyword">int</span> origImgMaxIdx <span class="token operator">=</span> gOrigImageCount <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+       <span class="token comment">// int hookedImgMaxIdx = origImgMaxIdx - jbDylibImgIdxListLen;</span>
+       <span class="token keyword">int</span> hookedImgMaxIdx <span class="token operator">=</span> origImgMaxIdx <span class="token operator">-</span> gJbDylibIdxListLen<span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;origImgMaxIdx=%d, hookedImgMaxIdx=%d, hookedImageIndex=%d&quot;</span><span class="token punctuation">,</span> origImgMaxIdx<span class="token punctuation">,</span> hookedImgMaxIdx<span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span>hookedImageIndex <span class="token operator">&gt;</span> hookedImgMaxIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token comment">// invalid</span>
+           <span class="token function">iosLogError</span><span class="token punctuation">(</span><span class="token string">&quot;input image index invalid, hookedImageIndex=%d &gt; hookedImgMaxIdx=%d&quot;</span><span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">,</span> hookedImgMaxIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           origImgIdx <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           <span class="token comment">// valid</span>
+           <span class="token comment">// origImgIdx = hookedToOrigImageIndex(hookedImageIndex, jbDylibImgIdxList, jbDylibImgIdxListLen,  origImageCount);</span>
+           origImgIdx <span class="token operator">=</span> <span class="token function">hookedToOrigImageIndex</span><span class="token punctuation">(</span>hookedImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       <span class="token comment">// no jailbreak dylib image index list</span>
+       origImgIdx <span class="token operator">=</span> hookedImageIndex<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;hookedImageIndex=%d -&gt; origImgIdx=%d&quot;</span><span class="token punctuation">,</span> hookedImageIndex<span class="token punctuation">,</span> origImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// if (NULL != jbDylibImgIdxList){</span>
+   <span class="token comment">//     free(jbDylibImgIdxList);</span>
+   <span class="token comment">// }</span>
+
+   <span class="token keyword">return</span> origImgIdx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">getRealOrOrigImageIndex</span><span class="token punctuation">(</span><span class="token keyword">int</span> inputImageIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;inputImageIndex=%d&quot;</span><span class="token punctuation">,</span> inputImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">int</span> realOrOrigImgIdx <span class="token operator">=</span> DYLD_IMAGE_INDEX_INVALID<span class="token punctuation">;</span>
+
+   bool isFakeImgIdx <span class="token operator">=</span> <span class="token function">isFakeImageIndex</span><span class="token punctuation">(</span>inputImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;isFakeImgIdx=%s&quot;</span><span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isFakeImgIdx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>isFakeImgIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       realOrOrigImgIdx <span class="token operator">=</span> <span class="token function">fakeToRealImageIndex</span><span class="token punctuation">(</span>inputImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       realOrOrigImgIdx <span class="token operator">=</span> <span class="token function">getOrigImageIndex</span><span class="token punctuation">(</span>inputImageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;inputImageIndex=%d -&gt; realOrOrigImgIdx=%d&quot;</span><span class="token punctuation">,</span> inputImageIndex<span class="token punctuation">,</span> realOrOrigImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">return</span> realOrOrigImgIdx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dyldimagecount"><a name="dyldimagecount" class="plugin-anchor" href="#dyldimagecount"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_image_count</h2>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span><span class="token punctuation">,</span> _dyld_image_count<span class="token punctuation">,</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//    iosLogDebug();</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%s&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token class-name">uint32_t</span> origCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> retImageCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       origCount <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;origCount=%d&quot;</span><span class="token punctuation">,</span> origCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       retImageCount <span class="token operator">=</span> origCount<span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_COMPLEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//            int* jbDylibIdxList = NULL;</span>
+<span class="token comment">//            int jbDylibIdxListLen = -1;</span>
+<span class="token comment">//            getJbDylibImgIdxList(origCount, &amp;jbDylibIdxList, &amp;jbDylibIdxListLen);</span>
+<span class="token comment">//            iosLogDebug(&quot;jbDylibIdxList=%p, jbDylibIdxListLen=%d&quot;, jbDylibIdxList, jbDylibIdxListLen);</span>
+<span class="token comment">//            retImageCount = origCount - jbDylibIdxListLen;</span>
+<span class="token comment">//</span>
+<span class="token comment">//            if(NULL != jbDylibIdxList){</span>
+<span class="token comment">//                free(jbDylibIdxList);</span>
+<span class="token comment">//            }</span>
+
+           <span class="token function">reInitImgCountIfNeed</span><span class="token punctuation">(</span>origCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+           <span class="token comment">// if ((NULL == gHookedImgIdxList) || (gHookedImgIdxListLen &lt;= 0)) {</span>
+           <span class="token comment">//     generateHookedImageIndexList(gJbDylibIdxList, gJbDylibIdxListLen, origCount, &amp;gHookedImgIdxList, &amp;gHookedImgIdxListLen);</span>
+           <span class="token comment">// }</span>
+
+           retImageCount <span class="token operator">=</span> gHookedImageCount<span class="token punctuation">;</span>
+           <span class="token comment">// retImageCount = gOrigImageCount;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       origCount <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       retImageCount <span class="token operator">=</span> origCount<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%sorigCount=%d -&gt; retImageCount=%d&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> origCount<span class="token punctuation">,</span> retImageCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> retImageCount<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dyldgetimagename"><a name="dyldgetimagename" class="plugin-anchor" href="#dyldgetimagename"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_get_image_name</h2>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">,</span> _dyld_get_image_name<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> retImgName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_COMPLEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token keyword">int</span> realOrOrigImgIdx <span class="token operator">=</span> <span class="token function">getRealOrOrigImageIndex</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           bool isValidImgIdx <span class="token operator">=</span> <span class="token punctuation">(</span>realOrOrigImgIdx <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> imgName <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>realOrOrigImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; realOrOrigImgIdx=%d -&gt; isValidImgIdx=%s -&gt; imgName=%{public}s&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> realOrOrigImgIdx<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">,</span> imgName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               retImgName <span class="token operator">=</span> imgName<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogError</span><span class="token punctuation">(</span><span class="token string">&quot;fail to get real or origin image index for image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               retImgName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span> firstImgName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token keyword">char</span><span class="token operator">*</span> randomDylibName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> imgName <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           bool isJbDylib <span class="token operator">=</span> <span class="token function">isJailbreakDylib</span><span class="token punctuation">(</span>imgName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_NULL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                   retImgName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+               <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_FIRST<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                   firstImgName <span class="token operator">=</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                   <span class="token comment">// normally is app self</span>
+                   <span class="token comment">// eg: /private/var/containers/Bundle/Application/B6327617-9ED7-4DED-AFAC-4D9C92D82377/Aweme.app/Aweme</span>
+                   retImgName <span class="token operator">=</span> firstImgName<span class="token punctuation">;</span>
+               <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_RANDOM_NAME<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                   <span class="token keyword">char</span><span class="token operator">*</span> randomName <span class="token operator">=</span> <span class="token function">randomStr</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                   <span class="token function">asprintf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>randomDylibName<span class="token punctuation">,</span> <span class="token string">&quot;/usr/lib/%s.dylib&quot;</span><span class="token punctuation">,</span> randomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                   retImgName <span class="token operator">=</span> randomDylibName<span class="token punctuation">;</span>
+               <span class="token punctuation">}</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               retImgName <span class="token operator">=</span> imgName<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+
+           <span class="token comment">// for debug</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; imgName=%{public}s -&gt; isJbDylib=%s -&gt; firstImgName=%{public}s, randomDylibName=%{public}s -&gt; retImgName=%{public}s&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> imgName<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">,</span> firstImgName<span class="token punctuation">,</span> randomDylibName<span class="token punctuation">,</span> retImgName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       retImgName <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%simage_index=%d -&gt; retImgName=%{public}s&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> retImgName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> retImgName<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dyldgetimageheader"><a name="dyldgetimageheader" class="plugin-anchor" href="#dyldgetimageheader"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_get_image_header</h2>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span><span class="token punctuation">,</span> _dyld_get_image_header<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    return %orig;</span>
+   <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> retMachHeader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_COMPLEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token keyword">int</span> realOrOrigImgIdx <span class="token operator">=</span> <span class="token function">getRealOrOrigImageIndex</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           bool isValidImgIdx <span class="token operator">=</span> <span class="token punctuation">(</span>realOrOrigImgIdx <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               retMachHeader <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>realOrOrigImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogError</span><span class="token punctuation">(</span><span class="token string">&quot;fail to get real or origin image index for image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               retMachHeader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; realOrOrigImgIdx=%d -&gt; isValidImgIdx=%s -&gt; retMachHeader=%p&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> realOrOrigImgIdx<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">,</span> retMachHeader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           bool isJbDylib <span class="token operator">=</span> false<span class="token punctuation">;</span>
+           <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> firstImgHeader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> imageName <span class="token operator">=</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> imageName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               retMachHeader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               isJbDylib <span class="token operator">=</span> <span class="token function">isJailbreakDylib</span><span class="token punctuation">(</span>imageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_NULL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                       retMachHeader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+                   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_FIRST<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_RANDOM_NAME<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                       firstImgHeader <span class="token operator">=</span> <span class="token function">_dyld_get_image_header</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token comment">// normally is app self</span>
+                       retMachHeader <span class="token operator">=</span> firstImgHeader<span class="token punctuation">;</span>
+                   <span class="token punctuation">}</span>
+               <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                   retMachHeader <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token punctuation">}</span>
+           <span class="token punctuation">}</span>
+
+           <span class="token comment">// for debug</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; imageName=%{public}s -&gt; isJbDylib=%s -&gt; firstImgHeader=%p -&gt; retMachHeader=%p&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> imageName<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">,</span> firstImgHeader<span class="token punctuation">,</span> retMachHeader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       retMachHeader <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        iosLogDebug(&quot;%simage_index=%d -&gt; retMachHeader=%p&quot;, HOOK_PREFIX(cfgHookEnable_dyld), image_index, retMachHeader);</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%simage_index=%d -&gt; retMachHeader=%p&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> retMachHeader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> retMachHeader<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dyldgetimagevmaddrslide"><a name="dyldgetimagevmaddrslide" class="plugin-anchor" href="#dyldgetimagevmaddrslide"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_get_image_vmaddr_slide</h2>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token class-name">intptr_t</span><span class="token punctuation">,</span> _dyld_get_image_vmaddr_slide<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span> image_index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    return %orig;</span>
+   <span class="token keyword">long</span> retSlide <span class="token operator">=</span> DYLD_IMAGE_SLIDE_INVALID<span class="token punctuation">;</span>
+
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_COMPLEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token keyword">int</span> realOrOrigImgIdx <span class="token operator">=</span> <span class="token function">getRealOrOrigImageIndex</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           bool isValidImgIdx <span class="token operator">=</span> <span class="token punctuation">(</span>realOrOrigImgIdx <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               retSlide <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>realOrOrigImgIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogError</span><span class="token punctuation">(</span><span class="token string">&quot;fail to get real or origin image index for image_index=%d&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               retSlide <span class="token operator">=</span> DYLD_IMAGE_SLIDE_INVALID<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+           <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; realOrOrigImgIdx=%d -&gt; isValidImgIdx=%s -&gt; retSlide=0x%lx&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> realOrOrigImgIdx<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isValidImgIdx<span class="token punctuation">)</span><span class="token punctuation">,</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           bool isJbDylib <span class="token operator">=</span> false<span class="token punctuation">;</span>
+           <span class="token keyword">long</span> firtImgSlide <span class="token operator">=</span> DYLD_IMAGE_SLIDE_INVALID<span class="token punctuation">;</span>
+           <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> imageName <span class="token operator">=</span> <span class="token function">_dyld_get_image_name</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> imageName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               retSlide <span class="token operator">=</span> DYLD_IMAGE_SLIDE_INVALID<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+               isJbDylib <span class="token operator">=</span> <span class="token function">isJailbreakDylib</span><span class="token punctuation">(</span>imageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                   <span class="token keyword">if</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_NULL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                       retSlide <span class="token operator">=</span> DYLD_IMAGE_SLIDE_INVALID<span class="token punctuation">;</span>
+                   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_FIRST<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>cfgCurDyldHookType <span class="token operator">==</span> DYLD_HOOK_SIMPLE_RANDOM_NAME<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                       firtImgSlide <span class="token operator">=</span> <span class="token function">_dyld_get_image_vmaddr_slide</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token comment">// normally is app self</span>
+                       retSlide <span class="token operator">=</span> firtImgSlide<span class="token punctuation">;</span>
+                   <span class="token punctuation">}</span>
+               <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                   retSlide <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token punctuation">}</span>
+           <span class="token punctuation">}</span>
+
+           <span class="token comment">// for debug</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;image_index=%d -&gt; imageName=%{public}s -&gt; isJbDylib=%s -&gt; firtImgSlide=0x%lx -&gt; retSlide=0x%lx&quot;</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> imageName<span class="token punctuation">,</span> <span class="token function">boolToStr</span><span class="token punctuation">(</span>isJbDylib<span class="token punctuation">)</span><span class="token punctuation">,</span> firtImgSlide<span class="token punctuation">,</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       retSlide <span class="token operator">=</span> <span class="token operator">%</span><span class="token function">orig</span><span class="token punctuation">(</span>image_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        iosLogDebug(&quot;%simage_index=%d -&gt; retSlide=0x%lx&quot;, HOOK_PREFIX(cfgHookEnable_dyld), image_index, retSlide);</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token function">iosLogDebug</span><span class="token punctuation">(</span><span class="token string">&quot;%simage_index=%d -&gt; retSlide=0x%lx&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> image_index<span class="token punctuation">,</span> retSlide<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> retSlide<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="其实无法hook，只能调试或注释掉"><a name="其实无法hook，只能调试或注释掉" class="plugin-anchor" href="#其实无法hook，只能调试或注释掉"><i class="fa fa-link" aria-hidden="true"></i></a>其实无法hook，只能调试或注释掉</h2>
+<h3 id="dyldregisterfuncforaddimage"><a name="dyldregisterfuncforaddimage" class="plugin-anchor" href="#dyldregisterfuncforaddimage"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_register_func_for_add_image</h3>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">,</span> _dyld_register_func_for_add_image<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> mh<span class="token punctuation">,</span> <span class="token class-name">intptr_t</span> vmaddr_slide<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//    iosLogInfo(&quot;%sfunc=%p -&gt; Omitted&quot;, HOOK_PREFIX(cfgHookEnable_dyld), func);</span>
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;%sfunc=%p&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//#ifndef XCODE_DEBUG</span>
+   <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+<span class="token comment">//    %orig(func);</span>
+<span class="token comment">//#endif</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="dyldregisterfuncforremoveimage"><a name="dyldregisterfuncforremoveimage" class="plugin-anchor" href="#dyldregisterfuncforremoveimage"><i class="fa fa-link" aria-hidden="true"></i></a>_dyld_register_func_for_remove_image</h3>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">,</span> _dyld_register_func_for_remove_image<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">mach_header</span><span class="token operator">*</span> mh<span class="token punctuation">,</span> <span class="token class-name">intptr_t</span> vmaddr_slide<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//    iosLogInfo(&quot;%sfunc=%p -&gt; Omitted&quot;, HOOK_PREFIX(cfgHookEnable_dyld), func);</span>
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;%sfunc=%p&quot;</span><span class="token punctuation">,</span> <span class="token function">HOOK_PREFIX</span><span class="token punctuation">(</span>cfgHookEnable_dyld<span class="token punctuation">)</span><span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="其他调试内容"><a name="其他调试内容" class="plugin-anchor" href="#其他调试内容"><i class="fa fa-link" aria-hidden="true"></i></a>其他调试内容</h2>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token class-name">int32_t</span><span class="token punctuation">,</span> NSVersionOfRunTimeLibrary<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> libraryName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token class-name">int32_t</span> rtLibVer <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;libraryName=%s -&gt; rtLibVer=%d&quot;</span><span class="token punctuation">,</span> libraryName<span class="token punctuation">,</span> rtLibVer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> rtLibVer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token class-name">int32_t</span><span class="token punctuation">,</span> NSVersionOfLinkTimeLibrary<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> libraryName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token class-name">int32_t</span> rtLtLibVer <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;libraryName=%s -&gt; rtLtLibVer=%d&quot;</span><span class="token punctuation">,</span> libraryName<span class="token punctuation">,</span> rtLtLibVer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> rtLtLibVer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">%</span><span class="token function">hookf</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> _NSGetExecutablePath<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> <span class="token class-name">uint32_t</span><span class="token operator">*</span> bufsize<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">int</span> extPathCpSize <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+   <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">&quot;buf=%{public}s,*bufsize=%d -&gt; extPathCpSize=%d&quot;</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> <span class="token operator">*</span>bufsize<span class="token punctuation">,</span> extPathCpSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">return</span> extPathCpSize<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2022-11-06 15:32:14
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: dyld动态库">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="dylib.html" class="navigation navigation-next " aria-label="Next page: dylib">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"_dyld系列","level":"1.4.8.1","depth":3,"next":{"title":"dylib","level":"1.4.8.2","depth":3,"path":"anti_jb_detect/dyld/dylib.md","ref":"anti_jb_detect/dyld/dylib.md","articles":[]},"previous":{"title":"dyld动态库","level":"1.4.8","depth":2,"path":"anti_jb_detect/dyld/README.md","ref":"anti_jb_detect/dyld/README.md","articles":[{"title":"_dyld系列","level":"1.4.8.1","depth":3,"path":"anti_jb_detect/dyld/_dyld_series.md","ref":"anti_jb_detect/dyld/_dyld_series.md","articles":[]},{"title":"dylib","level":"1.4.8.2","depth":3,"path":"anti_jb_detect/dyld/dylib.md","ref":"anti_jb_detect/dyld/dylib.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_jb_detection/pdf/ios_re_jb_detection.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_jb_detection/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_jb_detection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：越狱检测和反越狱检测","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的iOS的越狱检测和反越狱检测方面的内容。包括常用的越狱检测手段，比如URL Scheme、文件方面的：文件属性、文件打开和文件写入；其中文件打开又包括C函数和iOS函数，其中C函数又包括syscall的C函数和svc 0x80内联汇编；以及文件写入包括C函数和iOS函数；以及其他检测手段：环境变量、是否可调试、system、沙箱完整性校验、越狱相关进程、dyld动态库，包括dylib的dladdr、dlopen、dlsym和_dyld开头的系列函数、ObjC运行时、app本身、已安装app、SSH相关、getsectiondata等；以及上述各种方法的反越狱检测的具体实现，以及其他一些额外的反越狱检测手段，比如内核级反越狱；接着整理越狱检测和反越狱检测的通用的内容，比如app的启动过程、越狱路径相关，尤其是越狱路径列表。以及其他一些心得。且均已贴出相关的越狱检测和反越狱检测的代码段和独立的代码仓库。"},"file":{"path":"anti_jb_detect/dyld/_dyld_series.md","mtime":"2022-11-06T07:32:14.428Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-11-10T06:01:17.638Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

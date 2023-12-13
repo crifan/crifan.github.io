@@ -1,0 +1,1194 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>palera1n的rootful越狱详解 · iOS逆向：iOS15越狱</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="common_issue.html" />
+    
+    
+    <link rel="prev" href="rootful_summary.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_ios15_jailbreak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../ios15_jb_overview/">
+            
+                <a href="../../ios15_jb_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS15越狱概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../ios15_jb_background/">
+            
+                <a href="../../ios15_jb_background/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    iOS15+越狱背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../ios15_jb_background/rootless_rootful.html">
+            
+                <a href="../../ios15_jb_background/rootless_rootful.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    rootless和rootful
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../ios15_jb_background/iphone_info.html">
+            
+                <a href="../../ios15_jb_background/iphone_info.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    iPhone机型信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../ios15_jb_background/no_sign_install_ipa/">
+            
+                <a href="../../ios15_jb_background/no_sign_install_ipa/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    免签安装ipa文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../ios15_jb_background/no_sign_install_ipa/trollstore/">
+            
+                <a href="../../ios15_jb_background/no_sign_install_ipa/trollstore/">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    TrollStore
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1.1" data-path="../../ios15_jb_background/no_sign_install_ipa/trollstore/iphone_install.html">
+            
+                <a href="../../ios15_jb_background/no_sign_install_ipa/trollstore/iphone_install.html">
+            
+                    
+                        <b>1.3.3.1.1.</b>
+                    
+                    iPhone中安装TrollStore
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../ios15_jb_background/no_sign_install_ipa/sideloadly.html">
+            
+                <a href="../../ios15_jb_background/no_sign_install_ipa/sideloadly.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    Sideloadly
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    palera1n
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../before/">
+            
+                <a href="../before/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    越狱前
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../before/pre_condition.html">
+            
+                <a href="../before/pre_condition.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    前提条件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../before/caution_explain.html">
+            
+                <a href="../before/caution_explain.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    注意事项和说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../before/tool_version.html">
+            
+                <a href="../before/tool_version.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    工具的版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="../before/doc_ref.html">
+            
+                <a href="../before/doc_ref.html">
+            
+                    
+                        <b>1.4.1.4.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    越狱中
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="rootful_summary.html">
+            
+                <a href="rootful_summary.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    palera1n的rootful越狱概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.2.2" data-path="rootful_detail.html">
+            
+                <a href="rootful_detail.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    palera1n的rootful越狱详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="common_issue.html">
+            
+                <a href="common_issue.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="help_syntax.html">
+            
+                <a href="help_syntax.html">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="loader_app.html">
+            
+                <a href="loader_app.html">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    loader app
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../after/">
+            
+                <a href="../after/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    越狱后
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../after/ssh.html">
+            
+                <a href="../after/ssh.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    ssh
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../after/restore_jailbreak.html">
+            
+                <a href="../after/restore_jailbreak.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    如何恢复越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../after/issues.html">
+            
+                <a href="../after/issues.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../xinaa15/">
+            
+                <a href="../../xinaa15/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    XinaA15
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../xinaa15/before/">
+            
+                <a href="../../xinaa15/before/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    越狱前
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../xinaa15/before/versions_download.html">
+            
+                <a href="../../xinaa15/before/versions_download.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    历史版本和下载地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../xinaa15/doing/">
+            
+                <a href="../../xinaa15/doing/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    越狱中
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../xinaa15/doing/install.html">
+            
+                <a href="../../xinaa15/doing/install.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    安装XinaA15
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../xinaa15/doing/enable_jailbreak.html">
+            
+                <a href="../../xinaa15/doing/enable_jailbreak.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    用XinaA15越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../xinaa15/after/">
+            
+                <a href="../../xinaa15/after/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    越狱后
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../xinaa15/after/ui_function.html">
+            
+                <a href="../../xinaa15/after/ui_function.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    界面和功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../dopamine/">
+            
+                <a href="../../dopamine/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Dopamine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >palera1n的rootful越狱详解</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="用palera1n给ios-150的iphone8越狱的详细过程"><a name="用palera1n给ios-150的iphone8越狱的详细过程" class="plugin-anchor" href="#用palera1n给ios-150的iphone8越狱的详细过程"><i class="fa fa-link" aria-hidden="true"></i></a>用palera1n给iOS 15.0的iPhone8越狱的详细过程</h1>
+<h2 id="第一步：下载palera1n的二进制"><a name="第一步：下载palera1n的二进制" class="plugin-anchor" href="#第一步：下载palera1n的二进制"><i class="fa fa-link" aria-hidden="true"></i></a>第一步：下载palera1n的二进制</h2>
+<p>此处下载：Mac的palera1n的二进制文件：</p>
+<p>palera1n-macos-universal</p>
+<p><a href="https://github.com/palera1n/palera1n-c/releases/download/v2.0.0-beta.4/palera1n-macos-universal" target="_blank">https://github.com/palera1n/palera1n-c/releases/download/v2.0.0-beta.4/palera1n-macos-universal</a></p>
+<p><img src="../../assets/img/download_palera1n_macos_universal.png" alt="download_palera1n_macos_universal"></p>
+<p>并放到合适的目录中，比如：</p>
+<p><code>/usr/local/bin/palera1n</code></p>
+<p>此过程：</p>
+<ul>
+<li>可以手动操作</li>
+<li>也可以用命令去操作</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token function">curl</span> <span class="token parameter variable">-Lo</span> /usr/local/bin/palera1n https://github.com/palera1n/palera1n-c/releases/download/v2.0.0-beta.4/palera1n-macos-universal
+<span class="token function">sudo</span> <span class="token function">chmod</span> +x /usr/local/bin/palera1n
+</code></pre>
+<p>或：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token function">mv</span> ./palera1n-macos-universal /usr/local/bin/
+<span class="token function">mv</span> /usr/local/bin/palera1n-macos-universal /usr/local/bin/palera1n
+<span class="token function">sudo</span> xattr <span class="token parameter variable">-c</span> /usr/local/bin/palera1n
+<span class="token function">sudo</span> <span class="token function">chmod</span> +x /usr/local/bin/palera1n
+</code></pre>
+<p>放好后，确保命令行可以找到：</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&gt;</span> <span class="token function">which</span> palera1n
+/usr/local/bin/palera1n
+</code></pre>
+<p>另外顺带去看看版本：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/reverse_security/iOS/palera1n  palera1n <span class="token parameter variable">--version</span>
+palera1n version <span class="token number">2.0</span>.0: Wed Feb <span class="token number">15</span> 08:49:44 UTC <span class="token number">2023</span><span class="token punctuation">;</span> runner:v2.0.0-beta.4/RELEASE
+<span class="token comment"># == palera1n-c ==</span>
+<span class="token comment">#</span>
+<span class="token comment"># Made by: Nick Chan, Ploosh, Mineek, Nebula, llsc12</span>
+<span class="token comment">#</span>
+<span class="token comment"># Thanks to: dora2ios, pythonplayer, tihmstar, nikias</span>
+<span class="token comment"># (libimobiledevice), checkra1n team (Siguza, axi0mx, littlelailo</span>
+<span class="token comment"># et al.), Procursus Team (Hayden Seay, Cameron Katri, Keto et.al)</span>
+</code></pre>
+<h2 id="第二步：palera1n--c--f，安装创建fakefs"><a name="第二步：palera1n--c--f，安装创建fakefs" class="plugin-anchor" href="#第二步：palera1n--c--f，安装创建fakefs"><i class="fa fa-link" aria-hidden="true"></i></a>第二步：palera1n -c -f，安装创建fakefs</h2>
+<p>然后就可以开始用palera1n去越狱了：</p>
+<pre class="language-"><code class="lang-bash">palera1n <span class="token parameter variable">-c</span> <span class="token parameter variable">-f</span>
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><code>-c</code>, <code>--setup-fakefs</code>       Setup fakefs<ul>
+<li>When used with -f, --fakefs, Create the new APFS volume required for rootful. Will fail if one already exists.<ul>
+<li>创建fakefs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>-f</code>, <code>--fakefs</code>              Boots fakefs<ul>
+<li>Jailbreak in rootful mode.<ul>
+<li>越狱方式/类型/模式选择：普通越狱=rootful越狱</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>详细log日志：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/reverse_security/iOS/palera1n  palera1n <span class="token parameter variable">-c</span> <span class="token parameter variable">-f</span>
+<span class="token comment"># == palera1n-c ==</span>
+<span class="token comment">#</span>
+<span class="token comment"># Made by: Nick Chan, Ploosh, Mineek, Nebula, llsc12</span>
+<span class="token comment">#</span>
+<span class="token comment"># Thanks to: dora2ios, pythonplayer, tihmstar, nikias</span>
+<span class="token comment"># (libimobiledevice), checkra1n team (Siguza, axi0mx, littlelailo</span>
+<span class="token comment"># et al.), Procursus Team (Hayden Seay, Cameron Katri, Keto et.al)</span>
+
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:13:08<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Waiting <span class="token keyword">for</span> devices
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:13:08<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Telling device with udid abdc0dd961c3cb96f5c4afe109de4eb48b88433a to enter recovery mode immediately
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:13:20<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Press Enter when ready <span class="token keyword">for</span> DFU mode
+</code></pre>
+<p><img src="../../assets/img/palera1n_c_f_log.png" alt="palera1n_c_f_log"></p>
+<p>此时：iPhone手机中出现：</p>
+<ul>
+<li>数据线插入电脑<ul>
+<li>顶部文字：<code>support.apple.com/iphone/restore</code></li>
+</ul>
+</li>
+</ul>
+<p>的界面：</p>
+<p><img src="../../assets/img/iphone_plugin_ui.jpg" alt="iphone_plugin_ui"></p>
+<p>然后去：</p>
+<ul>
+<li>Enter=回车</li>
+</ul>
+<p>确认准备好，提示：<code>get ready</code></p>
+<p><img src="../../assets/img/palera1n_get_ready.png" alt="palera1n_get_ready"></p>
+<p>再根据提示：</p>
+<pre class="language-"><code class="lang-bash">Get ready <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+Hold volume down + side button <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+Hold volume down button <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>去操作iPhone进入DFU模式<ul>
+<li>Hold volume down + side button 长按 音量键减键 + 侧边栏键=电源键</li>
+<li>Hold volume down button （保持不松手，继续）长按 音量键减键</li>
+</ul>
+</li>
+</ul>
+<p>即可继续，进入DFU模式，继续自动越狱过程</p>
+<p>详细log日志：</p>
+<pre class="language-"><code class="lang-bash">- <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Device entered DFU mode successfully
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: About to execute checkra1n
+<span class="token comment">#</span>
+<span class="token comment"># Checkra1n 0.1337.1</span>
+<span class="token comment">#</span>
+<span class="token comment"># Proudly written in nano</span>
+<span class="token comment"># (c) 2019-2023 Kim Jong Cracks</span>
+<span class="token comment">#</span>
+<span class="token comment">#========  Made by  =======</span>
+<span class="token comment"># argp, axi0mx, danyl931, jaywalker, kirb, littlelailo, nitoTV</span>
+<span class="token comment"># never_released, nullpixel, pimskeks, qwertyoruiop, sbingner, siguza</span>
+<span class="token comment">#======== Thanks to =======</span>
+<span class="token comment"># haifisch, jndok, jonseals, xerub, lilstevie, psychotea, sferrini</span>
+<span class="token comment"># Cellebrite (ih8sn0w, cjori, ronyrus et al.)</span>
+<span class="token comment">#==========================</span>
+
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Starting thread <span class="token keyword">for</span> Apple TV 4K Advanced board
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Waiting <span class="token keyword">for</span> DFU mode devices
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Checking <span class="token keyword">if</span> device is ready
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Attempting to perform checkm8 on <span class="token number">8015</span> <span class="token number">11</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Setting up the exploit
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: <span class="token operator">==</span> checkm8 setup stage <span class="token operator">==</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Entered initial checkm8 state after <span class="token number">1</span> steps
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Stalled input endpoint after <span class="token number">4</span> steps
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device disconnected
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:54<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: <span class="token operator">==</span> checkm8 trigger stage <span class="token operator">==</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Checkmate<span class="token operator">!</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Device should now reconnect <span class="token keyword">in</span> download mode
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:37:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device disconnected
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:38:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Entered download mode
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:38:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Download mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:38:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Booting PongoOS<span class="token punctuation">..</span>.
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:38:06<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Found PongoOS USB Device
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:38:06<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Booting Kernel<span class="token punctuation">..</span>.
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/reverse_security/iOS/palera1n 
+</code></pre>
+<p>然后手机上会输出很多log日志：</p>
+<p><img src="../../assets/img/palera1n_jailbreaking_log_start.jpg" alt="palera1n_jailbreaking_log_start"></p>
+<p>直到看到最后的log：<code>rebooting in 5 seconds</code></p>
+<p><img src="../../assets/img/palera1n_jailbreaking_log_rebooting.jpg" alt="palera1n_jailbreaking_log_rebooting"></p>
+<p>iPhone会继续重启，然后进入桌面</p>
+<p>此时iPhone桌面中，还没有安装palera1n的app。</p>
+<h2 id="第三步：palera1n---f，首次会安装palera1n的app"><a name="第三步：palera1n---f，首次会安装palera1n的app" class="plugin-anchor" href="#第三步：palera1n---f，首次会安装palera1n的app"><i class="fa fa-link" aria-hidden="true"></i></a>第三步：palera1n  -f，首次会安装palera1n的app</h2>
+<p>继续去：</p>
+<pre class="language-"><code class="lang-bash">palera1n <span class="token parameter variable">-f</span>
+</code></pre>
+<p>去：启动设备</p>
+<p>继续按照提示，操作iPhone进入DFU模式</p>
+<p>详细log日志：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_tool/reverse_security/iOS/palera1n  palera1n <span class="token parameter variable">-f</span>
+<span class="token comment"># == palera1n-c ==</span>
+<span class="token comment">#</span>
+<span class="token comment"># Made by: Nick Chan, Ploosh, Mineek, Nebula, llsc12</span>
+<span class="token comment">#</span>
+<span class="token comment"># Thanks to: dora2ios, pythonplayer, tihmstar, nikias</span>
+<span class="token comment"># (libimobiledevice), checkra1n team (Siguza, axi0mx, littlelailo</span>
+<span class="token comment"># et al.), Procursus Team (Hayden Seay, Cameron Katri, Keto et.al)</span>
+
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:48:09<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Waiting <span class="token keyword">for</span> devices
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:48:09<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Telling device with udid abdc0dd961c3cb96f5c4afe109de4eb48b88433a to enter recovery mode immediately
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:48:20<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Press Enter when ready <span class="token keyword">for</span> DFU mode
+
+Get ready <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+Hold volume down + side button <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+Hold volume down button <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:55<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Device entered DFU mode successfully
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: About to execute checkra1n
+<span class="token comment">#</span>
+<span class="token comment"># Checkra1n 0.1337.1</span>
+<span class="token comment">#</span>
+<span class="token comment"># Proudly written in nano</span>
+<span class="token comment"># (c) 2019-2023 Kim Jong Cracks</span>
+<span class="token comment">#</span>
+<span class="token comment">#========  Made by  =======</span>
+<span class="token comment"># argp, axi0mx, danyl931, jaywalker, kirb, littlelailo, nitoTV</span>
+<span class="token comment"># never_released, nullpixel, pimskeks, qwertyoruiop, sbingner, siguza</span>
+<span class="token comment">#======== Thanks to =======</span>
+<span class="token comment"># haifisch, jndok, jonseals, xerub, lilstevie, psychotea, sferrini</span>
+<span class="token comment"># Cellebrite (ih8sn0w, cjori, ronyrus et al.)</span>
+<span class="token comment">#==========================</span>
+
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Starting thread <span class="token keyword">for</span> Apple TV 4K Advanced board
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Waiting <span class="token keyword">for</span> DFU mode devices
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Checking <span class="token keyword">if</span> device is ready
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Attempting to perform checkm8 on <span class="token number">8015</span> <span class="token number">11</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Setting up the exploit
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: <span class="token operator">==</span> checkm8 setup stage <span class="token operator">==</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Entered initial checkm8 state after <span class="token number">1</span> steps
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Stalled input endpoint after <span class="token number">6</span> steps
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device disconnected
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:56<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: <span class="token operator">==</span> checkm8 trigger stage <span class="token operator">==</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Checkmate<span class="token operator">!</span>
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Device should now reconnect <span class="token keyword">in</span> download mode
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:49:57<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: DFU mode device disconnected
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:50:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Entered download mode
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:50:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Verbose<span class="token operator">&gt;</span>: Download mode device found
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:50:04<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Booting PongoOS<span class="token punctuation">..</span>.
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:50:06<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Found PongoOS USB Device
+ - <span class="token punctuation">[</span>02/27/23 <span class="token number">14</span>:50:06<span class="token punctuation">]</span> <span class="token operator">&lt;</span>Info<span class="token operator">&gt;</span>: Booting Kernel<span class="token punctuation">..</span>.
+</code></pre>
+<p>iPhone中启动输出日志，其中屏幕中间可见 苹果的logo图标（其中嵌入了一个checkra1n的灯塔图标？）：</p>
+<p><img src="../../assets/img/palera1n_booting_apple_logo.jpg" alt="palera1n_booting_apple_logo"></p>
+<p>期间会自动安装：palera1n的app</p>
+<p>进入iPhone桌面后，可以看到：</p>
+<p><code>palera1n的app</code> = <code>palera1n loader</code> = paleran的图标</p>
+<p><img src="../../assets/img/palera1n_desktop_logo.jpg" alt="palera1n_desktop_logo"></p>
+<h2 id="第四步：进入palera1n的app去install安装"><a name="第四步：进入palera1n的app去install安装" class="plugin-anchor" href="#第四步：进入palera1n的app去install安装"><i class="fa fa-link" aria-hidden="true"></i></a>第四步：进入palera1n的app去Install安装</h2>
+<p>打开palera1n的app后，进入主页，能看到有个Install按钮</p>
+<p><img src="../../assets/img/palera1n_app_install_button.png" alt="palera1n_app_install_button"></p>
+<p>此处会显示：</p>
+<ul>
+<li>当前iPhone信息<ul>
+<li>iPhone 8 running i0s 15.0 (arm64)</li>
+</ul>
+</li>
+</ul>
+<p>点击Install，会继续越狱过程，输出log过程，直到最后：</p>
+<ul>
+<li><code>Finished installing! Enjoy!</code></li>
+</ul>
+<p>期间会下载和安装：</p>
+<ul>
+<li>bootstrap.tar</li>
+<li>sileo.deb</li>
+<li>straprepo.deb</li>
+</ul>
+<p>对应地址分别是：</p>
+<ul>
+<li>此处的普通越狱<ul>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/bootstrap.tar" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/bootstrap.tar</a></li>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/sileo.deb" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/sileo.deb</a></li>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/straprepo.deb" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/straprepo.deb</a></li>
+</ul>
+</li>
+<li>如果是rootless越狱<ul>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/rootless/bootstrap.tar" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/rootless/bootstrap.tar</a></li>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/rootless/palera1nrepo.deb" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/rootless/palera1nrepo.deb</a></li>
+<li><a href="https://cdn.nickchan.lol/palera1n/loader/assets/rootless/sileo.deb" target="_blank">https://cdn.nickchan.lol/palera1n/loader/assets/rootless/sileo.deb</a></li>
+</ul>
+</li>
+</ul>
+<p>点击：<code>Respring</code>=重启桌面</p>
+<p>然后桌面上即可看到：<code>Sileo</code>了</p>
+<p><img src="../../assets/img/palera1n_installed_sileo.png" alt="palera1n_installed_sileo"></p>
+<p>至此，palera1n越狱过程就结束了。</p>
+<p>可以愉快的用Sileo去安装各种越狱插件了。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-06-28 23:31:23
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="rootful_summary.html" class="navigation navigation-prev " aria-label="Previous page: palera1n的rootful越狱概述">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="common_issue.html" class="navigation navigation-next " aria-label="Next page: 常见问题">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"palera1n的rootful越狱详解","level":"1.4.2.2","depth":3,"next":{"title":"常见问题","level":"1.4.2.3","depth":3,"path":"palera1n/doing/common_issue.md","ref":"palera1n/doing/common_issue.md","articles":[]},"previous":{"title":"palera1n的rootful越狱概述","level":"1.4.2.1","depth":3,"path":"palera1n/doing/rootful_summary.md","ref":"palera1n/doing/rootful_summary.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_ios15_jailbreak/pdf/ios_re_ios15_jailbreak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_ios15_jailbreak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_ios15_jailbreak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：iOS15越狱","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS越狱中的iOS 15+之后的越狱工具和事项。包括palera1n、XinaA15、Dopamine等。先是iOS15+的越狱概览，然后是北背景知识，包括rootless和rootful、iPhone机型信息、免签安装ipa文件，其中包括TrollStore和，Sideloadly；以及详细介绍iPhone中安装TrollStore；接着介绍palera1n，包括越狱前的前提条件、注意事项和说明、工具的版本、文档和资料，和越狱中的palera1n的rootful越狱概述和详解，以及常见问题、help语法、loader app和越狱后的ssh、如何恢复越狱、常见问题；接着介绍XinaA15，包括越狱前的历史版本和下载地址，和越狱中的安装XinaA15、用XinaA15越狱，以及越狱后的界面和功能；接着介绍Dopamine；最后给出参考资料。"},"file":{"path":"palera1n/doing/rootful_detail.md","mtime":"2023-06-28T15:31:23.987Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-19T14:49:33.335Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

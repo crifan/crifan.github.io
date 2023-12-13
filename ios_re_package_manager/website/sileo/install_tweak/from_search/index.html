@@ -1,0 +1,892 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>通过搜索 · iOS逆向开发：越狱包管理器</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="install_zip_from_search.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_package_manager","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../package_manager_overview/">
+            
+                <a href="../../../package_manager_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    包管理器概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../cydia/">
+            
+                <a href="../../../cydia/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Cydia
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Sileo
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../install_sileo.html">
+            
+                <a href="../../install_sileo.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    安装Sileo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../ui_function/">
+            
+                <a href="../../ui_function/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    界面和功能
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../ui_function/hot/">
+            
+                <a href="../../ui_function/hot/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    精选
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../ui_function/hot/setting.html">
+            
+                <a href="../../ui_function/hot/setting.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../ui_function/news.html">
+            
+                <a href="../../ui_function/news.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    新闻
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../ui_function/repo.html">
+            
+                <a href="../../ui_function/repo.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    软件源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../../ui_function/tweak/">
+            
+                <a href="../../ui_function/tweak/">
+            
+                    
+                        <b>1.4.2.4.</b>
+                    
+                    软件包
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.4.1" data-path="../../ui_function/tweak/detail.html">
+            
+                <a href="../../ui_function/tweak/detail.html">
+            
+                    
+                        <b>1.4.2.4.1.</b>
+                    
+                    插件详情页
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../../ui_function/search.html">
+            
+                <a href="../../ui_function/search.html">
+            
+                    
+                        <b>1.4.2.5.</b>
+                    
+                    搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    安装插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.3.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    通过搜索
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="install_zip_from_search.html">
+            
+                <a href="install_zip_from_search.html">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    安装zip插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../from_repo/">
+            
+                <a href="../from_repo/">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    通过软件源
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.2.1" data-path="../from_repo/install_frida_from_repo.html">
+            
+                <a href="../from_repo/install_frida_from_repo.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    安装Frida插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../summary/">
+            
+                <a href="../../summary/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    经验和心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../zebra/">
+            
+                <a href="../../../zebra/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Zebra
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../tweak/">
+            
+                <a href="../../../tweak/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../tweak/common/">
+            
+                <a href="../../../tweak/common/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    常用插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../../tweak/common/openssh.html">
+            
+                <a href="../../../tweak/common/openssh.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    OpenSSH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../../tweak/common/filza.html">
+            
+                <a href="../../../tweak/common/filza.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    Filza
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../../tweak/common/afc2.html">
+            
+                <a href="../../../tweak/common/afc2.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    Apple File Conuit "2"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.4" data-path="../../../tweak/common/appsync_unified.html">
+            
+                <a href="../../../tweak/common/appsync_unified.html">
+            
+                    
+                        <b>1.6.1.4.</b>
+                    
+                    AppSync Unified
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.5" data-path="../../../tweak/common/icleaner_pro.html">
+            
+                <a href="../../../tweak/common/icleaner_pro.html">
+            
+                    
+                        <b>1.6.1.5.</b>
+                    
+                    iCleaner Pro
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.6" data-path="../../../tweak/common/mterminal.html">
+            
+                <a href="../../../tweak/common/mterminal.html">
+            
+                    
+                        <b>1.6.1.6.</b>
+                    
+                    Mterminal
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../tweak/summary.html">
+            
+                <a href="../../../tweak/summary.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    使用心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >通过搜索</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="通过搜索安装插件"><a name="通过搜索安装插件" class="plugin-anchor" href="#通过搜索安装插件"><i class="fa fa-link" aria-hidden="true"></i></a>通过搜索安装插件</h1>
+<p>可以通过<code>Sileo</code>中的<code>搜索</code>去搜索并安装所要的插件。</p>
+<h2 id="注意事项"><a name="注意事项" class="plugin-anchor" href="#注意事项"><i class="fa fa-link" aria-hidden="true"></i></a>注意事项</h2>
+<p>值得一提的值：</p>
+<ul>
+<li><code>Sileo</code>普通版本：只能从当前已添加的软件源的内部去搜索已有的插件<ul>
+<li>举例<ul>
+<li>（<code>palera1n</code>越狱后，安装的普通版本的<code>Sileo</code>中）<ul>
+<li>搜<code>zip</code>时，只能搜到内部软件源的结果<ul>
+<li><img src="../../../assets/img/sileo_search_internal_zip.png" alt="sileo_search_internal_zip"></li>
+</ul>
+</li>
+<li>搜<code>Frida</code>，就搜不到<ul>
+<li><img src="../../../assets/img/sileo_internal_frida_not_found.png" alt="sileo_internal_frida_not_found"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://book.crifan.org/books/ios_re_ios15_jailbreak/website/xinaa15/" target="_blank">XinaA15</a>（越狱后自动安装的）<code>Sileo Nightly</code>：支持同时从外部软件源中搜索<ul>
+<li>作用=好处：极大的方便了插件的安装<ul>
+<li>当内部软件源找不到插件时，自动从搜索的外部的软件源中，找到并添加软件源和安装相应插件</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>搜<code>Frida</code>可以搜到外部软件源<ul>
+<li><img src="../../../assets/img/sileo_search_frida_external_repo.png" alt="sileo_search_frida_external_repo"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-21 23:24:19
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 安装插件">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="install_zip_from_search.html" class="navigation navigation-next " aria-label="Next page: 安装zip插件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"通过搜索","level":"1.4.3.1","depth":3,"next":{"title":"安装zip插件","level":"1.4.3.1.1","depth":4,"path":"sileo/install_tweak/from_search/install_zip_from_search.md","ref":"sileo/install_tweak/from_search/install_zip_from_search.md","articles":[]},"previous":{"title":"安装插件","level":"1.4.3","depth":2,"path":"sileo/install_tweak/README.md","ref":"sileo/install_tweak/README.md","articles":[{"title":"通过搜索","level":"1.4.3.1","depth":3,"path":"sileo/install_tweak/from_search/README.md","ref":"sileo/install_tweak/from_search/README.md","articles":[{"title":"安装zip插件","level":"1.4.3.1.1","depth":4,"path":"sileo/install_tweak/from_search/install_zip_from_search.md","ref":"sileo/install_tweak/from_search/install_zip_from_search.md","articles":[]}]},{"title":"通过软件源","level":"1.4.3.2","depth":3,"path":"sileo/install_tweak/from_repo/README.md","ref":"sileo/install_tweak/from_repo/README.md","articles":[{"title":"安装Frida插件","level":"1.4.3.2.1","depth":4,"path":"sileo/install_tweak/from_repo/install_frida_from_repo.md","ref":"sileo/install_tweak/from_repo/install_frida_from_repo.md","articles":[]}]}]},"articles":[{"title":"安装zip插件","level":"1.4.3.1.1","depth":4,"path":"sileo/install_tweak/from_search/install_zip_from_search.md","ref":"sileo/install_tweak/from_search/install_zip_from_search.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_package_manager/pdf/ios_re_package_manager.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_package_manager/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_package_manager","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：越狱包管理器","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS越狱后，常需要包管理器来安装插件。先是对于包管理器进行概述；再分别详细介绍常用的包管理器：Cydia、Sileo等。以及其他一些常见的越狱插件的介绍。"},"file":{"path":"sileo/install_tweak/from_search/README.md","mtime":"2023-07-21T15:24:19.952Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-24T07:05:05.915Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

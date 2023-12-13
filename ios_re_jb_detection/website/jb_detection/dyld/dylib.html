@@ -1,0 +1,1437 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>dylib · iOS逆向开发：越狱检测和反越狱检测</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../objc_runtime.html" />
+    
+    
+    <link rel="prev" href="_dyld_series.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_jb_detection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../ios_jb_detecton_overview/">
+            
+                <a href="../../ios_jb_detecton_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS越狱检测概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    iOS越狱检测
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../url_scheme.html">
+            
+                <a href="../url_scheme.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    URL Scheme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../file/">
+            
+                <a href="../file/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../file/attributes.html">
+            
+                <a href="../file/attributes.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    文件属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../file/open/">
+            
+                <a href="../file/open/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    文件打开
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../file/open/c_func/">
+            
+                <a href="../file/open/c_func/">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1.1" data-path="../file/open/c_func/syscall.html">
+            
+                <a href="../file/open/c_func/syscall.html">
+            
+                    
+                        <b>1.3.2.2.1.1.</b>
+                    
+                    syscall
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.1.2" data-path="../file/open/c_func/svc_0x80_asm.html">
+            
+                <a href="../file/open/c_func/svc_0x80_asm.html">
+            
+                    
+                        <b>1.3.2.2.1.2.</b>
+                    
+                    svc 0x80内联汇编
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../file/open/ios_func.html">
+            
+                <a href="../file/open/ios_func.html">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../file/write/">
+            
+                <a href="../file/write/">
+            
+                    
+                        <b>1.3.2.3.</b>
+                    
+                    文件写入
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.3.1" data-path="../file/write/c_func.html">
+            
+                <a href="../file/write/c_func.html">
+            
+                    
+                        <b>1.3.2.3.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3.2" data-path="../file/write/ios_func.html">
+            
+                <a href="../file/write/ios_func.html">
+            
+                    
+                        <b>1.3.2.3.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../env.html">
+            
+                <a href="../env.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    环境变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../debuggable.html">
+            
+                <a href="../debuggable.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    是否可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../system.html">
+            
+                <a href="../system.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../sandbox.html">
+            
+                <a href="../sandbox.html">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    沙箱完整性校验
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../jb_processes.html">
+            
+                <a href="../jb_processes.html">
+            
+                    
+                        <b>1.3.7.</b>
+                    
+                    越狱相关进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.8.</b>
+                    
+                    dyld动态库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.8.1" data-path="_dyld_series.html">
+            
+                <a href="_dyld_series.html">
+            
+                    
+                        <b>1.3.8.1.</b>
+                    
+                    _dyld系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.8.2" data-path="dylib.html">
+            
+                <a href="dylib.html">
+            
+                    
+                        <b>1.3.8.2.</b>
+                    
+                    dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../objc_runtime.html">
+            
+                <a href="../objc_runtime.html">
+            
+                    
+                        <b>1.3.9.</b>
+                    
+                    ObjC运行时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../app_self.html">
+            
+                <a href="../app_self.html">
+            
+                    
+                        <b>1.3.10.</b>
+                    
+                    app本身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../installed_app.html">
+            
+                <a href="../installed_app.html">
+            
+                    
+                        <b>1.3.11.</b>
+                    
+                    已安装app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../ssh.html">
+            
+                <a href="../ssh.html">
+            
+                    
+                        <b>1.3.12.</b>
+                    
+                    SSH相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../getsectiondata.html">
+            
+                <a href="../getsectiondata.html">
+            
+                    
+                        <b>1.3.13.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../anti_jb_detect/">
+            
+                <a href="../../anti_jb_detect/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    iOS反越狱检测
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../anti_jb_detect/url_scheme.html">
+            
+                <a href="../../anti_jb_detect/url_scheme.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    URL Scheme
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../anti_jb_detect/file/">
+            
+                <a href="../../anti_jb_detect/file/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../anti_jb_detect/file/open/">
+            
+                <a href="../../anti_jb_detect/file/open/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    文件打开
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../anti_jb_detect/file/open/c_func/">
+            
+                <a href="../../anti_jb_detect/file/open/c_func/">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1.1" data-path="../../anti_jb_detect/file/open/c_func/syscall.html">
+            
+                <a href="../../anti_jb_detect/file/open/c_func/syscall.html">
+            
+                    
+                        <b>1.4.2.1.1.1.</b>
+                    
+                    syscall
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.1.2" data-path="../../anti_jb_detect/file/open/c_func/svc_0x80_asm.html">
+            
+                <a href="../../anti_jb_detect/file/open/c_func/svc_0x80_asm.html">
+            
+                    
+                        <b>1.4.2.1.1.2.</b>
+                    
+                    svc 0x80内联汇编
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.1.2" data-path="../../anti_jb_detect/file/open/ios_func.html">
+            
+                <a href="../../anti_jb_detect/file/open/ios_func.html">
+            
+                    
+                        <b>1.4.2.1.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../anti_jb_detect/file/write/">
+            
+                <a href="../../anti_jb_detect/file/write/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    文件写入
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../anti_jb_detect/file/write/c_func.html">
+            
+                <a href="../../anti_jb_detect/file/write/c_func.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    C函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../anti_jb_detect/file/write/ios_func.html">
+            
+                <a href="../../anti_jb_detect/file/write/ios_func.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../anti_jb_detect/env.html">
+            
+                <a href="../../anti_jb_detect/env.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    环境变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../anti_jb_detect/debuggable.html">
+            
+                <a href="../../anti_jb_detect/debuggable.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    是否可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../anti_jb_detect/system.html">
+            
+                <a href="../../anti_jb_detect/system.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../anti_jb_detect/sandbox.html">
+            
+                <a href="../../anti_jb_detect/sandbox.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    沙箱完整性校验
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../anti_jb_detect/jb_processes.html">
+            
+                <a href="../../anti_jb_detect/jb_processes.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    越狱相关进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../anti_jb_detect/dyld/">
+            
+                <a href="../../anti_jb_detect/dyld/">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    dyld动态库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.8.1" data-path="../../anti_jb_detect/dyld/_dyld_series.html">
+            
+                <a href="../../anti_jb_detect/dyld/_dyld_series.html">
+            
+                    
+                        <b>1.4.8.1.</b>
+                    
+                    _dyld系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.2" data-path="../../anti_jb_detect/dyld/dylib.html">
+            
+                <a href="../../anti_jb_detect/dyld/dylib.html">
+            
+                    
+                        <b>1.4.8.2.</b>
+                    
+                    dylib
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../anti_jb_detect/objc_runtime.html">
+            
+                <a href="../../anti_jb_detect/objc_runtime.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    ObjC运行时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../anti_jb_detect/app_self.html">
+            
+                <a href="../../anti_jb_detect/app_self.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    app本身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../../anti_jb_detect/getsectiondata.html">
+            
+                <a href="../../anti_jb_detect/getsectiondata.html">
+            
+                    
+                        <b>1.4.11.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../../anti_jb_detect/kernel_level.html">
+            
+                <a href="../../anti_jb_detect/kernel_level.html">
+            
+                    
+                        <b>1.4.12.</b>
+                    
+                    内核级反越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../detect_common/">
+            
+                <a href="../../detect_common/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    通用内容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../detect_common/app_load_process.html">
+            
+                <a href="../../detect_common/app_load_process.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    app启动过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../detect_common/jb_path/">
+            
+                <a href="../../detect_common/jb_path/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    越狱路径相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../detect_common/jb_path/jb_file_list.html">
+            
+                <a href="../../detect_common/jb_path/jb_file_list.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    越狱文件列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../other_summary/">
+            
+                <a href="../../other_summary/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >dylib</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="dylib"><a name="dylib" class="plugin-anchor" href="#dylib"><i class="fa fa-link" aria-hidden="true"></i></a>dylib</h1>
+<h2 id="dladdr"><a name="dladdr" class="plugin-anchor" href="#dladdr"><i class="fa fa-link" aria-hidden="true"></i></a><code>dladdr</code></h2>
+<p>TODO：</p>
+<ul>
+<li>【部分解决】iOS越狱检测：用dladdr解析函数所属动态库</li>
+<li>【无需解决】已越狱iOS且已反越狱但dladdr仍是系统库libsystem_kernel.dylib</li>
+<li>【已解决】iOS反越狱检测：dyld的dladdr</li>
+</ul>
+<hr>
+<pre class="language-"><code class="lang-c"><span class="token operator">-</span> <span class="token punctuation">(</span>IBAction<span class="token punctuation">)</span>dladdrBtnClicked<span class="token operator">:</span><span class="token punctuation">(</span>UIButton <span class="token operator">*</span><span class="token punctuation">)</span>sender <span class="token punctuation">{</span>
+    _curBtnLbl<span class="token punctuation">.</span>text <span class="token operator">=</span> sender<span class="token punctuation">.</span>titleLabel<span class="token punctuation">.</span>text<span class="token punctuation">;</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dladdr check&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token keyword">int</span> DLADDR_FAILED <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> curSystemLib <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> curTestFuncName <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    Dl_info dylib_info<span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> SystemLib_kernel <span class="token operator">=</span> <span class="token string">&quot;/usr/lib/system/libsystem_kernel.dylib&quot;</span><span class="token punctuation">;</span>
+    curSystemLib <span class="token operator">=</span> SystemLib_kernel<span class="token punctuation">;</span>
+    curTestFuncName <span class="token operator">=</span> <span class="token string">&quot;stat&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>func_stat<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">stat</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">=</span> stat<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ret <span class="token operator">=</span> <span class="token function">dladdr</span><span class="token punctuation">(</span>func_stat<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dylib_info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//    const char* SystemLib_c = &quot;/usr/lib/system/libsystem_c.dylib&quot;;</span>
+<span class="token comment">//    curSystemLib = SystemLib_c;</span>
+<span class="token comment">//    curTestFuncName = &quot;fopen&quot;;</span>
+<span class="token comment">//    FILE* (*func_fopen)(const char *filename, const char *mode) = fopen;</span>
+<span class="token comment">//    int ret = dladdr(func_fopen, &amp;dylib_info);</span>
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dladdr ret=%d&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    NSString <span class="token operator">*</span>dladdrResultStr <span class="token operator">=</span> @<span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>DLADDR_FAILED <span class="token operator">!=</span> ret<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        NSString<span class="token operator">*</span> conclusionStr <span class="token operator">=</span> @<span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> libName <span class="token operator">=</span> dylib_info<span class="token punctuation">.</span>dli_fname<span class="token punctuation">;</span>
+        <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dladdr dli_fname=%s, dli_fbase=%p, dli_sname=%s, dli_saddr=%p&quot;</span><span class="token punctuation">,</span> libName<span class="token punctuation">,</span> dylib_info<span class="token punctuation">.</span>dli_fbase<span class="token punctuation">,</span> dylib_info<span class="token punctuation">.</span>dli_sname<span class="token punctuation">,</span> dylib_info<span class="token punctuation">.</span>dli_saddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> <span class="token function">strcmp</span><span class="token punctuation">(</span>libName<span class="token punctuation">,</span> curSystemLib<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            conclusionStr <span class="token operator">=</span> @<span class="token string">&quot;是系统库 -&gt; 非越狱手机&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            conclusionStr <span class="token operator">=</span> @<span class="token string">&quot;不是系统库 -&gt; 越狱手机&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        dladdrResultStr <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token operator">:</span>@<span class="token string">&quot;解析成功 -&gt; %s 所属动态库: %s -&gt; %@&quot;</span><span class="token punctuation">,</span> curTestFuncName<span class="token punctuation">,</span> libName<span class="token punctuation">,</span> conclusionStr<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dladdr failed: ret=%d&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dladdrResultStr <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token operator">:</span>@<span class="token string">&quot;无法解析，返回值=%d&quot;</span><span class="token punctuation">,</span> ret<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dladdr: %@&quot;</span><span class="token punctuation">,</span> dladdrResultStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    _detectResultTv<span class="token punctuation">.</span>text <span class="token operator">=</span> dladdrResultStr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dlopendlsym"><a name="dlopendlsym" class="plugin-anchor" href="#dlopendlsym"><i class="fa fa-link" aria-hidden="true"></i></a>dlopen+dlsym</h2>
+<p>TODO：</p>
+<ul>
+<li>【已解决】iOS越狱检测：正向的dlopen+dlsym</li>
+<li>【记录】iOS中尝试dlopen和dlsym的system函数传入其他参数确保运行正常<ul>
+<li>【已解决】iOS中调用system返回值始终是32512</li>
+</ul>
+</li>
+<li>【已解决】iOS反越狱检测：dyld的dlopen和dlsym</li>
+</ul>
+<hr>
+<pre class="language-"><code class="lang-c"><span class="token operator">-</span> <span class="token punctuation">(</span>IBAction<span class="token punctuation">)</span>dlopenDlsymBtnClicked<span class="token operator">:</span><span class="token punctuation">(</span>UIButton <span class="token operator">*</span><span class="token punctuation">)</span>sender <span class="token punctuation">{</span>
+    _curBtnLbl<span class="token punctuation">.</span>text <span class="token operator">=</span> sender<span class="token punctuation">.</span>titleLabel<span class="token punctuation">.</span>text<span class="token punctuation">;</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;dlopen + dlsym check&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">typedef</span> <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>function_common<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>para<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    typedef void (*lib_MSHookFunction)(void *symbol, void *hook, void **old);</span>
+
+    <span class="token keyword">char</span><span class="token operator">*</span> dylibPathList<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token comment">//        // for debug</span>
+<span class="token comment">//        &quot;/usr/lib/libstdc++.dylib&quot;,</span>
+<span class="token comment">//        &quot;/usr/lib/libstdc++.6.dylib&quot;,</span>
+<span class="token comment">//        &quot;/usr/lib/libstdc++.6.0.9.dylib&quot;,</span>
+
+        <span class="token comment">// common: tweak plugin libs</span>
+        <span class="token string">&quot;/usr/lib/libsubstrate.dylib&quot;</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Cydia Substrate libs</span>
+        <span class="token string">&quot;/Library/MobileSubstrate/MobileSubstrate.dylib&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;/usr/lib/substrate/SubstrateInserter.dylib&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;/usr/lib/substrate/SubstrateLoader.dylib&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;/usr/lib/substrate/SubstrateBootstrap.dylib&quot;</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Substitute libs</span>
+        <span class="token string">&quot;/usr/lib/libsubstitute.dylib&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;/usr/lib/substitute-inserter.dylib&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;/usr/lib/substitute-loader.dylib&quot;</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Other libs</span>
+        <span class="token string">&quot;/usr/lib/tweakloader.dylib&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> StrSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> DylibLen <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>dylibPathList<span class="token punctuation">)</span> <span class="token operator">/</span> StrSize<span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span><span class="token operator">*</span> libFuncNameList<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;MSGetImageByName&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;MSFindSymbol&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;MSHookFunction&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;MSHookMessageEx&quot;</span><span class="token punctuation">,</span>
+
+        <span class="token string">&quot;SubGetImageByName&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;SubFindSymbol&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;SubHookFunction&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;SubHookMessageEx&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> LibFuncLen <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>libFuncNameList<span class="token punctuation">)</span> <span class="token operator">/</span> StrSize<span class="token punctuation">;</span>
+
+<span class="token comment">//    NSMutableArray *detectedJbDylibList = [NSMutableArray array];</span>
+<span class="token comment">//    NSMutableArray *detectedJbFuncNameList = [NSMutableArray array];</span>
+    NSMutableArray <span class="token operator">*</span>detectedJbLibAndFuncList <span class="token operator">=</span> <span class="token punctuation">[</span>NSMutableArray array<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> libIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> libIdx <span class="token operator">&lt;</span> DylibLen<span class="token punctuation">;</span> libIdx<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">char</span><span class="token operator">*</span> curDylib <span class="token operator">=</span> dylibPathList<span class="token punctuation">[</span>libIdx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">void</span> <span class="token operator">*</span>curLibHandle <span class="token operator">=</span> <span class="token function">dlopen</span><span class="token punctuation">(</span>curDylib<span class="token punctuation">,</span> RTLD_GLOBAL <span class="token operator">|</span> RTLD_NOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> curLibHandle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">char</span><span class="token operator">*</span> errStr <span class="token operator">=</span> <span class="token function">dlerror</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;Failed to open dylib %s, error: %s&quot;</span><span class="token punctuation">,</span> curDylib<span class="token punctuation">,</span> errStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+<span class="token comment">//            NSString* curDylibNs = [NSString stringWithFormat:@&quot;%s&quot;, curDylib];</span>
+<span class="token comment">//            [detectedJbDylibList addObject:curDylibNs];</span>
+
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> funcIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> funcIdx <span class="token operator">&lt;</span> LibFuncLen<span class="token punctuation">;</span> funcIdx<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span><span class="token operator">*</span> curFuncName <span class="token operator">=</span> libFuncNameList<span class="token punctuation">[</span>funcIdx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                function_common funcInLib <span class="token operator">=</span> <span class="token function">dlsym</span><span class="token punctuation">(</span>curLibHandle<span class="token punctuation">,</span> curFuncName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> funcInLib<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;Found func %s=%p in dylib %s\n&quot;</span><span class="token punctuation">,</span> curFuncName<span class="token punctuation">,</span> funcInLib<span class="token punctuation">,</span> curDylib<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//                    NSString* curFuncNameNs = [NSString stringWithFormat:@&quot;%s&quot;, curFuncName];</span>
+<span class="token comment">//                    [detectedJbFuncNameList addObject:curFuncNameNs];</span>
+                    NSString<span class="token operator">*</span> curLibAndFuncNs <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token operator">:</span>@<span class="token string">&quot;%s -&gt; %s&quot;</span><span class="token punctuation">,</span> curDylib<span class="token punctuation">,</span> curFuncName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">[</span>detectedJbLibAndFuncList addObject<span class="token operator">:</span>curLibAndFuncNs<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token function">dlclose</span><span class="token punctuation">(</span>curLibHandle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    NSString<span class="token operator">*</span> finalResult <span class="token operator">=</span>  @<span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token comment">//    BOOL isJb = (detectedJbDylibList.count &gt; 0) || (detectedJbFuncNameList.count &gt; 0);</span>
+<span class="token comment">//    NSString *detectedJbDylibListStr = [CrifanLibiOS nsStrListToStr:detectedJbDylibList isSortList:FALSE isAddIndexPrefix:TRUE];</span>
+<span class="token comment">//    NSString *detectedJbFuncNameListStr = [CrifanLibiOS nsStrListToStr:detectedJbFuncNameList isSortList:FALSE isAddIndexPrefix:TRUE];</span>
+<span class="token comment">//    NSString* detectedLibAndFuncNameStr = [NSString stringWithFormat:@&quot;越狱库=%@\n库函数=%@&quot;, detectedJbDylibListStr, detectedJbFuncNameListStr] ;</span>
+
+    BOOL isJb <span class="token operator">=</span> <span class="token punctuation">(</span>detectedJbLibAndFuncList<span class="token punctuation">.</span>count <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    NSString <span class="token operator">*</span>detectedJbLibAndFuncListStr <span class="token operator">=</span> <span class="token punctuation">[</span>CrifanLibiOS nsStrListToStr<span class="token operator">:</span>detectedJbLibAndFuncList isSortList<span class="token operator">:</span>FALSE isAddIndexPrefix<span class="token operator">:</span>TRUE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    NSString<span class="token operator">*</span> detectedLibAndFuncNameStr <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token operator">:</span>@<span class="token string">&quot;越狱库和库函数=%@&quot;</span><span class="token punctuation">,</span> detectedJbLibAndFuncListStr<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isJb<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        finalResult <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token operator">:</span>@<span class="token string">&quot;检测出越狱库或库函数 -&gt; 越狱手机\n%@&quot;</span><span class="token punctuation">,</span> detectedLibAndFuncNameStr<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        finalResult <span class="token operator">=</span> @<span class="token string">&quot;未检测出越狱库和库函数 -&gt; 非越狱手机&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;finalResult=%@&quot;</span><span class="token punctuation">,</span> finalResult<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    _detectResultTv<span class="token punctuation">.</span>text <span class="token operator">=</span> finalResult<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2022-11-06 16:25:00
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="_dyld_series.html" class="navigation navigation-prev " aria-label="Previous page: _dyld系列">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../objc_runtime.html" class="navigation navigation-next " aria-label="Next page: ObjC运行时">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"dylib","level":"1.3.8.2","depth":3,"next":{"title":"ObjC运行时","level":"1.3.9","depth":2,"path":"jb_detection/objc_runtime.md","ref":"jb_detection/objc_runtime.md","articles":[]},"previous":{"title":"_dyld系列","level":"1.3.8.1","depth":3,"path":"jb_detection/dyld/_dyld_series.md","ref":"jb_detection/dyld/_dyld_series.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_jb_detection/pdf/ios_re_jb_detection.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_jb_detection/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_jb_detection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：越狱检测和反越狱检测","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的iOS的越狱检测和反越狱检测方面的内容。包括常用的越狱检测手段，比如URL Scheme、文件方面的：文件属性、文件打开和文件写入；其中文件打开又包括C函数和iOS函数，其中C函数又包括syscall的C函数和svc 0x80内联汇编；以及文件写入包括C函数和iOS函数；以及其他检测手段：环境变量、是否可调试、system、沙箱完整性校验、越狱相关进程、dyld动态库，包括dylib的dladdr、dlopen、dlsym和_dyld开头的系列函数、ObjC运行时、app本身、已安装app、SSH相关、getsectiondata等；以及上述各种方法的反越狱检测的具体实现，以及其他一些额外的反越狱检测手段，比如内核级反越狱；接着整理越狱检测和反越狱检测的通用的内容，比如app的启动过程、越狱路径相关，尤其是越狱路径列表。以及其他一些心得。且均已贴出相关的越狱检测和反越狱检测的代码段和独立的代码仓库。"},"file":{"path":"jb_detection/dyld/dylib.md","mtime":"2022-11-06T08:25:00.200Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-11-10T06:01:17.638Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,799 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>OnesieRequestProto · iOS逆向YouTube：protobuf逆向</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../../appendix/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_protobuf_reverse","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../protobuf_overview/">
+            
+                <a href="../../../protobuf_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Protobuf概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../protobuf_dev/">
+            
+                <a href="../../../protobuf_dev/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Protobuf正向
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Protobuf逆向
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../normal_ios/">
+            
+                <a href="../../normal_ios/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    普通的iOS类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../normal_ios/gpbmessage.html">
+            
+                <a href="../../normal_ios/gpbmessage.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    GPBMessage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../normal_ios/gpbdescriptor.html">
+            
+                <a href="../../normal_ios/gpbdescriptor.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    GPBDescriptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../../normal_ios/gpbfielddescriptor.html">
+            
+                <a href="../../normal_ios/gpbfielddescriptor.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    GPBFieldDescriptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../lite_cpp/">
+            
+                <a href="../../lite_cpp/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    lite的C++类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../lite_cpp/messagelite/">
+            
+                <a href="../../lite_cpp/messagelite/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    MessageLite
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../../lite_cpp/messagelite/define.html">
+            
+                <a href="../../lite_cpp/messagelite/define.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    MessageLite定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    YouTube中Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../normal_ios/">
+            
+                <a href="../normal_ios/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    普通的iOS类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="../normal_ios/ytiplayerrequest.html">
+            
+                <a href="../normal_ios/ytiplayerrequest.html">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    YTIPlayerRequest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2" data-path="../normal_ios/ytiadbreakrequest.html">
+            
+                <a href="../normal_ios/ytiadbreakrequest.html">
+            
+                    
+                        <b>1.4.3.1.2.</b>
+                    
+                    YTIAdBreakRequest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.3" data-path="../normal_ios/ytiinnertubecontext.html">
+            
+                <a href="../normal_ios/ytiinnertubecontext.html">
+            
+                    
+                        <b>1.4.3.1.3.</b>
+                    
+                    YTIInnerTubeContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.4" data-path="../normal_ios/yticlientinfo.html">
+            
+                <a href="../normal_ios/yticlientinfo.html">
+            
+                    
+                        <b>1.4.3.1.4.</b>
+                    
+                    YTIClientInfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.5" data-path="../normal_ios/ytionesiehotconfig.html">
+            
+                <a href="../normal_ios/ytionesiehotconfig.html">
+            
+                    
+                        <b>1.4.3.1.5.</b>
+                    
+                    YTIOnesieHotConfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    lite的C++类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.3.2.1" data-path="onesierequestproto.html">
+            
+                <a href="onesierequestproto.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    OnesieRequestProto
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >OnesieRequestProto</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="onesierequestproto"><a name="onesierequestproto" class="plugin-anchor" href="#onesierequestproto"><i class="fa fa-link" aria-hidden="true"></i></a>OnesieRequestProto</h1>
+<p>TODO：</p>
+<ul>
+<li>【未解决】研究YouTube逻辑：lite版protobuf类OnesieRequestProto如何搞清楚属性字段定义</li>
+<li>【未解决】研究YouTube逻辑：OnesieRequestProto相关</li>
+</ul>
+<hr>
+<h2 id="onesierequestproto的vtable定义"><a name="onesierequestproto的vtable定义" class="plugin-anchor" href="#onesierequestproto的vtable定义"><i class="fa fa-link" aria-hidden="true"></i></a>OnesieRequestProto的vtable定义</h2>
+<p>经过逆向，目前的理解是：</p>
+<p>IDA中改名：</p>
+<p><img src="../../../assets/img/OnesieRequestProto_vtable_define.jpg" alt="OnesieRequestProto_vtable_define"></p>
+<p>核心定义：</p>
+<pre class="language-"><code class="lang-cpp"><span class="token number">000004F</span>7BEE8 <span class="token punctuation">;</span> `vtable <span class="token keyword">for</span><span class="token number">&apos;</span>video_streaming<span class="token double-colon punctuation">::</span>OnesieRequestProto
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BEE8 __ZTVN15video_streaming18OnesieRequestProtoE DCQ <span class="token number">0</span> <span class="token punctuation">;</span> offset to <span class="token keyword">this</span>
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BEF0                 DCQ __ZTIN15video_streaming18OnesieRequestProtoE <span class="token punctuation">;</span> `typeinfo <span class="token keyword">for</span><span class="token number">&apos;</span>video_streaming<span class="token double-colon punctuation">::</span>OnesieRequestProto
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BEF8 MessageLite_commonDctor_4F7BEF8 DCQ OnesieRequestProto_commonDctor_32D3230
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BEF8                                         <span class="token punctuation">;</span> DATA XREF<span class="token operator">:</span> requestConstructor_32D2E8C<span class="token operator">+</span>C↑o
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BEF8                                         <span class="token punctuation">;</span> requestConstructor_32D2E8C<span class="token operator">+</span><span class="token number">10</span>↑o <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF00                 DCQ OnesieRequestProto_dtor_32D3234
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF08                 DCQ OnesieRequestProto_GetTypeName_32D3ED8
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF10                 DCQ OnesieRequestProto_NewArena_32D3FA0
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF18                 DCQ OnesieRequestProto_Clear_32D3248
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF20                 DCQ OnesieRequestProto_IsInitialized_32D3EA8
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF28                 DCQ MessageLite_InitializationErrorString_3891244
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF30                 DCQ OnesieRequestProto_CheckTypeAndMergeFrom_32D3EA4
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF38                 DCQ OnesieRequestProto_ByteSizeLong_32D3BAC
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF40                 DCQ __ZNK7youtube8elements6Entity13GetCachedSizeEv <span class="token punctuation">;</span> youtube<span class="token double-colon punctuation">::</span>elements<span class="token double-colon punctuation">::</span><span class="token class-name">Entity</span><span class="token double-colon punctuation">::</span><span class="token function">GetCachedSize</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF48                 DCQ OnesieRequestProto__InternalParse_32D338C
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF50                 DCQ __ZN6proto28internal24GeneratedExtensionFinderD1Ev <span class="token punctuation">;</span> proto2<span class="token double-colon punctuation">::</span>internal<span class="token double-colon punctuation">::</span><span class="token class-name">GeneratedExtensionFinder</span><span class="token double-colon punctuation">::</span><span class="token operator">~</span><span class="token function">GeneratedExtensionFinder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF58                 DCQ OnesieRequestProto__InternalSerialize_32D373C
+__const<span class="token operator">:</span><span class="token number">0000000004F</span>7BF60 <span class="token punctuation">;</span> <span class="token keyword">public</span> video_streaming<span class="token double-colon punctuation">::</span>OnesieRequestProto <span class="token operator">:</span>
+</code></pre>
+<p>OnesieRequestProto的vtable定义：</p>
+<ul>
+<li>vtable OnesieRequestProto<ul>
+<li><code>+0x08</code> = <code>OnesieRequestProto typeinfo</code></li>
+<li><code>+0x10</code> = <code>MessageLite_commonDctor_4F7BEF8</code> = <code>OnesieRequestProto_commonDctor_32D3230</code><ul>
+<li>某种 deconstructor ？</li>
+</ul>
+</li>
+<li><code>+0x18</code> = <code>OnesieRequestProto_dtor_32D3234</code><ul>
+<li>virtual ~MessageLite() = default;</li>
+</ul>
+</li>
+<li><code>+0x20</code> = <code>OnesieRequestProto_GetTypeName_32D3ED8</code><ul>
+<li>virtual std::string GetTypeName() const = 0;</li>
+</ul>
+</li>
+<li><code>+0x28</code> = <code>OnesieRequestProto_NewArena_32D3FA0</code><ul>
+<li>virtual MessageLite<em> New(Arena</em> arena) const = 0;</li>
+</ul>
+</li>
+<li><code>+0x30</code> = <code>OnesieRequestProto_Clear_32D3248</code><ul>
+<li>virtual void Clear() = 0;</li>
+</ul>
+</li>
+<li><code>+0x38</code> = <code>OnesieRequestProto_IsInitialized_32D3EA8</code><ul>
+<li>virtual bool IsInitialized() const = 0;</li>
+</ul>
+</li>
+<li><code>+0x40</code> = <code>MessageLite_InitializationErrorString_3891244</code><ul>
+<li>virtual std::string InitializationErrorString() const;</li>
+</ul>
+</li>
+<li><code>+0x48</code> = <code>OnesieRequestProto_CheckTypeAndMergeFrom_32D3EA4</code><ul>
+<li>virtual void CheckTypeAndMergeFrom(const MessageLite&amp; other) = 0;</li>
+</ul>
+</li>
+<li><code>+0x50</code> = <code>OnesieRequestProto_ByteSizeLong_32D3BAC</code><ul>
+<li>virtual size_t ByteSizeLong() const = 0;</li>
+</ul>
+</li>
+<li><code>+0x58</code> = <code>youtube::elements::Entity::GetCachedSize(void)</code><ul>
+<li>virtual int GetCachedSize() const = 0;</li>
+</ul>
+</li>
+<li><code>+0x60</code> = <code>OnesieRequestProto__InternalParse_32D338C</code><ul>
+<li>virtual const char<em> _InternalParse(const char</em> /<em>ptr</em>/, internal::ParseContext<em> /</em>ctx*/)</li>
+</ul>
+</li>
+<li><code>+0x68</code> = <code>proto2::internal::GeneratedExtensionFinder::~GeneratedExtensionFinder()</code><ul>
+<li>virtual void OnDemandRegisterArenaDtor(Arena<em> /</em>arena*/) {}</li>
+</ul>
+</li>
+<li><code>+0x70</code> = <code>OnesieRequestProto__InternalSerialize_32D373C</code><ul>
+<li>virtual uint8_t<em> _InternalSerialize(uint8_t</em> ptr, io::EpsCopyOutputStream* stream) const = 0;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2022-11-04 15:46:21
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: lite的C++类">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../../appendix/" class="navigation navigation-next " aria-label="Next page: 附录">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"OnesieRequestProto","level":"1.4.3.2.1","depth":4,"next":{"title":"附录","level":"1.5","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.5.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"lite的C++类","level":"1.4.3.2","depth":3,"path":"protobuf_re/youtube/lite_cpp/README.md","ref":"protobuf_re/youtube/lite_cpp/README.md","articles":[{"title":"OnesieRequestProto","level":"1.4.3.2.1","depth":4,"path":"protobuf_re/youtube/lite_cpp/onesierequestproto.md","ref":"protobuf_re/youtube/lite_cpp/onesierequestproto.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_protobuf_reverse/pdf/ios_re_protobuf_reverse.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_protobuf_reverse/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_protobuf_reverse","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向YouTube：protobuf逆向","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理iOS逆向YouTube期间涉及到的Protobuf的逆向。先是概览；再是Protobuf的正向相关知识；然后是Protobuf逆向内容，包括普通的iOS的类、lite精简版的C++的类、YouTube中Protobuf的内容；其中，普通的iOS的类有GPBMessage、GPBDescriptor、GPBFieldDescriptor；lite精简版C++的类有MessageLite及其定义；YouTube中的普通的iOS类的Protobuf类有：YTIPlayerRequest、YTIAdBreakRequest、YTIInnerTubeContext，YTIClientInfo、YTIOnesieHotConfig，以及lite的C++类有OnesieRequestProto；"},"file":{"path":"protobuf_re/youtube/lite_cpp/onesierequestproto.md","mtime":"2022-11-04T07:46:21.615Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-11-10T02:35:59.390Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
