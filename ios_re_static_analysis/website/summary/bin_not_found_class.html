@@ -1,0 +1,1256 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>二进制中找不到类 · iOS逆向开发：静态分析</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../appendix/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../static_analysis_overview/">
+            
+                <a href="../static_analysis_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    静态分析概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../analysis_content/find_ipa_bin.html">
+            
+                <a href="../analysis_content/find_ipa_bin.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    从ipa中找到二进制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../analysis_content/">
+            
+                <a href="../analysis_content/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    静态分析内容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../analysis_content/macho_tool/">
+            
+                <a href="../analysis_content/macho_tool/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Mach-O工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../analysis_content/export_str_res/">
+            
+                <a href="../analysis_content/export_str_res/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    导出字符串资源
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../analysis_content/export_str_res/strings/">
+            
+                <a href="../analysis_content/export_str_res/strings/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    strings
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1.1" data-path="../analysis_content/export_str_res/strings/examples.html">
+            
+                <a href="../analysis_content/export_str_res/strings/examples.html">
+            
+                    
+                        <b>1.4.2.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../analysis_content/export_str_res/nm.html">
+            
+                <a href="../analysis_content/export_str_res/nm.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    nm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../analysis_content/export_header/">
+            
+                <a href="../analysis_content/export_header/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    导出头文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../analysis_content/export_header/class_dump/">
+            
+                <a href="../analysis_content/export_header/class_dump/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    class-dump
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="../analysis_content/export_header/class_dump/help_syntax.html">
+            
+                <a href="../analysis_content/export_header/class_dump/help_syntax.html">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../analysis_content/process_sign/">
+            
+                <a href="../analysis_content/process_sign/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    处理签名
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../analysis_content/process_sign/ldid/">
+            
+                <a href="../analysis_content/process_sign/ldid/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    ldid
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../analysis_content/process_sign/ldid/help_syntax.html">
+            
+                <a href="../analysis_content/process_sign/ldid/help_syntax.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../analysis_content/process_sign/codesign.html">
+            
+                <a href="../analysis_content/process_sign/codesign.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    codesign
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../analysis_content/analysis_code_logic/">
+            
+                <a href="../analysis_content/analysis_code_logic/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    分析代码逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../analysis_content/analysis_code_logic/ida.html">
+            
+                <a href="../analysis_content/analysis_code_logic/ida.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    IDA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../analysis_content/analysis_code_logic/hopper.html">
+            
+                <a href="../analysis_content/analysis_code_logic/hopper.html">
+            
+                    
+                        <b>1.4.5.2.</b>
+                    
+                    Hopper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../analysis_examples/">
+            
+                <a href="../analysis_examples/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    静态分析实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../analysis_examples/bin_info_exp_str.html">
+            
+                <a href="../analysis_examples/bin_info_exp_str.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    查看信息和导出字符串
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../related_tools/">
+            
+                <a href="../related_tools/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    相关工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../related_tools/radare2/">
+            
+                <a href="../related_tools/radare2/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    radare2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../related_tools/radare2/cutter/">
+            
+                <a href="../related_tools/radare2/cutter/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    Cutter
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../related_tools/radare2/cutter/example/">
+            
+                <a href="../related_tools/radare2/cutter/example/">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1.1" data-path="../related_tools/radare2/cutter/example/awemecore.html">
+            
+                <a href="../related_tools/radare2/cutter/example/awemecore.html">
+            
+                    
+                        <b>1.6.1.1.1.1.</b>
+                    
+                    AwemeCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    静态分析心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.7.1" data-path="bin_not_found_class.html">
+            
+                <a href="bin_not_found_class.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    二进制中找不到类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >二进制中找不到类</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="二进制中找不到类"><a name="二进制中找不到类" class="plugin-anchor" href="#二进制中找不到类"><i class="fa fa-link" aria-hidden="true"></i></a>二进制中找不到类</h1>
+<p>当前二进制找不到函数时，找别的二进制看看：</p>
+<p>概述：</p>
+<ul>
+<li>iOS逆向期间，如果当前二进制中找不到某个类和函数时，可以去试试：找其他二进制<ul>
+<li>以及可以从加载动态库依赖中，确认是否是依赖于别的二进制<ul>
+<li>对应的<code>Load Command</code>中是否有<code>LC_LOAD_DYLIB</code>，去加载（同一个iOS的app内部的其他的）二进制文件</li>
+<li>对应的<code>library</code>中是否有别的二进制文件</li>
+</ul>
+</li>
+<li>以及二进制查看函数<ul>
+<li>一个是<code>U</code>=<code>Undefined</code>：是当前二进制未定义的，需要从别的二进制导入的</li>
+<li>一个是<code>D</code>=<code>Defined</code>：是当前二进制实现的类和函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="whatsapp找不到waurlqueryitem，但别的二进制sharedmodules中可以找到"><a name="whatsapp找不到waurlqueryitem，但别的二进制sharedmodules中可以找到" class="plugin-anchor" href="#whatsapp找不到waurlqueryitem，但别的二进制sharedmodules中可以找到"><i class="fa fa-link" aria-hidden="true"></i></a>WhatsApp找不到WAURLQueryItem，但别的二进制SharedModules中可以找到</h3>
+<p>iOS的app<code>WhatsApp</code>中的主要二进制是：</p>
+<ul>
+<li><code>WhatsApp</code><ul>
+<li><img src="../assets/img/ios_whatsapp_main_bin_whatsapp.png" alt="ios_whatsapp_main_bin_whatsapp"></li>
+</ul>
+</li>
+</ul>
+<p>去逆向期间，发现<code>IDA</code>伪代码中：</p>
+<p><img src="../assets/img/whatsapp_ida_code_has_waurlqueryitem.png" alt="whatsapp_ida_code_has_waurlqueryitem"></p>
+<pre class="language-"><code class="lang-c">id __cdecl <span class="token operator">-</span><span class="token punctuation">[</span>WARegistrationURLBuilder verificationCodeRequestURLWithBaseURL<span class="token operator">:</span>method<span class="token operator">:</span>mcc<span class="token operator">:</span>mnc<span class="token operator">:</span>jailbroken<span class="token operator">:</span>context<span class="token operator">:</span>oldPhoneNumber<span class="token operator">:</span>silentPushNotifRegCode<span class="token operator">:</span>cellularStrength<span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
+        WARegistrationURLBuilder <span class="token operator">*</span>self<span class="token punctuation">,</span>
+        SEL a2<span class="token punctuation">,</span>
+        id a3<span class="token punctuation">,</span>
+        id a4<span class="token punctuation">,</span>
+        id a5<span class="token punctuation">,</span>
+        id a6<span class="token punctuation">,</span>
+        bool a7<span class="token punctuation">,</span>
+        id a8<span class="token punctuation">,</span>
+        id a9<span class="token punctuation">,</span>
+        id a10<span class="token punctuation">,</span>
+        id a11<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    v46 <span class="token operator">=</span> <span class="token function">objc_msgSend_queryItemWithName_value_</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>OBJC_CLASS___WAURLQueryItem<span class="token punctuation">,</span> v43<span class="token punctuation">,</span> <span class="token function">CFSTR</span><span class="token punctuation">(</span><span class="token string">&quot;reason&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">CFSTR</span><span class="token punctuation">(</span><span class="token string">&quot;jailbroken&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>其中有：</p>
+<ul>
+<li><code>OBJC_CLASS___WAURLQueryItem</code><ul>
+<li>iOS的类：<code>WAURLQueryItem</code></li>
+</ul>
+</li>
+</ul>
+<p>但是，此处WhatsApp的主要二进制<code>WhatsApp</code>中，竟然找不到<code>WAURLQueryItem</code></p>
+<p>具体现象是：</p>
+<h4 id="whatsapp发现类waurlqueryitem是未定义，需要额外引入的，且另外需要加载的库文件有sharedmodulesframeworksharedmodules"><a name="whatsapp发现类waurlqueryitem是未定义，需要额外引入的，且另外需要加载的库文件有sharedmodulesframeworksharedmodules" class="plugin-anchor" href="#whatsapp发现类waurlqueryitem是未定义，需要额外引入的，且另外需要加载的库文件有sharedmodulesframeworksharedmodules"><i class="fa fa-link" aria-hidden="true"></i></a><code>WhatsApp</code>发现类<code>WAURLQueryItem</code>是未定义，需要额外引入的，且另外需要加载的库文件有<code>SharedModules.framework/SharedModules</code></h4>
+<ul>
+<li>WhatsApp</li>
+</ul>
+<p>（1）导出的的头文件中</p>
+<ul>
+<li>搜不到：<code>WAURLQueryItem</code><ul>
+<li><img src="../assets/img/whatsapp_exported_headers_not_found_waurlqueryitem.png" alt="whatsapp_exported_headers_not_found_waurlqueryitem"></li>
+</ul>
+</li>
+</ul>
+<p>（2）导出的字符串等资源中</p>
+<ul>
+<li>能搜到<code>WAURLQueryItem</code>的字眼<ul>
+<li><img src="../assets/img/whatsapp_exported_strings_has_waurlqueryitem.png" alt="whatsapp_exported_strings_has_waurlqueryitem"></li>
+</ul>
+</li>
+</ul>
+<p>具体搜索到的内容有</p>
+<pre class="language-"><code class="lang-bash">  WhatsApp_jtool2_S_symbol.txt:
+    <span class="token number">8954</span>                   U _OBJC_CLASS_<span class="token variable">$_WATooltipView</span>
+    <span class="token number">8955</span>                   U _OBJC_CLASS_<span class="token variable">$_WATooltipView</span>
+    <span class="token number">8956</span>:                  U _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+    <span class="token number">8956</span>                   U _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+    <span class="token number">8957</span>                   U _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  WhatsApp_nm.txt:
+    <span class="token number">8954</span>                   U _OBJC_CLASS_<span class="token variable">$_WATooltipView</span>
+    <span class="token number">8955</span>:                  U _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+    <span class="token number">8956</span>                   U _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  WhatsApp_otool_oV.txt:
+    <span class="token number">1050534</span>  0000000103417970 0x0 _OBJC_CLASS_<span class="token variable">$_NSURLComponents</span>
+    <span class="token number">1050535</span>: 0000000103417978 0x0 _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+    <span class="token number">1050536</span>  0000000103417980 0x0 _OBJC_CLASS_<span class="token variable">$_WACacheQueue</span>
+
+  WhatsApp_rabin2_i_imports.txt:
+    <span class="token number">8957</span>  <span class="token number">8953</span>  ----------  NONE OBJC_CLASS         WATooltipView
+    <span class="token number">8958</span>: <span class="token number">8954</span>  ----------  NONE OBJC_CLASS         WAURLQueryItem
+    <span class="token number">8959</span>  <span class="token number">8955</span>  ----------  NONE OBJC_CLASS         WAUUID
+</code></pre>
+<ul>
+<li>具体分析：<ul>
+<li><code>WhatsApp_jtool2_S_symbol.txt</code>中的<ul>
+<li><code>8956:                  U _OBJC_CLASS_$_WAURLQueryItem</code><ul>
+<li>相关含义：U=Undefined=未定义</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>WhatsApp_rabin2_i_imports.txt</code>中的<ul>
+<li><code>8958: 8954  ----------  NONE OBJC_CLASS         WAURLQueryItem</code><ul>
+<li>中有WAURLQueryItem：表示WAURLQueryItem是属于（从外部）import进来的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>-&gt; 表示此类：WAURLQueryItem，是从外部导入import进来的，当前二进制（WhatsApp）中是没有此类的具体实现的</li>
+</ul>
+<p>（3）后记：在依赖的导入的Library库中，也能找到，是依赖于：库<code>SharedModules</code>的</p>
+<p>具体现象是：</p>
+<p>导出的字符串资源文件中，可以找到：</p>
+<pre class="language-"><code class="lang-bash"><span class="token number">13</span> 个结果 - <span class="token number">8</span> 文件
+
+WhatsApp_jtool2_L_library.txt:
+  <span class="token number">20</span>      /System/Library/Frameworks/CoreBluetooth.framework/CoreBluetooth <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+  <span class="token number">21</span>      /System/Library/Frameworks/CoreBluetooth.framework/CoreBluetooth <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+  <span class="token number">22</span>:     @rpath/SharedModules.framework/SharedModules <span class="token punctuation">(</span>compatibility version <span class="token number">1.0</span>.0, current version <span class="token number">1.0</span>.0<span class="token punctuation">)</span>
+  <span class="token number">22</span>      @rpath/WARCDManager.framework/WARCDManager <span class="token punctuation">(</span>compatibility version <span class="token number">0.0</span>.0, current version <span class="token number">0.0</span>.0<span class="token punctuation">)</span>
+  <span class="token number">23</span>      @rpath/WARCDManager.framework/WARCDManager <span class="token punctuation">(</span>compatibility version <span class="token number">0.0</span>.0, current version <span class="token number">0.0</span>.0<span class="token punctuation">)</span>
+
+WhatsApp_jtool2_l_list.txt:
+  <span class="token number">88</span>  LC <span class="token number">32</span>: LC_LOAD_DYLIB             /System/Library/Frameworks/CoreBluetooth.framework/CoreBluetooth
+  <span class="token number">89</span>: LC <span class="token number">33</span>: LC_LOAD_DYLIB             @rpath/SharedModules.framework/SharedModules
+  <span class="token number">90</span>  LC <span class="token number">34</span>: LC_LOAD_WEAK_DYLIB        @rpath/WARCDManager.framework/WARCDManager
+
+<span class="token punctuation">..</span>.
+
+WhatsApp_otool_l.txt:
+  Load <span class="token builtin class-name">command</span> <span class="token number">33</span>
+            cmd LC_LOAD_DYLIB
+        cmdsize <span class="token number">72</span>
+          name @rpath/SharedModules.framework/SharedModules <span class="token punctuation">(</span>offset <span class="token number">24</span><span class="token punctuation">)</span>
+    <span class="token function">time</span> stamp <span class="token number">2</span> Thu Jan  <span class="token number">1</span> 08:00:02 <span class="token number">1970</span>
+        current version <span class="token number">1.0</span>.0
+  compatibility version <span class="token number">1.0</span>.0
+
+<span class="token punctuation">..</span>.
+
+WhatsApp_rabin2_l_libraries.txt:
+  <span class="token number">21</span>  /System/Library/Frameworks/CoreBluetooth.framework/CoreBluetooth
+  <span class="token number">22</span>: @rpath/SharedModules.framework/SharedModules
+  <span class="token number">23</span>  @rpath/WARCDManager.framework/WARCDManager
+
+<span class="token punctuation">..</span>.
+</code></pre>
+<p>具体解释是：</p>
+<ul>
+<li><code>WhatsApp_jtool2_L_library.txt</code><ul>
+<li><code>22:     @rpath/SharedModules.framework/SharedModules (compatibility version 1.0.0, current version 1.0.0)</code><ul>
+<li>表示要，当前二进制<code>WhatsApp</code>加载时，所依赖的，还要额外加载的库是<ul>
+<li><code>SharedModules.framework/SharedModules</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>WhatsApp_jtool2_l_list.txt</code><ul>
+<li><code>89: LC 33: LC_LOAD_DYLIB             @rpath/SharedModules.framework/SharedModules</code><ul>
+<li>表示还要额外加载一个 Dylib=动态库文件：<code>SharedModules.framework/SharedModules</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>WhatsApp_otool_l.txt</code><ul>
+<li><code>Load command 33</code>：是有一个Load Command</li>
+<li><code>cmd LC_LOAD_DYLIB</code>：command类型是要加载<code>Dylib</code>=动态库</li>
+<li><code>name @rpath/SharedModules.framework/SharedModules (offset 24)</code>：具体要加载的库文件是：<code>SharedModules.framework/SharedModules</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="sharedmodules中找到了类waurlqueryitem的定义"><a name="sharedmodules中找到了类waurlqueryitem的定义" class="plugin-anchor" href="#sharedmodules中找到了类waurlqueryitem的定义"><i class="fa fa-link" aria-hidden="true"></i></a><code>SharedModules</code>中找到了类<code>WAURLQueryItem</code>的定义</h4>
+<p>最后是从同一个iOSapp：<code>WhatsApp</code>的：</p>
+<ul>
+<li>另外一个核心二进制<code>SharedModules</code><ul>
+<li><img src="../assets/img/whatsapp_another_bin_sharedmodules.png" alt="whatsapp_another_bin_sharedmodules"></li>
+</ul>
+</li>
+</ul>
+<p>中找到了：类<code>WAURLQueryItem</code>的具体实现</p>
+<p>具体现象是：</p>
+<p>（1）SharedModules的导出头文件中，能搜到：类WAURLQueryItem</p>
+<ul>
+<li><img src="../assets/img/whatsapp_sharedmodules_headers_found_waurlqueryitem.png" alt="whatsapp_sharedmodules_headers_found_waurlqueryitem"></li>
+</ul>
+<p>（2）以及SharedModules导出的字符串资源中，也能找到：类WAURLQueryItem</p>
+<p><img src="../assets/img/whatsapp_sharedmodules_strings_found_waurlqueryitem_1.png" alt="whatsapp_sharedmodules_strings_found_waurlqueryitem_1"></p>
+<p><img src="../assets/img/whatsapp_sharedmodules_strings_found_waurlqueryitem_2.png" alt="whatsapp_sharedmodules_strings_found_waurlqueryitem_2"></p>
+<pre class="language-"><code class="lang-bash"><span class="token number">25</span> 个结果 - <span class="token number">7</span> 文件
+
+SharedModules_jtool2_S_symbol.txt:
+  <span class="token number">2880</span>  0000000001952928 D _OBJC_CLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">2881</span>: 0000000001a1ed20 D _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">2882</span>  0000000001a1ede8 D _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  <span class="token number">6993</span>  0000000001a26170 D _OBJC_METACLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">6994</span>: 0000000001a018b0 D _OBJC_METACLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">6995</span>  0000000001a1ecf8 D _OBJC_METACLASS_<span class="token variable">$_WAUUID</span>
+
+SharedModules_nm.txt:
+   <span class="token number">25025</span>  00000000000ac75c t -<span class="token punctuation">[</span>WATrustSignalsDataFetcher init<span class="token punctuation">]</span>
+   <span class="token number">25026</span>: 0000000000b89ab0 t -<span class="token punctuation">[</span>WAURLQueryItem .cxx_destruct<span class="token punctuation">]</span>
+   <span class="token number">25027</span>: 0000000000b89a04 t -<span class="token punctuation">[</span>WAURLQueryItem initWithName:value:<span class="token punctuation">]</span>
+   <span class="token number">25028</span>: 0000000000b89aa8 t -<span class="token punctuation">[</span>WAURLQueryItem name<span class="token punctuation">]</span>
+   <span class="token number">25029</span>: 0000000000b89aac t -<span class="token punctuation">[</span>WAURLQueryItem value<span class="token punctuation">]</span>
+   <span class="token number">25030</span>  0000000000ee293c t -<span class="token punctuation">[</span>WAUUID .cxx_destruct<span class="token punctuation">]</span>
+
+   <span class="token number">92477</span>  0000000001952928 S _OBJC_CLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+   <span class="token number">92478</span>: 0000000001a1ed20 S _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+   <span class="token number">92479</span>  0000000001a1ede8 S _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  <span class="token number">101272</span>  0000000001a261b8 d _OBJC_IVAR_<span class="token variable">$_WATrustSignalsDataFetcher</span>.workQueue
+  <span class="token number">101273</span>: 000000000193b424 s _OBJC_IVAR_<span class="token variable">$_WAURLQueryItem</span>._name
+  <span class="token number">101274</span>: 000000000193b428 s _OBJC_IVAR_<span class="token variable">$_WAURLQueryItem</span>._value
+  <span class="token number">101275</span>  000000000193dc64 s _OBJC_IVAR_<span class="token variable">$_WAUUID</span>._creationDate
+
+  <span class="token number">112634</span>  0000000001a26170 D _OBJC_METACLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">112635</span>: 0000000001a018b0 S _OBJC_METACLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">112636</span>  0000000001a1ecf8 S _OBJC_METACLASS_<span class="token variable">$_WAUUID</span>
+
+SharedModules_otool_oV.txt:
+  <span class="token number">444381</span>          baseProperties 0x0
+  <span class="token number">444382</span>: 000000000161afc8 0x1a1ed20 _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">444383</span>:     isa        0x1a018b0 _OBJC_METACLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">444384</span>      superclass 0x0 _OBJC_CLASS_<span class="token variable">$_NSObject</span>
+
+  <span class="token number">444393</span>          layout map     0x02 
+  <span class="token number">444394</span>:         name           0x1427163 WAURLQueryItem
+  <span class="token number">444395</span>          baseMethods    0x1822628
+
+  <span class="token number">444442</span>          ivarLayout     0x0
+  <span class="token number">444443</span>:         name           0x1427163 WAURLQueryItem
+  <span class="token number">444444</span>          baseMethods    0x18225c0
+
+  <span class="token number">672642</span>  000000000192f338 0x1a02120 _OBJC_CLASS_<span class="token variable">$_WAStashedMessage</span>
+  <span class="token number">672643</span>: 000000000192f340 0x1a1ed20 _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">672644</span>  000000000192f348 0x1a16aa8 _OBJC_CLASS_<span class="token variable">$_WAPBPeerMessage</span>
+
+  <span class="token number">676826</span>  00000000019375f0 0x1a01ba8 _OBJC_CLASS_<span class="token variable">$_WALogWriter</span>
+  <span class="token number">676827</span>: 00000000019375f8 0x1a1ed20 _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">676828</span>  0000000001937600 0x1a01928 _OBJC_CLASS_<span class="token variable">$_WAFuture</span>
+
+SharedModules_rabin2_E_exports.txt:
+  <span class="token number">34621</span>  <span class="token number">34617</span> 0x01952928 0x01952928 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">34622</span>: <span class="token number">34618</span> 0x01a1ed20 0x01a1ed20 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">34623</span>  <span class="token number">34619</span> 0x01a1ede8 0x01a1ede8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  <span class="token number">38734</span>  <span class="token number">38730</span> 0x01a26170 0x01a26170 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">38735</span>: <span class="token number">38731</span> 0x01a018b0 0x01a018b0 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">38736</span>  <span class="token number">38732</span> 0x01a1ecf8 0x01a1ecf8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WAUUID</span>
+
+SharedModules_rabin2_s_symbols.txt:
+  <span class="token number">34621</span>  <span class="token number">34617</span> 0x01952928 0x01952928 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">34622</span>: <span class="token number">34618</span> 0x01a1ed20 0x01a1ed20 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">34623</span>  <span class="token number">34619</span> 0x01a1ede8 0x01a1ede8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_CLASS_<span class="token variable">$_WAUUID</span>
+
+  <span class="token number">38734</span>  <span class="token number">38730</span> 0x01a26170 0x01a26170 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WATrustSignalsDataFetcher</span>
+  <span class="token number">38735</span>: <span class="token number">38731</span> 0x01a018b0 0x01a018b0 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WAURLQueryItem</span>
+  <span class="token number">38736</span>  <span class="token number">38732</span> 0x01a1ecf8 0x01a1ecf8 GLOBAL FUNC <span class="token number">0</span>        _OBJC_METACLASS_<span class="token variable">$_WAUUID</span>
+
+SharedModules_rabin2_z_strings.txt:
+   <span class="token number">18365</span>  <span class="token number">13101</span> 0x0114de06 0x0114de06 <span class="token number">34</span>   <span class="token number">35</span>   <span class="token number">5</span>.__TEXT.__cstring         ascii   mms-base-task//finish/finishing/%@
+   <span class="token number">18366</span>  <span class="token number">13101</span> 0x0114de06 0x0114de06 <span class="token number">34</span>   <span class="token number">35</span>   <span class="token number">5</span>.__TEXT.__cstring         ascii   mms-base-task//finish/finishing/%@
+   <span class="token number">18367</span>: <span class="token number">13102</span> 0x0114de29 0x0114de29 <span class="token number">24</span>   <span class="token number">25</span>   <span class="token number">5</span>.__TEXT.__cstring         ascii   B16@?0@<span class="token string">&quot;WAURLQueryItem&quot;</span><span class="token number">8</span>
+
+   <span class="token number">18367</span>  <span class="token number">13103</span> 0x0114de42 0x0114de42 <span class="token number">7</span>    <span class="token number">8</span>    <span class="token number">5</span>.__TEXT.__cstring         ascii   _nc_cat
+   <span class="token number">18368</span>  <span class="token number">13103</span> 0x0114de42 0x0114de42 <span class="token number">7</span>    <span class="token number">8</span>    <span class="token number">5</span>.__TEXT.__cstring         ascii   _nc_cat
+
+  <span class="token number">114694</span>  <span class="token number">2073</span>  0x0142715e 0x0142715e <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">12</span>.__TEXT.__objc_classname ascii   HTML
+  <span class="token number">114695</span>  <span class="token number">2073</span>  0x0142715e 0x0142715e <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">12</span>.__TEXT.__objc_classname ascii   HTML
+  <span class="token number">114696</span>: <span class="token number">2074</span>  0x01427163 0x01427163 <span class="token number">14</span>   <span class="token number">15</span>   <span class="token number">12</span>.__TEXT.__objc_classname ascii   WAURLQueryItem
+  <span class="token number">114696</span>  <span class="token number">2075</span>  0x01427172 0x01427172 <span class="token number">13</span>   <span class="token number">14</span>   <span class="token number">12</span>.__TEXT.__objc_classname ascii   DataDetection
+  <span class="token number">114697</span>  <span class="token number">2075</span>  0x01427172 0x01427172 <span class="token number">13</span>   <span class="token number">14</span>   <span class="token number">12</span>.__TEXT.__objc_classname ascii   DataDetection
+
+SharedModules_strings.txt:
+   <span class="token number">17521</span>  mms-base-task//finish/finishing/%@
+   <span class="token number">17522</span>: B16@?0@<span class="token string">&quot;WAURLQueryItem&quot;</span><span class="token number">8</span>
+   <span class="token number">17523</span>  _nc_cat
+
+  <span class="token number">112316</span>  ySo11WAMessageIDCSo0A0C_G
+  <span class="token number">112317</span>: SaySo14WAURLQueryItemCG
+  <span class="token number">112318</span>  SDySo11WADeviceJIDC
+
+  <span class="token number">114720</span>  HTML
+  <span class="token number">114721</span>: WAURLQueryItem
+  <span class="token number">114722</span>  DataDetection
+</code></pre>
+<p>具体解释是：</p>
+<ul>
+<li><code>SharedModules_jtool2_S_symbol.txt</code><ul>
+<li>中的<ul>
+<li><code>2881: 0000000001a1ed20 D _OBJC_CLASS_$_WAURLQueryItem</code></li>
+<li><code>6994: 0000000001a018b0 D _OBJC_METACLASS_$_WAURLQueryItem</code></li>
+</ul>
+</li>
+<li>其中：<ul>
+<li><strong>D</strong>=<code>Defined</code>=<code>已定义</code>=<code>有定义</code></li>
+<li><code>_OBJC_CLASS_</code> = 是ObjC的class类</li>
+<li><code>_OBJC_METACLASS_</code> = 是ObjC的meta class=元类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_nm.txt</code><ul>
+<li><code>25027: 0000000000b89a04 t -[WAURLQueryItem initWithName:value:]</code><ul>
+<li><strong>t</strong>=<code>Text symbol, local (static)</code> = 本地的static的文本符号<ul>
+<li>函数名： -[WAURLQueryItem initWithName:value:]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>92478: 0000000001a1ed20 S _OBJC_CLASS_$_WAURLQueryItem</code><ul>
+<li><strong>S</strong>=<code>Section symbol, global</code> = 全局的节的符号，此处ObjC的类WAURLQueryItem</li>
+</ul>
+</li>
+<li><code>101273: 000000000193b424 s _OBJC_IVAR_$_WAURLQueryItem._name</code><ul>
+<li><strong>t</strong>=<code>Text symbol, local (static)</code> = 本地的static的文本符号<ul>
+<li>ObjC类WAURLQueryItem的ivar变量名_name</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>112635: 0000000001a018b0 S _OBJC_METACLASS_$_WAURLQueryItem</code><ul>
+<li><strong>S</strong>=<code>Section symbol, global</code> = 全局的节的符号，此处是ObjC的MetaClass元类WAURLQueryItem</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_otool_oV.txt</code><ul>
+<li><code>444382: 000000000161afc8 0x1a1ed20 _OBJC_CLASS_$_WAURLQueryItem</code><ul>
+<li>是有ObjC的类：WAURLQueryItem</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_rabin2_E_exports.txt</code><ul>
+<li>中的<ul>
+<li><code>34622: 34618 0x01a1ed20 0x01a1ed20 GLOBAL FUNC 0    _OBJC_CLASS_$_WAURLQueryItem</code></li>
+<li><code>38735: 38731 0x01a018b0 0x01a018b0 GLOBAL FUNC 0    _OBJC_METACLASS_$_WAURLQueryItem</code></li>
+</ul>
+</li>
+<li>表示：<ul>
+<li>有ObjC的普通类WAURLQueryItem 和ObjC的元类WAURLQueryItem，要导出export （供别处调用）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_rabin2_s_symbols.txt</code><ul>
+<li>中的<ul>
+<li><code>34622: 34618 0x01a1ed20 0x01a1ed20 GLOBAL FUNC 0    _OBJC_CLASS_$_WAURLQueryItem</code></li>
+<li><code>38735: 38731 0x01a018b0 0x01a018b0 GLOBAL FUNC 0    _OBJC_METACLASS_$_WAURLQueryItem</code></li>
+</ul>
+</li>
+<li>表示<ul>
+<li>有global全局的类：ObjC普通类和元类：WAURLQueryItem的 s=symbol符号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_rabin2_z_strings.txt</code><ul>
+<li><code>114696: 2074 0x01427163 0x01427163 14  15  12.__TEXT.__objc_classname ascii  WAURLQueryItem</code><ul>
+<li>表示：WAURLQueryItem是个Text节（Section）的ObjC的类名<code>__objc_classname</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SharedModules_strings.txt</code><ul>
+<li>中的<ul>
+<li><code>17522: B16@?0@&quot;WAURLQueryItem&quot;8</code></li>
+<li><code>112317: SaySo14WAURLQueryItemCG</code></li>
+<li><code>114721: WAURLQueryItem</code></li>
+</ul>
+</li>
+<li>表示<ul>
+<li>有类WAURLQueryItem相关的字符串（类名）和函数名等内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-21 10:33:08
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 静态分析心得">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../appendix/" class="navigation navigation-next " aria-label="Next page: 附录">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"二进制中找不到类","level":"1.7.1","depth":2,"next":{"title":"附录","level":"1.8","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.8.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"静态分析心得","level":"1.7","depth":1,"path":"summary/README.md","ref":"summary/README.md","articles":[{"title":"二进制中找不到类","level":"1.7.1","depth":2,"path":"summary/bin_not_found_class.md","ref":"summary/bin_not_found_class.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_static_analysis/pdf/ios_re_static_analysis.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_static_analysis/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：静态分析","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向开发期间的静态分析。先是静态分析的概览；接着是从ipa中找到要分析的二进制文件；再是静态分析主要涉及的内容，包括用Mach-O工具，用strings、nm、otool等导出字符串资源，用class-dump导出ObjC头文件，用IDA、Hopper等分析代码逻辑等等；以及相关工具，比如radare2以及GUI版Cutter等；然后给出一些相关实例；最后再整理一些相关的经验心得。"},"file":{"path":"summary/bin_not_found_class.md","mtime":"2023-10-21T02:33:08.070Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-22T13:49:54.801Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

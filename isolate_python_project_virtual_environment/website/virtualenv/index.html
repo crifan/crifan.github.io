@@ -1,0 +1,610 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>virtualenv · 隔离Python项目环境：虚拟环境</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../pipenv/" />
+    
+    
+    <link rel="prev" href="../py_virtual_env_overview/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"isolate_python_project_virtual_environment","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../py_virtual_env_overview/">
+            
+                <a href="../py_virtual_env_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Python虚拟环境概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    virtualenv
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../pipenv/">
+            
+                <a href="../pipenv/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    pipenv
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../pipenv/issues_summary.html">
+            
+                <a href="../pipenv/issues_summary.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    常见问题和心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >virtualenv</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="virtualenv"><a name="virtualenv" class="plugin-anchor" href="#virtualenv"><i class="fa fa-link" aria-hidden="true"></i></a>virtualenv</h1>
+<p><code>virtualenv</code>&#x662F;&#x76EE;&#x524D;&#x6D41;&#x884C;&#x5EA6;&#x6700;&#x9AD8;&#x7684;Python&#x865A;&#x62DF;&#x73AF;&#x5883;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#x4E4B;&#x4E00;&#x3002;</p>
+<p>&#x6700;&#x5927;&#x7279;&#x70B9;&#xFF0C;&#x7B80;&#x5355;&#x65B9;&#x4FBF;&#x6613;&#x7528;&#x3002;</p>
+<h2 id="&#x5B89;&#x88C5;"><a name="&#x5B89;&#x88C5;" class="plugin-anchor" href="#&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B89;&#x88C5;</h2>
+<pre class="language-"><code class="lang-bash">pip <span class="token function">install</span> virtualenv
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;"><a name="&#x4F7F;&#x7528;" class="plugin-anchor" href="#&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;</h2>
+<ul>
+<li>&#x6982;&#x8FF0;<ul>
+<li>&#x521B;&#x5EFA;&#xFF1A;<code>virtualenv venv</code></li>
+<li>&#x8FDB;&#x5165;&#xFF1A;<code>source venv/bin/activate</code><ul>
+<li>&#x7BA1;&#x7406;&#x5E93;&#xFF1A;&#x7528;<code>pip</code><ul>
+<li>&#x5B89;&#x88C5;&#xFF1A;<code>pip install xxx</code></li>
+<li>&#x4FDD;&#x5B58;&#x865A;&#x62DF;&#x73AF;&#x5883;=&#x51BB;&#x7ED3;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#xFF1A;<code>pip freeze &gt; requirements.txt</code></li>
+<li>&#x6062;&#x590D;&#x865A;&#x62DF;&#x73AF;&#x5883;=&#x6062;&#x590D;&#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#xFF1A;<code>pip install -r requirements.txt</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x9000;&#x51FA;&#xFF1A;<code>deactivate</code></li>
+<li>&#x5220;&#x9664;&#xFF1A;<code>rm -rf venv</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<ul>
+<li>&#x8BED;&#x6CD5;<pre class="language-"><code class="lang-bash">  virtualenv YourVirtualEnvName
+</code></pre>
+</li>
+<li>&#x6700;&#x5E38;&#x7528;&#x5199;&#x6CD5;<pre class="language-"><code class="lang-bash">  virtualenv venv
+</code></pre>
+<ul>
+<li>&#x5927;&#x5BB6;&#x7EA6;&#x5B9A;&#x4FD7;&#x6210;&#x628A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x540D;&#x79F0;&#x5199;&#x6210;&#xFF1A;<code>venv</code><ul>
+<li>&#x4F60;&#x770B;&#x5230;&#x9879;&#x76EE;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E2A;<code>venv</code>&#xFF0C;&#x5F80;&#x5F80;&#x5C31;&#x53EF;&#x4EE5;&#x5224;&#x65AD;&#x51FA;&#xFF0C;&#x5F53;&#x524D;&#x9879;&#x76EE;Python&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5DE5;&#x5177;&#x662F;<code>virtualenv</code>&#x4E86;</li>
+</ul>
+</li>
+<li>&#x4E3E;&#x4F8B;<pre class="language-"><code class="lang-bash">&#xE0B0; virtualenv venv
+Using base prefix <span class="token string">&apos;/Users/limao/.pyenv/versions/3.8.0/Python.framework/Versions/3.8&apos;</span>
+New python executable <span class="token keyword">in</span> /Users/limao/dev/xxx/AppCrawler/venv/bin/python3.8
+Also creating executable <span class="token keyword">in</span> /Users/limao/dev/xxx/AppCrawler/venv/bin/python
+Installing setuptools, pip, wheel<span class="token punctuation">..</span>.
+done.
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x6FC0;&#x6D3B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5E76;&#x8FDB;&#x5165;"><a name="&#x6FC0;&#x6D3B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5E76;&#x8FDB;&#x5165;" class="plugin-anchor" href="#&#x6FC0;&#x6D3B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5E76;&#x8FDB;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6FC0;&#x6D3B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5E76;&#x8FDB;&#x5165;</h3>
+<ul>
+<li>&#x6982;&#x8FF0;<ul>
+<li><code>Mac/Linux</code><pre class="language-"><code class="lang-bash"><span class="token function">source</span> venv/bin/activate
+</code></pre>
+<ul>
+<li>&#x6216;<pre class="language-"><code class="lang-bash">  <span class="token keyword">.</span> venv/bin/activate
+</code></pre>
+</li>
+</ul>
+</li>
+<li><code>Win</code><pre class="language-"><code class="lang-bash">venv\Scripts\activate.bat
+</code></pre>
+</li>
+</ul>
+</li>
+<li>&#x8BE6;&#x89E3;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Shell</th>
+<th>Command to activate virtual environment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POSIX</code></td>
+<td><code>bash/zsh</code></td>
+<td><code>$ source <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>/bin/activate</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>fish</code></td>
+<td><code>$ . <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>/bin/activate.fish</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>csh/tcsh</code></td>
+<td><code>$ source <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>/bin/activate.csh</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>PowerShell Core</code></td>
+<td><code>$ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>/bin/Activate.ps1</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>cmd.exe</code></td>
+<td><code>C:\&gt; <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>\Scripts\activate.bat</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>PowerShell</code></td>
+<td><code>PS C:\&gt; <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>venv</span><span class="token punctuation">&gt;</span></span>\Scripts\Activate.ps1</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&#x8BF4;&#x660E;<ul>
+<li>&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x540E;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#xFF0C;&#x7EC8;&#x7AEF;&#x6700;&#x524D;&#x9762;&#x591A;&#x51FA;&#x4E2A; <code>(venv)</code>&#xFF0C;&#x8868;&#x793A;&#x4F60;&#x8FDB;&#x5165;&#x4E86;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x4E86;&#x3002;<ul>
+<li>&#x4E3E;&#x4F8B;<ul>
+<li><code>(venv)  limao@xxx &#xE0B0; ~/dev/xxx/AppCrawler &#xE0B0; &#xE0A0; master &#x25CF; &#xE0B0;</code></li>
+<li><code>(venv) D:\dev\DevRoot\mitmdumpurlsaver\electron-python-example&gt;</code><ul>
+<li><img src="../assets/img/virtualenv_prefix_venv_1.png" alt="virtualenv_prefix_venv_1"></li>
+<li><img src="../assets/img/virtualenv_prefix_venv_2.png" alt="virtualenv_prefix_venv_2"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="&#x786E;&#x8BA4;python&#x7248;&#x672C;"><a name="&#x786E;&#x8BA4;python&#x7248;&#x672C;" class="plugin-anchor" href="#&#x786E;&#x8BA4;python&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x786E;&#x8BA4;Python&#x7248;&#x672C;</h4>
+<p>&#x8FDB;&#x5165;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x548C;&#x786E;&#x8BA4;&#xFF0C;&#x5F53;&#x524D;Python&#x7684;&#x7248;&#x672C;&#x548C;&#x4F4D;&#x7F6E;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>venv<span class="token punctuation">)</span> xxx &#xE0B0; python --version     
+Python 3.8.0
+<span class="token punctuation">(</span>venv<span class="token punctuation">)</span>  xxx &#xE0B0; <span class="token function">which</span> python
+/Users/limao/dev/xxx/AppCrawler/venv/bin/python
+</code></pre>
+<h4 id="&#x5305;&#x7BA1;&#x7406;&#x5668;"><a name="&#x5305;&#x7BA1;&#x7406;&#x5668;" class="plugin-anchor" href="#&#x5305;&#x7BA1;&#x7406;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5305;&#x7BA1;&#x7406;&#x5668;</h4>
+<p>&#x5176;&#x4E2D;&#x5305;&#x7BA1;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#xFF1A;<a href="https://book.crifan.com/books/python_summary_package_manager/website/pip/" target="_blank">pip</a></p>
+<p>pip&#x7684;&#x4F4D;&#x7F6E;&#x548C;&#x7248;&#x672C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>venv<span class="token punctuation">)</span>  xxx &#xE0B0; <span class="token function">which</span> pip
+/Users/limao/dev/xxx/AppCrawler/venv/bin/pip
+<span class="token punctuation">(</span>venv<span class="token punctuation">)</span>  xxx &#xE0B0; pip --version                                   
+pip 20.0.2 from /Users/limao/dev/xxx/venv/lib/python3.8/site-packages/pip <span class="token punctuation">(</span>python 3.8<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="&#x9000;&#x51FA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x9000;&#x51FA;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x9000;&#x51FA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9000;&#x51FA;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<pre class="language-"><code class="lang-bash">deactivate
+</code></pre>
+<h3 id="&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<p>&#x5982;&#x679C;&#x8981;&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF1A;&#x76F4;&#x63A5;&#x5220;&#x9664;&#x5F53;&#x524D;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x7684;&#x76EE;&#x5F55;&#x5373;&#x53EF;</p>
+<p>&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">rm</span> -rf virtualenv_folder
+</code></pre>
+<p>&#x5178;&#x578B;&#x7684;&#x662F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">rm</span> -rf venv/
+</code></pre>
+<p>&#x6CE8;&#xFF1A;</p>
+<ul>
+<li>&#x5176;&#x4ED6;&#x5F88;&#x591A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5DE5;&#x5177;&#xFF0C;&#x90FD;&#x662F;&#x7C7B;&#x4F3C;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x76F4;&#x63A5;&#x5220;&#x9664;&#x5BF9;&#x5E94;&#x6587;&#x4EF6;&#x5939;&#x5373;&#x53EF;<ul>
+<li><code>virtualenv</code></li>
+<li><code>venv</code></li>
+<li><code>Anaconda environment</code></li>
+<li><code>pyenv</code></li>
+</ul>
+</li>
+<li>&#x800C;&#x6709;&#x4E9B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5DE5;&#x5177;&#xFF0C;&#x662F;&#x6709;&#x4E13;&#x95E8;&#x7684;&#x547D;&#x4EE4;&#x7684;&#xFF08;&#x5728;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x6839;&#x76EE;&#x5F55;&#x4E2D;&#x6267;&#x884C;&#xFF09;<ul>
+<li><code>pipenv</code><ul>
+<li><code>pipenv --rm</code></li>
+</ul>
+</li>
+<li><code>virtualenvwrapper</code><ul>
+<li><code>rmvirtualenv</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x9644;&#x5F55;"><a name="&#x9644;&#x5F55;" class="plugin-anchor" href="#&#x9644;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9644;&#x5F55;</h2>
+<h3 id="&#x67E5;&#x770B;virtualenv&#x7248;&#x672C;"><a name="&#x67E5;&#x770B;virtualenv&#x7248;&#x672C;" class="plugin-anchor" href="#&#x67E5;&#x770B;virtualenv&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x67E5;&#x770B;virtualenv&#x7248;&#x672C;</h3>
+<p>&#x67E5;&#x770B;&#x6B64;&#x5904;virtualenv&#x5DE5;&#x5177;&#x7684;&#x7248;&#x672C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#xE0B0; virtualenv --version
+16.7.9
+</code></pre>
+<h3 id="&#x6587;&#x6863;"><a name="&#x6587;&#x6863;" class="plugin-anchor" href="#&#x6587;&#x6863;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6587;&#x6863;</h3>
+<ul>
+<li>&#x5B98;&#x65B9;&#x6587;&#x6863;<ul>
+<li>Virtualenv &#x2014; virtualenv 20.4.8.dev5+g5657d56 documentation<ul>
+<li><a href="https://virtualenv.pypa.io/en/latest/" target="_blank">https://virtualenv.pypa.io/en/latest/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-07-17 12:19:52
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../py_virtual_env_overview/" class="navigation navigation-prev " aria-label="Previous page: Python虚拟环境概述">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../pipenv/" class="navigation navigation-next " aria-label="Next page: pipenv">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"virtualenv","level":"1.3","depth":1,"next":{"title":"pipenv","level":"1.4","depth":1,"path":"pipenv/README.md","ref":"pipenv/README.md","articles":[{"title":"常见问题和心得","level":"1.4.1","depth":2,"path":"pipenv/issues_summary.md","ref":"pipenv/issues_summary.md","articles":[]}]},"previous":{"title":"Python虚拟环境概述","level":"1.2","depth":1,"path":"py_virtual_env_overview/README.md","ref":"py_virtual_env_overview/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/isolate_python_project_virtual_environment/pdf/isolate_python_project_virtual_environment.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/isolate_python_project_virtual_environment/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"isolate_python_project_virtual_environment","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"隔离Python项目环境：虚拟环境","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍用于隔离Python项目环境的虚拟环境，主要是virtualenv和pipenv。"},"file":{"path":"virtualenv/README.md","mtime":"2021-07-17T04:19:52.162Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-17T04:23:12.912Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

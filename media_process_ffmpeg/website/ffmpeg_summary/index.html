@@ -1,0 +1,1050 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ffmpeg使用心得 · 强大的音视频处理工具：FFmpeg</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../use_ffmpeg/" />
+    
+    
+    <link rel="prev" href="../subtitle/embed/config_text_attrib.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"media_process_ffmpeg","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ffmpeg_overview/">
+            
+                <a href="../ffmpeg_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    FFmpeg概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ffmpeg_overview/related.html">
+            
+                <a href="../ffmpeg_overview/related.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    FFmpeg相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ffmpeg_install/">
+            
+                <a href="../ffmpeg_install/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    FFmpeg安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../audio_process/">
+            
+                <a href="../audio_process/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    音频处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../audio_process/extract_audio_segment.html">
+            
+                <a href="../audio_process/extract_audio_segment.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    提取音频片段
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../video_process/">
+            
+                <a href="../video_process/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    视频处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../video_process/property/">
+            
+                <a href="../video_process/property/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    视频属性
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../video_process/property/get/">
+            
+                <a href="../video_process/property/get/">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    获取
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../video_process/property/adjust/">
+            
+                <a href="../video_process/property/adjust/">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    调整
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.2.1" data-path="../video_process/property/adjust/resolution.html">
+            
+                <a href="../video_process/property/adjust/resolution.html">
+            
+                    
+                        <b>1.5.1.2.1.</b>
+                    
+                    尺寸调整
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../video_process/motion_gif/">
+            
+                <a href="../video_process/motion_gif/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    动图gif
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../video_process/motion_gif/video_to_gif.html">
+            
+                <a href="../video_process/motion_gif/video_to_gif.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    视频转动图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../video_process/motion_gif/gif_to_video.html">
+            
+                <a href="../video_process/motion_gif/gif_to_video.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    动图转视频
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../video_process/watermark/">
+            
+                <a href="../video_process/watermark/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    水印
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../video_process/watermark/remove_watermark.html">
+            
+                <a href="../video_process/watermark/remove_watermark.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    去除水印
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../video_process/extract_audio.html">
+            
+                <a href="../video_process/extract_audio.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    提取音频
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../subtitle/">
+            
+                <a href="../subtitle/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    字幕处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../subtitle/background/">
+            
+                <a href="../subtitle/background/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../subtitle/background/type.html">
+            
+                <a href="../subtitle/background/type.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    字幕分类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../subtitle/background/format.html">
+            
+                <a href="../subtitle/background/format.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    字幕格式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../subtitle/edit/">
+            
+                <a href="../subtitle/edit/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    编辑字幕
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../subtitle/edit/aegisub.html">
+            
+                <a href="../subtitle/edit/aegisub.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    Aegisub
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../subtitle/extract/">
+            
+                <a href="../subtitle/extract/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    提取字幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../subtitle/convert/">
+            
+                <a href="../subtitle/convert/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    转换字幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../subtitle/embed/">
+            
+                <a href="../subtitle/embed/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    嵌入字幕
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.5.1" data-path="../subtitle/embed/config_position.html">
+            
+                <a href="../subtitle/embed/config_position.html">
+            
+                    
+                        <b>1.6.5.1.</b>
+                    
+                    指定字幕位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5.2" data-path="../subtitle/embed/config_text_attrib.html">
+            
+                <a href="../subtitle/embed/config_text_attrib.html">
+            
+                    
+                        <b>1.6.5.2.</b>
+                    
+                    指定字幕文字属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    ffmpeg使用心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../use_ffmpeg/">
+            
+                <a href="../use_ffmpeg/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    用到ffmpeg的
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../use_ffmpeg/python.html">
+            
+                <a href="../use_ffmpeg/python.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../appendix/help.html">
+            
+                <a href="../appendix/help.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../appendix/doc.html">
+            
+                <a href="../appendix/doc.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >ffmpeg使用心得</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="ffmpeg&#x4F7F;&#x7528;&#x5FC3;&#x5F97;"><a name="ffmpeg&#x4F7F;&#x7528;&#x5FC3;&#x5F97;" class="plugin-anchor" href="#ffmpeg&#x4F7F;&#x7528;&#x5FC3;&#x5F97;"><i class="fa fa-link" aria-hidden="true"></i></a>ffmpeg&#x4F7F;&#x7528;&#x5FC3;&#x5F97;</h1>
+<p>&#x6B64;&#x5904;&#x6574;&#x7406;ffmpeg&#x7684;&#x4E00;&#x4E9B;&#x4F7F;&#x7528;&#x5FC3;&#x5F97;&#x3002;</p>
+<h2 id="&#x62A5;&#x9519;&#xFF1A;avfiltergraph--0x7fa224608740-no-such-filter-ass"><a name="&#x62A5;&#x9519;&#xFF1A;avfiltergraph--0x7fa224608740-no-such-filter-ass" class="plugin-anchor" href="#&#x62A5;&#x9519;&#xFF1A;avfiltergraph--0x7fa224608740-no-such-filter-ass"><i class="fa fa-link" aria-hidden="true"></i></a>&#x62A5;&#x9519;&#xFF1A;[AVFilterGraph @ 0x7fa224608740] No such filter: &apos;ass&apos;</h2>
+<pre class="language-"><code class="lang-bash">ffmpeg -i CTT_Folge_01_CH_Subs_DefaultZhcnButNotShow.mp4 -vf <span class="token string">&quot;ass=subtitle.ass&quot;</span> addedAssSubtitle.mp4
+</code></pre>
+<p>&#x62A5;&#x9519;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>AVFilterGraph @ 0x7fa224608740<span class="token punctuation">]</span> No such filter: <span class="token string">&apos;ass&apos;</span>
+</code></pre>
+<p>&#x539F;&#x56E0;&#xFF1A;&#x6B64;&#x5904;ffmpeg&#xFF08;&#x6CA1;&#x6709;subtitles&#xFF0C;&#x4E5F;&#xFF09;&#x6CA1;&#x6709;ass&#x7684;filter</p>
+<p>&#x529E;&#x6CD5;&#xFF1A;</p>
+<p>&#x91CD;&#x65B0;&#x5B89;&#x88C5;&#x652F;&#x6301;&#x4E86;ass&#x7684;ffmpeg</p>
+<p>&#x5177;&#x4F53;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>Mac</p>
+<pre class="language-"><code class="lang-bash">brew reinstall ffmpeg --with-libass
+</code></pre>
+<h2 id="&#x62A5;&#x9519;&#xFF1A;error-calling-kegonly-providedpremountainlion-is-disabled-there-is-no-replacement"><a name="&#x62A5;&#x9519;&#xFF1A;error-calling-kegonly-providedpremountainlion-is-disabled-there-is-no-replacement" class="plugin-anchor" href="#&#x62A5;&#x9519;&#xFF1A;error-calling-kegonly-providedpremountainlion-is-disabled-there-is-no-replacement"><i class="fa fa-link" aria-hidden="true"></i></a>&#x62A5;&#x9519;&#xFF1A;Error: Calling keg_only :provided_pre_mountain_lion is disabled! There is no replacement</h2>
+<p>&#x91CD;&#x65B0;&#x5B89;&#x88C5;ffmpeg&#x671F;&#x95F4;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">ffmpeg_edit_subtitle brew reinstall ffmpeg \
+    --with-tools \
+    --with-fdk-aac \
+    --with-freetype \
+    --with-fontconfig \
+    --with-libass \
+    --with-libvorbis \
+    --with-libvpx \
+    --with-opus \
+    --with-x265
+</code></pre>
+<p>&#x62A5;&#x9519;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">Error: Calling keg_only :provided_pre_mountain_lion is disabled<span class="token operator">!</span> There is no replacement.
+</code></pre>
+<p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</p>
+<p>&#x5148;&#x53BB;&#x66F4;&#x65B0;brew&#x518D;&#x5347;&#x7EA7;ffmpeg</p>
+<pre class="language-"><code class="lang-bash">brew update <span class="token operator">&amp;&amp;</span> brew upgrade ffmpeg
+</code></pre>
+<p>&#x518D;&#x53BB;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">brew reinstall ffmpeg &#x52A0;&#x4E0A;&#x4F60;&#x7684;&#x8981;&#x7684;&#x53C2;&#x6570;
+</code></pre>
+<p>&#x5373;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">brew reinstall ffmpeg \
+    --with-tools \
+    --with-fdk-aac \
+    --with-freetype \
+    --with-fontconfig \
+    --with-libass \
+    --with-libvorbis \
+    --with-libvpx \
+    --with-opus \
+    --with-x265
+</code></pre>
+<h2 id="ffmpeg&#x4E0D;&#x663E;&#x793A;&#x5934;&#x90E8;&#x4FE1;&#x606F;"><a name="ffmpeg&#x4E0D;&#x663E;&#x793A;&#x5934;&#x90E8;&#x4FE1;&#x606F;" class="plugin-anchor" href="#ffmpeg&#x4E0D;&#x663E;&#x793A;&#x5934;&#x90E8;&#x4FE1;&#x606F;"><i class="fa fa-link" aria-hidden="true"></i></a>ffmpeg&#x4E0D;&#x663E;&#x793A;&#x5934;&#x90E8;&#x4FE1;&#x606F;</h2>
+<p>&#x7528;ffmpeg&#x53BB;&#x5904;&#x7406;&#x89C6;&#x9891;&#x7B49;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6BCF;&#x6B21;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#xFF0C;&#x90FD;&#x4F1A;&#x8F93;&#x51FA;ffmpeg&#x7248;&#x672C;&#x7B49;&#x4FE1;&#x606F;</p>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># ffmpeg  -nostdin -i /root/xxx/course/32145/course_32145_video.mp4 -vf &quot;delogo=x=474:y=6:w=162:h=90&quot; -c:a copy /root/xxx/course/32145/course_32145_video_removedWatermark.mp4</span>
+ffmpeg version 4.2-static https://johnvansickle.com/ffmpeg/  Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> 2000-2019 the FFmpeg developers
+  built with gcc 6.3.0 <span class="token punctuation">(</span>Debian 6.3.0-18+deb9u1<span class="token punctuation">)</span> 20170516
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev<span class="token operator">=</span>sndio --disable-outdev<span class="token operator">=</span>sndio --cc<span class="token operator">=</span>gcc-6 --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libfribidi --enable-libass --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg
+  libavutil      56. 31.100 / 56. 31.100
+  libavcodec     58. 54.100 / 58. 54.100
+  libavformat    58. 29.100 / 58. 29.100
+  libavdevice    58.  8.100 / 58.  8.100
+  libavfilter     7. 57.100 /  7. 57.100
+  libswscale      5.  5.100 /  5.  5.100
+  libswresample   3.  5.100 /  3.  5.100
+  libpostproc    55.  5.100 / 55.  5.100
+Input <span class="token comment">#0, mov,mp4,m4a,3gp,3g2,mj2, from &apos;/root/xxx/course/32145/course_32145_video.mp4&apos;:</span>
+  Metadata:
+    major_brand     <span class="token keyword">:</span> isom
+    minor_version   <span class="token keyword">:</span> 512
+    compatible_brands: isomiso2avc1mp41
+    creation_time   <span class="token keyword">:</span> 2015-11-16T08:09:13.000000Z
+    encoder         <span class="token keyword">:</span> Lavf57.71.100
+  Duration: 00:00:46.00, start: 0.000000, bitrate: 678 kb/s
+    Stream <span class="token comment">#0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 640x360 [SAR 1:1 DAR 16:9], 544 kb/s, 25 fps, 25 tbr, 12800 tbn, 50 tbc (default)</span>
+    Metadata:
+      creation_time   <span class="token keyword">:</span> 2015-11-16T08:09:13.000000Z
+      handler_name    <span class="token keyword">:</span> VideoHandler
+    Stream <span class="token comment">#0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)</span>
+    Metadata:
+      creation_time   <span class="token keyword">:</span> 2015-11-16T08:09:13.000000Z
+      handler_name    <span class="token keyword">:</span> SoundHandler
+Stream mapping:
+  Stream <span class="token comment">#0:0 -&gt; #0:0 (h264 (native) -&gt; h264 (libx264))</span>
+  Stream <span class="token comment">#0:1 -&gt; #0:1 (copy)</span>
+<span class="token punctuation">[</span>libx264 @ 0xce0e540<span class="token punctuation">]</span> using SAR<span class="token operator">=</span>1/1
+<span class="token punctuation">[</span>libx264 @ 0xce0e540<span class="token punctuation">]</span> using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+<span class="token punctuation">[</span>libx264 @ 0xce0e540<span class="token punctuation">]</span> profile Progressive High, level 3.0, 4:2:0, 8-bit
+<span class="token punctuation">[</span>libx264 @ 0xce0e540<span class="token punctuation">]</span> 264 - core 157 r2969 d4099dd - H.264/MPEG-4 AVC codec - Copyleft 2003-2019 - http://www.videolan.org/x264.html - options: cabac<span class="token operator">=</span>1 ref<span class="token operator">=</span>3 deblock<span class="token operator">=</span>1:0:0 analyse<span class="token operator">=</span>0x3:0x113 me<span class="token operator">=</span>hex subme<span class="token operator">=</span>7 psy<span class="token operator">=</span>1 psy_rd<span class="token operator">=</span>1.00:0.00 mixed_ref<span class="token operator">=</span>1 me_range<span class="token operator">=</span>16 chroma_me<span class="token operator">=</span>1 trellis<span class="token operator">=</span>1 8x8dct<span class="token operator">=</span>1 cqm<span class="token operator">=</span>0 deadzone<span class="token operator">=</span>21,11 fast_pskip<span class="token operator">=</span>1 chroma_qp_offset<span class="token operator">=</span>-2 threads<span class="token operator">=</span>6 lookahead_threads<span class="token operator">=</span>1 sliced_threads<span class="token operator">=</span>0 nr<span class="token operator">=</span>0 decimate<span class="token operator">=</span>1 interlaced<span class="token operator">=</span>0 bluray_compat<span class="token operator">=</span>0 constrained_intra<span class="token operator">=</span>0 bframes<span class="token operator">=</span>3 b_pyramid<span class="token operator">=</span>2 b_adapt<span class="token operator">=</span>1 b_bias<span class="token operator">=</span>0 direct<span class="token operator">=</span>1 weightb<span class="token operator">=</span>1 open_gop<span class="token operator">=</span>0 weightp<span class="token operator">=</span>2 keyint<span class="token operator">=</span>250 keyint_min<span class="token operator">=</span>25 scenecut<span class="token operator">=</span>40 intra_refresh<span class="token operator">=</span>0 rc_lookahead<span class="token operator">=</span>40 rc<span class="token operator">=</span>crf mbtree<span class="token operator">=</span>1 crf<span class="token operator">=</span>23.0 qcomp<span class="token operator">=</span>0.60 qpmin<span class="token operator">=</span>0 qpmax<span class="token operator">=</span>69 qpstep<span class="token operator">=</span>4 ip_ratio<span class="token operator">=</span>1.40 aq<span class="token operator">=</span>1:1.00
+Output <span class="token comment">#0, mp4, to </span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre>
+<p>&#x4E2D;&#x7684;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">ffmpeg version 4.2-static https://johnvansickle.com/ffmpeg/  Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> 2000-2019 the FFmpeg developers
+  built with gcc 6.3.0 <span class="token punctuation">(</span>Debian 6.3.0-18+deb9u1<span class="token punctuation">)</span> 20170516
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev<span class="token operator">=</span>sndio --disable-outdev<span class="token operator">=</span>sndio --cc<span class="token operator">=</span>gcc-6 --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libfribidi --enable-libass --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg
+  libavutil      56. 31.100 / 56. 31.100
+  libavcodec     58. 54.100 / 58. 54.100
+  libavformat    58. 29.100 / 58. 29.100
+  libavdevice    58.  8.100 / 58.  8.100
+  libavfilter     7. 57.100 /  7. 57.100
+  libswscale      5.  5.100 /  5.  5.100
+  libswresample   3.  5.100 /  3.  5.100
+  libpostproc    55.  5.100 / 55.  5.100
+</code></pre>
+<p>&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x89C9;&#x5F97;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x60F3;&#x8981;&#x7981;&#x6B62;&#x5176;&#x8F93;&#x51FA;&#xFF0C;&#x53EF;&#x4EE5;&#x52A0;&#x4E0A;&#x53C2;&#x6570;&#xFF1A;</p>
+<p><code>-hide_banner</code></p>
+<p>&#x7528;&#x4E8E;&#x7981;&#x6B62;&#x663E;&#x793A;banner&#xFF0C;&#x5373;&#x53EF;&#x3002;</p>
+<h2 id="ffmpeg&#x4E0D;&#x663E;&#x793A;&#x8F93;&#x51FA;&#x7684;&#x4F17;&#x591A;&#x7684;&#x666E;&#x901A;&#x7684;&#x4FE1;&#x606F;"><a name="ffmpeg&#x4E0D;&#x663E;&#x793A;&#x8F93;&#x51FA;&#x7684;&#x4F17;&#x591A;&#x7684;&#x666E;&#x901A;&#x7684;&#x4FE1;&#x606F;" class="plugin-anchor" href="#ffmpeg&#x4E0D;&#x663E;&#x793A;&#x8F93;&#x51FA;&#x7684;&#x4F17;&#x591A;&#x7684;&#x666E;&#x901A;&#x7684;&#x4FE1;&#x606F;"><i class="fa fa-link" aria-hidden="true"></i></a>ffmpeg&#x4E0D;&#x663E;&#x793A;&#x8F93;&#x51FA;&#x7684;&#x4F17;&#x591A;&#x7684;&#x666E;&#x901A;&#x7684;&#x4FE1;&#x606F;</h2>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x4E8E;&#x5904;&#x7406;&#x671F;&#x95F4;&#x8F93;&#x51FA;&#x7684;&#x4F17;&#x591A;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x60F3;&#x8981;&#x663E;&#x793A;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x52A0;&#xFF1A;</p>
+<p><code>-loglevel error</code></p>
+<p>&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x5F53;&#x8F93;&#x51FA;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x8D85;&#x8FC7;error&#xFF0C;&#x624D;&#x663E;&#x793A;</p>
+<p>&#x800C;&#x4E0A;&#x9762;&#x4FE1;&#x606F;&#x90FD;&#x662F;&#x5C5E;&#x4E8E;&#x666E;&#x901A;&#x7684;info&#x7EA7;&#x522B;&#xFF0C;&#x4F4E;&#x4E8E;error&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x4E0D;&#x663E;&#x793A;</p>
+<p>&#x8D77;&#x5230;&#x63A7;&#x5236;&#x4E0D;&#x663E;&#x793A;&#x666E;&#x901A;&#x7684;&#x8F93;&#x51FA;&#x7684;&#x4FE1;&#x606F;&#x7684;&#x6548;&#x679C;&#x4E86;</p>
+<p>&#x6CE8;&#xFF1A;</p>
+<p>ffmpeg&#x8F93;&#x51FA;&#x4FE1;&#x606F;&#x7684;&#x7B49;&#x7EA7;&#xFF1A;</p>
+<ul>
+<li><code>quiet</code></li>
+<li><code>panic</code></li>
+<li><code>fatal</code></li>
+<li><code>error</code></li>
+<li><code>warning</code></li>
+<li><code>info</code></li>
+<li><code>verbose</code></li>
+<li><code>debug</code></li>
+</ul>
+<h2 id="ffmpeg&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x8F93;&#x51FA;&#x6587;&#x4EF6;"><a name="ffmpeg&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x8F93;&#x51FA;&#x6587;&#x4EF6;" class="plugin-anchor" href="#ffmpeg&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x8F93;&#x51FA;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>ffmpeg&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x8F93;&#x51FA;&#x6587;&#x4EF6;</h2>
+<p>ffmpeg&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x8F93;&#x51FA;&#x6587;&#x4EF6; = &#x4E0D;&#x9700;&#x8981;&#x5F53;&#x6BCF;&#x6B21;&#x68C0;&#x6D4B;&#x5230;&#x5DF2;&#x5B58;&#x5728;&#x6587;&#x4EF6;&#x518D;&#x63D0;&#x793A;&#x4F60;&#x662F;&#x5426;&#x8981;&#x8986;&#x76D6;</p>
+<p>&#x7528;ffmpeg&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E0D;&#x4F1A;&#x8986;&#x76D6;&#xFF0C;&#x4F1A;&#x63D0;&#x793A;&#x4F60;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">File xxx.mp4 already exists. Overwrite ? <span class="token punctuation">[</span>y/N<span class="token punctuation">]</span>
+</code></pre>
+<p>&#x8981;&#x8F93;&#x5165;y&#xFF0C;&#x624D;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#xFF1A;</p>
+<p><img src="../assets/img/ffmpeg_already_exists_y.png" alt="ffmpeg_already_exists_y"></p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x8981;&#x63D0;&#x793A;&#xFF0C;&#x800C;&#x662F;&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x6E90;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x52A0;&#x4E0A;&#x53C2;&#x6570;&#xFF1A;</p>
+<p><code>-y</code></p>
+<p>&#x76F8;&#x5173;&#x53C2;&#x6570;&#x542B;&#x4E49;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># ffmpeg --help</span>
+<span class="token punctuation">..</span>.
+-y                  overwrite output files
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-09-14 09:03:56
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../subtitle/embed/config_text_attrib.html" class="navigation navigation-prev " aria-label="Previous page: 指定字幕文字属性">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../use_ffmpeg/" class="navigation navigation-next " aria-label="Next page: 用到ffmpeg的">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ffmpeg使用心得","level":"1.7","depth":1,"next":{"title":"用到ffmpeg的","level":"1.8","depth":1,"path":"use_ffmpeg/README.md","ref":"use_ffmpeg/README.md","articles":[{"title":"Python","level":"1.8.1","depth":2,"path":"use_ffmpeg/python.md","ref":"use_ffmpeg/python.md","articles":[]}]},"previous":{"title":"指定字幕文字属性","level":"1.6.5.2","depth":3,"path":"subtitle/embed/config_text_attrib.md","ref":"subtitle/embed/config_text_attrib.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/media_process_ffmpeg/pdf/media_process_ffmpeg.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/media_process_ffmpeg/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"media_process_ffmpeg","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"强大的音视频处理工具：FFmpeg","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍音视频处理工具FFmpeg有哪些强大的功能。先对ffmpeg进行概览，包括可以用来干什么，与之相关的ffprobe、ffplay、ffserver等工具；再介绍如何安装ffmpeg；如何用ffmpeg处理音频，比如从音频中提取某段音频片段；以及各种视频处理，包括视频属性的获取和调整，包括调整视频宽高尺寸大小；以及动图gif处理，包括视频转动图、动图转视频；以及水印处理，包括去除视频水印；从视频中提取完整音频和音频片段；字幕相关处理，包括字幕的背景知识，包括软字幕和硬字幕、常见字幕格式ass和srt；以及如何用Aegisub编辑字幕；从视频中提取字幕、从srt转换出ass字幕；嵌入字幕，包括用流拷贝模式嵌入软字幕、用vf模式烧录嵌入硬字幕、且可以指定字幕位置、指定字幕文字属性等；整理ffmpeg使用的心得和常见问题；以及其他有哪些工具软件用到了ffmpeg、如何用Python调用ffmpeg；最后给出附录内容，包括help语法、文档资料等。"},"file":{"path":"ffmpeg_summary/README.md","mtime":"2021-09-14T01:03:56.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-14T03:26:03.282Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

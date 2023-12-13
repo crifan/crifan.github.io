@@ -1,0 +1,922 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>视频转动图 · 强大的音视频处理工具：FFmpeg</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="gif_to_video.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"media_process_ffmpeg","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../ffmpeg_overview/">
+            
+                <a href="../../ffmpeg_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    FFmpeg概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../ffmpeg_overview/related.html">
+            
+                <a href="../../ffmpeg_overview/related.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    FFmpeg相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../ffmpeg_install/">
+            
+                <a href="../../ffmpeg_install/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    FFmpeg安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../audio_process/">
+            
+                <a href="../../audio_process/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    音频处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../audio_process/extract_audio_segment.html">
+            
+                <a href="../../audio_process/extract_audio_segment.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    提取音频片段
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    视频处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../property/">
+            
+                <a href="../property/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    视频属性
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../property/get/">
+            
+                <a href="../property/get/">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    获取
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../property/adjust/">
+            
+                <a href="../property/adjust/">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    调整
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.2.1" data-path="../property/adjust/resolution.html">
+            
+                <a href="../property/adjust/resolution.html">
+            
+                    
+                        <b>1.5.1.2.1.</b>
+                    
+                    尺寸调整
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    动图gif
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.2.1" data-path="video_to_gif.html">
+            
+                <a href="video_to_gif.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    视频转动图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="gif_to_video.html">
+            
+                <a href="gif_to_video.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    动图转视频
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../watermark/">
+            
+                <a href="../watermark/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    水印
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../watermark/remove_watermark.html">
+            
+                <a href="../watermark/remove_watermark.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    去除水印
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../extract_audio.html">
+            
+                <a href="../extract_audio.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    提取音频
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../subtitle/">
+            
+                <a href="../../subtitle/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    字幕处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../subtitle/background/">
+            
+                <a href="../../subtitle/background/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../subtitle/background/type.html">
+            
+                <a href="../../subtitle/background/type.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    字幕分类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../subtitle/background/format.html">
+            
+                <a href="../../subtitle/background/format.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    字幕格式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../subtitle/edit/">
+            
+                <a href="../../subtitle/edit/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    编辑字幕
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../subtitle/edit/aegisub.html">
+            
+                <a href="../../subtitle/edit/aegisub.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    Aegisub
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../subtitle/extract/">
+            
+                <a href="../../subtitle/extract/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    提取字幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../subtitle/convert/">
+            
+                <a href="../../subtitle/convert/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    转换字幕
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../../subtitle/embed/">
+            
+                <a href="../../subtitle/embed/">
+            
+                    
+                        <b>1.6.5.</b>
+                    
+                    嵌入字幕
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.5.1" data-path="../../subtitle/embed/config_position.html">
+            
+                <a href="../../subtitle/embed/config_position.html">
+            
+                    
+                        <b>1.6.5.1.</b>
+                    
+                    指定字幕位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5.2" data-path="../../subtitle/embed/config_text_attrib.html">
+            
+                <a href="../../subtitle/embed/config_text_attrib.html">
+            
+                    
+                        <b>1.6.5.2.</b>
+                    
+                    指定字幕文字属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../ffmpeg_summary/">
+            
+                <a href="../../ffmpeg_summary/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    ffmpeg使用心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../use_ffmpeg/">
+            
+                <a href="../../use_ffmpeg/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    用到ffmpeg的
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../use_ffmpeg/python.html">
+            
+                <a href="../../use_ffmpeg/python.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../appendix/help.html">
+            
+                <a href="../../appendix/help.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../appendix/doc.html">
+            
+                <a href="../../appendix/doc.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >视频转动图</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x89C6;&#x9891;&#x8F6C;&#x52A8;&#x56FE;gif"><a name="&#x89C6;&#x9891;&#x8F6C;&#x52A8;&#x56FE;gif" class="plugin-anchor" href="#&#x89C6;&#x9891;&#x8F6C;&#x52A8;&#x56FE;gif"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89C6;&#x9891;&#x8F6C;&#x52A8;&#x56FE;gif</h1>
+<h2 id="&#x89C6;&#x9891;&#x8F6C;&#x6210;&#x52A8;&#x56FE;gif"><a name="&#x89C6;&#x9891;&#x8F6C;&#x6210;&#x52A8;&#x56FE;gif" class="plugin-anchor" href="#&#x89C6;&#x9891;&#x8F6C;&#x6210;&#x52A8;&#x56FE;gif"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89C6;&#x9891;&#x8F6C;&#x6210;&#x52A8;&#x56FE;(gif)</h2>
+<pre class="language-"><code class="lang-bash">ffmpeg -i small.mp4 small.gif
+</code></pre>
+<h2 id="&#x8F6C;&#x5316;&#x89C6;&#x9891;&#x4E2D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x4E3A;-gif"><a name="&#x8F6C;&#x5316;&#x89C6;&#x9891;&#x4E2D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x4E3A;-gif" class="plugin-anchor" href="#&#x8F6C;&#x5316;&#x89C6;&#x9891;&#x4E2D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x4E3A;-gif"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x5316;&#x89C6;&#x9891;&#x4E2D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x4E3A; GIF</h2>
+<p>&#x4ECE;&#x89C6;&#x9891;&#x4E2D;&#x7B2C;&#x4E8C;&#x79D2;&#x5F00;&#x59CB;&#xFF0C;&#x622A;&#x53D6;&#x65F6;&#x957F;&#x4E3A;3&#x79D2;&#x7684;&#x7247;&#x6BB5;&#x8F6C;&#x5316;&#x4E3A; gif</p>
+<pre class="language-"><code class="lang-bash">ffmpeg -t 3 -ss 00:00:02 -i small.webm small-clip.gif
+</code></pre>
+<h2 id="&#x8F6C;&#x5316;&#x9AD8;&#x8D28;&#x91CF;-gif"><a name="&#x8F6C;&#x5316;&#x9AD8;&#x8D28;&#x91CF;-gif" class="plugin-anchor" href="#&#x8F6C;&#x5316;&#x9AD8;&#x8D28;&#x91CF;-gif"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x5316;&#x9AD8;&#x8D28;&#x91CF; GIF</h2>
+<p>&#x9ED8;&#x8BA4;&#x8F6C;&#x5316;&#x662F;&#x4E2D;&#x7B49;&#x8D28;&#x91CF;&#x6A21;&#x5F0F;&#xFF0C;&#x82E5;&#x8981;&#x8F6C;&#x5316;&#x51FA;&#x9AD8;&#x8D28;&#x91CF;&#x7684; gif&#xFF0C;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x6BD4;&#x7279;&#x7387;</p>
+<pre class="language-"><code class="lang-bash">ffmpeg -i small.mp4 -b 2048k small.gif
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-09-13 15:10:29
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 动图gif">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="gif_to_video.html" class="navigation navigation-next " aria-label="Next page: 动图转视频">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"视频转动图","level":"1.5.2.1","depth":3,"next":{"title":"动图转视频","level":"1.5.2.2","depth":3,"path":"video_process/motion_gif/gif_to_video.md","ref":"video_process/motion_gif/gif_to_video.md","articles":[]},"previous":{"title":"动图gif","level":"1.5.2","depth":2,"path":"video_process/motion_gif/README.md","ref":"video_process/motion_gif/README.md","articles":[{"title":"视频转动图","level":"1.5.2.1","depth":3,"path":"video_process/motion_gif/video_to_gif.md","ref":"video_process/motion_gif/video_to_gif.md","articles":[]},{"title":"动图转视频","level":"1.5.2.2","depth":3,"path":"video_process/motion_gif/gif_to_video.md","ref":"video_process/motion_gif/gif_to_video.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.com/books/media_process_ffmpeg/pdf/media_process_ffmpeg.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/books/media_process_ffmpeg/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"media_process_ffmpeg","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"强大的音视频处理工具：FFmpeg","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍音视频处理工具FFmpeg有哪些强大的功能。先对ffmpeg进行概览，包括可以用来干什么，与之相关的ffprobe、ffplay、ffserver等工具；再介绍如何安装ffmpeg；如何用ffmpeg处理音频，比如从音频中提取某段音频片段；以及各种视频处理，包括视频属性的获取和调整，包括调整视频宽高尺寸大小；以及动图gif处理，包括视频转动图、动图转视频；以及水印处理，包括去除视频水印；从视频中提取完整音频和音频片段；字幕相关处理，包括字幕的背景知识，包括软字幕和硬字幕、常见字幕格式ass和srt；以及如何用Aegisub编辑字幕；从视频中提取字幕、从srt转换出ass字幕；嵌入字幕，包括用流拷贝模式嵌入软字幕、用vf模式烧录嵌入硬字幕、且可以指定字幕位置、指定字幕文字属性等；整理ffmpeg使用的心得和常见问题；以及其他有哪些工具软件用到了ffmpeg、如何用Python调用ffmpeg；最后给出附录内容，包括help语法、文档资料等。"},"file":{"path":"video_process/motion_gif/video_to_gif.md","mtime":"2021-09-13T07:10:29.667Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-14T03:26:03.282Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

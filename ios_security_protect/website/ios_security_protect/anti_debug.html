@@ -1,0 +1,770 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>反调试 · iOS安全与防护</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="prevent_export_header.html" />
+    
+    
+    <link rel="prev" href="code_confuse/ios_class_guard.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_security_protect","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ios_security_overview/">
+            
+                <a href="../ios_security_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS安全概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    iOS安全防护
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="ios_sys_security.html">
+            
+                <a href="ios_sys_security.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    iOS系统的安全设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="code_confuse/">
+            
+                <a href="code_confuse/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    代码混淆
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="code_confuse/obfuscator_llvm.html">
+            
+                <a href="code_confuse/obfuscator_llvm.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    Obfuscator-LLVM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="code_confuse/ios_class_guard.html">
+            
+                <a href="code_confuse/ios_class_guard.html">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    ios-class-guard
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="anti_debug.html">
+            
+                <a href="anti_debug.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    反调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="prevent_export_header.html">
+            
+                <a href="prevent_export_header.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    防止导出头文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="jailbreak_detect.html">
+            
+                <a href="jailbreak_detect.html">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    越狱检测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="anti_crawler/">
+            
+                <a href="anti_crawler/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    反爬
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1" data-path="anti_crawler/ssl_pinning.html">
+            
+                <a href="anti_crawler/ssl_pinning.html">
+            
+                    
+                        <b>1.3.6.1.</b>
+                    
+                    SSL证书绑定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="data_encrypt.html">
+            
+                <a href="data_encrypt.html">
+            
+                    
+                        <b>1.3.7.</b>
+                    
+                    数据存储加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="code_dynamic_exec.html">
+            
+                <a href="code_dynamic_exec.html">
+            
+                    
+                        <b>1.3.8.</b>
+                    
+                    代码动态运行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="device_fingerprint.html">
+            
+                <a href="device_fingerprint.html">
+            
+                    
+                        <b>1.3.9.</b>
+                    
+                    设备指纹
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >反调试</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="反调试"><a name="反调试" class="plugin-anchor" href="#反调试"><i class="fa fa-link" aria-hidden="true"></i></a>反调试</h1>
+<p>TODO：</p>
+<ul>
+<li>【整理】iOS反越狱相关：反调试 反反调试</li>
+<li>【已解决】iOS中正向调用ptrace的PT_DENY_ATTACH防止调试</li>
+<li>【已解决】iOS中的caddr_t类型的定义</li>
+<li>【已解决】debugserver启动iOS的app抖音报错：Segmentation fault 11</li>
+<li></li>
+<li>【已解决】抖音反反调试：把二进制AwemeCore的svc 0x80指令替换成nop指令</li>
+<li>【已解决】Mac中用IDA实现抖音二进制AwemeCore的svc 0x80替换成nop指令</li>
+</ul>
+<hr>
+<p>iOS安全防护技术之一是</p>
+<ul>
+<li><code>反调试</code><ul>
+<li>防止你的iOS的app被别人逆向调试</li>
+<li>加了反调试后的效果<ul>
+<li>现象：别人用调试工具去调试你的iOS的app，会报错退出，从而无法继续调试<ul>
+<li>举例<ul>
+<li><code>debugserver</code>会报错：<code>Segmentation fault 11</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反调试实现手段<ul>
+<li>ptrace的PT_DENY_ATTACH<ul>
+<li>ptrace() = ptrace + PT_DENY_ATTACH</li>
+<li>syscall() = syscall + ptrace + PT_DENY_ATTACH</li>
+<li>inline asm=内联（ARM）汇编 = svc 0x80 + ptrace + PT_DENY_ATTACH</li>
+</ul>
+</li>
+<li>sysctl的getpid</li>
+<li>其他<ul>
+<li>SIGSTOP</li>
+<li>task_get_exception_ports</li>
+<li>isatty</li>
+<li>ioctl</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>详见子教程<ul>
+<li><a href="https://book.crifan.org/books/ios_re_dynamic_debug/website/anti_debug_related.html" target="_blank">反调试和反反调试 · iOS逆向开发：动态调试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ptrace的ptdenyattach"><a name="ptrace的ptdenyattach" class="plugin-anchor" href="#ptrace的ptdenyattach"><i class="fa fa-link" aria-hidden="true"></i></a>ptrace的PT_DENY_ATTACH</h2>
+<h3 id="ptrace--ptdenyattach"><a name="ptrace--ptdenyattach" class="plugin-anchor" href="#ptrace--ptdenyattach"><i class="fa fa-link" aria-hidden="true"></i></a>ptrace + PT_DENY_ATTACH</h3>
+<ul>
+<li><code>ptrace(PT_DENY_ATTACH, 0, 0, 0);</code></li>
+</ul>
+<p>具体代码：</p>
+<ul>
+<li>main.m</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">import</span> <span class="token expression"><span class="token operator">&lt;</span>UIKit<span class="token operator">/</span>UIKit<span class="token punctuation">.</span>h<span class="token operator">&gt;</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">import</span> <span class="token string">&quot;AppDelegate.h&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">import</span> <span class="token string">&quot;CrifanLib.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// anti-debug</span>
+    <span class="token function">iOS_antiDebug_ptrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    NSString <span class="token operator">*</span> appDelegateClassName<span class="token punctuation">;</span>
+    @autoreleasepool <span class="token punctuation">{</span>
+        <span class="token comment">// Setup code that might create autoreleased objects goes here.</span>
+        appDelegateClassName <span class="token operator">=</span> <span class="token function">NSStringFromClass</span><span class="token punctuation">(</span><span class="token punctuation">[</span>AppDelegate class<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token function">UIApplicationMain</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> nil<span class="token punctuation">,</span> appDelegateClassName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>CrifanLib.h</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> <span class="token function">iOS_antiDebug_ptrace</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>CrifanLib.c<ul>
+<li><a href="https://github.com/crifan/crifanLib/blob/master/c/crifanLib.c" target="_blank">https://github.com/crifan/crifanLib/blob/master/c/crifanLib.c</a></li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token comment">/*==============================================================================
+ iOS Anti-Debug
+==============================================================================*/</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>func_ptrace<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> request<span class="token punctuation">,</span> <span class="token class-name">pid_t</span> pid<span class="token punctuation">,</span> <span class="token class-name">caddr_t</span> addr<span class="token punctuation">,</span> <span class="token keyword">int</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span>PT_DENY_ATTACH<span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">PT_DENY_ATTACH</span>          <span class="token expression"><span class="token number">31</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span>  <span class="token comment">// !defined(PT_DENY_ATTACH)</span></span>
+
+<span class="token keyword">void</span> <span class="token function">iOS_antiDebug_ptrace</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment">//    ptrace(PT_DENY_ATTACH, 0, 0, 0);</span>
+
+<span class="token comment">//    void* libHandle = dlopen(0, RTLD_GLOBAL | RTLD_NOW);</span>
+<span class="token comment">//    // libHandle    void *    0xfffffffffffffffe</span>
+<span class="token comment">//    if (NULL == libHandle) {</span>
+<span class="token comment">//        char* errStr = dlerror();</span>
+<span class="token comment">//        printf(&quot;Failed to open 0, error: %s&quot;, errStr);</span>
+<span class="token comment">//    } else {</span>
+<span class="token comment">//        func_ptrace ptrace_ptr = dlsym(libHandle, &quot;ptrace&quot;);</span>
+<span class="token comment">//        if (NULL != ptrace_ptr){</span>
+<span class="token comment">//            ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);</span>
+<span class="token comment">//        }</span>
+<span class="token comment">//        dlclose(libHandle);</span>
+<span class="token comment">//    }</span>
+
+    func_ptrace ptrace_ptr <span class="token operator">=</span> <span class="token function">dlsym</span><span class="token punctuation">(</span>RTLD_SELF<span class="token punctuation">,</span> <span class="token string">&quot;ptrace&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// ptrace_ptr    func_ptrace    (libsystem_kernel.dylib`__ptrace)    0x000000018cee2df8</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> ptrace_ptr<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);</span>
+        <span class="token function">ptrace_ptr</span><span class="token punctuation">(</span>PT_DENY_ATTACH<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="syscall--ptrace--ptdenyattach"><a name="syscall--ptrace--ptdenyattach" class="plugin-anchor" href="#syscall--ptrace--ptdenyattach"><i class="fa fa-link" aria-hidden="true"></i></a>syscall + ptrace + PT_DENY_ATTACH</h3>
+<pre class="language-"><code class="lang-c"><span class="token function">syscall</span><span class="token punctuation">(</span>SYS_ptrace<span class="token punctuation">,</span> PT_DENY_ATTACH<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="svc-0x80--ptrace--ptdenyattach"><a name="svc-0x80--ptrace--ptdenyattach" class="plugin-anchor" href="#svc-0x80--ptrace--ptdenyattach"><i class="fa fa-link" aria-hidden="true"></i></a>svc 0x80 + ptrace + PT_DENY_ATTACH</h3>
+<ul>
+<li>inline asm=内联（ARM）汇编 = svc 0x80 + ptrace + PT_DENY_ATTACH<ul>
+<li>具体实现：<pre class="language-"><code class="lang-nasm">mov x0, #<span class="token number">26</span> <span class="token operator">/</span><span class="token operator">/</span> ptrace <span class="token operator">=</span> <span class="token number">0x1A</span>
+mov x1, #<span class="token number">31</span> <span class="token operator">/</span><span class="token operator">/</span> PT_DENY_ATTACH <span class="token operator">=</span> <span class="token number">0x1F</span>
+mov x2, #<span class="token number">0</span>
+mov x3, #<span class="token number">0</span>
+mov x16, #<span class="token number">0</span>
+svc #<span class="token number">0x80</span>
+</code></pre>
+</li>
+<li>效果：编译后的iOS的app的二进制中，加了反调试的汇编代码逻辑<ul>
+<li>举例<ul>
+<li>抖音<ul>
+<li><img src="../assets/img/anti_debug_aweme_svc_0x80.jpg" alt="anti_debug_aweme_svc_0x80"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="sysctl的getpid"><a name="sysctl的getpid" class="plugin-anchor" href="#sysctl的getpid"><i class="fa fa-link" aria-hidden="true"></i></a>sysctl的getpid</h2>
+<p>实现代码：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">int</span> name<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>             <span class="token comment">//里面放字节码。查询的信息</span>
+name<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> CTL_KERN<span class="token punctuation">;</span>      <span class="token comment">//内核查询</span>
+name<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> KERN_PROC<span class="token punctuation">;</span>     <span class="token comment">//查询进程</span>
+name<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> KERN_PROC_PID<span class="token punctuation">;</span> <span class="token comment">//传递的参数是进程的ID</span>
+name<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//获取当前进程ID</span>
+
+<span class="token class-name">size_t</span> infoSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">kinfo_proc</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">kinfo_proc</span> kernelInfoProc<span class="token punctuation">;</span>  <span class="token comment">//接受查询结果的结构体</span>
+<span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kernelInfoProc<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> infoSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">sysctl</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>kernelInfoProc<span class="token punctuation">,</span> <span class="token operator">&amp;</span>infoSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-07-10 11:23:08
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="code_confuse/ios_class_guard.html" class="navigation navigation-prev " aria-label="Previous page: ios-class-guard">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="prevent_export_header.html" class="navigation navigation-next " aria-label="Next page: 防止导出头文件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"反调试","level":"1.3.3","depth":2,"next":{"title":"防止导出头文件","level":"1.3.4","depth":2,"path":"ios_security_protect/prevent_export_header.md","ref":"ios_security_protect/prevent_export_header.md","articles":[]},"previous":{"title":"ios-class-guard","level":"1.3.2.2","depth":3,"path":"ios_security_protect/code_confuse/ios_class_guard.md","ref":"ios_security_protect/code_confuse/ios_class_guard.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_security_protect/pdf/ios_security_protect.pdf","icon":"fa-file-pdf-o"},"autocover":{"title":"iOS安全与防护"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_security_protect/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_security_protect","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS安全与防护","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS安全与防护。包括iOS安全的概览，在安全领域所属的范畴；以及iOS的安全的具体防护手段，包括但不限于iOS系统本身的安全设计、代码混淆、反调试、防止逆向导出头文件、越狱检测、反爬、数据存储加密、代码动态执行、设备指纹等，反爬中涉及到SSL证书绑定。"},"file":{"path":"ios_security_protect/anti_debug.md","mtime":"2023-07-10T03:23:08.700Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-07-10T03:56:22.104Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

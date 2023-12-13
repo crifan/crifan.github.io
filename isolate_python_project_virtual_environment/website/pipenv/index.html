@@ -1,0 +1,743 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>pipenv · 隔离Python项目环境：虚拟环境</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="issues_summary.html" />
+    
+    
+    <link rel="prev" href="../virtualenv/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"isolate_python_project_virtual_environment","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.com" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../py_virtual_env_overview/">
+            
+                <a href="../py_virtual_env_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Python虚拟环境概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../virtualenv/">
+            
+                <a href="../virtualenv/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    virtualenv
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    pipenv
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="issues_summary.html">
+            
+                <a href="issues_summary.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    常见问题和心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >pipenv</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="pipenv"><a name="pipenv" class="plugin-anchor" href="#pipenv"><i class="fa fa-link" aria-hidden="true"></i></a>pipenv</h1>
+<ul>
+<li><code>pipenv</code><ul>
+<li>&#x6982;&#x8FF0;&#xFF1A;pipenv&#x662F;Python&#x865A;&#x62DF;&#x73AF;&#x5883;&#x7BA1;&#x7406;&#x5DE5;&#x5177;</li>
+<li>&#x4F18;&#x70B9;&#xFF1A;&#x529F;&#x80FD;&#x7B80;&#x5355;&#x6613;&#x7528;</li>
+<li>&#x7F3A;&#x70B9;<ul>
+<li>locking&#x5361;&#x6B7B;&#x6216;&#x8017;&#x65F6;&#x5F88;&#x957F;<ul>
+<li>&#x5386;&#x53F2;&#x4E0A;&#xFF08;2020&#x5E74;&#x524D;&#x540E;&#xFF09;&#xFF0C;&#x5F88;&#x957F;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;locking&#x5361;&#x6B7B;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x76F4;&#x6CA1;&#x89E3;&#x51B3;&#xFF0C;&#x5BFC;&#x81F4;&#x51E0;&#x4E4E;&#x4E0D;&#x53EF;&#x7528;<ul>
+<li>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;<code>pipenv install xxx</code>&#x5B89;&#x88C5;&#x53EF;&#x80FD;&#x77AC;&#x95F4;&#x5C31;&#x5B8C;&#x6210;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x7EED;locking&#x53EF;&#x80FD;&#x8981;&#x6570;&#x4E2A;&#x5C0F;&#x65F6;</li>
+</ul>
+</li>
+<li>&#x6700;&#x65B0; 20210705&#xFF0C;locking&#x95EE;&#x9898;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x89E3;&#x51B3;<ul>
+<li>&#x73B0;&#x5728;<code>pipenv install xxx</code>&#x540E;&#xFF0C;locking&#x53EF;&#x80FD;&#x8981;&#x8017;&#x65F6;&#xFF0C;<code>&#x51E0;&#x5341;&#x79D2;</code>&#x6216;&#x8005;<code>&#x51E0;&#x5206;&#x949F;</code><ul>
+<li>&#x7B97;&#x8FD8;&#x80FD;&#x5FCD;&#xFF0C;&#x867D;&#x7136;&#x4E0D;&#x723D;&#xFF0C;&#x4F46;&#x57FA;&#x672C;&#x53EF;&#x7528;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x5B89;&#x88C5;"><a name="&#x5B89;&#x88C5;" class="plugin-anchor" href="#&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B89;&#x88C5;</h2>
+<pre class="language-"><code class="lang-bash">pip <span class="token function">install</span> pipenv
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;"><a name="&#x4F7F;&#x7528;" class="plugin-anchor" href="#&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;</h2>
+<ul>
+<li>&#x6982;&#x8FF0;<ul>
+<li>&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span>
+</code></pre>
+<ul>
+<li>&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;+&#x5B89;&#x88C5;&#x5E93;<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span> xxx
+</code></pre>
+</li>
+</ul>
+</li>
+<li>&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;<pre class="language-"><code class="lang-bash">pipenv shell
+</code></pre>
+</li>
+<li>&#x7BA1;&#x7406;&#x5E93;<ul>
+<li>&#x7528;<code>pipenv</code>&#x6216;<code>pip</code><ul>
+<li>&#x7528;<code>pipenv</code>&#xFF1A;&#x65E0;&#x9700;&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#x5373;&#x53EF;&#x53BB;&#x5B89;&#x88C5;&#x548C;&#x7BA1;&#x7406;&#x5E93;<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span> xxx
+</code></pre>
+<ul>
+<li>&#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x5E93;<pre class="language-"><code class="lang-bash">pipenv graph
+</code></pre>
+</li>
+</ul>
+</li>
+<li>&#x7528;<code>pip</code>&#xFF1A;&#x9700;&#x8981;&#x5148;<code>pipenv shell</code>&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#x518D;&#x7528;<code>pip</code>&#x53BB;&#x7BA1;&#x7406;&#x5E93;<pre class="language-"><code class="lang-bash">pipenv shell
+pip <span class="token function">install</span> xxx
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;<pre class="language-"><code class="lang-bash">pipenv &#x2014;-rm
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#xFF1A;</p>
+<h3 id="&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span>
+</code></pre>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<p>&#x6B64;&#x5904;&#x662F;&#x5DF2;&#x6709;Pipfile&#x548C;Pipfile.lock&#xFF0C;&#x7136;&#x540E;&#x518D;&#x53BB;&#xFF08;&#x521B;&#x5EFA;&#xFF09;&#x5E76;&#x8FDB;&#x5165;&#xFF08;&#x6062;&#x590D;&#xFF09;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; pipenv <span class="token function">install</span>
+Creating a virtualenv <span class="token keyword">for</span> this project&#x2026;
+Using /usr/local/bin/python3.6m <span class="token punctuation">(</span>3.6.4<span class="token punctuation">)</span> to create virtualenv&#x2026;
+&#x280B;Running virtualenv with interpreter /usr/local/bin/python3.6m
+Using base prefix <span class="token string">&apos;/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6&apos;</span>
+New python executable <span class="token keyword">in</span> /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ/bin/python3.6
+Also creating executable <span class="token keyword">in</span> /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ/bin/python
+Installing setuptools, pip, wheel<span class="token punctuation">..</span>.done.
+
+Virtualenv location: /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ
+Installing dependencies from Pipfile.lock <span class="token punctuation">(</span>132fcc<span class="token punctuation">)</span>&#x2026;
+  &#x1F40D;   &#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589;&#x2589; 29/29 &#x2014; 00:00:08
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF1A;</p>
+<p>install&#x6240;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x7684;&#x6240;&#x5728;&#x4F4D;&#x7F6E;&#x662F;&#xFF1A;</p>
+<p><code>/Users/crifan/.local/share/virtualenvs</code></p>
+<p>&#x5176;&#x4E2D;crifan&#x662F;&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;</p>
+<p>&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; ll /Users/crifan/.local/share/virtualenvs
+total 0
+drwxr-xr-x  8 crifan  staff   256B  4 21 14:47 AutocarData-xI-iqIq4
+drwxr-xr-x  7 crifan  staff   224B  5 18 15:58 xxx-SCpLPEyZ
+drwxr-xr-x  7 crifan  staff   224B  4 26 16:29 testDownloadChildes-MYpVabF5
+&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; ll /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ
+total 8
+drwxr-xr-x  21 crifan  staff   672B  5 18 15:58 bin
+drwxr-xr-x   3 crifan  staff    96B  5 18 15:58 include
+drwxr-xr-x   3 crifan  staff    96B  5 18 15:58 lib
+-rw-r--r--   1 crifan  staff    61B  5 18 15:58 pip-selfcheck.json
+</code></pre>
+<h3 id="&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8FDB;&#x5165;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<pre class="language-"><code class="lang-bash">pipenv shell
+</code></pre>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; pipenv shell
+Spawning environment shell <span class="token punctuation">(</span>/bin/zsh<span class="token punctuation">)</span>. Use <span class="token string">&apos;exit&apos;</span> to leave.
+<span class="token keyword">.</span> /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ/bin/activate
+&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; <span class="token keyword">.</span> /Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ/bin/activate
+</code></pre>
+<p>&#x8FDB;&#x53BB;&#x540E;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;python&#x5C31;&#x662F;&#x4F60;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x4E2D;&#x7684;python&#x4E86;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  xxx git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; <span class="token function">which</span> python
+/Users/crifan/.local/share/virtualenvs/xxx-SCpLPEyZ/bin/python
+</code></pre>
+<h3 id="&#x7BA1;&#x7406;python&#x5E93;"><a name="&#x7BA1;&#x7406;python&#x5E93;" class="plugin-anchor" href="#&#x7BA1;&#x7406;python&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7BA1;&#x7406;Python&#x5E93;</h3>
+<h4 id="&#x7528;pipenv&#x7BA1;&#x7406;python&#x5E93;"><a name="&#x7528;pipenv&#x7BA1;&#x7406;python&#x5E93;" class="plugin-anchor" href="#&#x7528;pipenv&#x7BA1;&#x7406;python&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;pipenv&#x7BA1;&#x7406;python&#x5E93;</h4>
+<p>&#x8BED;&#x6CD5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span> xxx
+</code></pre>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span> requests
+
+pipenv <span class="token function">install</span> pyspider
+
+pipenv <span class="token function">install</span> flask-restful
+
+pipenv <span class="token function">install</span> mysql
+pipenv <span class="token function">install</span> mysql-connector-python
+
+pipenv <span class="token function">install</span> pymysql
+
+pipenv <span class="token function">install</span> openpyxl
+
+pipenv <span class="token function">install</span> gunicorn
+
+pipenv <span class="token function">install</span> flask-pymongo
+
+pipenv <span class="token function">install</span> flask-cors
+</code></pre>
+<p>&#x7279;&#x6B8A;&#xFF1A;</p>
+<ul>
+<li>&#x5B89;&#x88C5;&#x67D0;&#x5E93;(A)&#xFF0C;&#x6307;&#x5B9A;&#x6240;&#x4F9D;&#x8D56;&#x7684;&#x5176;&#x4ED6;&#x5E93;(B) <ul>
+<li>&#x4E3E;&#x4F8B;<pre class="language-"><code class="lang-bash">pipenv <span class="token function">install</span> <span class="token string">&quot;celery[redis]&quot;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="&#x7528;pip&#x7BA1;&#x7406;python&#x5E93;"><a name="&#x7528;pip&#x7BA1;&#x7406;python&#x5E93;" class="plugin-anchor" href="#&#x7528;pip&#x7BA1;&#x7406;python&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;pip&#x7BA1;&#x7406;Python&#x5E93;</h4>
+<pre class="language-"><code class="lang-bash">pipenv shell
+
+pip <span class="token function">install</span> browsermob-proxy
+</code></pre>
+<p>&#x6CE8;&#xFF1A;&#x901A;&#x8FC7;<code>pip</code>&#x5B89;&#x88C5;&#x7684;&#x5E93;&#xFF0C;&#x65E0;&#x6CD5;&#x81EA;&#x52A8;&#x8FDB;&#x5165;<code>pipenv</code>&#x7684;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x7684;&#x5185;&#x90E8;&#x903B;&#x8F91;</p>
+<p>-&#x300B;&#x6BD4;&#x5982;<code>pipenv graph</code>&#x5C31;&#x65E0;&#x6CD5;&#x770B;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x5E93;&#x4E86;</p>
+<p>-&#x300B;&#x5C31;&#x4E0D;&#x65B9;&#x4FBF;<code>pipenv</code>&#x7684;&#x81EA;&#x52A8;&#x7BA1;&#x7406;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x5E93;&#x4E86;</p>
+<h3 id="&#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x5E93;"><a name="&#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x5E93;" class="plugin-anchor" href="#&#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x5E93;</h3>
+<pre class="language-"><code class="lang-bash">pipenv graph
+</code></pre>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  xxxDemoServer git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> &#x2717; pipenv graph
+celery<span class="token operator">==</span>4.1.0
+  - billiard <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>3.5.0.2,<span class="token operator">&lt;</span>3.6.0, installed: 3.5.0.3<span class="token punctuation">]</span>
+  - kombu <span class="token punctuation">[</span>required: <span class="token operator">&lt;</span>5.0,<span class="token operator">&gt;=</span>4.0.2, installed: 4.1.0<span class="token punctuation">]</span>
+    - amqp <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.1.4,<span class="token operator">&lt;</span>3.0, installed: 2.2.2<span class="token punctuation">]</span>
+      - vine <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>1.1.3, installed: 1.1.4<span class="token punctuation">]</span>
+  - pytz <span class="token punctuation">[</span>required: <span class="token operator">&gt;</span>dev, installed: 2018.4<span class="token punctuation">]</span>
+Flask-Cors<span class="token operator">==</span>3.0.4
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.9, installed: 1.0.2<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - Six <span class="token punctuation">[</span>required: Any, installed: 1.11.0<span class="token punctuation">]</span>
+Flask-PyMongo<span class="token operator">==</span>0.5.1
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.8, installed: 1.0.2<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - PyMongo <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.5, installed: 3.6.1<span class="token punctuation">]</span>
+Flask-RESTful<span class="token operator">==</span>0.3.6
+  - aniso8601 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.82, installed: 3.0.0<span class="token punctuation">]</span>
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.8, installed: 1.0.2<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - pytz <span class="token punctuation">[</span>required: Any, installed: 2018.4<span class="token punctuation">]</span>
+  - six <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>1.3.0, installed: 1.11.0<span class="token punctuation">]</span>
+gunicorn<span class="token operator">==</span>19.8.1
+openpyxl<span class="token operator">==</span>2.5.3
+  - et-xmlfile <span class="token punctuation">[</span>required: Any, installed: 1.0.1<span class="token punctuation">]</span>
+  - jdcal <span class="token punctuation">[</span>required: Any, installed: 1.4<span class="token punctuation">]</span>
+PyMySQL<span class="token operator">==</span>0.8.1
+redis<span class="token operator">==</span>2.10.6
+requests<span class="token operator">==</span>2.18.4
+  - certifi <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2017.4.17, installed: 2018.4.16<span class="token punctuation">]</span>
+  - chardet <span class="token punctuation">[</span>required: <span class="token operator">&lt;</span>3.1.0,<span class="token operator">&gt;=</span>3.0.2, installed: 3.0.4<span class="token punctuation">]</span>
+  - idna <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.5,<span class="token operator">&lt;</span>2.7, installed: 2.6<span class="token punctuation">]</span>
+  - urllib3 <span class="token punctuation">[</span>required: <span class="token operator">&lt;</span>1.23,<span class="token operator">&gt;=</span>1.21.1, installed: 1.22<span class="token punctuation">]</span>
+</code></pre>
+<p>&#x76EE;&#x7684;=&#x7528;&#x9014;&#xFF1A;&#x53EF;&#x4EE5;&#x6E05;&#x6670;&#x7684;&#x770B;&#x51FA;&#x5B89;&#x88C5;&#x4E86;&#x54EA;&#x4E9B;&#x5E93;&#xFF0C;&#x6BCF;&#x4E2A;&#x5E93;&#x7684;&#x4F9D;&#x8D56;&#x6709;&#x54EA;&#x4E9B;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x6211;&#x6B64;&#x5904;&#x5173;&#x5FC3;&#x7684;&#xFF1A;<code>celery==4.1.0</code></p>
+<p>&#x4E3E;&#x4F8B;2&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># pipenv graph</span>
+Flask-Cors<span class="token operator">==</span>3.0.4
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.9, installed: 1.0.1<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - Six <span class="token punctuation">[</span>required: Any, installed: 1.11.0<span class="token punctuation">]</span>
+Flask-PyMongo<span class="token operator">==</span>0.5.1
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.8, installed: 1.0.1<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - PyMongo <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.5, installed: 3.6.1<span class="token punctuation">]</span>
+Flask-RESTful<span class="token operator">==</span>0.3.6
+  - aniso8601 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.82, installed: 3.0.0<span class="token punctuation">]</span>
+  - Flask <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.8, installed: 1.0.1<span class="token punctuation">]</span>
+    - click <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>5.1, installed: 6.7<span class="token punctuation">]</span>
+    - itsdangerous <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.24, installed: 0.24<span class="token punctuation">]</span>
+    - Jinja2 <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>2.10, installed: 2.10<span class="token punctuation">]</span>
+      - MarkupSafe <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.23, installed: 1.0<span class="token punctuation">]</span>
+    - Werkzeug <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>0.14, installed: 0.14.1<span class="token punctuation">]</span>
+  - pytz <span class="token punctuation">[</span>required: Any, installed: 2018.4<span class="token punctuation">]</span>
+  - six <span class="token punctuation">[</span>required: <span class="token operator">&gt;=</span>1.3.0, installed: 1.11.0<span class="token punctuation">]</span>
+gunicorn<span class="token operator">==</span>19.8.1
+openpyxl<span class="token operator">==</span>2.5.3
+  - et-xmlfile <span class="token punctuation">[</span>required: Any, installed: 1.0.1<span class="token punctuation">]</span>
+  - jdcal <span class="token punctuation">[</span>required: Any, installed: 1.4<span class="token punctuation">]</span>
+PyMySQL<span class="token operator">==</span>0.8.0
+</code></pre>
+<h3 id="&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;"><a name="&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;" class="plugin-anchor" href="#&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5220;&#x9664;&#x865A;&#x62DF;&#x73AF;&#x5883;</h3>
+<p>&#x786E;&#x4FDD;&#x5728;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x53BB;&#x8FD0;&#x884C;&#xFF1A;</p>
+<pre class="language-"><code>pipenv --rm
+</code></pre><p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">&#x279C;  server pipenv --rm
+Removing virtualenv <span class="token punctuation">(</span>/Users/crifan/.local/share/virtualenvs/server-9an_1rEM<span class="token punctuation">)</span>&#x2026;
+</code></pre>
+<h2 id="pipenv&#x7684;&#x7F3A;&#x70B9;"><a name="pipenv&#x7684;&#x7F3A;&#x70B9;" class="plugin-anchor" href="#pipenv&#x7684;&#x7F3A;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>Pipenv&#x7684;&#x7F3A;&#x70B9;</h2>
+<h3 id="&#x672C;&#x5730;&#x548C;&#x522B;&#x5904;python&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x903B;&#x8F91;&#x51FA;&#x9519;"><a name="&#x672C;&#x5730;&#x548C;&#x522B;&#x5904;python&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x903B;&#x8F91;&#x51FA;&#x9519;" class="plugin-anchor" href="#&#x672C;&#x5730;&#x548C;&#x522B;&#x5904;python&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x903B;&#x8F91;&#x51FA;&#x9519;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x672C;&#x5730;&#x548C;&#x522B;&#x5904;Python&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x903B;&#x8F91;&#x51FA;&#x9519;</h3>
+<p>&#x6709;&#x65F6;&#x5019;&#xFF0C;&#x7531;&#x4E8E;&#x65E0;&#x6CD5;&#x5B8C;&#x7F8E;&#x590D;&#x5236;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#xFF08;Mac&#xFF09;&#x672C;&#x5730;&#x662F;python 3.6&#xFF0C;&#xFF08;CentOS&#xFF09;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x662F;Python 3.4&#xFF0C;&#x5BFC;&#x81F4;&#x90E8;&#x5206;&#x8BED;&#x6CD5;&#x652F;&#x6301;&#x4E0D;&#x540C;&#xFF0C;&#x800C;&#x4EE3;&#x7801;&#x51FA;&#x9519;&#xFF1A;</p>
+<p>&#x8BE6;&#x89C1;&#xFF1A;</p>
+<p>&#x3010;&#x5DF2;&#x89E3;&#x51B3;&#x3011;Python&#x4E2D;&#x4E24;&#x4E2A;&#x661F;&#x53F7;**&#x53C2;&#x6570;&#x53BB;&#x4F20;&#x9012;&#x7ED9;&#x51FD;&#x6570;&#x51FA;&#x9519;&#xFF1A;SyntaxError invalid syntax</p>
+<p>&#x4E0D;&#x80FD;&#x5B8C;&#x7F8E;&#x590D;&#x5236;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<p>&#x672C;&#x5730;python 3.6&#xFF0C;&#x7EBF;&#x4E0A;&#x53EA;&#x6709;python 3.4</p>
+<p>&#x9020;&#x6210;&#x95EE;&#x9898;&#xFF1A;</p>
+<ol>
+<li><a href="http://www.crifan.com/python_using_two_asterisk_double_star_parameter_function_syntaxerror_invalid_syntax" target="_blank">&#x3010;&#x5DF2;&#x89E3;&#x51B3;&#x3011;Python&#x4E2D;&#x4E24;&#x4E2A;&#x661F;&#x53F7;**&#x53C2;&#x6570;&#x53BB;&#x4F20;&#x9012;&#x7ED9;&#x51FD;&#x6570;&#x51FA;&#x9519;&#xFF1A;SyntaxError invalid syntax</a></li>
+<li><a href="http://www.crifan.com/script_editing_level_one_topic_python_dict_not_sort" target="_blank">&#x3010;&#x5DF2;&#x89E3;&#x51B3;&#x3011;&#x5267;&#x672C;&#x7F16;&#x5199;&#x7CFB;&#x7EDF;Python&#x8FD4;&#x56DE;&#x7684;dict&#x5BF9;&#x5E94;&#x7684;&#x4E00;&#x7EA7;topic&#x6CA1;&#x6709;&#x6392;&#x5E8F;</a></li>
+</ol>
+<h2 id="&#x9644;&#x5F55;"><a name="&#x9644;&#x5F55;" class="plugin-anchor" href="#&#x9644;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9644;&#x5F55;</h2>
+<h3 id="pipenv&#x7684;help"><a name="pipenv&#x7684;help" class="plugin-anchor" href="#pipenv&#x7684;help"><i class="fa fa-link" aria-hidden="true"></i></a>pipenv&#x7684;help</h3>
+<pre class="language-"><code class="lang-bash">&#x279C; pipenv --help
+Usage: pipenv <span class="token punctuation">[</span>OPTIONS<span class="token punctuation">]</span> COMMAND <span class="token punctuation">[</span>ARGS<span class="token punctuation">]</span><span class="token punctuation">..</span>.
+
+Options:
+  --where          Output project home information.
+  --venv           Output virtualenv information.
+  --py             Output Python interpreter information.
+  --envs           Output Environment Variable options.
+  --rm             Remove the virtualenv.
+  --bare           Minimal output.
+  --completion     Output completion <span class="token punctuation">(</span>to be eval&apos;d<span class="token punctuation">)</span>.
+  --man            Display manpage.
+  --three / --two  Use Python 3/2 when creating virtualenv.
+  --python TEXT    Specify <span class="token function">which</span> version of Python virtualenv should use.
+  --site-packages  Enable site-packages <span class="token keyword">for</span> the virtualenv.
+  --version        Show the version and exit.
+  -h, --help       Show this message and exit.
+
+
+Usage Examples:
+   Create a new project using Python 3.6, specifically:
+   $ pipenv --python 3.6
+
+   Install all dependencies <span class="token keyword">for</span> a project <span class="token punctuation">(</span>including dev<span class="token punctuation">)</span>:
+   $ pipenv <span class="token function">install</span> --dev
+
+   Create a lockfile containing pre-releases:
+   $ pipenv lock --pre
+
+   Show a graph of your installed dependencies:
+   $ pipenv graph
+
+   Check your installed dependencies <span class="token keyword">for</span> security vulnerabilities:
+   $ pipenv check
+
+   Install a local setup.py into your virtual environment/Pipfile:
+   $ pipenv <span class="token function">install</span> -e <span class="token keyword">.</span>
+
+   Use a lower-level pip command:
+   $ pipenv run pip freeze
+
+Commands:
+  check      Checks <span class="token keyword">for</span> security vulnerabilities and against PEP 508 markers
+             provided <span class="token keyword">in</span> Pipfile.
+  clean      Uninstalls all packages not specified <span class="token keyword">in</span> Pipfile.lock.
+  graph      Displays currently&#x2013;installed dependency graph information.
+  <span class="token function">install</span>    Installs provided packages and adds them to Pipfile, or <span class="token punctuation">(</span>if none
+             is given<span class="token punctuation">)</span>, installs all packages.
+  lock       Generates Pipfile.lock.
+  <span class="token function">open</span>       View a given module <span class="token keyword">in</span> your editor.
+  run        Spawns a <span class="token function">command</span> installed into the virtualenv.
+  shell      Spawns a shell within the virtualenv.
+  <span class="token function">sync</span>       Installs all packages specified <span class="token keyword">in</span> Pipfile.lock.
+  uninstall  Un-installs a provided package and removes it from Pipfile.
+  update     Runs lock, <span class="token keyword">then</span> sync.
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.com&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-07-17 12:17:07
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../virtualenv/" class="navigation navigation-prev " aria-label="Previous page: virtualenv">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="issues_summary.html" class="navigation navigation-next " aria-label="Next page: 常见问题和心得">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"pipenv","level":"1.4","depth":1,"next":{"title":"常见问题和心得","level":"1.4.1","depth":2,"path":"pipenv/issues_summary.md","ref":"pipenv/issues_summary.md","articles":[]},"previous":{"title":"virtualenv","level":"1.3","depth":1,"path":"virtualenv/README.md","ref":"virtualenv/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["google-adsense","theme-comscore","anchors","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","splitter","-sharing","sharing-plus","tbfed-pagefooter","expandable-chapters-small","ga","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.com，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"http://book.crifan.com/books/isolate_python_project_virtual_environment/pdf/isolate_python_project_virtual_environment.pdf","icon":"fa-file-pdf-o"},"splitter":{},"autocover":{"title":"Gitbook演示"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"alipay":"https://www.crifan.com/files/res/crifan_com/crifan_alipay_pay.jpg","alipayText":"支付宝打赏给Crifan","button":"打赏","title":"","wechat":"https://www.crifan.com/files/res/crifan_com/crifan_wechat_pay.jpg","wechatText":"微信打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.com/gitbook/isolate_python_project_virtual_environment/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"prism-themes":{},"google-adsense":{"ads":[{"client":"ca-pub-6626240105039250"}]},"github-buttons":{"buttons":[{"repo":"isolate_python_project_virtual_environment","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-chapters-small":{},"copy-code-button":{},"ga":{"configuration":"auto","token":"UA-28297199-1"},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"隔离Python项目环境：虚拟环境","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.com"}},"gitbook":"3.2.3","description":"介绍用于隔离Python项目环境的虚拟环境，主要是virtualenv和pipenv。"},"file":{"path":"pipenv/README.md","mtime":"2021-07-17T04:17:07.159Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-17T04:23:12.912Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-google-adsense/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
