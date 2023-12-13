@@ -1,0 +1,750 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>jadx使用心得 · 安卓反编译利器：jadx</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../jadx_help/" />
+    
+    
+    <link rel="prev" href="../jadx_gui/related_ui.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_decompile_jadx","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../jadx_overview/">
+            
+                <a href="../jadx_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    jadx概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../jadx_download/">
+            
+                <a href="../jadx_download/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    jadx下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../jadx_basic_usage/">
+            
+                <a href="../jadx_basic_usage/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    jadx基本用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../jadx_basic_usage/jadx_apk_to_java.html">
+            
+                <a href="../jadx_basic_usage/jadx_apk_to_java.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    jadx从apk导出java
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../jadx_basic_usage/jadx_dex_to_java.html">
+            
+                <a href="../jadx_basic_usage/jadx_dex_to_java.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    jadx从dex导出java
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../jadx_adv_usage/">
+            
+                <a href="../jadx_adv_usage/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    jadx高级用法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../jadx_adv_usage/show_bad_code.html">
+            
+                <a href="../jadx_adv_usage/show_bad_code.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    显示坏代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../jadx_adv_usage/deobfuscation.html">
+            
+                <a href="../jadx_adv_usage/deobfuscation.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    反混淆
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../jadx_gui/">
+            
+                <a href="../jadx_gui/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    jadx-gui图形界面版
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../jadx_gui/preferences/">
+            
+                <a href="../jadx_gui/preferences/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参数设置页面
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../jadx_gui/preferences/cli_gui_para_map.html">
+            
+                <a href="../jadx_gui/preferences/cli_gui_para_map.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    cli和gui参数对应关系
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../jadx_gui/related_ui.html">
+            
+                <a href="../jadx_gui/related_ui.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    相关页面
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    jadx使用心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../jadx_help/">
+            
+                <a href="../jadx_help/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    jadx的help语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >jadx使用心得</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="jadx使用心得"><a name="jadx使用心得" class="plugin-anchor" href="#jadx使用心得"><i class="fa fa-link" aria-hidden="true"></i></a>jadx使用心得</h1>
+<h2 id="经验心得"><a name="经验心得" class="plugin-anchor" href="#经验心得"><i class="fa fa-link" aria-hidden="true"></i></a>经验心得</h2>
+<h3 id="从jadx-gui打开的结构看出是否加固和是哪家的加固"><a name="从jadx-gui打开的结构看出是否加固和是哪家的加固" class="plugin-anchor" href="#从jadx-gui打开的结构看出是否加固和是哪家的加固"><i class="fa fa-link" aria-hidden="true"></i></a>从<code>jadx-gui</code>打开的结构看出是否加固和是哪家的加固</h3>
+<p>对于某个安卓的apk，用<code>jadx-gui</code>打开不同版本的apk的效果是：</p>
+<ul>
+<li>v1.5<ul>
+<li><img src="../assets/img/jadx_gui_open_jar_effect_1_5.png" alt="jadx_gui_open_jar_effect_1_5"></li>
+</ul>
+</li>
+<li>v3.4.8<ul>
+<li><img src="../assets/img/jadx_gui_open_jar_effect_3_4_8.png" alt="jadx_gui_open_jar_effect_3_4_8"></li>
+</ul>
+</li>
+<li>v3.6.9<ul>
+<li><img src="../assets/img/jadx_gui_open_jar_effect_3_6_9.png" alt="jadx_gui_open_jar_effect_3_6_9"></li>
+</ul>
+</li>
+</ul>
+<p>-》可以看出apk是否被加固以及用了何种加固方案：</p>
+<ul>
+<li><code>v1.5</code>：没有被加固</li>
+<li><code>v3.4.8</code>：加固方案 qihoo奇虎360</li>
+<li><code>v3.6.9</code>：加固方案 腾讯乐固legu</li>
+</ul>
+<h2 id="常见错误"><a name="常见错误" class="plugin-anchor" href="#常见错误"><i class="fa fa-link" aria-hidden="true"></i></a>常见错误</h2>
+<h3 id="jadx不能从jar导出java，否则会报错"><a name="jadx不能从jar导出java，否则会报错" class="plugin-anchor" href="#jadx不能从jar导出java，否则会报错"><i class="fa fa-link" aria-hidden="true"></i></a><code>jadx</code>不能从<code>jar</code>导出<code>java</code>，否则会报错</h3>
+<p>举例：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/reverse_engineering/jadx/jadx-1.0.0/bin/jadx <span class="token punctuation">..</span>/dex_to_jar/com.ishowedu.child.peiyin9201516-dex2jar.jar <span class="token parameter variable">-d</span> <span class="token builtin class-name">.</span>
+INFO  - loading <span class="token punctuation">..</span>.
+INFO  - converting to dex: com.ishowedu.child.peiyin9201516-dex2jar.jar <span class="token punctuation">..</span>.
+ERROR - jadx error: Error load file: <span class="token punctuation">..</span>/dex_to_jar/com.ishowedu.child.peiyin9201516-dex2jar.jar
+jadx.core.utils.exceptions.JadxRuntimeException: Error load file: <span class="token punctuation">..</span>/dex_to_jar/com.ishowedu.child.peiyin9201516-dex2jar.jar
+    at jadx.api.JadxDecompiler.loadFiles<span class="token punctuation">(</span>JadxDecompiler.java:138<span class="token punctuation">)</span>
+    at jadx.api.JadxDecompiler.load<span class="token punctuation">(</span>JadxDecompiler.java:102<span class="token punctuation">)</span>
+    at jadx.cli.JadxCLI.processAndSave<span class="token punctuation">(</span>JadxCLI.java:32<span class="token punctuation">)</span>
+    at jadx.cli.JadxCLI.main<span class="token punctuation">(</span>JadxCLI.java:18<span class="token punctuation">)</span>
+Caused by: jadx.core.utils.exceptions.DecodeException: <span class="token function">java</span> class to dex conversion error:
+ dx exception: Translation has been interrupted
+    at jadx.core.utils.files.InputFile.loadFromJar<span class="token punctuation">(</span>InputFile.java:191<span class="token punctuation">)</span>
+    at jadx.core.utils.files.InputFile.searchDexFiles<span class="token punctuation">(</span>InputFile.java:82<span class="token punctuation">)</span>
+    at jadx.core.utils.files.InputFile.addFilesFrom<span class="token punctuation">(</span>InputFile.java:40<span class="token punctuation">)</span>
+    at jadx.api.JadxDecompiler.loadFiles<span class="token punctuation">(</span>JadxDecompiler.java:136<span class="token punctuation">)</span>
+    <span class="token punctuation">..</span>. <span class="token number">3</span> common frames omitted
+Caused by: jadx.core.utils.exceptions.JadxException: dx exception: Translation has been interrupted
+    at jadx.core.utils.files.JavaToDex.convert<span class="token punctuation">(</span>JavaToDex.java:63<span class="token punctuation">)</span>
+    at jadx.core.utils.files.InputFile.loadFromJar<span class="token punctuation">(</span>InputFile.java:182<span class="token punctuation">)</span>
+    <span class="token punctuation">..</span>. <span class="token number">6</span> common frames omitted
+Caused by: java.lang.RuntimeException: Translation has been interrupted
+    at com.android.dx.command.dexer.Main.processAllFiles<span class="token punctuation">(</span>Main.java:614<span class="token punctuation">)</span>
+    at com.android.dx.command.dexer.Main.runMultiDex<span class="token punctuation">(</span>Main.java:365<span class="token punctuation">)</span>
+    at com.android.dx.command.dexer.Main.runDx<span class="token punctuation">(</span>Main.java:286<span class="token punctuation">)</span>
+    at jadx.core.utils.files.JavaToDex.convert<span class="token punctuation">(</span>JavaToDex.java:49<span class="token punctuation">)</span>
+    <span class="token punctuation">..</span>. <span class="token number">7</span> common frames omitted
+Caused by: java.lang.InterruptedException: Too many errors
+    at com.android.dx.command.dexer.Main.processAllFiles<span class="token punctuation">(</span>Main.java:606<span class="token punctuation">)</span>
+    <span class="token punctuation">..</span>. <span class="token number">10</span> common frames omitted
+</code></pre>
+<h3 id="jadx转换出错：javalangoutofmemoryerror"><a name="jadx转换出错：javalangoutofmemoryerror" class="plugin-anchor" href="#jadx转换出错：javalangoutofmemoryerror"><i class="fa fa-link" aria-hidden="true"></i></a>jadx转换出错：java.lang.OutOfMemoryError</h3>
+<p>如果用<code>jadx</code>转换代码期间出错：</p>
+<pre class="language-"><code class="lang-bash">java.lang.OutOfMemoryError: GC overhead limit exceeded
+    at jadx.core.dex.visitors.blocksmaker.BlockProcessor.computeDominators<span class="token punctuation">(</span>BlockProcessor.java:189<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.blocksmaker.BlockProcessor.processBlocksTree<span class="token punctuation">(</span>BlockProcessor.java:52<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.blocksmaker.BlockProcessor.visit<span class="token punctuation">(</span>BlockProcessor.java:42<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.DepthTraversal.visit<span class="token punctuation">(</span>DepthTraversal.java:27<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.DepthTraversal.lambda<span class="token variable">$visit</span><span class="token variable">$1</span><span class="token punctuation">(</span>DepthTraversal.java:14<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.DepthTraversal<span class="token variable">$$</span>Lambda<span class="token variable">$19</span>/469590976.accept<span class="token punctuation">(</span>Unknown Source<span class="token punctuation">)</span>
+    at java.util.ArrayList.forEach<span class="token punctuation">(</span>ArrayList.java:1249<span class="token punctuation">)</span>
+    at jadx.core.dex.visitors.DepthTraversal.visit<span class="token punctuation">(</span>DepthTraversal.java:14<span class="token punctuation">)</span>
+    at jadx.core.ProcessClass.process<span class="token punctuation">(</span>ProcessClass.java:32<span class="token punctuation">)</span>
+    at jadx.api.JadxDecompiler.processClass<span class="token punctuation">(</span>JadxDecompiler.java:292<span class="token punctuation">)</span>
+    at jadx.api.JavaClass.decompile<span class="token punctuation">(</span>JavaClass.java:62<span class="token punctuation">)</span>
+    at jadx.api.JadxDecompiler.lambda<span class="token variable">$appendSourcesSave</span><span class="token variable">$0</span><span class="token punctuation">(</span>JadxDecompiler.java:200<span class="token punctuation">)</span>
+    at jadx.api.JadxDecompiler<span class="token variable">$$</span>Lambda<span class="token variable">$13</span>/1425454633.run<span class="token punctuation">(</span>Unknown Source<span class="token punctuation">)</span>
+    at java.util.concurrent.ThreadPoolExecutor.runWorker<span class="token punctuation">(</span>ThreadPoolExecutor.java:1142<span class="token punctuation">)</span>
+    at java.util.concurrent.ThreadPoolExecutor<span class="token variable">$Worker</span>.run<span class="token punctuation">(</span>ThreadPoolExecutor.java:617<span class="token punctuation">)</span>
+    at java.lang.Thread.run<span class="token punctuation">(</span>Thread.java:745<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+</code></pre>
+<p>且同时伴有：</p>
+<ul>
+<li>CPU占用率很高</li>
+<li>内存消耗也很大<ul>
+<li>比如此处JadxCLI占用了4G的内存<ul>
+<li><img src="../assets/img/jadx_memory_4g.jpg" alt="jadx_memory_4g"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>就是典型的：<code>OOM</code>=<code>Out Of Memory</code>的问题了。</p>
+<p>解决办法，有两种：</p>
+<ul>
+<li>增加JVM最大内存<ul>
+<li>逻辑：修改<code>jadx</code>脚本，增大<code>-Xmx</code>的值</li>
+<li>步骤：<ul>
+<li>编辑<code>jadx-0.9.0/bin/jadx</code>，找到<code>DEFAULT_JVM_OPTS</code>的配置，修改其中<code>-Xmx</code>的值</li>
+<li>比如把此处的<pre class="language-"><code class="lang-bash"><span class="token assign-left variable">DEFAULT_JVM_OPTS</span><span class="token operator">=</span><span class="token string">&apos;&quot;-Xms128M&quot; &quot;-Xmx4g&quot;&apos;</span>
+</code></pre>
+</li>
+<li>改为：<pre class="language-"><code class="lang-bash"><span class="token assign-left variable">DEFAULT_JVM_OPTS</span><span class="token operator">=</span><span class="token string">&apos;&quot;-Xms128M&quot; &quot;-Xmx6g&quot;&apos;</span>
+</code></pre>
+</li>
+<li>即表示，把JVM最大内存，从之前的<code>4G</code>，增大到<code>6G</code></li>
+<li>这样就运行<code>jadx</code>使用更多的内存，从而降低或消除<code>OOM</code>的问题了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>减少线程数<ul>
+<li>逻辑：通过<code>-j N</code>，N=1/2之类，减少进程数，从而降低内存占用，减少OOM的概率</li>
+<li>步骤：<ul>
+<li>在命令行运行jadx时，传递<code>-j</code>参数，指定线程数，比如<pre class="language-"><code class="lang-bash">jadx <span class="token parameter variable">-d</span> output_folder <span class="token parameter variable">-j</span> <span class="token number">1</span> your_apk.apk
+</code></pre>
+</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>处理速度会有所降低<ul>
+<li>因为默认<code>4</code>线程处理，反编译等速度会比较快</li>
+<li>线程数减少后，反编译等速度可能会有所影响</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>一般反编译小的不复杂的<code>apk</code>或<code>dex</code>，不会遇到<code>OOM</code>问题</li>
+<li>反编译比较大型的，比较复杂的<code>apk</code>或<code>dex</code>，才可能会遇到<code>OOM</code><ul>
+<li>比如之前用jadx反编译马蜂窝时遇到了<code>OOM</code></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-09-12 21:24:01
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../jadx_gui/related_ui.html" class="navigation navigation-prev " aria-label="Previous page: 相关页面">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../jadx_help/" class="navigation navigation-next " aria-label="Next page: jadx的help语法">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"jadx使用心得","level":"1.7","depth":1,"next":{"title":"jadx的help语法","level":"1.8","depth":1,"path":"jadx_help/README.md","ref":"jadx_help/README.md","articles":[]},"previous":{"title":"相关页面","level":"1.6.2","depth":2,"path":"jadx_gui/related_ui.md","ref":"jadx_gui/related_ui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_decompile_jadx/pdf/android_re_decompile_jadx.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_decompile_jadx/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_decompile_jadx","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"安卓反编译利器：jadx","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍整理安卓逆向中静态分析之反编译器中比较好用的反编译器：jadx。包括如何下载，以及jadx的基本用法，包括从apk转java，从dex转java；然后是jadx的高级用法，包括显示坏代码、开启反混淆；然后是jadx的gui图形界面版本，包括如何打开，参数设置页面，以及参数映射关系，和其他一些页面；然后是jadx使用心得，以及help语法帮助。"},"file":{"path":"jadx_summary/README.md","mtime":"2023-09-12T13:24:01.401Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-09-12T14:33:46.436Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1635 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>DisplayDemo · Android逆向：动态调试</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../common_issues.html" />
+    
+    
+    <link rel="prev" href="liftfilemanager.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../debug_overview/">
+            
+                <a href="../../debug_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Android逆向动态调试概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../debug_overview/debug_logic.html">
+            
+                <a href="../../debug_overview/debug_logic.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    调试的总体思路
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../debug_smali/steps/">
+            
+                <a href="../../debug_smali/steps/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    AndroidStudio调试Smali
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../debug_smali/steps/detail/">
+            
+                <a href="../../debug_smali/steps/detail/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    详细步骤
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../debug_smali/steps/detail/android_root.html">
+            
+                <a href="../../debug_smali/steps/detail/android_root.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    确保安卓已root
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../../debug_smali/steps/detail/debug_tools.html">
+            
+                <a href="../../debug_smali/steps/detail/debug_tools.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    调试工具选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../../debug_smali/steps/detail/decompile_to_smali.html">
+            
+                <a href="../../debug_smali/steps/detail/decompile_to_smali.html">
+            
+                    
+                        <b>1.3.1.3.</b>
+                    
+                    反编译出smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4" data-path="../../debug_smali/steps/detail/app_debuggable.html">
+            
+                <a href="../../debug_smali/steps/detail/app_debuggable.html">
+            
+                    
+                        <b>1.3.1.4.</b>
+                    
+                    app可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="../../debug_smali/steps/detail/debug_run_app.html">
+            
+                <a href="../../debug_smali/steps/detail/debug_run_app.html">
+            
+                    
+                        <b>1.3.1.5.</b>
+                    
+                    调试方式启动app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.6" data-path="../../debug_smali/steps/detail/import_smali_to_as.html">
+            
+                <a href="../../debug_smali/steps/detail/import_smali_to_as.html">
+            
+                    
+                        <b>1.3.1.6.</b>
+                    
+                    AS中导入smali代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.7" data-path="../../debug_smali/steps/detail/smali_add_breakpoint.html">
+            
+                <a href="../../debug_smali/steps/detail/smali_add_breakpoint.html">
+            
+                    
+                        <b>1.3.1.7.</b>
+                    
+                    给smali加断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.8" data-path="../../debug_smali/steps/detail/config_as_project.html">
+            
+                <a href="../../debug_smali/steps/detail/config_as_project.html">
+            
+                    
+                        <b>1.3.1.8.</b>
+                    
+                    配置AS项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.9" data-path="../../debug_smali/steps/detail/adb_get_process.html">
+            
+                <a href="../../debug_smali/steps/detail/adb_get_process.html">
+            
+                    
+                        <b>1.3.1.9.</b>
+                    
+                    adb可获取进程列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.10" data-path="../../debug_smali/steps/detail/as_debug_app_process.html">
+            
+                <a href="../../debug_smali/steps/detail/as_debug_app_process.html">
+            
+                    
+                        <b>1.3.1.10.</b>
+                    
+                    AS调试app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../debug_smali/examples/">
+            
+                <a href="../../debug_smali/examples/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    调试Smali实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../debug_smali/examples/youtube_smali.html">
+            
+                <a href="../../debug_smali/examples/youtube_smali.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    调试安卓Youtube的smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../debug_smali/summary_smali/">
+            
+                <a href="../../debug_smali/summary_smali/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    调试Smali心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../lldb_debug_android/">
+            
+                <a href="../../lldb_debug_android/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    LLDB调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../lldb_debug_android/download_lldb_server.html">
+            
+                <a href="../../lldb_debug_android/download_lldb_server.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    下载安卓版lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../lldb_debug_android/lldb_server_to_android.html">
+            
+                <a href="../../lldb_debug_android/lldb_server_to_android.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    lldb-server传输到手机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../lldb_debug_android/run_lldb_server.html">
+            
+                <a href="../../lldb_debug_android/run_lldb_server.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    运行lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                <a href="../../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    lldb连接lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../lldb_debug_android/lldb_debug_android_process.html">
+            
+                <a href="../../lldb_debug_android/lldb_debug_android_process.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    用lldb调试安卓app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../init_frida_dev_env.html">
+            
+                <a href="../init_frida_dev_env.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    初始化Frida开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../frida_debug_android_app.html">
+            
+                <a href="../frida_debug_android_app.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Frida调试安卓app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    示例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="liftfilemanager.html">
+            
+                <a href="liftfilemanager.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    LiftFileManager
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3.2" data-path="displaydemo.html">
+            
+                <a href="displaydemo.html">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    DisplayDemo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../common_issues.html">
+            
+                <a href="../common_issues.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../summary.html">
+            
+                <a href="../summary.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../emulate_code/">
+            
+                <a href="../../emulate_code/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    模拟代码运行
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../emulate_code/unidbg/">
+            
+                <a href="../../emulate_code/unidbg/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    Unidbg
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../hook_framework/">
+            
+                <a href="../../hook_framework/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    Hook框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../hook_framework/xposed.html">
+            
+                <a href="../../hook_framework/xposed.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    Xposed框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../hook_framework/cydiasubstrate/">
+            
+                <a href="../../hook_framework/cydiasubstrate/">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    CydiaSubstrate
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                <a href="../../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                    
+                        <b>1.7.2.1.</b>
+                    
+                    Android-OpenDebug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                <a href="../../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                    
+                        <b>1.7.2.2.</b>
+                    
+                    Introspy-Android
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../adb_assit_debug/">
+            
+                <a href="../../adb_assit_debug/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    adb辅助调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../adb_assit_debug/mem_mapping.html">
+            
+                <a href="../../adb_assit_debug/mem_mapping.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    查看内存映射
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../other_debug_tool/">
+            
+                <a href="../../other_debug_tool/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    其他工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../other_debug_tool/andbug.html">
+            
+                <a href="../../other_debug_tool/andbug.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    AndBug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../other_debug_tool/redexer.html">
+            
+                <a href="../../other_debug_tool/redexer.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    redexer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../other_debug_tool/fino.html">
+            
+                <a href="../../other_debug_tool/fino.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    Fino
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >DisplayDemo</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="displaydemo"><a name="displaydemo" class="plugin-anchor" href="#displaydemo"><i class="fa fa-link" aria-hidden="true"></i></a>DisplayDemo</h1>
+<p>用<code>frida-trace</code>调试安卓app：<code>com.example.displaydemo</code></p>
+<h2 id="命令"><a name="命令" class="plugin-anchor" href="#命令"><i class="fa fa-link" aria-hidden="true"></i></a>命令</h2>
+<pre class="language-"><code class="lang-bash">frida-trace <span class="token parameter variable">-U</span> <span class="token parameter variable">-f</span> com.example.displaydemo <span class="token parameter variable">-I</span> libdl.so <span class="token parameter variable">-I</span> liblog.so <span class="token parameter variable">-I</span> libtacker.so <span class="token parameter variable">-i</span> <span class="token function">open</span> <span class="token parameter variable">-i</span> openat <span class="token parameter variable">-i</span> dlopen
+</code></pre>
+<h2 id="输出"><a name="输出" class="plugin-anchor" href="#输出"><i class="fa fa-link" aria-hidden="true"></i></a>输出</h2>
+<h3 id="截图"><a name="截图" class="plugin-anchor" href="#截图"><i class="fa fa-link" aria-hidden="true"></i></a>截图</h3>
+<p><img src="../../assets/img/frida_trace_hook_more_func.png" alt="frida_trace_hook_more_func"></p>
+<h3 id="log日志"><a name="log日志" class="plugin-anchor" href="#log日志"><i class="fa fa-link" aria-hidden="true"></i></a>log日志</h3>
+<pre class="language-"><code class="lang-bash">frida-trace <span class="token parameter variable">-U</span> <span class="token parameter variable">-f</span> com.example.displaydemo <span class="token parameter variable">-I</span> libdl.so <span class="token parameter variable">-I</span> liblog.so <span class="token parameter variable">-I</span> libtacker.so <span class="token parameter variable">-i</span> <span class="token function">open</span> <span class="token parameter variable">-i</span> openat <span class="token parameter variable">-i</span> dlopen
+
+<span class="token punctuation">..</span>.
+
+__android_log_buf_write: Loaded handler at <span class="token string">&quot;/Users/crifan/dev/dev_root/androidReverse/popupSDK_libtacker/dynamicDebug/frida/frida-trace/__handlers__/liblog.so/__android_log_buf_write.js&quot;</span>
+__android_log_is_debuggable: Loaded handler at <span class="token string">&quot;/Users/crifan/dev/dev_root/androidReverse/popupSDK_libtacker/dynamicDebug/frida/frida-trace/__handlers__/liblog.so/__android_log_is_debuggable.js&quot;</span>
+android_openEventTagMap: Loaded handler at <span class="token string">&quot;/Users/crifan/dev/dev_root/androidReverse/popupSDK_libtacker/dynamicDebug/frida/frida-trace/__handlers__/liblog.so/android_openEventTagMap.js&quot;</span>
+open: Loaded handler at <span class="token string">&quot;/Users/crifan/dev/dev_root/androidReverse/popupSDK_libtacker/dynamicDebug/frida/frida-trace/__handlers__/libc.so/open.js&quot;</span>
+openat: Loaded handler at <span class="token string">&quot;/Users/crifan/dev/dev_root/androidReverse/popupSDK_libtacker/dynamicDebug/frida/frida-trace/__handlers__/libc.so/openat.js&quot;</span>
+Started tracing <span class="token number">82</span> functions. Press Ctrl+C to stop.
+           /* TID 0x73a5 */
+   <span class="token number">628</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x28d2598c92f4b5bd, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">641</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x28d2598c92f4b5bd, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x18091f93b592f005, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x18091f93b592f005, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf61d9d184f5bd255, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf61d9d184f5bd255, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf93963b9819f875f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf93963b9819f875f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb6965c803b1ea0bf, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb6965c803b1ea0bf, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf33483d7107b39b5, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf33483d7107b39b5, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x49a6c69ccf1943e5, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">642</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x49a6c69ccf1943e5, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">643</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x12b477e61386e20d, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">643</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x12b477e61386e20d, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0__JI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">643</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x3cb81b9cf29f00eb, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;Java_sun_nio_fs_UnixNativeDispatcher_access0&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">646</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">647</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+。。。
+<span class="token number">1</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">651</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/base.apk&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+   <span class="token number">657</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+。。。
+   <span class="token number">676</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/proc/self/cmdline&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+   <span class="token number">679</span> ms  dl_iterate_phdr<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">679</span> ms  android_dlopen_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatdata&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatlastword&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatdatabimgrelro&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlerror<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatbss&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlerror<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatdex&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x6c3b15dbd25a16d1, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;oatdexlastword&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  dl_iterate_phdr<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">681</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/oat/arm64/base.vdex&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">683</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/base.apk&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">684</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/apex/com.android.art/javalib/arm64/boot.art&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">684</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/system/framework/arm64/boot-framework.art&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">684</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/oat/arm64/base.art&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">702</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">702</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">702</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">702</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">702</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">702</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">703</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">704</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/base.apk&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+   <span class="token number">705</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/product/overlay/NavigationBarMode2Button/NavigationBarMode2ButtonOverlay.apk&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+   <span class="token number">712</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">712</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">712</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">712</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">712</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">712</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">713</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">718</span> ms  __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">718</span> ms     <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+           /* TID 0x73cb */
+   <span class="token number">739</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x8473cc9900a85ecd, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;InitEsxProfile&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">739</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">739</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">739</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">739</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+           /* TID 0x73a5 */
+   <span class="token number">752</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">753</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">753</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">753</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">753</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">753</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">769</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">769</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">783</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+。。。
+   <span class="token number">964</span> ms  dladdr<span class="token punctuation">(</span>addr<span class="token operator">=</span>0x6dc20f4b08, <span class="token assign-left variable">info</span><span class="token operator">=</span>0x6d6dbfc760<span class="token punctuation">)</span>
+   <span class="token number">964</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">964</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">964</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">964</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">964</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">964</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">965</span> ms  android_dlopen_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">965</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf4f687c6329daa95, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;HMI&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;./adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu//adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu//adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;./yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu//yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu//yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">966</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config_com.example.displaydemo.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">967</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu/esx_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/present&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu0/cpu_capacity&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu5/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu6/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">968</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/devices/system/cpu/cpu7/cpufreq/cpuinfo_max_freq&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">969</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/sys/class/kgsl/kgsl-3d0/gpu_model&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">969</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">969</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libEGL_adreno.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x2<span class="token punctuation">)</span>
+   <span class="token number">970</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf9e57fda79bd3c09, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;eglSetBlobCacheFuncsANDROID&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">971</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetStringi&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">971</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetStringi&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">971</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetStringi&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetStringi&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glMemoryBarrier&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glMemoryBarrier&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindVertexArray&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindVertexArray&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteVertexArrays&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteVertexArrays&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenVertexArrays&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenVertexArrays&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPatchParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPatchParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindFragDataLocationEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindFragDataLocationEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindFragDataLocationIndexedEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindFragDataLocationIndexedEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBlendBarrierKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBlendBarrierKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawArraysInstanced&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawArraysInstanced&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawElementsInstanced&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawElementsInstanced&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawBuffers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">972</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawBuffers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glReadBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glReadBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawArraysIndirect&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawArraysIndirect&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawElementsIndirect&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawElementsIndirect&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawRangeElements&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDrawRangeElements&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetMultisamplefv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetMultisamplefv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetTexLevelParameteriv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetTexLevelParameteriv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexStorage2D&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glTexStorage2D&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDiscardFramebufferEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDiscardFramebufferEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glEndTilingQCOM&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glEndTilingQCOM&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">973</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glStartTilingQCOM&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glStartTilingQCOM&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glVertexAttribDivisor&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glVertexAttribDivisor&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glVertexAttribIPointer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glVertexAttribIPointer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBlitFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBlitFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glRenderbufferStorageMultisample&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glRenderbufferStorageMultisample&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFramebufferTexture2DMultisampleEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFramebufferTexture2DMultisampleEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glRenderbufferStorageMultisampleEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glRenderbufferStorageMultisampleEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glUnmapBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glUnmapBuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFlushMappedBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFlushMappedBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glMapBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glMapBufferRange&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInsertEventMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInsertEventMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPopGroupMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPopGroupMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">974</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPushGroupMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPushGroupMarkerEXT&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetProgramResourceLocation&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetProgramResourceLocation&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageCallbackKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageCallbackKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageControlKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageControlKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageInsertKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDebugMessageInsertKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetDebugMessageLogKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetDebugMessageLogKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glObjectLabelKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glObjectLabelKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPopDebugGroupKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPopDebugGroupKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPushDebugGroupKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glPushDebugGroupKHR&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glClientWaitSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glClientWaitSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFenceSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glFenceSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glIsSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">975</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glIsSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glWaitSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glWaitSync&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetInternalformativ&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetInternalformativ&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetProgramBinary&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetProgramBinary&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glProgramBinary&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glProgramBinary&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glProgramParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glProgramParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindSampler&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBindSampler&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteSamplers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteSamplers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenSamplers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenSamplers&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glSamplerParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glSamplerParameteri&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glSamplerParameteriv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glSamplerParameteriv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBeginQuery&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glBeginQuery&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteQueries&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glDeleteQueries&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">976</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glEndQuery&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glEndQuery&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenQueries&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGenQueries&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetQueryObjectuiv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetQueryObjectuiv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetQueryiv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glGetQueryiv&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInvalidateFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInvalidateFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x5dae32eb4dcc0329, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInvalidateSubFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x231259e63d1aef61, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;glInvalidateSubFramebuffer&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">977</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.skia.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+   <span class="token number">990</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms  dlerror<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">990</span> ms  android_dlopen_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">991</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x32a24e38d5386b55, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;HIDL_FETCH_IMapper&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">991</span> ms  __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">991</span> ms     <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token number">991</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libadreno_utils.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x2<span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;compute_aligned_width_and_height&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;compute_fmt_aligned_width_and_height&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;compute_surface_padding&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;compute_compressedfmt_aligned_width_and_height&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;isUBWCSupportedByGpu&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;get_gpu_pixel_alignment&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;adreno_get_metadata_blob_size&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;adreno_init_memory_layout&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xf1188f74383613ef, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;adreno_get_aligned_gpu_buffer_size&quot;</span><span class="token punctuation">)</span>
+   <span class="token number">992</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+           /* TID 0x73cc */
+  <span class="token number">1406</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token number">1407</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token number">1407</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token number">1407</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token number">1407</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">..</span>.
+
+           /* TID 0x73a5 */
+ <span class="token number">35028</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">35028</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">35035</span> ms  __android_log_buf_write<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">35036</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+。。。
+           /* TID 0x73c9 */
+ <span class="token number">35113</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.opengl.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">36036</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/proc/self/cmdline&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+ <span class="token number">36037</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/proc/self/cmdline&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+ <span class="token number">36037</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/proc/self/cmdline&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+           /* TID 0x73a5 */
+。。。
+ <span class="token number">36345</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37083</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/lib/arm64/libtacker.so&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37085</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/app/~~OyO-UMCLSaECmfJvvRSy1w==/com.example.displaydemo-EXz8U1Y8uB9h_Modc1C__Q==/base.apk&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+ <span class="token number">37086</span> ms  android_dlopen_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37094</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2bb94aab7ee5d9eb, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;JNI_OnLoad&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37097</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37099</span> ms  dlerror<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37100</span> ms  android_dlopen_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37111</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x0, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;android_get_exported_namespace&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37111</span> ms     <span class="token operator">|</span> dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libRS_internal.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x1<span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation1DData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation1DRead&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation2DData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation2DRead&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation3DData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocation3DRead&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationAdapterCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationAdapterOffset&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCopy2DRange&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCopy3DRange&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37141</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCopyToBitmap&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCreateFromBitmap&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCreateStrided&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCreateTyped&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationCubeCreateFromBitmap&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationElementData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationElementRead&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationGenerateMipmaps&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationGetPointer&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationGetSurface&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsaAllocationGetType&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationIoReceive&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationIoSend&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationRead&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationResize1D&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationSetSurface&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationSyncAll&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationSetupBufferQueue&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAllocationShareBufferQueue&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsAssignName&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsClosureCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsClosureSetArg&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsClosureSetGlobal&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextCreateVendor&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextDeinitToClient&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextDestroy&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextDump&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextFinish&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextGetMessage&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextInitToClient&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextPeekMessage&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextSendMessage&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37142</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextSetPriority&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsContextSetCacheDir&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsElementCreate2&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsElementCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsaElementGetNativeData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsaElementGetSubElements&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsaGetName&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsInvokeClosureCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsObjDestroy&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsSamplerCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptBindAllocation&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptCCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptFieldIDCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptForEachMulti&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGetVarV&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGroup2Create&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGroupCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGroupExecute&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGroupSetInput&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptGroupSetOutput&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptIntrinsicCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptInvoke&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptInvokeIDCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptInvokeV&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptKernelIDCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptReduce&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetTimeZone&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarD&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarF&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarI&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarJ&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarObj&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarVE&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsScriptSetVarV&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsTypeCreate&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37143</span> ms     <span class="token operator">|</span> dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xb510c3446c65bd65, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsaTypeGetNativeData&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37144</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xdd4f837609790777, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;HIDL_FETCH_IDevice&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+           /* TID 0x748b */
+ <span class="token number">37148</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libRSDriver_adreno.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x1<span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  dlerror<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xd30b16fb5b2b6c41, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsdHalQueryVersion&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xd30b16fb5b2b6c41, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsdHalQueryHal&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xd30b16fb5b2b6c41, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsdHalInit&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xd30b16fb5b2b6c41, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsdHalAbort&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37169</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/proc/cpuinfo&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x80000<span class="token punctuation">)</span>
+ <span class="token number">37170</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;./adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37170</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu//adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37170</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu//adreno_config.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37170</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;./yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37171</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/vendor/gpu//yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37171</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/misc/gpu//yamato_panel.txt&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0x0<span class="token punctuation">)</span>
+ <span class="token number">37172</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37180</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libllvm-qcom.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x2<span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_create_llvm_instance&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_destroy_llvm_instance&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_compile_source&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_link_program&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_get_error_code&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_get_build_log&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_query_handle_type&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_handle_to_executable&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_free_handle&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_disassemble&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_free_assembly&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_program_get_ddl_data&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37256</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_handle_from_binary&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37257</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_handle_create_binary&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37257</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_program_free_binary&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37257</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_interpret_printf_buffer&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37257</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0x2dd005fbeae03129, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;cl_compiler_query_version_string&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37264</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37265</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37265</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37265</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37265</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libqti-perfd-client.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x2<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+ <span class="token number">37266</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37266</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;librs_adreno_sha1.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x2<span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;libllvm_qcom_so_SHA1&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;libCB_so_SHA1&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;libgsl_so_SHA1&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;librs_adreno_so_SHA1&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;libRSDriver_adreno_so_SHA1&quot;</span><span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  dlclose<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xe42754d5434639f<span class="token punctuation">)</span>
+ <span class="token number">37269</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms  __android_log_print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms     <span class="token operator">|</span> __android_log_is_loggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_get_minimum_priority<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms     <span class="token operator">|</span> __android_log_write_log_message<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_logd_logger<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token number">37270</span> ms     <span class="token operator">|</span>    <span class="token operator">|</span>    <span class="token operator">|</span> __android_log_is_debuggable<span class="token punctuation">(</span><span class="token punctuation">)</span>
+           /* TID 0x73a5 */
+ <span class="token number">37270</span> ms  dlopen<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;libRSCacheDir.so&quot;</span>, <span class="token assign-left variable">mode</span><span class="token operator">=</span>0x1<span class="token punctuation">)</span>
+ <span class="token number">37272</span> ms  dlsym<span class="token punctuation">(</span>handle<span class="token operator">=</span>0xaaa10682b389f92b, <span class="token assign-left variable">symbol</span><span class="token operator">=</span><span class="token string">&quot;rsQueryCacheDir&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+ <span class="token number">37339</span> ms  __cfi_slowpath<span class="token punctuation">(</span><span class="token punctuation">)</span>
+           /* TID 0x73e8 */
+ <span class="token number">39181</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.opengl.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0xc2<span class="token punctuation">)</span>
+ <span class="token number">39196</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.opengl.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0xc2<span class="token punctuation">)</span>
+
+
+           /* TID 0x73e9 */
+ <span class="token number">39255</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.skia.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0xc2<span class="token punctuation">)</span>
+ <span class="token number">39257</span> ms  open<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">&quot;/data/user_de/0/com.example.displaydemo/code_cache/com.android.skia.shaders_cache&quot;</span>, <span class="token assign-left variable">oflag</span><span class="token operator">=</span>0xc2<span class="token punctuation">)</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-08-15 22:26:56
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="liftfilemanager.html" class="navigation navigation-prev " aria-label="Previous page: LiftFileManager">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../common_issues.html" class="navigation navigation-next " aria-label="Next page: 常见问题">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"DisplayDemo","level":"1.5.3.2","depth":3,"next":{"title":"常见问题","level":"1.5.4","depth":2,"path":"frida_debug_android/common_issues.md","ref":"frida_debug_android/common_issues.md","articles":[]},"previous":{"title":"LiftFileManager","level":"1.5.3.1","depth":3,"path":"frida_debug_android/demo/liftfilemanager.md","ref":"frida_debug_android/demo/liftfilemanager.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_dynamic_debug/pdf/android_re_dynamic_debug.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_dynamic_debug/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：动态调试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发期间，如何动态调试安卓程序。包括用AndroidStudio调试apk的smali代码、用LLDB调试安卓程序、用Frida调试安卓程序、编写Xposed模块去调试安卓程序。对于AndroidStudio调试安卓Smali代码，此处以YouTube为例，介绍主要步骤：确保安卓已root、调试工具选择、反编译出smali代码、确保app可调试、调试方式启动app、Android Studio中导入smali代码、给smali加断点、配置Android Studio项目、确保adb可获取进程列表、Android Studio调试app进程；对于LLDB调试安卓，包括下载安卓版lldb-server到电脑、把lldb-server传输下载到安卓手机中、电脑中运行lldb、用lldb连接安卓手机中的lldb-server、最后是开始用lldb调试安卓app进程。对于Firda调试安卓，包括初始化Frida调试环境、Frida调试安卓app，以及贴出几个实例包括LiftFileManager、DisplayDemo等。以及Frida方面的常见的问题和心得。然后是动态调试方面的一些常见问题和心得。以及其他一些分析调试工具，包括Unidbg、AndBug、redexer、Fino等；以及用于辅助调试的adb，比如用adb查看内存映射；最后加上心得和实例和附录的参考资料。"},"file":{"path":"frida_debug_android/demo/displaydemo.md","mtime":"2023-08-15T14:26:56.101Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T08:09:06.000Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

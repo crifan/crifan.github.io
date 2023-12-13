@@ -1,0 +1,1383 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>查看内存映射 · Android逆向：动态调试</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../other_debug_tool/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../debug_overview/">
+            
+                <a href="../debug_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Android逆向动态调试概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../debug_overview/debug_logic.html">
+            
+                <a href="../debug_overview/debug_logic.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    调试的总体思路
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../debug_smali/steps/">
+            
+                <a href="../debug_smali/steps/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    AndroidStudio调试Smali
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../debug_smali/steps/detail/">
+            
+                <a href="../debug_smali/steps/detail/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    详细步骤
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../debug_smali/steps/detail/android_root.html">
+            
+                <a href="../debug_smali/steps/detail/android_root.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    确保安卓已root
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../debug_smali/steps/detail/debug_tools.html">
+            
+                <a href="../debug_smali/steps/detail/debug_tools.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    调试工具选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../debug_smali/steps/detail/decompile_to_smali.html">
+            
+                <a href="../debug_smali/steps/detail/decompile_to_smali.html">
+            
+                    
+                        <b>1.3.1.3.</b>
+                    
+                    反编译出smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4" data-path="../debug_smali/steps/detail/app_debuggable.html">
+            
+                <a href="../debug_smali/steps/detail/app_debuggable.html">
+            
+                    
+                        <b>1.3.1.4.</b>
+                    
+                    app可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="../debug_smali/steps/detail/debug_run_app.html">
+            
+                <a href="../debug_smali/steps/detail/debug_run_app.html">
+            
+                    
+                        <b>1.3.1.5.</b>
+                    
+                    调试方式启动app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.6" data-path="../debug_smali/steps/detail/import_smali_to_as.html">
+            
+                <a href="../debug_smali/steps/detail/import_smali_to_as.html">
+            
+                    
+                        <b>1.3.1.6.</b>
+                    
+                    AS中导入smali代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.7" data-path="../debug_smali/steps/detail/smali_add_breakpoint.html">
+            
+                <a href="../debug_smali/steps/detail/smali_add_breakpoint.html">
+            
+                    
+                        <b>1.3.1.7.</b>
+                    
+                    给smali加断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.8" data-path="../debug_smali/steps/detail/config_as_project.html">
+            
+                <a href="../debug_smali/steps/detail/config_as_project.html">
+            
+                    
+                        <b>1.3.1.8.</b>
+                    
+                    配置AS项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.9" data-path="../debug_smali/steps/detail/adb_get_process.html">
+            
+                <a href="../debug_smali/steps/detail/adb_get_process.html">
+            
+                    
+                        <b>1.3.1.9.</b>
+                    
+                    adb可获取进程列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.10" data-path="../debug_smali/steps/detail/as_debug_app_process.html">
+            
+                <a href="../debug_smali/steps/detail/as_debug_app_process.html">
+            
+                    
+                        <b>1.3.1.10.</b>
+                    
+                    AS调试app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../debug_smali/examples/">
+            
+                <a href="../debug_smali/examples/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    调试Smali实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../debug_smali/examples/youtube_smali.html">
+            
+                <a href="../debug_smali/examples/youtube_smali.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    调试安卓Youtube的smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../debug_smali/summary_smali/">
+            
+                <a href="../debug_smali/summary_smali/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    调试Smali心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../lldb_debug_android/">
+            
+                <a href="../lldb_debug_android/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    LLDB调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../lldb_debug_android/download_lldb_server.html">
+            
+                <a href="../lldb_debug_android/download_lldb_server.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    下载安卓版lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../lldb_debug_android/lldb_server_to_android.html">
+            
+                <a href="../lldb_debug_android/lldb_server_to_android.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    lldb-server传输到手机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../lldb_debug_android/run_lldb_server.html">
+            
+                <a href="../lldb_debug_android/run_lldb_server.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    运行lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                <a href="../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    lldb连接lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../lldb_debug_android/lldb_debug_android_process.html">
+            
+                <a href="../lldb_debug_android/lldb_debug_android_process.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    用lldb调试安卓app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../frida_debug_android/">
+            
+                <a href="../frida_debug_android/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../frida_debug_android/init_frida_dev_env.html">
+            
+                <a href="../frida_debug_android/init_frida_dev_env.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    初始化Frida开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../frida_debug_android/frida_debug_android_app.html">
+            
+                <a href="../frida_debug_android/frida_debug_android_app.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Frida调试安卓app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../frida_debug_android/demo/">
+            
+                <a href="../frida_debug_android/demo/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    示例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../frida_debug_android/demo/liftfilemanager.html">
+            
+                <a href="../frida_debug_android/demo/liftfilemanager.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    LiftFileManager
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../frida_debug_android/demo/displaydemo.html">
+            
+                <a href="../frida_debug_android/demo/displaydemo.html">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    DisplayDemo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../frida_debug_android/common_issues.html">
+            
+                <a href="../frida_debug_android/common_issues.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../frida_debug_android/summary.html">
+            
+                <a href="../frida_debug_android/summary.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../emulate_code/">
+            
+                <a href="../emulate_code/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    模拟代码运行
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../emulate_code/unidbg/">
+            
+                <a href="../emulate_code/unidbg/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    Unidbg
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../hook_framework/">
+            
+                <a href="../hook_framework/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    Hook框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../hook_framework/xposed.html">
+            
+                <a href="../hook_framework/xposed.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    Xposed框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../hook_framework/cydiasubstrate/">
+            
+                <a href="../hook_framework/cydiasubstrate/">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    CydiaSubstrate
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                <a href="../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                    
+                        <b>1.7.2.1.</b>
+                    
+                    Android-OpenDebug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                <a href="../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                    
+                        <b>1.7.2.2.</b>
+                    
+                    Introspy-Android
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    adb辅助调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.8.1" data-path="mem_mapping.html">
+            
+                <a href="mem_mapping.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    查看内存映射
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../other_debug_tool/">
+            
+                <a href="../other_debug_tool/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    其他工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../other_debug_tool/andbug.html">
+            
+                <a href="../other_debug_tool/andbug.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    AndBug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../other_debug_tool/redexer.html">
+            
+                <a href="../other_debug_tool/redexer.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    redexer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../other_debug_tool/fino.html">
+            
+                <a href="../other_debug_tool/fino.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    Fino
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >查看内存映射</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="adb查看进程内存映射"><a name="adb查看进程内存映射" class="plugin-anchor" href="#adb查看进程内存映射"><i class="fa fa-link" aria-hidden="true"></i></a>adb查看进程内存映射</h1>
+<ul>
+<li>查看进程的内存映射real layout of process segment<pre class="language-"><code class="lang-bash">/proc/<span class="token operator">&lt;</span>pid<span class="token operator">&gt;</span>/maps
+</code></pre>
+</li>
+</ul>
+<p>举例：</p>
+<p>查看安卓app：<code>AIO File Manager</code>=包名：<code>com.manager.files.super.cleaner</code>的进程的内存映射</p>
+<pre class="language-"><code class="lang-bash">adb shell
+</code></pre>
+<p>后：</p>
+<p>查看确认进程PID：</p>
+<pre class="language-"><code class="lang-bash">blueline:/storage/emulated/0/dev <span class="token comment"># ps -A | grep clean</span>
+u0_a256       <span class="token number">14868</span>   <span class="token number">1025</span> <span class="token number">2051980</span>  <span class="token number">61568</span> SyS_epoll_wait      <span class="token number">0</span> S com.manager.files.super.cleaner
+</code></pre>
+<p>查看到AIO File Manager的PID是：14868</p>
+<p>再去切换到root权限：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">su</span>
+</code></pre>
+<p>然后才能看到maps映射：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">cat</span> /proc/14868/maps
+</code></pre>
+<p>输出结果：</p>
+<pre class="language-"><code class="lang-bash">blueline:/sdcard/dev $ <span class="token function">cat</span> /proc/14868/map
+map_files/  maps
+</code></pre>
+<p>详细结果：</p>
+<pre class="language-"><code class="lang-bash">blueline:/storage/emulated/0/dev <span class="token comment"># cat /proc/14868/maps</span>
+12c00000-52c00000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-main space <span class="token punctuation">(</span>region space<span class="token punctuation">)</span><span class="token punctuation">]</span>
+6faeb000-6fcc8000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot.art<span class="token punctuation">]</span>
+6fcc8000-6fd0b000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot-core-libart.art<span class="token punctuation">]</span>
+6fd0b000-6fda9000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot-core-icu4j.art<span class="token punctuation">]</span>
+6fda9000-6fdd2000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot-okhttp.art<span class="token punctuation">]</span>
+6fdd2000-6fe08000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot-bouncycastle.art<span class="token punctuation">]</span>
+6fe08000-6fe13000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/apex/com.android.art/javalib/boot-apache-xml.art<span class="token punctuation">]</span>
+6fe13000-6fe90000 r--p 00000000 07:78 <span class="token number">44</span>                                 /apex/com.android.art/javalib/arm/boot.oat
+6fe90000-70094000 r-xp 0007d000 07:78 <span class="token number">44</span>                                 /apex/com.android.art/javalib/arm/boot.oat
+<span class="token number">70094000</span>-70095000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+<span class="token number">70095000</span>-70097000 r--p 00000000 07:78 <span class="token number">45</span>                                 /apex/com.android.art/javalib/arm/boot.vdex
+<span class="token number">70097000</span>-70098000 r--p 00281000 07:78 <span class="token number">44</span>                                 /apex/com.android.art/javalib/arm/boot.oat
+<span class="token number">70098000</span>-70099000 rw-p 00282000 07:78 <span class="token number">44</span>                                 /apex/com.android.art/javalib/arm/boot.oat
+<span class="token number">70099000</span>-700a8000 r--p 00000000 07:78 <span class="token number">38</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.oat
+700a8000-700e7000 r-xp 0000f000 07:78 <span class="token number">38</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.oat
+700e7000-700e8000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+700e8000-700e9000 r--p 00000000 07:78 <span class="token number">39</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.vdex
+700e9000-700ea000 r--p 0004e000 07:78 <span class="token number">38</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.oat
+700ea000-700eb000 rw-p 0004f000 07:78 <span class="token number">38</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.oat
+700eb000-70114000 r--p 00000000 07:78 <span class="token number">35</span>                                 /apex/com.android.art/javalib/arm/boot-core-icu4j.oat
+<span class="token number">70114000</span>-701ad000 r-xp 00029000 07:78 <span class="token number">35</span>                                 /apex/com.android.art/javalib/arm/boot-core-icu4j.oat
+701ad000-701ae000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+701ae000-701af000 r--p 00000000 07:78 <span class="token number">36</span>                                 /apex/com.android.art/javalib/arm/boot-core-icu4j.vdex
+701af000-701b0000 r--p 000c2000 07:78 <span class="token number">35</span>                                 /apex/com.android.art/javalib/arm/boot-core-icu4j.oat
+701b0000-701b1000 rw-p 000c3000 07:78 <span class="token number">35</span>                                 /apex/com.android.art/javalib/arm/boot-core-icu4j.oat
+701b1000-701bc000 r--p 00000000 07:78 <span class="token number">41</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.oat
+701bc000-701e2000 r-xp 0000b000 07:78 <span class="token number">41</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.oat
+701e2000-701e3000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+701e3000-701e4000 r--p 00000000 07:78 <span class="token number">42</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.vdex
+701e4000-701e5000 r--p 00031000 07:78 <span class="token number">41</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.oat
+701e5000-701e6000 rw-p 00032000 07:78 <span class="token number">41</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.oat
+701e6000-701f1000 r--p 00000000 07:78 <span class="token number">32</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.oat
+701f1000-70200000 r-xp 0000b000 07:78 <span class="token number">32</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.oat
+<span class="token number">70200000</span>-70201000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+<span class="token number">70201000</span>-70202000 r--p 00000000 07:78 <span class="token number">33</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.vdex
+<span class="token number">70202000</span>-70203000 r--p 0001a000 07:78 <span class="token number">32</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.oat
+<span class="token number">70203000</span>-70204000 rw-p 0001b000 07:78 <span class="token number">32</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.oat
+<span class="token number">70204000</span>-70209000 r--p 00000000 07:78 <span class="token number">29</span>                                 /apex/com.android.art/javalib/arm/boot-apache-xml.oat
+<span class="token number">70209000</span>-7020a000 r--p 00000000 07:78 <span class="token number">30</span>                                 /apex/com.android.art/javalib/arm/boot-apache-xml.vdex
+7020a000-7020b000 r--p 00005000 07:78 <span class="token number">29</span>                                 /apex/com.android.art/javalib/arm/boot-apache-xml.oat
+7020b000-7020c000 rw-p 00006000 07:78 <span class="token number">29</span>                                 /apex/com.android.art/javalib/arm/boot-apache-xml.oat
+7020c000-70b13000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-framework.art<span class="token punctuation">]</span>
+70b13000-70b44000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-ext.art<span class="token punctuation">]</span>
+70b44000-70c6f000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-telephony-common.art<span class="token punctuation">]</span>
+70c6f000-70cf2000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-voip-common.art<span class="token punctuation">]</span>
+70cf2000-70d0f000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-ims-common.art<span class="token punctuation">]</span>
+70d0f000-70d12000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-/system/framework/boot-framework-atb-backward-compatibility.art<span class="token punctuation">]</span>
+70d12000-70f01000 r--p 00000000 fd:04 <span class="token number">1225</span>                               /system/framework/arm/boot-framework.oat
+70f01000-71613000 r-xp 001ef000 fd:04 <span class="token number">1225</span>                               /system/framework/arm/boot-framework.oat
+<span class="token number">71613000</span>-71615000 r--p 00901000 fd:04 <span class="token number">1225</span>                               /system/framework/arm/boot-framework.oat
+<span class="token number">71615000</span>-71616000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+<span class="token number">71616000</span>-71620000 r--p 00000000 fd:04 <span class="token number">1258</span>                               /system/framework/boot-framework.vdex
+<span class="token number">71620000</span>-71621000 r--p 00903000 fd:04 <span class="token number">1225</span>                               /system/framework/arm/boot-framework.oat
+<span class="token number">71621000</span>-71622000 rw-p 00904000 fd:04 <span class="token number">1225</span>                               /system/framework/arm/boot-framework.oat
+<span class="token number">71622000</span>-71627000 r--p 00000000 fd:04 <span class="token number">1219</span>                               /system/framework/arm/boot-ext.oat
+<span class="token number">71627000</span>-71638000 r-xp 00005000 fd:04 <span class="token number">1219</span>                               /system/framework/arm/boot-ext.oat
+<span class="token number">71638000</span>-71639000 r--p 00016000 fd:04 <span class="token number">1219</span>                               /system/framework/arm/boot-ext.oat
+<span class="token number">71639000</span>-7163a000 r--p 00000000 fd:04 <span class="token number">1256</span>                               /system/framework/boot-ext.vdex
+7163a000-7163b000 r--p 00017000 fd:04 <span class="token number">1219</span>                               /system/framework/arm/boot-ext.oat
+7163b000-7163c000 rw-p 00018000 fd:04 <span class="token number">1219</span>                               /system/framework/arm/boot-ext.oat
+7163c000-71644000 r--p 00000000 fd:04 <span class="token number">1231</span>                               /system/framework/arm/boot-telephony-common.oat
+<span class="token number">71644000</span>-71645000 r--p 00000000 fd:04 <span class="token number">1260</span>                               /system/framework/boot-telephony-common.vdex
+<span class="token number">71645000</span>-71646000 r--p 00008000 fd:04 <span class="token number">1231</span>                               /system/framework/arm/boot-telephony-common.oat
+<span class="token number">71646000</span>-71647000 rw-p 00009000 fd:04 <span class="token number">1231</span>                               /system/framework/arm/boot-telephony-common.oat
+<span class="token number">71647000</span>-7164c000 r--p 00000000 fd:04 <span class="token number">1234</span>                               /system/framework/arm/boot-voip-common.oat
+7164c000-7164d000 r-xp 00005000 fd:04 <span class="token number">1234</span>                               /system/framework/arm/boot-voip-common.oat
+7164d000-7164e000 r--p 00000000 fd:04 <span class="token number">1261</span>                               /system/framework/boot-voip-common.vdex
+7164e000-7164f000 r--p 00006000 fd:04 <span class="token number">1234</span>                               /system/framework/arm/boot-voip-common.oat
+7164f000-71650000 rw-p 00007000 fd:04 <span class="token number">1234</span>                               /system/framework/arm/boot-voip-common.oat
+<span class="token number">71650000</span>-71652000 r--p 00000000 fd:04 <span class="token number">1228</span>                               /system/framework/arm/boot-ims-common.oat
+<span class="token number">71652000</span>-71653000 r--p 00000000 fd:04 <span class="token number">1259</span>                               /system/framework/boot-ims-common.vdex
+<span class="token number">71653000</span>-71654000 r--p 00002000 fd:04 <span class="token number">1228</span>                               /system/framework/arm/boot-ims-common.oat
+<span class="token number">71654000</span>-71655000 rw-p 00003000 fd:04 <span class="token number">1228</span>                               /system/framework/arm/boot-ims-common.oat
+<span class="token number">71655000</span>-71657000 r--p 00000000 fd:04 <span class="token number">1222</span>                               /system/framework/arm/boot-framework-atb-backward-compatibility.oat
+<span class="token number">71657000</span>-71658000 r--p 00000000 fd:04 <span class="token number">1257</span>                               /system/framework/boot-framework-atb-backward-compatibility.vdex
+<span class="token number">71658000</span>-71659000 r--p 00002000 fd:04 <span class="token number">1222</span>                               /system/framework/arm/boot-framework-atb-backward-compatibility.oat
+<span class="token number">71659000</span>-7165a000 rw-p 00003000 fd:04 <span class="token number">1222</span>                               /system/framework/arm/boot-framework-atb-backward-compatibility.oat
+7165a000-719bd000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-zygote space<span class="token punctuation">]</span>
+719bd000-719bf000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-non moving space<span class="token punctuation">]</span>
+719bf000-719cc000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-non moving space<span class="token punctuation">]</span>
+719cc000-74e5b000 ---p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-non moving space<span class="token punctuation">]</span>
+74e5b000-7565a000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-non moving space<span class="token punctuation">]</span>
+b1562000-b1564000 r--p 00000000 fd:04 <span class="token number">176</span>                                /system/bin/app_process32
+b1564000-b1568000 r-xp 00001000 fd:04 <span class="token number">176</span>                                /system/bin/app_process32
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+
+
+f4226000-f4246000 r--s 00000000 00:11 <span class="token number">23653</span>                              /dev/__properties__/u:object_r:vendor_socket_hook_prop:s0
+f4246000-f4266000 r--s 00000000 00:11 <span class="token number">23566</span>                              /dev/__properties__/u:object_r:heapprofd_prop:s0
+f4266000-f4286000 r--s 00000000 00:11 <span class="token number">23535</span>                              /dev/__properties__/u:object_r:exported2_default_prop:s0
+f4286000-f434e000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:linker_alloc<span class="token punctuation">]</span>
+f434e000-f436e000 r--s 00000000 00:11 <span class="token number">23665</span>                              /dev/__properties__/u:object_r:vndk_prop:s0
+f436e000-f436f000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f436f000-f4370000 r--p 00002000 07:78 <span class="token number">28</span>                                 /apex/com.android.art/javalib/arm/boot-apache-xml.art
+f4370000-f4371000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f4371000-f4372000 r--p 00015000 07:78 <span class="token number">31</span>                                 /apex/com.android.art/javalib/arm/boot-bouncycastle.art
+f4372000-f4377000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f4377000-f4378000 r--p 00011000 07:78 <span class="token number">40</span>                                 /apex/com.android.art/javalib/arm/boot-okhttp.art
+f4378000-f4379000 r--p 0001b000 07:78 <span class="token number">37</span>                                 /apex/com.android.art/javalib/arm/boot-core-libart.art
+f4379000-f437d000 r--p 000b7000 07:78 <span class="token number">43</span>                                 /apex/com.android.art/javalib/arm/boot.art
+f437d000-f437e000 ---p 00000000 00:00 <span class="token number">0</span> 
+f437e000-f4381000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:stack_and_tls:main<span class="token punctuation">]</span>
+f4381000-f4382000 ---p 00000000 00:00 <span class="token number">0</span> 
+f4382000-f438a000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f438a000-f43ee000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:linker_alloc<span class="token punctuation">]</span>
+f43ee000-f43ef000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f43ef000-f440f000 r--s 00000000 00:11 <span class="token number">23514</span>                              /dev/__properties__/u:object_r:debug_prop:s0
+f440f000-f442f000 r--s 00000000 00:11 <span class="token number">23535</span>                              /dev/__properties__/u:object_r:exported2_default_prop:s0
+f442f000-f4430000 ---p 00000000 00:00 <span class="token number">0</span> 
+f4430000-f4438000 rw-p 00000000 00:00 <span class="token number">0</span> 
+f4438000-f4439000 ---p 00000000 00:00 <span class="token number">0</span> 
+f4439000-f4459000 r--s 00000000 00:11 <span class="token number">23669</span>                              /dev/__properties__/properties_serial
+f4459000-f445b000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:System property context nodes<span class="token punctuation">]</span>
+f445b000-f446a000 r--s 00000000 00:11 <span class="token number">23470</span>                              /dev/__properties__/property_info
+f446a000-f44ce000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:linker_alloc<span class="token punctuation">]</span>
+f44ce000-f44cf000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:bionic_alloc_small_objects<span class="token punctuation">]</span>
+f44cf000-f44d0000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:atexit handlers<span class="token punctuation">]</span>
+f44d0000-f44d1000 ---p 00000000 00:00 <span class="token number">0</span> 
+f44d1000-f44d5000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:thread signal stack<span class="token punctuation">]</span>
+f44d5000-f44d6000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:arc4random data<span class="token punctuation">]</span>
+f44d6000-f44d8000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:System property context nodes<span class="token punctuation">]</span>
+f44d8000-f44d9000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:arc4random data<span class="token punctuation">]</span>
+f44d9000-f44da000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>vvar<span class="token punctuation">]</span>
+f44da000-f44dc000 r-xp 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>vdso<span class="token punctuation">]</span>
+f44dc000-f44f5000 r--p 00000000 07:b8 <span class="token number">13</span>                                 /apex/com.android.runtime/bin/linker
+f44f5000-f457c000 r-xp 00018000 07:b8 <span class="token number">13</span>                                 /apex/com.android.runtime/bin/linker
+f457c000-f4580000 r--p 0009e000 07:b8 <span class="token number">13</span>                                 /apex/com.android.runtime/bin/linker
+f4580000-f4582000 rw-p 000a1000 07:b8 <span class="token number">13</span>                                 /apex/com.android.runtime/bin/linker
+f4582000-f4585000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+f4585000-f4586000 r--p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+f4586000-f458c000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:.bss<span class="token punctuation">]</span>
+ff77f000-ff780000 ---p 00000000 00:00 <span class="token number">0</span> 
+ff780000-fff7f000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>stack<span class="token punctuation">]</span>
+ffff0000-ffff1000 r-xp 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>kuserhelpers<span class="token punctuation">]</span>
+</code></pre>
+<ul>
+<li><img src="../assets/img/android_process_map_detail_1.jpg" alt="android_process_map_detail_1"></li>
+<li><img src="../assets/img/android_process_map_detail_2.jpg" alt="android_process_map_detail_2"></li>
+</ul>
+<h2 id="内存映射信息的解读"><a name="内存映射信息的解读" class="plugin-anchor" href="#内存映射信息的解读"><i class="fa fa-link" aria-hidden="true"></i></a>内存映射信息的解读</h2>
+<p>想要搞懂：</p>
+<ul>
+<li>内存对齐</li>
+<li>哪个是stack</li>
+</ul>
+<p>等具体含义。</p>
+<p><a href="https://studylib.net/doc/8584577/understanding-elf-using-readelf-and-objdump" target="_blank">Understanding ELF using readelf and objdump (studylib.net)</a></p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> 0039d000-003b2000 r-xp 00000000 <span class="token number">16</span>:41 <span class="token number">1080084</span> /lib/ld-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> 003b2000-003b3000 r--p 00014000 <span class="token number">16</span>:41 <span class="token number">1080084</span> /lib/ld-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> 003b3000-003b4000 rw-p 00015000 <span class="token number">16</span>:41 <span class="token number">1080084</span> /lib/ld-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> 003b6000-004cb000 r-xp 00000000 <span class="token number">16</span>:41 <span class="token number">1080085</span> /lib/tls/libc-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> 004cb000-004cd000 r--p 00115000 <span class="token number">16</span>:41 <span class="token number">1080085</span> /lib/tls/libc-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> 004cd000-004cf000 rw-p 00117000 <span class="token number">16</span>:41 <span class="token number">1080085</span> /lib/tls/libc-2.3.3.so
+<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> 004cf000-004d1000 rw-p 004cf000 00:00 <span class="token number">0</span>
+<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> 08048000-08049000 r-xp 00000000 <span class="token number">16</span>:06 <span class="token number">66970</span> /tmp/test
+<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> 08049000-0804a000 rw-p 00000000 <span class="token number">16</span>:06 <span class="token number">66970</span> /tmp/test
+<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> b7fec000-b7fed000 rw-p b7fec000 00:00 <span class="token number">0</span>
+<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> bffeb000-c0000000 rw-p bffeb000 00:00 <span class="token number">0</span>
+<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> ffffe000-fffff000 ---p 00000000 00:00 <span class="token number">0</span>
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>VMA# 11<ul>
+<li><code>[11] bffeb000-c0000000 rw-p bffeb000 00:00 0</code></li>
+</ul>
+</li>
+</ul>
+<p>是：</p>
+<ul>
+<li>stack<ul>
+<li>usually, the kernel allocate several pages dynamically and map to the highest virtual address possible in user space to form stack area.</li>
+</ul>
+</li>
+</ul>
+<p>-&gt; 此处去搜stack，还真有多个stack这样的：</p>
+<pre class="language-"><code class="lang-bash">e6ded000-e6df1000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:thread signal stack<span class="token punctuation">]</span>
+
+e84d3000-e86d3000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-rb copying gc mark stack<span class="token punctuation">]</span>
+e86d3000-e96d3000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-concurrent copying gc mark stack<span class="token punctuation">]</span>
+e96d3000-e9ed4000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-live stack<span class="token punctuation">]</span>
+e9ed4000-ea6d5000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-allocation stack<span class="token punctuation">]</span>
+
+ebbc0000-ebdc0000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-rb copying gc mark stack<span class="token punctuation">]</span>
+
+f2282000-f228e000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>anon:dalvik-thread <span class="token builtin class-name">local</span> mark stack<span class="token punctuation">]</span>
+<span class="token punctuation">..</span>.
+</code></pre>
+<p>倒数最后一个：</p>
+<pre class="language-"><code class="lang-bash">ff780000-fff7f000 rw-p 00000000 00:00 <span class="token number">0</span>                                  <span class="token punctuation">[</span>stack<span class="token punctuation">]</span>
+</code></pre>
+<p>整个名字就是Stack：</p>
+<p><img src="../assets/img/android_mapping_stack_info.jpg" alt="android_mapping_stack_info"></p>
+<p>是我们希望的，要找的</p>
+<ul>
+<li>Simply speaking, each process address space isdivid ed into two part (this assume Intel compatible 32 bit processor): user space and kernel space. User space is in 0x00000000-0xc0000000 range, while kernel space starts on 0xc0000000 onward</li>
+</ul>
+<p>-&gt; </p>
+<ul>
+<li>每个进程的（Intel 的32位处理器的）地址空间都被分为2部分<ul>
+<li>用户空间<ul>
+<li>范围：<code>0x00000000-0xc0000000</code><ul>
+<li>所以上述test的地址空间的，最高位置(地址范围<code>bffeb000-c0000000</code>),分配给了stack<ul>
+<li><code>[11] bffeb000-c0000000 rw-p bffeb000 00:00 0</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内核空间<ul>
+<li>范围：0xc0000000-...</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其他相关解释：</p>
+<p><a href="https://stevens.netmeister.org/631/elf.html" target="_blank">Executable and Linkable Format (ELF) (netmeister.org)</a></p>
+<pre class="language-"><code class="lang-bash">0000000000400000      8K r-x--  a.out
+0000000000601000      4K rw---  a.out
+0000003433e00000    112K r-x--  /lib64/ld-2.5.so
+000000343401b000      4K r----  /lib64/ld-2.5.so
+000000343401c000      4K rw---  /lib64/ld-2.5.so
+0000003434200000   1336K r-x--  /lib64/libc-2.5.so     <span class="token operator">&lt;</span>-- The first <span class="token string">&quot;LOAD&quot;</span> segment, <span class="token function">which</span> contains .text and .rodata sections
+000000343434e000   2044K -----  /lib64/libc-2.5.so     <span class="token operator">&lt;</span>-- <span class="token string">&quot;Hole&quot;</span>
+000000343454d000     16K r----  /lib64/libc-2.5.so     <span class="token operator">&lt;</span>-- Relocation <span class="token punctuation">(</span>GNU_RELRO<span class="token punctuation">)</span> info  -+---- The second <span class="token string">&quot;LOAD&quot;</span> segment
+0000003434551000      4K rw---  /lib64/libc-2.5.so     <span class="token operator">&lt;</span>-- .got.plt .data sections      -+
+0000003434552000     20K rw---    <span class="token punctuation">[</span> anon <span class="token punctuation">]</span>             <span class="token operator">&lt;</span>-- The remaining zero-filled sections <span class="token punctuation">(</span>e.g. .bss<span class="token punctuation">)</span>
+0000003434e00000     88K r-x--  /lib64/libpthread-2.5.so     <span class="token operator">&lt;</span>-- The first <span class="token string">&quot;LOAD&quot;</span> segment, <span class="token function">which</span> contains .text and .rodata sections
+0000003434e16000   2044K -----  /lib64/libpthread-2.5.so     <span class="token operator">&lt;</span>-- <span class="token string">&quot;Hole&quot;</span>
+0000003435015000      4K r----  /lib64/libpthread-2.5.so     <span class="token operator">&lt;</span>-- Relocation <span class="token punctuation">(</span>GNU_RELRO<span class="token punctuation">)</span> info  -+---- The second <span class="token string">&quot;LOAD&quot;</span> segment
+0000003435016000      4K rw---  /lib64/libpthread-2.5.so     <span class="token operator">&lt;</span>-- .got.plt .data sections      -+
+0000003435017000     16K rw---    <span class="token punctuation">[</span> anon <span class="token punctuation">]</span>                   <span class="token operator">&lt;</span>-- The remaining zero-filled sections <span class="token punctuation">(</span>e.g. .bss<span class="token punctuation">)</span>
+00002aaaaaaab000      4K rw---    <span class="token punctuation">[</span> anon <span class="token punctuation">]</span>
+00002aaaaaac6000     12K rw---    <span class="token punctuation">[</span> anon <span class="token punctuation">]</span>
+00007ffffffea000     84K rw---    <span class="token punctuation">[</span> stack <span class="token punctuation">]</span>
+ffffffffff600000   8192K -----    <span class="token punctuation">[</span> anon <span class="token punctuation">]</span>
+ total            14000K
+</code></pre>
+<p>供参考。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-10-02 17:19:54
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: adb辅助调试">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../other_debug_tool/" class="navigation navigation-next " aria-label="Next page: 其他工具">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"查看内存映射","level":"1.8.1","depth":2,"next":{"title":"其他工具","level":"1.9","depth":1,"path":"other_debug_tool/README.md","ref":"other_debug_tool/README.md","articles":[{"title":"AndBug","level":"1.9.1","depth":2,"path":"other_debug_tool/andbug.md","ref":"other_debug_tool/andbug.md","articles":[]},{"title":"redexer","level":"1.9.2","depth":2,"path":"other_debug_tool/redexer.md","ref":"other_debug_tool/redexer.md","articles":[]},{"title":"Fino","level":"1.9.3","depth":2,"path":"other_debug_tool/fino.md","ref":"other_debug_tool/fino.md","articles":[]}]},"previous":{"title":"adb辅助调试","level":"1.8","depth":1,"path":"adb_assit_debug/README.md","ref":"adb_assit_debug/README.md","articles":[{"title":"查看内存映射","level":"1.8.1","depth":2,"path":"adb_assit_debug/mem_mapping.md","ref":"adb_assit_debug/mem_mapping.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_dynamic_debug/pdf/android_re_dynamic_debug.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_dynamic_debug/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：动态调试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发期间，如何动态调试安卓程序。包括用AndroidStudio调试apk的smali代码、用LLDB调试安卓程序、用Frida调试安卓程序、编写Xposed模块去调试安卓程序。对于AndroidStudio调试安卓Smali代码，此处以YouTube为例，介绍主要步骤：确保安卓已root、调试工具选择、反编译出smali代码、确保app可调试、调试方式启动app、Android Studio中导入smali代码、给smali加断点、配置Android Studio项目、确保adb可获取进程列表、Android Studio调试app进程；对于LLDB调试安卓，包括下载安卓版lldb-server到电脑、把lldb-server传输下载到安卓手机中、电脑中运行lldb、用lldb连接安卓手机中的lldb-server、最后是开始用lldb调试安卓app进程。对于Firda调试安卓，包括初始化Frida调试环境、Frida调试安卓app，以及贴出几个实例包括LiftFileManager、DisplayDemo等。以及Frida方面的常见的问题和心得。然后是动态调试方面的一些常见问题和心得。以及其他一些分析调试工具，包括Unidbg、AndBug、redexer、Fino等；以及用于辅助调试的adb，比如用adb查看内存映射；最后加上心得和实例和附录的参考资料。"},"file":{"path":"adb_assit_debug/mem_mapping.md","mtime":"2023-10-02T09:19:54.622Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T08:09:06.000Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

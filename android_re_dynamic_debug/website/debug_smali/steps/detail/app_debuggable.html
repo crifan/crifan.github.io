@@ -1,0 +1,1229 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>app可调试 · Android逆向：动态调试</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="debug_run_app.html" />
+    
+    
+    <link rel="prev" href="decompile_to_smali.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../debug_overview/">
+            
+                <a href="../../../debug_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Android逆向动态调试概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../debug_overview/debug_logic.html">
+            
+                <a href="../../../debug_overview/debug_logic.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    调试的总体思路
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    AndroidStudio调试Smali
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    详细步骤
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="android_root.html">
+            
+                <a href="android_root.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    确保安卓已root
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="debug_tools.html">
+            
+                <a href="debug_tools.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    调试工具选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="decompile_to_smali.html">
+            
+                <a href="decompile_to_smali.html">
+            
+                    
+                        <b>1.3.1.3.</b>
+                    
+                    反编译出smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.1.4" data-path="app_debuggable.html">
+            
+                <a href="app_debuggable.html">
+            
+                    
+                        <b>1.3.1.4.</b>
+                    
+                    app可调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="debug_run_app.html">
+            
+                <a href="debug_run_app.html">
+            
+                    
+                        <b>1.3.1.5.</b>
+                    
+                    调试方式启动app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.6" data-path="import_smali_to_as.html">
+            
+                <a href="import_smali_to_as.html">
+            
+                    
+                        <b>1.3.1.6.</b>
+                    
+                    AS中导入smali代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.7" data-path="smali_add_breakpoint.html">
+            
+                <a href="smali_add_breakpoint.html">
+            
+                    
+                        <b>1.3.1.7.</b>
+                    
+                    给smali加断点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.8" data-path="config_as_project.html">
+            
+                <a href="config_as_project.html">
+            
+                    
+                        <b>1.3.1.8.</b>
+                    
+                    配置AS项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.9" data-path="adb_get_process.html">
+            
+                <a href="adb_get_process.html">
+            
+                    
+                        <b>1.3.1.9.</b>
+                    
+                    adb可获取进程列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.10" data-path="as_debug_app_process.html">
+            
+                <a href="as_debug_app_process.html">
+            
+                    
+                        <b>1.3.1.10.</b>
+                    
+                    AS调试app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../examples/">
+            
+                <a href="../../examples/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    调试Smali实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../examples/youtube_smali.html">
+            
+                <a href="../../examples/youtube_smali.html">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    调试安卓Youtube的smali
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../summary_smali/">
+            
+                <a href="../../summary_smali/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    调试Smali心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../lldb_debug_android/">
+            
+                <a href="../../../lldb_debug_android/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    LLDB调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../lldb_debug_android/download_lldb_server.html">
+            
+                <a href="../../../lldb_debug_android/download_lldb_server.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    下载安卓版lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../lldb_debug_android/lldb_server_to_android.html">
+            
+                <a href="../../../lldb_debug_android/lldb_server_to_android.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    lldb-server传输到手机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../lldb_debug_android/run_lldb_server.html">
+            
+                <a href="../../../lldb_debug_android/run_lldb_server.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    运行lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                <a href="../../../lldb_debug_android/lldb_connect_lldb_server.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    lldb连接lldb-server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../../lldb_debug_android/lldb_debug_android_process.html">
+            
+                <a href="../../../lldb_debug_android/lldb_debug_android_process.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    用lldb调试安卓app进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../frida_debug_android/">
+            
+                <a href="../../../frida_debug_android/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Frida调试安卓
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../frida_debug_android/init_frida_dev_env.html">
+            
+                <a href="../../../frida_debug_android/init_frida_dev_env.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    初始化Frida开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../frida_debug_android/frida_debug_android_app.html">
+            
+                <a href="../../../frida_debug_android/frida_debug_android_app.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Frida调试安卓app
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../frida_debug_android/demo/">
+            
+                <a href="../../../frida_debug_android/demo/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    示例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../frida_debug_android/demo/liftfilemanager.html">
+            
+                <a href="../../../frida_debug_android/demo/liftfilemanager.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    LiftFileManager
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../../frida_debug_android/demo/displaydemo.html">
+            
+                <a href="../../../frida_debug_android/demo/displaydemo.html">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    DisplayDemo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../../frida_debug_android/common_issues.html">
+            
+                <a href="../../../frida_debug_android/common_issues.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../../../frida_debug_android/summary.html">
+            
+                <a href="../../../frida_debug_android/summary.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../emulate_code/">
+            
+                <a href="../../../emulate_code/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    模拟代码运行
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../emulate_code/unidbg/">
+            
+                <a href="../../../emulate_code/unidbg/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    Unidbg
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../hook_framework/">
+            
+                <a href="../../../hook_framework/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    Hook框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../hook_framework/xposed.html">
+            
+                <a href="../../../hook_framework/xposed.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    Xposed框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../../hook_framework/cydiasubstrate/">
+            
+                <a href="../../../hook_framework/cydiasubstrate/">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    CydiaSubstrate
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                <a href="../../../hook_framework/cydiasubstrate/android_opendebug.html">
+            
+                    
+                        <b>1.7.2.1.</b>
+                    
+                    Android-OpenDebug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                <a href="../../../hook_framework/cydiasubstrate/introspy_android.html">
+            
+                    
+                        <b>1.7.2.2.</b>
+                    
+                    Introspy-Android
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../adb_assit_debug/">
+            
+                <a href="../../../adb_assit_debug/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    adb辅助调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../adb_assit_debug/mem_mapping.html">
+            
+                <a href="../../../adb_assit_debug/mem_mapping.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    查看内存映射
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../other_debug_tool/">
+            
+                <a href="../../../other_debug_tool/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    其他工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../other_debug_tool/andbug.html">
+            
+                <a href="../../../other_debug_tool/andbug.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    AndBug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../../other_debug_tool/redexer.html">
+            
+                <a href="../../../other_debug_tool/redexer.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    redexer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../../other_debug_tool/fino.html">
+            
+                <a href="../../../other_debug_tool/fino.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    Fino
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >app可调试</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="app可调试"><a name="app可调试" class="plugin-anchor" href="#app可调试"><i class="fa fa-link" aria-hidden="true"></i></a>app可调试</h1>
+<p>TODO：</p>
+<ul>
+<li>【已解决】安卓逆向：如何让YouTube的apk可以被调试</li>
+<li>【已解决】安卓让apk可调试：修改全局系统属性ro.debuggable</li>
+<li>【已解决】安卓逆向：用MagiskHide Props Config实现全局apk可调试</li>
+<li>【未解决】安卓逆向：让apk可调试之通过XPosed插件</li>
+<li>【未解决】尝试用BDOpener修改ro.debuggable使得apk可调试</li>
+<li>【已解决】用Magisk插件MagiskHide Props Config去设置ro.debuggable实现全局app可调试</li>
+<li>【已解决】Google Pixel3安卓手机中MagiskHide Props Config中没有ro.debuggable属性可设置</li>
+<li>【未解决】安卓逆向：用mprop修改属性ro.debuggable让apk可调试</li>
+<li>【未解决】安卓逆向：用rootadb的setpropex修改属性ro.debuggable让apk可调试</li>
+<li>【未解决】mprop提示报错：inject position not found, may be already patched</li>
+</ul>
+<hr>
+<p>确保app<code>可调试</code>=<code>debuggable</code>：</p>
+<p>让app可调试，有多种方式：</p>
+<ul>
+<li>针对<code>特定app</code>可调试<ul>
+<li>app代码中<code>AndroidManifest.xml</code>加上<code>android:debuggable=&quot;true&quot;</code><ul>
+<li>思路：往往是（<code>apktool</code>等）反编译得到源码，修改后，再重新打包回去</li>
+<li>缺点：对于稍微复杂点的apk，往往重新打包的过程中会出错，会很麻烦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>全局可调</code>：安卓系统中所有app进程都可调试<ul>
+<li>实现思路：修改系统全局属性<code>ro.debuggable</code></li>
+<li>具体方法<ul>
+<li>修改<code>boot.img</code>，重新刷入<ul>
+<li>说明：比较折腾的一种。不推荐，虽然也可以一劳永逸，但是比较折腾，刷机操作失误还容易变砖</li>
+</ul>
+</li>
+<li><code>mprop</code><ul>
+<li>已基本失效，放弃</li>
+</ul>
+</li>
+<li><code>XPosed</code>插件<ul>
+<li><code>xinstaller</code></li>
+<li><code>Xdebuggable</code></li>
+<li><code>BuildProp Enhancer</code></li>
+<li><code>XDebug</code></li>
+</ul>
+</li>
+<li><code>Magisk</code><ul>
+<li><code>Magisk</code><ul>
+<li>命令行：<code>magisk resetprop ro.debuggable 1</code></li>
+<li>缺点：重启后失效</li>
+</ul>
+</li>
+<li><code>Magisk</code>插件<ul>
+<li><code>MagiskHide Props Config</code><ul>
+<li>用<code>props</code>去修改<code>ro.debuggable=1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此处选择，相对方便操作和效果更好的：</p>
+<h2 id="magiskhide-props-config"><a name="magiskhide-props-config" class="plugin-anchor" href="#magiskhide-props-config"><i class="fa fa-link" aria-hidden="true"></i></a>MagiskHide Props Config</h2>
+<ul>
+<li>Magisk的插件<ul>
+<li>MagiskHide Props Config<ul>
+<li><img src="../../../assets/img/magiskhide_props_config.png" alt="magiskhide_props_config"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>安装后，去安卓设备端的命令行（<code>adb shell</code>进去）运行：</p>
+<pre class="language-"><code class="lang-bash">props
+</code></pre>
+<p>根据提示，去（先新增再）修改为：<code>ro.debuggable=1</code></p>
+<p>核心的选择是：</p>
+<ul>
+<li><code>5</code> - Add/edit custom props<ul>
+<li><code>n</code> - New custom prop<ul>
+<li><code>ro.debuggable</code><ul>
+<li><code>y</code> - Yes<ul>
+<li><code>1</code><ul>
+<li><code>y</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>最后查看属性，确保修改成功：</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&gt;</span> adb shell getprop ro.debuggable
+<span class="token number">1</span>
+</code></pre>
+<h2 id="androidmanifestxml加debuggable属性"><a name="androidmanifestxml加debuggable属性" class="plugin-anchor" href="#androidmanifestxml加debuggable属性"><i class="fa fa-link" aria-hidden="true"></i></a>AndroidManifest.xml加debuggable属性</h2>
+<p>顺带介绍另外一种，虽然不推荐，但是大家常提到的方式：</p>
+<ul>
+<li>app代码中<code>AndroidManifest.xml</code>加上<code>android:debuggable=&quot;true&quot;</code></li>
+</ul>
+<p>思路：</p>
+<p>把apktool反编译后的代码中的</p>
+<p><code>AndroidManifest.xml</code></p>
+<p>去修改，加上：</p>
+<pre class="language-"><code class="lang-bash">android:debuggable<span class="token operator">=</span><span class="token string">&quot;true&quot;</span>
+</code></pre>
+<p><img src="../../../assets/img/debuggable_xml_set_true.jpg" alt="debuggable_xml_set_true"></p>
+<p>然后再用apktool重新打包出apk（有失败的风险）</p>
+<p>安装到安卓手机中，成为可调试的app</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2023-09-13 21:54:29
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="decompile_to_smali.html" class="navigation navigation-prev " aria-label="Previous page: 反编译出smali">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="debug_run_app.html" class="navigation navigation-next " aria-label="Next page: 调试方式启动app">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"app可调试","level":"1.3.1.4","depth":3,"next":{"title":"调试方式启动app","level":"1.3.1.5","depth":3,"path":"debug_smali/steps/detail/debug_run_app.md","ref":"debug_smali/steps/detail/debug_run_app.md","articles":[]},"previous":{"title":"反编译出smali","level":"1.3.1.3","depth":3,"path":"debug_smali/steps/detail/decompile_to_smali.md","ref":"debug_smali/steps/detail/decompile_to_smali.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_dynamic_debug/pdf/android_re_dynamic_debug.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_dynamic_debug/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：动态调试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发期间，如何动态调试安卓程序。包括用AndroidStudio调试apk的smali代码、用LLDB调试安卓程序、用Frida调试安卓程序、编写Xposed模块去调试安卓程序。对于AndroidStudio调试安卓Smali代码，此处以YouTube为例，介绍主要步骤：确保安卓已root、调试工具选择、反编译出smali代码、确保app可调试、调试方式启动app、Android Studio中导入smali代码、给smali加断点、配置Android Studio项目、确保adb可获取进程列表、Android Studio调试app进程；对于LLDB调试安卓，包括下载安卓版lldb-server到电脑、把lldb-server传输下载到安卓手机中、电脑中运行lldb、用lldb连接安卓手机中的lldb-server、最后是开始用lldb调试安卓app进程。对于Firda调试安卓，包括初始化Frida调试环境、Frida调试安卓app，以及贴出几个实例包括LiftFileManager、DisplayDemo等。以及Frida方面的常见的问题和心得。然后是动态调试方面的一些常见问题和心得。以及其他一些分析调试工具，包括Unidbg、AndBug、redexer、Fino等；以及用于辅助调试的adb，比如用adb查看内存映射；最后加上心得和实例和附录的参考资料。"},"file":{"path":"debug_smali/steps/detail/app_debuggable.md","mtime":"2023-09-13T13:54:29.305Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T08:09:06.000Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
