@@ -3,7 +3,7 @@
 <html lang="zh-hans" >
     <head>
         <meta charset="UTF-8">
-        <title>p · 主流调试器：LLDB</title>
+        <title>breakpoint · 主流调试器：LLDB</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="po.html" />
+    <link rel="next" href="help.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="../frame.html" />
     
 
     <style>
@@ -469,9 +469,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.3" data-path="./">
+        <li class="chapter " data-level="1.4.2.3" data-path="../expression/">
             
-                <a href="./">
+                <a href="../expression/">
             
                     
                         <b>1.4.2.3.</b>
@@ -485,9 +485,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.2.3.1" data-path="p.html">
+        <li class="chapter " data-level="1.4.2.3.1" data-path="../expression/p.html">
             
-                <a href="p.html">
+                <a href="../expression/p.html">
             
                     
                         <b>1.4.2.3.1.</b>
@@ -500,9 +500,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.3.2" data-path="po.html">
+        <li class="chapter " data-level="1.4.2.3.2" data-path="../expression/po.html">
             
-                <a href="po.html">
+                <a href="../expression/po.html">
             
                     
                         <b>1.4.2.3.2.</b>
@@ -622,9 +622,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.8" data-path="../breakpoint/">
+        <li class="chapter active" data-level="1.4.2.8" data-path="./">
             
-                <a href="../breakpoint/">
+                <a href="./">
             
                     
                         <b>1.4.2.8.</b>
@@ -638,9 +638,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.2.8.1" data-path="../breakpoint/help.html">
+        <li class="chapter " data-level="1.4.2.8.1" data-path="help.html">
             
-                <a href="../breakpoint/help.html">
+                <a href="help.html">
             
                     
                         <b>1.4.2.8.1.</b>
@@ -1106,7 +1106,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >p</a>
+        <a href="../../.." >breakpoint</a>
     </h1>
 </div>
 
@@ -1121,43 +1121,44 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="p"><a name="p" class="plugin-anchor" href="#p"><i class="fa fa-link" aria-hidden="true"></i></a>p</h1>
+                                <html><head></head><body><h1 id="breakpoint"><a name="breakpoint" class="plugin-anchor" href="#breakpoint"><i class="fa fa-link" aria-hidden="true"></i></a>breakpoint</h1>
+<p>TODO：</p>
 <ul>
-<li><code>p</code> == <code>expression --</code></li>
+<li>【记录】lldb命令使用心得：breakpoint</li>
+<li>【已解决】Xcode中lldb中b list不是breakpoint list</li>
+<li>【未解决】Xcode中无法给下一行将要运行的汇编指令加断点</li>
+<li>【已解决】XCode中如何给符号断点加上判断条件</li>
+<li>【未解决】XCode和lldb如何根据函数地址加断点</li>
 </ul>
-<h2 id="常见p的缩写的语法"><a name="常见p的缩写的语法" class="plugin-anchor" href="#常见p的缩写的语法"><i class="fa fa-link" aria-hidden="true"></i></a>常见p的缩写的语法</h2>
+<hr>
 <ul>
-<li>英文</li>
+<li>详见独立子教程<ul>
+<li><a href="https://book.crifan.org/books/ios_re_debug_breakpoint/website/" target="_blank">iOS逆向之动态调试：断点</a></li>
 </ul>
-<pre class="language-"><code class="lang-bash">p    //
-p/x  //x<span class="token operator">=</span>hex<span class="token operator">=</span>hexadecimal
-p/d  //d<span class="token operator">=</span>decimal<span class="token operator">=</span>signed decimal
-p/u  //u<span class="token operator">=</span>unsigned decimal
-p/o  //o<span class="token operator">=</span>octal
-p/t  //t<span class="token operator">=</span>two<span class="token operator">=</span>binary
-p/a  //a<span class="token operator">=</span>address
-p/c  //c<span class="token operator">=</span>char<span class="token operator">=</span>character
-p/f  //f<span class="token operator">=</span>float
-p/s  //s<span class="token operator">=</span>string
-p/r  //r<span class="token operator">=</span>raw
+</li>
+</ul>
+<h2 id="breakpoint举例"><a name="breakpoint举例" class="plugin-anchor" href="#breakpoint举例"><i class="fa fa-link" aria-hidden="true"></i></a>breakpoint举例</h2>
+<pre class="language-"><code class="lang-bash">breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">-a</span> 函数地址
+
+breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">-a</span> ASLR偏移量 + 静态分析的函数地址
+
+breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">-a</span> （image list <span class="token parameter variable">-o</span> -f看到的库的加载的起始地址） +  （IDA等工具）静态分析的函数地址
 </code></pre>
-<ul>
-<li>中文</li>
-</ul>
-<pre class="language-"><code class="lang-bash">p    //<span class="token operator">!</span><span class="token operator">&lt;</span> 默认打印十进制
-p/x  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以十六进制打印整数 
-p/d  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以带符号的十进制打印整数 
-p/u  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以无符号的十进制打印整数 
-p/o  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以八进制打印整数 
-p/t  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以二进制打印整数 
-p/a  //<span class="token operator">!</span><span class="token operator">&lt;</span> 以十六进制打印地址 
-p/c  //<span class="token operator">!</span><span class="token operator">&lt;</span> 打印字符常量 
-p/f  //<span class="token operator">!</span><span class="token operator">&lt;</span> 打印浮点数 
-p/s  //<span class="token operator">!</span><span class="token operator">&lt;</span> 打印字符串 
-p/r  //<span class="token operator">!</span><span class="token operator">&lt;</span> 格式化打印
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">-a</span> 0x1102d3348
+Breakpoint <span class="token number">54</span>: where <span class="token operator">=</span> AwemeCore<span class="token variable"><span class="token variable">`</span>___lldb_unnamed_symbol1462804$$AwemeCore + <span class="token number">480</span>, address <span class="token operator">=</span> 0x00000001102d3348
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> breakpoint list
+Current breakpoints:
+…
+<span class="token number">54</span>: address <span class="token operator">=</span> AwemeCore<span class="token punctuation">[</span>0x000000000ee2b348<span class="token punctuation">]</span>, locations <span class="token operator">=</span> <span class="token number">1</span>, resolved <span class="token operator">=</span> <span class="token number">1</span>, hit count <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token number">54.1</span>: where <span class="token operator">=</span> AwemeCore<span class="token variable">`</span></span>___lldb_unnamed_symbol1462804<span class="token variable">$$</span>AwemeCore + <span class="token number">480</span>, address <span class="token operator">=</span> 0x00000001102d3348, resolved, hit count <span class="token operator">=</span> <span class="token number">0</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">breakpoint <span class="token builtin class-name">set</span> <span class="token parameter variable">--name</span> foo <span class="token parameter variable">--condition</span> <span class="token string">&apos;(int)strcmp(y,&quot;hello&quot;) == 0&apos;</span>
+</code></pre>
+<p>==</p>
+<pre class="language-"><code class="lang-bash">br s <span class="token parameter variable">-n</span> foo <span class="token parameter variable">-c</span> <span class="token string">&apos;(int)strcmp(y,&quot;hello&quot;) == 0&apos;</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-07-13 17:28:19
+2023-12-21 22:14:23
 </span></footer></body></html>
                                 
                                 </section>
@@ -1185,12 +1186,12 @@ p/r  //<span class="token operator">!</span><span class="token operator">&lt;</s
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: expression">
+                <a href="../frame.html" class="navigation navigation-prev " aria-label="Previous page: frame">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="po.html" class="navigation navigation-next " aria-label="Next page: po">
+                <a href="help.html" class="navigation navigation-next " aria-label="Next page: help语法">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1201,7 +1202,7 @@ p/r  //<span class="token operator">!</span><span class="token operator">&lt;</s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"p","level":"1.4.2.3.1","depth":4,"next":{"title":"po","level":"1.4.2.3.2","depth":4,"path":"lldb_commands/common_cmd/expression/po.md","ref":"lldb_commands/common_cmd/expression/po.md","articles":[]},"previous":{"title":"expression","level":"1.4.2.3","depth":3,"path":"lldb_commands/common_cmd/expression/README.md","ref":"lldb_commands/common_cmd/expression/README.md","articles":[{"title":"p","level":"1.4.2.3.1","depth":4,"path":"lldb_commands/common_cmd/expression/p.md","ref":"lldb_commands/common_cmd/expression/p.md","articles":[]},{"title":"po","level":"1.4.2.3.2","depth":4,"path":"lldb_commands/common_cmd/expression/po.md","ref":"lldb_commands/common_cmd/expression/po.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/popular_debugger_lldb/pdf/popular_debugger_lldb.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/popular_debugger_lldb/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"popular_debugger_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"主流调试器：LLDB","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍主流的调试器LLDB。先是LLDB概览；再详细介绍LLDB的命令，包括LLDB的命令概览和LLDB的各个命令；LLDB命令概览包括cheat sheet和help语法；LLDB常用命令包括image，以及image中的image lookup、image list、image dump等，且给出了详细的例子和help语法；然后是register、expression和其中的p和po，；然后介绍了其中的、memory和memory read及其中的help语法、disassemble、thread、frame、breakpoint、watchpoint、以及调试控制相关的命令，包括run、continue、next和nexti、step和stepi、jump、finish、exit等，且都给出help语法和用法举例；然后再整理出相关心得，包括命令的缩写、Xcode中的lld，包括自动补全和查看函数调用堆栈、iOS逆向、LLVM等等。最后给出相关的文档和资料。"},"file":{"path":"lldb_commands/common_cmd/expression/p.md","mtime":"2023-07-13T09:28:19.844Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-21T14:15:37.516Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"breakpoint","level":"1.4.2.8","depth":3,"next":{"title":"help语法","level":"1.4.2.8.1","depth":4,"path":"lldb_commands/common_cmd/breakpoint/help.md","ref":"lldb_commands/common_cmd/breakpoint/help.md","articles":[]},"previous":{"title":"frame","level":"1.4.2.7","depth":3,"path":"lldb_commands/common_cmd/frame.md","ref":"lldb_commands/common_cmd/frame.md","articles":[]},"articles":[{"title":"help语法","level":"1.4.2.8.1","depth":4,"path":"lldb_commands/common_cmd/breakpoint/help.md","ref":"lldb_commands/common_cmd/breakpoint/help.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/popular_debugger_lldb/pdf/popular_debugger_lldb.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/popular_debugger_lldb/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"popular_debugger_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"主流调试器：LLDB","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍主流的调试器LLDB。先是LLDB概览；再详细介绍LLDB的命令，包括LLDB的命令概览和LLDB的各个命令；LLDB命令概览包括cheat sheet和help语法；LLDB常用命令包括image，以及image中的image lookup、image list、image dump等，且给出了详细的例子和help语法；然后是register、expression和其中的p和po，；然后介绍了其中的、memory和memory read及其中的help语法、disassemble、thread、frame、breakpoint、watchpoint、以及调试控制相关的命令，包括run、continue、next和nexti、step和stepi、jump、finish、exit等，且都给出help语法和用法举例；然后再整理出相关心得，包括命令的缩写、Xcode中的lld，包括自动补全和查看函数调用堆栈、iOS逆向、LLVM等等。最后给出相关的文档和资料。"},"file":{"path":"lldb_commands/common_cmd/breakpoint/README.md","mtime":"2023-12-21T14:14:23.905Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-21T14:15:37.516Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
