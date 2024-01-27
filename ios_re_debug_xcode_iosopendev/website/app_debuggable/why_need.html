@@ -1,0 +1,713 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>为何要 · iOS逆向调试：Xcode+iOSOpenDev</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="internal_logic.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_debug_xcode_iosopendev","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview_xcode_iosopendev/">
+            
+                <a href="../overview_xcode_iosopendev/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Xcode+iOSOpenDev概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    app可调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="why_need.html">
+            
+                <a href="why_need.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    为何要
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="internal_logic.html">
+            
+                <a href="internal_logic.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    底层机制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="how_implement/">
+            
+                <a href="how_implement/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    如何实现
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="how_implement/unc0ver_jail.html">
+            
+                <a href="how_implement/unc0ver_jail.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    unc0ver越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="how_implement/xinaa15_jail.html">
+            
+                <a href="how_implement/xinaa15_jail.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    XinaA15越狱
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="how_implement/resign_add_ent.html">
+            
+                <a href="how_implement/resign_add_ent.html">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    重签名加权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="how_implement/via_plugin.html">
+            
+                <a href="how_implement/via_plugin.html">
+            
+                    
+                        <b>1.3.3.4.</b>
+                    
+                    用插件实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../debug_type/">
+            
+                <a href="../debug_type/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    调试方式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../debug_type/attach_mode.html">
+            
+                <a href="../debug_type/attach_mode.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    Attach挂载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../debug_type/spawn_mode.html">
+            
+                <a href="../debug_type/spawn_mode.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    Spawn孵化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../effect_example/">
+            
+                <a href="../effect_example/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    效果举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../appendix/check_pid.html">
+            
+                <a href="../appendix/check_pid.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    查看进程PID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../appendix/process_csflags.html">
+            
+                <a href="../appendix/process_csflags.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    进程csflags定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >为何要</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="为何要可调试debuggable"><a name="为何要可调试debuggable" class="plugin-anchor" href="#为何要可调试debuggable"><i class="fa fa-link" aria-hidden="true"></i></a>为何要可调试debuggable</h1>
+<p>iOS逆向期间，尝试用Xcode去调试iPhone中的目标（app或二进制）时，如果目标不可调试，则会报错：</p>
+<p><code>Not allowed to attach to process</code></p>
+<p>所以被调试目标（app或二进制），必须：可调试=<code>debuggable</code>，才可以顺利调试。</p>
+<h2 id="报错举例"><a name="报错举例" class="plugin-anchor" href="#报错举例"><i class="fa fa-link" aria-hidden="true"></i></a>报错举例</h2>
+<pre class="language-"><code class="lang-bash">Could not attach to pid <span class="token builtin class-name">:</span> “5439”
+
+attach failed <span class="token punctuation">(</span>Not allowed to attach to process.  Look <span class="token keyword">in</span> the console messages <span class="token punctuation">(</span>Console.app<span class="token punctuation">)</span>, near the debugserver entries, when the attach failed.  The subsystem that denied the attach permission will likely have logged an informative message about why it was denied.<span class="token punctuation">)</span>
+</code></pre>
+<p><img src="../assets/img/xcode_not_allowed_attach.png" alt="xcode_not_allowed_attach"></p>
+<ul>
+<li>Details<ul>
+<li><img src="../assets/img/not_attach_detail.png" alt="not_attach_detail"></li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-bash">Details
+
+Could not attach to pid <span class="token builtin class-name">:</span> “5439”
+Domain: IDEDebugSessionErrorDomain
+Code: <span class="token number">3</span>
+Failure Reason: attach failed <span class="token punctuation">(</span>Not allowed to attach to process.  Look <span class="token keyword">in</span> the console messages <span class="token punctuation">(</span>Console.app<span class="token punctuation">)</span>, near the debugserver entries, when the attach failed.  The subsystem that denied the attach permission will likely have logged an informative message about why it was denied.<span class="token punctuation">)</span>
+User Info: <span class="token punctuation">{</span>
+    DVTErrorCreationDateKey <span class="token operator">=</span> <span class="token string">&quot;2023-03-02 09:53:45 +0000&quot;</span><span class="token punctuation">;</span>
+    DVTRadarComponentKey <span class="token operator">=</span> <span class="token number">855031</span><span class="token punctuation">;</span>
+    IDERunOperationFailingWorker <span class="token operator">=</span> DBGLLDBLauncher<span class="token punctuation">;</span>
+    RawUnderlyingErrorMessage <span class="token operator">=</span> <span class="token string">&quot;attach failed (Not allowed to attach to process.  Look in the console messages (Console.app), near the debugserver entries, when the attach failed.  The subsystem that denied the attach permission will likely have logged an informative message about why it was denied.)&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+--
+
+Analytics Event: com.apple.dt.IDERunOperationWorkerFinished <span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;device_model&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;iPhone10,1&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;device_osBuild&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;15.0 (19A346)&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;device_platform&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;com.apple.platform.iphoneos&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;launchSession_schemeCommand&quot;</span> <span class="token operator">=</span> Run<span class="token punctuation">;</span>
+    <span class="token string">&quot;launchSession_state&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;launchSession_targetArch&quot;</span> <span class="token operator">=</span> arm64<span class="token punctuation">;</span>
+    <span class="token string">&quot;operation_duration_ms&quot;</span> <span class="token operator">=</span> <span class="token number">105483</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;operation_errorCode&quot;</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;operation_errorDomain&quot;</span> <span class="token operator">=</span> IDEDebugSessionErrorDomain<span class="token punctuation">;</span>
+    <span class="token string">&quot;operation_errorWorker&quot;</span> <span class="token operator">=</span> DBGLLDBLauncher<span class="token punctuation">;</span>
+    <span class="token string">&quot;operation_name&quot;</span> <span class="token operator">=</span> IDEiPhoneRunOperationWorkerGroup<span class="token punctuation">;</span>
+    <span class="token string">&quot;param_consoleMode&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_debugger_attachToExtensions&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_debugger_attachToXPC&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_debugger_type&quot;</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_destination_isProxy&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_destination_platform&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;com.apple.platform.iphoneos&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_MainThreadChecker_stopOnIssue&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_MallocStackLogging_enableDuringAttach&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_MallocStackLogging_enableForXPC&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_allowLocationSimulation&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_gpu_frameCapture_enable&quot;</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_gpu_shaderValidation_enable&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_gpu_validation_enable&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_memoryGraphOnResourceException&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_queueDebugging_enable&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_runtimeProfile_generate&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_sanitizer_asan_enable&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_sanitizer_tsan_enable&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_sanitizer_tsan_stopOnIssue&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_sanitizer_ubsan_stopOnIssue&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_showNonLocalizedStrings&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_viewDebugging_enabled&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_diag_viewDebugging_insertDylibOnLaunch&quot;</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_install_style&quot;</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_launcher_UID&quot;</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_launcher_allowDeviceSensorReplayData&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_launcher_kind&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_launcher_style&quot;</span> <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_launcher_substyle&quot;</span> <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_runnable_appExtensionHostRunMode&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_runnable_type&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_testing_launchedForTesting&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_testing_suppressSimulatorApp&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;param_testing_usingCLI&quot;</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;sdk_canonicalName&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;iphoneos15.2&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;sdk_osVersion&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;15.2&quot;</span><span class="token punctuation">;</span>
+    <span class="token string">&quot;sdk_variant&quot;</span> <span class="token operator">=</span> iphoneos<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+--
+
+
+System Information
+
+macOS Version <span class="token number">11.7</span>.3 <span class="token punctuation">(</span>Build 20G1116<span class="token punctuation">)</span>
+Xcode <span class="token number">13.2</span>.1 <span class="token punctuation">(</span><span class="token number">19586</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Build 13C100<span class="token punctuation">)</span>
+Timestamp: <span class="token number">2023</span>-03-02T17:53:45+08:00
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-01-27 12:02:15
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: app可调试">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="internal_logic.html" class="navigation navigation-next " aria-label="Next page: 底层机制">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"为何要","level":"1.3.1","depth":2,"next":{"title":"底层机制","level":"1.3.2","depth":2,"path":"app_debuggable/internal_logic.md","ref":"app_debuggable/internal_logic.md","articles":[]},"previous":{"title":"app可调试","level":"1.3","depth":1,"path":"app_debuggable/README.md","ref":"app_debuggable/README.md","articles":[{"title":"为何要","level":"1.3.1","depth":2,"path":"app_debuggable/why_need.md","ref":"app_debuggable/why_need.md","articles":[]},{"title":"底层机制","level":"1.3.2","depth":2,"path":"app_debuggable/internal_logic.md","ref":"app_debuggable/internal_logic.md","articles":[]},{"title":"如何实现","level":"1.3.3","depth":2,"path":"app_debuggable/how_implement/README.md","ref":"app_debuggable/how_implement/README.md","articles":[{"title":"unc0ver越狱","level":"1.3.3.1","depth":3,"path":"app_debuggable/how_implement/unc0ver_jail.md","ref":"app_debuggable/how_implement/unc0ver_jail.md","articles":[]},{"title":"XinaA15越狱","level":"1.3.3.2","depth":3,"path":"app_debuggable/how_implement/xinaa15_jail.md","ref":"app_debuggable/how_implement/xinaa15_jail.md","articles":[]},{"title":"重签名加权限","level":"1.3.3.3","depth":3,"path":"app_debuggable/how_implement/resign_add_ent.md","ref":"app_debuggable/how_implement/resign_add_ent.md","articles":[]},{"title":"用插件实现","level":"1.3.3.4","depth":3,"path":"app_debuggable/how_implement/via_plugin.md","ref":"app_debuggable/how_implement/via_plugin.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_xcode_iosopendev/pdf/ios_re_debug_xcode_iosopendev.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_xcode_iosopendev/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_xcode_iosopendev","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向调试：Xcode+iOSOpenDev","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向的动态调试期间的，常用的好用的调试方式：Xcode+iOSOpenDev。主要包括先是概览；再介绍为何要实现可调式debuggable；以及对应底层机制；以及如何实现可调试，包括用unc0ver、XinaA15等工具越狱后自带可调试、用codesign加上权限重签名、用jailbreakd_client加上权限等，以及用插件XcodeRootDebug等；然后介绍具体的调试方式，包括Attach挂载模式和Spawn孵化模式；然后给出具体的调试的例子，包括Xcode汇编代码、函数调用堆栈、hook代码加断点等等效果；最后加上附录、包括如何查看进程PID。"},"file":{"path":"app_debuggable/why_need.md","mtime":"2024-01-27T04:02:15.778Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-01-27T09:50:05.302Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

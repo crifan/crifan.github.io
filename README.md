@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20231226`
+最后更新：`20240127`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -147,5 +147,6 @@
     * [可执行文件格式：Mach-O](https://crifan.github.io/exec_file_format_macho/website)
     * [iOS逆向工具：Hopper](https://crifan.github.io/ios_re_tool_hopper/website)
     * [iOS逆向调试：debugserver+lldb](https://crifan.github.io/ios_re_debug_debugserver_lldb/website)
+    * [iOS逆向调试：Xcode+iOSOpenDev](https://crifan.github.io/ios_re_debug_xcode_iosopendev/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
