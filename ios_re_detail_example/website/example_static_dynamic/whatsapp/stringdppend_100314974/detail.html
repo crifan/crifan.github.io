@@ -1,0 +1,1345 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>逆向过程 · iOS逆向：举例详解</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="before_after_logic.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_detail_example","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../ios_re_example_overview/">
+            
+                <a href="../../../ios_re_example_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS逆向举例概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../example_static_analysis/">
+            
+                <a href="../../../example_static_analysis/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    静态分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../example_dynamic_debug/">
+            
+                <a href="../../../example_dynamic_debug/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    动态调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    静态分析+动态调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    WhatsApp
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    StringAppend_100314974
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1.1.1" data-path="detail.html">
+            
+                <a href="detail.html">
+            
+                    
+                        <b>1.5.1.1.1.</b>
+                    
+                    逆向过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.1.2" data-path="before_after_logic.html">
+            
+                <a href="before_after_logic.html">
+            
+                    
+                        <b>1.5.1.1.2.</b>
+                    
+                    前后对比和结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >逆向过程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="逆向过程"><a name="逆向过程" class="plugin-anchor" href="#逆向过程"><i class="fa fa-link" aria-hidden="true"></i></a>逆向过程</h1>
+<p>现在开始具体说明：</p>
+<p>WhatsApp中的函数，二进制内函数偏移量地址是：<code>0x100314974</code></p>
+<p>最开始，用IDA打开并自动分析后，去查看IDA伪代码是：</p>
+<ul>
+<li>sub_100314974</li>
+</ul>
+<pre class="language-"><code class="lang-c">__int64 <span class="token function">sub_100314974</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  _QWORD <span class="token operator">*</span>v0<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  __int64 v1<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 v2<span class="token punctuation">;</span> <span class="token comment">// x9</span>
+  __int64 v3<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v4<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  __int64 v5<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v6<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 v7<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  __int64 v8<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v9<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v10<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v12<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __int64 v13<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+
+
+  v1 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v12 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v13 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v1 <span class="token operator">+</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">124LL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v2 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v3 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v2 <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v4 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v2 <span class="token operator">+</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v3<span class="token punctuation">,</span> v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">124LL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v6 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v7 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v6 <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v8 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v6 <span class="token operator">+</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v7<span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> v12<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../../assets/img/ida_sub_100314974_orig.jpg" alt="ida_sub_100314974_orig"></p>
+<p>很明显，最开始的默认的IDA伪代码看不出此处函数的代码逻辑 =不知道函数具体是做什么的</p>
+<p>然后，经过分析和调试，慢慢搞懂了代码逻辑，再回来给IDA伪代码中去优化改名：</p>
+<ul>
+<li>函数名改名<ul>
+<li>sub_100314974 -&gt; StringAppend_100314974</li>
+</ul>
+</li>
+<li>变量名改名<ul>
+<li><code>v1</code> -&gt; <code>universeInfo</code></li>
+<li><code>v12</code> -&gt; <code>userInfoNameStringObjPart1</code></li>
+<li><code>v13</code> -&gt; <code>userInfoNameStringObjPart2</code></li>
+<li><code>v2</code> -&gt; <code>experimentInfo</code></li>
+<li><code>v6</code> -&gt; <code>bucketInfo</code></li>
+<li>...</li>
+</ul>
+</li>
+<li>加上注释<ul>
+<li><img src="../../../assets/img/sub_100314974_add_comment.jpg" alt="sub_100314974_add_comment"></li>
+</ul>
+</li>
+</ul>
+<p>然后才能慢慢搞懂，逐渐的彻底搞懂代码的全部逻辑</p>
+<p>接着去解释中间是，如何：</p>
+<ul>
+<li><p>静态分析</p>
+</li>
+<li><p>动态调试</p>
+</li>
+</ul>
+<p>的。</p>
+<p>先去动态调试代码逻辑：</p>
+<p>此时先要搞清楚：</p>
+<p>传入的参数值：</p>
+<p>且通过后续研究，比如查看IDA的汇编代码：</p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__text:</span><span class="token number">0000000100314974</span> sub_100314974                           <span class="token comment">; CODE XREF: sub_100314868+B4↑p</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span> var_40          <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">0x40</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span> var_30          <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">0x30</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span> var_20          <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">0x20</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span> var_10          <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">0x10</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span> var_s0          <span class="token operator">=</span>  <span class="token number">0</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314974</span>                 SUB             <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">0x50</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314978</span>                 STP             X24, X23, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_30<span class="token operator">]</span>
+<span class="token label function">__text:</span>000000010031497C                 STP             X22, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_20<span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314980</span>                 STP             X20, X19, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_10<span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314984</span>                 STP             X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_s0<span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314988</span>                 ADD             X29, <span class="token register variable">SP</span>, #<span class="token number">0x40</span>
+<span class="token label function">__text:</span>000000010031498C                 MOV             X19, X20
+<span class="token label function">__text:</span><span class="token number">0000000100314990</span>                 LDR             X8, <span class="token operator">[</span>X20,#<span class="token number">0x10</span><span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314994</span>                 LDP             X9, X0, <span class="token operator">[</span>X8,#<span class="token number">0x10</span><span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">0000000100314998</span>                 STP             X9, X0, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>000000010031499C                 <span class="token register variable">BL</span>              _swift_bridgeObjectRetain
+<span class="token label function">__text:</span>00000001003149A0                 MOV             X20, <span class="token register variable">SP</span>
+<span class="token label function">__text:</span>00000001003149A4                 MOV             W0, #<span class="token number">0x7C</span> <span class="token comment">; &apos;|&apos;</span>
+<span class="token label function">__text:</span>00000001003149A8                 MOV             X1, #<span class="token number">0xE100000000000000</span>
+<span class="token label function">__text:</span>00000001003149AC                 <span class="token register variable">BL</span>              _<span class="token operator">$</span>sSS6appendyySSF <span class="token comment">; String.append(_:)</span>
+<span class="token label function">__text:</span>00000001003149B0                 LDP             X8, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>00000001003149B4                 LDR             X9, <span class="token operator">[</span>X19,#<span class="token number">0x18</span><span class="token operator">]</span>
+<span class="token label function">__text:</span>00000001003149B8                 LDP             X22, X23, <span class="token operator">[</span>X9,#<span class="token number">0x10</span><span class="token operator">]</span>
+<span class="token label function">__text:</span>00000001003149BC                 STP             X8, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>00000001003149C0                 MOV             X0, X21
+<span class="token label function">__text:</span>00000001003149C4                 <span class="token register variable">BL</span>              _swift_bridgeObjectRetain
+<span class="token label function">__text:</span>00000001003149C8                 MOV             X20, <span class="token register variable">SP</span>
+<span class="token label function">__text:</span>00000001003149CC                 MOV             X0, X22
+<span class="token label function">__text:</span>00000001003149D0                 MOV             X1, X23
+<span class="token label function">__text:</span>00000001003149D4                 <span class="token register variable">BL</span>              _<span class="token operator">$</span>sSS6appendyySSF <span class="token comment">; String.append(_:)</span>
+<span class="token label function">__text:</span>00000001003149D8                 LDP             X20, X22, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>00000001003149DC                 MOV             X0, X21
+<span class="token label function">__text:</span><span class="token number">00000001003149E0</span>                 <span class="token register variable">BL</span>              _swift_bridgeObjectRelease
+<span class="token label function">__text:</span><span class="token number">00000001003149E4</span>                 STP             X20, X22, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span><span class="token number">00000001003149E8</span>                 MOV             X0, X22
+<span class="token label function">__text:</span>00000001003149EC                 <span class="token register variable">BL</span>              _swift_bridgeObjectRetain
+<span class="token label function">__text:</span>00000001003149F0                 MOV             X20, <span class="token register variable">SP</span>
+<span class="token label function">__text:</span>00000001003149F4                 MOV             W0, #<span class="token number">0x7C</span> <span class="token comment">; &apos;|&apos;</span>
+<span class="token label function">__text:</span>00000001003149F8                 MOV             X1, #<span class="token number">0xE100000000000000</span>
+<span class="token label function">__text:</span>00000001003149FC                 <span class="token register variable">BL</span>              _<span class="token operator">$</span>sSS6appendyySSF <span class="token comment">; String.append(_:)</span>
+<span class="token label function">__text:</span>0000000100314A00                 LDP             X20, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A04                 MOV             X0, X22
+<span class="token label function">__text:</span>0000000100314A08                 <span class="token register variable">BL</span>              _swift_bridgeObjectRelease
+<span class="token label function">__text:</span>0000000100314A0C                 LDR             X8, <span class="token operator">[</span>X19,#<span class="token number">0x20</span><span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A10                 LDP             X19, X22, <span class="token operator">[</span>X8,#<span class="token number">0x10</span><span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A14                 STP             X20, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A18                 MOV             X0, X21
+<span class="token label function">__text:</span>0000000100314A1C                 <span class="token register variable">BL</span>              _swift_bridgeObjectRetain
+<span class="token label function">__text:</span>0000000100314A20                 MOV             X20, <span class="token register variable">SP</span>
+<span class="token label function">__text:</span>0000000100314A24                 MOV             X0, X19
+<span class="token label function">__text:</span>0000000100314A28                 MOV             X1, X22
+<span class="token label function">__text:</span>0000000100314A2C                 <span class="token register variable">BL</span>              _<span class="token operator">$</span>sSS6appendyySSF <span class="token comment">; String.append(_:)</span>
+<span class="token label function">__text:</span>0000000100314A30                 LDP             X19, X20, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_40<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A34                 MOV             X0, X21
+<span class="token label function">__text:</span>0000000100314A38                 <span class="token register variable">BL</span>              _swift_bridgeObjectRelease
+<span class="token label function">__text:</span>0000000100314A3C                 MOV             X0, X19
+<span class="token label function">__text:</span>0000000100314A40                 MOV             X1, X20
+<span class="token label function">__text:</span>0000000100314A44                 LDP             X29, X30, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_s0<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A48                 LDP             X20, X19, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_10<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A4C                 LDP             X22, X21, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_20<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A50                 LDP             X24, X23, <span class="token operator">[</span><span class="token register variable">SP</span>,#<span class="token number">0x40</span><span class="token operator">+</span>var_30<span class="token operator">]</span>
+<span class="token label function">__text:</span>0000000100314A54                 ADD             <span class="token register variable">SP</span>, <span class="token register variable">SP</span>, #<span class="token number">0x50</span> <span class="token comment">; &apos;P&apos;</span>
+<span class="token label function">__text:</span>0000000100314A58                 RET
+<span class="token label function">__text:</span>0000000100314A58 <span class="token comment">; End of function sub_100314974</span>
+</code></pre>
+<p><img src="../../../assets/img/sub_100314974_asm_orig.jpg" alt="sub_100314974_asm_orig"></p>
+<p>才搞清楚此处是特殊的：通过X20传递了参数的</p>
+<p>而不是普通的，通过X0、X1、X2等寄存器传递参数的</p>
+<p>然后去调试查看寄存器值：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> reg r x0 x1 x19 x20
+      x0 <span class="token operator">=</span> 0x000000016d658c90
+      x1 <span class="token operator">=</span> 0x00000002828d0780
+     x19 <span class="token operator">=</span> 0x00000002828d0780
+     x20 <span class="token operator">=</span> 0x00000002833c1140
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token variable">$x20</span>
+MainAppLibrary.ExperimentAssignment
+</code></pre>
+<p>发现是：</p>
+<ul>
+<li>类<code>MainAppLibrary.ExperimentAssignment</code></li>
+</ul>
+<p>后续确认，是个：Swift的类，而不是普通的ObjC的类</p>
+<p>如此，想要搞清楚，该类的具体细节，比如有哪些属性（字段）和函数等等，就无法直接查看到</p>
+<p>然后需要去通过分析才能找到。</p>
+<p>经过：</p>
+<ul>
+<li>用class-dump导出的头文件<ul>
+<li>详见<ul>
+<li><a href="https://book.crifan.org/books/ios_re_static_analysis/website/analysis_content/export_header/class_dump/" target="_blank">class-dump · iOS逆向开发：静态分析</a></li>
+</ul>
+</li>
+<li>找到类的字段=属性名称</li>
+</ul>
+</li>
+<li>导出的静态字符串等资源<ul>
+<li>详见<ul>
+<li><a href="https://book.crifan.org/books/ios_re_static_analysis/website/analysis_examples/bin_info_exp_str.html" target="_blank">查看信息和导出字符串 · iOS逆向开发：静态分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IDA中类的定义<ul>
+<li>找到类的字段=属性，以及具体的偏移量定义 </li>
+</ul>
+</li>
+</ul>
+<p>最后找到了：</p>
+<p>之前导出的头文件中，搜：</p>
+<p><code>MainAppLibrary\d+ExperimentAssignment</code></p>
+<p>找到的：</p>
+<p><img src="../../../assets/img/headers_experimentassignment.jpg" alt="headers_experimentassignment"></p>
+<ul>
+<li>/Users/crifan/dev/dev_root/iosReverse/WhatsApp/headers/WhatsApp_v23.20.79_headers_WhatsApp/_TtC14MainAppLibrary20ExperimentAssignment.h</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token comment">//</span>
+<span class="token comment">//     Generated by class-dump 3.5 (64 bit) (Debug version compiled Sep 17 2017 16:24:48).</span>
+<span class="token comment">//</span>
+<span class="token comment">//     class-dump is Copyright (C) 1997-1998, 2000-2001, 2004-2015 by Steve Nygard.</span>
+<span class="token comment">//</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">import</span> <span class="token expression"><span class="token operator">&lt;</span>swiftCore<span class="token operator">/</span>_TtCs12_SwiftObject<span class="token punctuation">.</span>h<span class="token operator">&gt;</span></span></span>
+
+@interface _TtC14MainAppLibrary20ExperimentAssignment <span class="token operator">:</span> _TtCs12_SwiftObject
+<span class="token punctuation">{</span>
+    <span class="token comment">// Error parsing type: , name: universeInfo</span>
+    <span class="token comment">// Error parsing type: , name: experimentInfo</span>
+    <span class="token comment">// Error parsing type: , name: bucketInfo</span>
+<span class="token punctuation">}</span>
+
+@end
+</code></pre>
+<p>-》能看出：</p>
+<ul>
+<li>类<code>_TtC14MainAppLibrary20ExperimentAssignment</code><ul>
+<li>有3个属性<ul>
+<li><code>universeInfo</code></li>
+<li><code>experimentInfo</code></li>
+<li><code>bucketInfo</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>但是具体内部偏移量，不清楚。</p>
+<p>然后去找</p>
+<ul>
+<li>类<code>_TtC14MainAppLibrary20ExperimentAssignment</code></li>
+</ul>
+<p>然后通过之前导出的静态字符串资源中，搜索</p>
+<p><code>MainAppLibrary\d+ExperimentAssignment</code></p>
+<p>而找到的：</p>
+<p><img src="../../../assets/img/headers_search_experimentassignment.jpg" alt="headers_search_experimentassignment"></p>
+<ul>
+<li>/Users/crifan/dev/dev_root/iosReverse/WhatsApp/staticAnalysis/WhatsApp/strings_restoredAllSymbols/WhatsApp_nm.txt</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token number">0000000103617</span>cd0 D _OBJC_CLASS_$__TtC14MainAppLibrary20ExperimentAssignment
+</code></pre>
+<ul>
+<li>/Users/crifan/dev/dev_root/iosReverse/WhatsApp/staticAnalysis/WhatsApp/strings_restoredAllSymbols/WhatsApp_otool_oV.txt</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token number">00000001030</span>a7aa8 <span class="token number">0x103617cd0</span> _OBJC_CLASS_$__TtC14MainAppLibrary20ExperimentAssignment
+    isa        <span class="token number">0x103617c98</span> _OBJC_METACLASS_$__TtC14MainAppLibrary20ExperimentAssignment
+    superclass <span class="token number">0x0</span> _OBJC_CLASS_$__TtCs12_SwiftObject
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    data       <span class="token number">0x1030dfe79</span> Swift class
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        name           <span class="token number">0x1029e4a70</span> _TtC14MainAppLibrary20ExperimentAssignment
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        ivars          <span class="token number">0x1030dfe10</span> __OBJC_$_INSTANCE_VARIABLES__TtC14MainAppLibrary20ExperimentAssignment
+</code></pre>
+<p>找到了：</p>
+<ul>
+<li><code>OBJC_CLASS____TtC14MainAppLibrary20ExperimentAssignment</code></li>
+</ul>
+<p>然后去IDA中看看：</p>
+<ul>
+<li><code>OBJC_CLASS____TtC14MainAppLibrary20ExperimentAssignment</code><ul>
+<li>偏移量=地址：<code>0x103617cd0</code></li>
+</ul>
+</li>
+</ul>
+<p>而找到</p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__data:</span>0000000103617CD0 _OBJC_CLASS_<span class="token operator">$</span>__TtC14MainAppLibrary20ExperimentAssignment __objc2_class <span class="token operator">&lt;</span>_OBJC_METACLASS_<span class="token operator">$</span>__TtC14MainAppLibrary20ExperimentAssignment,\
+<span class="token label function">__data:</span>0000000103617CD0                                         <span class="token comment">; DATA XREF: type metadata accessor for ExperimentAssignment+4↑o</span>
+<span class="token label function">__data:</span>0000000103617CD0                                         <span class="token comment">; __objc_classlist:00000001030A7AA8↑o</span>
+<span class="token label function">__data:</span>0000000103617CD0                                _OBJC_CLASS_<span class="token operator">$</span>__TtCs12_SwiftObject, __objc_empty_cache, \ <span class="token comment">; ExperimentAssignment</span>
+<span class="token label function">__data:</span>0000000103617CD0                                <span class="token number">0</span>, \
+<span class="token label function">__data:</span>0000000103617CD0                                _TtC14MainAppLibrary20ExperimentAssignment_<span class="token operator">$</span>classData.flags<span class="token operator">+</span><span class="token number">1</span><span class="token operator">&gt;</span>
+<span class="token label function">__data:</span>0000000103617CF8                 DCB    <span class="token number">2</span>
+<span class="token label function">__data:</span>0000000103617CF9                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFA                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFB                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFC                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFD                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFE                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617CFF                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D00                 DCB <span class="token number">0x28</span> <span class="token comment">; (</span>
+<span class="token label function">__data:</span>0000000103617D01                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D02                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D03                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D04                 DCB    <span class="token number">7</span>
+<span class="token label function">__data:</span>0000000103617D05                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D06                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D07                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D08                 DCB <span class="token number">0x80</span>
+<span class="token label function">__data:</span>0000000103617D09                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D0A                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D0B                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D0C                 DCB <span class="token number">0x10</span>
+<span class="token label function">__data:</span>0000000103617D0D                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D0E                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D0F                 DCB    <span class="token number">0</span>
+<span class="token label function">__data:</span>0000000103617D10                 DCQ <span class="token operator">$</span>s14MainAppLibrary20ExperimentAssignmentCMn <span class="token comment">; nominal type descriptor for ExperimentAssignment</span>
+<span class="token label function">__data:</span>0000000103617D18                 ALIGN <span class="token number">0x20</span>
+<span class="token label function">__data:</span>0000000103617D20                 DCB <span class="token number">0x10</span>
+<span class="token label function">__data:</span>0000000103617D21                 DCB    <span class="token number">0</span>
+</code></pre>
+<p><img src="../../../assets/img/experimentassignment_objc_class.jpg" alt="experimentassignment_objc_class"></p>
+<p>继而找到：</p>
+<pre class="language-"><code class="lang-c">__data<span class="token operator">:</span><span class="token number">0000000103617</span>D10                 DCQ $s14MainAppLibrary20ExperimentAssignmentCMn <span class="token punctuation">;</span> nominal type descriptor <span class="token keyword">for</span> ExperimentAssignment
+</code></pre>
+<p>双击</p>
+<ul>
+<li><code>$s14MainAppLibrary20ExperimentAssignmentCMn</code></li>
+</ul>
+<p>进去看到定义：</p>
+<p>即：</p>
+<ul>
+<li>类<code>MainAppLibrary.ExperimentAssignment</code>的具体定义</li>
+</ul>
+<p><img src="../../../assets/img/experimentassignment_definition.jpg" alt="experimentassignment_definition"></p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__const:</span>0000000102606D27                 DCB    <span class="token number">0</span>
+<span class="token label function">__const:</span>0000000102606D28 _OBJC_IVAR_<span class="token operator">$</span>__TtC14MainAppLibrary20ExperimentAssignment.universeInfo DCD <span class="token number">0x10</span>
+<span class="token label function">__const:</span>0000000102606D28                                         <span class="token comment">; DATA XREF: __objc_const:00000001030DFE18↓o</span>
+<span class="token label function">__const:</span>0000000102606D2C                 ALIGN <span class="token number">0x10</span>
+<span class="token label function">__const:</span>0000000102606D30 _OBJC_IVAR_<span class="token operator">$</span>__TtC14MainAppLibrary20ExperimentAssignment.experimentInfo DCD <span class="token number">0x18</span>
+<span class="token label function">__const:</span>0000000102606D30                                         <span class="token comment">; DATA XREF: __objc_const:00000001030DFE38↓o</span>
+<span class="token label function">__const:</span>0000000102606D34                 ALIGN <span class="token number">8</span>
+<span class="token label function">__const:</span>0000000102606D38 _OBJC_IVAR_<span class="token operator">$</span>__TtC14MainAppLibrary20ExperimentAssignment.bucketInfo DCD <span class="token number">0x20</span>
+<span class="token label function">__const:</span>0000000102606D38                                         <span class="token comment">; DATA XREF: __objc_const:00000001030DFE58↓o</span>
+<span class="token label function">__const:</span>0000000102606D3C                 ALIGN <span class="token number">0x20</span>
+<span class="token label function">__const:</span>0000000102606D40 aExperimentassi_0 DCB <span class="token string">&quot;ExperimentAssignment&quot;</span>,<span class="token number">0</span>
+<span class="token label function">__const:</span>0000000102606D40                                         <span class="token comment">; DATA XREF: __const:nominal type descriptor for ExperimentAssignment↓o</span>
+<span class="token label function">__const:</span>0000000102606D55                 ALIGN <span class="token number">8</span>
+<span class="token label function">__const:</span>0000000102606D58 <span class="token comment">; nominal type descriptor for MainAppLibrary.ExperimentAssignment</span>
+<span class="token label function">__const:</span>0000000102606D58 <span class="token operator">$</span>s14MainAppLibrary20ExperimentAssignmentCMn ClassDescriptor <span class="token operator">&lt;</span><span class="token number">0x80000050</span>, <span class="token operator">$</span>s14MainAppLibraryMXM <span class="token operator">-</span> ., \
+<span class="token label function">__const:</span>0000000102606D58                                         <span class="token comment">; DATA XREF: __swift5_types:0000000102C7D2AC↓o</span>
+<span class="token label function">__const:</span>0000000102606D58                                         <span class="token comment">; __data:0000000103617D10↓o ...</span>
+<span class="token label function">__const:</span>0000000102606D58                                  aExperimentassi_0 <span class="token operator">-</span> ., \ <span class="token comment">; type metadata accessor for ExperimentAssignment ...</span>
+<span class="token label function">__const:</span>0000000102606D58                                  <span class="token operator">$</span>s14MainAppLibrary20ExperimentAssignmentCMa <span class="token operator">-</span> ., \
+<span class="token label function">__const:</span>0000000102606D58                                  <span class="token operator">$</span>s14MainAppLibrary20ExperimentAssignmentCMn.FieldDescriptor <span class="token operator">-</span> .,\
+<span class="token label function">__const:</span>0000000102606D58                                  <span class="token operator">$</span>s14MainAppLibrary20ExperimentAssignmentCMn.SuperclassType <span class="token operator">-</span> .,\
+<span class="token label function">__const:</span>0000000102606D58                                  <span class="token number">2</span>, <span class="token number">0xE</span>, <span class="token number">4</span>, <span class="token number">3</span><span class="token operator">&gt;</span>
+<span class="token label function">__const:</span>0000000102606D80                 DCB  <span class="token number">0xA</span>
+<span class="token label function">__const:</span>0000000102606D81                 DCB    <span class="token number">0</span>
+</code></pre>
+<p>此处其实就可以看出：</p>
+<ul>
+<li><code>MainAppLibrary.ExperimentAssignment</code> == <code>_TtC14MainAppLibrary20ExperimentAssignment</code><ul>
+<li>[+0x10] = <code>universeInfo</code></li>
+<li>[+0x18] = <code>experimentInfo</code></li>
+<li>[+0x20] = <code>bucketInfo</code></li>
+</ul>
+</li>
+</ul>
+<p>后续去（Xcode调试中的lldb调试界面）查看内存中的数据，就是可以对得上的：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8gx <span class="token variable">$x20</span>
+0x2833c1140: 0x0000000105dbbcd0 0x0000000200000003
+0x2833c1150: 0x00000002819ecea0 0x00000002819ecf00
+0x2833c1160: 0x00000002833b9b00 0x0000000000000000
+0x2833c1170: 0x00000001efe1f820 0x0000000000000000
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x0000000105dbbcd0
+MainAppLibrary.ExperimentAssignment
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002819ecea0
+MainAppLibrary.OfflineAB.UniverseInfo
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002819ecf00
+MainAppLibrary.OfflineAB.ExperimentInfo
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002833b9b00
+MainAppLibrary.OfflineAB.BucketInfo
+</code></pre>
+<p>如此，即可推断和确认和计算出此处的值：</p>
+<ul>
+<li><code>MainAppLibrary.ExperimentAssignment</code> == <code>0x00000002833c1140</code> == <code>0x2833c1140</code><ul>
+<li>[+0x10] = <code>universeInfo</code><ul>
+<li><code>0x00000002819ecea0</code></li>
+</ul>
+</li>
+<li>[+0x18] = <code>experimentInfo</code><ul>
+<li><code>0x00000002819ecf00</code></li>
+</ul>
+</li>
+<li>[+0x20] = <code>bucketInfo</code><ul>
+<li><code>0x00000002833b9b00</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>而至此，理论上，其实可以通过：</p>
+<p>IDA汇编代码 + IDA伪代码</p>
+<p>能看出：</p>
+<pre class="language-"><code class="lang-c">  v1 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  v2 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  v6 <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<p>==</p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__text:</span><span class="token number">0000000100314990</span>                 LDR             X8, <span class="token operator">[</span>X20,#<span class="token number">0x10</span><span class="token operator">]</span>
+
+<span class="token label function">__text:</span>00000001003149B4                 LDR             X9, <span class="token operator">[</span>X19,#<span class="token number">0x18</span><span class="token operator">]</span>
+
+<span class="token label function">__text:</span>0000000100314A0C                 LDR             X8, <span class="token operator">[</span>X19,#<span class="token number">0x20</span><span class="token operator">]</span>
+</code></pre>
+<p>其实就分别对应着上面的：</p>
+<ul>
+<li><code>[+0x10] = universeInfo</code><ul>
+<li><code>0x00000002819ecea0</code></li>
+</ul>
+</li>
+<li><code>[+0x18] = experimentInfo</code><ul>
+<li><code>0x00000002819ecf00</code></li>
+</ul>
+</li>
+<li><code>[+0x20] = bucketInfo</code><ul>
+<li><code>0x00000002833b9b00</code></li>
+</ul>
+</li>
+</ul>
+<p>如此，即可去分别：</p>
+<p>优化IDA伪代码，给变量重命名：</p>
+<p><img src="../../../assets/img/ida_var_rename_popup.jpg" alt="ida_var_rename_popup"></p>
+<p><img src="../../../assets/img/ida_rename_input_new_name.jpg" alt="ida_rename_input_new_name"></p>
+<p><img src="../../../assets/img/ida_renamed_effect.jpg" alt="ida_renamed_effect"></p>
+<p>此时，IDA伪代码就变成了：</p>
+<pre class="language-"><code class="lang-c">__int64 <span class="token function">StringAppend_100314974</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  _QWORD <span class="token operator">*</span>v0<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  __int64 universeInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 experimentInfo<span class="token punctuation">;</span> <span class="token comment">// x9</span>
+  __int64 v3<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v4<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  __int64 v5<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 bucketInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 v7<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  __int64 v8<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v9<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v10<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v12<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __int64 v13<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+
+
+  universeInfo <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v12 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>universeInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v13 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>universeInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">)</span>swift_bridgeObjectRetain<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  experimentInfo <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v3 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v4 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v3<span class="token punctuation">,</span> v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v13<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  bucketInfo <span class="token operator">=</span> v0<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  v7 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  v8 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v7<span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> v12<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>-》很明显，代码逻辑，就慢慢的，逐渐的，更加清晰了。</p>
+<p>而后续的逻辑，看起来，主要就是：</p>
+<pre class="language-"><code class="lang-c">String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+
+String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v3<span class="token punctuation">,</span> v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+
+String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v7<span class="token punctuation">,</span> v8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>本来以为很简单，直接去：</p>
+<p>找到具体的：原先字符串和拼接字符串，即可</p>
+<p>之前调试已经知道，希望的最终的值是：</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&lt;</span>Swift.__SwiftDeferredNSArray 0x28264210<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span><span class="token punctuation">(</span>
+  dummy_aa_offline_rid_universe_ios<span class="token operator">|</span>dummy_aa_offline_rid_experiment_ios<span class="token operator">|</span>control,
+  hide_link_device_button_release_rollout_universe<span class="token operator">|</span>hide_link_device_button_release_rollout_experiment<span class="token operator">|</span>control,
+  ios_prod_latam_tos_reg_universe<span class="token operator">|</span>ios_prod_latam_tos_reg_experiment<span class="token operator">|</span><span class="token builtin class-name">test</span>
+<span class="token punctuation">)</span>
+</code></pre>
+<p>所以，此处第一轮，应该是：</p>
+<ul>
+<li><code>dummy_aa_offline_rid_universe_ios|dummy_aa_offline_rid_experiment_ios|control,</code></li>
+</ul>
+<p>而去掉竖杠<code>|</code>，则应该分别是：</p>
+<ul>
+<li><code>dummy_aa_offline_rid_universe_ios</code></li>
+<li><code>dummy_aa_offline_rid_experiment_ios</code></li>
+<li><code>control</code></li>
+</ul>
+<p>所以就去调试</p>
+<p>结果去调试时，却发现找不到我们要的字符串的值</p>
+<p>和预想的逻辑对不上</p>
+<p>比如，第一个，不是：</p>
+<ul>
+<li><code>dummy_aa_offline_rid_universe_ios</code></li>
+</ul>
+<p>首先是：</p>
+<pre class="language-"><code class="lang-asm">    <span class="token number">0x102ab89a0</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">44</span><span class="token operator">&gt;</span>:  mov    x20, <span class="token register variable">sp</span>
+    <span class="token number">0x102ab89a4</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">48</span><span class="token operator">&gt;</span>:  mov    w0, #<span class="token number">0x7c</span>
+    <span class="token number">0x102ab89a8</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">52</span><span class="token operator">&gt;</span>:  mov    x1, #<span class="token operator">-</span><span class="token number">0x1f00000000000000</span>
+    <span class="token number">0x102ab89ac</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">56</span><span class="token operator">&gt;</span>:  <span class="token register variable">bl</span>     <span class="token number">0x104c44824</span>              <span class="token comment">; symbol stub for: String.append(_:)</span>
+</code></pre>
+<p>此时值：</p>
+<pre class="language-"><code class="lang-asm">(lldb) reg r x0 x1
+      x0 <span class="token operator">=</span> <span class="token number">0x000000000000007c</span>
+      x1 <span class="token operator">=</span> <span class="token number">0xe100000000000000</span>
+</code></pre>
+<p>-》好像此处Swift函数<code>String.append(_:)</code>中，<code>x0</code>和<code>x1</code>，就不是我们要的普通的字符串</p>
+<p>找不到我们要的：<code>dummy_aa_offline_rid_universe_ios</code></p>
+<p>后来自己研究出了，看起来是放到了：<code>x20</code>=<code>sp</code>中了？</p>
+<p>去看看，果然还是有字符串值的：</p>
+<p>其次是，虽然有字符串值，但是也还不是我们要的值：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> reg r x20 sp
+     x20 <span class="token operator">=</span> 0x000000016d658c20
+      sp <span class="token operator">=</span> 0x000000016d658c20
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8gx 0x000000016d658c20
+0x16d658c20: 0xd000000000000021 0x80000001051946f0
+0x16d658c30: 0x0000000000000002 0x00000002833c1140
+0x16d658c40: 0x0000000105da1628 0x0000000105dbbcd0
+0x16d658c50: 0x00000002833c1140 0x00000002828d0780
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x80000001051946f0
+<span class="token number">9223372041235285744</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/s 0x80000001051946f0
+0x1051946f0: <span class="token string">&quot;dummy_aa_offline_user_rid_ios&quot;</span>
+</code></pre>
+<p>即，此处：</p>
+<ul>
+<li>打印出的字符串是：<ul>
+<li><code>dummy_aa_offline_user_rid_ios</code></li>
+</ul>
+</li>
+<li>希望的字符串是<ul>
+<li><code>dummy_aa_offline_rid_universe_ios</code></li>
+</ul>
+</li>
+</ul>
+<p>所以就怀疑，难道是，Swift的字符串拼接函数：<code>String.append(_:)</code>，内部有额外的逻辑？</p>
+<p>经过一番研究：</p>
+<ul>
+<li>【未解决】iOS逆向WhatsApp：Swift函数String.append(_:)的字符串拼接的实现逻辑</li>
+</ul>
+<p>没有发现啥特殊的逻辑。</p>
+<p>正在一筹莫展之际，无意间发现别的帖子：</p>
+<p><a href="https://huahuahublog.wordpress.com/2019/03/20/swift-li-zi-fu-chuan-shi-xiu-gai-zi-fu-chuan/" target="_blank">Swift 里字符串（十）修改字符串 – huahuahu (wordpress.com)</a></p>
+<p>好像是Swift的String，比较特殊？</p>
+<p>所以再转去研究：</p>
+<p>Swift中的String的类的具体定义</p>
+<ul>
+<li><a href="https://book.crifan.org/books/ios_re_swift_reverse/website/common_type/string/" target="_blank">String字符串 · iOS逆向：Swift逆向</a></li>
+</ul>
+<p>最终彻底搞懂了：</p>
+<p>核心就一句话：</p>
+<ul>
+<li>Swift中(Native的)LargeString中：真正字符串的地址=<code>objectAddr + 0x20</code></li>
+</ul>
+<p>所以此处是：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/x 0x80000001051946f0 + 0x20
+<span class="token punctuation">(</span>unsigned long<span class="token punctuation">)</span> 0x8000000105194710
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x8000000105194710
+<span class="token number">9223372041235285776</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/s 0x8000000105194710
+0x105194710: <span class="token string">&quot;dummy_aa_offline_rid_universe_ios&quot;</span>
+</code></pre>
+<p>如此，最终才彻底搞清楚了：</p>
+<ul>
+<li>Swift中字符串拼接函数：<code>String.append(_:)</code>，内部没有特殊逻辑<ul>
+<li>但是传入的参数，此处其实是多个来源<ul>
+<li>2个寄存器：<code>x0</code>和<code>x1</code><ul>
+<li>其实保存的好像也是：Swift中的small string，用2个寄存器=2个64位保存对应的值</li>
+</ul>
+</li>
+<li>sp堆栈<ul>
+<li>保存的是Swift的large string，也是2个64位的地址保存其值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>综合起来就是：</p>
+<ul>
+<li><code>Swift的String.append(_:)</code><ul>
+<li><code>originSwiftString.append(toAppendSwiftString)</code><ul>
+<li>originSwiftString：放在了sp堆栈中<ul>
+<li>只不过也要2个64位地址保存：<code>[sp]</code>、<code>[sp+0x08]</code></li>
+</ul>
+</li>
+<li>toAppendSwiftString：放在了寄存器中<ul>
+<li>只不过要2个寄存器保存：x0、x1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>最终，才真正搞懂，此处后续字符串的拼接的逻辑。</p>
+<p>注：</p>
+<p>关于另外的几个类的属性字段的定义，详见</p>
+<ul>
+<li>/Users/crifan/dev/dev_root/iosReverse/WhatsApp/WhatsApp_v23.25.85/headers/headers_WhatsApp_v23.25.85_WhatsApp_paradiseduo_dsdump/_TtC7Catalog24VariantTypeBaseViewModel.h</li>
+</ul>
+<pre class="language-"><code class="lang-c"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token number">0x0010381f460</span> _TtCO14MainAppLibrary9OfflineAB10BucketInfo <span class="token operator">:</span> Swift<span class="token punctuation">.</span>_SwiftObject @rpath<span class="token operator">/</span>libswiftCore<span class="token punctuation">.</span>dylib
+<span class="token punctuation">{</span>
+    <span class="token operator">+</span><span class="token number">0x0010</span>  <span class="token function">name</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0020</span>  <span class="token function">size</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0028</span>  <span class="token function">configList</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token number">0x0010381f510</span> _TtCO14MainAppLibrary9OfflineAB14ConfigVariable <span class="token operator">:</span> Swift<span class="token punctuation">.</span>_SwiftObject @rpath<span class="token operator">/</span>libswiftCore<span class="token punctuation">.</span>dylib
+<span class="token punctuation">{</span>
+    <span class="token operator">+</span><span class="token number">0x0010</span>  <span class="token function">code</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0018</span>  <span class="token function">name</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0028</span>  <span class="token function">value</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token number">0x0010381f5c0</span> _TtCO14MainAppLibrary9OfflineAB14ExperimentInfo <span class="token operator">:</span> Swift<span class="token punctuation">.</span>_SwiftObject @rpath<span class="token operator">/</span>libswiftCore<span class="token punctuation">.</span>dylib
+<span class="token punctuation">{</span>
+    <span class="token operator">+</span><span class="token number">0x0010</span>  <span class="token function">name</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0020</span>  <span class="token function">startTime</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0028</span>  <span class="token function">endTime</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0030</span>  <span class="token function">bucketList</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0038</span>  <span class="token function">userFilter</span> <span class="token punctuation">(</span><span class="token number">0x28</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token number">0x0010381f730</span> _TtCO14MainAppLibrary9OfflineAB12UniverseInfo <span class="token operator">:</span> Swift<span class="token punctuation">.</span>_SwiftObject @rpath<span class="token operator">/</span>libswiftCore<span class="token punctuation">.</span>dylib
+<span class="token punctuation">{</span>
+    <span class="token operator">+</span><span class="token number">0x0010</span>  <span class="token function">name</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0020</span>  <span class="token function">unit</span> <span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0030</span>  <span class="token function">experimentList</span> <span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+    <span class="token operator">+</span><span class="token number">0x0038</span>  <span class="token function">userFilter</span> <span class="token punctuation">(</span><span class="token number">0x28</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<p>此处就不赘述了。</p>
+<p>然后就可以去计算出此处拼接处的字符串了：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8gx 0x00000002833c1140
+0x2833c1140: 0x0000000105dbbcd0 0x0000000200000003
+0x2833c1150: 0x00000002819ecea0 0x00000002819ecf00
+0x2833c1160: 0x00000002833b9b00 0x0000000000000000
+0x2833c1170: 0x00000001efe1f820 0x0000000000000000
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002819ecea0
+MainAppLibrary.OfflineAB.UniverseInfo
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002819ecf00
+MainAppLibrary.OfflineAB.ExperimentInfo
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po 0x00000002833b9b00
+MainAppLibrary.OfflineAB.BucketInfo
+
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/6gx 0x00000002819ecea0
+0x2819ecea0: 0x0000000105dc0398 0x0000000200000003
+0x2819eceb0: 0xd000000000000021 0x80000001051946f0
+0x2819ecec0: 0x6469725f72657375 0xe800000000000000
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/6gx 0x00000002819ecf00
+0x2819ecf00: 0x0000000105dc0238 0x0000000200000003
+0x2819ecf10: 0xd000000000000023 0x80000001051946a0
+0x2819ecf20: 0x000000006316eff0 0x0000000065e82280
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/6gx 0x00000002833b9b00
+0x2833b9b00: 0x0000000105dc00e8 0x0000000200000003
+0x2833b9b10: 0x006c6f72746e6f63 0xe700000000000000
+0x2833b9b20: 0x0000000000001388 0x00000002833b9b90
+
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/s 0x8000000105194710
+0x105194710: <span class="token string">&quot;dummy_aa_offline_rid_universe_ios&quot;</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/s 0x80000001051946c0
+0x1051946c0: <span class="token string">&quot;dummy_aa_offline_rid_experiment_ios&quot;</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/c 0x006c6f72746e6f63
+<span class="token punctuation">(</span>long<span class="token punctuation">)</span> control<span class="token punctuation">\</span><span class="token number">0</span>
+</code></pre>
+<p>-》</p>
+<ul>
+<li><code>&quot;dummy_aa_offline_rid_universe_ios&quot;</code></li>
+<li><code>&quot;dummy_aa_offline_rid_experiment_ios&quot;</code></li>
+<li><code>&quot;control&quot;</code></li>
+</ul>
+<p>由此得到最终拼接后的字符串：</p>
+<ul>
+<li><code>dummy_aa_offline_rid_universe_ios|dummy_aa_offline_rid_experiment_ios|control</code></li>
+</ul>
+<p>去调试确认和我们算出的值是一样的：</p>
+<pre class="language-"><code class="lang-asm">    <span class="token number">0x102ab8a2c</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">184</span><span class="token operator">&gt;</span>: <span class="token register variable">bl</span>     <span class="token number">0x104c44824</span>              <span class="token comment">; symbol stub for: String.append(_:)</span>
+    <span class="token number">0x102ab8a30</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">188</span><span class="token operator">&gt;</span>: ldp    x19, x20, <span class="token operator">[</span><span class="token register variable">sp</span><span class="token operator">]</span>
+    <span class="token number">0x102ab8a34</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">192</span><span class="token operator">&gt;</span>: mov    x0, x21
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> reg r x19 x20
+     x19 <span class="token operator">=</span> 0xf00000000000004d
+     x20 <span class="token operator">=</span> 0x00000002808e80c0
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/x 0x00000002808e80c0 + 0x20
+<span class="token punctuation">(</span>long<span class="token punctuation">)</span> 0x00000002808e80e0
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/s 0x00000002808e80e0
+0x2808e80e0: <span class="token string">&quot;dummy_aa_offline_rid_universe_ios|dummy_aa_offline_rid_experiment_ios|control&quot;</span>
+</code></pre>
+<p><img src="../../../assets/img/xcode_debug_merged_str.jpg" alt="xcode_debug_merged_str"></p>
+<p>是一样的。</p>
+<p>如此，继续去优化IDA伪代码：</p>
+<p>去改名：</p>
+<pre class="language-"><code class="lang-c">__int64 <span class="token function">StringAppend_100314974</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  _QWORD <span class="token operator">*</span>curMainAppLibraryExperimentAssignment<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  __int64 universeInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 experimentInfo<span class="token punctuation">;</span> <span class="token comment">// x9</span>
+  __int64 experimentInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 experimentInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  __int64 v5<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 bucketInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 bucketInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  __int64 bucketInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v9<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v10<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 userInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __int64 userInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+
+
+  universeInfo <span class="token operator">=</span> curMainAppLibraryExperimentAssignment<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  userInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>universeInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  userInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>universeInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  experimentInfo <span class="token operator">=</span> curMainAppLibraryExperimentAssignment<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  experimentInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  experimentInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfoNameStringObjPart1<span class="token punctuation">,</span> experimentInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  bucketInfo <span class="token operator">=</span> curMainAppLibraryExperimentAssignment<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  bucketInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfo <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  bucketInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfo <span class="token operator">+</span> <span class="token number">0x18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfoNameStringObjPart1<span class="token punctuation">,</span> bucketInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> userInfoNameStringObjPart1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../../assets/img/ida_stringappend_100314974_renamed.jpg" alt="ida_stringappend_100314974_renamed"></p>
+<p>如此，其实代码逻辑已经很清楚了。</p>
+<p>不过另外想到了：</p>
+<p>如果IDA此处能识别：</p>
+<ul>
+<li>类MainAppLibrary\d+ExperimentAssignment</li>
+</ul>
+<p>就好了？就可以自动识别出：具体属性和字段了</p>
+<p>而去试了试，前面搜到的，也确认IDA有的：</p>
+<ul>
+<li>类名：_TtC14MainAppLibrary20ExperimentAssignment</li>
+</ul>
+<p>即给此处变量更改类型type为：</p>
+<ul>
+<li>_TtC14MainAppLibrary20ExperimentAssignment*</li>
+</ul>
+<p>操作步骤：</p>
+<p><img src="../../../assets/img/ida_set_ivar_type.jpg" alt="ida_set_ivar_type"></p>
+<p><img src="../../../assets/img/ida_enter_new_type.jpg" alt="ida_enter_new_type"></p>
+<p>从：</p>
+<ul>
+<li><code>_QWORD *curMainAppLibraryExperimentAssignment</code></li>
+</ul>
+<p>改为：</p>
+<ul>
+<li><code>_TtC14MainAppLibrary20ExperimentAssignment *curMainAppLibraryExperimentAssignment</code></li>
+</ul>
+<p><img src="../../../assets/img/ida_enter_type_declaration.jpg" alt="ida_enter_type_declaration"></p>
+<p>IDA中可见，的确自动识别成，类的属性=字段=成员的引用了：</p>
+<p><img src="../../../assets/img/ida_show_class_ref_field.jpg" alt="ida_show_class_ref_field"></p>
+<p>另外，再去给：</p>
+<ul>
+<li>universeInfo</li>
+<li>experimentInfo</li>
+<li>bucketInfo</li>
+</ul>
+<p>也分别去修改类型为对应的类名：</p>
+<p><img src="../../../assets/img/ida_universeInfo_change_type.jpg" alt="ida_universeInfo_change_type"></p>
+<ul>
+<li><code>__int64 universeInfo</code> -&gt; <code>_TtCO14MainAppLibrary9OfflineAB12UniverseInfo* universeInfo</code></li>
+</ul>
+<p><img src="../../../assets/img/ida_changed_class_universeInfo.jpg" alt="ida_changed_class_universeInfo"></p>
+<p>优化后的代码：</p>
+<pre class="language-"><code class="lang-c">__int64 <span class="token function">StringAppend_100314974</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  _TtC14MainAppLibrary20ExperimentAssignment <span class="token operator">*</span>curMainAppLibraryExperimentAssignment<span class="token punctuation">;</span> <span class="token comment">// x20</span>
+  _TtCO14MainAppLibrary9OfflineAB12UniverseInfo <span class="token operator">*</span>universeInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  _TtCO14MainAppLibrary9OfflineAB14ExperimentInfo <span class="token operator">*</span>experimentInfo<span class="token punctuation">;</span> <span class="token comment">// x9</span>
+  __int64 experimentInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 experimentInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// x23</span>
+  __int64 v5<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  _TtCO14MainAppLibrary9OfflineAB10BucketInfo <span class="token operator">*</span>bucketInfo<span class="token punctuation">;</span> <span class="token comment">// x8</span>
+  __int64 bucketInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// x19</span>
+  __int64 bucketInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// x22</span>
+  __int64 v9<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 v10<span class="token punctuation">;</span> <span class="token comment">// x21</span>
+  __int64 userInfoNameStringObjPart1<span class="token punctuation">;</span> <span class="token comment">// [xsp+0h] [xbp-40h]</span>
+  __int64 userInfoNameStringObjPart2<span class="token punctuation">;</span> <span class="token comment">// [xsp+8h] [xbp-38h]</span>
+
+
+  universeInfo <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_TtCO14MainAppLibrary9OfflineAB12UniverseInfo <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>curMainAppLibraryExperimentAssignment<span class="token operator">-&gt;</span>universeInfo<span class="token punctuation">;</span>
+  userInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span>universeInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">;</span>
+  userInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>universeInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  experimentInfo <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_TtCO14MainAppLibrary9OfflineAB14ExperimentInfo <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>curMainAppLibraryExperimentAssignment<span class="token operator">-&gt;</span>experimentInfo<span class="token punctuation">;</span>
+  experimentInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span>experimentInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">;</span>
+  experimentInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>experimentInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>experimentInfoNameStringObjPart1<span class="token punctuation">,</span> experimentInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0x7CLL</span><span class="token punctuation">,</span> <span class="token number">0xE100000000000000LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 0x7C = &apos;|&apos;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>userInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  bucketInfo <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_TtCO14MainAppLibrary9OfflineAB10BucketInfo <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>curMainAppLibraryExperimentAssignment<span class="token operator">-&gt;</span>bucketInfo<span class="token punctuation">;</span>
+  bucketInfoNameStringObjPart1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span>bucketInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">;</span>
+  bucketInfoNameStringObjPart2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_QWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>bucketInfo<span class="token operator">-&gt;</span>name<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRetain</span><span class="token punctuation">(</span>v9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  String<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>_<span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">(</span>bucketInfoNameStringObjPart1<span class="token punctuation">,</span> bucketInfoNameStringObjPart2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">swift_bridgeObjectRelease</span><span class="token punctuation">(</span>v10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> userInfoNameStringObjPart1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../../assets/img/ida_optimzed_stringappend_100314974.jpg" alt="ida_optimzed_stringappend_100314974"></p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-02-24 15:55:56
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: StringAppend_100314974">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="before_after_logic.html" class="navigation navigation-next " aria-label="Next page: 前后对比和结果">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"逆向过程","level":"1.5.1.1.1","depth":4,"next":{"title":"前后对比和结果","level":"1.5.1.1.2","depth":4,"path":"example_static_dynamic/whatsapp/stringdppend_100314974/before_after_logic.md","ref":"example_static_dynamic/whatsapp/stringdppend_100314974/before_after_logic.md","articles":[]},"previous":{"title":"StringAppend_100314974","level":"1.5.1.1","depth":3,"path":"example_static_dynamic/whatsapp/stringdppend_100314974/README.md","ref":"example_static_dynamic/whatsapp/stringdppend_100314974/README.md","articles":[{"title":"逆向过程","level":"1.5.1.1.1","depth":4,"path":"example_static_dynamic/whatsapp/stringdppend_100314974/detail.md","ref":"example_static_dynamic/whatsapp/stringdppend_100314974/detail.md","articles":[]},{"title":"前后对比和结果","level":"1.5.1.1.2","depth":4,"path":"example_static_dynamic/whatsapp/stringdppend_100314974/before_after_logic.md","ref":"example_static_dynamic/whatsapp/stringdppend_100314974/before_after_logic.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_detail_example/pdf/ios_re_detail_example.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_detail_example/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_detail_example","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：举例详解","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"通过具体的例子，详细介绍iOS逆向的过程，以便于更好的理解如何进行iOS逆向的开发。具体例子有，WhatsApp中的StringAppend_100314974函数。"},"file":{"path":"example_static_dynamic/whatsapp/stringdppend_100314974/detail.md","mtime":"2024-02-24T07:55:56.813Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-02-24T08:05:59.189Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
