@@ -150,5 +150,6 @@
     * [iOS逆向调试：Xcode+iOSOpenDev](https://crifan.github.io/ios_re_debug_xcode_iosopendev/website)
     * [iOS逆向：Swift逆向](https://crifan.github.io/ios_re_swift_reverse/website)
     * [iOS逆向：举例详解](https://crifan.github.io/ios_re_detail_example/website)
+    * [iOS逆向：心得集锦](https://crifan.github.io/ios_re_experience_collection/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
