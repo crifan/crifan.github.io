@@ -675,21 +675,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../../../swift_common/valuebuffer.html">
-            
-                <a href="../../../swift_common/valuebuffer.html">
-            
-                    
-                        <b>1.6.3.</b>
-                    
-                    ValueBuffer
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -1560,8 +1545,312 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="举例"><a name="举例" class="plugin-anchor" href="#举例"><i class="fa fa-link" aria-hidden="true"></i></a>举例</h1>
+<h2 id="纯structure不带protocol的structure"><a name="纯structure不带protocol的structure" class="plugin-anchor" href="#纯structure不带protocol的structure"><i class="fa fa-link" aria-hidden="true"></i></a>纯Structure=不带Protocol的Structure</h2>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">struct</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;Crifan Li&quot;</span></span>
+    <span class="token keyword">let</span> height <span class="token operator">=</span> <span class="token number">1.83</span>
+    <span class="token keyword">let</span> isMale <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token keyword">let</span> age <span class="token operator">=</span> <span class="token number">20</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> person <span class="token operator">=</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>对应内存数据：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8xg 0x0000000102f82bf0
+0x102f82bf0: 0x4c206e6166697243 0xe900000000000069
+0x102f82c00: 0x3ffd47ae147ae148 0x0000000000000001
+0x102f82c10: 0x0000000000000014 0x0000000000000000
+0x102f82c20: 0x0000000000000000 0x0000000000000000
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/c 0x4c206e6166697243
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> Crifan L
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/c 0x00000000000069
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> i<span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/f 0x3ffd47ae147ae148
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token number">1.8300000000000001</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8xb 0x102f82c08
+0x102f82c08: 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/d 0x0000000000000014
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token number">20</span>
+</code></pre>
+<p>-&gt;</p>
+<ul>
+<li>Person结构体<ul>
+<li>大小=40=0x28</li>
+<li>内存布局<ul>
+<li>Person实例= person = 0x0000000102f82bf0<ul>
+<li>[+0x00~0x08] = String name<ul>
+<li>0x4c206e6166697243 0xe900000000000069<ul>
+<li>&quot;Crifan Li&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x10] = Float height<ul>
+<li>0x3ffd47ae147ae148<ul>
+<li>Float值：1.83</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x18] = bool isMale<ul>
+<li>0x01 = true</li>
+</ul>
+</li>
+<li>[+0x20] = Int age<ul>
+<li>0x0000000000000014 = 20</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="带protocol的structure"><a name="带protocol的structure" class="plugin-anchor" href="#带protocol的structure"><i class="fa fa-link" aria-hidden="true"></i></a>带Protocol的Structure</h2>
+<h3 id="struct结构体字段可以放得下valuebuffer3的内存布局"><a name="struct结构体字段可以放得下valuebuffer3的内存布局" class="plugin-anchor" href="#struct结构体字段可以放得下valuebuffer3的内存布局"><i class="fa fa-link" aria-hidden="true"></i></a>Struct结构体字段可以放得下<code>ValueBuffer[3]</code>的内存布局</h3>
+<p>代码：</p>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">protocol</span> <span class="token class-name">Drivable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">drive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token class-name">Drivable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> numberOfWheels <span class="token operator">=</span> <span class="token number">4</span>
+    <span class="token keyword">let</span> brand <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;Tank300-Hi4T&quot;</span></span>
+
+    <span class="token keyword">func</span> <span class="token function-definition function">drive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> curCar<span class="token punctuation">:</span><span class="token class-name">Drivable</span> <span class="token operator">=</span> <span class="token class-name">Car</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>-&gt;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8xg 0x000000010227aba0
+0x10227aba0: 0x0000000000000004 0x2d3030336b6e6154
+0x10227abb0: 0xec00000054346948 0x0000000102274450
+0x10227abc0: 0x0000000102274188 0x0000000000000000
+0x10227abd0: 0x0000000000000000 0x0000000000000000
+
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/c 0x2d3030336b6e6154
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> Tank300-
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/c 0x00000054346948
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> Hi4T<span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span><span class="token punctuation">\</span><span class="token number">0</span>
+</code></pre>
+<p>-&gt;</p>
+<ul>
+<li>Protocol的Structure，字段没超过ValueBuffer[3] = ValueBuffer[3]可以放得下Structure的字段 的内存布局：Car = 0x000000010227aba0<ul>
+<li>[+0x00] = ValueBuffer[0] = int64 numberOfWheels<ul>
+<li>0x0000000000000004</li>
+</ul>
+</li>
+<li>[+0x08~0x10] = ValueBuffer[1:2] = String brand<ul>
+<li>0x2d3030336b6e6154 0xec00000054346948<ul>
+<li>&quot;Tank300-Hi4T&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x18] = TypeMetadata * typeMetadata<ul>
+<li>0x0000000102274450 = typeMetadata_struct_Car<ul>
+<li>type metadata for SwiftBasic.Car</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x20] = PWT * pwt<ul>
+<li>0x0000000102274188 = PWT_Car<ul>
+<li>protocol witness table for SwiftBasic.Car : SwiftBasic.Drivable in SwiftBasic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>0x0000000102274450 = typeMetadata_struct_Car</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000102274450
+  Address: SwiftBasic<span class="token punctuation">[</span>0x0000000100018450<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">808</span><span class="token punctuation">)</span>
+  Summary: SwiftBasic`type metadata <span class="token keyword">for</span> SwiftBasic.Car
+    Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+    Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004be<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000102274450-0x0000000102274468<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;type metadata for SwiftBasic.Car&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3CarVN</span>&quot;</span>
+</code></pre>
+<ul>
+<li>0x0000000102274188 = PWT_Car</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000102274188
+  Address: SwiftBasic<span class="token punctuation">[</span>0x0000000100018188<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">96</span><span class="token punctuation">)</span>
+  Summary: SwiftBasic`protocol witness table <span class="token keyword">for</span> SwiftBasic.Car <span class="token builtin class-name">:</span> SwiftBasic.Drivable <span class="token keyword">in</span> SwiftBasic
+    Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+    Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004ac<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000102274188-0x00000001022741a0<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;protocol witness table for SwiftBasic.Car : SwiftBasic.Drivable in SwiftBasic&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3CarVAA8DrivableAAWP</span>&quot;</span>
+</code></pre>
+<h3 id="structue字段超过valuebuffer3的struct结构体的内存布局"><a name="structue字段超过valuebuffer3的struct结构体的内存布局" class="plugin-anchor" href="#structue字段超过valuebuffer3的struct结构体的内存布局"><i class="fa fa-link" aria-hidden="true"></i></a>Structue字段超过<code>ValueBuffer[3]</code>的Struct结构体的内存布局</h3>
+<p>代码：</p>
+<pre class="language-"><code class="lang-swift"><span class="token keyword">protocol</span> <span class="token class-name">Drivable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">drive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Bus</span><span class="token punctuation">:</span> <span class="token class-name">Drivable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> numberOfWheels <span class="token operator">=</span> <span class="token number">8</span>
+    <span class="token keyword">let</span> fare <span class="token operator">=</span> <span class="token number">2.25</span>
+    <span class="token keyword">let</span> seats <span class="token operator">=</span> <span class="token number">28</span>
+    <span class="token keyword">let</span> totalOccupancy <span class="token operator">=</span> <span class="token number">38</span>
+
+    <span class="token keyword">let</span> isElectric <span class="token operator">=</span> <span class="token boolean">true</span>
+
+    <span class="token keyword">func</span> <span class="token function-definition function">drive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> curBus<span class="token punctuation">:</span><span class="token class-name">Drivable</span> <span class="token operator">=</span> <span class="token class-name">Bus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p><img src="../../../assets/img/xcode_struct_protocol_car.png" alt="xcode_struct_protocol_car"></p>
+<p>对应的生成的相关初始化代码是：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">_s6Empty221PersistenceControllerV6sharedACvau_5</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> one<span class="token operator">-</span>time initialization token <span class="token keyword">for</span> curBus <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span>
+    <span class="token function">swift_once</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>one<span class="token operator">-</span>time initialization token <span class="token keyword">for</span> curBus<span class="token punctuation">,</span> one<span class="token operator">-</span>time initialization function <span class="token keyword">for</span> curBus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">&amp;</span>curBus<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../../assets/img/struct_ida_car_init_token.png" alt="struct_ida_car_init_token"></p>
+<p>和：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">void</span> <span class="token operator">*</span>one<span class="token operator">-</span>time initialization function <span class="token keyword">for</span> <span class="token function">curBus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">char</span> copySrc<span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// [xsp+28h] [xbp-28h] BYREF</span>
+
+  Bus<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  TypeMetadata_Bus_10001EBE0 <span class="token operator">=</span> <span class="token operator">&amp;</span>type metadata <span class="token keyword">for</span> Bus<span class="token punctuation">;</span>
+  PWT_Bus_10001EBE8 <span class="token operator">=</span> <span class="token operator">&amp;</span>protocol witness table <span class="token keyword">for</span> Bus<span class="token punctuation">;</span>
+  curBus <span class="token operator">=</span> <span class="token function">swift_allocObject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>MetadataKind_HeapLocalVariable_Bus_100018598<span class="token punctuation">,</span> <span class="token number">0x38LL</span><span class="token punctuation">,</span> <span class="token number">7LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token function">memcpy</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>curBus <span class="token operator">+</span> <span class="token number">0x10LL</span><span class="token punctuation">)</span><span class="token punctuation">,</span> copySrc<span class="token punctuation">,</span> <span class="token number">0x21uLL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../../assets/img/struct_ida_car_init_func.png" alt="struct_ida_car_init_func"></p>
+<p>-》相关调试数据：</p>
+<pre class="language-"><code class="lang-bash">-------------- Drivable --------------
+变量的地址: 0x0000000104bdebc8
+变量的内存: 0x0000000283354140 0x0000000000000000 0x0000000000000000 0x0000000104bd84d0 0x0000000104bd81a0
+变量的大小: <span class="token assign-left variable">40</span><span class="token operator">=</span>0x28
+
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/6xg 0x0000000104bdebc8
+0x104bdebc8: 0x0000000283354140 0x0000000000000000
+0x104bdebd8: 0x0000000000000000 0x0000000104bd84d0
+0x104bdebe8: 0x0000000104bd81a0 0x0000000000000000
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8xg 0x0000000283354140
+0x283354140: 0x0000000104bd8598 0x0000000000000003
+0x283354150: 0x0000000000000008 0x4002000000000000
+0x283354160: 0x000000000000001c 0x0000000000000026
+0x283354170: 0x00000003f11bc601 0x00000001f9b262ce
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000104bd84d0
+      Address: SwiftBasic<span class="token punctuation">[</span>0x00000001000184d0<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">936</span><span class="token punctuation">)</span>
+      Summary: SwiftBasic<span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">type</span> metadata <span class="token keyword">for</span> SwiftBasic.Bus
+       Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+       Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004c1<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000104bd84d0-0x0000000104bd84f8<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;type metadata for SwiftBasic.Bus&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3BusVN</span>&quot;</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000104bd81a0
+      Address: SwiftBasic<span class="token punctuation">[</span>0x00000001000181a0<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">120</span><span class="token punctuation">)</span>
+      Summary: SwiftBasic<span class="token variable">`</span></span>protocol witness table <span class="token keyword">for</span> SwiftBasic.Bus <span class="token builtin class-name">:</span> SwiftBasic.Drivable <span class="token keyword">in</span> SwiftBasic
+       Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+       Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004ad<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000104bd81a0-0x0000000104bd81b8<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;protocol witness table for SwiftBasic.Bus : SwiftBasic.Drivable in SwiftBasic&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3BusVAA8DrivableAAWP</span>&quot;</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/f 0x4002000000000000
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token number">2.25</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/d 0x000000000000001c
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token number">28</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> p/d 0x0000000000000026
+<span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token number">38</span>
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/8xb 0x283354170
+0x283354170: 0x01 0xc6 0x1b 0xf1 0x03 0x00 0x00 0x00
+<span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/2xg 0x0000000104bd8598
+0x104bd8598: 0x0000000000000400 0x0000000000000010
+</code></pre>
+<p>-&gt;含义：</p>
+<ul>
+<li>Protocol的Structure的，且Structure字段超过ValueBuffer[3]的（Bus的）内存布局 = <ul>
+<li>[+0x00] = ValueBuffer[0] = Structure的指针<ul>
+<li>0x0000000283354140 = curBus的ptr<ul>
+<li>[+0x00] = MetadataKind kind<ul>
+<li>= 0x0000000000000400 == HeapLocalVariable<ul>
+<li>Bus是HeapLocalVariable类型变量<ul>
+<li>内存是在堆中分配的</li>
+<li>且是个本地临时变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x08] = int64 refCount<ul>
+<li>0x0000000000000003</li>
+</ul>
+</li>
+<li>Structure自己的属性值<ul>
+<li>[+0x10] = int64 numberOfWheels<ul>
+<li>0x0000000000000008</li>
+</ul>
+</li>
+<li>[+0x18] = float fare<ul>
+<li>0x4002000000000000 == 2.25</li>
+</ul>
+</li>
+<li>[+0x20] = int64 seats<ul>
+<li>0x000000000000001c == 28</li>
+</ul>
+</li>
+<li>[+0x28] = int64 totalOccupancy<ul>
+<li>0x0000000000000026 == 38</li>
+</ul>
+</li>
+<li>[+0x30] = bool(int8) isElectric<ul>
+<li>0x01</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x08] = ValueBuffer[1] = 空 = 没用</li>
+<li>[+0x10] = ValueBuffer[2] = 空 = 没用</li>
+<li>[+0x18] = TypeMetadata * typeMetadata<ul>
+<li>0x0000000104bd84d0 = typeMetadata_struct_Bus<ul>
+<li>type metadata for SwiftBasic.Bus</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[+0x20] = PWT * pwt<ul>
+<li>0x0000000104bd81a0 = PWT_Bus<ul>
+<li>protocol witness table for SwiftBasic.Bus : SwiftBasic.Drivable in SwiftBasic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>0x0000000104bd84d0 = typeMetadata_struct_Bus</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000104bd84d0
+  Address: SwiftBasic<span class="token punctuation">[</span>0x00000001000184d0<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">936</span><span class="token punctuation">)</span>
+  Summary: SwiftBasic`type metadata <span class="token keyword">for</span> SwiftBasic.Bus
+    Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+    Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004c1<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000104bd84d0-0x0000000104bd84f8<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;type metadata for SwiftBasic.Bus&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3BusVN</span>&quot;</span>
+</code></pre>
+<ul>
+<li>0x0000000104bd81a0 = PWT_Bus</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> im loo <span class="token parameter variable">-va</span> 0x0000000104bd81a0
+  Address: SwiftBasic<span class="token punctuation">[</span>0x00000001000181a0<span class="token punctuation">]</span> <span class="token punctuation">(</span>SwiftBasic.__DATA_CONST.__const + <span class="token number">120</span><span class="token punctuation">)</span>
+  Summary: SwiftBasic`protocol witness table <span class="token keyword">for</span> SwiftBasic.Bus <span class="token builtin class-name">:</span> SwiftBasic.Drivable <span class="token keyword">in</span> SwiftBasic
+    Module: <span class="token function">file</span> <span class="token operator">=</span> <span class="token string">&quot;/Users/crifan/Library/Developer/Xcode/DerivedData/SwiftBasic-gbbekuhnjvcbzueioosvbqhdnlyq/Build/Products/Debug-iphoneos/SwiftBasic.app/SwiftBasic&quot;</span>, arch <span class="token operator">=</span> <span class="token string">&quot;arm64&quot;</span>
+    Symbol: <span class="token function">id</span> <span class="token operator">=</span> <span class="token punctuation">{</span>0x000004ad<span class="token punctuation">}</span>, range <span class="token operator">=</span> <span class="token punctuation">[</span>0x0000000104bd81a0-0x0000000104bd81b8<span class="token punctuation">)</span>, <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">&quot;protocol witness table for SwiftBasic.Bus : SwiftBasic.Drivable in SwiftBasic&quot;</span>, <span class="token assign-left variable">mangled</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$s10SwiftBasic3BusVAA8DrivableAAWP</span>&quot;</span>
+</code></pre>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-02-22 09:26:37
+2024-03-02 22:49:15
 </span></footer></body></html>
                                 
                                 </section>
@@ -1605,7 +1894,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"举例","level":"1.7.9.1.5","depth":4,"next":{"title":"Tuple元祖","level":"1.7.10","depth":2,"path":"common_type/tuple/README.md","ref":"common_type/tuple/README.md","articles":[]},"previous":{"title":"IDA定义","level":"1.7.9.1.4","depth":4,"path":"common_type/struct/memory_layout/ida_def.md","ref":"common_type/struct/memory_layout/ida_def.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_swift_reverse/pdf/ios_re_swift_reverse.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_swift_reverse/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_swift_reverse","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：Swift逆向","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理iOS逆向期间，关于Swift逆向相关的各种知识。包括通用逻辑和各种常见类型，尤其是各种类型的内存布局。"},"file":{"path":"common_type/struct/memory_layout/example.md","mtime":"2024-02-22T01:26:37.890Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-02-29T06:23:57.462Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"举例","level":"1.7.9.1.5","depth":4,"next":{"title":"Tuple元祖","level":"1.7.10","depth":2,"path":"common_type/tuple/README.md","ref":"common_type/tuple/README.md","articles":[]},"previous":{"title":"IDA定义","level":"1.7.9.1.4","depth":4,"path":"common_type/struct/memory_layout/ida_def.md","ref":"common_type/struct/memory_layout/ida_def.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_swift_reverse/pdf/ios_re_swift_reverse.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_swift_reverse/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_swift_reverse","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：Swift逆向","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理iOS逆向期间，关于Swift逆向相关的各种知识。最开始是Swift逆向概览；其中包括脑图；然后是Swift基础知识；接着是逆向常会涉及到的Swift常用函数；然后是Swift逆向常涉及的方面，包括静态分析和动态调试，静态分析包括导出头文件和IDA分析；然后是最终要的，通用逻辑，包括TypeMetadata、VWT、StructMetadata以及ClassMetadata，和通用的MetadataKind等；然后是常用的类型，包括Array数组和内存布局详情、Bool变量、Data数据和内存布局详情、Dictionary字典和内存布局详情、Enum枚举、Set集合和内存布局详情、String字符串和内存布局详情、Struct结构体和内存布局详情、Tuple元祖。"},"file":{"path":"common_type/struct/memory_layout/example.md","mtime":"2024-03-02T14:49:15.478Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-03-02T15:26:43.986Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
