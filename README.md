@@ -152,5 +152,6 @@
     * [iOS逆向：举例详解](https://crifan.github.io/ios_re_detail_example/website)
     * [iOS逆向：心得集锦](https://crifan.github.io/ios_re_experience_collection/website)
     * [iOS逆向分析：恢复符号表](https://crifan.github.io/ios_re_restore_symbol/website)
+    * [iOS越狱开发：常用越狱插件](https://crifan.github.io/ios_re_common_tweak/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
