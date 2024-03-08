@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20240306`
+最后更新：`20240308`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -153,5 +153,6 @@
     * [iOS逆向：心得集锦](https://crifan.github.io/ios_re_experience_collection/website)
     * [iOS逆向分析：恢复符号表](https://crifan.github.io/ios_re_restore_symbol/website)
     * [iOS越狱开发：常用越狱插件](https://crifan.github.io/ios_re_common_tweak/website)
+    * [底层编程语言：汇编语言asm](https://crifan.github.io/low_level_assembly_asm/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
