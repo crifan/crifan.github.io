@@ -1,0 +1,1051 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>函数 · IDA插件脚本：IDAPython</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="util_class.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ida_plugin_script_idapython","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ida_script_overview/">
+            
+                <a href="../ida_script_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IDA插件脚本概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../docs/">
+            
+                <a href="../docs/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../docs/cheatsheet.html">
+            
+                <a href="../docs/cheatsheet.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    cheatsheet小抄
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../docs/official_ref_code.html">
+            
+                <a href="../docs/official_ref_code.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    官网示例代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../run/">
+            
+                <a href="../run/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    运行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../debugging/">
+            
+                <a href="../debugging/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    IDA常用函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.6.1" data-path="function.html">
+            
+                <a href="function.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="util_class.html">
+            
+                <a href="util_class.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    工具类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../common_plugin/">
+            
+                <a href="../common_plugin/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    IDA常用插件脚本
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../common_plugin/crifan.html">
+            
+                <a href="../common_plugin/crifan.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    crifan的
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../common_plugin/other.html">
+            
+                <a href="../common_plugin/other.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../common_issue/">
+            
+                <a href="../common_issue/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >函数</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="ida函数"><a name="ida函数" class="plugin-anchor" href="#ida函数"><i class="fa fa-link" aria-hidden="true"></i></a>IDA函数</h1>
+<ul>
+<li><p>概述</p>
+<ul>
+<li>关于IDA的Python脚本代码中常用的函数，已整理至<ul>
+<li><a href="https://github.com/crifan/crifanLibPython/blob/master/python3/crifanLib/thirdParty/crifanIDA.py" target="_blank">crifanIDA.py</a></li>
+</ul>
+</li>
+<li>使用举例<ul>
+<li><a href="https://github.com/crifan/AutoRename/blob/main/AutoRename.py" target="_blank">AutoRename.py</a></li>
+<li><a href="https://github.com/crifan/restore-symbol/blob/master/tools/IDAScripts/export_ida_symbol/exportIDASymbol.py" target="_blank">exportIDASymbol.py</a></li>
+<li><a href="https://github.com/crifan/restore-symbol/blob/master/tools/IDAScripts/search_oc_block/ida_search_block.py" target="_blank">ida_search_block.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>详解</p>
+</li>
+</ul>
+<h2 id="辅助内容"><a name="辅助内容" class="plugin-anchor" href="#辅助内容"><i class="fa fa-link" aria-hidden="true"></i></a>辅助内容</h2>
+<h4 id="导入ida的库"><a name="导入ida的库" class="plugin-anchor" href="#导入ida的库"><i class="fa fa-link" aria-hidden="true"></i></a>导入IDA的库</h4>
+<pre class="language-"><code class="lang-python"><span class="token keyword">import</span> re
+<span class="token keyword">import</span> os
+
+<span class="token keyword">import</span> idc
+<span class="token keyword">import</span> idaapi
+<span class="token keyword">import</span> idautils
+<span class="token keyword">import</span> ida_nalt
+<span class="token keyword">import</span> ida_segment
+</code></pre>
+<h4 id="辅助函数"><a name="辅助函数" class="plugin-anchor" href="#辅助函数"><i class="fa fa-link" aria-hidden="true"></i></a>辅助函数</h4>
+<ul>
+<li><a href="https://github.com/crifan/crifanLibPython/blob/master/python3/crifanLib/thirdParty/crifaniOS.py" target="_blank">crifaniOS.py</a></li>
+</ul>
+<h5 id="isobjcfunctionname"><a name="isobjcfunctionname" class="plugin-anchor" href="#isobjcfunctionname"><i class="fa fa-link" aria-hidden="true"></i></a>isObjcFunctionName</h5>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isObjcFunctionName</span><span class="token punctuation">(</span>funcName<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is ObjC function name or not
+  eg:
+    &quot;+[WAAvatarStringsActions editAvatar]&quot; -&gt; True
+    &quot;-[ParentGroupInfoViewController initWithParentGroupChatSession:userContext:recentlyLinkedGroupJIDs:]&quot; -&gt; True
+    &quot;-[OKEvolveSegmentationVC proCard]_116&quot; -&gt; True
+    &quot;-[WAAvatarStickerUpSellSupplementaryView .cxx_destruct]&quot; -&gt; True
+    &quot;sub_10004C6D8&quot; -&gt; False
+    &quot;protocol witness for RawRepresentable.init(rawValue:) in conformance UIFont.FontWeight&quot; -&gt; True
+  &quot;&quot;&quot;</span>
+  isMatchObjcFuncName <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">&quot;^[\-\+]\[\w+ [\w\.\:]+\]\w*$&quot;</span><span class="token punctuation">,</span> funcName<span class="token punctuation">)</span>
+  isObjcFuncName <span class="token operator">=</span> <span class="token builtin">bool</span><span class="token punctuation">(</span>isMatchObjcFuncName<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;funcName=%s -&gt; isObjcFuncName=%s&quot; % (funcName, isObjcFuncName))</span>
+  <span class="token keyword">return</span> isObjcFuncName
+</code></pre>
+<h2 id="ida常用函数"><a name="ida常用函数" class="plugin-anchor" href="#ida常用函数"><i class="fa fa-link" aria-hidden="true"></i></a>IDA常用函数</h2>
+<h3 id="idagetinfo"><a name="idagetinfo" class="plugin-anchor" href="#idagetinfo"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getInfo</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get IDA info
+  &quot;&quot;&quot;</span>
+  info <span class="token operator">=</span> idaapi<span class="token punctuation">.</span>get_inf_structure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;info=%s&quot; % info)</span>
+  <span class="token keyword">return</span> info
+</code></pre>
+<h3 id="idaprintinfo"><a name="idaprintinfo" class="plugin-anchor" href="#idaprintinfo"><i class="fa fa-link" aria-hidden="true"></i></a>ida_printInfo</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_printInfo</span><span class="token punctuation">(</span>info<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  print IDA info
+  &quot;&quot;&quot;</span>
+  version <span class="token operator">=</span> info<span class="token punctuation">.</span>version
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;version=%s&quot;</span> <span class="token operator">%</span> version<span class="token punctuation">)</span>
+  is64Bit <span class="token operator">=</span> info<span class="token punctuation">.</span>is_64bit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;is64Bit=%s&quot;</span> <span class="token operator">%</span> is64Bit<span class="token punctuation">)</span>
+  procName <span class="token operator">=</span> info<span class="token punctuation">.</span>procname
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;procName=%s&quot;</span> <span class="token operator">%</span> procName<span class="token punctuation">)</span>
+  entryPoint <span class="token operator">=</span> info<span class="token punctuation">.</span>start_ea
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;entryPoint=0x%X&quot;</span> <span class="token operator">%</span> entryPoint<span class="token punctuation">)</span>
+  baseAddr <span class="token operator">=</span> info<span class="token punctuation">.</span>baseaddr
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;baseAddr=0x%X&quot;</span> <span class="token operator">%</span> baseAddr<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="idaprintallimports"><a name="idaprintallimports" class="plugin-anchor" href="#idaprintallimports"><i class="fa fa-link" aria-hidden="true"></i></a>ida_printAllImports</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_printAllImports</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  print all imports lib and functions inside lib&quot;&quot;&quot;</span>
+  nimps <span class="token operator">=</span> ida_nalt<span class="token punctuation">.</span>get_import_module_qty<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Found %d import(s)...&quot;</span> <span class="token operator">%</span> nimps<span class="token punctuation">)</span>
+  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>nimps<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    name <span class="token operator">=</span> ida_nalt<span class="token punctuation">.</span>get_import_module_name<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> name<span class="token punctuation">:</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Failed to get import module name for [%d] %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      name <span class="token operator">=</span> <span class="token string">&quot;&lt;unnamed&gt;&quot;</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;[%d] %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">imp_cb</span><span class="token punctuation">(</span>ea<span class="token punctuation">,</span> name<span class="token punctuation">,</span> ordinal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> name<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;%08x: ordinal #%d&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>ea<span class="token punctuation">,</span> ordinal<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;%08x: %s (ordinal #%d)&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>ea<span class="token punctuation">,</span> name<span class="token punctuation">,</span> ordinal<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment"># True -&gt; Continue enumeration</span>
+        <span class="token comment"># False -&gt; Stop enumeration</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+    ida_nalt<span class="token punctuation">.</span>enum_import_names<span class="token punctuation">(</span>i<span class="token punctuation">,</span> imp_cb<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="idaprintsegment"><a name="idaprintsegment" class="plugin-anchor" href="#idaprintsegment"><i class="fa fa-link" aria-hidden="true"></i></a>ida_printSegment</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_printSegment</span><span class="token punctuation">(</span>curSeg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  print segment info
+    Note: in IDA, segment == section
+  &quot;&quot;&quot;</span>
+  segName <span class="token operator">=</span> curSeg<span class="token punctuation">.</span>name
+  <span class="token comment"># print(&quot;type(segName)=%s&quot; % type(segName))</span>
+  segSelector <span class="token operator">=</span> curSeg<span class="token punctuation">.</span>sel
+  segStartAddr <span class="token operator">=</span> curSeg<span class="token punctuation">.</span>start_ea
+  segEndAddr <span class="token operator">=</span> curSeg<span class="token punctuation">.</span>end_ea
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Segment: [0x%X-0x%X] name=%s, selector=%s : seg=%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>segStartAddr<span class="token punctuation">,</span> segEndAddr<span class="token punctuation">,</span> segName<span class="token punctuation">,</span> segSelector<span class="token punctuation">,</span> curSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="idagetsegmentlist"><a name="idagetsegmentlist" class="plugin-anchor" href="#idagetsegmentlist"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getSegmentList</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getSegmentList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get segment list
+  &quot;&quot;&quot;</span>
+  segList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  segNum <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_qty<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">for</span> segIdx <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>segNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    curSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>getnseg<span class="token punctuation">(</span>segIdx<span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;curSeg=%s&quot; % curSeg)</span>
+    segList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>curSeg<span class="token punctuation">)</span>
+    <span class="token comment"># ida_printSegment(curSeg)</span>
+  <span class="token keyword">return</span> segList
+</code></pre>
+<h3 id="idatestgetsegment"><a name="idatestgetsegment" class="plugin-anchor" href="#idatestgetsegment"><i class="fa fa-link" aria-hidden="true"></i></a>ida_testGetSegment</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_testGetSegment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  test get segment info
+  &quot;&quot;&quot;</span>
+  <span class="token comment"># textSeg = ida_segment.get_segm_by_name(&quot;__TEXT&quot;)</span>
+  <span class="token comment"># dataSeg = ida_segment.get_segm_by_name(&quot;__DATA&quot;)</span>
+
+  <span class="token comment"># ida_getSegmentList()</span>
+
+  <span class="token comment"># NAME___TEXT = &quot;21&quot;</span>
+  <span class="token comment"># NAME___TEXT = 21</span>
+  <span class="token comment"># NAME___TEXT = &quot;__TEXT,__text&quot;</span>
+  <span class="token comment"># NAME___TEXT = &quot;__TEXT:__text&quot;</span>
+  <span class="token comment"># NAME___TEXT = &quot;.text&quot;</span>
+
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    __TEXT,__text
+    __TEXT,__stubs
+    __TEXT,__stub_helper
+    __TEXT,__objc_stubs
+    __TEXT,__const
+    __TEXT,__objc_methname
+    __TEXT,__cstring
+    __TEXT,__swift5_typeref
+    __TEXT,__swift5_protos
+    __TEXT,__swift5_proto
+    __TEXT,__swift5_types
+    __TEXT,__objc_classname
+    __TEXT,__objc_methtype
+    __TEXT,__gcc_except_tab
+    __TEXT,__ustring
+    __TEXT,__unwind_info
+    __TEXT,__eh_frame
+    __TEXT,__oslogstring
+
+    __DATA,__got
+    __DATA,__la_symbol_ptr
+    __DATA,__mod_init_func
+    __DATA,__const
+    __DATA,__cfstring
+    __DATA,__objc_classlist
+    __DATA,__objc_catlist
+    __DATA,__objc_protolist
+    __DATA,__objc_imageinfo
+    __DATA,__objc_const
+    __DATA,__objc_selrefs
+    __DATA,__objc_protorefs
+    __DATA,__objc_classrefs
+    __DATA,__objc_superrefs
+    __DATA,__objc_ivar
+    __DATA,__objc_data
+    __DATA,__data
+    __DATA,__objc_stublist
+    __DATA,__swift_hooks
+    __DATA,__swift51_hooks
+    __DATA,__s_async_hook
+    __DATA,__swift56_hooks
+    __DATA,__thread_vars
+    __DATA,__thread_bss
+    __DATA,__bss
+    __DATA,__common
+  &quot;&quot;&quot;</span>
+
+  <span class="token comment"># __TEXT,__text</span>
+  NAME___text <span class="token operator">=</span> <span class="token string">&quot;__text&quot;</span>
+  textSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_by_name<span class="token punctuation">(</span>NAME___text<span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;textSeg: %s -&gt; %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>NAME___text<span class="token punctuation">,</span> textSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  ida_printSegment<span class="token punctuation">(</span>textSeg<span class="token punctuation">)</span>
+
+  <span class="token comment"># __TEXT,__objc_methname</span>
+  NAME___objc_methname <span class="token operator">=</span> <span class="token string">&quot;__objc_methname&quot;</span>
+  objcMethNameSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_by_name<span class="token punctuation">(</span>NAME___objc_methname<span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;objcMethNameSeg: %s -&gt; %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>NAME___objc_methname<span class="token punctuation">,</span> objcMethNameSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  ida_printSegment<span class="token punctuation">(</span>objcMethNameSeg<span class="token punctuation">)</span>
+
+  <span class="token comment"># __DATA,__got</span>
+  NAME___got <span class="token operator">=</span> <span class="token string">&quot;__got&quot;</span>
+  gotSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_by_name<span class="token punctuation">(</span>NAME___got<span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;gotSeg: %s -&gt; %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>NAME___got<span class="token punctuation">,</span> gotSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  ida_printSegment<span class="token punctuation">(</span>gotSeg<span class="token punctuation">)</span>
+
+  <span class="token comment"># __DATA,__data</span>
+  <span class="token comment"># NAME___DATA = &quot;22&quot;</span>
+  <span class="token comment"># NAME___DATA = 22</span>
+  NAME___DATA <span class="token operator">=</span> <span class="token string">&quot;__data&quot;</span>
+  dataSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_by_name<span class="token punctuation">(</span>NAME___DATA<span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;dataSeg: %s -&gt; %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>NAME___DATA<span class="token punctuation">,</span> dataSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  ida_printSegment<span class="token punctuation">(</span>dataSeg<span class="token punctuation">)</span>
+
+  <span class="token comment"># exist two one: __TEXT,__const / __DATA,__const</span>
+  NAME___const <span class="token operator">=</span> <span class="token string">&quot;__const&quot;</span>
+  constSeg <span class="token operator">=</span> ida_segment<span class="token punctuation">.</span>get_segm_by_name<span class="token punctuation">(</span>NAME___const<span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;constSeg: %s -&gt; %s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>NAME___const<span class="token punctuation">,</span> constSeg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  ida_printSegment<span class="token punctuation">(</span>constSeg<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="idagetdemangledname"><a name="idagetdemangledname" class="plugin-anchor" href="#idagetdemangledname"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getDemangledName</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getDemangledName</span><span class="token punctuation">(</span>origSymbolName<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  use IDA to get demangled name for original symbol name
+  &quot;&quot;&quot;</span>
+  retName <span class="token operator">=</span> origSymbolName
+  <span class="token comment"># demangledName = idc.demangle_name(origSymbolName, idc.get_inf_attr(idc.INF_SHORT_DN))</span>
+  <span class="token comment"># https://hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml</span>
+  demangledName <span class="token operator">=</span> idc<span class="token punctuation">.</span>demangle_name<span class="token punctuation">(</span>origSymbolName<span class="token punctuation">,</span> idc<span class="token punctuation">.</span>get_inf_attr<span class="token punctuation">(</span>idc<span class="token punctuation">.</span>INF_SHORT_DEMNAMES<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> demangledName<span class="token punctuation">:</span>
+    retName <span class="token operator">=</span> demangledName
+
+  <span class="token comment"># do extra post process:</span>
+  <span class="token comment"># remove/replace invalid char for non-objc function name</span>
+  isNotObjcFuncName <span class="token operator">=</span> <span class="token keyword">not</span> isObjcFunctionName<span class="token punctuation">(</span>retName<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;isNotObjcFuncName=%s&quot; % isNotObjcFuncName)</span>
+  <span class="token keyword">if</span> isNotObjcFuncName<span class="token punctuation">:</span>
+    retName <span class="token operator">=</span> retName<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;?&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+    retName <span class="token operator">=</span> retName<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">)</span>
+    retName <span class="token operator">=</span> retName<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;*&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;origSymbolName=%s -&gt; retName=%s&quot; % (origSymbolName, retName))</span>
+  <span class="token keyword">return</span> retName
+</code></pre>
+<h3 id="idagetfunctionendaddr"><a name="idagetfunctionendaddr" class="plugin-anchor" href="#idagetfunctionendaddr"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getFunctionEndAddr</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getFunctionEndAddr</span><span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get function end address
+    Example:
+      0x1023A2534 -&gt; 0x1023A2540
+  &quot;&quot;&quot;</span>
+  funcAddrEnd <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_func_attr<span class="token punctuation">(</span>funcAddr<span class="token punctuation">,</span> attr<span class="token operator">=</span>idc<span class="token punctuation">.</span>FUNCATTR_END<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> funcAddrEnd
+</code></pre>
+<h3 id="idagetfunctionsize"><a name="idagetfunctionsize" class="plugin-anchor" href="#idagetfunctionsize"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getFunctionSize</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getFunctionSize</span><span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get function size
+    Example:
+      0x1023A2534 -&gt; 12
+  &quot;&quot;&quot;</span>
+  funcAddrEnd <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_func_attr<span class="token punctuation">(</span>funcAddr<span class="token punctuation">,</span> attr<span class="token operator">=</span>idc<span class="token punctuation">.</span>FUNCATTR_END<span class="token punctuation">)</span>
+  funcAddStart <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_func_attr<span class="token punctuation">(</span>funcAddr<span class="token punctuation">,</span> attr<span class="token operator">=</span>idc<span class="token punctuation">.</span>FUNCATTR_START<span class="token punctuation">)</span>
+  funcSize <span class="token operator">=</span> funcAddrEnd <span class="token operator">-</span> funcAddStart
+  <span class="token keyword">return</span> funcSize
+</code></pre>
+<h3 id="idagetfunctionname"><a name="idagetfunctionname" class="plugin-anchor" href="#idagetfunctionname"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getFunctionName</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getFunctionName</span><span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get function name
+    Exmaple:
+      0x1023A2534 -&gt; &quot;sub_1023A2534&quot;
+      0xF9D260 -&gt; &quot;objc_msgSend$initWithKeyValueStore_namespace_binaryCoders_X22toX0_X23toX2_X24toX4_EF8C&quot;
+  &quot;&quot;&quot;</span>
+  funcName <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_func_name<span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> funcName
+</code></pre>
+<h3 id="idagetname"><a name="idagetname" class="plugin-anchor" href="#idagetname"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getName</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getName</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get name
+    Exmaple:
+      0xF9D260 -&gt; &quot;_objc_msgSend$initWithKeyValueStore:namespace:binaryCoders:&quot;
+  &quot;&quot;&quot;</span>
+  addrName <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_name<span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> addrName
+</code></pre>
+<h3 id="idagetdisasmstr"><a name="idagetdisasmstr" class="plugin-anchor" href="#idagetdisasmstr"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getDisasmStr</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getDisasmStr</span><span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get disasmemble string
+    Exmaple:
+      0x1023A2534 -&gt; &quot;MOV X5, X0&quot;
+  &quot;&quot;&quot;</span>
+  <span class="token comment"># method 1: generate_disasm_line</span>
+  <span class="token comment"># disasmLine_forceCode = idc.generate_disasm_line(funcAddr, idc.GENDSM_FORCE_CODE)</span>
+  <span class="token comment"># print(&quot;disasmLine_forceCode: type=%s, val=%s&quot; % (type(disasmLine_forceCode), disasmLine_forceCode))</span>
+  <span class="token comment"># disasmLine_multiLine = idc.generate_disasm_line(funcAddr, idc.GENDSM_MULTI_LINE)</span>
+  <span class="token comment"># print(&quot;disasmLine_multiLine: type=%s, val=%s&quot; % (type(disasmLine_multiLine), disasmLine_multiLine))</span>
+
+  <span class="token comment"># method 2: GetDisasm</span>
+  disasmLine <span class="token operator">=</span> idc<span class="token punctuation">.</span>GetDisasm<span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;disasmLine: type=%s, val=%s&quot; % (type(disasmLine), disasmLine))</span>
+
+  <span class="token comment"># post process</span>
+  <span class="token comment"># print(&quot;disasmLine=%s&quot; % disasmLine)</span>
+  <span class="token comment"># &quot;MOV             X4, X21&quot; -&gt; &quot;MOV X4, X21&quot;</span>
+  disasmLine <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">&quot;\s+&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> disasmLine<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;disasmLine=%s&quot; % disasmLine)</span>
+  <span class="token keyword">return</span> disasmLine
+</code></pre>
+<h3 id="idagetfunctionaddrlist"><a name="idagetfunctionaddrlist" class="plugin-anchor" href="#idagetfunctionaddrlist"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getFunctionAddrList</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getFunctionAddrList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get function address list
+  &quot;&quot;&quot;</span>
+  functionIterator <span class="token operator">=</span> idautils<span class="token punctuation">.</span>Functions<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  functionAddrList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">for</span> curFuncAddr <span class="token keyword">in</span> functionIterator<span class="token punctuation">:</span>
+    functionAddrList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>curFuncAddr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> functionAddrList
+</code></pre>
+<h3 id="idarename"><a name="idarename" class="plugin-anchor" href="#idarename"><i class="fa fa-link" aria-hidden="true"></i></a>ida_rename</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_rename</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">,</span> newName<span class="token punctuation">,</span> retryName<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  rename &lt;curAddr&gt; to &lt;newName&gt;. if fail, retry with with &lt;retryName&gt; if not None
+    Example:
+      0x3B4E28, &quot;X2toX21_X1toX20_X0toX19_4E28&quot;, &quot;X2toX21_X1toX20_X0toX19_3B4E28&quot; -&gt; True, &quot;X2toX21_X1toX20_X0toX19_4E28&quot;
+  &quot;&quot;&quot;</span>
+  <span class="token comment"># print(&quot;curAddr=0x%X, newName=%s, retryName=%s&quot; % (curAddr, newName, retryName))</span>
+  isRenameOk <span class="token operator">=</span> <span class="token boolean">False</span>
+  renamedName <span class="token operator">=</span> <span class="token boolean">None</span>
+
+  isOk <span class="token operator">=</span> idc<span class="token punctuation">.</span>set_name<span class="token punctuation">(</span>curAddr<span class="token punctuation">,</span> newName<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;isOk=%s for [0x%X] -&gt; %s&quot; % (isOk, curAddr, newName))</span>
+  <span class="token keyword">if</span> isOk <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+    isRenameOk <span class="token operator">=</span> <span class="token boolean">True</span>
+    renamedName <span class="token operator">=</span> newName
+  <span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> retryName<span class="token punctuation">:</span>
+      isOk <span class="token operator">=</span> idc<span class="token punctuation">.</span>set_name<span class="token punctuation">(</span>curAddr<span class="token punctuation">,</span> retryName<span class="token punctuation">)</span>
+      <span class="token comment"># print(&quot;isOk=%s for [0x%X] -&gt; %s&quot; % (isOk, curAddr, retryName))</span>
+      <span class="token keyword">if</span> isOk <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        isRenameOk <span class="token operator">=</span> <span class="token boolean">True</span>
+        renamedName <span class="token operator">=</span> retryName
+
+  <span class="token comment"># print(&quot;isRenameOk=%s, renamedName=%s&quot; % (isRenameOk, renamedName))</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>isRenameOk<span class="token punctuation">,</span> renamedName<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="idagetcurrentfolder"><a name="idagetcurrentfolder" class="plugin-anchor" href="#idagetcurrentfolder"><i class="fa fa-link" aria-hidden="true"></i></a>ida_getCurrentFolder</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">ida_getCurrentFolder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  get current folder for IDA current opened binary file
+    Example:
+      -&gt; /Users/crifan/dev/dev_root/iosReverse/WhatsApp/ipa/Payload/WhatsApp.app
+      -&gt; /Users/crifan/dev/dev_root/iosReverse/WhatsApp/ipa/Payload/WhatsApp.app/Frameworks/SharedModules.framework
+  &quot;&quot;&quot;</span>
+  curFolder <span class="token operator">=</span> <span class="token boolean">None</span>
+  inputFileFullPath <span class="token operator">=</span> ida_nalt<span class="token punctuation">.</span>get_input_file_path<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;inputFileFullPath=%s&quot; % inputFileFullPath)</span>
+  <span class="token keyword">if</span> inputFileFullPath<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">&quot;/var/containers/Bundle/Application&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># inputFileFullPath=/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/WhatsApp</span>
+    <span class="token comment"># -&gt; maybe IDA bug -&gt; after debug settings, output iOS device path, but later no authority to write exported file to it</span>
+    <span class="token comment"># so need to avoid this case, change to output to PC side (Mac) current folder</span>
+    curFolder <span class="token operator">=</span> <span class="token string">&quot;.&quot;</span>
+  <span class="token keyword">else</span><span class="token punctuation">:</span>
+    curFolder <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>inputFileFullPath<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;curFolder=%s&quot; % curFolder)</span>
+
+  <span class="token comment"># debugInputPath = ida_nalt.dbg_get_input_path()</span>
+  <span class="token comment"># print(&quot;debugInputPath=%s&quot; % debugInputPath)</span>
+
+  curFolder <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>curFolder<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;curFolder=%s&quot; % curFolder)</span>
+  <span class="token comment"># here work:</span>
+  <span class="token comment"># . -&gt; /Users/crifan/dev/dev_root/iosReverse/WhatsApp/ipa/Payload/WhatsApp.app</span>
+  <span class="token keyword">return</span> curFolder
+</code></pre>
+<h3 id="isdefaulttypeforobjcmsgsendfunction"><a name="isdefaulttypeforobjcmsgsendfunction" class="plugin-anchor" href="#isdefaulttypeforobjcmsgsendfunction"><i class="fa fa-link" aria-hidden="true"></i></a>isDefaultTypeForObjcMsgSendFunction</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isDefaultTypeForObjcMsgSendFunction</span><span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is objc_msgSend$xxx function&apos;s default type &quot;id(void *, const char *, ...)&quot; or not
+  eg:
+    0xF3EF8C -&gt; True
+      note: funcType=id(void *, const char *, __int64, __int64, ...)
+  &quot;&quot;&quot;</span>
+  isDefType <span class="token operator">=</span> <span class="token boolean">False</span>
+  funcType <span class="token operator">=</span> idc<span class="token punctuation">.</span>get_type<span class="token punctuation">(</span>funcAddr<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;[0x%X] -&gt; funcType=%s&quot; % (funcAddr, funcType))</span>
+  <span class="token keyword">if</span> funcType<span class="token punctuation">:</span>
+    defaultTypeMatch <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;\.\.\.\)$&quot;</span><span class="token punctuation">,</span> funcType<span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;defaultTypeMatch=%s&quot; % defaultTypeMatch)</span>
+    isDefType <span class="token operator">=</span> <span class="token builtin">bool</span><span class="token punctuation">(</span>defaultTypeMatch<span class="token punctuation">)</span>
+    <span class="token comment"># print(&quot;isDefType=%s&quot; % isDefType)</span>
+  <span class="token keyword">return</span> isDefType
+</code></pre>
+<h2 id="无需调用ida的api的相关函数"><a name="无需调用ida的api的相关函数" class="plugin-anchor" href="#无需调用ida的api的相关函数"><i class="fa fa-link" aria-hidden="true"></i></a>无需调用IDA的API的相关函数</h2>
+<h3 id="isdefaultsubfuncname"><a name="isdefaultsubfuncname" class="plugin-anchor" href="#isdefaultsubfuncname"><i class="fa fa-link" aria-hidden="true"></i></a>isDefaultSubFuncName</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isDefaultSubFuncName</span><span class="token punctuation">(</span>funcName<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is default sub_XXX function or not from name
+  eg:
+    sub_F332C0 -&gt; True, &quot;F332C0&quot;
+  &quot;&quot;&quot;</span>
+  isSub <span class="token operator">=</span> <span class="token boolean">False</span>
+  addressStr <span class="token operator">=</span> <span class="token boolean">None</span>
+  <span class="token comment"># subMatch = re.match(&quot;^sub_[0-9A-Za-z]+$&quot;, funcName)</span>
+  subMatch <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">&quot;^sub_(?P&lt;addressStr&gt;[0-9A-Fa-f]+)$&quot;</span><span class="token punctuation">,</span> funcName<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;subMatch=%s&quot; % subMatch)</span>
+  <span class="token keyword">if</span> subMatch<span class="token punctuation">:</span>
+    isSub <span class="token operator">=</span> <span class="token boolean">True</span>
+    addressStr <span class="token operator">=</span> subMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;addressStr&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> isSub<span class="token punctuation">,</span> addressStr
+</code></pre>
+<h3 id="isreservedprefixloc"><a name="isreservedprefixloc" class="plugin-anchor" href="#isreservedprefixloc"><i class="fa fa-link" aria-hidden="true"></i></a>isReservedPrefix_loc</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isReservedPrefix_loc</span><span class="token punctuation">(</span>funcName<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is reserved prefix loc_XXX name or not
+  eg:
+    loc_100007A2C -&gt; True, &quot;100007A2C&quot;
+  &quot;&quot;&quot;</span>
+  isLoc <span class="token operator">=</span> <span class="token boolean">False</span>
+  addressStr <span class="token operator">=</span> <span class="token boolean">None</span>
+  locMatch <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">&quot;^loc_(?P&lt;addressStr&gt;[0-9A-Fa-f]+)$&quot;</span><span class="token punctuation">,</span> funcName<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;locMatch=%s&quot; % locMatch)</span>
+  <span class="token keyword">if</span> locMatch<span class="token punctuation">:</span>
+    isLoc <span class="token operator">=</span> <span class="token boolean">True</span>
+    addressStr <span class="token operator">=</span> locMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;addressStr&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> isLoc<span class="token punctuation">,</span> addressStr
+</code></pre>
+<h3 id="isdefaultsubfunction"><a name="isdefaultsubfunction" class="plugin-anchor" href="#isdefaultsubfunction"><i class="fa fa-link" aria-hidden="true"></i></a>isDefaultSubFunction</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isDefaultSubFunction</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is default sub_XXX function or not from address
+  &quot;&quot;&quot;</span>
+  isDefSubFunc <span class="token operator">=</span> <span class="token boolean">False</span>
+  curFuncName  <span class="token operator">=</span> ida_getFunctionName<span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;curFuncName=%s&quot; % curFuncName)</span>
+  <span class="token keyword">if</span> curFuncName<span class="token punctuation">:</span>
+    isDefSubFunc<span class="token punctuation">,</span> subAddStr <span class="token operator">=</span> isDefaultSubFuncName<span class="token punctuation">(</span>curFuncName<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> isDefSubFunc<span class="token punctuation">,</span> curFuncName
+</code></pre>
+<h3 id="isobjcmsgsendfunction"><a name="isobjcmsgsendfunction" class="plugin-anchor" href="#isobjcmsgsendfunction"><i class="fa fa-link" aria-hidden="true"></i></a>isObjcMsgSendFunction</h3>
+<pre class="language-"><code class="lang-python"><span class="token keyword">def</span> <span class="token function">isObjcMsgSendFunction</span><span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token triple-quoted-string string">&quot;&quot;&quot;
+  check is default sub_XXX function or not from address
+  &quot;&quot;&quot;</span>
+  isObjcMsgSend <span class="token operator">=</span> <span class="token boolean">False</span>
+  curFuncName  <span class="token operator">=</span> ida_getFunctionName<span class="token punctuation">(</span>curAddr<span class="token punctuation">)</span>
+  <span class="token comment"># print(&quot;curFuncName=%s&quot; % curFuncName)</span>
+  <span class="token keyword">if</span> curFuncName<span class="token punctuation">:</span>
+    isObjcMsgSend<span class="token punctuation">,</span> selectorStr <span class="token operator">=</span> isObjcMsgSendFuncName<span class="token punctuation">(</span>curFuncName<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> isObjcMsgSend<span class="token punctuation">,</span> selectorStr
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-03-11 09:36:44
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: IDA常用函数">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="util_class.html" class="navigation navigation-next " aria-label="Next page: 工具类">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"函数","level":"1.6.1","depth":2,"next":{"title":"工具类","level":"1.6.2","depth":2,"path":"ida_common_func/util_class.md","ref":"ida_common_func/util_class.md","articles":[]},"previous":{"title":"IDA常用函数","level":"1.6","depth":1,"path":"ida_common_func/README.md","ref":"ida_common_func/README.md","articles":[{"title":"函数","level":"1.6.1","depth":2,"path":"ida_common_func/function.md","ref":"ida_common_func/function.md","articles":[]},{"title":"工具类","level":"1.6.2","depth":2,"path":"ida_common_func/util_class.md","ref":"ida_common_func/util_class.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ida_plugin_script_idapython/pdf/ida_plugin_script_idapython.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ida_plugin_script_idapython/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ida_plugin_script_idapython","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"IDA插件脚本：IDAPython","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍IDA中支持用Python代码调用IDAPython接口编写插件脚本，实现各种功能。"},"file":{"path":"ida_common_func/function.md","mtime":"2024-03-11T01:36:44.758Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-03-12T01:14:52.592Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
