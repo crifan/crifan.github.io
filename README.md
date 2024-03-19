@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20240313`
+最后更新：`20240319`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -156,5 +156,6 @@
     * [底层编程语言：汇编语言asm](https://crifan.github.io/low_level_assembly_asm/website)
     * [IDA插件脚本：IDAPython](https://crifan.github.io/ida_plugin_script_idapython/website)
     * [安卓保活技术](https://crifan.github.io/android_keep_alive_tech/website)
+    * [iOS逆向：管理app和插件](https://crifan.github.io/ios_re_manage_app_tweak/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
