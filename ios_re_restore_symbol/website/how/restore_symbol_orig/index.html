@@ -366,10 +366,251 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="原版restore-symbol"><a name="原版restore-symbol" class="plugin-anchor" href="#原版restore-symbol"><i class="fa fa-link" aria-hidden="true"></i></a>原版restore-symbol</h1>
+<p>此处所说的原始版本的<code>restore-symbol</code>，是相对于我自己修改的版本来说的。</p>
+<p>而演示版本的<code>restore-symbol</code>，又分几个版本：</p>
+<ul>
+<li>最原始版本： <code>tobefuturer</code>的<code>restore-symbol</code><ul>
+<li><a href="https://github.com/tobefuturer/restore-symbol" target="_blank">https://github.com/tobefuturer/restore-symbol</a></li>
+</ul>
+</li>
+<li>改进版本：<code>HeiTanBc</code>的<code>restore-symbol</code><ul>
+<li><a href="https://github.com/HeiTanBc/restore-symbol" target="_blank">https://github.com/HeiTanBc/restore-symbol</a></li>
+</ul>
+</li>
+</ul>
+<p>但是总体用法是一样的，下面以<code>HeiTanBc</code>版本的<code>restore-symbol</code>为例，来说明如何使用：</p>
+<h2 id="准备"><a name="准备" class="plugin-anchor" href="#准备"><i class="fa fa-link" aria-hidden="true"></i></a>准备</h2>
+<p>下载、编译、确认：</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> clone <span class="token parameter variable">--recursive</span> https://github.com/HeiTanBc/restore-symbol.git
+<span class="token builtin class-name">cd</span> restore-symbol
+<span class="token function">make</span>
+./restore-symbol
+</code></pre>
 <h2 id="用restore-symbol恢复objc符号表"><a name="用restore-symbol恢复objc符号表" class="plugin-anchor" href="#用restore-symbol恢复objc符号表"><i class="fa fa-link" aria-hidden="true"></i></a>用restore-symbol恢复ObjC符号表</h2>
+<p>下面举例说明：</p>
+<h3 id="awemecore"><a name="awemecore" class="plugin-anchor" href="#awemecore"><i class="fa fa-link" aria-hidden="true"></i></a>AwemeCore</h3>
+<pre class="language-"><code class="lang-bash">➜  AwemeCore.framework /Users/crifan/dev/DevSrc/iOS/restore-symbol/HeiTanBc/restore-symbol/restore-symbol AwemeCore_noSymbol <span class="token parameter variable">-o</span> AwemeCore_restoredSymbol_HeiTanBc
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+Scan OC method finish.
+restore <span class="token number">329610</span> symbols
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre>
+<h3 id="aweme"><a name="aweme" class="plugin-anchor" href="#aweme"><i class="fa fa-link" aria-hidden="true"></i></a>Aweme</h3>
+<pre class="language-"><code class="lang-bash">➜  Aweme.app /Users/crifan/dev/DevSrc/iOS/restore-symbol/HeiTanBc/restore-symbol/restore-symbol Aweme_noSymbol <span class="token parameter variable">-o</span> Aweme_restoredSymbol_HeiTanBc
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+Scan OC method finish.
+restore <span class="token number">0</span> symbols
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre>
+<p>注：此处0个symbol，说明：没有可用符号。</p>
+<h3 id="whatsapp"><a name="whatsapp" class="plugin-anchor" href="#whatsapp"><i class="fa fa-link" aria-hidden="true"></i></a>WhatsApp</h3>
+<pre class="language-"><code class="lang-bash">➜  WhatsApp.app git:<span class="token punctuation">(</span>main<span class="token punctuation">)</span> ✗ /Users/crifan/dev/dev_src/ios_reverse/symbol/restore-symbol/HeiTanBc/restore-symbol/restore-symbol WhatsApp <span class="token parameter variable">-o</span> WhatsApp_restoredSymbol_HeiTanBc
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.440 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Unknown load command: 0x00000032
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.539 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s15UILibraryShared23PTTTranscriptionManagerCN</span> <span class="token punctuation">(</span>addr 10345a998<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.541 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s5WAOTP12CopyCodeBaseCN</span> <span class="token punctuation">(</span>addr 10345f418<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.544 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core13DeviceManagerCN</span> <span class="token punctuation">(</span>addr 10346a1c0<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.545 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core21MessageEditDataSourceCN</span> <span class="token punctuation">(</span>addr 10346e370<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.550 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core21MessagingDataProviderCN</span> <span class="token punctuation">(</span>addr 10347c0b0<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.561 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core17MessageDataSourceCN</span> <span class="token punctuation">(</span>addr 1034922a8<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.561 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core24StatusThumbnailProcessorCN</span> <span class="token punctuation">(</span>addr <span class="token number">103492500</span><span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.561 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core20MessagePinDataSourceCN</span> <span class="token punctuation">(</span>addr <span class="token number">103492618</span><span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.565 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core18ReactionDataSourceCN</span> <span class="token punctuation">(</span>addr 103497ef0<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.566 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core20KeepInChatDataSourceCN</span> <span class="token punctuation">(</span>addr 1034998e0<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.567 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core28NewsletterReactionDataSourceCN</span> <span class="token punctuation">(</span>addr 10349acb0<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.573 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s4Core27ScheduledCallEditDataSourceCN</span> <span class="token punctuation">(</span>addr 1034a2568<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.578 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s25WAPaymentsTransactionBase20PaymentStanzaBuilderCN</span> <span class="token punctuation">(</span>addr 10364b0b8<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.589 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s25WAPaymentsTransactionBase20PaymentStanzaBuilderCN</span> <span class="token punctuation">(</span>addr 10364b0b8<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.596 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s15UILibraryShared13TextFieldCellCN</span> <span class="token punctuation">(</span>addr 1034fe858<span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.597 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s25WAPaymentsTransactionBase20PaymentStanzaElementCN</span> <span class="token punctuation">(</span>addr <span class="token number">103503180</span><span class="token punctuation">)</span>
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:10.597 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Unknown prefix on symbol name<span class="token punctuation">..</span>. _<span class="token variable">$s25WAPaymentsTransactionBase20PaymentStanzaBuilderCN</span> <span class="token punctuation">(</span>addr 10365ce38<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, botEncryptionRequest
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, primaryEncryptionRequest
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, Log
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, signalManager
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, result
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, sessionId
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, keychainWrapper
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, credentialQueue
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, cachedUser
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, repository
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, credentialStore
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, userJid
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, logger
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, fetchPromise
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, log
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, fileHandle
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, mapPointer
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, size
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, nameFieldLength
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, lengthFieldLength
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, parameters
+<span class="token number">2023</span>-10-26 <span class="token number">17</span>:20:11.511 restore-symbol<span class="token punctuation">[</span><span class="token number">16809</span>:360862686<span class="token punctuation">]</span> Warning: Parsing instance variable <span class="token builtin class-name">type</span> failed, query
+Scan OC method finish.
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+➜  WhatsApp.app git:<span class="token punctuation">(</span>main<span class="token punctuation">)</span> ✗
+</code></pre>
+<p><img src="../../assets/img/restore_symbol_example_whatsapp_1.png" alt="restore_symbol_example_whatsapp_1"></p>
+<p><img src="../../assets/img/restore_symbol_example_whatsapp_2.png" alt="restore_symbol_example_whatsapp_2"></p>
+<h3 id="musicallycore"><a name="musicallycore" class="plugin-anchor" href="#musicallycore"><i class="fa fa-link" aria-hidden="true"></i></a>MusicallyCore</h3>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/symbol/restore-symbol/HeiTanBc/restore-symbol   master  ./restore-symbol /Users/crifan/dev/dev_root/iosReverse/tiktok/ipa/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore <span class="token parameter variable">-o</span> /Users/crifan/dev/dev_root/iosReverse/tiktok/ipa/Payload/TikTok.app/Frameworks/MusicallyCore.framework/MusicallyCore_addSymbol
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+Scan OC method finish.
+restore <span class="token number">261142</span> symbols
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre>
+<p><img src="../../assets/img/restore_symbol_example_musicallycore.png" alt="restore_symbol_example_musicallycore"></p>
+<h3 id="rzgame"><a name="rzgame" class="plugin-anchor" href="#rzgame"><i class="fa fa-link" aria-hidden="true"></i></a>RzGame</h3>
+<pre class="language-"><code class="lang-bash">✘ crifan@licrifandeMacBook-Pro  ~/dev/dev_src/ios_reverse/symbol/restore-symbol/HeiTanBc/restore-symbol   master ●  ./restore-symbol /Users/crifan/dev/dev_root/iosReverse/undecember/ipa/Payload/RzGame.app/RzGame <span class="token parameter variable">-o</span> /Users/crifan/dev/dev_root/iosReverse/undecember/ipa/Payload/RzGame.app/RzGame_addSymbol
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+Scan OC method finish.
+restore <span class="token number">28136</span> symbols
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre>
+<h2 id="导出block符号表"><a name="导出block符号表" class="plugin-anchor" href="#导出block符号表"><i class="fa fa-link" aria-hidden="true"></i></a>导出Block符号表</h2>
+<p>用restore-symbol去恢复=导出，ObjC的符号表后，对于更加完整的用法，则还可以继续去导出block符号表</p>
+<p>需要借用相关的工具：<code>ida_search_block.py</code>的IDA插件</p>
+<h4 id="idasearchblockpy的版本"><a name="idasearchblockpy的版本" class="plugin-anchor" href="#idasearchblockpy的版本"><i class="fa fa-link" aria-hidden="true"></i></a>ida_search_block.py的版本</h4>
+<p>而关于<code>ida_search_block.py</code>的文件，此处代码仓库中是有的：</p>
+<ul>
+<li><a href="https://github.com/HeiTanBc/restore-symbol/blob/master/search_oc_block/ida_search_block.py" target="_blank">https://github.com/HeiTanBc/restore-symbol/blob/master/search_oc_block/ida_search_block.py</a></li>
+</ul>
+<p>但该版本有些bug，而我Crifan修改后的：修复该bug+额外优化后的最新版本是：</p>
+<ul>
+<li><a href="https://github.com/crifan/restore-symbol/blob/master/tools/IDAScripts/search_oc_block/ida_search_block.py" target="_blank">https://github.com/crifan/restore-symbol/blob/master/tools/IDAScripts/search_oc_block/ida_search_block.py</a></li>
+</ul>
+<h3 id="举例"><a name="举例" class="plugin-anchor" href="#举例"><i class="fa fa-link" aria-hidden="true"></i></a>举例</h3>
+<p>此处举例说明如何使用：</p>
+<h4 id="musicallycore"><a name="musicallycore" class="plugin-anchor" href="#musicallycore"><i class="fa fa-link" aria-hidden="true"></i></a>MusicallyCore</h4>
+<p><img src="../../assets/img/ida_plugin_ida_search_block.png" alt="ida_plugin_ida_search_block"></p>
+<p>最后会输出：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">..</span>.
+Result file: ./block_symbol.json
+restore block num <span class="token number">1530</span> 
+origin  block num: <span class="token number">49422</span><span class="token punctuation">(</span>GlobalBlock: <span class="token number">10</span>, StackBlock: <span class="token number">49412</span><span class="token punctuation">)</span>
+</code></pre>
+<p><img src="../../assets/img/ida_output_block_symbol.png" alt="ida_output_block_symbol"></p>
+<p>对应的输出文件：</p>
+<ul>
+<li><code>/Users/crifan/dev/dev_root/iosReverse/tiktok/ipa/Payload/TikTok.app/Frameworks/MusicallyCore.framework/block_symbol.json</code><ul>
+<li><img src="../../assets/img/block_symbol_file.png" alt="block_symbol_file"></li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x5F4000C&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UIView makeToastActivity:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xD900034&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;+[APMAnalytics logEventWithOrigin:isPublicEvent:name:parameters:]_block_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE4005C&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_reloadRowsAtIndexPaths:withRowAnimation:]_block_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x5F40120&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UIView hideToastActivity]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x5F40130&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UIView hideToastActivity]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xD9001BC&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;+[APMAnalytics logEventWithOrigin:isPublicEvent:name:parameters:timestamp:ignoreEnabled:ignoreInterceptor:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x9F00278&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[NSObject validatedArraryOfStrings]_0_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+...
+
+
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xA2BF6E4&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UIScrollView dzn_reloadEmptyDataSet]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x463F778&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[AppsFlyerLib callServerWithEventName:eventValues:options:completion:]_block_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3F7B8&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_insertRowsAtIndexPaths:withRowAnimation:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x463F7F0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[AppsFlyerLib callServerWithEventName:eventValues:options:completion:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3F878&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_insertRowsAtIndexPaths:withRowAnimation:]_block_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3FB20&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_deleteRowsAtIndexPaths:withRowAnimation:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0x74FFBA4&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UIImageView p_loadImageURLs:placeholder:options:isReloadURL:size:userID:hitImageInCache:enabledOptimisation:enableDemotionImage:completion:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3FC7C&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_deleteRowsAtIndexPaths:withRowAnimation:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3FD6C&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_deleteRowsAtIndexPaths:withRowAnimation:]_block_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xD8FFEB8&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;+[APMAnalytics logInternalEventWithOrigin:name:timestamp:parameters:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xD8FFF30&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;+[APMAnalytics logEventWithOrigin:isPublicEvent:name:parameters:]_block&quot;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">{</span>
+  <span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0xBE3FF9C&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;-[UITableView fd_reloadRowsAtIndexPaths:withRowAnimation:]_block&quot;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<p><img src="../../assets/img/block_symbol_vscode_1.png" alt="block_symbol_vscode_1"></p>
+<p><img src="../../assets/img/block_symbol_vscode_2.png" alt="block_symbol_vscode_2"></p>
 <h2 id="用restore-symbol恢复objcblock符号表"><a name="用restore-symbol恢复objcblock符号表" class="plugin-anchor" href="#用restore-symbol恢复objcblock符号表"><i class="fa fa-link" aria-hidden="true"></i></a>用restore-symbol恢复ObjC+block符号表</h2>
+<p>此处，想要一次性恢复ObjC和Block的符号表，则用<code>-j</code>参数即可</p>
+<p>举例说明：</p>
+<h3 id="youtube"><a name="youtube" class="plugin-anchor" href="#youtube"><i class="fa fa-link" aria-hidden="true"></i></a>YouTube</h3>
+<pre class="language-"><code class="lang-bash">/Users/crifan/dev/DevSrc/iOS/symbol/restore-symbol/HeiTanBc/restore-symbol/restore-symbol YouTube <span class="token parameter variable">-o</span> YouTube_objcBlockSymbol <span class="token parameter variable">-j</span>
+ block_symbol.json
+</code></pre>
+<h3 id="moduleframework"><a name="moduleframework" class="plugin-anchor" href="#moduleframework"><i class="fa fa-link" aria-hidden="true"></i></a>Module_Framework</h3>
+<pre class="language-"><code class="lang-bash">/Users/crifan/dev/DevSrc/iOS/symbol/restore-symbol/HeiTanBc/restore-symbol/restore-symbol Module_Framework <span class="token parameter variable">-o</span> Module_Framework_objcBlockSymbol <span class="token parameter variable">-j</span> block_symbol.json
+</code></pre>
+<h3 id="rzgame"><a name="rzgame" class="plugin-anchor" href="#rzgame"><i class="fa fa-link" aria-hidden="true"></i></a>RzGame</h3>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">cd</span> ~/dev/dev_root/iosReverse/undecember/ipa/Payload/RzGame.app
+
+✘ crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/undecember/ipa/Payload/RzGame.app  /Users/crifan/dev/dev_src/ios_reverse/symbol/restore-symbol/HeiTanBc/restore-symbol/restore-symbol RzGame_addSymbol <span class="token parameter variable">-o</span> RzGame_addedAllSymbol <span class="token parameter variable">-j</span> block_symbol.json
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Start <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Scan OC method <span class="token keyword">in</span> mach-o-file.
+Scan OC method finish.
+restore <span class="token number">28136</span> symbols
+Parse symbols <span class="token keyword">in</span> json file.
+Parse finish.
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> Finish <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-03-03 17:57:15
+2024-05-07 09:53:36
 </span></footer></body></html>
                                 
                                 </section>
@@ -413,7 +654,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"原版restore-symbol","level":"1.5.1","depth":2,"next":{"title":"crifan版restore-symbol","level":"1.5.2","depth":2,"path":"how/restore_symbol_crifan/README.md","ref":"how/restore_symbol_crifan/README.md","articles":[]},"previous":{"title":"如何恢复符号表","level":"1.5","depth":1,"path":"how/README.md","ref":"how/README.md","articles":[{"title":"原版restore-symbol","level":"1.5.1","depth":2,"path":"how/restore_symbol_orig/README.md","ref":"how/restore_symbol_orig/README.md","articles":[]},{"title":"crifan版restore-symbol","level":"1.5.2","depth":2,"path":"how/restore_symbol_crifan/README.md","ref":"how/restore_symbol_crifan/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_restore_symbol/pdf/ios_re_restore_symbol.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_restore_symbol/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_restore_symbol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向分析：恢复符号表","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍关于iOS逆向期间的，恢复符号表相关的各种内容。"},"file":{"path":"how/restore_symbol_orig/README.md","mtime":"2024-03-03T09:57:15.678Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-03-04T15:05:49.471Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"原版restore-symbol","level":"1.5.1","depth":2,"next":{"title":"crifan版restore-symbol","level":"1.5.2","depth":2,"path":"how/restore_symbol_crifan/README.md","ref":"how/restore_symbol_crifan/README.md","articles":[]},"previous":{"title":"如何恢复符号表","level":"1.5","depth":1,"path":"how/README.md","ref":"how/README.md","articles":[{"title":"原版restore-symbol","level":"1.5.1","depth":2,"path":"how/restore_symbol_orig/README.md","ref":"how/restore_symbol_orig/README.md","articles":[]},{"title":"crifan版restore-symbol","level":"1.5.2","depth":2,"path":"how/restore_symbol_crifan/README.md","ref":"how/restore_symbol_crifan/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_restore_symbol/pdf/ios_re_restore_symbol.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_restore_symbol/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_restore_symbol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向分析：恢复符号表","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍关于iOS逆向期间的，恢复符号表相关的各种内容。"},"file":{"path":"how/restore_symbol_orig/README.md","mtime":"2024-05-07T01:53:36.992Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-05-29T14:07:15.307Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
