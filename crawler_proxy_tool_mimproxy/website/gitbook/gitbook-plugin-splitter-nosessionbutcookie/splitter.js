@@ -14,6 +14,7 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
 	gitbook.events.bind('page.change', function () {
 
 		var KEY_SPLIT_STATE = 'plugin_gitbook_split';
+		var obj = {};
 
 		var dividerWidth = null;
 		var isDraggable = false;
@@ -96,9 +97,8 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
 			$summary.outerWidth(event.pageX + grabPointWidth);
 			$bookBody.offset({ left: event.pageX + grabPointWidth });
 		});
-
 		function getSplitState() {
-			var splitState = JSON.parse(sessionStorage.getItem(KEY_SPLIT_STATE));
+			var splitState = obj;
 			splitState || (splitState = {});
 			splitState.summaryWidth || (splitState.summaryWidth = $summary.outerWidth());
 			splitState.summaryOffset || (splitState.summaryOffset = $summary.position().left);
@@ -107,11 +107,9 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
 		}
 
 		function saveSplitState(summaryWidth, summaryWidthOffset, bookBodyOffset) {
-			sessionStorage.setItem(KEY_SPLIT_STATE, JSON.stringify({
-				summaryWidth: summaryWidth,
-				summaryOffset: summaryWidthOffset,
-				bookBodyOffset: bookBodyOffset,
-			}));
+			obj.summaryWidth = summaryWidth
+			obj.summaryOffset = summaryWidthOffset
+			obj.bookBodyOffset = bookBodyOffset
 		}
 
 		function setSplitState(summaryWidth, summaryOffset, bookBodyOffset) {
