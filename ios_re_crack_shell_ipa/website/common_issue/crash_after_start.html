@@ -1,0 +1,783 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>app启动后崩溃 · iOS逆向开发：砸壳ipa</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../appendix/" />
+    
+    
+    <link rel="prev" href="devicenotsupportedbythinning.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_crack_shell_ipa","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../crack_shell_overview/">
+            
+                <a href="../crack_shell_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    砸壳ipa概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../crack_tools/">
+            
+                <a href="../crack_tools/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    常见砸壳工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../crack_tools/frida_ios_dump.html">
+            
+                <a href="../crack_tools/frida_ios_dump.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    frida-ios-dump
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../crack_tools/dumpdecrypted.html">
+            
+                <a href="../crack_tools/dumpdecrypted.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    dumpdecrypted
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../crack_tools/clutch.html">
+            
+                <a href="../crack_tools/clutch.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    Clutch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../crack_tools/bfinject.html">
+            
+                <a href="../crack_tools/bfinject.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    bfinject
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../crack_example/">
+            
+                <a href="../crack_example/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    砸壳实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../crack_example/frida_ios_dump/">
+            
+                <a href="../crack_example/frida_ios_dump/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    frida-ios-dump实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../crack_example/frida_ios_dump/tiktok.html">
+            
+                <a href="../crack_example/frida_ios_dump/tiktok.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    TikTok的ipa
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../crack_example/frida_ios_dump/aweme.html">
+            
+                <a href="../crack_example/frida_ios_dump/aweme.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    抖音的ipa
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../crack_example/frida_ios_dump/youtube.html">
+            
+                <a href="../crack_example/frida_ios_dump/youtube.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    YouTube的ipa
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../after_ipa/">
+            
+                <a href="../after_ipa/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    砸壳后
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../after_ipa/install_ipa.html">
+            
+                <a href="../after_ipa/install_ipa.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    安装ipa
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    砸壳常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="no_progress_0_00b.html">
+            
+                <a href="no_progress_0_00b.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    无进度 0.00B 00:00
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="devicenotsupportedbythinning.html">
+            
+                <a href="devicenotsupportedbythinning.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    DeviceNotSupportedByThinning
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="crash_after_start.html">
+            
+                <a href="crash_after_start.html">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    app启动后崩溃
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >app启动后崩溃</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="app启动后崩溃"><a name="app启动后崩溃" class="plugin-anchor" href="#app启动后崩溃"><i class="fa fa-link" aria-hidden="true"></i></a>app启动后崩溃</h1>
+<ul>
+<li>现象：用frida-ios-dump砸壳后的app，启动后就崩溃</li>
+<li>原因<ul>
+<li>其实有多种可能</li>
+</ul>
+</li>
+<li>思路<ul>
+<li>可以通过找app崩溃日志，而找到，具体错误的现象和找出背后的根本原因</li>
+</ul>
+</li>
+</ul>
+<h3 id="通过ips崩溃日志找崩溃原因"><a name="通过ips崩溃日志找崩溃原因" class="plugin-anchor" href="#通过ips崩溃日志找崩溃原因"><i class="fa fa-link" aria-hidden="true"></i></a>通过ips崩溃日志找崩溃原因</h3>
+<p>举例：</p>
+<p>抖音启动就闪退崩溃，此时去找crash崩溃日志：</p>
+<p><img src="../assets/img/aweme_start_crash_ips_log.png" alt="aweme_start_crash_ips_log"></p>
+<p>打开对应的，Aweme的崩溃日志文件：</p>
+<ul>
+<li><code>Aweme-2022-01-07-102659.ips</code><ul>
+<li><img src="../assets/img/aweme_ips_log.png" alt="aweme_ips_log"></li>
+</ul>
+</li>
+</ul>
+<pre class="language-"><code class="lang-log"><span class="token operator">{</span><span class="token string">&quot;app_name&quot;</span><span class="token operator">:</span><span class="token string">&quot;Aweme&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;timestamp&quot;</span><span class="token operator">:</span><span class="token string">&quot;2022-01-07 10:26:59.00 +0800&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;app_version&quot;</span><span class="token operator">:</span><span class="token string">&quot;18.9.0&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;slice_uuid&quot;</span><span class="token operator">:</span><span class="token string">&quot;31ed6d91-1868-36f5-89b8-c39fbf7d01e3&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;adam_id&quot;</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;build_version&quot;</span><span class="token operator">:</span><span class="token string">&quot;189034&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;bundleID&quot;</span><span class="token operator">:</span><span class="token string">&quot;com.ss.iphone.ugc.Aweme&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;share_with_app_devs&quot;</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;is_first_party&quot;</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;bug_type&quot;</span><span class="token operator">:</span><span class="token string">&quot;109&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;os_version&quot;</span><span class="token operator">:</span><span class="token string">&quot;iPhone OS 13.4.1 (17E262)&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;incident_id&quot;</span><span class="token operator">:</span><span class="token string">&quot;C446C22E-347A-4340-8D68-637187E331B4&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;Aweme&quot;</span><span class="token operator">}</span>
+<span class="token property">Incident Identifier:</span> <span class="token uuid constant">C446C22E-347A-4340-8D68-637187E331B4</span>
+<span class="token property">CrashReporter Key:</span>   <span class="token number">17234ceb2c5be537d1971110d8a3263466bb1250</span>
+<span class="token property">Hardware Model:</span>      iPhone9<span class="token punctuation">,</span><span class="token number">2</span>
+<span class="token property">Process:</span>             Aweme <span class="token punctuation">[</span><span class="token number">8782</span><span class="token punctuation">]</span>
+<span class="token property">Path:</span>                <span class="token file-path string">/private/var/containers/Bundle/Application/9AB25481-0AD3-435C-A02E-68F9623535BB/Aweme.app/Aweme</span>
+<span class="token property">Identifier:</span>          com<span class="token punctuation">.</span>ss<span class="token punctuation">.</span>iphone<span class="token punctuation">.</span>ugc<span class="token punctuation">.</span>Aweme
+<span class="token property">Version:</span>             <span class="token number">189034</span> <span class="token operator">(</span><span class="token number">18.9.0</span><span class="token operator">)</span>
+<span class="token property">AppStoreTools:</span>       <span class="token number">13C88a</span>
+<span class="token property">Code Type:</span>           ARM<span class="token operator">-</span><span class="token number">64</span> <span class="token operator">(</span>Native<span class="token operator">)</span>
+<span class="token property">Role:</span>                Foreground
+<span class="token property">Parent Process:</span>      launchd <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token property">Coalition:</span>           com<span class="token punctuation">.</span>ss<span class="token punctuation">.</span>iphone<span class="token punctuation">.</span>ugc<span class="token punctuation">.</span>Aweme <span class="token punctuation">[</span><span class="token number">4724</span><span class="token punctuation">]</span>
+
+<span class="token property">Date/Time:</span>           <span class="token date number">2022-01-07</span> <span class="token time number">10:26:59.5847 +0800</span>
+<span class="token property">Launch Time:</span>         <span class="token date number">2022-01-07</span> <span class="token time number">10:26:58.4574 +0800</span>
+<span class="token property">OS Version:</span>          iPhone OS <span class="token number">13.4.1</span> <span class="token operator">(</span><span class="token number">17E262</span><span class="token operator">)</span>
+<span class="token property">Release Type:</span>        User
+<span class="token property">Baseband Version:</span>    <span class="token number">7.51.01</span>
+<span class="token property">Report Version:</span>      <span class="token number">104</span>
+
+<span class="token property">Exception Type:</span>  EXC_CRASH <span class="token operator">(</span>SIGABRT<span class="token operator">)</span>
+<span class="token property">Exception Codes:</span> <span class="token number">0x0000000000000000</span><span class="token punctuation">,</span> <span class="token number">0x0000000000000000</span>
+<span class="token property">Exception Note:</span>  EXC_CORPSE_NOTIFY
+<span class="token property">Triggered by Thread:</span>  <span class="token number">0</span>
+
+<span class="token property">Last Exception Backtrace:</span>
+<span class="token operator">(</span><span class="token number">0x18d0ed5f0</span> <span class="token number">0x18ce0fbcc</span> <span class="token number">0x18d1430cc</span> <span class="token number">0x18d142748</span> <span class="token number">0x18cfc5edc</span> <span class="token number">0x119d9a4dc</span> <span class="token number">0x10ac42650</span> <span class="token number">0x10ac418bc</span> <span class="token number">0x10ac40b80</span> <span class="token number">0x10ac40730</span> <span class="token number">0x10ac33af8</span> <span class="token number">0x10ac2036c</span> <span class="token number">0x10bc2f940</span> <span class="token number">0x10ac20080</span> <span class="token number">0x10ac1fb48</span> <span class="token number">0x10bc2e1c8</span> <span class="token number">0x111713890</span> <span class="token number">0x19118ea5c</span> <span class="token number">0x1911907e8</span> <span class="token number">0x191196084</span> <span class="token number">0x19093d46c</span> <span class="token number">0x190deca38</span> <span class="token number">0x19093df50</span> <span class="token number">0x19093d9a4</span> <span class="token number">0x19093dd7c</span> <span class="token number">0x19093d63c</span> <span class="token number">0x190941ad8</span> <span class="token number">0x190d10dd4</span> <span class="token number">0x190e05e7c</span> <span class="token number">0x190941834</span> <span class="token number">0x190e05d78</span> <span class="token number">0x19094169c</span> <span class="token number">0x1907b0f2c</span> <span class="token number">0x1907afacc</span> <span class="token number">0x1907b0c64</span> <span class="token number">0x1911942d0</span> <span class="token number">0x190d36284</span> <span class="token number">0x19226720c</span> <span class="token number">0x19228bd84</span> <span class="token number">0x1922717ec</span> <span class="token number">0x19228ba40</span> <span class="token number">0x18cdb3524</span> <span class="token number">0x18cd5c434</span> <span class="token number">0x1922b0440</span> <span class="token number">0x1922b010c</span> <span class="token number">0x1922b0634</span> <span class="token number">0x18d06bb64</span> <span class="token number">0x18d06babc</span> <span class="token number">0x18d06b244</span> <span class="token number">0x18d066274</span> <span class="token number">0x18d065c34</span> <span class="token number">0x1971af38c</span> <span class="token number">0x19119822c</span> <span class="token number">0x111714094</span> <span class="token number">0x1049a7ca4</span> <span class="token number">0x18ceed800</span><span class="token operator">)</span>
+
+<span class="token property">Thread 0 name:</span>  <span class="token property">Dispatch queue:</span> <span class="token domain constant">com.apple.main-thread</span>
+<span class="token property">Thread 0 Crashed:</span>
+<span class="token number">0</span>   libsystem_kernel<span class="token punctuation">.</span>dylib            <span class="token number">0x000000018cee2d88</span> <span class="token number">0x18cebd000</span> <span class="token operator">+</span> <span class="token number">155016</span>
+<span class="token number">1</span>   libsystem_pthread<span class="token punctuation">.</span>dylib           <span class="token number">0x000000018cdfb1e8</span> <span class="token number">0x18cdf9000</span> <span class="token operator">+</span> <span class="token number">8680</span>
+<span class="token number">2</span>   libsystem_c<span class="token punctuation">.</span>dylib                 <span class="token number">0x000000018cd4e644</span> <span class="token number">0x18ccdc000</span> <span class="token operator">+</span> <span class="token number">468548</span>
+<span class="token number">3</span>   libc<span class="token operator">+</span><span class="token operator">+</span>abi<span class="token punctuation">.</span>dylib                   <span class="token number">0x000000018ceb6cc0</span> <span class="token number">0x18cea4000</span> <span class="token operator">+</span> <span class="token number">76992</span>
+<span class="token number">4</span>   libc<span class="token operator">+</span><span class="token operator">+</span>abi<span class="token punctuation">.</span>dylib                   <span class="token number">0x000000018cea8e10</span> <span class="token number">0x18cea4000</span> <span class="token operator">+</span> <span class="token number">19984</span>
+<span class="token number">5</span>   libobjc<span class="token punctuation">.</span>A<span class="token punctuation">.</span>dylib                   <span class="token number">0x000000018ce0fe80</span> <span class="token number">0x18ce0a000</span> <span class="token operator">+</span> <span class="token number">24192</span>
+<span class="token number">6</span>   libc<span class="token operator">+</span><span class="token operator">+</span>abi<span class="token punctuation">.</span>dylib                   <span class="token number">0x000000018ceb614c</span> <span class="token number">0x18cea4000</span> <span class="token operator">+</span> <span class="token number">74060</span>
+<span class="token number">7</span>   libc<span class="token operator">+</span><span class="token operator">+</span>abi<span class="token punctuation">.</span>dylib                   <span class="token number">0x000000018ceb60e4</span> <span class="token number">0x18cea4000</span> <span class="token operator">+</span> <span class="token number">73956</span>
+<span class="token number">8</span>   <span class="token domain constant">libdispatch.dylib</span>                 <span class="token number">0x000000018cdb3538</span> <span class="token number">0x18cd58000</span> <span class="token operator">+</span> <span class="token number">374072</span>
+<span class="token number">9</span>   <span class="token domain constant">libdispatch.dylib</span>                 <span class="token number">0x000000018cd5c434</span> <span class="token number">0x18cd58000</span> <span class="token operator">+</span> <span class="token number">17460</span>
+<span class="token number">10</span>  FrontBoardServices                <span class="token number">0x00000001922b0440</span> <span class="token number">0x19225b000</span> <span class="token operator">+</span> <span class="token number">349248</span>
+<span class="token number">11</span>  FrontBoardServices                <span class="token number">0x00000001922b010c</span> <span class="token number">0x19225b000</span> <span class="token operator">+</span> <span class="token number">348428</span>
+<span class="token number">12</span>  FrontBoardServices                <span class="token number">0x00000001922b0634</span> <span class="token number">0x19225b000</span> <span class="token operator">+</span> <span class="token number">349748</span>
+<span class="token number">13</span>  CoreFoundation                    <span class="token number">0x000000018d06bb64</span> <span class="token number">0x18cfc3000</span> <span class="token operator">+</span> <span class="token number">691044</span>
+<span class="token number">14</span>  CoreFoundation                    <span class="token number">0x000000018d06babc</span> <span class="token number">0x18cfc3000</span> <span class="token operator">+</span> <span class="token number">690876</span>
+<span class="token number">15</span>  CoreFoundation                    <span class="token number">0x000000018d06b244</span> <span class="token number">0x18cfc3000</span> <span class="token operator">+</span> <span class="token number">688708</span>
+<span class="token number">16</span>  CoreFoundation                    <span class="token number">0x000000018d066274</span> <span class="token number">0x18cfc3000</span> <span class="token operator">+</span> <span class="token number">668276</span>
+<span class="token number">17</span>  CoreFoundation                    <span class="token number">0x000000018d065c34</span> <span class="token number">0x18cfc3000</span> <span class="token operator">+</span> <span class="token number">666676</span>
+<span class="token number">18</span>  GraphicsServices                  <span class="token number">0x00000001971af38c</span> <span class="token number">0x1971ac000</span> <span class="token operator">+</span> <span class="token number">13196</span>
+<span class="token number">19</span>  UIKitCore                         <span class="token number">0x000000019119822c</span> <span class="token number">0x19076c000</span> <span class="token operator">+</span> <span class="token number">10666540</span>
+<span class="token number">20</span>  <span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span>                               <span class="token number">0x0000000111714094</span> <span class="token number">0</span> <span class="token operator">+</span> <span class="token number">4587602068</span>
+<span class="token number">21</span>  Aweme                             <span class="token number">0x00000001049a7ca4</span> <span class="token number">0x1049a0000</span> <span class="token operator">+</span> <span class="token number">31908</span>
+<span class="token number">22</span>  <span class="token domain constant">libdyld.dylib</span>                     <span class="token number">0x000000018ceed800</span> <span class="token number">0x18ceec000</span> <span class="token operator">+</span> <span class="token number">6144</span>
+
+
+<span class="token property">Thread 1:</span>
+<span class="token number">0</span>   libsystem_pthread<span class="token punctuation">.</span>dylib           <span class="token number">0x000000018ce07738</span> <span class="token number">0x18cdf9000</span> <span class="token operator">+</span> <span class="token number">59192</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<p>从中可以看出：</p>
+<ul>
+<li>二进制文件：<ul>
+<li><code>/private/var/containers/Bundle/Application/9AB25481-0AD3-435C-A02E-68F9623535BB/Aweme.app/Aweme</code></li>
+</ul>
+</li>
+</ul>
+<p>注：多次尝试用：</p>
+<ul>
+<li>XCode-&gt;Window-&gt;Devices and Simulators-》View Devices logs<ul>
+<li><img src="../assets/img/xcode_devices_simulators_view_devices_logs.jpg" alt="xcode_devices_simulators_view_devices_logs"></li>
+</ul>
+</li>
+</ul>
+<p>最后才看到，解析后的日志，带库（但仍没有解析出函数名）的：</p>
+<ul>
+<li><img src="../assets/img/aweme_crash_log_no_func_name.jpg" alt="aweme_crash_log_no_func_name"></li>
+</ul>
+<p>总之，确定是自己的插件导致的了。</p>
+<p>重新安装一下反越狱检测插件试试</p>
+<p>即可解决问题：</p>
+<p>抖音可以正常启动了：</p>
+<ul>
+<li><img src="../assets/img/aweme_app_running_normal.jpg" alt="aweme_app_running_normal"></li>
+</ul>
+<p>反推：</p>
+<p>此处crash是由于之前的代码，hook了https的SSL证书，但是新iPhone测试机中没有Charles证书，导致的崩溃。</p>
+<p>之前另外一个iPhone测试机已解决了，但是此处iPhone没安装新版插件。</p>
+<p>重新安装修复后的版本：</p>
+<ul>
+<li><img src="../assets/img/xcode_aweme_anti_ssl_pinning.jpg" alt="xcode_aweme_anti_ssl_pinning"></li>
+</ul>
+<p>即可解决问题。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-07-17 11:38:18
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="devicenotsupportedbythinning.html" class="navigation navigation-prev " aria-label="Previous page: DeviceNotSupportedByThinning">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../appendix/" class="navigation navigation-next " aria-label="Next page: 附录">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"app启动后崩溃","level":"1.6.3","depth":2,"next":{"title":"附录","level":"1.7","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.7.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"DeviceNotSupportedByThinning","level":"1.6.2","depth":2,"path":"common_issue/devicenotsupportedbythinning.md","ref":"common_issue/devicenotsupportedbythinning.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_crack_shell_ipa/pdf/ios_re_crack_shell_ipa.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_crack_shell_ipa/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_crack_shell_ipa","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：砸壳ipa","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中的砸壳脱壳出ipa方面的内容。主要包括什么是壳，为何要砸壳，常见砸壳工具，比如frida-ios-dump、dumpdecrypted、clutch等；以及举例介绍如何用frida-ios-dump砸壳YouTube、抖音等app得到ipa文件；以及砸壳出iap后的事情，包括ipa的安装；以及整理常见的问题及解决办法。"},"file":{"path":"common_issue/crash_after_start.md","mtime":"2024-07-17T03:38:18.739Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-17T03:41:04.614Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
