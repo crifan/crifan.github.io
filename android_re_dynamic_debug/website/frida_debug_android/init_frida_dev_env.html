@@ -966,88 +966,33 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="初始化frida开发环境"><a name="初始化frida开发环境" class="plugin-anchor" href="#初始化frida开发环境"><i class="fa fa-link" aria-hidden="true"></i></a>初始化Frida开发环境</h1>
-<h2 id="电脑端安装frida"><a name="电脑端安装frida" class="plugin-anchor" href="#电脑端安装frida"><i class="fa fa-link" aria-hidden="true"></i></a>电脑端安装Frida</h2>
 <ul>
 <li>概述<ul>
-<li>Mac<ul>
-<li>安装<code>frida</code>（和<code>frida-tools</code>）<pre class="language-"><code class="lang-bash">pip3 <span class="token function">install</span> frida
-pip3 <span class="token function">install</span> frida-tools
-</code></pre>
+<li>电脑端安装<code>frida</code>（和<code>frida-tools</code>），移动端安装<code>frida</code>（的<strong>server</strong>）<ul>
+<li>Mac中逆向iOS<ul>
+<li>Mac：安装<code>frida</code>（<code>pip3 install frida</code>）和安装<code>frida-tools</code>（<code>pip3 install frida-tools</code>）</li>
+<li>iOS（iPhone）：包管理器（<code>Sileo</code>/<code>Cydia</code>）中（通过软件源：<code>https://build.frida.re</code>）安装<code>frida</code>的插件</li>
+</ul>
 </li>
-<li>或：已有frida，去升级到最新版<pre class="language-"><code class="lang-bash">pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> frida
-pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> frida-tools
-</code></pre>
+<li>Mac中逆向Android<ul>
+<li>Mac：安装<code>frida</code>（<code>pip3 install frida</code>）和安装<code>frida-tools</code>（<code>pip3 install frida-tools</code>）</li>
+<li>Android：<code>Magisk</code>中安装<a href="https://github.com/ViRb3/magisk-frida" target="_blank">MagiskFrida</a>插件<ul>
+<li>注：Frida官网的Android版<code>frida-server</code>有问题，所以换装第三方可用版本</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>详解<ul>
-<li><a href="https://book.crifan.org/books/reverse_debug_frida/website/install_upgrade/install_frida.html" target="_blank">安装Frida · 逆向调试利器：Frida</a></li>
-</ul>
-</li>
-</ul>
-<p>此处已安装的（最新）Frida版本是：<code>16.1.3</code></p>
-<pre class="language-"><code class="lang-bash">➜  ~ frida <span class="token parameter variable">--version</span>
-<span class="token number">16.1</span>.3
-</code></pre>
-<h2 id="安卓手机中安装frida-server"><a name="安卓手机中安装frida-server" class="plugin-anchor" href="#安卓手机中安装frida-server"><i class="fa fa-link" aria-hidden="true"></i></a>安卓手机中安装frida-server</h2>
-<p>由于之前手动从下载frida-server并放到安卓手机Pixel3中，结果后续会报错<code>Failed to enumerate processes connection closed</code>，而无法使用</p>
-<p>最后解决办法是：安装Magisk的插件：</p>
-<p><a href="https://github.com/ViRb3/magisk-frida" target="_blank">ViRb3/magisk-frida: 🔐 Run frida-server on boot with Magisk, always up-to-date</a></p>
-<p>具体步骤：</p>
-<p>下载到此处最新版的：</p>
-<p><a href="https://github.com/ViRb3/magisk-frida/releases/download/16.1.3-1/MagiskFrida-16.1.3-1.zip" target="_blank">https://github.com/ViRb3/magisk-frida/releases/download/16.1.3-1/MagiskFrida-16.1.3-1.zip</a></p>
-<p>得到：<code>MagiskFrida-16.1.3-1.zip</code></p>
-<p>（用adb push）传输到安卓手机中（的下载目录）</p>
-<p>然后去：</p>
-<p><code>Magisk</code>-&gt;<code>模块</code>-&gt;<code>从本地安装</code>-&gt;找到并点击<code>MagiskFrida-16.1.3-1.zip</code>-&gt;开始自动安装-&gt;重启</p>
-<p>（以后）每次重启安卓手机后：</p>
-<ul>
-<li>可以看到Magisk中的插件：<code>MagiskFrida</code><ul>
-<li><img src="../assets/img/magisk_installed_magiskfrida.png" alt="magisk_installed_magiskfrida"></li>
-</ul>
-</li>
-<li>都会自动运行frida-server<pre class="language-"><code class="lang-bash">blueline:/ <span class="token comment"># ps -A | grep frida</span>
-root           <span class="token number">4408</span>   <span class="token number">1321</span> <span class="token number">10877092</span>  <span class="token number">3696</span> do_sys_poll         <span class="token number">0</span> S frida-server
-</code></pre>
-</li>
-</ul>
-<p>后续即可正常使用<code>Frida</code>：</p>
-<h2 id="mac中用确认frida工具可用"><a name="mac中用确认frida工具可用" class="plugin-anchor" href="#mac中用确认frida工具可用"><i class="fa fa-link" aria-hidden="true"></i></a>Mac中用确认frida工具可用</h2>
-<ul>
-<li>可用的<ul>
-<li>frida-ps<pre class="language-"><code class="lang-bash">frida-ps <span class="token parameter variable">-U</span>
-frida-ps <span class="token parameter variable">-Uai</span>
-</code></pre>
-</li>
-<li>frida<pre class="language-"><code class="lang-bash">frida <span class="token parameter variable">-U</span> <span class="token parameter variable">-F</span> com.example.displaydemo
-</code></pre>
-</li>
-<li>frida-trace<pre class="language-"><code class="lang-bash">frida-trace <span class="token parameter variable">-U</span> <span class="token parameter variable">-F</span> com.example.displaydemo <span class="token parameter variable">-i</span> <span class="token function">open</span>
-</code></pre>
-</li>
-</ul>
-</li>
-<li>不可用<ul>
-<li>frida-ls<pre class="language-"><code class="lang-bash">➜  frida frida-ls <span class="token parameter variable">-U</span>
-Failed to retrieve listing: Error: Invalid mode: 0x0
-    at I <span class="token punctuation">(</span>agent.ts:274<span class="token punctuation">)</span>
-    at L <span class="token punctuation">(</span>agent.ts:274<span class="token punctuation">)</span>
-    at <span class="token function">ls</span> <span class="token punctuation">(</span>agent.ts:274<span class="token punctuation">)</span>
-    at apply <span class="token punctuation">(</span>native<span class="token punctuation">)</span>
-    at <span class="token operator">&lt;</span>anonymous<span class="token operator">&gt;</span> <span class="token punctuation">(</span>frida/runtime/message-dispatcher.js:13<span class="token punctuation">)</span>
-    at c <span class="token punctuation">(</span>frida/runtime/message-dispatcher.js:23<span class="token punctuation">)</span>
-</code></pre>
-<ul>
-<li>暂时无法解决</li>
-</ul>
-</li>
+<li>详见<ul>
+<li><a href="https://book.crifan.org/books/reverse_debug_frida/website/install_upgrade/" target="_blank">安装和升级 · 逆向调试利器：Frida (crifan.org)</a></li>
 </ul>
 </li>
 </ul>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-08-15 21:25:00
+2024-07-22 15:48:49
 </span></footer></body></html>
                                 
                                 </section>
@@ -1091,7 +1036,7 @@ Failed to retrieve listing: Error: Invalid mode: 0x0
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"初始化Frida开发环境","level":"1.5.1","depth":2,"next":{"title":"Frida调试安卓app","level":"1.5.2","depth":2,"path":"frida_debug_android/frida_debug_android_app.md","ref":"frida_debug_android/frida_debug_android_app.md","articles":[]},"previous":{"title":"Frida调试安卓","level":"1.5","depth":1,"path":"frida_debug_android/README.md","ref":"frida_debug_android/README.md","articles":[{"title":"初始化Frida开发环境","level":"1.5.1","depth":2,"path":"frida_debug_android/init_frida_dev_env.md","ref":"frida_debug_android/init_frida_dev_env.md","articles":[]},{"title":"Frida调试安卓app","level":"1.5.2","depth":2,"path":"frida_debug_android/frida_debug_android_app.md","ref":"frida_debug_android/frida_debug_android_app.md","articles":[]},{"title":"示例","level":"1.5.3","depth":2,"path":"frida_debug_android/demo/README.md","ref":"frida_debug_android/demo/README.md","articles":[{"title":"LiftFileManager","level":"1.5.3.1","depth":3,"path":"frida_debug_android/demo/liftfilemanager.md","ref":"frida_debug_android/demo/liftfilemanager.md","articles":[]},{"title":"DisplayDemo","level":"1.5.3.2","depth":3,"path":"frida_debug_android/demo/displaydemo.md","ref":"frida_debug_android/demo/displaydemo.md","articles":[]}]},{"title":"常见问题","level":"1.5.4","depth":2,"path":"frida_debug_android/common_issues.md","ref":"frida_debug_android/common_issues.md","articles":[]},{"title":"心得","level":"1.5.5","depth":2,"path":"frida_debug_android/summary.md","ref":"frida_debug_android/summary.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_dynamic_debug/pdf/android_re_dynamic_debug.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_dynamic_debug/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：动态调试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发期间，如何动态调试安卓程序。包括用AndroidStudio调试apk的smali代码、用LLDB调试安卓程序、用Frida调试安卓程序、编写Xposed模块去调试安卓程序。对于AndroidStudio调试安卓Smali代码，此处以YouTube为例，介绍主要步骤：确保安卓已root、调试工具选择、反编译出smali代码、确保app可调试、调试方式启动app、Android Studio中导入smali代码、给smali加断点、配置Android Studio项目、确保adb可获取进程列表、Android Studio调试app进程；对于LLDB调试安卓，包括下载安卓版lldb-server到电脑、把lldb-server传输下载到安卓手机中、电脑中运行lldb、用lldb连接安卓手机中的lldb-server、最后是开始用lldb调试安卓app进程。对于Firda调试安卓，包括初始化Frida调试环境、Frida调试安卓app，以及贴出几个实例包括LiftFileManager、DisplayDemo等。以及Frida方面的常见的问题和心得。然后是动态调试方面的一些常见问题和心得。以及其他一些分析调试工具，包括Unidbg、AndBug、redexer、Fino等；以及用于辅助调试的adb，比如用adb查看内存映射；最后加上心得和实例和附录的参考资料。"},"file":{"path":"frida_debug_android/init_frida_dev_env.md","mtime":"2023-08-15T13:25:00.348Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-04T08:09:06.000Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"初始化Frida开发环境","level":"1.5.1","depth":2,"next":{"title":"Frida调试安卓app","level":"1.5.2","depth":2,"path":"frida_debug_android/frida_debug_android_app.md","ref":"frida_debug_android/frida_debug_android_app.md","articles":[]},"previous":{"title":"Frida调试安卓","level":"1.5","depth":1,"path":"frida_debug_android/README.md","ref":"frida_debug_android/README.md","articles":[{"title":"初始化Frida开发环境","level":"1.5.1","depth":2,"path":"frida_debug_android/init_frida_dev_env.md","ref":"frida_debug_android/init_frida_dev_env.md","articles":[]},{"title":"Frida调试安卓app","level":"1.5.2","depth":2,"path":"frida_debug_android/frida_debug_android_app.md","ref":"frida_debug_android/frida_debug_android_app.md","articles":[]},{"title":"示例","level":"1.5.3","depth":2,"path":"frida_debug_android/demo/README.md","ref":"frida_debug_android/demo/README.md","articles":[{"title":"LiftFileManager","level":"1.5.3.1","depth":3,"path":"frida_debug_android/demo/liftfilemanager.md","ref":"frida_debug_android/demo/liftfilemanager.md","articles":[]},{"title":"DisplayDemo","level":"1.5.3.2","depth":3,"path":"frida_debug_android/demo/displaydemo.md","ref":"frida_debug_android/demo/displaydemo.md","articles":[]}]},{"title":"常见问题","level":"1.5.4","depth":2,"path":"frida_debug_android/common_issues.md","ref":"frida_debug_android/common_issues.md","articles":[]},{"title":"心得","level":"1.5.5","depth":2,"path":"frida_debug_android/summary.md","ref":"frida_debug_android/summary.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_dynamic_debug/pdf/android_re_dynamic_debug.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_dynamic_debug/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_dynamic_debug","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：动态调试","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Android逆向开发期间，如何动态调试安卓程序。包括用AndroidStudio调试apk的smali代码、用LLDB调试安卓程序、用Frida调试安卓程序、编写Xposed模块去调试安卓程序。对于AndroidStudio调试安卓Smali代码，此处以YouTube为例，介绍主要步骤：确保安卓已root、调试工具选择、反编译出smali代码、确保app可调试、调试方式启动app、Android Studio中导入smali代码、给smali加断点、配置Android Studio项目、确保adb可获取进程列表、Android Studio调试app进程；对于LLDB调试安卓，包括下载安卓版lldb-server到电脑、把lldb-server传输下载到安卓手机中、电脑中运行lldb、用lldb连接安卓手机中的lldb-server、最后是开始用lldb调试安卓app进程。对于Firda调试安卓，包括初始化Frida调试环境、Frida调试安卓app，以及贴出几个实例包括LiftFileManager、DisplayDemo等。以及Frida方面的常见的问题和心得。然后是动态调试方面的一些常见问题和心得。以及其他一些分析调试工具，包括Unidbg、AndBug、redexer、Fino等；以及用于辅助调试的adb，比如用adb查看内存映射；最后加上心得和实例和附录的参考资料。"},"file":{"path":"frida_debug_android/init_frida_dev_env.md","mtime":"2024-07-22T07:48:49.615Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-22T07:49:34.443Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
