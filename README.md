@@ -159,5 +159,6 @@
     * [iOS逆向：管理app和插件](https://crifan.github.io/ios_re_manage_app_tweak/website)
     * [Frida逆向实例和工具函数](https://crifan.github.io/frida_re_example_function/website)
     * [iOS逆向开发：dyld动态链接](https://crifan.github.io/ios_re_dyld_link/website)
+    * [小白兔的光荣往事](https://crifan.github.io/glorious_past_of_little_white_rabbit/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
