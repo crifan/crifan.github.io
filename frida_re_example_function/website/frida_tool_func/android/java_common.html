@@ -1025,32 +1025,32 @@ public static java.lang.String X.0Prr.LJI<span class="token punctuation">(</span
 public static boolean X.0Prr.LJII<span class="token punctuation">(</span><span class="token punctuation">)</span>
 public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h2 id="getstackstr"><a name="getstackstr" class="plugin-anchor" href="#getstackstr"><i class="fa fa-link" aria-hidden="true"></i></a>getStackStr</h2>
-<pre class="language-"><code class="lang-js"><span class="token comment">// get current stack trace string</span>
-<span class="token keyword">function</span> <span class="token function">getStackStr</span><span class="token punctuation">(</span><span class="token parameter">ThrowableCls</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h2 id="genstackstr"><a name="genstackstr" class="plugin-anchor" href="#genstackstr"><i class="fa fa-link" aria-hidden="true"></i></a>genStackStr</h2>
+<pre class="language-"><code class="lang-js"><span class="token comment">// generate current stack trace string</span>
+<span class="token keyword">function</span> <span class="token function">genStackStr</span><span class="token punctuation">(</span><span class="token parameter">ThrowableCls</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">let</span> newThrowable <span class="token operator">=</span> ThrowableCls<span class="token punctuation">.</span>$<span class="token keyword">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token comment">// console.log(&quot;getStackStr: newThrowable=&quot; + newThrowable)</span>
+  <span class="token comment">// console.log(&quot;genStackStr: newThrowable=&quot; + newThrowable)</span>
   <span class="token keyword">var</span> stackElements <span class="token operator">=</span> newThrowable<span class="token punctuation">.</span><span class="token function">getStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token comment">// console.log(&quot;getStackStr: stackElements=&quot; + stackElements)</span>
+  <span class="token comment">// console.log(&quot;genStackStr: stackElements=&quot; + stackElements)</span>
   <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token string">&quot;Stack: &quot;</span> <span class="token operator">+</span> stackElements<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment">//method//stackElements[0].getMethodName()</span>
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> stackElements<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     stackStr <span class="token operator">+=</span> <span class="token string">&quot;\n    at &quot;</span> <span class="token operator">+</span> stackElements<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
   <span class="token comment">// stackStr = &quot;\n\n&quot; + stackStr</span>
   stackStr <span class="token operator">=</span> stackStr <span class="token operator">+</span> <span class="token string">&quot;\n&quot;</span>
-  <span class="token comment">// console.log(&quot;getStackStr: stackStr=&quot; + stackStr)</span>
+  <span class="token comment">// console.log(&quot;genStackStr: stackStr=&quot; + stackStr)</span>
 
   <span class="token keyword">return</span> stackStr
 <span class="token punctuation">}</span>
 </code></pre>
 <p>调用：</p>
-<pre class="language-"><code class="lang-js">  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">getStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
+<pre class="language-"><code class="lang-js">  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">genStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>stackStr<span class="token punctuation">)</span>
 </code></pre>
 <h2 id="printstack"><a name="printstack" class="plugin-anchor" href="#printstack"><i class="fa fa-link" aria-hidden="true"></i></a>PrintStack</h2>
 <pre class="language-"><code class="lang-js"><span class="token comment">// 打印当前调用堆栈信息 print call stack</span>
 <span class="token keyword">function</span> <span class="token function">PrintStack</span><span class="token punctuation">(</span><span class="token parameter">ThrowableCls</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">getStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
+  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">genStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>stackStr<span class="token punctuation">)</span>
 
   <span class="token comment">// let newThrowable = ThrowableCls.$new()</span>
@@ -1065,14 +1065,9 @@ public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span 
 
     <span class="token function">PrintStack</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
 </code></pre>
-<h2 id="getfunctioncallstr"><a name="getfunctioncallstr" class="plugin-anchor" href="#getfunctioncallstr"><i class="fa fa-link" aria-hidden="true"></i></a>getFunctionCallStr</h2>
-<pre class="language-"><code class="lang-js"><span class="token comment">// get Function call string</span>
-<span class="token keyword">function</span> <span class="token function">getFunctionCallStr</span><span class="token punctuation">(</span><span class="token parameter">funcName<span class="token punctuation">,</span> funcParaDict</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  <span class="token comment">// var isAMSStartSevice = funcName === &quot;AMS.startService&quot;</span>
-  <span class="token comment">// if(isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;getFunctionCallStr: funcName=&quot; + funcName + &quot;, funcParaDict=&quot; + toJsonStr(funcParaDict))</span>
-  <span class="token comment">// }</span>
-
+<h2 id="genfunctioncallstr"><a name="genfunctioncallstr" class="plugin-anchor" href="#genfunctioncallstr"><i class="fa fa-link" aria-hidden="true"></i></a>genFunctionCallStr</h2>
+<pre class="language-"><code class="lang-js"><span class="token comment">// generate Function call string</span>
+<span class="token keyword">function</span> <span class="token function">genFunctionCallStr</span><span class="token punctuation">(</span><span class="token parameter">funcName<span class="token punctuation">,</span> funcParaDict</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token keyword">var</span> logStr <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>funcName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">:</span><span class="token template-punctuation string">`</span></span>
   <span class="token comment">// var logStr = funcName + &quot;:&quot;</span>
   <span class="token keyword">var</span> isFirst <span class="token operator">=</span> <span class="token boolean">true</span>
@@ -1091,48 +1086,49 @@ public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span 
     <span class="token comment">// logStr = logStr + prevStr + curParaName + &quot;=&quot; + curParaValue</span>
   <span class="token punctuation">}</span>
 
-  <span class="token comment">// if(isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;getFunctionCallStr: logStr=&quot; + logStr)</span>
-  <span class="token comment">// }</span>
-
   <span class="token keyword">return</span> logStr
 <span class="token punctuation">}</span>
 </code></pre>
 <p>调用：</p>
-<pre class="language-"><code class="lang-js">  <span class="token keyword">var</span> functionCallStr <span class="token operator">=</span> <span class="token function">getFunctionCallStr</span><span class="token punctuation">(</span>funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">)</span>
+<pre class="language-"><code class="lang-js">  <span class="token keyword">var</span> functionCallStr <span class="token operator">=</span> <span class="token function">genFunctionCallStr</span><span class="token punctuation">(</span>funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">)</span>
 </code></pre>
 <h2 id="printfunctioncallandstack"><a name="printfunctioncallandstack" class="plugin-anchor" href="#printfunctioncallandstack"><i class="fa fa-link" aria-hidden="true"></i></a>printFunctionCallAndStack</h2>
 <pre class="language-"><code class="lang-js"><span class="token comment">// print Function call and stack trace string</span>
-<span class="token keyword">function</span> <span class="token function">printFunctionCallAndStack</span><span class="token punctuation">(</span><span class="token parameter">funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">,</span> ThrowableCls</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  <span class="token comment">// var isAMSStartSevice = funcName === &quot;AMS.startService&quot;</span>
-  <span class="token comment">// if (isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;printFunctionCallAndStack: funcName=&quot; + funcName + &quot;, funcParaDict=&quot; + toJsonStr(funcParaDict) + &quot;, ThrowableCls=&quot; + ThrowableCls)</span>
-  <span class="token comment">// }</span>
+<span class="token keyword">function</span> <span class="token function">printFunctionCallAndStack</span><span class="token punctuation">(</span><span class="token parameter">funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">,</span> ThrowableCls<span class="token punctuation">,</span> filterList<span class="token operator">=</span><span class="token keyword">undefined</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// console.log(&quot;filterList=&quot; + filterList)</span>
 
-  <span class="token keyword">var</span> functionCallStr <span class="token operator">=</span> <span class="token function">getFunctionCallStr</span><span class="token punctuation">(</span>funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">)</span>
+  <span class="token keyword">var</span> needPrint <span class="token operator">=</span> <span class="token boolean">true</span>
 
-  <span class="token comment">// if (isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;printFunctionCallAndStack: functionCallStr=&quot; + functionCallStr)</span>
-  <span class="token comment">// }</span>
+  <span class="token keyword">var</span> functionCallStr <span class="token operator">=</span> <span class="token function">genFunctionCallStr</span><span class="token punctuation">(</span>funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">)</span>
 
-  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">getStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
+  <span class="token keyword">var</span> stackStr <span class="token operator">=</span> <span class="token function">genStackStr</span><span class="token punctuation">(</span>ThrowableCls<span class="token punctuation">)</span>
 
-  <span class="token comment">// if(isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;printFunctionCallAndStack: stackStr=&quot; + stackStr)</span>
-  <span class="token comment">// }</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>filterList <span class="token operator">!=</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    needPrint <span class="token operator">=</span> <span class="token boolean">false</span>
 
-  <span class="token keyword">var</span> functionCallAndStackStr <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>functionCallStr<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>stackStr<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
-  <span class="token comment">// var functionCallAndStackStr = functionCallStr + &quot;\n&quot; + stackStr</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> curFilter <span class="token keyword">of</span> filterList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// console.log(&quot;curFilter=&quot; + curFilter)</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>stackStr<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>curFilter<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        needPrint <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token comment">// console.log(&quot;needPrint=&quot; + needPrint)</span>
+        <span class="token keyword">break</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
-  <span class="token comment">// if(isAMSStartSevice){</span>
-  <span class="token comment">//   console.log(&quot;printFunctionCallAndStack: functionCallAndStackStr=&quot; + functionCallAndStackStr)</span>
-  <span class="token comment">// }</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>needPrint<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> functionCallAndStackStr <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>functionCallStr<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>stackStr<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+    <span class="token comment">// var functionCallAndStackStr = functionCallStr + &quot;\n&quot; + stackStr</span>
 
-  <span class="token comment">// return functionCallAndStackStr</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>functionCallAndStackStr<span class="token punctuation">)</span>
+    <span class="token comment">// return functionCallAndStackStr</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>functionCallAndStackStr<span class="token punctuation">)</span>  
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>调用：</p>
+<ul>
+<li>场景1：不传递filter，没过滤条件，直接全都打印</li>
+</ul>
 <pre class="language-"><code class="lang-js">    <span class="token comment">// ---------------------------------------- android.app.ContextImpl</span>
     <span class="token keyword">var</span> ContextImplClassName <span class="token operator">=</span> <span class="token string">&quot;android.app.ContextImpl&quot;</span>
     <span class="token keyword">var</span> ContextImplCls <span class="token operator">=</span> Java<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ContextImplClassName<span class="token punctuation">)</span>
@@ -1157,6 +1153,17 @@ public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span 
         <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">bindServiceAsUser</span><span class="token punctuation">(</span>service<span class="token punctuation">,</span> conn<span class="token punctuation">,</span> flags<span class="token punctuation">,</span> user<span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>场景2：传递filter，只有堆栈中出现filter的字符串，才打印</li>
+</ul>
+<pre class="language-"><code class="lang-js">      <span class="token keyword">var</span> funcName <span class="token operator">=</span> <span class="token string">&quot;GlobalProxyLancet.com_ss_android_ugc_aweme_lancet_MemoryOptLancet_toString&quot;</span>
+      <span class="token keyword">var</span> funcParaDict <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">&quot;jSONObject&quot;</span><span class="token operator">:</span> jSONObject
+      <span class="token punctuation">}</span>
+      <span class="token comment">// printFunctionCallAndStack(funcName, funcParaDict, ThrowableCls)</span>
+      <span class="token comment">// printFunctionCallAndStack(funcName, funcParaDict, ThrowableCls, filterList=[&quot;X.0Pru.LIZ&quot;])</span>
+      <span class="token function">printFunctionCallAndStack</span><span class="token punctuation">(</span>funcName<span class="token punctuation">,</span> funcParaDict<span class="token punctuation">,</span> ThrowableCls<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&quot;X.0Pru.LIZ&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 </code></pre>
 <h2 id="findclass"><a name="findclass" class="plugin-anchor" href="#findclass"><i class="fa fa-link" aria-hidden="true"></i></a>findClass</h2>
 <pre class="language-"><code class="lang-js"><span class="token comment">// find loaded classes that match a pattern (async)</span>
@@ -1190,7 +1197,7 @@ public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span 
 <span class="token punctuation">}</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-07-21 16:28:48
+2024-07-25 17:57:58
 </span></footer></body></html>
                                 
                                 </section>
@@ -1234,7 +1241,7 @@ public static void X.0Prr.LJIIIIZZ<span class="token punctuation">(</span><span 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java通用","level":"1.4.3.1","depth":3,"next":{"title":"Android类","level":"1.4.3.2","depth":3,"path":"frida_tool_func/android/android_class.md","ref":"frida_tool_func/android/android_class.md","articles":[]},"previous":{"title":"Android函数","level":"1.4.3","depth":2,"path":"frida_tool_func/android/README.md","ref":"frida_tool_func/android/README.md","articles":[{"title":"Java通用","level":"1.4.3.1","depth":3,"path":"frida_tool_func/android/java_common.md","ref":"frida_tool_func/android/java_common.md","articles":[]},{"title":"Android类","level":"1.4.3.2","depth":3,"path":"frida_tool_func/android/android_class.md","ref":"frida_tool_func/android/android_class.md","articles":[]},{"title":"C","level":"1.4.3.3","depth":3,"path":"frida_tool_func/android/c/README.md","ref":"frida_tool_func/android/c/README.md","articles":[{"title":"native C","level":"1.4.3.3.1","depth":4,"path":"frida_tool_func/android/c/native.md","ref":"frida_tool_func/android/c/native.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/frida_re_example_function/pdf/frida_re_example_function.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/frida_re_example_function/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"frida_re_example_function","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Frida逆向实例和工具函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理Frida逆向期间涉及到的各种实际案例，以及整理出的各种工具类函数。其中Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。"},"file":{"path":"frida_tool_func/android/java_common.md","mtime":"2024-07-21T08:28:48.989Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-25T09:03:30.734Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java通用","level":"1.4.3.1","depth":3,"next":{"title":"Android类","level":"1.4.3.2","depth":3,"path":"frida_tool_func/android/android_class.md","ref":"frida_tool_func/android/android_class.md","articles":[]},"previous":{"title":"Android函数","level":"1.4.3","depth":2,"path":"frida_tool_func/android/README.md","ref":"frida_tool_func/android/README.md","articles":[{"title":"Java通用","level":"1.4.3.1","depth":3,"path":"frida_tool_func/android/java_common.md","ref":"frida_tool_func/android/java_common.md","articles":[]},{"title":"Android类","level":"1.4.3.2","depth":3,"path":"frida_tool_func/android/android_class.md","ref":"frida_tool_func/android/android_class.md","articles":[]},{"title":"C","level":"1.4.3.3","depth":3,"path":"frida_tool_func/android/c/README.md","ref":"frida_tool_func/android/c/README.md","articles":[{"title":"native C","level":"1.4.3.3.1","depth":4,"path":"frida_tool_func/android/c/native.md","ref":"frida_tool_func/android/c/native.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/frida_re_example_function/pdf/frida_re_example_function.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/frida_re_example_function/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"frida_re_example_function","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Frida逆向实例和工具函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理Frida逆向期间涉及到的各种实际案例，以及整理出的各种工具类函数。其中Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。"},"file":{"path":"frida_tool_func/android/java_common.md","mtime":"2024-07-25T09:57:58.638Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-25T09:59:02.490Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
