@@ -1,0 +1,1501 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>JNI · Frida逆向实例和工具函数</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../c/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"frida_re_example_function","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../frida_overview/">
+            
+                <a href="../../../frida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../frida_re_example/">
+            
+                <a href="../../../frida_re_example/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Frida逆向实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../frida_re_example/code_snippet/">
+            
+                <a href="../../../frida_re_example/code_snippet/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    代码段
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../../frida_re_example/code_snippet/frida_official.html">
+            
+                <a href="../../../frida_re_example/code_snippet/frida_official.html">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    Frida官网
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../../../frida_re_example/code_snippet/online_others.html">
+            
+                <a href="../../../frida_re_example/code_snippet/online_others.html">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    网上别人的案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../frida_re_example/frida/">
+            
+                <a href="../../../frida_re_example/frida/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../frida_re_example/frida/ios_objc/">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../../frida_re_example/frida/ios_objc/object/">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/object/">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    ObjC的Object
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1.1" data-path="../../../frida_re_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/object/methods_ownMethods.html">
+            
+                    
+                        <b>1.3.2.1.1.1.</b>
+                    
+                    $methods和$ownMethods
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../../frida_re_example/frida/ios_objc/hook_func/">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/hook_func/">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    Interceptor=hook函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.2.1" data-path="../../../frida_re_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/hook_func/single_cls_single_func.html">
+            
+                    
+                        <b>1.3.2.1.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2.2" data-path="../../../frida_re_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/hook_func/single_cls_all_func.html">
+            
+                    
+                        <b>1.3.2.1.2.2.</b>
+                    
+                    单个类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2.3" data-path="../../../frida_re_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/hook_func/cll_cls_all_func.html">
+            
+                    
+                        <b>1.3.2.1.2.3.</b>
+                    
+                    所有类的所有函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.3" data-path="../../../frida_re_example/frida/ios_objc/apiresolver/">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/apiresolver/">
+            
+                    
+                        <b>1.3.2.1.3.</b>
+                    
+                    ApiResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.4" data-path="../../../frida_re_example/frida/ios_objc/stalker/">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/stalker/">
+            
+                    
+                        <b>1.3.2.1.4.</b>
+                    
+                    Stalker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.4.1" data-path="../../../frida_re_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../../frida_re_example/frida/ios_objc/stalker/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.3.2.1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../../../frida_re_example/frida/android/">
+            
+                <a href="../../../frida_re_example/frida/android/">
+            
+                    
+                        <b>1.3.2.2.</b>
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.1" data-path="../../../frida_re_example/frida/android/hook_demo.html">
+            
+                <a href="../../../frida_re_example/frida/android/hook_demo.html">
+            
+                    
+                        <b>1.3.2.2.1.</b>
+                    
+                    demo示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.2" data-path="../../../frida_re_example/frida/android/single_class/">
+            
+                <a href="../../../frida_re_example/frida/android/single_class/">
+            
+                    
+                        <b>1.3.2.2.2.</b>
+                    
+                    单个类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.2.2.1" data-path="../../../frida_re_example/frida/android/single_class/single_func.html">
+            
+                <a href="../../../frida_re_example/frida/android/single_class/single_func.html">
+            
+                    
+                        <b>1.3.2.2.2.1.</b>
+                    
+                    单个类的单个函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2.3" data-path="../../../frida_re_example/frida/android/hookforcestop.html">
+            
+                <a href="../../../frida_re_example/frida/android/hookforcestop.html">
+            
+                    
+                        <b>1.3.2.2.3.</b>
+                    
+                    hookForceStop
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../frida_re_example/frida_trace/">
+            
+                <a href="../../../frida_re_example/frida_trace/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    frida-trace
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../../frida_re_example/frida_trace/ios_objc/">
+            
+                <a href="../../../frida_re_example/frida_trace/ios_objc/">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    iOS的ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1.1" data-path="../../../frida_re_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                <a href="../../../frida_re_example/frida_trace/ios_objc/akd_apple_login.html">
+            
+                    
+                        <b>1.3.3.1.1.</b>
+                    
+                    akd中Apple账号验证过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.1.2" data-path="../../../frida_re_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                <a href="../../../frida_re_example/frida_trace/ios_objc/preferences_full_apple_login.html">
+            
+                    
+                        <b>1.3.3.1.2.</b>
+                    
+                    Preferences中Apple账号登录全过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../../frida_re_example/frida_trace/android/">
+            
+                <a href="../../../frida_re_example/frida_trace/android/">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.2.1" data-path="../../../frida_re_example/frida_trace/android/commands.html">
+            
+                <a href="../../../frida_re_example/frida_trace/android/commands.html">
+            
+                    
+                        <b>1.3.3.2.1.</b>
+                    
+                    commands
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2.2" data-path="../../../frida_re_example/frida_trace/android/system_server.html">
+            
+                <a href="../../../frida_re_example/frida_trace/android/system_server.html">
+            
+                    
+                        <b>1.3.3.2.2.</b>
+                    
+                    安卓进程system_server
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Frida工具函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../common_js/">
+            
+                <a href="../../common_js/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    通用js函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../common_js/frida_common.html">
+            
+                <a href="../../common_js/frida_common.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    Frida的js通用函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../ios/">
+            
+                <a href="../../ios/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    iOS函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../ios/callstack.html">
+            
+                <a href="../../ios/callstack.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    iOS函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    Android函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../java_common/">
+            
+                <a href="../java_common/">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    Java通用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1.1" data-path="../java_common/process_class.html">
+            
+                <a href="../java_common/process_class.html">
+            
+                    
+                        <b>1.4.3.1.1.</b>
+                    
+                    类的处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.2" data-path="../java_common/func_property.html">
+            
+                <a href="../java_common/func_property.html">
+            
+                    
+                        <b>1.4.3.1.2.</b>
+                    
+                    函数和属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.1.3" data-path="../java_common/call_stack.html">
+            
+                <a href="../java_common/call_stack.html">
+            
+                    
+                        <b>1.4.3.1.3.</b>
+                    
+                    函数调用堆栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    Android类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.3.2.1" data-path="jni.html">
+            
+                <a href="jni.html">
+            
+                    
+                        <b>1.4.3.2.1.</b>
+                    
+                    JNI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../c/">
+            
+                <a href="../c/">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    C
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.3.1" data-path="../c/native.html">
+            
+                <a href="../c/native.html">
+            
+                    
+                        <b>1.4.3.3.1.</b>
+                    
+                    native C
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >JNI</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="android的jni函数"><a name="android的jni函数" class="plugin-anchor" href="#android的jni函数"><i class="fa fa-link" aria-hidden="true"></i></a>Android的JNI函数</h1>
+<p>用Frida去hook安卓的JNI函数：</p>
+<ul>
+<li><code>RegisterNatives</code></li>
+<li><code>GetMethodID</code></li>
+<li><code>NewStringUTF</code></li>
+</ul>
+<p>的相关代码：</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">class</span> <span class="token class-name">FridaUtil</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+
+  <span class="token keyword">static</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// constructor(curThrowableCls) {</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;FridaUtil constructor&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// this.curThrowableCls = curThrowableCls</span>
+    <span class="token comment">// console.log(&quot;this.curThrowableCls=&quot; + this.curThrowableCls)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Frida pointer to UTF-8 string</span>
+  <span class="token keyword">static</span> <span class="token function">ptrToUtf8Str</span><span class="token punctuation">(</span><span class="token parameter">curPtr</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> curUtf8Str <span class="token operator">=</span> curPtr<span class="token punctuation">.</span><span class="token function">readUtf8String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// console.log(&quot;curUtf8Str=&quot; + curUtf8Str)</span>
+    <span class="token keyword">return</span> curUtf8Str
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Frida pointer to C string</span>
+  <span class="token keyword">static</span> <span class="token function">ptrToCStr</span><span class="token punctuation">(</span><span class="token parameter">curPtr</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> curCStr <span class="token operator">=</span> curPtr<span class="token punctuation">.</span><span class="token function">readCString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// console.log(&quot;curCStr=&quot; + curCStr)</span>
+    <span class="token keyword">return</span> curCStr
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// get java class name</span>
+  <span class="token comment">// example:</span>
+  <span class="token comment">//  clazz=0x35 -&gt; className=java.lang.ref.Reference</span>
+  <span class="token comment">//  clazz=0xa1 -&gt; className=com.tencent.wcdb.database.SQLiteConnection</span>
+  <span class="token comment">//  clazz=0x91 -&gt; className=java.lang.String</span>
+  <span class="token keyword">static</span> <span class="token function">getJclassName</span><span class="token punctuation">(</span><span class="token parameter">clazz</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> env <span class="token operator">=</span> Java<span class="token punctuation">.</span>vm<span class="token punctuation">.</span><span class="token function">tryGetEnv</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// console.log(&quot;env=&quot; + env) // env=[object Object]</span>
+    <span class="token keyword">var</span> className <span class="token operator">=</span> env<span class="token punctuation">.</span><span class="token function">getClassName</span><span class="token punctuation">(</span>clazz<span class="token punctuation">)</span>
+    <span class="token comment">// console.log(&quot;className=&quot; + className)</span>
+    <span class="token keyword">return</span> className
+  <span class="token punctuation">}</span>
+
+
+  <span class="token keyword">static</span> <span class="token function">findSymbolFromLib</span><span class="token punctuation">(</span><span class="token parameter">soLibName<span class="token punctuation">,</span> jniFuncName<span class="token punctuation">,</span> callback_isFound</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;soLibName=&quot;</span> <span class="token operator">+</span> soLibName <span class="token operator">+</span> <span class="token string">&quot;, jniFuncName=&quot;</span> <span class="token operator">+</span> jniFuncName <span class="token operator">+</span> <span class="token string">&quot;, callback_isFound=&quot;</span> <span class="token operator">+</span> callback_isFound<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> foundSymbolList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">let</span> libSymbolList <span class="token operator">=</span> Module<span class="token punctuation">.</span><span class="token function">enumerateSymbolsSync</span><span class="token punctuation">(</span>soLibName<span class="token punctuation">)</span>
+    <span class="token comment">// console.log(&quot;libSymbolList=&quot; + libSymbolList)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> libSymbolList<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> curSymbol <span class="token operator">=</span> libSymbolList<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token comment">// console.log(&quot;[&quot; + i  + &quot;] curSymbol=&quot; + curSymbol)</span>
+
+        <span class="token keyword">var</span> symbolName <span class="token operator">=</span> curSymbol<span class="token punctuation">.</span>name
+        <span class="token comment">// console.log(&quot;[&quot; + i  + &quot;] symbolName=&quot; + symbolName)</span>
+
+        <span class="token comment">// var isFound = callback_isFound(symbolName)</span>
+        <span class="token keyword">var</span> isFound <span class="token operator">=</span> <span class="token function">callback_isFound</span><span class="token punctuation">(</span>curSymbol<span class="token punctuation">,</span> jniFuncName<span class="token punctuation">)</span>
+        <span class="token comment">// console.log(&quot;isFound=&quot; + isFound)</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>isFound<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> symbolAddr <span class="token operator">=</span> curSymbol<span class="token punctuation">.</span>address
+          <span class="token comment">// console.log(&quot;symbolAddr=&quot; + symbolAddr)</span>
+
+          foundSymbolList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curSymbol<span class="token punctuation">)</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;+++ Found [&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;] symbol: addr=&quot;</span> <span class="token operator">+</span> symbolAddr <span class="token operator">+</span> <span class="token string">&quot;, name=&quot;</span> <span class="token operator">+</span> symbolName<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// console.log(&quot;foundSymbolList=&quot; + foundSymbolList)</span>
+    <span class="token keyword">return</span> foundSymbolList
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token function">android_findFunction_libart_so</span><span class="token punctuation">(</span><span class="token parameter">jniFuncName<span class="token punctuation">,</span> func_isFound</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> foundSymbolList <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">findSymbolFromLib</span><span class="token punctuation">(</span><span class="token string">&quot;libart.so&quot;</span><span class="token punctuation">,</span> jniFuncName<span class="token punctuation">,</span> func_isFound<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;foundSymbolList=&quot;</span> <span class="token operator">+</span> foundSymbolList<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> foundSymbolList
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token function">android_isFoundSymbol</span><span class="token punctuation">(</span><span class="token parameter">curSymbol<span class="token punctuation">,</span> symbolName</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return symbolName.includes(&quot;NewStringUTF&quot;)</span>
+    <span class="token comment">// return symbolName.includes(&quot;CheckJNI12NewStringUTF&quot;)</span>
+    <span class="token comment">// return symbol.name.includes(&quot;CheckJNI12NewStringUTF&quot;)</span>
+
+    <span class="token comment">// _ZN3art12_GLOBAL__N_18CheckJNI12NewStringUTFEP7_JNIEnvPKc.llvm.16005601603641821307</span>
+    <span class="token comment">// _ZN3art3JNIILb0EE12NewStringUTFEP7_JNIEnvPKc</span>
+    <span class="token comment">// _ZN3art2gc4Heap24AllocObjectWithAllocatorILb1ELb1ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadENS_6ObjPtrINS5_5ClassEEEmNS0_13AllocatorTypeERKT1_</span>
+    <span class="token comment">// _ZNK3art12_GLOBAL__N_119NewStringUTFVisitorclENS_6ObjPtrINS_6mirror6ObjectEEEm</span>
+    <span class="token comment">// _ZN3art2gc4Heap16AllocLargeObjectILb1ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadEPNS_6ObjPtrINS5_5ClassEEEmRKT0_</span>
+    <span class="token comment">// _ZZN3art2gc4Heap24AllocObjectWithAllocatorILb1ELb0ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadENS_6ObjPtrINS5_5ClassEEEmNS0_13AllocatorTypeERKT1_ENKUlvE_clEv</span>
+    <span class="token comment">// _ZN3art3JNIILb1EE12NewStringUTFEP7_JNIEnvPKc</span>
+    <span class="token comment">// _ZZN3art3JNIILb0EE12NewStringUTFEP7_JNIEnvPKcE19prev_bad_input_time</span>
+    <span class="token comment">// _ZZN3art3JNIILb1EE12NewStringUTFEP7_JNIEnvPKcE19prev_bad_input_time</span>
+    <span class="token comment">// return symbol.name.includes(&quot;NewStringUTF&quot;)</span>
+
+    <span class="token comment">// symbolName.includes(&quot;RegisterNatives&quot;) &amp;&amp; symbolName.includes(&quot;CheckJNI&quot;)</span>
+    <span class="token comment">// return symbolName.includes(&quot;CheckJNI15RegisterNatives&quot;)</span>
+    <span class="token comment">// return symbolName.includes(&quot;RegisterNatives&quot;)</span>
+
+    <span class="token comment">// _ZN3art12_GLOBAL__N_18CheckJNI15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi.llvm.16005601603641821307</span>
+    <span class="token comment">// _ZN3art3JNIILb0EE15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi</span>
+    <span class="token comment">// _ZN3art3JNIILb1EE15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi</span>
+    <span class="token comment">// return symbol.name.includes(&quot;RegisterNatives&quot;)</span>
+
+    <span class="token comment">// return symbolName.includes(&quot;CheckJNI11GetMethodID&quot;)</span>
+    <span class="token comment">// return symbolName.includes(&quot;GetMethodID&quot;)</span>
+
+    <span class="token comment">// _ZN3art12_GLOBAL__N_18CheckJNI19GetMethodIDInternalEPKcP7_JNIEnvP7_jclassS3_S3_b</span>
+    <span class="token comment">// _ZN3art12_GLOBAL__N_18CheckJNI11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_.llvm.16005601603641821307</span>
+    <span class="token comment">// _ZN3art3JNIILb0EE11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_</span>
+    <span class="token comment">// _ZN3art3JNIILb1EE11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_</span>
+    <span class="token comment">// return symbol.name.includes(&quot;GetMethodID&quot;)</span>
+
+    <span class="token keyword">return</span> curSymbol<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>symbolName<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token function">android_findJniFunc</span><span class="token punctuation">(</span><span class="token parameter">jniFuncName</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> jniSymbolList <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">android_findFunction_libart_so</span><span class="token punctuation">(</span>jniFuncName<span class="token punctuation">,</span> FridaUtil<span class="token punctuation">.</span>android_isFoundSymbol<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> jniSymbolList
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token function">android_doHookJniFunc_multipleMatch</span><span class="token punctuation">(</span><span class="token parameter">foundSymbolList<span class="token punctuation">,</span> callback_hookFunc</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> foundSymbolList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> symbolNum <span class="token operator">=</span> foundSymbolList<span class="token punctuation">.</span>length
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;symbolNum=&quot;</span> <span class="token operator">+</span> symbolNum<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>symbolNum <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> symbolNum<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> eachSymbol <span class="token operator">=</span> foundSymbolList<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+      <span class="token comment">// console.log(&quot;eachSymbol=&quot; + eachSymbol)</span>
+      <span class="token keyword">var</span> curSymbolAddr <span class="token operator">=</span> eachSymbol<span class="token punctuation">.</span>address
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;curSymbolAddr=&quot;</span> <span class="token operator">+</span> curSymbolAddr<span class="token punctuation">)</span>
+
+      Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>curSymbolAddr<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">callback_hookFunc</span><span class="token punctuation">(</span>eachSymbol<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token function">android_hookJniFunc</span><span class="token punctuation">(</span><span class="token parameter">jniFuncName<span class="token punctuation">,</span> hookFunc</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> jniSymbolList <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">android_findJniFunc</span><span class="token punctuation">(</span>jniFuncName<span class="token punctuation">)</span>
+    FridaUtil<span class="token punctuation">.</span><span class="token function">android_doHookJniFunc_multipleMatch</span><span class="token punctuation">(</span>jniSymbolList<span class="token punctuation">,</span> hookFunc<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>注：</p>
+<ul>
+<li><code>FridaUtil</code>的最新完整代码，详见：<ul>
+<li><a href="https://github.com/crifan/crifanLib/blob/master/javascript/FridaUtil.js" target="_blank">https://github.com/crifan/crifanLib/blob/master/javascript/FridaUtil.js</a></li>
+</ul>
+</li>
+</ul>
+<p>调用=hook代码：</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">function</span> <span class="token function">hookNative_NewStringUTF</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// var symbolList_NewStringUTF = find_NewStringUTF()</span>
+  <span class="token comment">// hoook_NewStringUTF(symbolList_NewStringUTF)</span>
+
+  FridaUtil<span class="token punctuation">.</span><span class="token function">android_hookJniFunc</span><span class="token punctuation">(</span><span class="token string">&quot;NewStringUTF&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">curSymbol<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    JsUtil<span class="token punctuation">.</span><span class="token function">logStr</span><span class="token punctuation">(</span><span class="token string">&quot;Trigged NewStringUTF [&quot;</span> <span class="token operator">+</span> curSymbol<span class="token punctuation">.</span>address <span class="token operator">+</span> <span class="token string">&quot;]&quot;</span><span class="token punctuation">)</span>
+      <span class="token comment">// jstring NewStringUTF(JNIEnv *env, const char *bytes);</span>
+      <span class="token keyword">var</span> jniEnv <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;jniEnv=&quot;</span> <span class="token operator">+</span> jniEnv<span class="token punctuation">)</span>
+
+      <span class="token keyword">var</span> newStrPtr <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+      <span class="token comment">// var newStr = newStrPtr.readCString()</span>
+      <span class="token comment">// var newStr = FridaUtil.ptrToUtf8Str(newStrPtr)</span>
+      <span class="token keyword">var</span> newStr <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">ptrToCStr</span><span class="token punctuation">(</span>newStrPtr<span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;newStrPtr=&quot;</span> <span class="token operator">+</span> newStrPtr <span class="token operator">+</span> <span class="token string">&quot; -&gt; newStr=&quot;</span> <span class="token operator">+</span> newStr<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">hookNative_GetMethodID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// var symbolList_GetMethodID = find_GetMethodID()</span>
+  <span class="token comment">// hoook_GetMethodID(symbolList_GetMethodID)</span>
+
+  FridaUtil<span class="token punctuation">.</span><span class="token function">android_hookJniFunc</span><span class="token punctuation">(</span><span class="token string">&quot;GetMethodID&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">curSymbol<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    JsUtil<span class="token punctuation">.</span><span class="token function">logStr</span><span class="token punctuation">(</span><span class="token string">&quot;Trigged GetMethodID [&quot;</span> <span class="token operator">+</span> curSymbol<span class="token punctuation">.</span>address <span class="token operator">+</span> <span class="token string">&quot;]&quot;</span><span class="token punctuation">)</span>
+      <span class="token comment">// jmethodID GetMethodID(JNIEnv *env, jclass clazz, const char *name, const char *sig);</span>
+      <span class="token keyword">var</span> jniEnv <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;jniEnv=&quot;</span> <span class="token operator">+</span> jniEnv<span class="token punctuation">)</span>
+
+      <span class="token keyword">var</span> clazz <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+      <span class="token keyword">var</span> jclassName <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">getJclassName</span><span class="token punctuation">(</span>clazz<span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;clazz=&quot;</span> <span class="token operator">+</span> clazz <span class="token operator">+</span> <span class="token string">&quot; -&gt; jclassName=&quot;</span> <span class="token operator">+</span> jclassName<span class="token punctuation">)</span>
+
+      <span class="token keyword">var</span> namePtr <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+      <span class="token keyword">var</span> nameStr <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">ptrToUtf8Str</span><span class="token punctuation">(</span>namePtr<span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;namePtr=&quot;</span> <span class="token operator">+</span> namePtr <span class="token operator">+</span> <span class="token string">&quot; -&gt; nameStr=&quot;</span> <span class="token operator">+</span> nameStr<span class="token punctuation">)</span>
+
+      <span class="token keyword">var</span> sigPtr <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">var</span> sigStr <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">ptrToUtf8Str</span><span class="token punctuation">(</span>sigPtr<span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;sigPtr=&quot;</span> <span class="token operator">+</span> sigPtr <span class="token operator">+</span> <span class="token string">&quot; -&gt; sigStr=&quot;</span> <span class="token operator">+</span> sigStr<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">hookNative_RegisterNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// var symbolList_RegisterNatives = find_RegisterNatives()</span>
+  <span class="token comment">// hoook_RegisterNatives(symbolList_RegisterNatives)</span>
+
+  FridaUtil<span class="token punctuation">.</span><span class="token function">android_hookJniFunc</span><span class="token punctuation">(</span><span class="token string">&quot;RegisterNatives&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">curSymbol<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    JsUtil<span class="token punctuation">.</span><span class="token function">logStr</span><span class="token punctuation">(</span><span class="token string">&quot;Trigged RegisterNatives [&quot;</span> <span class="token operator">+</span> curSymbol<span class="token punctuation">.</span>address <span class="token operator">+</span> <span class="token string">&quot;]&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/*
+      typedef struct {
+        const char* name;
+        const char* signature;
+        void* fnPtr;
+      } JNINativeMethod;
+
+      jint RegisterNatives(JNIEnv *env, jclass clazz, const JNINativeMethod *methods, jint nMethods);
+    */</span>
+    <span class="token keyword">var</span> jniEnv <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;jniEnv=&quot;</span> <span class="token operator">+</span> jniEnv<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> clazz <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">var</span> jclassName <span class="token operator">=</span> FridaUtil<span class="token punctuation">.</span><span class="token function">getJclassName</span><span class="token punctuation">(</span>clazz<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;clazz=&quot;</span> <span class="token operator">+</span> clazz <span class="token operator">+</span> <span class="token string">&quot; -&gt; jclassName=&quot;</span> <span class="token operator">+</span> jclassName<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> methods <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;methods=&quot;</span> <span class="token operator">+</span> methods<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> nMethods <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+    <span class="token keyword">var</span> methodNum <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>nMethods<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;nMethods=&quot;</span> <span class="token operator">+</span> nMethods <span class="token operator">+</span> <span class="token string">&quot; -&gt; methodNum=&quot;</span> <span class="token operator">+</span> methodNum<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">hookNative</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">hookNative_RegisterNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token function">hookNative_GetMethodID</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token function">hookNative_NewStringUTF</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">hookAndroid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Java<span class="token punctuation">.</span>available<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;Java is not available&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+  <span class="token punctuation">}</span>
+
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Java is available&quot;</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Java.androidVersion=&quot;</span> <span class="token operator">+</span> Java<span class="token punctuation">.</span>androidVersion<span class="token punctuation">)</span>
+
+  Java<span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">hookNative</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-------------------- Begin Hook --------------------&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token function">setImmediate</span><span class="token punctuation">(</span>hookAndroid<span class="token punctuation">)</span>
+</code></pre>
+<p>输出：</p>
+<ul>
+<li>RegisterNatives</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span><span class="token number">8588</span><span class="token punctuation">]</span> <span class="token assign-left variable">curSymbol</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
++++ Found smbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc36550, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art12_GLOBAL__N_18CheckJNI15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi.llvm.16005601603641821307
+<span class="token punctuation">[</span><span class="token number">9254</span><span class="token punctuation">]</span> <span class="token assign-left variable">curSymbol</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
++++ Found smbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccb070c, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb0EE15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi
+<span class="token punctuation">[</span><span class="token number">9761</span><span class="token punctuation">]</span> <span class="token assign-left variable">curSymbol</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
++++ Found smbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cd109f8, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb1EE15RegisterNativesEP7_JNIEnvP7_jclassPK15JNINativeMethodi
+<span class="token assign-left variable">foundSymbolList</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
+<span class="token assign-left variable">foundFuncPtr</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
+<span class="token assign-left variable">symbolList_RegisterNatives.length</span><span class="token operator">=</span><span class="token number">3</span>
+<span class="token assign-left variable">curAddr_RegisterNatives</span><span class="token operator">=</span>0x738cc36550
+<span class="token assign-left variable">curAddr_RegisterNatives</span><span class="token operator">=</span>0x738ccb070c
+<span class="token assign-left variable">curAddr_RegisterNatives</span><span class="token operator">=</span>0x738cd109f8
+
+-------------------- Trigged RegisterNatives <span class="token punctuation">[</span>0x738cd109f8<span class="token punctuation">]</span>--------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0xb4000074504b0b10
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0x129
+<span class="token assign-left variable">jclassName</span><span class="token operator">=</span>android.net.NetworkUtils
+<span class="token assign-left variable">methods</span><span class="token operator">=</span>0x7375709008
+<span class="token assign-left variable">nMethods</span><span class="token operator">=</span>0xc
+<span class="token assign-left variable">methodNum</span><span class="token operator">=</span><span class="token number">12</span>
+
+-------------------- Trigged RegisterNatives <span class="token punctuation">[</span>0x738cd109f8<span class="token punctuation">]</span>--------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0x74504e88d0
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0x45
+<span class="token assign-left variable">jclassName</span><span class="token operator">=</span>J.N
+<span class="token assign-left variable">methods</span><span class="token operator">=</span>0x72a0fa3b78
+<span class="token assign-left variable">nMethods</span><span class="token operator">=</span>0x3e
+<span class="token assign-left variable">methodNum</span><span class="token operator">=</span><span class="token number">62</span>
+-------------------- Trigged RegisterNatives <span class="token punctuation">[</span>0x738cd109f8<span class="token punctuation">]</span>--------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0x74504e88d0
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0x49
+<span class="token assign-left variable">jclassName</span><span class="token operator">=</span>J.N
+<span class="token assign-left variable">methods</span><span class="token operator">=</span>0x72a0fa4148
+<span class="token assign-left variable">nMethods</span><span class="token operator">=</span>0x8f
+<span class="token assign-left variable">methodNum</span><span class="token operator">=</span><span class="token number">143</span>
+</code></pre>
+<ul>
+<li>GetMethodID</li>
+</ul>
+<pre class="language-"><code class="lang-bash">+++ Found <span class="token punctuation">[</span><span class="token number">8067</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc40520, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art12_GLOBAL__N_18CheckJNI19GetMethodIDInternalEPKcP7_JNIEnvP7_jclassS3_S3_b
++++ Found <span class="token punctuation">[</span><span class="token number">8406</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc2f90c, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art12_GLOBAL__N_18CheckJNI11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_.llvm.16005601603641821307
++++ Found <span class="token punctuation">[</span><span class="token number">8879</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc6385c, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb0EE11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_
++++ Found <span class="token punctuation">[</span><span class="token number">9392</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccc3778, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb1EE11GetMethodIDEP7_JNIEnvP7_jclassPKcS7_
+<span class="token assign-left variable">foundSymbolList</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
+<span class="token assign-left variable">symbolNum</span><span class="token operator">=</span><span class="token number">4</span>
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738cc40520
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738cc2f90c
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738cc6385c
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ccc3778
+
+-------------------- Trigged GetMethodID <span class="token punctuation">[</span>0x738ccc3778<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0x74504ef410
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0x45 -<span class="token operator">&gt;</span> <span class="token assign-left variable">jclassName</span><span class="token operator">=</span>android.system.ErrnoException
+<span class="token assign-left variable">namePtr</span><span class="token operator">=</span>0x7382448900 -<span class="token operator">&gt;</span> <span class="token assign-left variable">nameStr</span><span class="token operator">=</span><span class="token operator">&lt;</span>init<span class="token operator">&gt;</span>
+<span class="token assign-left variable">sigPtr</span><span class="token operator">=</span>0x73824490b0 -<span class="token operator">&gt;</span> <span class="token assign-left variable">sigStr</span><span class="token operator">=</span><span class="token punctuation">(</span>Ljava/lang/String<span class="token punctuation">;</span>I<span class="token punctuation">)</span>V
+
+-------------------- Trigged GetMethodID <span class="token punctuation">[</span>0x738ccc3778<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0x74504e8770
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0xd -<span class="token operator">&gt;</span> <span class="token assign-left variable">jclassName</span><span class="token operator">=</span>java.lang.Class
+<span class="token assign-left variable">namePtr</span><span class="token operator">=</span>0x72af707f32 -<span class="token operator">&gt;</span> <span class="token assign-left variable">nameStr</span><span class="token operator">=</span>getDeclaredMethod
+<span class="token assign-left variable">sigPtr</span><span class="token operator">=</span>0x72af707f44 -<span class="token operator">&gt;</span> <span class="token assign-left variable">sigStr</span><span class="token operator">=</span><span class="token punctuation">(</span>Ljava/lang/String<span class="token punctuation">;</span><span class="token punctuation">[</span>Ljava/lang/Class<span class="token punctuation">;</span><span class="token punctuation">)</span>Ljava/lang/reflect/Method<span class="token punctuation">;</span>
+
+-------------------- Trigged GetMethodID <span class="token punctuation">[</span>0x738ccc3778<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0x74504e5750
+<span class="token assign-left variable">clazz</span><span class="token operator">=</span>0x45 -<span class="token operator">&gt;</span> <span class="token assign-left variable">jclassName</span><span class="token operator">=</span>android.system.ErrnoException
+<span class="token assign-left variable">namePtr</span><span class="token operator">=</span>0x7382448900 -<span class="token operator">&gt;</span> <span class="token assign-left variable">nameStr</span><span class="token operator">=</span><span class="token operator">&lt;</span>init<span class="token operator">&gt;</span>
+<span class="token assign-left variable">sigPtr</span><span class="token operator">=</span>0x73824490b0 -<span class="token operator">&gt;</span> <span class="token assign-left variable">sigStr</span><span class="token operator">=</span><span class="token punctuation">(</span>Ljava/lang/String<span class="token punctuation">;</span>I<span class="token punctuation">)</span>V
+</code></pre>
+<ul>
+<li>NewStringUTF</li>
+</ul>
+<pre class="language-"><code class="lang-bash">+++ Found <span class="token punctuation">[</span><span class="token number">8540</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc337c8, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art12_GLOBAL__N_18CheckJNI12NewStringUTFEP7_JNIEnvPKc.llvm.16005601603641821307
++++ Found <span class="token punctuation">[</span><span class="token number">9143</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738cc9b938, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb0EE12NewStringUTFEP7_JNIEnvPKc
++++ Found <span class="token punctuation">[</span><span class="token number">9145</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccb64f0, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art2gc4Heap24AllocObjectWithAllocatorILb1ELb1ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadENS_6ObjPtrINS5_5ClassEEEmNS0_13AllocatorTypeERKT1_
++++ Found <span class="token punctuation">[</span><span class="token number">9300</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccb7b6c, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZNK3art12_GLOBAL__N_119NewStringUTFVisitorclENS_6ObjPtrINS_6mirror6ObjectEEEm
++++ Found <span class="token punctuation">[</span><span class="token number">9301</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccb7750, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art2gc4Heap16AllocLargeObjectILb1ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadEPNS_6ObjPtrINS5_5ClassEEEmRKT0_
++++ Found <span class="token punctuation">[</span><span class="token number">9302</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ca308d8, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZZN3art2gc4Heap24AllocObjectWithAllocatorILb1ELb0ENS_12_GLOBAL__N_119NewStringUTFVisitorEEEPNS_6mirror6ObjectEPNS_6ThreadENS_6ObjPtrINS5_5ClassEEEmNS0_13AllocatorTypeERKT1_ENKUlvE_clEv
++++ Found <span class="token punctuation">[</span><span class="token number">9656</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738ccfbc24, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZN3art3JNIILb1EE12NewStringUTFEP7_JNIEnvPKc
++++ Found <span class="token punctuation">[</span><span class="token number">23806</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738d215948, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZZN3art3JNIILb0EE12NewStringUTFEP7_JNIEnvPKcE19prev_bad_input_time
++++ Found <span class="token punctuation">[</span><span class="token number">23812</span><span class="token punctuation">]</span> symbol: <span class="token assign-left variable">addr</span><span class="token operator">=</span>0x738d215950, <span class="token assign-left variable">name</span><span class="token operator">=</span>_ZZN3art3JNIILb1EE12NewStringUTFEP7_JNIEnvPKcE19prev_bad_input_time
+<span class="token assign-left variable">foundSymbolList</span><span class="token operator">=</span><span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>,<span class="token punctuation">[</span>object Object<span class="token punctuation">]</span>
+<span class="token assign-left variable">symbolNum</span><span class="token operator">=</span><span class="token number">9</span>
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738cc337c8
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738cc9b938
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ccb64f0
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ccb7b6c
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ccb7750
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ca308d8
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738ccfbc24
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738d215948
+<span class="token assign-left variable">curSymbolAddr</span><span class="token operator">=</span>0x738d215950
+
+-------------------- Trigged NewStringUTF <span class="token punctuation">[</span>0x738d215950<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0xb4000074504b0b10
+<span class="token assign-left variable">newStrPtr</span><span class="token operator">=</span>0x7ff3cc3650 -<span class="token operator">&gt;</span> <span class="token assign-left variable">newStr</span><span class="token operator">=</span>false
+
+-------------------- Trigged NewStringUTF <span class="token punctuation">[</span>0x738d215950<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0xb4000074504b0b10
+<span class="token assign-left variable">newStrPtr</span><span class="token operator">=</span>0x7379c4c468 -<span class="token operator">&gt;</span> <span class="token assign-left variable">newStr</span><span class="token operator">=</span>arm64-v8a
+
+-------------------- Trigged NewStringUTF <span class="token punctuation">[</span>0x738d215950<span class="token punctuation">]</span> --------------------
+<span class="token assign-left variable">jniEnv</span><span class="token operator">=</span>0xb4000074504b0b10
+<span class="token assign-left variable">newStrPtr</span><span class="token operator">=</span>0x7379c4c5ac -<span class="token operator">&gt;</span> <span class="token assign-left variable">newStr</span><span class="token operator">=</span>default:targetSdkVersion<span class="token operator">=</span><span class="token number">30</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-08-23 11:16:53
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Android类">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../c/" class="navigation navigation-next " aria-label="Next page: C">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"JNI","level":"1.4.3.2.1","depth":4,"next":{"title":"C","level":"1.4.3.3","depth":3,"path":"frida_tool_func/android/c/README.md","ref":"frida_tool_func/android/c/README.md","articles":[{"title":"native C","level":"1.4.3.3.1","depth":4,"path":"frida_tool_func/android/c/native.md","ref":"frida_tool_func/android/c/native.md","articles":[]}]},"previous":{"title":"Android类","level":"1.4.3.2","depth":3,"path":"frida_tool_func/android/android_class/README.md","ref":"frida_tool_func/android/android_class/README.md","articles":[{"title":"JNI","level":"1.4.3.2.1","depth":4,"path":"frida_tool_func/android/android_class/jni.md","ref":"frida_tool_func/android/android_class/jni.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/frida_re_example_function/pdf/frida_re_example_function.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/frida_re_example_function/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"frida_re_example_function","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Frida逆向实例和工具函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理Frida逆向期间涉及到的各种实际案例，以及整理出的各种工具类函数。其中Frida的实际使用案例，包括网上别人的实例案例，包括官网的Cdeshare，以及frida和frida-trace。frida中包括iOS的ObjC的各种例子。包括Object对象的methods和ownMethods，以及用Interceptor去hook函数的，单个类的单个函数、单个类的所有函数、所有类的所有函数等。以及ApiResolver的案例以及Stalker的案例，尤其是___lldb_unnamed_symbol2575$$akd的完整代码；接着是frida-trace的实际例子，包括ObjC的akd中Apple账号验证过程、Preferences中Apple账号登录全过程的详细内容。"},"file":{"path":"frida_tool_func/android/android_class/jni.md","mtime":"2024-08-23T03:16:53.886Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-08-23T03:17:46.613Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
