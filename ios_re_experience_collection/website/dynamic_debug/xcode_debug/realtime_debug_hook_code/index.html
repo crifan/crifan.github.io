@@ -1,0 +1,1848 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>实时调试hook代码 · iOS逆向：心得集锦</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../lldb/" />
+    
+    
+    <link rel="prev" href="../xm_cannot_locate/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_experience_collection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../experience_summary/">
+            
+                <a href="../../../experience_summary/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    iOS逆向心得概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../experience_summary/overall_strategy.html">
+            
+                <a href="../../../experience_summary/overall_strategy.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    总体对策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../iphone/">
+            
+                <a href="../../../iphone/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    iPhone
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../iphone/init_dev_env.html">
+            
+                <a href="../../../iphone/init_dev_env.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    初始化开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../iphone/common_folder.html">
+            
+                <a href="../../../iphone/common_folder.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    常用目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../ios_app/">
+            
+                <a href="../../../ios_app/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    app
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../ios_app/plist.html">
+            
+                <a href="../../../ios_app/plist.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    plist文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../ios_app/related_data_folder/">
+            
+                <a href="../../../ios_app/related_data_folder/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    相关文件目录和数据
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../ios_app/related_data_folder/bundle.html">
+            
+                <a href="../../../ios_app/related_data_folder/bundle.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    Bundle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../ios_app/related_data_folder/data.html">
+            
+                <a href="../../../ios_app/related_data_folder/data.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    Data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../../ios_app/related_data_folder/shared_app_group.html">
+            
+                <a href="../../../ios_app/related_data_folder/shared_app_group.html">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    Shared AppGroup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../ios_app/bin_path.html">
+            
+                <a href="../../../ios_app/bin_path.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    二进制文件路径
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../ios_app/uninstall/">
+            
+                <a href="../../../ios_app/uninstall/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    app卸载
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../../ios_app/uninstall/residual_data.html">
+            
+                <a href="../../../ios_app/uninstall/residual_data.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    残留数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../../ios_app/keychain_db/">
+            
+                <a href="../../../ios_app/keychain_db/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    Keychain数据库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../../ios_app/keychain_db/field_def.html">
+            
+                <a href="../../../ios_app/keychain_db/field_def.html">
+            
+                    
+                        <b>1.4.5.1.</b>
+                    
+                    字段含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../ios_objc/">
+            
+                <a href="../../../ios_objc/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../ios_objc/runtime/">
+            
+                <a href="../../../ios_objc/runtime/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    运行时
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../ios_objc/runtime/objc_msgsend/">
+            
+                <a href="../../../ios_objc/runtime/objc_msgsend/">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    objc_msgSend
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1.1" data-path="../../../ios_objc/runtime/objc_msgsend/manual_calc_arg.html">
+            
+                <a href="../../../ios_objc/runtime/objc_msgsend/manual_calc_arg.html">
+            
+                    
+                        <b>1.5.1.1.1.</b>
+                    
+                    手动计算参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../../../ios_objc/runtime/objc_alloc.html">
+            
+                <a href="../../../ios_objc/runtime/objc_alloc.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    objc_alloc
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../ios_objc/class/">
+            
+                <a href="../../../ios_objc/class/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Class
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../ios_objc/class/print_detail.html">
+            
+                <a href="../../../ios_objc/class/print_detail.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    打印类的描述详情信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../../ios_objc/class/property/">
+            
+                <a href="../../../ios_objc/class/property/">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    成员属性
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.2.1" data-path="../../../ios_objc/class/property/public.html">
+            
+                <a href="../../../ios_objc/class/property/public.html">
+            
+                    
+                        <b>1.5.2.2.1.</b>
+                    
+                    公开成员属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2.2" data-path="../../../ios_objc/class/property/private.html">
+            
+                <a href="../../../ios_objc/class/property/private.html">
+            
+                    
+                        <b>1.5.2.2.2.</b>
+                    
+                    私有成员属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../../../ios_objc/class/expanded_property.html">
+            
+                <a href="../../../ios_objc/class/expanded_property.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    扩展属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="../../../ios_objc/class/class_instance_state.html">
+            
+                <a href="../../../ios_objc/class/class_instance_state.html">
+            
+                    
+                        <b>1.5.2.4.</b>
+                    
+                    类、实例、状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../ios_objc/property/">
+            
+                <a href="../../../ios_objc/property/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    属性值
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../ios_objc/property/get_value/">
+            
+                <a href="../../../ios_objc/property/get_value/">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    获取变量值
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1.1" data-path="../../../ios_objc/property/get_value/dict.html">
+            
+                <a href="../../../ios_objc/property/get_value/dict.html">
+            
+                    
+                        <b>1.5.3.1.1.</b>
+                    
+                    dict字典
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../../ios_objc/property/calclulated.html">
+            
+                <a href="../../../ios_objc/property/calclulated.html">
+            
+                    
+                        <b>1.5.3.2.</b>
+                    
+                    计算类的属性值
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../../../ios_objc/property/xcode_frida_not_same.html">
+            
+                <a href="../../../ios_objc/property/xcode_frida_not_same.html">
+            
+                    
+                        <b>1.5.3.3.</b>
+                    
+                    Xcode和Frida属性值不一致
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    动态调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../debug_logic/">
+            
+                <a href="../../debug_logic/">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    调试代码逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../../debug_logic/func_trigger/">
+            
+                <a href="../../debug_logic/func_trigger/">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    寻找函数触发时机
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1.1" data-path="../../debug_logic/func_trigger/alloc_init_new.html">
+            
+                <a href="../../debug_logic/func_trigger/alloc_init_new.html">
+            
+                    
+                        <b>1.6.1.1.1.</b>
+                    
+                    alloc和init和new
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.1.2" data-path="../../debug_logic/func_trigger/reinstall_spawn.html">
+            
+                <a href="../../debug_logic/func_trigger/reinstall_spawn.html">
+            
+                    
+                        <b>1.6.1.1.2.</b>
+                    
+                    重装和spawn方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../../debug_logic/var_changed/">
+            
+                <a href="../../debug_logic/var_changed/">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    寻找变量改动时机
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.2.1" data-path="../../debug_logic/var_changed/wivar.html">
+            
+                <a href="../../debug_logic/var_changed/wivar.html">
+            
+                    
+                        <b>1.6.1.2.1.</b>
+                    
+                    wivar
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="../../debug_logic/change_logic/">
+            
+                <a href="../../debug_logic/change_logic/">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    改变运行逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.3.1" data-path="../../debug_logic/change_logic/edit_reg_value.html">
+            
+                <a href="../../debug_logic/change_logic/edit_reg_value.html">
+            
+                    
+                        <b>1.6.1.3.1.</b>
+                    
+                    修改寄存器值
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3.2" data-path="../../debug_logic/change_logic/hook_ret_val.html">
+            
+                <a href="../../debug_logic/change_logic/hook_ret_val.html">
+            
+                    
+                        <b>1.6.1.3.2.</b>
+                    
+                    hook函数返回值
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    Xcode调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../attach_debug/">
+            
+                <a href="../attach_debug/">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    Attach调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../callstack/">
+            
+                <a href="../callstack/">
+            
+                    
+                        <b>1.6.2.2.</b>
+                    
+                    函数调用堆栈
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.2.1" data-path="../callstack/func_not_same.html">
+            
+                <a href="../callstack/func_not_same.html">
+            
+                    
+                        <b>1.6.2.2.1.</b>
+                    
+                    函数名不一致
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../see_all_var/">
+            
+                <a href="../see_all_var/">
+            
+                    
+                        <b>1.6.2.3.</b>
+                    
+                    查看当前所有变量值
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.4" data-path="../fetch_var_on_iphone/">
+            
+                <a href="../fetch_var_on_iphone/">
+            
+                    
+                        <b>1.6.2.4.</b>
+                    
+                    Fetching Variables on iPhone
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.5" data-path="../asm_tab_opening/">
+            
+                <a href="../asm_tab_opening/">
+            
+                    
+                        <b>1.6.2.5.</b>
+                    
+                    汇编代码窗口保持打开状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.6" data-path="../2_target_arm64_arm64e/">
+            
+                <a href="../2_target_arm64_arm64e/">
+            
+                    
+                        <b>1.6.2.6.</b>
+                    
+                    2个调试目标：arm64和arm64e
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.7" data-path="../xm_cannot_locate/">
+            
+                <a href="../xm_cannot_locate/">
+            
+                    
+                        <b>1.6.2.7.</b>
+                    
+                    xm文件无法定位到源代码位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.2.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.6.2.8.</b>
+                    
+                    实时调试hook代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../lldb/">
+            
+                <a href="../../lldb/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    LLDB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../../lldb/regex_find/">
+            
+                <a href="../../lldb/regex_find/">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    正则搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../iosopendev/">
+            
+                <a href="../../iosopendev/">
+            
+                    
+                        <b>1.6.4.</b>
+                    
+                    iOSOpenDev
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../mach_o/">
+            
+                <a href="../../../mach_o/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    Mach-O
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../mach_o/image_base.html">
+            
+                <a href="../../../mach_o/image_base.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    image base基地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../log/">
+            
+                <a href="../../../log/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    log日志
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../../log/large_1k_log.html">
+            
+                <a href="../../../log/large_1k_log.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    超过1K的日志打印
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../headers/">
+            
+                <a href="../../../headers/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    头文件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../headers/try_diff_version.html">
+            
+                <a href="../../../headers/try_diff_version.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    试试新旧不同版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../capture/">
+            
+                <a href="../../../capture/">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    抓包
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../../capture/request_response.html">
+            
+                <a href="../../../capture/request_response.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    request和response
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../../../tweak_plugin/">
+            
+                <a href="../../../tweak_plugin/">
+            
+                    
+                        <b>1.11.</b>
+                    
+                    tweak插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../../../crash/">
+            
+                <a href="../../../crash/">
+            
+                    
+                        <b>1.12.</b>
+                    
+                    crash崩溃
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../../../crash/parse_tool.html">
+            
+                <a href="../../../crash/parse_tool.html">
+            
+                    
+                        <b>1.12.1.</b>
+                    
+                    崩溃日志解析工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../../../crash/find_crash_location.html">
+            
+                <a href="../../../crash/find_crash_location.html">
+            
+                    
+                        <b>1.12.2.</b>
+                    
+                    从崩溃信息找崩溃所在位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../../../common/">
+            
+                <a href="../../../common/">
+            
+                    
+                        <b>1.13.</b>
+                    
+                    通用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../../../common/understand_asm_logic.html">
+            
+                <a href="../../../common/understand_asm_logic.html">
+            
+                    
+                        <b>1.13.1.</b>
+                    
+                    从汇编反推代码逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../../../common/hook_multiple_target.html">
+            
+                <a href="../../../common/hook_multiple_target.html">
+            
+                    
+                        <b>1.13.2.</b>
+                    
+                    必要时hook多个目标
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../../../common/pass_arg_special.html">
+            
+                <a href="../../../common/pass_arg_special.html">
+            
+                    
+                        <b>1.13.3.</b>
+                    
+                    特殊的参数传递
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="../../../common/hook_code_not_work.html">
+            
+                <a href="../../../common/hook_code_not_work.html">
+            
+                    
+                        <b>1.13.4.</b>
+                    
+                    hook代码没生效
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.5" data-path="../../../common/hook_slow_stuck.html">
+            
+                <a href="../../../common/hook_slow_stuck.html">
+            
+                    
+                        <b>1.13.5.</b>
+                    
+                    hook导致很慢和卡死
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.14.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.14.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >实时调试hook代码</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="实时调试hook代码"><a name="实时调试hook代码" class="plugin-anchor" href="#实时调试hook代码"><i class="fa fa-link" aria-hidden="true"></i></a>实时调试hook代码</h1>
+<ul>
+<li>背景<ul>
+<li>想要调试iOS的程序：<code>设置</code>=<code>Preferences</code></li>
+<li>对于设备<ul>
+<li>iPhone8<ul>
+<li>A11，iOS 15.0，palera1n普通越狱</li>
+</ul>
+</li>
+<li>iPhone11<ul>
+<li>A12，iOS 15.1，XinaA15的rootless越狱</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>之前都没有很好的效果：<ul>
+<li>frida<ul>
+<li>之前偶尔还能调试</li>
+<li>现在始终会崩溃Process terminated</li>
+</ul>
+</li>
+<li>Xcode调试<ul>
+<li>只能iPhone11中才能调试<ul>
+<li>但是也只是Attach上去调试，无法加hook代码的</li>
+</ul>
+</li>
+<li>但是又和iPhone8中的逻辑，未必完全对的上，因为iOS版本不完全一样（15.0和15.1）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需求<ul>
+<li>想要在Xcode中实时调试iOSOpenDev的hook插件代码<ul>
+<li>优点：Xcode中调试会比Frida稳定多了（不会经常崩溃退出）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="具体步骤"><a name="具体步骤" class="plugin-anchor" href="#具体步骤"><i class="fa fa-link" aria-hidden="true"></i></a>具体步骤</h2>
+<h3 id="新建iosopendev的hook插件项目"><a name="新建iosopendev的hook插件项目" class="plugin-anchor" href="#新建iosopendev的hook插件项目"><i class="fa fa-link" aria-hidden="true"></i></a>新建iOSOpenDev的hook插件项目</h3>
+<p>具体可参考：</p>
+<p><a href="https://book.crifan.org/books/ios_re_iosopendev_tweak/website/normal_tweak_process/" target="_blank">普通的插件开发流程 · iOS逆向开发：iOSOpenDev开发插件 (crifan.org)</a></p>
+<p>确保完成基本的环境：</p>
+<ul>
+<li>新建iOSOpenDev的Xcode项目</li>
+<li>写hook代码</li>
+<li>编译</li>
+<li>安装插件</li>
+<li>确认插件生效<ul>
+<li><img src="../../../assets/img/console_app_log_take_effect.png" alt="console_app_log_take_effect"></li>
+</ul>
+</li>
+</ul>
+<h3 id="xcode中给代码加上断点"><a name="xcode中给代码加上断点" class="plugin-anchor" href="#xcode中给代码加上断点"><i class="fa fa-link" aria-hidden="true"></i></a>Xcode中给代码加上断点</h3>
+<p>Xcode中，写好hook代码</p>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span>hook AAUISignInViewController
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>_nextButtonSelected<span class="token operator">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg1<span class="token punctuation">{</span>
+     <span class="token operator">%</span>log<span class="token punctuation">;</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span>@<span class="token string">&quot;AAUISignInViewController _nextButtonSelected: %@&quot;</span><span class="token punctuation">,</span> arg1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">return</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>给代码加上断点：</p>
+<p><img src="../../../assets/img/xcode_hook_next_add_breakpoint.png" alt="xcode_hook_next_add_breakpoint"></p>
+<h3 id="attach挂载进程"><a name="attach挂载进程" class="plugin-anchor" href="#attach挂载进程"><i class="fa fa-link" aria-hidden="true"></i></a>Attach挂载进程</h3>
+<p>先确保进程是可以被调试的</p>
+<p>然后去Xcode中，挂载进程：</p>
+<p>找到要被调试的二进制=服务=进程=此处的：<code>Preferences</code></p>
+<p><img src="../../../assets/img/xcode_debug_attach_to_process.png" alt="xcode_debug_attach_to_process"></p>
+<p>注，此处</p>
+<ul>
+<li>其他方式都不行<ul>
+<li><code>Xcode</code>-&gt;<code>Debug</code>-&gt;<code>Attach to Process</code>-&gt;<code>Getting Process List</code><ul>
+<li>找不到Preferences的进程</li>
+</ul>
+</li>
+<li><code>Xcode</code>-&gt;<code>Debug</code>-&gt;<code>Attach to Process by PID or Name</code>-&gt;<code>PID or Process Name</code><ul>
+<li>用name也都不行<ul>
+<li><code>Preferences</code></li>
+<li><code>com.apple.Preferences</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>只好换：<code>PID</code><ul>
+<li><code>Xcode</code>-&gt;<code>Debug</code>-&gt;<code>Attach to Process by PID or Name</code>-&gt;<code>PID or Process Name</code><ul>
+<li><img src="../../../assets/img/xcode_attach_process_pid_1464.png" alt="xcode_attach_process_pid_1464"></li>
+</ul>
+</li>
+<li>说明<ul>
+<li>PID的值：可以通过ssh的命令去查找到<pre class="language-"><code class="lang-bash"><span class="token function">ps</span> <span class="token parameter variable">-A</span> <span class="token operator">|</span> <span class="token function">grep</span> Preferences
+</code></pre>
+<ul>
+<li>此处输出：<pre class="language-"><code class="lang-bash">iPhone11-151:~ root<span class="token comment"># ps -A | grep Preferences</span>
+  <span class="token number">72</span> ??         <span class="token number">0</span>:00.15 /System/Library/PrivateFrameworks/NanoPreferencesSync.framework/nanoprefsyncd <span class="token parameter variable">-companion</span>
+  <span class="token number">157</span> ??         <span class="token number">0</span>:01.29 /System/Library/PrivateFrameworks/IntlPreferences.framework/Support/localizationswitcherd
+<span class="token number">1464</span> ??         <span class="token number">0</span>:06.02 /Applications/Preferences.app/Preferences
+<span class="token number">1720</span> ttys000    <span class="token number">0</span>:00.01 <span class="token function">grep</span> Preferences
+</code></pre>
+</li>
+<li>得到：<code>Preferences</code>的PID是：<code>1464</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>显示 PID 和 Running了 -&gt; 表示Attach上了：</p>
+<p><img src="../../../assets/img/xcode_process_attached_running.png" alt="xcode_process_attached_running"></p>
+<h3 id="触发断点"><a name="触发断点" class="plugin-anchor" href="#触发断点"><i class="fa fa-link" aria-hidden="true"></i></a>触发断点</h3>
+<p>此处，去app中操作页面，触发到被hook的代码的逻辑</p>
+<p>具体此处操作是：设置中点击登录的下一步，触发到此处代码逻辑</p>
+<p>即可触发断点：</p>
+<p><img src="../../../assets/img/xcode_trigged_hook_code_breakpoint.png" alt="xcode_trigged_hook_code_breakpoint"></p>
+<p>函数调用堆栈：</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> bt
+* thread <span class="token comment">#1, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 2.1</span>
+  * frame <span class="token comment">#0: 0x00000001077cfe60 jailAppleAccount.dylib`_logos_method$_ungrouped$AAUISignInViewController$_nextButtonSelected$(self=0x0000000107015610, _cmd=&quot;_nextButtonSelected:&quot;, arg1=0x000000012100b280) at jailAppleAccount.xm:6:2 [opt]</span>
+    frame <span class="token comment">#1: 0x0000000183ba6bf0 UIKitCore`-[UIApplication sendAction:to:from:forEvent:] + 100</span>
+    frame <span class="token comment">#2: 0x0000000183e85b80 UIKitCore`-[UIBarButtonItem _triggerActionForEvent:] + 180</span>
+    frame <span class="token comment">#3: 0x0000000183e6f880 UIKitCore`__45-[_UIButtonBarTargetAction _invoke:forEvent:]_block_invoke + 40</span>
+    frame <span class="token comment">#4: 0x0000000183e6f730 UIKitCore`-[_UIButtonBarTargetAction _invoke:forEvent:] + 204</span>
+    frame <span class="token comment">#5: 0x0000000183ba6bf0 UIKitCore`-[UIApplication sendAction:to:from:forEvent:] + 100</span>
+    frame <span class="token comment">#6: 0x0000000183cd2a4c UIKitCore`-[UIControl sendAction:to:forEvent:] + 128</span>
+    frame <span class="token comment">#7: 0x0000000183a4e2c8 UIKitCore`-[UIControl _sendActionsForEvents:withEvent:] + 352</span>
+    frame <span class="token comment">#8: 0x0000000183a4e318 UIKitCore`-[UIControl _sendActionsForEvents:withEvent:] + 432</span>
+    frame <span class="token comment">#9: 0x0000000183d7d7c0 UIKitCore`-[UIControl touchesEnded:withEvent:] + 536</span>
+    frame <span class="token comment">#10: 0x000000018385107c UIKitCore`-[UIWindow _sendTouchesForEvent:] + 980</span>
+    frame <span class="token comment">#11: 0x0000000183882a84 UIKitCore`-[UIWindow sendEvent:] + 4456</span>
+    frame <span class="token comment">#12: 0x0000000183a32318 UIKitCore`-[UIApplication sendEvent:] + 828</span>
+    frame <span class="token comment">#13: 0x0000000183855c30 UIKitCore`__dispatchPreprocessedEventFromEventQueue + 7904</span>
+    frame <span class="token comment">#14: 0x000000018384aa1c UIKitCore`__processEventQueue + 6760</span>
+    frame <span class="token comment">#15: 0x000000018384fec8 UIKitCore`__eventFetcherSourceCallback + 172</span>
+    frame <span class="token comment">#16: 0x00000001812f3020 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 28</span>
+    frame <span class="token comment">#17: 0x0000000181303ce0 CoreFoundation`__CFRunLoopDoSource0 + 208</span>
+    frame <span class="token comment">#18: 0x000000018123dfe8 CoreFoundation`__CFRunLoopDoSources0 + 268</span>
+    frame <span class="token comment">#19: 0x00000001812437f4 CoreFoundation`__CFRunLoopRun + 820</span>
+    frame <span class="token comment">#20: 0x00000001812573b8 CoreFoundation`CFRunLoopRunSpecific + 600</span>
+    frame <span class="token comment">#21: 0x000000019cbe738c GraphicsServices`GSEventRunModal + 164</span>
+    frame <span class="token comment">#22: 0x0000000183bf76a8 UIKitCore`-[UIApplication _run] + 1100</span>
+    frame <span class="token comment">#23: 0x00000001839767f4 UIKitCore`UIApplicationMain + 2092</span>
+    frame <span class="token comment">#24: 0x000000010489cc0c Preferences`___lldb_unnamed_symbol132$$Preferences + 60</span>
+    frame <span class="token comment">#25: 0x00000001049d5a24 dyld`start + 520</span>
+</code></pre>
+<p>如此，即可愉快的：</p>
+<p>用Xcode+iOSOpenDev，去实时的动态的调试iOS的app的代码逻辑了。</p>
+<p>总体效果：</p>
+<p>虽然有点麻烦：</p>
+<ul>
+<li>每次改动插件代码后：<ul>
+<li>不能像MonkeyDev那么直接启动调试</li>
+<li>而是要：重新编译并安装插件，再去Attach，才能调试</li>
+</ul>
+</li>
+</ul>
+<p>但是UI界面的调试，比之前的：</p>
+<ul>
+<li>没有插件代码</li>
+<li>只有frida的js脚本<ul>
+<li>且很容易崩溃</li>
+</ul>
+</li>
+</ul>
+<p>的效率要高多了</p>
+<h2 id="总结"><a name="总结" class="plugin-anchor" href="#总结"><i class="fa fa-link" aria-hidden="true"></i></a>总结</h2>
+<p>此处目前是：</p>
+<ul>
+<li>iPhone11<ul>
+<li>iOS 15.1</li>
+<li>XinaA15越狱<ul>
+<li>其自动重签名了debugserver，使得Xcode可以Attach挂载调试任意进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>可以去：</p>
+<ul>
+<li>Xcode+iOSOpenDev编译安装deb插件到iPhone11</li>
+<li>手动启动Preferences设置后，Xcode去Attach挂载到Preferences的进程<ul>
+<li>在PID  or Process Name中输入：PID值</li>
+</ul>
+</li>
+</ul>
+<p>设置页面中，正常去操作：</p>
+<p>输入账号，点击下一步按钮</p>
+<p>-》最终可以触发到Xcode中插件的hook代码的断点的</p>
+<p>-》后续可以进一步去调试逻辑了。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-09-27 09:45:07
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../xm_cannot_locate/" class="navigation navigation-prev " aria-label="Previous page: xm文件无法定位到源代码位置">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../lldb/" class="navigation navigation-next " aria-label="Next page: LLDB">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"实时调试hook代码","level":"1.6.2.8","depth":3,"next":{"title":"LLDB","level":"1.6.3","depth":2,"path":"dynamic_debug/lldb/README.md","ref":"dynamic_debug/lldb/README.md","articles":[{"title":"正则搜索","level":"1.6.3.1","depth":3,"path":"dynamic_debug/lldb/regex_find/README.md","ref":"dynamic_debug/lldb/regex_find/README.md","articles":[]}]},"previous":{"title":"xm文件无法定位到源代码位置","level":"1.6.2.7","depth":3,"path":"dynamic_debug/xcode_debug/xm_cannot_locate/README.md","ref":"dynamic_debug/xcode_debug/xm_cannot_locate/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_experience_collection/pdf/ios_re_experience_collection.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_experience_collection/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_experience_collection","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：心得集锦","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"把iOS逆向中的，各种不适合、不方便、不应该放到某个其他独立子教程中的心得，都整理过来，放到此处iOS逆向心得集锦中，方便参考；包括心得概述；iPhone的初始化开发环境和常用目录；app的plist文件、相关文件目录和数据，包括Bundle、Data、Shared AppGroup；二进制文件路径，app的卸载的残留数据；Keychain数据库及字段含义；以及ObjC的运行时，包括objc_msgSend、objc_alloc；Class类的打印类的描述详情信息、成员属性包括公开和私有的和扩展属性；以及类和实例的对比；以及属性值，如何获取变量的值，包括dict字典；计算类的属性值；Xcode和Frida属性值不一样；以及动态调试的调试代码逻辑，寻找函数触发时机；alloc和init和new；重装和spawn方式；寻找变量改动时机；wivar；改变运行逻辑的修改寄存器值、hook函数返回值；Xcode调试包括Attach调试、函数调用堆栈，函数名不一致；产看当前所有变量值；Fetching Variables on iPhone；汇编代码窗口保持打开状态；2个调试目标arm64和arm64e；xm文件无法定位到源代码位置；实时调试hook代码；和LLDB的正则搜索；iOSOpenDev；Mach-O的image base基地址；log日志的超过1K的打印；头文件的试试新旧不同版本；抓包的request和response；tweak插件；crash崩溃的崩溃日志解析工具、从崩溃信息找崩溃所在位置；和通用的：从汇编反推代码逻辑、必要时hook多个目标、特殊的参数传递、hook代码没生效、hook导致很慢和卡死；最后有附录相关资料。"},"file":{"path":"dynamic_debug/xcode_debug/realtime_debug_hook_code/README.md","mtime":"2024-09-27T01:45:07.180Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-09-27T06:19:42.016Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
