@@ -1,0 +1,1452 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Chainlink · DeFi借贷协议</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../protocol_token/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"defi_lending_protocol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../explanation/">
+            
+                <a href="../../../explanation/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../financial/">
+            
+                <a href="../../../financial/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    金融
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../financial/position.html">
+            
+                <a href="../../../financial/position.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    头寸position
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../defi/">
+            
+                <a href="../../../defi/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    DeFi
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../defi/ecological/">
+            
+                <a href="../../../defi/ecological/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    DeFi生态=用途=领域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../defi/ecological/lending/">
+            
+                <a href="../../../defi/ecological/lending/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    借贷
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../../defi/ecological/lending/compound/">
+            
+                <a href="../../../defi/ecological/lending/compound/">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    Compound
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1.1" data-path="../../../defi/ecological/lending/compound/process_logic/">
+            
+                <a href="../../../defi/ecological/lending/compound/process_logic/">
+            
+                    
+                        <b>1.4.1.1.1.1.</b>
+                    
+                    流程和逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.1.2" data-path="../../../defi/ecological/lending/compound/ctoken/">
+            
+                <a href="../../../defi/ecological/lending/compound/ctoken/">
+            
+                    
+                        <b>1.4.1.1.1.2.</b>
+                    
+                    cToken
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.2" data-path="../../../defi/ecological/lending/aave/">
+            
+                <a href="../../../defi/ecological/lending/aave/">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    AAVE
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.3" data-path="../../../defi/ecological/lending/makerdao/">
+            
+                <a href="../../../defi/ecological/lending/makerdao/">
+            
+                    
+                        <b>1.4.1.1.3.</b>
+                    
+                    MakerDAO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.1.4" data-path="../../../defi/ecological/lending/fortube/">
+            
+                <a href="../../../defi/ecological/lending/fortube/">
+            
+                    
+                        <b>1.4.1.1.4.</b>
+                    
+                    ForTube
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../defi/ecological/dex/">
+            
+                <a href="../../../defi/ecological/dex/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    DEX
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.1" data-path="../../../defi/ecological/dex/uniswap/">
+            
+                <a href="../../../defi/ecological/dex/uniswap/">
+            
+                    
+                        <b>1.4.1.2.1.</b>
+                    
+                    Uniswap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2.2" data-path="../../../defi/ecological/dex/compare/">
+            
+                <a href="../../../defi/ecological/dex/compare/">
+            
+                    
+                        <b>1.4.1.2.2.</b>
+                    
+                    对比
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.2.2.1" data-path="../../../defi/ecological/dex/compare/cex.html">
+            
+                <a href="../../../defi/ecological/dex/compare/cex.html">
+            
+                    
+                        <b>1.4.1.2.2.1.</b>
+                    
+                    CEX
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2.3" data-path="../../../defi/ecological/dex/1inch/">
+            
+                <a href="../../../defi/ecological/dex/1inch/">
+            
+                    
+                        <b>1.4.1.2.3.</b>
+                    
+                    1inch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2.4" data-path="../../../defi/ecological/dex/balancer/">
+            
+                <a href="../../../defi/ecological/dex/balancer/">
+            
+                    
+                        <b>1.4.1.2.4.</b>
+                    
+                    Balancer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../../../defi/ecological/stable_coin/">
+            
+                <a href="../../../defi/ecological/stable_coin/">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    稳定币
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.3.1" data-path="../../../defi/ecological/stable_coin/usdt.html">
+            
+                <a href="../../../defi/ecological/stable_coin/usdt.html">
+            
+                    
+                        <b>1.4.1.3.1.</b>
+                    
+                    USDT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.2" data-path="../../../defi/ecological/stable_coin/usdc.html">
+            
+                <a href="../../../defi/ecological/stable_coin/usdc.html">
+            
+                    
+                        <b>1.4.1.3.2.</b>
+                    
+                    USDC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.3" data-path="../../../defi/ecological/stable_coin/tusd.html">
+            
+                <a href="../../../defi/ecological/stable_coin/tusd.html">
+            
+                    
+                        <b>1.4.1.3.3.</b>
+                    
+                    TUSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.4" data-path="../../../defi/ecological/stable_coin/busd.html">
+            
+                <a href="../../../defi/ecological/stable_coin/busd.html">
+            
+                    
+                        <b>1.4.1.3.4.</b>
+                    
+                    BUSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3.5" data-path="../../../defi/ecological/stable_coin/susd.html">
+            
+                <a href="../../../defi/ecological/stable_coin/susd.html">
+            
+                    
+                        <b>1.4.1.3.5.</b>
+                    
+                    SUSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../defi/concept/">
+            
+                <a href="../../../defi/concept/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    DeFi概念
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../defi/concept/tvl/">
+            
+                <a href="../../../defi/concept/tvl/">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    TVL总锁定价值
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../../defi/concept/tokenomics/">
+            
+                <a href="../../../defi/concept/tokenomics/">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    Tokenomics代币经济学
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.2.1" data-path="../../../defi/concept/tokenomics/token_allocation.html">
+            
+                <a href="../../../defi/concept/tokenomics/token_allocation.html">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    代币的分配
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../../../defi/concept/tokenomics/token_release.html">
+            
+                <a href="../../../defi/concept/tokenomics/token_release.html">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    代币的释放
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../../defi/concept/non_custodial/">
+            
+                <a href="../../../defi/concept/non_custodial/">
+            
+                    
+                        <b>1.4.2.3.</b>
+                    
+                    非托管流动性协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../defi/tokens/">
+            
+                <a href="../../../defi/tokens/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    主流DeFi币
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../../defi/tokens/wbtc.html">
+            
+                <a href="../../../defi/tokens/wbtc.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    WBTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    DeFi借贷协议
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../core_logic/">
+            
+                <a href="../../core_logic/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    核心逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    相关概念
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../stake/">
+            
+                <a href="../stake/">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    质押Stake
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.1" data-path="../stake/stake_pledge_collateral_mortgage.html">
+            
+                <a href="../stake/stake_pledge_collateral_mortgage.html">
+            
+                    
+                        <b>1.5.2.1.1.</b>
+                    
+                    stake vs pledge vs Collateral vs mortgage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2" data-path="../stake/what_is/">
+            
+                <a href="../stake/what_is/">
+            
+                    
+                        <b>1.5.2.1.2.</b>
+                    
+                    什么是质押
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.2.1" data-path="../stake/what_is/ethereum_pos.html">
+            
+                <a href="../stake/what_is/ethereum_pos.html">
+            
+                    
+                        <b>1.5.2.1.2.1.</b>
+                    
+                    以太坊的PoS质押
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.2.2" data-path="../stake/what_is/defi_liquidity.html">
+            
+                <a href="../stake/what_is/defi_liquidity.html">
+            
+                    
+                        <b>1.5.2.1.2.2.</b>
+                    
+                    DeFi中的流动性质押
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3" data-path="../stake/concepts/">
+            
+                <a href="../stake/concepts/">
+            
+                    
+                        <b>1.5.2.1.3.</b>
+                    
+                    相关概念
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1.3.1" data-path="../stake/concepts/over_collateralized.html">
+            
+                <a href="../stake/concepts/over_collateralized.html">
+            
+                    
+                        <b>1.5.2.1.3.1.</b>
+                    
+                    过度抵押
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3.2" data-path="../stake/concepts/collateral_ratio.html">
+            
+                <a href="../stake/concepts/collateral_ratio.html">
+            
+                    
+                        <b>1.5.2.1.3.2.</b>
+                    
+                    抵押率
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.1.3.3" data-path="../stake/concepts/collateral.html">
+            
+                <a href="../stake/concepts/collateral.html">
+            
+                    
+                        <b>1.5.2.1.3.3.</b>
+                    
+                    抵押物
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../interest/">
+            
+                <a href="../interest/">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    利息Interest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../borrowing_rate/">
+            
+                <a href="../borrowing_rate/">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    借贷利率Borrowing Interest Rate
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="../liquidation/">
+            
+                <a href="../liquidation/">
+            
+                    
+                        <b>1.5.2.4.</b>
+                    
+                    清算Liquidation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.4.1" data-path="../liquidation/incentive.html">
+            
+                <a href="../liquidation/incentive.html">
+            
+                    
+                        <b>1.5.2.4.1.</b>
+                    
+                    清算奖励
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4.2" data-path="../liquidation/penalty.html">
+            
+                <a href="../liquidation/penalty.html">
+            
+                    
+                        <b>1.5.2.4.2.</b>
+                    
+                    清算罚金
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4.3" data-path="../liquidation/liquidator.html">
+            
+                <a href="../liquidation/liquidator.html">
+            
+                    
+                        <b>1.5.2.4.3.</b>
+                    
+                    清算人Liquidator
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.2.5.</b>
+                    
+                    预言机Oracle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.2.5.1" data-path="chainlink.html">
+            
+                <a href="chainlink.html">
+            
+                    
+                        <b>1.5.2.5.1.</b>
+                    
+                    Chainlink
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.6" data-path="../protocol_token/">
+            
+                <a href="../protocol_token/">
+            
+                    
+                        <b>1.5.2.6.</b>
+                    
+                    协议代币
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.7" data-path="../liquidity_pool/">
+            
+                <a href="../liquidity_pool/">
+            
+                    
+                        <b>1.5.2.7.</b>
+                    
+                    流动性池Liquidity Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.8" data-path="../utilization_ratio/">
+            
+                <a href="../utilization_ratio/">
+            
+                    
+                        <b>1.5.2.8.</b>
+                    
+                    利用率Utilization Ratio
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../appendix/terminology.html">
+            
+                <a href="../../../appendix/terminology.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    名词术语
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >Chainlink</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="chainlink"><a name="chainlink" class="plugin-anchor" href="#chainlink"><i class="fa fa-link" aria-hidden="true"></i></a>Chainlink</h1>
+<ul>
+<li>Chainlink：去中心化预言机网络 <ul>
+<li>是什么：一个去中心化预言机网络 </li>
+<li>作用：旨在将区块链智能合约安全可靠地连接至链下系统 <ul>
+<li>将智能合约安全地连接至区块链网络以外的数据和服务 </li>
+</ul>
+</li>
+<li>目的=效果：现代经济中的传统系统一旦接入了Chainlink预言机，就可以连通最前沿的区块链技术，让商业和社会流程变得更加安全、透明且高效 </li>
+<li>代币：LINK <ul>
+<li>属于：Chainlink </li>
+<li>概述：LINK是基于以太坊区块链的ERC20标准化代币，用于支付Chainlink节点运营商，以便从脱链数据中检索数据，将数据格式化为区块链可读格式，脱链计算以及保证正常运行时间。Chainlink代币作为运行节点的一部分，可防止不良参与者。 <ul>
+<li>Chainlink简介：首个分散的Oracle网络，允许任何人安全地提供智能合同，访问关键的外部数据，脱机支付和任何其他API功能 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>类比 <ul>
+<li>区块链：去中心化的计算机网络 </li>
+<li>智能合约：去中心化的应用 </li>
+<li>Chainlink：去中心化的互联网 <ul>
+<li>让智能合约可以与链下世界交互，并同时保持区块链技术在安全、透明和信任方面的核心价值 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现细节： <ul>
+<li>Chainlink采用了与区块链相同的模式，建立了去中心化的独立预言机网络，网络中的预言机从多个数据源共同获取数据，将数据聚合，并将经过验证的聚合数据传输至智能合约，触发合约执行，在整个过程中规避了所有中心化风险 <ul>
+<li>举例 <ul>
+<li>Chainlink会通过ETH/USD喂价将以太币价格传输到区块链上，Chainlink喂价采用了众多独立的预言机节点和数据源，获取并传输价格数据（见下图）。区块链应用可以通过ETH/USD价格预言机获取当前以太币价格，将以太币作为贷款抵押，或结算以太币价格预测协议。 <ul>
+<li>ETH/USDChainlink喂价从多个独立的预言机运营商聚合价格数据 <ul>
+<li><img src="../../../assets/img/chainlink_aggregate_price_multile_src.png" alt="chainlink_aggregate_price_multile_src"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Chainlink预言机网络的特点 <ul>
+<li>去中心化 </li>
+<li>多层安全机制 <ul>
+<li>通用的基础架构 <ul>
+<li>Chainlink框架灵活性极高，可以在上面开发和运行预言机网络。用户可以亲自打造或连接至专属的预言机网络，无需依赖其他预言机网络。 <ul>
+<li>Chainlink网络、预言机网络、Chainlink节点以及节点运营商分布图 <ul>
+<li><img src="../../../assets/img/chainlink_network_nodes.png" alt="chainlink_network_nodes"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据签名 <ul>
+<li>Chainlink预言机会使用独特的加密签名技术对发送到链上的数据进行签名，用户可以证明数据来自某一预言机节点。 </li>
+</ul>
+</li>
+<li>优质数据 <ul>
+<li>Chainlink可以将智能合约连接至包括付费数据提供商在内的所有链下系统。智能合约还可以向其他系统发送指令，比如向传统支付系统发送支付指令。 </li>
+</ul>
+</li>
+<li>兼容所有区块链 <ul>
+<li>Chainlink可以在任何区块链上运行，无需依赖其他外部区块链。这意味着Chainlink可以支持公链和企业级区块链等各种区块链环境。 <ul>
+<li>Chainlink可以为任何区块链上的智能合约输入输出数据<ul>
+<li><img src="../../../assets/img/chainlink_all_blockchain_input_output.png" alt="chainlink_all_blockchain_input_output"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务水平协议 <ul>
+<li>Chainlink最终将允许用户自定义链上智能合约的预言机服务条款，其中预言机节点需要支付一笔保证金，只有在节点按照服务条款完成任务后（如：按时传输数据）才能拿回保证金。 </li>
+</ul>
+</li>
+<li>声誉系统 <ul>
+<li>Chainlink预言机的历史性能参数都可以在链上公开查看，而且数据经过签名验证。用户可以根据平均响应时间、任务完成率和平均保证金等各种历史性能参数筛选预言机。节点运营商也可以选择性地提供额外数据，比如身份信息、地理位置和第三方认证。 <ul>
+<li>节点可以在Chainlink市场列出自己的关键功能特色，用户可以结合这些特色以及链上性能参数进行筛选 <ul>
+<li><img src="../../../assets/img/chainlink_list_key_features.png" alt="chainlink_list_key_features"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他功能 <ul>
+<li>Chainlink目前还在开发其他安全功能，其中包括预言机和数据隐私以及高级预言机计算等。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>主要应用场景 <ul>
+<li>去中心化金融（DeFi） <ul>
+<li>贷款、支付、衍生品和资产权益等各类传统金融产品都开始通过智能合约出现在区块链上。智能合约使这些金融产品变得更加安全透明，并且降低了它们的准入门槛。这些DeFi应用接入了Chainlink预言机获得资产喂价和利率，并验证资产抵押率，因而实现了各种高级功能，比如以公允市场价值发放贷款、自动发放股息或交割期权合约。 </li>
+</ul>
+</li>
+<li>保险 <ul>
+<li>智能合约还可以用来在区块链上创建参数保险合约。Chainlink目前正在为Arbol的农作物保险产品提供天气数据，全世界各地的农民只要登陆互联网就可以获得这款农作物参数保险。这款产品根据降雨量和气温等参数，基于合约预先设置的逻辑（如：如果今年雨水量超过x，则支付y赔偿金。）及时且公平地进行理赔。 </li>
+</ul>
+</li>
+<li>游戏 <ul>
+<li>现在开发者还开始在区块链上发布智能合约游戏应用。对于许多区块链游戏来说，其中一个关键要素就是随机数生成，比如随机创建游戏场景或抽出中奖玩家。Chainlink推出了一个随机数解决方案，名为Chainlink可验证随机函数（VRF）。Chainlink VRF可以生成随机数，并将随机数传输至智能合约。用户可以证明随机数是公平公正的，因为无论是游戏玩家、游戏开发者还是第三方都无法篡改或操纵生成的随机数。 <ul>
+<li>Chainlink VRF为区块链游戏场景输入和输出随机数 <ul>
+<li><img src="../../../assets/img/chainlink_vrf_randomness.png" alt="chainlink_vrf_randomness"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传统系统 <ul>
+<li>Chainlink的另一个关键应用场景就是为数据提供商、物联网、网站和企业等传统系统提供一条路径，向所有区块链网络出售其数据和服务。由于Chainlink网络可兼容任何区块链，因此可以作为一道门户，将所有链下数据基础架构接入区块链网络。近期，世界经济论坛与Chainlink联合创始人Sergey Nazarov共同发布了一份名为《弥合治理差距：区块链和传统系统之间的互操作性》的报告，其中详细阐述了行业标准的互操作框架如何接入Chainlink这类预言机网络连通传统系统和区块链环境。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-09-04 10:25:19
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 预言机Oracle">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../protocol_token/" class="navigation navigation-next " aria-label="Next page: 协议代币">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chainlink","level":"1.5.2.5.1","depth":4,"next":{"title":"协议代币","level":"1.5.2.6","depth":3,"path":"defi_lend_proto/terminology/protocol_token/README.md","ref":"defi_lend_proto/terminology/protocol_token/README.md","articles":[]},"previous":{"title":"预言机Oracle","level":"1.5.2.5","depth":3,"path":"defi_lend_proto/terminology/oracle/README.md","ref":"defi_lend_proto/terminology/oracle/README.md","articles":[{"title":"Chainlink","level":"1.5.2.5.1","depth":4,"path":"defi_lend_proto/terminology/oracle/chainlink.md","ref":"defi_lend_proto/terminology/oracle/chainlink.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/defi_lending_protocol/pdf/defi_lending_protocol.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/defi_lending_protocol/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"defi_lending_protocol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"DeFi借贷协议","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理出DeFi借贷协议的基础背景知识和相关内容。"},"file":{"path":"defi_lend_proto/terminology/oracle/chainlink.md","mtime":"2024-09-04T02:25:19.677Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-09-28T01:29:56.866Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

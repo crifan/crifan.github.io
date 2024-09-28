@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20240927`
+最后更新：`20240928`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -160,5 +160,6 @@
     * [Frida逆向实例和工具函数](https://crifan.github.io/frida_re_example_function/website)
     * [iOS逆向开发：dyld动态链接](https://crifan.github.io/ios_re_dyld_link/website)
     * [小白兔的光荣往事](https://crifan.github.io/glorious_past_of_little_white_rabbit/website)
+    * [DeFi借贷协议](https://crifan.github.io/defi_lending_protocol/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
