@@ -1,0 +1,1506 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>核心的类和代码 · 借贷协议：AAVE</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="aave_v3_contracts_overview.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"lending_protocol_aave","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../aave_lending_proto/">
+            
+                <a href="../aave_lending_proto/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    AAVE借贷协议概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../aave_lending_proto/core_logic_arch.html">
+            
+                <a href="../aave_lending_proto/core_logic_arch.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    核心逻辑和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../lending_logic/">
+            
+                <a href="../lending_logic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    借贷逻辑
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../lending_logic/deposit.html">
+            
+                <a href="../lending_logic/deposit.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    deposit=存款
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../lending_logic/borrow.html">
+            
+                <a href="../lending_logic/borrow.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    borrow=借款
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../lending_logic/repay.html">
+            
+                <a href="../lending_logic/repay.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    repay=偿还
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../lending_logic/redeem.html">
+            
+                <a href="../lending_logic/redeem.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    redeem=赎回
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../lending_logic/liquidation/">
+            
+                <a href="../lending_logic/liquidation/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    liquidation=清算
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="../lending_logic/liquidation/health_factor.html">
+            
+                <a href="../lending_logic/liquidation/health_factor.html">
+            
+                    
+                        <b>1.3.5.1.</b>
+                    
+                    健康因子Health Factor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../lending_logic/rate_mode.html">
+            
+                <a href="../lending_logic/rate_mode.html">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    Swap borrow rate mode=切换借贷利率模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../sub_module/">
+            
+                <a href="../sub_module/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    子模块
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../sub_module/atoken/">
+            
+                <a href="../sub_module/atoken/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    aToken
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../sub_module/atoken/token_function.html">
+            
+                <a href="../sub_module/atoken/token_function.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    代币的作用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../sub_module/governance.html">
+            
+                <a href="../sub_module/governance.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    Governance治理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../sub_module/safety_module.html">
+            
+                <a href="../sub_module/safety_module.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    Safety Module安全模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../sub_module/flash_loan.html">
+            
+                <a href="../sub_module/flash_loan.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    Flash Loan闪电贷
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../sub_module/gho.html">
+            
+                <a href="../sub_module/gho.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    稳定币GHO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../sub_module/credit_delegation.html">
+            
+                <a href="../sub_module/credit_delegation.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    Credit Delegation信用委托
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../sub_module/debt_tokenization.html">
+            
+                <a href="../sub_module/debt_tokenization.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    Debt Tokenization=债务代币化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../rate_model/">
+            
+                <a href="../rate_model/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    利率模型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../rate_model/variable_vs_stable.html">
+            
+                <a href="../rate_model/variable_vs_stable.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    可变利率vs稳定利率
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../rate_model/stable_rate.html">
+            
+                <a href="../rate_model/stable_rate.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    稳定利率
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../rate_model/various_para.html">
+            
+                <a href="../rate_model/various_para.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    各种参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../version/">
+            
+                <a href="../version/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    版本
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../version/v1.html">
+            
+                <a href="../version/v1.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    AAVE v1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../version/v2/">
+            
+                <a href="../version/v2/">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    AAVE v2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../version/v2/gas_optimize.html">
+            
+                <a href="../version/v2/gas_optimize.html">
+            
+                    
+                        <b>1.6.2.1.</b>
+                    
+                    Gas优化和改进
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../version/v3/">
+            
+                <a href="../version/v3/">
+            
+                    
+                        <b>1.6.3.</b>
+                    
+                    AAVE v3
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../version/v3/e_mode.html">
+            
+                <a href="../version/v3/e_mode.html">
+            
+                    
+                        <b>1.6.3.1.</b>
+                    
+                    E-Mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.2" data-path="../version/v3/isolation_mode.html">
+            
+                <a href="../version/v3/isolation_mode.html">
+            
+                    
+                        <b>1.6.3.2.</b>
+                    
+                    Isolation Mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.3" data-path="../version/v3/portal.html">
+            
+                <a href="../version/v3/portal.html">
+            
+                    
+                        <b>1.6.3.3.</b>
+                    
+                    Portal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.4" data-path="../version/v3/risk_management/">
+            
+                <a href="../version/v3/risk_management/">
+            
+                    
+                        <b>1.6.3.4.</b>
+                    
+                    Risk Management
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.4.1" data-path="../version/v3/risk_management/control_borrow.html">
+            
+                <a href="../version/v3/risk_management/control_borrow.html">
+            
+                    
+                        <b>1.6.3.4.1.</b>
+                    
+                    Granular borrowing power control
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.4.2" data-path="../version/v3/risk_management/price_oracle_sentinel.html">
+            
+                <a href="../version/v3/risk_management/price_oracle_sentinel.html">
+            
+                    
+                        <b>1.6.3.4.2.</b>
+                    
+                    Price Oracle Sentinel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.4.3" data-path="../version/v3/risk_management/siloed_borrowing.html">
+            
+                <a href="../version/v3/risk_management/siloed_borrowing.html">
+            
+                    
+                        <b>1.6.3.4.3.</b>
+                    
+                    Siloed Borrowing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.5" data-path="../version/v3/role_authority_manage.html">
+            
+                <a href="../version/v3/role_authority_manage.html">
+            
+                    
+                        <b>1.6.3.5.</b>
+                    
+                    权限和角色管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.6" data-path="../version/v3/protocol_features.html">
+            
+                <a href="../version/v3/protocol_features.html">
+            
+                    
+                        <b>1.6.3.6.</b>
+                    
+                    协议特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.7" data-path="../version/v3/multiple_rewards_claim.html">
+            
+                <a href="../version/v3/multiple_rewards_claim.html">
+            
+                    
+                        <b>1.6.3.7.</b>
+                    
+                    Multiple Rewards and Claim
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../compare/">
+            
+                <a href="../compare/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    对比
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../compare/aave_vs_compound.html">
+            
+                <a href="../compare/aave_vs_compound.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    AAVE vs Compound
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    开发相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.8.1" data-path="core_class_code.html">
+            
+                <a href="core_class_code.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    核心的类和代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="aave_v3_contracts_overview.html">
+            
+                <a href="aave_v3_contracts_overview.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    AAVE V3合约概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="audit_report.html">
+            
+                <a href="audit_report.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    审计报告
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="bug_bounty.html">
+            
+                <a href="bug_bounty.html">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    漏洞赏金
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../appendix/terms.html">
+            
+                <a href="../appendix/terms.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    名词和术语
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../appendix/aave_docs.html">
+            
+                <a href="../appendix/aave_docs.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    AAVE资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../appendix/aave_evolution.html">
+            
+                <a href="../appendix/aave_evolution.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    AAVE发展进化历史
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.9.4.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >核心的类和代码</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="核心的类和代码"><a name="核心的类和代码" class="plugin-anchor" href="#核心的类和代码"><i class="fa fa-link" aria-hidden="true"></i></a>核心的类和代码</h1>
+<ul>
+<li>AAVE协议的核心类和代码 <ul>
+<li>Smart Contract - Aave v3 <ul>
+<li>Smart Contract - Aave v3 PoolAddressesProvider <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/PoolAddressesProvider.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/PoolAddressesProvider.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 ACLManager <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/ACLManager.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/ACLManager.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Pool <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 L2Pool <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/L2Pool.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/L2Pool.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Pool Configurator <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/PoolConfigurator.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/PoolConfigurator.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 DefaultReserveInterestRateStrategy <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/DefaultReserveInterestRateStrategy.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/DefaultReserveInterestRateStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Upgradability - BaseImmutableAdminUpgradeabilityProxy <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/BaseImmutableAdminUpgradeabilityProxy.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/BaseImmutableAdminUpgradeabilityProxy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Upgradability - InitializableImmutableAdminUpgradabilityProxy <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/InitializableImmutableAdminUpgradeabilityProxy.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/InitializableImmutableAdminUpgradeabilityProxy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Upgradability - VersionedInitializable <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/VersionedInitializable.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/aave-upgradeability/VersionedInitializable.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Global configurations - Reserve Configuration <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/configuration/ReserveConfiguration.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/configuration/ReserveConfiguration.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Global configurations - User Configuration <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/configuration/UserConfiguration.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/configuration/UserConfiguration.sol</a></li>
+</ul>
+</li>
+<li>Logic Libraries <ul>
+<li>Smart Contract - Aave v3 Logic Libraries - Borrow Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/BorrowLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/BorrowLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Bridge Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/BridgeLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/BridgeLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Calldata Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/CalldataLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/CalldataLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Configurator Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ConfiguratorLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ConfiguratorLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - EMode Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/EModeLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/EModeLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Flash Loan Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/FlashLoanLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/FlashLoanLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Generic Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/GenericLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/GenericLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Isolation Mode Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/IsolationModeLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/IsolationModeLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Liquidation Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/LiquidationLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/LiquidationLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Pool Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/PoolLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/PoolLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Reserve Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ReserveLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ReserveLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Supply Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/SupplyLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/SupplyLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Logic Libraries - Validation Logic <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ValidationLogic.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/logic/ValidationLogic.sol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Math Libraries <ul>
+<li>Smart Contract - Aave v3 Math Libraries - Math Utils <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/MathUtils.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/MathUtils.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Math Libraries - Percentage Math <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/PercentageMath.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/PercentageMath.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Math Libraries - WadRayMath <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/WadRayMath.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/libraries/math/WadRayMath.sol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 AToken <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/AToken.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/AToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 VariableDebtToken <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/VariableDebtToken.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/VariableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 StableDebtToken <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/StableDebtToken.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/tokenization/StableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 AaveOracle <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/misc/AaveOracle.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/misc/AaveOracle.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 L2Encoder <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/misc/L2Encoder.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/misc/L2Encoder.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Price Oracle Sentinel <ul>
+<li><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/PriceOracleSentinel.sol" target="_blank">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/configuration/PriceOracleSentinel.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Periphery - Rewards Controller <ul>
+<li><a href="https://github.com/aave/aave-v3-periphery/blob/master/contracts/rewards/RewardsController.sol" target="_blank">https://github.com/aave/aave-v3-periphery/blob/master/contracts/rewards/RewardsController.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Emission Manager <ul>
+<li><a href="https://github.com/aave/aave-v3-periphery/blob/master/contracts/rewards/EmissionManager.sol" target="_blank">https://github.com/aave/aave-v3-periphery/blob/master/contracts/rewards/EmissionManager.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 Collector <ul>
+<li><a href="https://github.com/bgd-labs/aave-collector-unification/blob/main/src/contracts/Collector.sol" target="_blank">https://github.com/bgd-labs/aave-collector-unification/blob/main/src/contracts/Collector.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoOracle <ul>
+<li><a href="https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/oracle/GhoOracle.sol" target="_blank">https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/oracle/GhoOracle.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoAToken <ul>
+<li><a href="https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/tokens/GhoAToken.sol" target="_blank">https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/tokens/GhoAToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoVariableDebtToken <ul>
+<li><a href="https://github.com/aave/gho-core/blob/main/src/contracts/facilitators/aave/tokens/GhoVariableDebtToken.sol" target="_blank">https://github.com/aave/gho-core/blob/main/src/contracts/facilitators/aave/tokens/GhoVariableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoStableDebtToken <ul>
+<li><a href="https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/tokens/GhoStableDebtToken.sol" target="_blank">https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/tokens/GhoStableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoInterestRateStrategy <ul>
+<li><a href="https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/interestStrategy/GhoInterestRateStrategy.sol" target="_blank">https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/interestStrategy/GhoInterestRateStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v3 GhoDiscountRateStrategy <ul>
+<li><a href="https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/interestStrategy/GhoDiscountRateStrategy.sol" target="_blank">https://github.com/aave/gho-core/blob/27a86dfe0bcbbef2a1809d2b8eaee7a7ca1a37d5/src/contracts/facilitators/aave/interestStrategy/GhoDiscountRateStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave Safety Module Staked Aave v3 <ul>
+<li><a href="https://github.com/bgd-labs/aave-stk-v1-5/blob/main/src/contracts/StakedAaveV3.sol" target="_blank">https://github.com/bgd-labs/aave-stk-v1-5/blob/main/src/contracts/StakedAaveV3.sol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 <ul>
+<li>Smart Contract - Aave v2 LendingPoolAddressProvider <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/configuration/LendingPoolAddressesProvider.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/configuration/LendingPoolAddressesProvider.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 LendingPool <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPool.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPool.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 LendingPoolCollateralManager <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPoolCollateralManager.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPoolCollateralManager.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 DefaultReserveInterestRateStrategy <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/DefaultReserveInterestRateStrategy.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/DefaultReserveInterestRateStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 LendingPoolConfigurator <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPoolConfigurator.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/lendingpool/LendingPoolConfigurator.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 BaseImmutableAdminUpgradeabilityProxy <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/BaseImmutableAdminUpgradeabilityProxy.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/BaseImmutableAdminUpgradeabilityProxy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 InitializableImmutableAdminUpgradeabilityProxy <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/InitializableImmutableAdminUpgradeabilityProxy.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/InitializableImmutableAdminUpgradeabilityProxy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 VersionedInitializable <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/VersionedInitializable.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/aave-upgradeability/VersionedInitializable.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Global configurations - Reserve Configuration <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/configuration/ReserveConfiguration.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/configuration/ReserveConfiguration.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Global configurations - User Configuration <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/configuration/UserConfiguration.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/configuration/UserConfiguration.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Logic libraries - GenericLogic <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/GenericLogic.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/GenericLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Logic libraries - ReserveLogic <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/ReserveLogic.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/ReserveLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Logic libraries - ValidationLogic <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/ValidationLogic.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/logic/ValidationLogic.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Math libraries - MathUtils <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/MathUtils.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/MathUtils.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Math libraries - PercentageMath <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/PercentageMath.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/PercentageMath.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Math libraries - WadRayMath <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/WadRayMath.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/math/WadRayMath.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 AToken <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/AToken.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/AToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 VariableDebtToken <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/VariableDebtToken.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/VariableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 StableDebtToken <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/StableDebtToken.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/protocol/tokenization/StableDebtToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Aave Oracle <ul>
+<li><a href="https://github.com/aave/protocol-v2/blob/master/contracts/misc/AaveOracle.sol" target="_blank">https://github.com/aave/protocol-v2/blob/master/contracts/misc/AaveOracle.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Lending Rate Oracle <ul>
+<li><a href="https://etherscan.io/address/0x8A32f49FFbA88aba6EFF96F45D8BD1D4b3f35c7D" target="_blank">https://etherscan.io/address/0x8A32f49FFbA88aba6EFF96F45D8BD1D4b3f35c7D</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 WrappedTokenGatewayV2 <ul>
+<li><a href="https://etherscan.io/address/0xEFFC18fC3b7eb8E676dac549E0c693ad50D1Ce31" target="_blank">https://etherscan.io/address/0xEFFC18fC3b7eb8E676dac549E0c693ad50D1Ce31</a></li>
+</ul>
+</li>
+<li>Smart Contract - Aave v2 Collector <ul>
+<li><a href="https://etherscan.io/address/0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c" target="_blank">https://etherscan.io/address/0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他 <ul>
+<li>Smart Contract - new Aave Safety Module (stkABPT and stkGHO) <ul>
+<li><a href="https://github.com/bgd-labs/stake-token/blob/main/src/contracts/StakeToken.sol" target="_blank">https://github.com/bgd-labs/stake-token/blob/main/src/contracts/StakeToken.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - GSM <ul>
+<li><a href="https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/Gsm.sol" target="_blank">https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/Gsm.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - FixedPriceStrategy <ul>
+<li><a href="https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/priceStrategy/FixedPriceStrategy.sol" target="_blank">https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/priceStrategy/FixedPriceStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - FixedFeeStrategy <ul>
+<li><a href="https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/feeStrategy/FixedFeeStrategy.sol" target="_blank">https://github.com/aave/gho-core/blob/c351f895b4eadde317157c4e456690689c2a4a79/src/contracts/facilitators/gsm/feeStrategy/FixedFeeStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - TransparentUpgradeableProxy <ul>
+<li><a href="https://github.com/bgd-labs/solidity-utils/blob/7a7548c1d01f011febdb1c0d47e52c7ec6c30f9d/src/contracts/transparent-proxy/TransparentUpgradeableProxy.sol" target="_blank">https://github.com/bgd-labs/solidity-utils/blob/7a7548c1d01f011febdb1c0d47e52c7ec6c30f9d/src/contracts/transparent-proxy/TransparentUpgradeableProxy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Governance <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/Governance.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/Governance.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - VotingStrategy <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/VotingStrategy.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/VotingStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - GovernancePowerStrategy <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/GovernancePowerStrategy.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/GovernancePowerStrategy.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - VotingMachine <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/VotingMachine.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/VotingMachine.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - DataWarehouse <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/DataWarehouse.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/voting/DataWarehouse.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - Executor <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/payloads/Executor.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/payloads/Executor.sol</a></li>
+</ul>
+</li>
+<li>Smart Contract - PayloadsController <ul>
+<li><a href="https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/payloads/PayloadsController.sol" target="_blank">https://github.com/bgd-labs/aave-governance-v3/blob/main/src/contracts/payloads/PayloadsController.sol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-09-30 09:42:40
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 开发相关">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="aave_v3_contracts_overview.html" class="navigation navigation-next " aria-label="Next page: AAVE V3合约概览">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"核心的类和代码","level":"1.8.1","depth":2,"next":{"title":"AAVE V3合约概览","level":"1.8.2","depth":2,"path":"dev_related/aave_v3_contracts_overview.md","ref":"dev_related/aave_v3_contracts_overview.md","articles":[]},"previous":{"title":"开发相关","level":"1.8","depth":1,"path":"dev_related/README.md","ref":"dev_related/README.md","articles":[{"title":"核心的类和代码","level":"1.8.1","depth":2,"path":"dev_related/core_class_code.md","ref":"dev_related/core_class_code.md","articles":[]},{"title":"AAVE V3合约概览","level":"1.8.2","depth":2,"path":"dev_related/aave_v3_contracts_overview.md","ref":"dev_related/aave_v3_contracts_overview.md","articles":[]},{"title":"审计报告","level":"1.8.3","depth":2,"path":"dev_related/audit_report.md","ref":"dev_related/audit_report.md","articles":[]},{"title":"漏洞赏金","level":"1.8.4","depth":2,"path":"dev_related/bug_bounty.md","ref":"dev_related/bug_bounty.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/lending_protocol_aave/pdf/lending_protocol_aave.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/lending_protocol_aave/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"lending_protocol_aave","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"借贷协议：AAVE","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理介绍区块链和加密货币领域中的借贷协议龙头之一：AAVE。先是概述和核心逻辑架构；然后是借贷协议，包括deposit存款、borrow借款、repay偿还、redeem赎回、liquidation清算和借贷利率模型；清算包括健康因子；以及子模块，包括aToken及代币的作用、Governance治理、Safety Module安全模块、Flash Loan闪电贷、稳定币GHO、Credit Delegation信用委托、Debt Tokenization债务代币化；以及利率模型，包括可变利率、稳定利率、两者对比、各种参数；以及三种版本AAVE v1、v2、v3，以及相关的Gas优化、E-Mode、Isolation Mode、Portal、Risk Management的Granular borrowing power control、Price Oracle Sentinel、Siloed Borrowing、权限和角色管理、协议特性、Multiple Rewards and Claim；以及AAVE和其他的对比，比如Compound；再就是开发相关的核心类和代码、V3合约概览、审计报告、漏洞赏金；最后附录加上名字术语、AAVE资料、发展进化历史等。"},"file":{"path":"dev_related/core_class_code.md","mtime":"2024-09-30T01:42:40.572Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-09-30T02:15:16.467Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
