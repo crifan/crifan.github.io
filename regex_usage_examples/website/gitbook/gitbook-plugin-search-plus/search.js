@@ -40,7 +40,7 @@ require([
 
     $bookSearchResults.addClass('open')
 
-    var noResults = res.count == 0
+    var noResults = res.count === 0
     $bookSearchResults.toggleClass('no-results', noResults)
 
     // Clear old results
@@ -84,26 +84,35 @@ require([
 
   function escapeRegExp (keyword) {
     // escape regexp prevserve word
-    return String(keyword).replace(/([-.*+?^${}()|[\]\/\\])/g, '\\$1')
+    return String(keyword).replace(/([-.*+?^${}()|[\]/\\])/g, '\\$1')
   }
 
-  function query (keyword) {
-    if (keyword == null || keyword.trim() === '') return
-    keyword = keyword.toLowerCase()
+  function query (originKeyword) {
+    if (originKeyword == null || originKeyword.trim() === '') return
+
     var results = []
     var index = -1
     for (var page in INDEX_DATA) {
       var store = INDEX_DATA[page]
+      var keyword = originKeyword.toLowerCase() // ignore case
+      var hit = false
+      if (store.keywords && ~store.keywords.split(/\s+/).indexOf(keyword.split(':').pop())) {
+        if (/.:./.test(keyword)) {
+          keyword = keyword.split(':').slice(0, -1).join(':')
+        } else {
+          hit = true
+        }
+      }
+      var keywordRe = new RegExp('(' + escapeRegExp(keyword) + ')', 'gi')
       if (
-        ~store.keywords.toLowerCase().indexOf(keyword) ||
-        ~(index = store.body.toLowerCase().indexOf(keyword))
+        hit || ~(index = store.body.toLowerCase().indexOf(keyword))
       ) {
         results.push({
           url: page,
           title: store.title,
           body: store.body.substr(Math.max(0, index - 50), MAX_DESCRIPTION_SIZE)
-                    .replace(/^[^\s,.]+./, '').replace(/(..*)[\s,.].*/, '$1') // prevent break word
-                    .replace(new RegExp('(' + escapeRegExp(keyword) + ')', 'gi'), '<span class="search-highlight-keyword">$1</span>')
+                .replace(/^[^\s,.]+./, '').replace(/(..*)[\s,.].*/, '$1') // prevent break word
+                .replace(keywordRe, '<span class="search-highlight-keyword">$1</span>')
         })
       }
     }
@@ -181,13 +190,18 @@ require([
     })
   })
 
+  var markConfig = {
+    'ignoreJoiners': true,
+    'acrossElements': true,
+    'separateWordSearch': false
+  }
   // highlight
   var highLightPageInner = function (keyword) {
-    $('.page-inner').mark(keyword, {
-      'ignoreJoiners': true,
-      'acrossElements': true,
-      'separateWordSearch': false
-    })
+    var pageInner = $('.page-inner')
+    if (/(?:(.+)?\:)(.+)/.test(keyword)) {
+        pageInner.mark(RegExp.$1, markConfig)
+    }
+    pageInner.mark(keyword, markConfig)
 
     setTimeout(function () {
       var mark = $('mark[data-markjs="true"]')
