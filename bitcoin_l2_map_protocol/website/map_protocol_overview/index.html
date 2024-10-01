@@ -1,0 +1,1173 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>MAP Protocol概览 · 比特币L2：MAP Protocol</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../map_protocol_detail/" />
+    
+    
+    <link rel="prev" href="../background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"bitcoin_l2_map_protocol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../background_knowledge/">
+            
+                <a href="../background_knowledge/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    背景知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../background_knowledge/digital_sig/">
+            
+                <a href="../background_knowledge/digital_sig/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    数字签名
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../background_knowledge/digital_sig/aggregate_signature_algorithm/">
+            
+                <a href="../background_knowledge/digital_sig/aggregate_signature_algorithm/">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    聚合签名算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1.1" data-path="../background_knowledge/digital_sig/aggregate_signature_algorithm/bls.html">
+            
+                <a href="../background_knowledge/digital_sig/aggregate_signature_algorithm/bls.html">
+            
+                    
+                        <b>1.2.1.1.1.</b>
+                    
+                    BLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../background_knowledge/bitcoin/">
+            
+                <a href="../background_knowledge/bitcoin/">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    比特币
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../background_knowledge/bitcoin/brc_20.html">
+            
+                <a href="../background_knowledge/bitcoin/brc_20.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    BRC-20
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../background_knowledge/bitcoin/checkpoint.html">
+            
+                <a href="../background_knowledge/bitcoin/checkpoint.html">
+            
+                    
+                        <b>1.2.2.2.</b>
+                    
+                    checkpoint检查点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../background_knowledge/bitcoin/long_range_attack.html">
+            
+                <a href="../background_knowledge/bitcoin/long_range_attack.html">
+            
+                    
+                        <b>1.2.2.3.</b>
+                    
+                    Long-Range Attack长程攻击
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../background_knowledge/bitcoin/zero_knowledge_proof/">
+            
+                <a href="../background_knowledge/bitcoin/zero_knowledge_proof/">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    零知识证明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.html">
+            
+                <a href="../background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.html">
+            
+                    
+                        <b>1.2.3.1.</b>
+                    
+                    Groth16协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    MAP Protocol概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../map_protocol_detail/">
+            
+                <a href="../map_protocol_detail/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    MAP Protocol详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../map_protocol_detail/whitepaper.html">
+            
+                <a href="../map_protocol_detail/whitepaper.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    白皮书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../map_protocol_detail/logic/">
+            
+                <a href="../map_protocol_detail/logic/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../map_protocol_detail/logic/zk_lightclient.html">
+            
+                <a href="../map_protocol_detail/logic/zk_lightclient.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    ZK-LightClient
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../map_protocol_detail/logic/cross_chain_process.html">
+            
+                <a href="../map_protocol_detail/logic/cross_chain_process.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    跨链流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../map_protocol_detail/logic/arch.html">
+            
+                <a href="../map_protocol_detail/logic/arch.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../map_protocol_detail/logic/levels/">
+            
+                <a href="../map_protocol_detail/logic/levels/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    层级
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../map_protocol_detail/logic/levels/dapp_level/">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    Dapp层
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../map_protocol_detail/logic/levels/dapp_level/satsat.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/satsat.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    SatSat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.2" data-path="../map_protocol_detail/logic/levels/dapp_level/hiveswap.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/hiveswap.html">
+            
+                    
+                        <b>1.4.4.1.2.</b>
+                    
+                    HiveSwap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.3" data-path="../map_protocol_detail/logic/levels/dapp_level/butterswap.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/butterswap.html">
+            
+                    
+                        <b>1.4.4.1.3.</b>
+                    
+                    ButterSwap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.4" data-path="../map_protocol_detail/logic/levels/dapp_level/roup.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/roup.html">
+            
+                    
+                        <b>1.4.4.1.4.</b>
+                    
+                    ROUP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.5" data-path="../map_protocol_detail/logic/levels/dapp_level/eeaa.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/eeaa.html">
+            
+                    
+                        <b>1.4.4.1.5.</b>
+                    
+                    EEAA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.6" data-path="../map_protocol_detail/logic/levels/dapp_level/lessgas.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/lessgas.html">
+            
+                    
+                        <b>1.4.4.1.6.</b>
+                    
+                    LessGas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.7" data-path="../map_protocol_detail/logic/levels/dapp_level/memever.html">
+            
+                <a href="../map_protocol_detail/logic/levels/dapp_level/memever.html">
+            
+                    
+                        <b>1.4.4.1.7.</b>
+                    
+                    MEMEVER
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../map_protocol_detail/logic/levels/mos/">
+            
+                <a href="../map_protocol_detail/logic/levels/mos/">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    MOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../map_protocol_detail/logic/levels/protocol/">
+            
+                <a href="../map_protocol_detail/logic/levels/protocol/">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    Protocol层
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.3.1" data-path="../map_protocol_detail/logic/levels/protocol/map_relay_chain.html">
+            
+                <a href="../map_protocol_detail/logic/levels/protocol/map_relay_chain.html">
+            
+                    
+                        <b>1.4.4.3.1.</b>
+                    
+                    MAP Relay Chain
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../map_protocol_detail/logic/levels/token/">
+            
+                <a href="../map_protocol_detail/logic/levels/token/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    代币
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../map_protocol_detail/logic/levels/other/">
+            
+                <a href="../map_protocol_detail/logic/levels/other/">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.6.1" data-path="../map_protocol_detail/logic/levels/other/mitigate_long_range_attacks.html">
+            
+                <a href="../map_protocol_detail/logic/levels/other/mitigate_long_range_attacks.html">
+            
+                    
+                        <b>1.4.6.1.</b>
+                    
+                    缓解Long-Range Attack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6.2" data-path="../map_protocol_detail/logic/levels/other/brc_201_protocol.html">
+            
+                <a href="../map_protocol_detail/logic/levels/other/brc_201_protocol.html">
+            
+                    
+                        <b>1.4.6.2.</b>
+                    
+                    BRC-201协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../map_protocol_material/">
+            
+                <a href="../map_protocol_material/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    MAP Protocol资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../map_protocol_news/">
+            
+                <a href="../map_protocol_news/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    MAP Protocol新闻、进展、活动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >MAP Protocol概览</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="map-protocol概览"><a name="map-protocol概览" class="plugin-anchor" href="#map-protocol概览"><i class="fa fa-link" aria-hidden="true"></i></a>MAP Protocol概览</h1>
+<ul>
+<li>MAP Protocol=MAP协议=脉波协议 <ul>
+<li>是什么：比特币的L2  == 比特币的各种L2的L0 <ul>
+<li>A Bitcoin L2 for peer-to-peer interoperability, built on ZK light-clients </li>
+<li>是比特币二层网络，也是一个点对点的全链互操作网络，专注于跨链互操作性 </li>
+</ul>
+</li>
+<li>核心要点 <ul>
+<li>MAP协议= zkLightClient <ul>
+<li>= zkLightClient  + 智能合约? </li>
+<li>= ZKP + LightClient + 智能合约? </li>
+<li>= 零知识证明 + 轻客户端  <ul>
+<li>ZKP = Zero-Knowledge Proof = 零知识证明 <ul>
+<li>ZK是提高验证速度，通过验证zk proof来快速验证，可以节约gas fee </li>
+</ul>
+</li>
+<li>LightClient = Light-Client = 轻客户端 <ul>
+<li>轻客户端是 智能合约式的验证，有别于多签的验证，所以安全 </li>
+</ul>
+</li>
+<li>智能合约 ：（比特币&lt;-&gt;其他生态）点对点互操作 == 跨链资产互操作 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>=&gt; <ul>
+<li>实现了一个纯粹的、点对点的、完全的、可互操作的、跨链验证网络 == 区块链生态系统 <ul>
+<li>只依赖验证，不依赖任何第三方 == 点对点，无特权第三方 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>功能：实现了各种比特币 L2 网络之间的互操作性 <ul>
+<li>为比特币生态系统开发人员提供了一个统一的、可互操作的基础设施，涵盖了广泛的可互操作的比特币L2 </li>
+</ul>
+</li>
+<li>概述 <ul>
+<li>MAP Protocol 是一个用于点对点跨链互操作的比特币第二层网络 </li>
+<li>MAP 协议作为比特币 Layer-2 网络，也是一个专注于跨链互操作性的点对点互操作全链网络，是开发者和用户的 Web3 网关 </li>
+<li>一个全链基础设施 <ul>
+<li>它为基于区块链的资产、存储和计算提供了实现跨EVM和非EVM链互操作性的基础设施。作为一个全链基础设施，脉波上不依靠信赖任何第三方进行跨链通信。唯一信任的是代码，这些代码利用轻客户端的自验证特性，以完全点对点的方式进行跨链。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>详解 <ul>
+<li>比特币L2们的第零层、比特币生态与其他生态之间互操作的比特币第二层网络 <ul>
+<li>通过利用比特币网络的安全机制，MAP Protocol的安全性受比特币网络确保，并通过的 BRC201 协议 实现一层和二层之间的资产跨链。同时，通过成功研发的尖端 ZK-LightClient 技术，实现各个比特币第二层之间的点对点互操作，以及其他公链与比特币网络之间的互操作 </li>
+</ul>
+</li>
+<li>比特币级别的点对点跨链网络 <ul>
+<li>与“纯粹的点对点”比特币网络类似，MAP Protocol 的跨链网络也是点对点的，不经过任何第三方。跨链请求的有效性完全取决于它是否已在源链上发生，而不是依赖于可信第三方的决定或证明。 </li>
+</ul>
+</li>
+<li>构建覆盖所有比特币二层的应用 <ul>
+<li>众多的比特币二层应该是一个整体，而非割裂。我们为开发者提供了一整套的 开发工具、教程和SDK，通过MAP Protocol的比特币二层网络，开发者可以尽可能轻松地构建覆盖所有比特币二层的跨链dAPP，而这一切就像在单个链上构建应用一样简单。 </li>
+</ul>
+</li>
+<li>用于互操作的链上资产、存储和计算的基础设施 <ul>
+<li>互操作性不仅仅是连接不同链上的不同代币。一个真正去中心化的 Web3 是资产、存储和计算都在链上并且可互操作的地方。我们提供用于互操作的链上资产、存储和计算的基础设施。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可以理解为 <ul>
+<li>Web3 的用户入口 <ul>
+<li>硬核技术细节和复杂的跨链步骤阻碍了新用户进入 Web3 世界。MAP Protocol 使得导航 Web3 直观。在 MAP Protocol 中，用户只需要知道他们完全拥有自己资产的事实，当他们将资产从一个链移动到另一个链时，这是纯粹的点对点，没有任何第三方可以干预。 </li>
+</ul>
+</li>
+<li>一站式开发者门户 <ul>
+<li>数据主权是 Web3 的核心，意味着用户对其数据拥有完全的所有权。要构建一个 Web3 应用，开发者需要结合不同区块链的功能，使得用户的资产、存储和计算都在链上。通过 MAP Protocol，开发者可以无缝组合不同的区块链组件，并构建应用程序，让用户对其数据和资产有控制权。 </li>
+</ul>
+</li>
+<li>自由和点对点资产流动的守护者 <ul>
+<li>Web3 是新的价值互联网。互联网价值的流动可能面临第三方的安全担忧和挑战。虽然在单个区块链中的资产流动已经是点对点的，但 MAP Protocol 更进一步，使得不同区块链上的资产能够以纯粹的点对点方式流动。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MAP Protocol 能做什么 <ul>
+<li>比特币生态系统增长 <ul>
+<li>由于 MAP Protocol 是比特币第二层，任何链上的资产都可以轻松地与比特币网络互动。这将把其他类型的资产和社区加入到现有的比特币生态系统和社区中。 </li>
+</ul>
+</li>
+<li>可互操作的链上存储和计算 <ul>
+<li>除了资产转移，MAP Protocol 扩展了互操作性范围，包括链上存储和计算资源，允许 dApp 开发者高效利用跨多个区块链的服务。 </li>
+</ul>
+</li>
+<li>增强的安全性和隐私性 <ul>
+<li>除了构建在轻客户端和零知识证明技术之上，MAP Protocol 还利用比特币网络加强了安全性，以防止长距离攻击。 </li>
+</ul>
+</li>
+<li>对开发者友好的平台 <ul>
+<li>凭借其 Web3 用户入口和开发者门户，MAP Protocol 为开发者提供了构建和部署跨链应用所需的工具集，有效地促进了区块链创新的发展。 </li>
+</ul>
+</li>
+<li>用户赋权 <ul>
+<li>用户可以轻松创建 MAP Protocol 账户并探索或贡献于全链生态系统。没有中央权威可以更改规则或限制访问，从而为用户提供了无与伦比的控制权。 </li>
+</ul>
+</li>
+<li>点对点网络 <ul>
+<li>MAP Protocol 全链网络允许点对点交易和互动，坚持区块链技术最初的去中心化精神，同时提供跨链能力的优势。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特点 <ul>
+<li>全链互操作性 <ul>
+<li>脉波允许EVM和非EVM链的点对点跨链互操作性。 </li>
+</ul>
+</li>
+<li>比特币网络加强的安全 <ul>
+<li>脉波利用比特币网络安全机制来保护中继链 </li>
+<li>利用轻客户端自验证特性保护跨链交易 <ul>
+<li>使用 ZK 技术重构了轻客户端 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无第三方信任 <ul>
+<li>脉波是去中心化的，没有单一实体控制，所有参与者都依赖于代码进行操作。 </li>
+<li>实现了这个纯粹的点对点、无第三方的跨链验证网络 <ul>
+<li>纯粹的点对点 <ul>
+<li>从第一行代码开始，MAP Protocol 就体现了中本聪的点对点、无第三方理念 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>灵活性：允许不同区块链的集成，包括具有不同签名、哈希算法和默克尔证明的区块链。 </li>
+</ul>
+</li>
+<li>为什么要使用 MAP Protocol <ul>
+<li>解锁比特币生态系统的未来 <ul>
+<li>由于缺乏图灵完备性，比特币在可用性上与以太坊相比存在限制，其生态系统的增长也较慢。然而，随着 BCR-20 代币和 Ordinal NFTs 在 2023 年 5 月接管了 Web3 领域，比特币生态系统的新叙事撤销了关于比特币互操作性的话题和辩论。 </li>
+<li>通过 MAP Protocol 的 BRC-201，一种对 BRC-20 代币的跨链扩展协议，比特币网络上的 BRC-20 和 ORC-20 资产可以与其他公链上的其他代币互动。这一层比特币网络的跨链互操作性也将整体增长比特币社区。 </li>
+</ul>
+</li>
+<li>迈向真正互操作的未来 <ul>
+<li>今天，大多数互操作性解决方案只强调资产跨链交易。然而，一个真正互操作的 Web3 未来的范围远超此——在这个未来中，包括交易、数据存储和计算在内的 dApp 操作将在区块链上执行，并且可以跨不同链互操作，赋予用户对他们的数据和隐私的完全控制。 </li>
+<li>MAP Protocol 为这个真正互操作的 Web3 未来铺平了道路。通过 MAP Protocol，开发者可以无缝整合各种区块链组件，实现所有操作都在链上进行的应用程序构建。这为用户提供了跨多个链对他们的数据和资产的完全控制 </li>
+</ul>
+</li>
+<li>进一步赋能玩家 <ul>
+<li>传统上，玩家受到中心化游戏服务平台的限制，实际上并不拥有他们购买或获得的游戏内物品。为了交易或转移游戏资产，玩家被迫使用黑市网站，这往往带来额外的安全风险。 </li>
+<li>区块链游戏改变了这种旧的游戏方式。像 Crypto Kitties、Axie Infinity 和 Dark Forest 这样的 Web3 项目创造了一个新的游戏范式，在这里玩家被鼓励交易游戏内物品，并因他们的游戏时间而得到奖励。然而，与许多初创的创新一样，这些区块链游戏项目远非完美，由于可扩展性问题、交易费用和管理基于区块链资产的复杂性，已经让真正的玩家失去了兴趣。 </li>
+<li>这就是全链条和完全链上游戏的用武之地。通过 MAP Protocol，GameFi 项目不仅可以在所有链上交易和互操作游戏资产，还可以在区块链上实现游戏状态、逻辑和数据的所有方面，从而使区块链游戏成为一个玩家拥有完整代理权并为游戏开发做出贡献的自治世界。 </li>
+</ul>
+</li>
+<li>实现轻松的跨链资产流动 <ul>
+<li>MAP Protocol 利用轻客户端和零知识证明（ZK Proofs）提供一个无需信任的环境，以实现包括 EVM 和非 EVM 链在内的多个区块链之间的无缝资产转移。这消除了对中心化权威或第三方服务的需求，强化了去中心化原则的同时确保了交易的安全性和效率。 </li>
+<li>MAP Protocol 不仅支持简单的资产转移，还实现了用于存储和计算能力的跨链通信。这为去中心化应用程序（dApp）开发者提供了前所未有的灵活性，用以构建更加健壮、可扩展和互操作的应用程序。这项技术是对区块链生态系统的关键贡献，使我们更接近一个真正互联的世界，在这个世界中，资产和资源可以在各个链之间毫不费力地流动。 </li>
+</ul>
+</li>
+<li>节省时间和金钱来构建出色的应用程序 <ul>
+<li>在单一链上构建是简单且维护成本低的，但同时也限制了用户的覆盖范围和适应性，因此需要额外工作才能部署在其他链上或使用潜在不安全的跨链解决方案。此外，在多个区块链上建设意味着同时管理多个账本，这可能比在单一链上操作更困难也更昂贵。 </li>
+<li>与其在两害之间选择较小的一害，牺牲时间和资源变成多链或跨链，并在功能开发上妥协，项目和开发者可以直接在 MAP Protocol 上部署或使用 MAP Protocol 成为全链通，他们无需花额外的时间和金钱去寻找跨链解决方案或使用桥接技术成为多链。 </li>
+<li>有了 MAP Protocol，项目只需专注于应用开发的所有基本要素，并找到提升用户体验的方法，这样创新就能到来并推动真正的 dApp 大规模采用。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对比 <ul>
+<li>旧的<ul>
+<li><img src="../assets/img/blockchain_us_cmp.png" alt="blockchain_us_cmp"></li>
+</ul>
+</li>
+<li>MAP Protocol <ul>
+<li>互联效果 = 全链效果 = 互操作效果<ul>
+<li><img src="../assets/img/map_protocol_what_is.png" alt="map_protocol_what_is"></li>
+<li><img src="../assets/img/map_protocol_stars.png" alt="map_protocol_stars"></li>
+<li><img src="../assets/img/map_protocol_connect_zk_snack.png" alt="map_protocol_connect_zk_snack"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他介绍<ul>
+<li><img src="../assets/img/map_protocol_omnichain_web_3_0.png" alt="map_protocol_omnichain_web_3_0"></li>
+<li><img src="../assets/img/map_protocol_crosschain_communication.png" alt="map_protocol_crosschain_communication"></li>
+<li><img src="../assets/img/map_protocol_zk_snack.png" alt="map_protocol_zk_snack"></li>
+<li><img src="../assets/img/map_protocol_node_light_full.png" alt="map_protocol_node_light_full"></li>
+<li><img src="../assets/img/map_protocol_omnichain_dapp.png" alt="map_protocol_omnichain_dapp"></li>
+<li><img src="../assets/img/map_protocol_unlock_feature.png" alt="map_protocol_unlock_feature"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MAP浏览器 <ul>
+<li><a href="https://www.maposcan.io" target="_blank">MAPO SCAN</a><ul>
+<li><a href="https://www.maposcan.io" target="_blank">https://www.maposcan.io</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-09-30 16:05:24
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.html" class="navigation navigation-prev " aria-label="Previous page: Groth16协议">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../map_protocol_detail/" class="navigation navigation-next " aria-label="Next page: MAP Protocol详解">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"MAP Protocol概览","level":"1.3","depth":1,"next":{"title":"MAP Protocol详解","level":"1.4","depth":1,"path":"map_protocol_detail/README.md","ref":"map_protocol_detail/README.md","articles":[{"title":"白皮书","level":"1.4.1","depth":2,"path":"map_protocol_detail/whitepaper.md","ref":"map_protocol_detail/whitepaper.md","articles":[]},{"title":"原理","level":"1.4.2","depth":2,"path":"map_protocol_detail/logic/README.md","ref":"map_protocol_detail/logic/README.md","articles":[{"title":"ZK-LightClient","level":"1.4.2.1","depth":3,"path":"map_protocol_detail/logic/zk_lightclient.md","ref":"map_protocol_detail/logic/zk_lightclient.md","articles":[]},{"title":"跨链流程","level":"1.4.2.2","depth":3,"path":"map_protocol_detail/logic/cross_chain_process.md","ref":"map_protocol_detail/logic/cross_chain_process.md","articles":[]}]},{"title":"架构","level":"1.4.3","depth":2,"path":"map_protocol_detail/logic/arch.md","ref":"map_protocol_detail/logic/arch.md","articles":[]},{"title":"层级","level":"1.4.4","depth":2,"path":"map_protocol_detail/logic/levels/README.md","ref":"map_protocol_detail/logic/levels/README.md","articles":[{"title":"Dapp层","level":"1.4.4.1","depth":3,"path":"map_protocol_detail/logic/levels/dapp_level/README.md","ref":"map_protocol_detail/logic/levels/dapp_level/README.md","articles":[{"title":"SatSat","level":"1.4.4.1.1","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/satsat.md","ref":"map_protocol_detail/logic/levels/dapp_level/satsat.md","articles":[]},{"title":"HiveSwap","level":"1.4.4.1.2","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/hiveswap.md","ref":"map_protocol_detail/logic/levels/dapp_level/hiveswap.md","articles":[]},{"title":"ButterSwap","level":"1.4.4.1.3","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/butterswap.md","ref":"map_protocol_detail/logic/levels/dapp_level/butterswap.md","articles":[]},{"title":"ROUP","level":"1.4.4.1.4","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/roup.md","ref":"map_protocol_detail/logic/levels/dapp_level/roup.md","articles":[]},{"title":"EEAA","level":"1.4.4.1.5","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/eeaa.md","ref":"map_protocol_detail/logic/levels/dapp_level/eeaa.md","articles":[]},{"title":"LessGas","level":"1.4.4.1.6","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/lessgas.md","ref":"map_protocol_detail/logic/levels/dapp_level/lessgas.md","articles":[]},{"title":"MEMEVER","level":"1.4.4.1.7","depth":4,"path":"map_protocol_detail/logic/levels/dapp_level/memever.md","ref":"map_protocol_detail/logic/levels/dapp_level/memever.md","articles":[]}]},{"title":"MOS","level":"1.4.4.2","depth":3,"path":"map_protocol_detail/logic/levels/mos/README.md","ref":"map_protocol_detail/logic/levels/mos/README.md","articles":[]},{"title":"Protocol层","level":"1.4.4.3","depth":3,"path":"map_protocol_detail/logic/levels/protocol/README.md","ref":"map_protocol_detail/logic/levels/protocol/README.md","articles":[{"title":"MAP Relay Chain","level":"1.4.4.3.1","depth":4,"path":"map_protocol_detail/logic/levels/protocol/map_relay_chain.md","ref":"map_protocol_detail/logic/levels/protocol/map_relay_chain.md","articles":[]}]}]},{"title":"代币","level":"1.4.5","depth":2,"path":"map_protocol_detail/logic/levels/token/README.md","ref":"map_protocol_detail/logic/levels/token/README.md","articles":[]},{"title":"其他","level":"1.4.6","depth":2,"path":"map_protocol_detail/logic/levels/other/README.md","ref":"map_protocol_detail/logic/levels/other/README.md","articles":[{"title":"缓解Long-Range Attack","level":"1.4.6.1","depth":3,"path":"map_protocol_detail/logic/levels/other/mitigate_long_range_attacks.md","ref":"map_protocol_detail/logic/levels/other/mitigate_long_range_attacks.md","articles":[]},{"title":"BRC-201协议","level":"1.4.6.2","depth":3,"path":"map_protocol_detail/logic/levels/other/brc_201_protocol.md","ref":"map_protocol_detail/logic/levels/other/brc_201_protocol.md","articles":[]}]}]},"previous":{"title":"Groth16协议","level":"1.2.3.1","depth":3,"path":"background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.md","ref":"background_knowledge/bitcoin/zero_knowledge_proof/groth16_protocol.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/bitcoin_l2_map_protocol/pdf/bitcoin_l2_map_protocol.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/bitcoin_l2_map_protocol/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"bitcoin_l2_map_protocol","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"比特币L2：MAP Protocol","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理Bitcoin比特币的L2层的协议：MAP Protocol脉波协议。"},"file":{"path":"map_protocol_overview/README.md","mtime":"2024-09-30T08:05:24.451Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-10-01T06:34:48.556Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
