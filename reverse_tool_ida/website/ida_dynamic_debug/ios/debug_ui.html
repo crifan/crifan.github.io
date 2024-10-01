@@ -1,0 +1,1008 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>调试界面 · 逆向利器：IDA</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-callouts/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="issues.html" />
+    
+    
+    <link rel="prev" href="begin_debug.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../ida_overview/">
+            
+                <a href="../../ida_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IDA概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../ida_quick_start/">
+            
+                <a href="../../ida_quick_start/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    IDA快手上手
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../ida_common/">
+            
+                <a href="../../ida_common/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    IDA通用知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../ida_common/version.html">
+            
+                <a href="../../ida_common/version.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../ida_common/ui_layout.html">
+            
+                <a href="../../ida_common/ui_layout.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    界面布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../ida_common/name_meaning/">
+            
+                <a href="../../ida_common/name_meaning/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    命名和含义
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../ida_common/name_meaning/example.html">
+            
+                <a href="../../ida_common/name_meaning/example.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../ida_common/auto_analysis.html">
+            
+                <a href="../../ida_common/auto_analysis.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    自动分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../ida_common/search.html">
+            
+                <a href="../../ida_common/search.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../ida_common/shortcut.html">
+            
+                <a href="../../ida_common/shortcut.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    快捷键
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../ida_features/">
+            
+                <a href="../../ida_features/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    IDA功能详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../ida_features/view_code/">
+            
+                <a href="../../ida_features/view_code/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    查看代码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../ida_features/view_code/asm_code.html">
+            
+                <a href="../../ida_features/view_code/asm_code.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    汇编代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../../ida_features/view_code/pseudocode.html">
+            
+                <a href="../../ida_features/view_code/pseudocode.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    伪代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../../ida_features/view_code/function_call.html">
+            
+                <a href="../../ida_features/view_code/function_call.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    函数调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../../ida_features/view_code/struct_class_def.html">
+            
+                <a href="../../ida_features/view_code/struct_class_def.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    结构体类定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../ida_features/strings.html">
+            
+                <a href="../../ida_features/strings.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    字符串
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../ida_features/function_list.html">
+            
+                <a href="../../ida_features/function_list.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    函数列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../ida_features/import_export.html">
+            
+                <a href="../../ida_features/import_export.html">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    导入和导出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../../ida_features/plugins.html">
+            
+                <a href="../../ida_features/plugins.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../ida_usage_note/">
+            
+                <a href="../../ida_usage_note/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    IDA使用心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../ida_usage_note/objc.html">
+            
+                <a href="../../ida_usage_note/objc.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    ObjC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    IDA动态调试
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    iOS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="init_dev_env.html">
+            
+                <a href="init_dev_env.html">
+            
+                    
+                        <b>1.7.1.1.</b>
+                    
+                    搭建环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="begin_debug.html">
+            
+                <a href="begin_debug.html">
+            
+                    
+                        <b>1.7.1.2.</b>
+                    
+                    开始调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.1.3" data-path="debug_ui.html">
+            
+                <a href="debug_ui.html">
+            
+                    
+                        <b>1.7.1.3.</b>
+                    
+                    调试界面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="issues.html">
+            
+                <a href="issues.html">
+            
+                    
+                        <b>1.7.1.4.</b>
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.8.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../appendix/doc_refer.html">
+            
+                <a href="../../appendix/doc_refer.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    文档和资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >调试界面</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="调试界面"><a name="调试界面" class="plugin-anchor" href="#调试界面"><i class="fa fa-link" aria-hidden="true"></i></a>调试界面</h1>
+<p>之前给：IDA的汇编和F5伪代码，都加了断点：</p>
+<p>断点的函数名是：入口函数start</p>
+<p>此处进来后，默认进入：</p>
+<p>伪代码中的断点：</p>
+<p><img src="../../assets/img/ida_breakpoit_pseudocode.png" alt="ida_breakpoit_pseudocode"></p>
+<h2 id="ida-view-pc"><a name="ida-view-pc" class="plugin-anchor" href="#ida-view-pc"><i class="fa fa-link" aria-hidden="true"></i></a>IDA View-PC</h2>
+<p>点击 IDA View-PC，切换到：</p>
+<p>IDA汇编，可以看到之前给汇编加的断点：</p>
+<p><img src="../../assets/img/ida_breakpoit_asm.png" alt="ida_breakpoit_asm"></p>
+<h2 id="相关log"><a name="相关log" class="plugin-anchor" href="#相关log"><i class="fa fa-link" aria-hidden="true"></i></a>相关log</h2>
+<p>IDA左下角的最后一部分的log是：</p>
+<pre class="language-"><code class="lang-log">insider the segment <span class="token string">&apos;__objc_const&apos;</span> as read<span class="token operator">-</span>only
+because the segment has the write permission
+The decompiler did not consider the segment <span class="token string">&apos;__objc_data&apos;</span> as read<span class="token operator">-</span>only
+because the segment has the write permission
+<span class="token number">102380000</span><span class="token operator">:</span> process <span class="token file-path string">/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/WhatsApp</span> has started <span class="token operator">(</span>pid<span class="token operator">=</span><span class="token number">4294967294</span><span class="token operator">)</span>
+<span class="token property">shared cache mapping:</span> <span class="token number">1BCFA0000</span><span class="token punctuation">.</span><span class="token punctuation">.</span>1F8D24000
+<span class="token property">shared cache mapping:</span> <span class="token number">1FAD24000</span><span class="token punctuation">.</span><span class="token punctuation">.</span>2067E8000
+<span class="token property">shared cache mapping:</span> <span class="token number">2087E8000</span><span class="token punctuation">.</span><span class="token punctuation">.</span>2112E8000
+<span class="token number">10703C000</span><span class="token operator">:</span> loaded <span class="token file-path string">/private/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/Frameworks/libswift_Concurrency.dylib</span>
+<span class="token number">1074BC000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/substitute-inserter.dylib</span>
+<span class="token number">10792C000</span><span class="token operator">:</span> loaded <span class="token file-path string">/private/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/Frameworks/SharedModules.framework/SharedModules</span>
+<span class="token number">1BCFDC000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/system/libsystem_trace.dylib</span>
+<span class="token number">1BCFF3000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/system/libxpc.dylib</span>
+<span class="token number">1BD025000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/system/libsystem_blocks.dylib</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token number">1F4CEC000</span><span class="token operator">:</span> loaded <span class="token file-path string">/System/Library/PrivateFrameworks/AppSSO.framework/AppSSO</span>
+<span class="token number">1F4D1F000</span><span class="token operator">:</span> loaded <span class="token file-path string">/System/Library/PrivateFrameworks/CPAnalytics.framework/CPAnalytics</span>
+<span class="token number">1F5483000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/swift/libswiftCoreML.dylib</span>
+<span class="token number">1F549F000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/swift/libswiftSpeech.dylib</span>
+<span class="token number">1074BC000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/substitute-inserter.dylib</span>
+gdb<span class="token operator">&gt;</span>objc<span class="token punctuation">[</span><span class="token number">41732</span><span class="token punctuation">]</span><span class="token operator">:</span> Class WADocumentAttachmentStats is implemented in both <span class="token file-path string">/private/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/Frameworks/SharedModules.framework/SharedModules</span> <span class="token operator">(</span><span class="token number">0x10928d0c8</span><span class="token operator">)</span> and <span class="token file-path string">/private/var/containers/Bund</span>
+gdb<span class="token operator">&gt;</span>le<span class="token operator">/</span>Application<span class="token operator">/</span><span class="token uuid constant">2BE964D4-8DF0-4858-A06D-66CA8741ACDC</span><span class="token operator">/</span>WhatsApp<span class="token punctuation">.</span>app<span class="token operator">/</span>WhatsApp <span class="token operator">(</span><span class="token number">0x105979e10</span><span class="token operator">)</span><span class="token punctuation">.</span> One of the two will be used<span class="token punctuation">.</span> Which one is undefined<span class="token punctuation">.</span>
+objc<span class="token punctuation">[</span><span class="token number">41732</span><span class="token punctuation">]</span><span class="token operator">:</span> Class WAChatSearchBarCatalyst is implemented in both <span class="token file-path string">/private/var/containers/Bundle/Application/2BE9</span>
+gdb<span class="token operator">&gt;</span><span class="token number">64D4</span><span class="token operator">-</span><span class="token number">8DF0</span><span class="token operator">-</span><span class="token number">4858</span><span class="token operator">-</span>A06D<span class="token operator">-</span><span class="token number">66CA8741ACDC</span><span class="token operator">/</span>WhatsApp<span class="token punctuation">.</span>app<span class="token operator">/</span>Frameworks<span class="token operator">/</span>SharedModules<span class="token punctuation">.</span>framework<span class="token operator">/</span>SharedModules <span class="token operator">(</span><span class="token number">0x1092b2720</span><span class="token operator">)</span> and <span class="token file-path string">/private/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/WhatsApp</span> <span class="token operator">(</span><span class="token number">0x105979fe0</span><span class="token operator">)</span><span class="token punctuation">.</span> One of the two will be use
+gdb<span class="token operator">&gt;</span>d<span class="token punctuation">.</span> Which one is undefined<span class="token punctuation">.</span>
+
+<span class="token number">10715C000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/libobjc-trampolines.dylib</span>
+<span class="token number">107198000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/libsubstitute.dylib</span>
+<span class="token number">10B800000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/substitute-loader.dylib</span>
+<span class="token number">1071C0000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/libsubstrate.dylib</span>
+<span class="token number">1071E4000</span><span class="token operator">:</span> loaded <span class="token file-path string">/Library/MobileSubstrate/DynamicLibraries/</span>   Choicy<span class="token punctuation">.</span>dylib
+<span class="token number">1071F4000</span><span class="token operator">:</span> loaded <span class="token file-path string">/Library/MobileSubstrate/DynamicLibraries/AppSyncUnified-FrontBoard.dylib</span>
+gdb<span class="token operator">&gt;</span>SubstituteLog<span class="token operator">:</span> Attempted to hook non<span class="token operator">-</span>existant selector <span class="token string">&quot;trustStateForApplication:&quot;</span> in class <span class="token string">&quot;nil&quot;</span>
+<span class="token property">SubstituteLog:</span> Attempted to hook non<span class="token operator">-</span>existant selector <span class="token string">&quot;trustStateWithTrustRequiredReasons:&quot;</span> in class <span class="token string">&quot;nil&quot;</span>
+<span class="token property">SubstituteLog:</span> Attempted to hook non<span class="token operator">-</span>existant se
+gdb<span class="token operator">&gt;</span>lector <span class="token string">&quot;trustState&quot;</span> in class <span class="token string">&quot;nil&quot;</span>
+
+<span class="token number">107340000</span><span class="token operator">:</span> loaded <span class="token file-path string">/Library/MobileSubstrate/DynamicLibraries/HookWhatsApp.dylib</span>
+<span class="token number">107370000</span><span class="token operator">:</span> loaded <span class="token file-path string">/Library/MobileSubstrate/DynamicLibraries/SSLKillSwitch2.dylib</span>
+<span class="token number">1C22B4000</span><span class="token operator">:</span> loaded <span class="token file-path string">/usr/lib/libboringssl.dylib</span>
+<span class="token property">FFFFFFFFFFFFFFFF:</span> thread has started <span class="token operator">(</span>tid<span class="token operator">=</span><span class="token number">6692482</span><span class="token operator">)</span> 
+<span class="token property">FFFFFFFFFFFFFFFF:</span> thread has started <span class="token operator">(</span>tid<span class="token operator">=</span><span class="token number">6692481</span><span class="token operator">)</span> 
+<span class="token property">FFFFFFFFFFFFFFFF:</span> thread has started <span class="token operator">(</span>tid<span class="token operator">=</span><span class="token number">6692479</span><span class="token operator">)</span> 
+<span class="token property">FFFFFFFFFFFFFFFF:</span> thread has started <span class="token operator">(</span>tid<span class="token operator">=</span><span class="token number">6692478</span><span class="token operator">)</span>
+</code></pre>
+<p>发现并没有太多的界面，可供查看？</p>
+<h2 id="stack-view"><a name="stack-view" class="plugin-anchor" href="#stack-view"><i class="fa fa-link" aria-hidden="true"></i></a>Stack View</h2>
+<p>点击部分窗口，变成浮动窗口，看看效果：</p>
+<p><img src="../../assets/img/ida_debug_stack_view_float.png" alt="ida_debug_stack_view_float"></p>
+<pre class="language-"><code class="lang-bash">000000016DA7FA70  00000001BD234360  libdyld.dylib:__text:00000001BD234360
+000000016DA7FA78  0000000000000000  MEMORY:unk_0
+000000016DA7FA80  0000000000000000  MEMORY:unk_0
+000000016DA7FA88  0000000000000000  MEMORY:unk_0
+000000016DA7FA90  0000000000000000  MEMORY:unk_0
+000000016DA7FA98  0000000102380000  HEADER:__mh_execute_header
+000000016DA7FAA0  0000000000000001  MEMORY:unk_1
+000000016DA7FAA8  000000016DA7FBF0  MEMORY:000000016DA7FBF0
+000000016DA7FAB0  0000000000000000  MEMORY:unk_0
+000000016DA7FAB8  000000016DA7FC4E  MEMORY:000000016DA7FC4E
+000000016DA7FAC0  000000016DA7FC5A  MEMORY:000000016DA7FC5A
+000000016DA7FAC8  000000016DA7FC69  MEMORY:000000016DA7FC69
+000000016DA7FAD0  0000000283A2C000  MEMORY:0000000283A2C000
+000000016DA7FAD8  0000000283528000  MEMORY:0000000283528000
+000000016DA7FAE0  000000016DA7FD4D  MEMORY:000000016DA7FD4D
+000000016DA7FAE8  000000016DA7FD5B  MEMORY:000000016DA7FD5B
+000000016DA7FAF0  000000016DA7FD6E  MEMORY:000000016DA7FD6E
+000000016DA7FAF8  0000000283A2C070  MEMORY:0000000283A2C070
+000000016DA7FB00  000000016DA7FDF0  MEMORY:000000016DA7FDF0
+000000016DA7FB08  000000028132C0B0  MEMORY:000000028132C0B0
+000000016DA7FB10  0000000000000000  MEMORY:unk_0
+000000016DA7FB18  0000000000000000  MEMORY:unk_0
+000000016DA7FB20  0000000000000000  MEMORY:unk_0
+000000016DA7FB28  000000016DA7FB80  MEMORY:000000016DA7FB80
+000000016DA7FB30  000000016DA7FEA8  MEMORY:000000016DA7FEA8
+000000016DA7FB38  000000016DA7FEBF  MEMORY:000000016DA7FEBF
+000000016DA7FB40  000000016DA7FED0  MEMORY:000000016DA7FED0
+000000016DA7FB48  000000016DA7FEEF  MEMORY:000000016DA7FEEF
+000000016DA7FB50  000000016DA7FF24  MEMORY:000000016DA7FF24
+000000016DA7FB58  000000016DA7FF40  MEMORY:000000016DA7FF40
+000000016DA7FB60  000000016DA7FF74  MEMORY:000000016DA7FF74
+000000016DA7FB68  000000016DA7FF9B  MEMORY:000000016DA7FF9B
+000000016DA7FB70  000000016DA7FFBE  MEMORY:000000016DA7FFBE
+000000016DA7FB78  0000000000000000  MEMORY:unk_0
+000000016DA7FB80  <span class="token number">6261747563657865</span>  MEMORY:6261747563657865
+000000016DA7FB88  3D687461705F656C  MEMORY:3D687461705F656C
+000000016DA7FB90  6E6F632F7261762F  MEMORY:6E6F632F7261762F
+000000016DA7FB98  2F7372656E696174  MEMORY:2F7372656E696174
+000000016DA7FBA0  412F656C646E7542  MEMORY:412F656C646E7542
+000000016DA7FBA8  69746163696C7070  MEMORY:69746163696C7070
+000000016DA7FBB0  36394542322F6E6F  MEMORY:36394542322F6E6F
+000000016DA7FBB8  304644382D344434  MEMORY:304644382D344434
+000000016DA7FBC0  30412D383538342D  MEMORY:30412D383538342D
+000000016DA7FBC8  38414336362D4436  MEMORY:38414336362D4436
+<span class="token punctuation">..</span>.
+</code></pre>
+<p>结果操作一下：都是<code>?</code>了：</p>
+<p><img src="../../assets/img/ida_debug_stack_view_question.png" alt="ida_debug_stack_view_question"></p>
+<h2 id="hex-view"><a name="hex-view" class="plugin-anchor" href="#hex-view"><i class="fa fa-link" aria-hidden="true"></i></a>Hex View</h2>
+<p>去看看：</p>
+<ul>
+<li><code>Hex View-1</code><ul>
+<li><img src="../../assets/img/ida_debug_hex_view.png" alt="ida_debug_hex_view"><ul>
+<li>好像也看不出啥</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>后来发现了：</p>
+<p><img src="../../assets/img/ida_debug_hex_raw.png" alt="ida_debug_hex_raw"></p>
+<p>此处是以hex的16进制，查看二进制的原始数据</p>
+<p>此处PC在：</p>
+<ul>
+<li>入口函数：start<ul>
+<li>地址：0000000103C9A374</li>
+</ul>
+</li>
+</ul>
+<p>是对得上的。</p>
+<p>但是貌似Hex模式也没太多用。关闭。</p>
+<h2 id="modules"><a name="modules" class="plugin-anchor" href="#modules"><i class="fa fa-link" aria-hidden="true"></i></a>Modules</h2>
+<p>去选择Modules：</p>
+<p><img src="../../assets/img/ida_debug_modules_view.png" alt="ida_debug_modules_view"></p>
+<p>且可以复制出内容：</p>
+<pre class="language-"><code class="lang-bash">/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/WhatsApp    0000000102380000    0000000004CBC000
+/private/var/containers/Bundle/Application/2BE964D4-8DF0-4858-A06D-66CA8741ACDC/WhatsApp.app/Frameworks/libswift_Concurrency.dylib    000000010703C000    000000000006C000
+/usr/lib/libobjc-trampolines.dylib    000000010715C000    0000000000010000
+/usr/lib/libsubstitute.dylib    0000000107198000    0000000000028000
+/usr/lib/libsubstrate.dylib    00000001071C0000    0000000000014000
+/Library/MobileSubstrate/DynamicLibraries/   Choicy.dylib    00000001071E4000    0000000000010000
+/Library/MobileSubstrate/DynamicLibraries/AppSyncUnified-FrontBoard.dylib    00000001071F4000    000000000000C000
+。。。
+</code></pre>
+<p>拖动已变成浮动窗口：</p>
+<p><img src="../../assets/img/ida_debug_modules_float.png" alt="ida_debug_modules_float"></p>
+<p>不过后续调试期间也很少用得到Modules，所以也可以去关闭了。</p>
+<p>目前的IDA中调试iOS的app的效果是：</p>
+<p><img src="../../assets/img/ida_debugging_ios_app.png" alt="ida_debugging_ios_app"></p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-01 17:02:53
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="begin_debug.html" class="navigation navigation-prev " aria-label="Previous page: 开始调试">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="issues.html" class="navigation navigation-next " aria-label="Next page: 常见问题">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"调试界面","level":"1.7.1.3","depth":3,"next":{"title":"常见问题","level":"1.7.1.4","depth":3,"path":"ida_dynamic_debug/ios/issues.md","ref":"ida_dynamic_debug/ios/issues.md","articles":[]},"previous":{"title":"开始调试","level":"1.7.1.2","depth":3,"path":"ida_dynamic_debug/ios/begin_debug.md","ref":"ida_dynamic_debug/ios/begin_debug.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_tool_ida/pdf/reverse_tool_ida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_tool_ida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向利器：IDA","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍逆向领域中功能强大且好用的利器：IDA。先介绍IDA概览；再介绍IDA的快速上手过程；再介绍IDA中通用的基础知识，包括版本选择、界面相关比如布局等、常见命名和含义、自动分析过程、搜索、快捷键；以及介绍IDA各种功能，包括查看代码，比如汇编代码、F5伪代码、函数调用、结构体的类的定义、字符串、函数列表插件等等；再去记录IDA的使用心得；最后整理一些IDA相关的文档和资料，供参考。"},"file":{"path":"ida_dynamic_debug/ios/debug_ui.md","mtime":"2024-10-01T09:02:53.218Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-10-01T09:12:44.638Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
