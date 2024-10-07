@@ -6,7 +6,7 @@
         <title>新增Xposed配置 · 安卓逆向调试：XPosed框架</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -766,7 +766,7 @@
 <p>文件内容：</p>
 <pre class="language-"><code class="lang-c">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>crifanxposedhook<span class="token punctuation">.</span>XposedHook
 </code></pre>
-<p><img src="../assets/img/as_xposed_init.png" alt="as_xposed_init"></p>
+<p><img src="../assets/img/as_xposed_init.png" alt="as_xposed_init"></img></p>
 <p>内容说明：</p>
 <ul>
 <li><code>com.example.crifanxposedhook.XposedHook</code><ul>
@@ -785,11 +785,11 @@
 
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XposedHook</span> <span class="token keyword">implements</span> <span class="token class-name">IXposedHookLoadPackage</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleLoadPackage</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">LoadPackageParam</span> lpparam<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Throwable</span> <span class="token punctuation">{</span>
-        <span class="token class-name">XposedBridge</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;XposedHook Loaded app: &quot;</span> <span class="token operator">+</span> lpparam<span class="token punctuation">.</span>packageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">XposedBridge</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"XposedHook Loaded app: "</span> <span class="token operator">+</span> lpparam<span class="token punctuation">.</span>packageName<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="../assets/img/as_xposed_hook_code.png" alt="as_xposed_hook_code"></p>
+<p><img src="../assets/img/as_xposed_hook_code.png" alt="as_xposed_hook_code"></img></p>
 <ul>
 <li>代码说明<ul>
 <li>无需理会报错：<code>Cannot resolve symbol IXposedHookLoadPackage</code><ul>
@@ -807,10 +807,10 @@
 <p>本身已有：<code>app/src/main/res/values/strings.xml</code></p>
 <p>文件内容：</p>
 <pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>app_name<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>CrifanXposedHook<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app_name<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>CrifanXposedHook<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
-<p><img src="../assets/img/as_xposed_strings_xml.png" alt="as_xposed_strings_xml"></p>
+<p><img src="../assets/img/as_xposed_strings_xml.png" alt="as_xposed_strings_xml"></img></p>
 <ul>
 <li>内容说明<ul>
 <li>其中<code>CrifanXposedHook</code>是当前app名称=Xposed插件名称=安卓项目名称</li>
@@ -823,42 +823,42 @@
 <p>核心改动：修改<code>application</code>的部分属性，并加上<code>meta-data</code>的<code>Xposed</code>相关属性</p>
 <p>改动后的：</p>
 <p>文件内容：</p>
-<pre class="language-"><code class="lang-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<pre class="language-"><code class="lang-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>dataExtractionRules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@xml/data_extraction_rules<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>fullBackupContent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@xml/backup_rules<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>roundIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher_round<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>supportsRtl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Theme.CrifanXposedHook<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">tools:</span>targetApi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>31<span class="token punctuation">&quot;</span></span> <span class="token punctuation">&gt;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>dataExtractionRules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@xml/data_extraction_rules<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>fullBackupContent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@xml/backup_rules<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@string/app_name<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>roundIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher_round<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>supportsRtl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@style/Theme.CrifanXposedHook<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">tools:</span>targetApi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>31<span class="token punctuation">"</span></span> <span class="token punctuation">&gt;</span></span>
 
         <span class="token comment">&lt;!-- 是否是xposed模块，xposed根据这个来判断是否是模块 --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposedmodule<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposedmodule<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 
         <span class="token comment">&lt;!-- 模块描述，显示在xposed模块列表那里第二行 --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposeddescription<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>crifan测试XPosed插件hook<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposeddescription<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>crifan测试XPosed插件hook<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 
         <span class="token comment">&lt;!-- 最低xposed版本号。对于Xposed来说，最新的是：82
             注：后续如果需要用EdXposed最新的，可以改为：93
          --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposedminversion<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>82<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposedminversion<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>82<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
-<p><img src="../assets/img/as_xposed_androidmanifest_xml.png" alt="as_xposed_androidmanifest_xml"></p>
+<p><img src="../assets/img/as_xposed_androidmanifest_xml.png" alt="as_xposed_androidmanifest_xml"></img></p>
 <ul>
 <li>参数说明<ul>
 <li><code>xposedmodule</code>=<code>true</code><ul>
@@ -887,7 +887,7 @@
 <li>另外最好：去你的安卓手机中确认当前Xposed的API版本<ul>
 <li>比如<ul>
 <li>此处的Pixel5中，EdXposed首页中的：v93.0<ul>
-<li><img src="../assets/img/pixel5_edxposed_api_v93.png" alt="pixel5_edxposed_api_v93"><ul>
+<li><img src="../assets/img/pixel5_edxposed_api_v93.png" alt="pixel5_edxposed_api_v93"></img><ul>
 <li>表示用的是，更加新的93的EdXposed的Xposed的API版本</li>
 <li>注：更新的API版本，支持其他更新的API接口<ul>
 <li>但是同时会兼容旧版本Xposed的API接口的</li>
@@ -919,7 +919,7 @@
 <p>另外贴出，之前，针对于旧版本<code>Android 4.4</code>的安卓手机</p>
 <ul>
 <li>当时是<code>Android 4.4.2</code>的<code>Nox夜神模拟器</code><ul>
-<li><img src="../assets/img/android_4_4_2_nox.png" alt="android_4_4_2_nox"></li>
+<li><img src="../assets/img/android_4_4_2_nox.png" alt="android_4_4_2_nox"></img></li>
 <li>对应adb连接并查看设备<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~  adb connect <span class="token number">127.0</span>.0.1:62001
 connected to <span class="token number">127.0</span>.0.1:62001
 crifan@licrifandeMacBook-Pro  ~  adb devices
@@ -931,31 +931,31 @@ List of devices attached
 </li>
 </ul>
 <p>的<code>src/main/AndroidManifest.xml</code>的配置：</p>
-<pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name">package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.crifan.crifanxposedmodule<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<pre class="language-"><code class="lang-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span>
+    <span class="token attr-name">package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.crifan.crifanxposedmodule<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
 
-    <span class="token comment">&lt;!--android:debuggable=&quot;true&quot;--&gt;</span>
-    <span class="token comment">&lt;!--tools:ignore=&quot;HardcodedDebugMode&quot;--&gt;</span>
-    <span class="token comment">&lt;!--android:exported=&quot;true&quot;--&gt;</span>
+    <span class="token comment">&lt;!--android:debuggable="true"--&gt;</span>
+    <span class="token comment">&lt;!--tools:ignore="HardcodedDebugMode"--&gt;</span>
+    <span class="token comment">&lt;!--android:exported="true"--&gt;</span>
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>roundIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher_round<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>supportsRtl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/AppTheme<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@string/app_name<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>roundIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher_round<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>supportsRtl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@style/AppTheme<span class="token punctuation">"</span></span>
     <span class="token punctuation">&gt;</span></span>
         <span class="token comment">&lt;!-- 是否是xposed模块，xposed根据这个来判断是否是模块 --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposedmodule<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposedmodule<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 
         <span class="token comment">&lt;!-- 模块描述，显示在xposed模块列表那里第二行 --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposeddescription<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>crifan测试XPosed模块开发<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposeddescription<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>crifan测试XPosed模块开发<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 
         <span class="token comment">&lt;!-- 最低xposed版本号。用最新的：82
             详见：
@@ -966,8 +966,8 @@ List of devices attached
             所以还是改为 53
          --&gt;</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>xposedminversion<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>53<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xposedminversion<span class="token punctuation">"</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>53<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
@@ -977,35 +977,35 @@ List of devices attached
 <p>改动文件：<code>app/build.gradle</code></p>
 <p>目的：让Gradle下载相关xposed的jar包（和相关源码）</p>
 <p>核心改动：加上：</p>
-<pre class="language-"><code class="lang-bash">        versionName <span class="token string">&quot;2023.08.09.01&quot;</span>
+<pre class="language-"><code class="lang-bash">        versionName <span class="token string">"2023.08.09.01"</span>
 
-    compileOnly <span class="token string">&apos;de.robv.android.xposed:api:82&apos;</span>
-    compileOnly <span class="token string">&apos;de.robv.android.xposed:api:82:sources&apos;</span>
+    compileOnly <span class="token string">'de.robv.android.xposed:api:82'</span>
+    compileOnly <span class="token string">'de.robv.android.xposed:api:82:sources'</span>
 </code></pre>
 <p>改为：</p>
 <p><code>app/build.gradle</code></p>
 <pre class="language-"><code class="lang-json">plugins <span class="token punctuation">{</span>
-    id &apos;com.android.application&apos;
+    id 'com.android.application'
 <span class="token punctuation">}</span>
 
 android <span class="token punctuation">{</span>
-    namespace &apos;com.example.crifanxposedhook&apos;
+    namespace 'com.example.crifanxposedhook'
     compileSdk <span class="token number">33</span>
 
     defaultConfig <span class="token punctuation">{</span>
-        applicationId <span class="token string">&quot;com.example.crifanxposedhook&quot;</span>
+        applicationId <span class="token string">"com.example.crifanxposedhook"</span>
         minSdk <span class="token number">24</span>
         targetSdk <span class="token number">33</span>
         versionCode <span class="token number">1</span>
-        versionName <span class="token string">&quot;2023.08.09.01&quot;</span>
+        versionName <span class="token string">"2023.08.09.01"</span>
 
-        testInstrumentationRunner <span class="token string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+        testInstrumentationRunner <span class="token string">"androidx.test.runner.AndroidJUnitRunner"</span>
     <span class="token punctuation">}</span>
 
     buildTypes <span class="token punctuation">{</span>
         release <span class="token punctuation">{</span>
             minifyEnabled <span class="token boolean">false</span>
-            proguardFiles getDefaultProguardFile(&apos;proguard-android-optimize.txt&apos;)<span class="token punctuation">,</span> &apos;proguard-rules.pro&apos;
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')<span class="token punctuation">,</span> 'proguard-rules.pro'
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     compileOptions <span class="token punctuation">{</span>
@@ -1015,28 +1015,28 @@ android <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 
 dependencies <span class="token punctuation">{</span>
-    implementation &apos;androidx.appcompat<span class="token operator">:</span>appcompat<span class="token operator">:</span><span class="token number">1.6</span>.<span class="token number">1</span>&apos;
-    implementation &apos;com.google.android.material<span class="token operator">:</span>material<span class="token operator">:</span><span class="token number">1.9</span>.<span class="token number">0</span>&apos;
-    testImplementation &apos;junit<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">4.13</span>.<span class="token number">2</span>&apos;
-    androidTestImplementation &apos;androidx.test.ext<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">1.1</span>.<span class="token number">5</span>&apos;
-    androidTestImplementation &apos;androidx.test.espresso<span class="token operator">:</span>espresso-core<span class="token operator">:</span><span class="token number">3.5</span>.<span class="token number">1</span>&apos;
+    implementation 'androidx.appcompat<span class="token operator">:</span>appcompat<span class="token operator">:</span><span class="token number">1.6</span>.<span class="token number">1</span>'
+    implementation 'com.google.android.material<span class="token operator">:</span>material<span class="token operator">:</span><span class="token number">1.9</span>.<span class="token number">0</span>'
+    testImplementation 'junit<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">4.13</span>.<span class="token number">2</span>'
+    androidTestImplementation 'androidx.test.ext<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">1.1</span>.<span class="token number">5</span>'
+    androidTestImplementation 'androidx.test.espresso<span class="token operator">:</span>espresso-core<span class="token operator">:</span><span class="token number">3.5</span>.<span class="token number">1</span>'
 
-    compileOnly &apos;de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">82</span>&apos;
-    compileOnly &apos;de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">82</span><span class="token operator">:</span>sources&apos;
+    compileOnly 'de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">82</span>'
+    compileOnly 'de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">82</span><span class="token operator">:</span>sources'
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="../assets/img/as_xposed_app_build_gradle.png" alt="as_xposed_app_build_gradle"></p>
+<p><img src="../assets/img/as_xposed_app_build_gradle.png" alt="as_xposed_app_build_gradle"></img></p>
 <p>参数说明：</p>
 <ul>
 <li>xposed相关<ul>
-<li><code>compileOnly &apos;de.robv.android.xposed:api:82&apos;</code><ul>
+<li><code>compileOnly 'de.robv.android.xposed:api:82'</code><ul>
 <li>xposed的jar包依赖，版本是用最新的<code>82</code><ul>
 <li>和之前的<code>AndroidManifest.xml</code>中的<code>xposedminversion=82</code>是对应的</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>compileOnly &apos;de.robv.android.xposed:api:82:sources&apos;</code><ul>
+<li><code>compileOnly 'de.robv.android.xposed:api:82:sources'</code><ul>
 <li>xposed的源码包</li>
 </ul>
 </li>
@@ -1053,7 +1053,7 @@ dependencies <span class="token punctuation">{</span>
 </ul>
 </li>
 <li>app相关<ul>
-<li><code>versionName &quot;2023.08.09.01&quot;</code><ul>
+<li><code>versionName "2023.08.09.01"</code><ul>
 <li>app的版本号<ul>
 <li>在app列表详情页和EdXposed的Xposed插件列表中可以看到</li>
 </ul>
@@ -1066,36 +1066,36 @@ dependencies <span class="token punctuation">{</span>
 <h4 id="附录：旧版本android-studio中app的gradle配置"><a name="附录：旧版本android-studio中app的gradle配置" class="plugin-anchor" href="#附录：旧版本android-studio中app的gradle配置"><i class="fa fa-link" aria-hidden="true"></i></a>附录：旧版本Android Studio中app的Gradle配置</h4>
 <p>对于之前的旧版本的<code>Android Studio v4.2.2</code> 来说：</p>
 <p>app的Gradle配置：<code>app/build.gradle</code></p>
-<p>主要是加了：<code>compileOnly &apos;de.robv.android.xposed:api:53&apos;</code></p>
+<p>主要是加了：<code>compileOnly 'de.robv.android.xposed:api:53'</code></p>
 <p>内容为：</p>
-<pre class="language-"><code class="lang-json">apply plugin<span class="token operator">:</span> &apos;com.android.application&apos;
+<pre class="language-"><code class="lang-json">apply plugin<span class="token operator">:</span> 'com.android.application'
 
 android <span class="token punctuation">{</span>
     compileSdkVersion <span class="token number">29</span>
     defaultConfig <span class="token punctuation">{</span>
-        applicationId <span class="token string">&quot;com.crifan.crifanxposedmodule&quot;</span>
+        applicationId <span class="token string">"com.crifan.crifanxposedmodule"</span>
         minSdkVersion <span class="token number">19</span>
         targetSdkVersion <span class="token number">29</span>
         versionCode <span class="token number">3</span>
-        versionName <span class="token string">&quot;1.2&quot;</span>
-        testInstrumentationRunner <span class="token string">&quot;android.support.test.runner.AndroidJUnitRunner&quot;</span>
+        versionName <span class="token string">"1.2"</span>
+        testInstrumentationRunner <span class="token string">"android.support.test.runner.AndroidJUnitRunner"</span>
     <span class="token punctuation">}</span>
     buildTypes <span class="token punctuation">{</span>
         release <span class="token punctuation">{</span>
             minifyEnabled <span class="token boolean">false</span>
-            proguardFiles getDefaultProguardFile(&apos;proguard-android-optimize.txt&apos;)<span class="token punctuation">,</span> &apos;proguard-rules.pro&apos;
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')<span class="token punctuation">,</span> 'proguard-rules.pro'
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 dependencies <span class="token punctuation">{</span>
-    implementation fileTree(dir<span class="token operator">:</span> &apos;libs&apos;<span class="token punctuation">,</span> include<span class="token operator">:</span> <span class="token punctuation">[</span>&apos;*.jar&apos;<span class="token punctuation">]</span>)
-    implementation &apos;com.android.support<span class="token operator">:</span>appcompat-v7<span class="token operator">:</span><span class="token number">28.0</span>.<span class="token number">0</span>&apos;
-    testImplementation &apos;junit<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">4.12</span>&apos;
-    androidTestImplementation &apos;com.android.support.test<span class="token operator">:</span>runner<span class="token operator">:</span><span class="token number">1.0</span>.<span class="token number">2</span>&apos;
-    androidTestImplementation &apos;com.android.support.test.espresso<span class="token operator">:</span>espresso-core<span class="token operator">:</span><span class="token number">3.0</span>.<span class="token number">2</span>&apos;
+    implementation fileTree(dir<span class="token operator">:</span> 'libs'<span class="token punctuation">,</span> include<span class="token operator">:</span> <span class="token punctuation">[</span>'*.jar'<span class="token punctuation">]</span>)
+    implementation 'com.android.support<span class="token operator">:</span>appcompat-v7<span class="token operator">:</span><span class="token number">28.0</span>.<span class="token number">0</span>'
+    testImplementation 'junit<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">4.12</span>'
+    androidTestImplementation 'com.android.support.test<span class="token operator">:</span>runner<span class="token operator">:</span><span class="token number">1.0</span>.<span class="token number">2</span>'
+    androidTestImplementation 'com.android.support.test.espresso<span class="token operator">:</span>espresso-core<span class="token operator">:</span><span class="token number">3.0</span>.<span class="token number">2</span>'
 
-    compileOnly &apos;de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">53</span>&apos;
+    compileOnly 'de.robv.android.xposed<span class="token operator">:</span>api<span class="token operator">:</span><span class="token number">53</span>'
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="全局gradle配置文件：settingsgradle"><a name="全局gradle配置文件：settingsgradle" class="plugin-anchor" href="#全局gradle配置文件：settingsgradle"><i class="fa fa-link" aria-hidden="true"></i></a>全局Gradle配置文件：settings.gradle</h3>
@@ -1118,17 +1118,17 @@ dependencyResolutionManagement <span class="token punctuation">{</span>
         jcenter()
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-rootProject.name = <span class="token string">&quot;CrifanXposedHook&quot;</span>
-include &apos;<span class="token operator">:</span>app&apos;
+rootProject.name = <span class="token string">"CrifanXposedHook"</span>
+include '<span class="token operator">:</span>app'
 </code></pre>
-<p><img src="../assets/img/as_xposed_settings_gradle.png" alt="as_xposed_settings_gradle"></p>
+<p><img src="../assets/img/as_xposed_settings_gradle.png" alt="as_xposed_settings_gradle"></img></p>
 <p>参数说明：</p>
 <ul>
 <li><code>jcenter()</code><ul>
 <li>xposed的官网的jar包的源，就放在了<code>jcenter</code><ul>
 <li>Gradle去sync同步后，会去下载，之前加入的依赖<ul>
-<li><code>compileOnly &apos;de.robv.android.xposed:api:82&apos;</code></li>
-<li><code>compileOnly &apos;de.robv.android.xposed:api:82:sources&apos;</code></li>
+<li><code>compileOnly 'de.robv.android.xposed:api:82'</code></li>
+<li><code>compileOnly 'de.robv.android.xposed:api:82:sources'</code></li>
 </ul>
 </li>
 <li>分别对应的jar包地址：<ul>
@@ -1154,7 +1154,7 @@ buildscript <span class="token punctuation">{</span>
         jcenter()
     <span class="token punctuation">}</span>
     dependencies <span class="token punctuation">{</span>
-        classpath &apos;com.android.tools.build<span class="token operator">:</span>gradle<span class="token operator">:</span><span class="token number">7.0</span>.<span class="token number">0</span>&apos;
+        classpath 'com.android.tools.build<span class="token operator">:</span>gradle<span class="token operator">:</span><span class="token number">7.0</span>.<span class="token number">0</span>'
 
         <span class="token comment">// NOTE: Do not place your application dependencies here; they belong</span>
         <span class="token comment">// in the individual module build.gradle files</span>
@@ -1184,14 +1184,14 @@ task clean(type<span class="token operator">:</span> Delete) <span class="token 
 <p><code>Android Studio</code>-&gt;<code>Run</code>-&gt;<code>Edit Configuration</code>-&gt;<code>Android App</code>-&gt;<code>app</code>-&gt;<code>General</code>-&gt;<code>Launch Options</code>-&gt;从默认的：</p>
 <ul>
 <li><code>Launch</code>: <code>Default Activity</code><ul>
-<li><img src="../assets/img/as_launch_default_activity.png" alt="as_launch_default_activity"></li>
+<li><img src="../assets/img/as_launch_default_activity.png" alt="as_launch_default_activity"></img></li>
 </ul>
 </li>
 </ul>
 <p>改为：</p>
 <ul>
 <li><code>Launch</code>: <code>Nothing</code><ul>
-<li><img src="../assets/img/as_launch_nothing.png" alt="as_launch_nothing"></li>
+<li><img src="../assets/img/as_launch_nothing.png" alt="as_launch_nothing"></img></li>
 </ul>
 </li>
 </ul>
@@ -1202,17 +1202,17 @@ Error <span class="token keyword">while</span> Launching activity
 Failed to launch an application on all devices
 </code></pre>
 <ul>
-<li><img src="../assets/img/as_default_activity_not_found.png" alt="as_default_activity_not_found"></li>
+<li><img src="../assets/img/as_default_activity_not_found.png" alt="as_default_activity_not_found"></img></li>
 </ul>
 </li>
 <li>改了后，后续点击Debug调试按钮去调试时<ul>
 <li>最后会报错<ul>
 <li>要么是：<code>Timed out waiting for process xxx to appear on</code><ul>
-<li><img src="../assets/img/as_timed_out_waiting_for_process_to_appear_on.png" alt="as_timed_out_waiting_for_process_to_appear_on"></li>
+<li><img src="../assets/img/as_timed_out_waiting_for_process_to_appear_on.png" alt="as_timed_out_waiting_for_process_to_appear_on"></img></li>
 </ul>
 </li>
 <li>要么是：<code>Processes xxx are not found Aborting session</code><ul>
-<li><img src="../assets/img/processes_are_not_found_aborting_session.png" alt="processes_are_not_found_aborting_session"></li>
+<li><img src="../assets/img/processes_are_not_found_aborting_session.png" alt="processes_are_not_found_aborting_session"></img></li>
 </ul>
 </li>
 </ul>
@@ -1231,7 +1231,7 @@ Failed to launch an application on all devices
 <li>已经没有<a href="https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API" target="_blank">官网提示的Instant Run</a>了<ul>
 <li>最多算是有个，或许相关的，但是默认没有开启的<ul>
 <li><code>Live Edit</code><ul>
-<li><img src="../assets/img/as_live_edit.png" alt="as_live_edit"></li>
+<li><img src="../assets/img/as_live_edit.png" alt="as_live_edit"></img></li>
 </ul>
 </li>
 </ul>
@@ -1285,7 +1285,7 @@ Failed to launch an application on all devices
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"新增Xposed配置","level":"1.5.2","depth":2,"next":{"title":"编译安装Xposed插件apk","level":"1.5.3","depth":2,"path":"dev_xposed_plugin/build_install_apk.md","ref":"dev_xposed_plugin/build_install_apk.md","articles":[]},"previous":{"title":"新建安卓app项目","level":"1.5.1","depth":2,"path":"dev_xposed_plugin/new_android_app_project.md","ref":"dev_xposed_plugin/new_android_app_project.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_xposed_framework/pdf/android_re_xposed_framework.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_xposed_framework/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_xposed_framework","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"安卓逆向调试：XPosed框架","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍用于安卓破解的辅助工具：Xposed框架；先是Xposed框架简介，Xposed发展历史，从Xposed到EdXposed，再到LSPosed；然后介绍背景知识，包括Riru、Zygisk等；再介绍类XPosed框架的VirtualXposed、太极、LSPatch；接着介绍具体如何安装Xposed、EdXposed、LSPosed；其中包括EdXposed常见问题；LSPosed的相关日志、打开LSPosed的app、LSPosed的界面和功能、Shamiko模块；如何具体使用XPosed；以及常见的XPosed的插件模块，包括JustTrustMe，砸壳导出dex的FDex2和dumpdex，app可调试的Xdebuggable和XAppDebug，以及GravityBox；然后介绍如何开发XPosed插件，包括先是用AS新建一个安卓普通app项目，再去改动增加Xposed的配置，写Xposed插件的hook代码，编译和安装Xposed插件即普通安卓apk到安卓手机，然后确认Xposed插件是否安装成功和被正常识别，然后测试Xposed插件是否生效是否能输出log日志；以及贴出Xposed插件的demo项目源代码。最后整理Xposed相关心得；"},"file":{"path":"dev_xposed_plugin/add_xposed_config.md","mtime":"2024-07-29T02:45:22.831Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-29T02:46:53.147Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"新增Xposed配置","level":"1.5.2","depth":2,"next":{"title":"编译安装Xposed插件apk","level":"1.5.3","depth":2,"path":"dev_xposed_plugin/build_install_apk.md","ref":"dev_xposed_plugin/build_install_apk.md","articles":[]},"previous":{"title":"新建安卓app项目","level":"1.5.1","depth":2,"path":"dev_xposed_plugin/new_android_app_project.md","ref":"dev_xposed_plugin/new_android_app_project.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_xposed_framework/pdf/android_re_xposed_framework.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_xposed_framework/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_xposed_framework","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"安卓逆向调试：XPosed框架","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍用于安卓破解的辅助工具：Xposed框架；先是Xposed框架简介，Xposed发展历史，从Xposed到EdXposed，再到LSPosed；然后介绍背景知识，包括Riru、Zygisk等；再介绍类XPosed框架的VirtualXposed、太极、LSPatch；接着介绍具体如何安装Xposed、EdXposed、LSPosed；其中包括EdXposed常见问题；LSPosed的相关日志、打开LSPosed的app、LSPosed的界面和功能、Shamiko模块；如何具体使用XPosed；以及常见的XPosed的插件模块，包括JustTrustMe，砸壳导出dex的FDex2和dumpdex，app可调试的Xdebuggable和XAppDebug，以及GravityBox；然后介绍如何开发XPosed插件，包括先是用AS新建一个安卓普通app项目，再去改动增加Xposed的配置，写Xposed插件的hook代码，编译和安装Xposed插件即普通安卓apk到安卓手机，然后确认Xposed插件是否安装成功和被正常识别，然后测试Xposed插件是否生效是否能输出log日志；以及贴出Xposed插件的demo项目源代码。最后整理Xposed相关心得；"},"file":{"path":"dev_xposed_plugin/add_xposed_config.md","mtime":"2024-07-29T02:45:22.831Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-07T09:28:16.052Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
