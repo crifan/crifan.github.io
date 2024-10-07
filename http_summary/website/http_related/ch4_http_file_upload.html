@@ -6,7 +6,7 @@
         <title>HTTP的文件上传 · HTTP知识总结</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -576,20 +576,20 @@
 <p>可以基本实现文件上传的iOS的Alamofire的代码：</p>
 <pre class="language-"><code class="lang-swift"><span class="token keyword">func</span> <span class="token function-definition function">uploadImageData</span><span class="token punctuation">(</span>imageData<span class="token punctuation">:</span><span class="token class-name">NSData</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">dispatchBackground_async</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;imageData.length=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">imageData<span class="token punctuation">.</span>length</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"imageData.length=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">imageData<span class="token punctuation">.</span>length</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
         <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">pleaseWait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
         <span class="token keyword">var</span> curHeader <span class="token operator">=</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        curHeader<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;authenticate&quot;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;token &quot;</span></span> <span class="token operator">+</span> gCurUserItem<span class="token punctuation">.</span>accessToken
+        curHeader<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"authenticate"</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"token "</span></span> <span class="token operator">+</span> gCurUserItem<span class="token punctuation">.</span>accessToken
 
-        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;curHeader=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">curHeader</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"curHeader=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">curHeader</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
         <span class="token keyword">let</span> curDate <span class="token operator">=</span> <span class="token class-name">NSDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;file&quot;</span></span>
-        <span class="token keyword">let</span> filename <span class="token operator">=</span> curDate<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;yyyyMMdd_hhmmss&quot;</span></span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string-literal"><span class="token string">&quot;.jpg&quot;</span></span>
-        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;name=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">name</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">, filename=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">filename</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"file"</span></span>
+        <span class="token keyword">let</span> filename <span class="token operator">=</span> curDate<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"yyyyMMdd_hhmmss"</span></span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string-literal"><span class="token string">".jpg"</span></span>
+        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"name=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">name</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">, filename=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">filename</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
         <span class="token comment">//uploadImageData &gt; name=file, filename=20160625_085958.jpg</span>
 
         <span class="token class-name">Alamofire</span><span class="token punctuation">.</span><span class="token function">upload</span><span class="token punctuation">(</span>
@@ -601,52 +601,52 @@
                     data<span class="token punctuation">:</span> imageData<span class="token punctuation">,</span>
                     name<span class="token punctuation">:</span> name<span class="token punctuation">,</span>
                     fileName<span class="token punctuation">:</span> filename<span class="token punctuation">,</span>
-                    mimeType<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;image/jpeg&quot;</span></span>
+                    mimeType<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"image/jpeg"</span></span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
             encodingCompletion<span class="token punctuation">:</span> <span class="token punctuation">{</span> encodingResult <span class="token keyword">in</span>
-                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;encodingResult=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingResult</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"encodingResult=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingResult</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                 <span class="token comment">/*
 encodingResult=Success($ curl -i \
     -X POST \
-    -H &quot;User-Agent: Xxx App/com.xxx.YyyApp (2016.6.24; OS ban ben 9.3(ban hao 13E230))&quot; \
-    -H &quot;authenticate: token zzzzzz&quot; \
-    -H &quot;Content-Type: multipart/form-data; boundary=alamofire.boundary.5fd5efc56016a4df&quot; \
-    -H &quot;Accept-Encoding: gzip;q=1.0, compress;q=0.5&quot; \
-    -H &quot;Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9&quot; \
-    &quot;http://192.168.1.102:8080/app/user/10000010/upload&quot;, false, nil)
+    -H "User-Agent: Xxx App/com.xxx.YyyApp (2016.6.24; OS ban ben 9.3(ban hao 13E230))" \
+    -H "authenticate: token zzzzzz" \
+    -H "Content-Type: multipart/form-data; boundary=alamofire.boundary.5fd5efc56016a4df" \
+    -H "Accept-Encoding: gzip;q=1.0, compress;q=0.5" \
+    -H "Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9" \
+    "http://192.168.1.102:8080/app/user/10000010/upload", false, nil)
 
 encodingResult=Success($ curl -i \
     -X POST \
-    -H &quot;User-Agent: Xxx App/com.xxx.YyyApp (2016.6.24; OS ban ben 9.3(ban hao 13E230))&quot; \
-    -H &quot;authenticate: token zzzzzz&quot; \
-    -H &quot;Content-Type: multipart/form-data; boundary=alamofire.boundary.01fc8db6b551cd51&quot; \
-    -H &quot;Accept-Encoding: gzip;q=1.0, compress;q=0.5&quot; \
-    -H &quot;Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9&quot; \
-    &quot;http://xxx.yyy.cn/app/user/10000010/upload&quot;, false, nil)
+    -H "User-Agent: Xxx App/com.xxx.YyyApp (2016.6.24; OS ban ben 9.3(ban hao 13E230))" \
+    -H "authenticate: token zzzzzz" \
+    -H "Content-Type: multipart/form-data; boundary=alamofire.boundary.01fc8db6b551cd51" \
+    -H "Accept-Encoding: gzip;q=1.0, compress;q=0.5" \
+    -H "Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9" \
+    "http://xxx.yyy.cn/app/user/10000010/upload", false, nil)
                  */</span>
 
                 <span class="token keyword">switch</span> encodingResult <span class="token punctuation">{</span>
                 <span class="token comment">//case .Success(let uploadRequest, streamingFromDisk, streamFileURL):</span>
                     <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token class-name">Success</span><span class="token punctuation">(</span><span class="token keyword">let</span> uploadRequest<span class="token punctuation">,</span> <span class="token omit keyword">_</span><span class="token punctuation">,</span> <span class="token omit keyword">_</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-<span class="token comment">//                        gLog.verbose(&quot;uploadRequest=\(uploadRequest), streamingFromDisk=\(streamingFromDisk), streamFileURL=\(streamFileURL)&quot;)</span>
-                        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;uploadRequest=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">uploadRequest</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+<span class="token comment">//                        gLog.verbose("uploadRequest=\(uploadRequest), streamingFromDisk=\(streamingFromDisk), streamFileURL=\(streamFileURL)")</span>
+                        gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"uploadRequest=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">uploadRequest</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                     <span class="token comment">//upload=POST http://192.168.1.102:8080/app/user/10000010/upload</span>
                     <span class="token comment">//uploadRequest=POST http://xxx.yyy.cn/app/user/10000010/upload</span>
 
                     uploadRequest<span class="token punctuation">.</span><span class="token function">responseJSON</span><span class="token punctuation">(</span>completionHandler<span class="token punctuation">:</span>
                         <span class="token punctuation">{</span> response <span class="token keyword">in</span>
-                            gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;response=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">response</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                            gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"response=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">response</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                             <span class="token comment">/*
                              response=SUCCESS: {
                                 code = 200;
                                 data =     {
                                     created = 1466850689624;
                                     id = 1000001020160625103129624;
-                                    location = &quot;&lt;null&gt;&quot;;
-                                    name = &quot;image.jpg&quot;;
-                                    owner = &quot;&lt;null&gt;&quot;;
+                                    location = "&lt;null&gt;";
+                                    name = "image.jpg";
+                                    owner = "&lt;null&gt;";
                                     uploader = 10000010;
                                 };
                                 message = ok;
@@ -654,8 +654,8 @@ encodingResult=Success($ curl -i \
 
                             response=SUCCESS: {
                                 errors =     (
-                                    &quot;The request body may not be null&quot;,
-                                    &quot;The request body may not be null&quot;
+                                    "The request body may not be null",
+                                    "The request body may not be null"
                                 );
                             }
 
@@ -664,9 +664,9 @@ encodingResult=Success($ curl -i \
                                 data =     {
                                     created = 1466859610413;
                                     id = 1000001020160625130010413;
-                                    location = &quot;&lt;null&gt;&quot;;
-                                    name = &quot;20160625_085958.jpg&quot;;
-                                    owner = &quot;&lt;null&gt;&quot;;
+                                    location = "&lt;null&gt;";
+                                    name = "20160625_085958.jpg";
+                                    owner = "&lt;null&gt;";
                                     uploader = 10000010;
                                 };
                                 message = ok;
@@ -676,34 +676,34 @@ encodingResult=Success($ curl -i \
                             <span class="token keyword">switch</span> response<span class="token punctuation">.</span>result <span class="token punctuation">{</span>
                             <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token class-name">Success</span><span class="token punctuation">(</span><span class="token keyword">let</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
                                 <span class="token keyword">let</span> valueJson <span class="token operator">=</span> <span class="token function">JSON</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
-                                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">valueJson</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">valueJson</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                                 <span class="token comment">/*
                                 {
-                                  &quot;message&quot; : &quot;ok&quot;,
-                                  &quot;code&quot; : 200,
-                                  &quot;data&quot; : {
-                                    &quot;name&quot; : &quot;image.jpg&quot;,
-                                    &quot;id&quot; : &quot;1000001020160625103129624&quot;,
-                                    &quot;uploader&quot; : 10000010,
-                                    &quot;location&quot; : null,
-                                    &quot;created&quot; : 1466850689624,
-                                    &quot;owner&quot; : null
+                                  "message" : "ok",
+                                  "code" : 200,
+                                  "data" : {
+                                    "name" : "image.jpg",
+                                    "id" : "1000001020160625103129624",
+                                    "uploader" : 10000010,
+                                    "location" : null,
+                                    "created" : 1466850689624,
+                                    "owner" : null
                                   }
                                 }
                                  */</span>
 
-                                <span class="token keyword">let</span> statusCode <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;code&quot;</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>int <span class="token operator">??</span> <span class="token number">0</span>
+                                <span class="token keyword">let</span> statusCode <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"code"</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>int <span class="token operator">??</span> <span class="token number">0</span>
                                 <span class="token keyword">if</span> statusCode <span class="token operator">==</span> <span class="token number">200</span> <span class="token punctuation">{</span>
-                                    <span class="token keyword">let</span> dataObj <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;data&quot;</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>object
+                                    <span class="token keyword">let</span> dataObj <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"data"</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>object
                                     <span class="token keyword">let</span> dataJson<span class="token punctuation">:</span><span class="token constant">JSON</span> <span class="token operator">=</span> <span class="token function">JSON</span><span class="token punctuation">(</span>dataObj<span class="token punctuation">)</span>
                                     <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">uploadAttachmentsHandler</span><span class="token punctuation">(</span><span class="token class-name">Alamofire</span><span class="token punctuation">.</span><span class="token class-name">Result</span><span class="token punctuation">.</span><span class="token class-name">Success</span><span class="token punctuation">(</span>dataJson<span class="token punctuation">)</span><span class="token punctuation">)</span>
-                                    gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;dataJson=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">dataJson</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                                    gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"dataJson=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">dataJson</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
                                 <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                                    <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">noticeError</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;上传附件出错&quot;</span></span><span class="token punctuation">,</span> autoClear<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> autoClearTime<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                                    <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">noticeError</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"上传附件出错"</span></span><span class="token punctuation">,</span> autoClear<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> autoClearTime<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span>
 
-                                    <span class="token keyword">let</span> message <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;message&quot;</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>string <span class="token operator">??</span> <span class="token string-literal"><span class="token string">&quot;&quot;</span></span>
-                                    <span class="token keyword">let</span> messageStrArr <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">splitToStrArr</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;|&quot;</span></span><span class="token punctuation">)</span>
+                                    <span class="token keyword">let</span> message <span class="token operator">=</span> valueJson<span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"message"</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>string <span class="token operator">??</span> <span class="token string-literal"><span class="token string">""</span></span>
+                                    <span class="token keyword">let</span> messageStrArr <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">splitToStrArr</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"|"</span></span><span class="token punctuation">)</span>
 
                                     <span class="token keyword">var</span> messageStr<span class="token punctuation">:</span><span class="token class-name">String</span> <span class="token operator">=</span> message
                                     <span class="token keyword">var</span> subCode<span class="token punctuation">:</span><span class="token class-name">Int</span> <span class="token operator">=</span> <span class="token number">0</span>
@@ -714,21 +714,21 @@ encodingResult=Success($ curl -i \
                                     <span class="token punctuation">}</span>
 
                                     <span class="token keyword">let</span> error<span class="token punctuation">:</span><span class="token class-name">NSError</span> <span class="token operator">=</span> <span class="token class-name">NSError</span><span class="token punctuation">(</span>domain<span class="token punctuation">:</span> <span class="token class-name">HttpErrorDomain</span><span class="token punctuation">,</span> code<span class="token punctuation">:</span> statusCode<span class="token punctuation">,</span> userInfo<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-                                        <span class="token string-literal"><span class="token string">&quot;message&quot;</span></span>   <span class="token punctuation">:</span> messageStr<span class="token punctuation">,</span>
-                                        <span class="token string-literal"><span class="token string">&quot;code&quot;</span></span>      <span class="token punctuation">:</span> statusCode<span class="token punctuation">,</span>
-                                        <span class="token string-literal"><span class="token string">&quot;subCode&quot;</span></span>   <span class="token punctuation">:</span> subCode<span class="token punctuation">,</span>
+                                        <span class="token string-literal"><span class="token string">"message"</span></span>   <span class="token punctuation">:</span> messageStr<span class="token punctuation">,</span>
+                                        <span class="token string-literal"><span class="token string">"code"</span></span>      <span class="token punctuation">:</span> statusCode<span class="token punctuation">,</span>
+                                        <span class="token string-literal"><span class="token string">"subCode"</span></span>   <span class="token punctuation">:</span> subCode<span class="token punctuation">,</span>
                                         <span class="token punctuation">]</span><span class="token punctuation">)</span>
 
                                     <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">uploadAttachmentsHandler</span><span class="token punctuation">(</span><span class="token class-name">Alamofire</span><span class="token punctuation">.</span><span class="token class-name">Result</span><span class="token punctuation">.</span><span class="token class-name">Failure</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
                                 <span class="token punctuation">}</span>
                             <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token class-name">Failure</span><span class="token punctuation">(</span><span class="token keyword">let</span> error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;error=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">error</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                                gLog<span class="token punctuation">.</span><span class="token function">verbose</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"error=</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">error</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                                 <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">uploadAttachmentsHandler</span><span class="token punctuation">(</span><span class="token class-name">Alamofire</span><span class="token punctuation">.</span><span class="token class-name">Result</span><span class="token punctuation">.</span><span class="token class-name">Failure</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
                             <span class="token punctuation">}</span>
                     <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
                 <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token class-name">Failure</span><span class="token punctuation">(</span><span class="token keyword">let</span> encodingError<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                    gLog<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;上传附件失败</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingError</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                    gLog<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"上传附件失败</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingError</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">)</span>
@@ -803,7 +803,7 @@ encodingResult=Success($ curl -i \
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"HTTP的文件上传","level":"1.4.4","depth":2,"next":{"title":"混合内容","level":"1.4.5","depth":2,"path":"http_related/ch5_mixed_content.md","ref":"http_related/ch5_mixed_content.md","articles":[]},"previous":{"title":"HTTP相关心得","level":"1.4.3","depth":2,"path":"http_related/ch3_http_note_summary.md","ref":"http_related/ch3_http_note_summary.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/http_summary/pdf/http_summary.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/http_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP知识总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"总结HTTP技术相关内容。先进行了HTTP的简介，介绍了学习HTTP的目的，以及典型的HTTP的内部流程，以及总结了基本的逻辑。再进行HTTP的详细介绍，包括字段和结构，Header头，请求参数和编码，响应的状态码，响应数据的JSON格式等。再整理HTTP相关的一些内容，比如工具和不同语言的HTTP的网络库，以及如何进行后台HTTP相关的api接口设计，总结了一些相关心得，文件上传、混合内容等。最后附上一些HTTP相关的教程资料。"},"file":{"path":"http_related/ch4_http_file_upload.md","mtime":"2023-12-13T07:46:23.955Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-13T07:51:23.218Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"HTTP的文件上传","level":"1.4.4","depth":2,"next":{"title":"混合内容","level":"1.4.5","depth":2,"path":"http_related/ch5_mixed_content.md","ref":"http_related/ch5_mixed_content.md","articles":[]},"previous":{"title":"HTTP相关心得","level":"1.4.3","depth":2,"path":"http_related/ch3_http_note_summary.md","ref":"http_related/ch3_http_note_summary.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/http_summary/pdf/http_summary.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/http_summary/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"http_summary","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"HTTP知识总结","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"总结HTTP技术相关内容。先进行了HTTP的简介，介绍了学习HTTP的目的，以及典型的HTTP的内部流程，以及总结了基本的逻辑。再进行HTTP的详细介绍，包括字段和结构，Header头，请求参数和编码，响应的状态码，响应数据的JSON格式等。再整理HTTP相关的一些内容，比如工具和不同语言的HTTP的网络库，以及如何进行后台HTTP相关的api接口设计，总结了一些相关心得，文件上传、混合内容等。最后附上一些HTTP相关的教程资料。"},"file":{"path":"http_related/ch4_http_file_upload.md","mtime":"2023-12-13T07:46:23.955Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-07T09:38:54.243Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
