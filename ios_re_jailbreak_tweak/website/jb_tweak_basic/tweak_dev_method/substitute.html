@@ -3,7 +3,7 @@
 <html lang="zh-hans" >
     <head>
         <meta charset="UTF-8">
-        <title>CydiaSubstrate · iOS逆向开发：越狱插件开发</title>
+        <title>Substitute · iOS逆向开发：越狱插件开发</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 6.0.0">
@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="substitute.html" />
+    <link rel="next" href="../../tweak_dev/" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="cydiasubstrate.html" />
     
 
     <style>
@@ -214,7 +214,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.2.1" data-path="cydiasubstrate.html">
+        <li class="chapter " data-level="1.3.2.1" data-path="cydiasubstrate.html">
             
                 <a href="cydiasubstrate.html">
             
@@ -229,7 +229,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="substitute.html">
+        <li class="chapter active" data-level="1.3.2.2" data-path="substitute.html">
             
                 <a href="substitute.html">
             
@@ -437,7 +437,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >CydiaSubstrate</a>
+        <a href="../.." >Substitute</a>
     </h1>
 </div>
 
@@ -452,204 +452,98 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="cydiasubstrate"><a name="cydiasubstrate" class="plugin-anchor" href="#cydiasubstrate"><i class="fa fa-link" aria-hidden="true"></i></a>CydiaSubstrate</h1>
+                                <html><head></head><body><h1 id="substitute"><a name="substitute" class="plugin-anchor" href="#substitute"><i class="fa fa-link" aria-hidden="true"></i></a>Substitute</h1>
 <ul>
-<li><code>CydiaSubstrate</code>=<code>Cydia Substrate</code> = <code>Cydia Mobile Substrate</code><ul>
-<li>旧称：<code>MobileSubstrate</code></li>
-<li>概述：Cydia中的hook框架<ul>
-<li>The powerful code modification platform behind Cydia</li>
-<li>Powerful Code Insertion Platform</li>
-<li>a framework and development library<ul>
-<li>used by developers to reasonably sanely (and hopefully safely) make modifications to code written by other developers and running in other processes, even if multiple people are attempting to modify the same thing; this library is the foundation of most of the interesting hacks found on the iPhone.</li>
+<li>Substitute<ul>
+<li>是什么：一个插件注入系统<ul>
+<li>和Substrate（==CydiaSubstrate）类似<ul>
+<li>是Substrate的替代品</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>额外说明<ul>
-<li><code>MobileSubstrate</code>是<code>Cydia</code>实现的基础<ul>
-<li>现有的越狱开发环境一般使用的是 <a href="../../tweak_dev/theos_logos/">Theos/Logos</a> 或者 <a href="../../tweak_dev/iosopendev.html">iOSOpenDev</a><ul>
-<li>这两者hook功能都是对MobileSubstrate API的封装</li>
+<li>用途<ul>
+<li>可以基于Substitute的API函数，开发插件，实现各种hook</li>
+</ul>
+</li>
+<li>Substitute的函数<ul>
+<li>API函数<ul>
+<li>包含<ul>
+<li><code>SubGetImageByName</code></li>
+<li><code>SubFindSymbol</code></li>
+<li><code>SubHookFunction</code></li>
+<li><code>SubHookMessageEx</code></li>
+</ul>
+</li>
+<li>（好像分别）对应着 <a href="cydiasubstrate.html">CydiaSubstrate</a> 的<ul>
+<li><code>MSGetImageByName</code></li>
+<li><code>MSFindSymbol</code></li>
+<li><code>MSHookFunction</code></li>
+<li><code>MSHookMessageEx</code></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li>反破解<ul>
-<li><code>MobileSubstrate</code>是基于<code>DYLD_INSERT_LIBRARIES</code>方式实现的<ul>
-<li>有些应用（如美团）为了阻止他人的破解，采用了一些措施阻止了DYLD_INSERT_LIBRARIES这种注入方式<ul>
-<li>核心：加编译参数，Restricted Segment of Header 禁止改动加载的库<ul>
-<li><code>-Wl,-sectcreate,__RESTRICT,__restrict,/dev/null</code></li>
-</ul>
-</li>
-<li>最新情况<ul>
-<li>新版dyld早已废弃此种手段了<ul>
-<li>从iOS10开始，这种防护手段已失效</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>功能<ul>
-<li>允许实时修改代码<ul>
-<li>第三方开发者调用其API，可以实现给IOS系统打补丁，改变系统或者应用的运行行为。</li>
-<li>Substrate makes it easy to modify software, even without the source code, and in a way that allows users to easily choose which changes they want</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>机制=原理<ul>
-<li>injection mechanism 注入机制</li>
-<li>自己写插件=扩展=substrate extensions，利用API，实现特定功能<ul>
-<li>Developers support this by building their changes as "substrate extensions" that are loaded into all of the processes they want to take control of.</li>
-<li>By using the provided API to make all changes in memory, multiple developers can safely adapt the same parts of the target program to their purposes.</li>
-</ul>
-</li>
-<li>实现原理<ul>
-<li>在MAC与IOS平台上，动态库的后缀一般是dylid，而加载这些动态库的程序叫做<ul>
-<li>dynamic linker=dynamic loader=dyld</li>
-</ul>
-</li>
-<li>这个程序有很多的环境变量来设置程序的一些行为，最为常用的一个环境变量叫做<ul>
-<li>DYLD_INSERT_LIBRARIES</li>
-</ul>
-</li>
-<li>它是一个使用冒号分隔的动态库路径字符串，表示一个将要加载运行的动态库额外依赖的其它动态库</li>
-<li>通过这个环境变量，我们就可以向应用中注入自己的动态库，进而改变应用运行时的特定行为</li>
-<li>而这种方式，也正是mobileSubstrate所使用的最基本方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Cydia Substrate extensions<ul>
-<li>=run-time patches</li>
-</ul>
-</li>
-<li>主要模块<ul>
-<li>MobileHooker<ul>
-<li>used to replace system functions<ul>
-<li>This process is known as hooking</li>
-</ul>
-</li>
-<li>核心函数API<ul>
-<li>MSHookMessage<ul>
-<li>非线程安全</li>
-<li>用于替换原函数实现</li>
-<li>在OC的Runtime机制上实现的</li>
-</ul>
-</li>
-<li>MSHookMessageEx<ul>
-<li>线程安全</li>
-<li>用于 hook Objective-C 方法<ul>
-<li>在OC的Runtime机制上实现的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>MSHookFunction<ul>
-<li>用于 hook C 语言函数<ul>
-<li>主要用于C/C++函数</li>
-</ul>
-</li>
-<li>与OC不同，它另有一套自己的实现方式</li>
-</ul>
-</li>
-<li>非公开的：MSHookProcess</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>MobileLoader<ul>
-<li>loads 3rd-party patching code into the running application<ul>
-<li>将指定目录下的补丁文件（动态库文件）加载到指定的程序中</li>
-</ul>
-</li>
-<li><code>/Library/MobileSubstrate/DynamicLibraries/</code></li>
-<li>举例<ul>
-<li><img src="../../assets/img/loader_filter.png" alt="loader_filter"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Safe mode<ul>
-<li>容错处理</li>
-<li>第三方开发者通过MobileSubstrate向系统注入自定义代码时，如果考虑不周就可能导致终端设备处于崩溃的状态。MobileLoader会捕获这个崩溃异常，然后让设备进入SafeMode状态，在这个状态下，所有的第三方补丁都将被禁用，开发者可以比较从容的恢复设备。</li>
-<li>注入别的进程并改变其逻辑一定存在风险，难免会造成程序崩溃的现象，如果崩溃的是SpringBoard等系统进程，则会造成系统瘫痪。为了避免这类情况，SafeMode会捕获SIGABRT、SIGILL、SIGBUS、SIGSEGV、SIGSYS这几种信号，捕获到目标信号后SafeMode会使设备进入安全模式，在安全模式下所有第三方插件(即dylib)都会被禁用，便于修复系统</li>
-<li>When a extension crashed the SpringBoard, MobileLoader will catch that and put the device into safe mode</li>
-<li>In safe mode all 3rd-party extensions will be disabled.</li>
-<li>The following signals will invoke safe mode<ul>
-<li>SIGABRT</li>
-<li>SIGILL</li>
-<li>SIGBUS</li>
-<li>SIGSEGV</li>
-<li>SIGSYS</li>
+<li>其他底层函数<ul>
+<li><a href="https://github.com/comex/substitute/blob/master/lib/substitute.h" target="_blank">substitute.h</a><ul>
+<li><code>substitute_open_image</code></li>
+<li><code>substitute_close_image</code></li>
+<li><code>substitute_find_private_syms</code></li>
+<li><code>substitute_sym_to_ptr</code></li>
+<li><code>substitute_interpose_imports</code></li>
+<li><code>substitute_hook_objc_message</code></li>
+<li><code>substitute_free_created_imp</code></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>iOS<ul>
-<li>前提：<ul>
-<li>iOS设备已越狱</li>
-<li>已安装Cydia = Cydia Installer</li>
+<li>作者：Comex</li>
+<li>官网<ul>
+<li>没有官网，只有GitHub<ul>
+<li><a href="https://github.com/comex/substitute" target="_blank">comex/substitute: A free runtime modification library. (github.com)</a><ul>
+<li>但是：作者已放弃维护了</li>
 </ul>
 </li>
-<li>安装：通过Cydia安装<ul>
-<li>Cydia Substrate · Cydia (saurik.com)<ul>
-<li><a href="https://cydia.saurik.com/package/mobilesubstrate/" target="_blank">https://cydia.saurik.com/package/mobilesubstrate/</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>安卓<ul>
-<li>包名：com.saurik.substrate</li>
-<li>apk<ul>
-<li><a href="http://www.cydiasubstrate.com/download/com.saurik.substrate.apk" target="_blank">http://www.cydiasubstrate.com/download/com.saurik.substrate.apk</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>资料<ul>
-<li>官网 Cydia Substrate<ul>
-<li><a href="http://www.cydiasubstrate.com/" target="_blank">http://www.cydiasubstrate.com/</a></li>
-</ul>
-</li>
-<li>快速上手 <a href="http://www.cydiasubstrate.com/id/264d6581-a762-4343-9605-729ef12ff0af/" target="_blank">Getting Started</a></li>
-<li>常见问题 <a href="http://www.cydiasubstrate.com/id/1842c585-50e3-4964-8a0d-2f69762767d7/" target="_blank">FAQ | Cydia Substrate</a><ul>
-<li>Why are the APIs namespaced with "MS”? FAQ | Cydia Substrate<ul>
-<li>API前缀：MS = MobileSubstrate<ul>
-<li>最早时：Mobile指的是MobileSafari, MobileMail等</li>
+<li>其他人的fork后的<ul>
+<li><a href="https://github.com/MidnightTeam/substitute" target="_blank">MidnightTeam/substitute: A free runtime modification library. (github.com)</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li>相关<ul>
-<li>The iPhone Wiki<ul>
-<li><a href="https://www.theiphonewiki.com/" target="_blank">https://www.theiphonewiki.com/</a><ul>
-<li>The iPhone Wiki is an unofficial wiki dedicated to collecting, storing and providing information on the internals of Apple's amazing iDevices</li>
-<li>We hope to pass this information on to the next generation of hackers so that they can go forth into their forebears' footsteps and break the ridiculous bonds Apple has put on their amazing mobile devices.</li>
-</ul>
-</li>
-<li>越狱Jailbreak<ul>
-<li><a href="https://www.theiphonewiki.com/wiki/Jailbreak" target="_blank">https://www.theiphonewiki.com/wiki/Jailbreak</a></li>
+<li>下载<ul>
+<li>只能网上找到其他地方去下载<ul>
+<li><a href="https://www.ios-repo-updates.com/repository/bingner-elucubratus/package/com.ex.substitute/" target="_blank">Package: Substitute • com.ex.substitute • Bingn... (ios-repo-updates.com)</a><ul>
+<li>2.2.3版本<ul>
+<li><a href="https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.2.3_iphoneos-arm.deb" target="_blank">https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.2.3_iphoneos-arm.deb</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>类似框架<ul>
-<li>Cycript</li>
+</ul>
+</li>
+<li>或者从Cydia中搜：Substitute，可以找到并安装对应插件<ul>
+<li><img src="../../assets/img/cydia_plugin_substitute.jpg" alt="cydia_plugin_substitute"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对应现象<ul>
+<li>用unc0ver越狱后，会自动安装<ul>
+<li>Substitute的app：桌面上可以看到Substitute的图标<ul>
+<li><img src="../../assets/img/iphone_substitute_app_logo.jpg" alt="iphone_substitute_app_logo"></img></li>
+</ul>
+</li>
+<li>Substitute的插件<ul>
+<li>Cydia中可以看到Substitute插件<ul>
+<li><img src="../../assets/img/cydia_installed_substitute.png" alt="cydia_installed_substitute"></img></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -658,7 +552,7 @@
 </li>
 </ul>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-10-11 09:49:52
+2024-10-14 09:57:06
 </span></footer></body></html>
                                 
                                 </section>
@@ -686,12 +580,12 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: tweak开发手段">
+                <a href="cydiasubstrate.html" class="navigation navigation-prev " aria-label="Previous page: CydiaSubstrate">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="substitute.html" class="navigation navigation-next " aria-label="Next page: Substitute">
+                <a href="../../tweak_dev/" class="navigation navigation-next " aria-label="Next page: Tweak越狱插件开发">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -702,7 +596,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CydiaSubstrate","level":"1.3.2.1","depth":3,"next":{"title":"Substitute","level":"1.3.2.2","depth":3,"path":"jb_tweak_basic/tweak_dev_method/substitute.md","ref":"jb_tweak_basic/tweak_dev_method/substitute.md","articles":[]},"previous":{"title":"tweak开发手段","level":"1.3.2","depth":2,"path":"jb_tweak_basic/tweak_dev_method/README.md","ref":"jb_tweak_basic/tweak_dev_method/README.md","articles":[{"title":"CydiaSubstrate","level":"1.3.2.1","depth":3,"path":"jb_tweak_basic/tweak_dev_method/cydiasubstrate.md","ref":"jb_tweak_basic/tweak_dev_method/cydiasubstrate.md","articles":[]},{"title":"Substitute","level":"1.3.2.2","depth":3,"path":"jb_tweak_basic/tweak_dev_method/substitute.md","ref":"jb_tweak_basic/tweak_dev_method/substitute.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_jailbreak_tweak/pdf/ios_re_jailbreak_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_jailbreak_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_jailbreak_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：越狱插件开发","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向开发领域中，如何开发越狱插件tweak。先是概览，然后介绍基础知识：什么是tweak插件、tweak插件的开发手段；以及具体如何用Theos/Logos、iOSOpenDev、MonkeyDev去开发tweak插件；Theos中包括搭建Theos开发环境；以及整理相关心得。"},"file":{"path":"jb_tweak_basic/tweak_dev_method/cydiasubstrate.md","mtime":"2024-10-11T01:49:52.808Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-14T01:58:53.728Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Substitute","level":"1.3.2.2","depth":3,"next":{"title":"Tweak越狱插件开发","level":"1.4","depth":1,"path":"tweak_dev/README.md","ref":"tweak_dev/README.md","articles":[{"title":"Theos/Logos","level":"1.4.1","depth":2,"path":"tweak_dev/theos_logos/README.md","ref":"tweak_dev/theos_logos/README.md","articles":[{"title":"搭建Theos环境","level":"1.4.1.1","depth":3,"path":"tweak_dev/theos_logos/build_env.md","ref":"tweak_dev/theos_logos/build_env.md","articles":[]},{"title":"相关资料","level":"1.4.1.2","depth":3,"path":"tweak_dev/theos_logos/doc.md","ref":"tweak_dev/theos_logos/doc.md","articles":[]}]},{"title":"iOSOpenDev","level":"1.4.2","depth":2,"path":"tweak_dev/iosopendev.md","ref":"tweak_dev/iosopendev.md","articles":[]},{"title":"MonkeyDev","level":"1.4.3","depth":2,"path":"tweak_dev/monkeydev.md","ref":"tweak_dev/monkeydev.md","articles":[]}]},"previous":{"title":"CydiaSubstrate","level":"1.3.2.1","depth":3,"path":"jb_tweak_basic/tweak_dev_method/cydiasubstrate.md","ref":"jb_tweak_basic/tweak_dev_method/cydiasubstrate.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_jailbreak_tweak/pdf/ios_re_jailbreak_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_jailbreak_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_jailbreak_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：越狱插件开发","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向开发领域中，如何开发越狱插件tweak。先是概览，然后介绍基础知识：什么是tweak插件、tweak插件的开发手段；以及具体如何用Theos/Logos、iOSOpenDev、MonkeyDev去开发tweak插件；Theos中包括搭建Theos开发环境；以及整理相关心得。"},"file":{"path":"jb_tweak_basic/tweak_dev_method/substitute.md","mtime":"2024-10-14T01:57:06.010Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-14T01:58:53.728Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
