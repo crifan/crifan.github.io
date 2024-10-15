@@ -1,0 +1,1846 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>dyld版本 · iOS逆向开发：dyld动态链接</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="source/" />
+    
+    
+    <link rel="prev" href="man_help/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_dyld_link","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dyld_overview/">
+            
+                <a href="../dyld_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    dyld概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../dyld_overview/dyld_versions.html">
+            
+                <a href="../dyld_overview/dyld_versions.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    dyld库的版本和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../dyld_overview/dyld_functions.html">
+            
+                <a href="../dyld_overview/dyld_functions.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    dyld函数概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    dyld
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="man_help/">
+            
+                <a href="man_help/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    man page=help
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2" data-path="version.html">
+            
+                <a href="version.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    dyld版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="source/">
+            
+                <a href="source/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    dyld源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="loading_process/">
+            
+                <a href="loading_process/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    dyld加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="func/">
+            
+                <a href="func/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    相关函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="func/dyld_api/">
+            
+                <a href="func/dyld_api/">
+            
+                    
+                        <b>1.3.5.1.</b>
+                    
+                    dyld的API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.1" data-path="func/dyld_api/dlfcn_h/">
+            
+                <a href="func/dyld_api/dlfcn_h/">
+            
+                    
+                        <b>1.3.5.1.1.</b>
+                    
+                    dlfcn.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.1.1" data-path="func/dyld_api/dlfcn_h/dladdr.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dladdr.html">
+            
+                    
+                        <b>1.3.5.1.1.1.</b>
+                    
+                    dladdr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.2" data-path="func/dyld_api/dlfcn_h/dlsym.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dlsym.html">
+            
+                    
+                        <b>1.3.5.1.1.2.</b>
+                    
+                    dlsym
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.3" data-path="func/dyld_api/dlfcn_h/dlinfo.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dlinfo.html">
+            
+                    
+                        <b>1.3.5.1.1.3.</b>
+                    
+                    dlinfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.4" data-path="func/dyld_api/dlfcn_h/dlopen.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dlopen.html">
+            
+                    
+                        <b>1.3.5.1.1.4.</b>
+                    
+                    dlopen
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.5" data-path="func/dyld_api/dlfcn_h/dlclose.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dlclose.html">
+            
+                    
+                        <b>1.3.5.1.1.5.</b>
+                    
+                    dlclose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.6" data-path="func/dyld_api/dlfcn_h/dlopen_preflight.html">
+            
+                <a href="func/dyld_api/dlfcn_h/dlopen_preflight.html">
+            
+                    
+                        <b>1.3.5.1.1.6.</b>
+                    
+                    dlopen_preflight
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2" data-path="func/dyld_api/dyld_h/">
+            
+                <a href="func/dyld_api/dyld_h/">
+            
+                    
+                        <b>1.3.5.1.2.</b>
+                    
+                    dyld.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.2.1" data-path="func/dyld_api/dyld_h/_dyld_image_count.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_image_count.html">
+            
+                    
+                        <b>1.3.5.1.2.1.</b>
+                    
+                    _dyld_image_count
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.2" data-path="func/dyld_api/dyld_h/_dyld_get_image_header.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_get_image_header.html">
+            
+                    
+                        <b>1.3.5.1.2.2.</b>
+                    
+                    _dyld_get_image_header
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.3" data-path="func/dyld_api/dyld_h/_dyld_get_image_vmaddr_slide.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_get_image_vmaddr_slide.html">
+            
+                    
+                        <b>1.3.5.1.2.3.</b>
+                    
+                    _dyld_get_image_vmaddr_slide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.4" data-path="func/dyld_api/dyld_h/_dyld_get_image_name.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_get_image_name.html">
+            
+                    
+                        <b>1.3.5.1.2.4.</b>
+                    
+                    _dyld_get_image_name
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.5" data-path="func/dyld_api/dyld_h/_dyld_register_func_for_add_image.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_register_func_for_add_image.html">
+            
+                    
+                        <b>1.3.5.1.2.5.</b>
+                    
+                    _dyld_register_func_for_add_image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.6" data-path="func/dyld_api/dyld_h/_dyld_register_func_for_remove_image.html">
+            
+                <a href="func/dyld_api/dyld_h/_dyld_register_func_for_remove_image.html">
+            
+                    
+                        <b>1.3.5.1.2.6.</b>
+                    
+                    _dyld_register_func_for_remove_image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.7" data-path="func/dyld_api/dyld_h/nsversionofruntimelibrary.html">
+            
+                <a href="func/dyld_api/dyld_h/nsversionofruntimelibrary.html">
+            
+                    
+                        <b>1.3.5.1.2.7.</b>
+                    
+                    NSVersionOfRunTimeLibrary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.8" data-path="func/dyld_api/dyld_h/nsversionoflinktimelibrary.html">
+            
+                <a href="func/dyld_api/dyld_h/nsversionoflinktimelibrary.html">
+            
+                    
+                        <b>1.3.5.1.2.8.</b>
+                    
+                    NSVersionOfLinkTimeLibrary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.9" data-path="func/dyld_api/dyld_h/_nsgetexecutablepath.html">
+            
+                <a href="func/dyld_api/dyld_h/_nsgetexecutablepath.html">
+            
+                    
+                        <b>1.3.5.1.2.9.</b>
+                    
+                    _NSGetExecutablePath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3" data-path="func/dyld_api/dyld_priv_h/">
+            
+                <a href="func/dyld_api/dyld_priv_h/">
+            
+                    
+                        <b>1.3.5.1.3.</b>
+                    
+                    dyld_priv.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.3.1" data-path="func/dyld_api/dyld_priv_h/dyld_image_header_containing_address.html">
+            
+                <a href="func/dyld_api/dyld_priv_h/dyld_image_header_containing_address.html">
+            
+                    
+                        <b>1.3.5.1.3.1.</b>
+                    
+                    dyld_image_header_containing_address
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.2" data-path="func/dyld_api/dyld_priv_h/dyld_program_sdk_at_least.html">
+            
+                <a href="func/dyld_api/dyld_priv_h/dyld_program_sdk_at_least.html">
+            
+                    
+                        <b>1.3.5.1.3.2.</b>
+                    
+                    dyld_program_sdk_at_least
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.3" data-path="func/dyld_api/dyld_priv_h/dyld_shared_cache_file_path.html">
+            
+                <a href="func/dyld_api/dyld_priv_h/dyld_shared_cache_file_path.html">
+            
+                    
+                        <b>1.3.5.1.3.3.</b>
+                    
+                    dyld_shared_cache_file_path
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.4" data-path="func/dyld_api/dyld_priv_h/_dyld_get_all_image_infos.html">
+            
+                <a href="func/dyld_api/dyld_priv_h/_dyld_get_all_image_infos.html">
+            
+                    
+                        <b>1.3.5.1.3.4.</b>
+                    
+                    _dyld_get_all_image_infos
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.4" data-path="func/dyld_api/dyld_interposing_h/">
+            
+                <a href="func/dyld_api/dyld_interposing_h/">
+            
+                    
+                        <b>1.3.5.1.4.</b>
+                    
+                    dyld-interposing.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.4.1" data-path="func/dyld_api/dyld_interposing_h/dyld_interpose.html">
+            
+                <a href="func/dyld_api/dyld_interposing_h/dyld_interpose.html">
+            
+                    
+                        <b>1.3.5.1.4.1.</b>
+                    
+                    DYLD_INTERPOSE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2" data-path="func/other/">
+            
+                <a href="func/other/">
+            
+                    
+                        <b>1.3.5.2.</b>
+                    
+                    其他函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.2.1" data-path="func/other/start.html">
+            
+                <a href="func/other/start.html">
+            
+                    
+                        <b>1.3.5.2.1.</b>
+                    
+                    start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2.2" data-path="func/other/_dyld_start.html">
+            
+                <a href="func/other/_dyld_start.html">
+            
+                    
+                        <b>1.3.5.2.2.</b>
+                    
+                    _dyld_start
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="var/">
+            
+                <a href="var/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    相关变量
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1" data-path="var/gprocessinfo.html">
+            
+                <a href="var/gprocessinfo.html">
+            
+                    
+                        <b>1.3.6.1.</b>
+                    
+                    gProcessInfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="definition/">
+            
+                <a href="definition/">
+            
+                    
+                        <b>1.3.7.</b>
+                    
+                    相关定义
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.7.1" data-path="definition/dyld_images_h/">
+            
+                <a href="definition/dyld_images_h/">
+            
+                    
+                        <b>1.3.7.1.</b>
+                    
+                    dyld_images.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.7.1.1" data-path="definition/dyld_images_h/dyld_all_image_infos.html">
+            
+                <a href="definition/dyld_images_h/dyld_all_image_infos.html">
+            
+                    
+                        <b>1.3.7.1.1.</b>
+                    
+                    dyld_all_image_infos
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="use_case/">
+            
+                <a href="use_case/">
+            
+                    
+                        <b>1.3.8.</b>
+                    
+                    涉及的地方
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../dyld_libdyld/">
+            
+                <a href="../dyld_libdyld/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    libdyld.dylib
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../dyld_libdyld/man_page/">
+            
+                <a href="../dyld_libdyld/man_page/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    man page
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../dyld_libdyld/func/">
+            
+                <a href="../dyld_libdyld/func/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    相关函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../dyld_libdyld/func/dyld_stub_binder.html">
+            
+                <a href="../dyld_libdyld/func/dyld_stub_binder.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    dyld_stub_binder
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../related/">
+            
+                <a href="../related/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    相关内容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../related/getsect_h/">
+            
+                <a href="../related/getsect_h/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    getsect.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../related/getsect_h/getsectdata.html">
+            
+                <a href="../related/getsect_h/getsectdata.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    getsectdata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../related/getsect_h/getsectdatafromframework.html">
+            
+                <a href="../related/getsect_h/getsectdatafromframework.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    getsectdatafromFramework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../related/getsect_h/getsectiondata.html">
+            
+                <a href="../related/getsect_h/getsectiondata.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../related/getsect_h/getsectbyname.html">
+            
+                <a href="../related/getsect_h/getsectbyname.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    getsectbyname
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../related/getsect_h/getsegbyname.html">
+            
+                <a href="../related/getsect_h/getsegbyname.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    getsegbyname
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.6" data-path="../related/getsect_h/getsegmentdata.html">
+            
+                <a href="../related/getsect_h/getsegmentdata.html">
+            
+                    
+                        <b>1.5.1.6.</b>
+                    
+                    getsegmentdata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.7" data-path="../related/getsect_h/getsectdatafromheader/">
+            
+                <a href="../related/getsect_h/getsectdatafromheader/">
+            
+                    
+                        <b>1.5.1.7.</b>
+                    
+                    getsectdatafromheader
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.7.1" data-path="../related/getsect_h/getsectdatafromheader/getsectdatafromheader_64.html">
+            
+                <a href="../related/getsect_h/getsectdatafromheader/getsectdatafromheader_64.html">
+            
+                    
+                        <b>1.5.1.7.1.</b>
+                    
+                    getsectdatafromheader_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.8" data-path="../related/getsect_h/getsectbynamefromheader/">
+            
+                <a href="../related/getsect_h/getsectbynamefromheader/">
+            
+                    
+                        <b>1.5.1.8.</b>
+                    
+                    getsectbynamefromheader
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.8.1" data-path="../related/getsect_h/getsectbynamefromheader/getsectbynamefromheader_64.html">
+            
+                <a href="../related/getsect_h/getsectbynamefromheader/getsectbynamefromheader_64.html">
+            
+                    
+                        <b>1.5.1.8.1.</b>
+                    
+                    getsectbynamefromheader_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.9" data-path="../related/getsect_h/getsectbynamefromheaderwithswap/">
+            
+                <a href="../related/getsect_h/getsectbynamefromheaderwithswap/">
+            
+                    
+                        <b>1.5.1.9.</b>
+                    
+                    getsectbynamefromheaderwithswap
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.9.1" data-path="../related/getsect_h/getsectbynamefromheaderwithswap/getsectbynamefromheaderwithswap_64.html">
+            
+                <a href="../related/getsect_h/getsectbynamefromheaderwithswap/getsectbynamefromheaderwithswap_64.html">
+            
+                    
+                        <b>1.5.1.9.1.</b>
+                    
+                    getsectbynamefromheaderwithswap_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../related/dyld_env/">
+            
+                <a href="../related/dyld_env/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    DYLD环境变量
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../related/dyld_env/dyld_library_path.html">
+            
+                <a href="../related/dyld_env/dyld_library_path.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    DYLD_LIBRARY_PATH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../related/dyld_env/dyld_insert_libraries.html">
+            
+                <a href="../related/dyld_env/dyld_insert_libraries.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    DYLD_INSERT_LIBRARIES
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../related/dyld_env/dyld_print_libraries.html">
+            
+                <a href="../related/dyld_env/dyld_print_libraries.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    DYLD_PRINT_LIBRARIES
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="../related/dyld_env/dyld_print_statistics.html">
+            
+                <a href="../related/dyld_env/dyld_print_statistics.html">
+            
+                    
+                        <b>1.5.2.4.</b>
+                    
+                    DYLD_PRINT_STATISTICS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.5" data-path="../related/dyld_env/dyld_image_suffix.html">
+            
+                <a href="../related/dyld_env/dyld_image_suffix.html">
+            
+                    
+                        <b>1.5.2.5.</b>
+                    
+                    DYLD_IMAGE_SUFFIX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.6" data-path="../related/dyld_env/dyld_print_apis.html">
+            
+                <a href="../related/dyld_env/dyld_print_apis.html">
+            
+                    
+                        <b>1.5.2.6.</b>
+                    
+                    DYLD_PRINT_APIS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.7" data-path="../related/dyld_env/dyld_print_warnings.html">
+            
+                <a href="../related/dyld_env/dyld_print_warnings.html">
+            
+                    
+                        <b>1.5.2.7.</b>
+                    
+                    DYLD_PRINT_WARNINGS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../related/tool/">
+            
+                <a href="../related/tool/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    相关工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../related/tool/dyldinfo.html">
+            
+                <a href="../related/tool/dyldinfo.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    dyldinfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../related/mach_o/">
+            
+                <a href="../related/mach_o/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Mach-O中Load Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../related/mach_o/define/">
+            
+                <a href="../related/mach_o/define/">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    详细定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../related/mach_o/lc/">
+            
+                <a href="../related/mach_o/lc/">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    各种Load Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.2.1" data-path="../related/mach_o/lc/lc_dyld_chained_fixups.html">
+            
+                <a href="../related/mach_o/lc/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.5.4.2.1.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../related/mach_o/lc/use_case.html">
+            
+                <a href="../related/mach_o/lc/use_case.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    涉及地方
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../related/structure/">
+            
+                <a href="../related/structure/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    相关结构体
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../related/structure/dyld_info_command.html">
+            
+                <a href="../related/structure/dyld_info_command.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    dyld_info_command
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.2" data-path="../related/structure/linkedit_data_command.html">
+            
+                <a href="../related/structure/linkedit_data_command.html">
+            
+                    
+                        <b>1.5.5.2.</b>
+                    
+                    linkedit_data_command
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../appendix/">
+            
+                <a href="../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../appendix/reference.html">
+            
+                <a href="../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >dyld版本</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="dyld版本"><a name="dyld版本" class="plugin-anchor" href="#dyld版本"><i class="fa fa-link" aria-hidden="true"></i></a>dyld版本</h1>
+<h2 id="iphone中dyld的版本"><a name="iphone中dyld的版本" class="plugin-anchor" href="#iphone中dyld的版本"><i class="fa fa-link" aria-hidden="true"></i></a>iPhone中dyld的版本</h2>
+<ul>
+<li>iPhone中dyld的版本<ul>
+<li>概述<ul>
+<li>导出<code>iPhone</code>中<code>/usr/lib/dyld</code>，然后用工具（<code>IDA</code>、<code>rabin2</code>、<code>jtool2</code>等）分析出<code>_dyldVersionString</code>（和<code>_dyldVersionNumber</code>）中的版本号（字符串）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="举例1"><a name="举例1" class="plugin-anchor" href="#举例1"><i class="fa fa-link" aria-hidden="true"></i></a>举例1</h3>
+<h4 id="iphone11"><a name="iphone11" class="plugin-anchor" href="#iphone11"><i class="fa fa-link" aria-hidden="true"></i></a>iPhone11</h4>
+<p><code>iPhone11</code>中的<code>dyld</code>：</p>
+<ul>
+<li>/usr/lib/dyld</li>
+</ul>
+<p>想要知道：dyld的版本号</p>
+<p>最后是：</p>
+<p>（1）先是：根据源码</p>
+<p><a href="https://opensource.apple.com/source/dyld/dyld-433.5/include/mach-o/dyld_images.h" target="_blank">https://opensource.apple.com/source/dyld/dyld-433.5/include/mach-o/dyld_images.h</a></p>
+<p>知道了其中有个：</p>
+<p><code>dyldVersion</code>，其中会指向C字符串，其中包含：<code>dyld-127.3</code>这种值，其中就表示版本是：<code>127.3</code></p>
+<p>（2）去导出此处<code>dyld</code>二进制后，用工具（<code>rabin2</code>、<code>jtool2</code>等）查看到symbol中，包含<code>dyldVersion</code>字样的有：</p>
+<pre class="language-"><code class="lang-bash"><span class="token number">1883</span> 0x0004ddb8 0x0004ddb8 LOCAL  FUNC <span class="token number">0</span>        _dyldVersionString
+<span class="token number">1884</span> 0x0004dde0 0x0004dde0 LOCAL  FUNC <span class="token number">0</span>        _dyldVersionNumber
+</code></pre>
+<p>（3）去通过IDA分析二进制，而查看到：</p>
+<ul>
+<li><code>_dyldVersionString</code><ul>
+<li>地址：<code>000000000004DDB8</code></li>
+<li>值=字符串：<code>@(#)PROGRAM:dyld  PROJECT:dyld-932.4</code></li>
+</ul>
+</li>
+</ul>
+<p>-》即可从：</p>
+<ul>
+<li><code>dyld-932.4</code></li>
+</ul>
+<p>找到最终要的值：</p>
+<ul>
+<li><code>dyld</code>的版本号：<code>932.4</code></li>
+</ul>
+<h4 id="iphone7"><a name="iphone7" class="plugin-anchor" href="#iphone7"><i class="fa fa-link" aria-hidden="true"></i></a>iPhone7</h4>
+<p>导出<code>iPhone7</code>中的：</p>
+<pre class="language-"><code class="lang-bash">iPhone7-1331:~ root<span class="token comment"># ls /usr/lib/dyld</span>
+/usr/lib/dyld*
+iPhone7-1331:~ root<span class="token comment"># ls -lh /usr/lib/dyld</span>
+-rwxr-xr-x <span class="token number">1</span> root wheel 650K Apr <span class="token number">14</span>  <span class="token number">2018</span> /usr/lib/dyld*
+</code></pre>
+<p>到Mac中：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331  <span class="token function">scp</span> root@192.168.2.6:/usr/lib/dyld dyld
+dyld                                                                                                              <span class="token number">100</span>%  650KB   <span class="token number">6</span>.5MB/s   00:00
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331  ll
+total <span class="token number">1304</span>
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   650K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:58 dyld
+</code></pre>
+<p>去导出symbol：</p>
+<pre class="language-"><code class="lang-bash">crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331  rabin2 <span class="token parameter variable">-s</span> dyld <span class="token operator">&gt;</span> dyld_rabin2_s_symbols.txt
+Stack exhaustion prevented
+Stack exhaustion prevented
+Stack exhaustion prevented
+Stack exhaustion prevented
+Stack exhaustion prevented
+Stack exhaustion prevented
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331  jtool2 <span class="token parameter variable">-S</span> dyld <span class="token operator">&gt;</span> dyld_jtool2_S_symbol.txt
+ crifan@licrifandeMacBook-Pro  ~/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331  ll
+total <span class="token number">2512</span>
+-rwxr-xr-x  <span class="token number">1</span> crifan  staff   650K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:58 dyld
+-rw-r--r--  <span class="token number">1</span> crifan  staff   186K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:59 dyld_jtool2_S_symbol.txt
+-rw-r--r--  <span class="token number">1</span> crifan  staff   412K  <span class="token number">1</span> <span class="token number">13</span> <span class="token number">22</span>:59 dyld_rabin2_s_symbols.txt
+</code></pre>
+<p>然后再去：搜dyldVersion</p>
+<p><code>/Users/crifan/dev/dev_root/iosReverse/AppleStore/debug/gProcessInfo/iPhone7_1331/dyld_rabin2_s_symbols.txt</code></p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">[</span>Symbols<span class="token punctuation">]</span>
+
+
+nth  paddr      vaddr      <span class="token builtin class-name">bind</span>   <span class="token builtin class-name">type</span> size lib name
+――――――――――――――――――――――――――――――――――――――――――――――――――――
+<span class="token number">0</span>    0x0000e788 0x0000e788 GLOBAL FUNC <span class="token number">0</span>        __dyld_debugger_notification
+<span class="token number">1</span>    0x00052770 0x00052770 GLOBAL FUNC <span class="token number">0</span>        _dyldVersionNumber
+<span class="token number">2</span>    0x00052748 0x00052748 GLOBAL FUNC <span class="token number">0</span>        _dyldVersionString
+<span class="token number">3</span>    0x00068000 0x00068000 GLOBAL FUNC <span class="token number">0</span>        _dyld_all_image_infos
+<span class="token number">4</span>    0x00069180 0x00069180 GLOBAL FUNC <span class="token number">0</span>        _error_string
+<span class="token number">5</span>    0x00001000 0x00001000 LOCAL  FUNC <span class="token number">0</span>        __dyld_start
+<span class="token punctuation">..</span>.
+</code></pre>
+<p>-&gt;</p>
+<ul>
+<li><code>_dyldVersionNumber</code>: <code>0x00052770</code></li>
+<li><code>_dyldVersionString</code>: <code>0x00052748</code></li>
+</ul>
+<p>再去用IDA查看版本号：</p>
+<ul>
+<li><code>0x00052748</code></li>
+</ul>
+<p><img src="../assets/img/ida_dyld__dyldversionstring.png" alt="ida_dyld__dyldversionstring"></img></p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__const:</span><span class="token number">0000000000052748</span>                 EXPORT _dyldVersionString
+<span class="token label function">__const:</span><span class="token number">0000000000052748</span> _dyldVersionString DCB <span class="token string">"@(#)PROGRAM:dyld  PROJECT:dyld-733.3.1"</span>,<span class="token number">0xA</span>,<span class="token number">0</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052770</span>                 EXPORT _dyldVersionNumber
+<span class="token label function">__const:</span><span class="token number">0000000000052770</span> _dyldVersionNumber DCB <span class="token number">0x66</span> <span class="token comment">; f</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052771</span>                 DCB <span class="token number">0x66</span> <span class="token comment">; f</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052772</span>                 DCB <span class="token number">0x66</span> <span class="token comment">; f</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052773</span>                 DCB <span class="token number">0x66</span> <span class="token comment">; f</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052774</span>                 DCB <span class="token number">0x66</span> <span class="token comment">; f</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052775</span>                 DCB <span class="token number">0xEA</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052776</span>                 DCB <span class="token number">0x86</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052777</span>                 DCB <span class="token number">0x40</span> <span class="token comment">; @</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052778</span> <span class="token comment">; `typeinfo name for'std::exception</span>
+<span class="token label function">__const:</span><span class="token number">0000000000052778</span> __ZTSSt9exception DCB <span class="token string">"St9exception"</span>,<span class="token number">0</span>
+</code></pre>
+<p>-&gt;</p>
+<ul>
+<li><code>_dyldVersionString</code><ul>
+<li><code>@(#)PROGRAM:dyld  PROJECT:dyld-733.3.1</code></li>
+</ul>
+</li>
+</ul>
+<p>-&gt; <code>dyld-733.3.1</code></p>
+<ul>
+<li>dyld版本号：<code>733.3.1</code></li>
+</ul>
+<h3 id="或许相关"><a name="或许相关" class="plugin-anchor" href="#或许相关"><i class="fa fa-link" aria-hidden="true"></i></a>或许相关</h3>
+<p>当前（Mac或iPhone中）的dyld的版本</p>
+<p>-&gt; 或许是：dyld，就是ld？</p>
+<p>-&gt; 如果是，则</p>
+<p><code>ld -v</code>可以查看版本：</p>
+<p>举例：</p>
+<pre class="language-"><code class="lang-bash">➜  ~ ld <span class="token parameter variable">-v</span>
+@<span class="token punctuation">(</span><span class="token comment">#)PROGRAM:ld  PROJECT:ld64-711</span>
+BUILD <span class="token number">18</span>:11:15 Aug  <span class="token number">3</span> <span class="token number">2021</span>
+configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+LTO support using: LLVM version <span class="token number">13.0</span>.0, <span class="token punctuation">(</span>clang-1300.0.29.3<span class="token punctuation">)</span> <span class="token punctuation">(</span>static support <span class="token keyword">for</span> <span class="token number">27</span>, runtime is <span class="token number">27</span><span class="token punctuation">)</span>
+TAPI support using: Apple TAPI version <span class="token number">13.0</span>.0 <span class="token punctuation">(</span>tapi-1300.0.6.5<span class="token punctuation">)</span>
+</code></pre>
+<p>其中，<code>ld64-711</code>中的<code>711</code>，好像就是：<code>dyld</code>的版本</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-12 11:45:04
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="man_help/" class="navigation navigation-prev " aria-label="Previous page: man page=help">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="source/" class="navigation navigation-next " aria-label="Next page: dyld源码">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"dyld版本","level":"1.3.2","depth":2,"next":{"title":"dyld源码","level":"1.3.3","depth":2,"path":"dyld/source/README.md","ref":"dyld/source/README.md","articles":[]},"previous":{"title":"man page=help","level":"1.3.1","depth":2,"path":"dyld/man_help/README.md","ref":"dyld/man_help/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_dyld_link/pdf/ios_re_dyld_link.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_dyld_link/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_dyld_link","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：dyld动态链接","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理关于iOS逆向期间涉及到的dyld动态链接的各种内容。先是dyld概述；然后是分别详细介绍dyld和libdyld.dylib的具体内容；dyld包括，二进制工具的man page；如何查看dyld的版本；哪里可以找到dyld的源码；dyld的app的加载过程；以及相关函数，包括dyld的API，具体有dlfcn.h的dladdr、dlsym、dlinfo、dlopen、dlclose、dlopen_preflight；dyld.h的_dyld_image_count、_dyld_get_image_header、_dyld_get_image_vmaddr_slide、_dyld_get_image_name、_dyld_register_func_for_add_image、_dyld_register_func_for_remove_image、NSVersionOfRunTimeLibrary、NSVersionOfLinkTimeLibrary、_NSGetExecutablePath；dyld_priv.h的dyld_image_header_containing_address、dyld_program_sdk_at_least、dyld_shared_cache_file_path、_dyld_get_all_image_infos；dyld-interposing.h的DYLD_INTERPOSE，以及一些其他函数start、_dyld_start和相关变量，比如gProcessInfo和一些定义dyld_all_image_infos等；以及相关涉及到的地方；再介绍libdyld.dylib中的内容，包括man page，相关函数dyld_stub_binder等；以及其他dyld相关的内容，包括getsect.h的getsectdata、getsectdatafromFramework、getsectiondata、getsectbyname、getsegbyname、getsegmentdata、getsectdatafromheader、getsectdatafromheader_64、getsectbynamefromheader、getsectbynamefromheader_64、getsectbynamefromheaderwithswap、getsectbynamefromheaderwithswap_64；DYLD环境变量的DYLD_LIBRARY_PATH、DYLD_INSERT_LIBRARIES、DYLD_PRINT_LIBRARIES、DYLD_PRINT_STATISTICS、DYLD_IMAGE_SUFFIX、DYLD_PRINT_APIS、DYLD_PRINT_WARNINGS；相关工具dyldinfo等；Mach-O中Load Command的详细定义和具体command，比如LC_DYLD_CHAINED_FIXUPS，和其他涉及到的地方；以及相关结构体dyld_info_command、linkedit_data_command等定义。"},"file":{"path":"dyld/version.md","mtime":"2024-10-12T03:45:04.077Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-15T02:59:24.475Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,2118 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>dlinfo · iOS逆向开发：dyld动态链接</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="dlopen.html" />
+    
+    
+    <link rel="prev" href="dlsym.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_dyld_link","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../dyld_overview/">
+            
+                <a href="../../../../dyld_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    dyld概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../../dyld_overview/dyld_versions.html">
+            
+                <a href="../../../../dyld_overview/dyld_versions.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    dyld库的版本和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../../../dyld_overview/dyld_functions.html">
+            
+                <a href="../../../../dyld_overview/dyld_functions.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    dyld函数概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    dyld
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../man_help/">
+            
+                <a href="../../../man_help/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    man page=help
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../version.html">
+            
+                <a href="../../../version.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    dyld版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../../source/">
+            
+                <a href="../../../source/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    dyld源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../../loading_process/">
+            
+                <a href="../../../loading_process/">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    dyld加载过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    相关函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.3.5.1.</b>
+                    
+                    dyld的API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.5.1.1.</b>
+                    
+                    dlfcn.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.1.1" data-path="dladdr.html">
+            
+                <a href="dladdr.html">
+            
+                    
+                        <b>1.3.5.1.1.1.</b>
+                    
+                    dladdr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.2" data-path="dlsym.html">
+            
+                <a href="dlsym.html">
+            
+                    
+                        <b>1.3.5.1.1.2.</b>
+                    
+                    dlsym
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.5.1.1.3" data-path="dlinfo.html">
+            
+                <a href="dlinfo.html">
+            
+                    
+                        <b>1.3.5.1.1.3.</b>
+                    
+                    dlinfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.4" data-path="dlopen.html">
+            
+                <a href="dlopen.html">
+            
+                    
+                        <b>1.3.5.1.1.4.</b>
+                    
+                    dlopen
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.5" data-path="dlclose.html">
+            
+                <a href="dlclose.html">
+            
+                    
+                        <b>1.3.5.1.1.5.</b>
+                    
+                    dlclose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.1.6" data-path="dlopen_preflight.html">
+            
+                <a href="dlopen_preflight.html">
+            
+                    
+                        <b>1.3.5.1.1.6.</b>
+                    
+                    dlopen_preflight
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2" data-path="../dyld_h/">
+            
+                <a href="../dyld_h/">
+            
+                    
+                        <b>1.3.5.1.2.</b>
+                    
+                    dyld.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.2.1" data-path="../dyld_h/_dyld_image_count.html">
+            
+                <a href="../dyld_h/_dyld_image_count.html">
+            
+                    
+                        <b>1.3.5.1.2.1.</b>
+                    
+                    _dyld_image_count
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.2" data-path="../dyld_h/_dyld_get_image_header.html">
+            
+                <a href="../dyld_h/_dyld_get_image_header.html">
+            
+                    
+                        <b>1.3.5.1.2.2.</b>
+                    
+                    _dyld_get_image_header
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.3" data-path="../dyld_h/_dyld_get_image_vmaddr_slide.html">
+            
+                <a href="../dyld_h/_dyld_get_image_vmaddr_slide.html">
+            
+                    
+                        <b>1.3.5.1.2.3.</b>
+                    
+                    _dyld_get_image_vmaddr_slide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.4" data-path="../dyld_h/_dyld_get_image_name.html">
+            
+                <a href="../dyld_h/_dyld_get_image_name.html">
+            
+                    
+                        <b>1.3.5.1.2.4.</b>
+                    
+                    _dyld_get_image_name
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.5" data-path="../dyld_h/_dyld_register_func_for_add_image.html">
+            
+                <a href="../dyld_h/_dyld_register_func_for_add_image.html">
+            
+                    
+                        <b>1.3.5.1.2.5.</b>
+                    
+                    _dyld_register_func_for_add_image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.6" data-path="../dyld_h/_dyld_register_func_for_remove_image.html">
+            
+                <a href="../dyld_h/_dyld_register_func_for_remove_image.html">
+            
+                    
+                        <b>1.3.5.1.2.6.</b>
+                    
+                    _dyld_register_func_for_remove_image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.7" data-path="../dyld_h/nsversionofruntimelibrary.html">
+            
+                <a href="../dyld_h/nsversionofruntimelibrary.html">
+            
+                    
+                        <b>1.3.5.1.2.7.</b>
+                    
+                    NSVersionOfRunTimeLibrary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.8" data-path="../dyld_h/nsversionoflinktimelibrary.html">
+            
+                <a href="../dyld_h/nsversionoflinktimelibrary.html">
+            
+                    
+                        <b>1.3.5.1.2.8.</b>
+                    
+                    NSVersionOfLinkTimeLibrary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.2.9" data-path="../dyld_h/_nsgetexecutablepath.html">
+            
+                <a href="../dyld_h/_nsgetexecutablepath.html">
+            
+                    
+                        <b>1.3.5.1.2.9.</b>
+                    
+                    _NSGetExecutablePath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3" data-path="../dyld_priv_h/">
+            
+                <a href="../dyld_priv_h/">
+            
+                    
+                        <b>1.3.5.1.3.</b>
+                    
+                    dyld_priv.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.3.1" data-path="../dyld_priv_h/dyld_image_header_containing_address.html">
+            
+                <a href="../dyld_priv_h/dyld_image_header_containing_address.html">
+            
+                    
+                        <b>1.3.5.1.3.1.</b>
+                    
+                    dyld_image_header_containing_address
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.2" data-path="../dyld_priv_h/dyld_program_sdk_at_least.html">
+            
+                <a href="../dyld_priv_h/dyld_program_sdk_at_least.html">
+            
+                    
+                        <b>1.3.5.1.3.2.</b>
+                    
+                    dyld_program_sdk_at_least
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.3" data-path="../dyld_priv_h/dyld_shared_cache_file_path.html">
+            
+                <a href="../dyld_priv_h/dyld_shared_cache_file_path.html">
+            
+                    
+                        <b>1.3.5.1.3.3.</b>
+                    
+                    dyld_shared_cache_file_path
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.3.4" data-path="../dyld_priv_h/_dyld_get_all_image_infos.html">
+            
+                <a href="../dyld_priv_h/_dyld_get_all_image_infos.html">
+            
+                    
+                        <b>1.3.5.1.3.4.</b>
+                    
+                    _dyld_get_all_image_infos
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.1.4" data-path="../dyld_interposing_h/">
+            
+                <a href="../dyld_interposing_h/">
+            
+                    
+                        <b>1.3.5.1.4.</b>
+                    
+                    dyld-interposing.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.4.1" data-path="../dyld_interposing_h/dyld_interpose.html">
+            
+                <a href="../dyld_interposing_h/dyld_interpose.html">
+            
+                    
+                        <b>1.3.5.1.4.1.</b>
+                    
+                    DYLD_INTERPOSE
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2" data-path="../../other/">
+            
+                <a href="../../other/">
+            
+                    
+                        <b>1.3.5.2.</b>
+                    
+                    其他函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.2.1" data-path="../../other/start.html">
+            
+                <a href="../../other/start.html">
+            
+                    
+                        <b>1.3.5.2.1.</b>
+                    
+                    start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2.2" data-path="../../other/_dyld_start.html">
+            
+                <a href="../../other/_dyld_start.html">
+            
+                    
+                        <b>1.3.5.2.2.</b>
+                    
+                    _dyld_start
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../../var/">
+            
+                <a href="../../../var/">
+            
+                    
+                        <b>1.3.6.</b>
+                    
+                    相关变量
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1" data-path="../../../var/gprocessinfo.html">
+            
+                <a href="../../../var/gprocessinfo.html">
+            
+                    
+                        <b>1.3.6.1.</b>
+                    
+                    gProcessInfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../../../definition/">
+            
+                <a href="../../../definition/">
+            
+                    
+                        <b>1.3.7.</b>
+                    
+                    相关定义
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.7.1" data-path="../../../definition/dyld_images_h/">
+            
+                <a href="../../../definition/dyld_images_h/">
+            
+                    
+                        <b>1.3.7.1.</b>
+                    
+                    dyld_images.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.7.1.1" data-path="../../../definition/dyld_images_h/dyld_all_image_infos.html">
+            
+                <a href="../../../definition/dyld_images_h/dyld_all_image_infos.html">
+            
+                    
+                        <b>1.3.7.1.1.</b>
+                    
+                    dyld_all_image_infos
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../../../use_case/">
+            
+                <a href="../../../use_case/">
+            
+                    
+                        <b>1.3.8.</b>
+                    
+                    涉及的地方
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../../dyld_libdyld/">
+            
+                <a href="../../../../dyld_libdyld/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    libdyld.dylib
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../../dyld_libdyld/man_page/">
+            
+                <a href="../../../../dyld_libdyld/man_page/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    man page
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../../../dyld_libdyld/func/">
+            
+                <a href="../../../../dyld_libdyld/func/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    相关函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../../../dyld_libdyld/func/dyld_stub_binder.html">
+            
+                <a href="../../../../dyld_libdyld/func/dyld_stub_binder.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    dyld_stub_binder
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../related/">
+            
+                <a href="../../../../related/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    相关内容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../../related/getsect_h/">
+            
+                <a href="../../../../related/getsect_h/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    getsect.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../../related/getsect_h/getsectdata.html">
+            
+                <a href="../../../../related/getsect_h/getsectdata.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    getsectdata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../../../../related/getsect_h/getsectdatafromframework.html">
+            
+                <a href="../../../../related/getsect_h/getsectdatafromframework.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    getsectdatafromFramework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../../../../related/getsect_h/getsectiondata.html">
+            
+                <a href="../../../../related/getsect_h/getsectiondata.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    getsectiondata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../../../../related/getsect_h/getsectbyname.html">
+            
+                <a href="../../../../related/getsect_h/getsectbyname.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    getsectbyname
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../../../../related/getsect_h/getsegbyname.html">
+            
+                <a href="../../../../related/getsect_h/getsegbyname.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    getsegbyname
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.6" data-path="../../../../related/getsect_h/getsegmentdata.html">
+            
+                <a href="../../../../related/getsect_h/getsegmentdata.html">
+            
+                    
+                        <b>1.5.1.6.</b>
+                    
+                    getsegmentdata
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.7" data-path="../../../../related/getsect_h/getsectdatafromheader/">
+            
+                <a href="../../../../related/getsect_h/getsectdatafromheader/">
+            
+                    
+                        <b>1.5.1.7.</b>
+                    
+                    getsectdatafromheader
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.7.1" data-path="../../../../related/getsect_h/getsectdatafromheader/getsectdatafromheader_64.html">
+            
+                <a href="../../../../related/getsect_h/getsectdatafromheader/getsectdatafromheader_64.html">
+            
+                    
+                        <b>1.5.1.7.1.</b>
+                    
+                    getsectdatafromheader_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.8" data-path="../../../../related/getsect_h/getsectbynamefromheader/">
+            
+                <a href="../../../../related/getsect_h/getsectbynamefromheader/">
+            
+                    
+                        <b>1.5.1.8.</b>
+                    
+                    getsectbynamefromheader
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.8.1" data-path="../../../../related/getsect_h/getsectbynamefromheader/getsectbynamefromheader_64.html">
+            
+                <a href="../../../../related/getsect_h/getsectbynamefromheader/getsectbynamefromheader_64.html">
+            
+                    
+                        <b>1.5.1.8.1.</b>
+                    
+                    getsectbynamefromheader_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.9" data-path="../../../../related/getsect_h/getsectbynamefromheaderwithswap/">
+            
+                <a href="../../../../related/getsect_h/getsectbynamefromheaderwithswap/">
+            
+                    
+                        <b>1.5.1.9.</b>
+                    
+                    getsectbynamefromheaderwithswap
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.9.1" data-path="../../../../related/getsect_h/getsectbynamefromheaderwithswap/getsectbynamefromheaderwithswap_64.html">
+            
+                <a href="../../../../related/getsect_h/getsectbynamefromheaderwithswap/getsectbynamefromheaderwithswap_64.html">
+            
+                    
+                        <b>1.5.1.9.1.</b>
+                    
+                    getsectbynamefromheaderwithswap_64
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../../related/dyld_env/">
+            
+                <a href="../../../../related/dyld_env/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    DYLD环境变量
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../../related/dyld_env/dyld_library_path.html">
+            
+                <a href="../../../../related/dyld_env/dyld_library_path.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    DYLD_LIBRARY_PATH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../../../related/dyld_env/dyld_insert_libraries.html">
+            
+                <a href="../../../../related/dyld_env/dyld_insert_libraries.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    DYLD_INSERT_LIBRARIES
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../../../../related/dyld_env/dyld_print_libraries.html">
+            
+                <a href="../../../../related/dyld_env/dyld_print_libraries.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    DYLD_PRINT_LIBRARIES
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="../../../../related/dyld_env/dyld_print_statistics.html">
+            
+                <a href="../../../../related/dyld_env/dyld_print_statistics.html">
+            
+                    
+                        <b>1.5.2.4.</b>
+                    
+                    DYLD_PRINT_STATISTICS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.5" data-path="../../../../related/dyld_env/dyld_image_suffix.html">
+            
+                <a href="../../../../related/dyld_env/dyld_image_suffix.html">
+            
+                    
+                        <b>1.5.2.5.</b>
+                    
+                    DYLD_IMAGE_SUFFIX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.6" data-path="../../../../related/dyld_env/dyld_print_apis.html">
+            
+                <a href="../../../../related/dyld_env/dyld_print_apis.html">
+            
+                    
+                        <b>1.5.2.6.</b>
+                    
+                    DYLD_PRINT_APIS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.7" data-path="../../../../related/dyld_env/dyld_print_warnings.html">
+            
+                <a href="../../../../related/dyld_env/dyld_print_warnings.html">
+            
+                    
+                        <b>1.5.2.7.</b>
+                    
+                    DYLD_PRINT_WARNINGS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../../related/tool/">
+            
+                <a href="../../../../related/tool/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    相关工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../../related/tool/dyldinfo.html">
+            
+                <a href="../../../../related/tool/dyldinfo.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    dyldinfo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../../../related/mach_o/">
+            
+                <a href="../../../../related/mach_o/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Mach-O中Load Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../../../../related/mach_o/define/">
+            
+                <a href="../../../../related/mach_o/define/">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    详细定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../../../../related/mach_o/lc/">
+            
+                <a href="../../../../related/mach_o/lc/">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    各种Load Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.2.1" data-path="../../../../related/mach_o/lc/lc_dyld_chained_fixups.html">
+            
+                <a href="../../../../related/mach_o/lc/lc_dyld_chained_fixups.html">
+            
+                    
+                        <b>1.5.4.2.1.</b>
+                    
+                    LC_DYLD_CHAINED_FIXUPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../../../../related/mach_o/lc/use_case.html">
+            
+                <a href="../../../../related/mach_o/lc/use_case.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    涉及地方
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../../../../related/structure/">
+            
+                <a href="../../../../related/structure/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    相关结构体
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../../../../related/structure/dyld_info_command.html">
+            
+                <a href="../../../../related/structure/dyld_info_command.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    dyld_info_command
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.2" data-path="../../../../related/structure/linkedit_data_command.html">
+            
+                <a href="../../../../related/structure/linkedit_data_command.html">
+            
+                    
+                        <b>1.5.5.2.</b>
+                    
+                    linkedit_data_command
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../../appendix/">
+            
+                <a href="../../../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../../appendix/reference.html">
+            
+                <a href="../../../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >dlinfo</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="dlinfo"><a name="dlinfo" class="plugin-anchor" href="#dlinfo"><i class="fa fa-link" aria-hidden="true"></i></a>dlinfo</h1>
+<ul>
+<li><code>dlinfo</code><ul>
+<li>概述：<code>Linux</code>系统中，<code>ELF</code>相关函数，用于获取动态链接库的信息</li>
+<li>所属头文件: <code>dlfcn.h</code><ul>
+<li>相关头文件: <code>link.h</code></li>
+</ul>
+</li>
+<li>定义<pre class="language-"><code class="lang-c"><span class="token keyword">int</span> <span class="token function">dlinfo</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>restrict handle<span class="token punctuation">,</span> <span class="token keyword">int</span> request<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>restrict info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>实现<ul>
+<li><a href="https://github.com/lattera/glibc/blob/master/dlfcn/dlinfo.c" target="_blank">glibc/dlfcn/dlinfo.c at master · lattera/glibc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="man-page"><a name="man-page" class="plugin-anchor" href="#man-page"><i class="fa fa-link" aria-hidden="true"></i></a>man page</h2>
+<h3 id="linux"><a name="linux" class="plugin-anchor" href="#linux"><i class="fa fa-link" aria-hidden="true"></i></a>Linux</h3>
+<p><a href="https://man7.org/linux/man-pages/man3/dlinfo.3.html" target="_blank">dlinfo(3) - Linux manual page</a></p>
+<pre class="language-"><code class="lang-bash">dlinfo<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>               Library Functions Manual               dlinfo<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+NAME         <span class="token function">top</span>
+       dlinfo - obtain information about a dynamically loaded object
+
+LIBRARY         <span class="token function">top</span>
+       Dynamic linking library <span class="token punctuation">(</span>libdl, -ldl<span class="token punctuation">)</span>
+
+SYNOPSIS         <span class="token function">top</span>
+       <span class="token comment">#define _GNU_SOURCE</span>
+       <span class="token comment">#include &lt;link.h&gt;</span>
+       <span class="token comment">#include &lt;dlfcn.h&gt;</span>
+
+       int dlinfo<span class="token punctuation">(</span>void *restrict handle, int request, void *restrict info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+DESCRIPTION         <span class="token function">top</span>
+       The dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> obtains information about the dynamically
+       loaded object referred to by handle <span class="token punctuation">(</span>typically obtained by an
+       earlier call to dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> or dlmopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">))</span>.  The request argument
+       specifies <span class="token function">which</span> information is to be returned.  The info argument
+       is a pointer to a buffer used to store information returned by
+       the call<span class="token punctuation">;</span> the <span class="token builtin class-name">type</span> of this argument depends on request.
+
+       The following values are supported <span class="token keyword">for</span> request <span class="token punctuation">(</span>with the
+       corresponding <span class="token builtin class-name">type</span> <span class="token keyword">for</span> info shown <span class="token keyword">in</span> parentheses<span class="token punctuation">)</span>:
+
+       RTLD_DI_LMID <span class="token punctuation">(</span>Lmid_t *<span class="token punctuation">)</span>
+              Obtain the ID of the link-map list <span class="token punctuation">(</span>namespace<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token function">which</span>
+              handle is loaded.
+
+       RTLD_DI_LINKMAP <span class="token punctuation">(</span>struct link_map **<span class="token punctuation">)</span>
+              Obtain a pointer to the link_map structure corresponding
+              to handle.  The info argument points to a pointer to a
+              link_map structure, defined <span class="token keyword">in</span> <span class="token operator">&lt;</span>link.h<span class="token operator">&gt;</span> as:
+
+                  struct link_map <span class="token punctuation">{</span>
+                      ElfW<span class="token punctuation">(</span>Addr<span class="token punctuation">)</span> l_addr<span class="token punctuation">;</span>  /* Difference between the
+                                             address <span class="token keyword">in</span> the ELF <span class="token function">file</span> and
+                                             the address <span class="token keyword">in</span> memory */
+                      char      *l_name<span class="token punctuation">;</span>  /* Absolute pathname where
+                                             object was found */
+                      ElfW<span class="token punctuation">(</span>Dyn<span class="token punctuation">)</span> *l_ld<span class="token punctuation">;</span>    /* Dynamic section of the
+                                             shared object */
+                      struct link_map *l_next, *l_prev<span class="token punctuation">;</span>
+                                          /* Chain of loaded objects */
+
+                      /* Plus additional fields private to the
+                         implementation */
+                  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+       RTLD_DI_ORIGIN <span class="token punctuation">(</span>char *<span class="token punctuation">)</span>
+              Copy the pathname of the origin of the shared object
+              corresponding to handle to the location pointed to by
+              info.
+
+       RTLD_DI_SERINFO <span class="token punctuation">(</span>Dl_serinfo *<span class="token punctuation">)</span>
+              Obtain the library search paths <span class="token keyword">for</span> the shared object
+              referred to by handle.  The info argument is a pointer to
+              a Dl_serinfo that contains the search paths.  Because the
+              number of search paths may vary, the size of the structure
+              pointed to by info can vary.  The RTLD_DI_SERINFOSIZE
+              request described below allows applications to size the
+              buffer suitably.  The <span class="token builtin class-name">caller</span> must perform the following
+              steps:
+
+              <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  Use a RTLD_DI_SERINFOSIZE request to populate a
+                   Dl_serinfo structure with the size <span class="token punctuation">(</span>dls_size<span class="token punctuation">)</span> of the
+                   structure needed <span class="token keyword">for</span> the subsequent RTLD_DI_SERINFO
+                   request.
+
+              <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>  Allocate a Dl_serinfo buffer of the correct size
+                   <span class="token punctuation">(</span>dls_size<span class="token punctuation">)</span>.
+
+              <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>  Use a further RTLD_DI_SERINFOSIZE request to populate
+                   the dls_size and dls_cnt fields of the buffer
+                   allocated <span class="token keyword">in</span> the previous step.
+
+              <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>  Use a RTLD_DI_SERINFO to obtain the library search
+                   paths.
+
+              The Dl_serinfo structure is defined as follows:
+
+                  typedef struct <span class="token punctuation">{</span>
+                      size_t dls_size<span class="token punctuation">;</span>           /* Size <span class="token keyword">in</span> bytes of
+                                                    the whole buffer */
+                      unsigned int dls_cnt<span class="token punctuation">;</span>      /* Number of elements
+                                                    <span class="token keyword">in</span> <span class="token string">'dls_serpath'</span> */
+                      Dl_serpath dls_serpath<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> /* Actually longer,
+                                                    <span class="token string">'dls_cnt'</span> elements */
+                  <span class="token punctuation">}</span> Dl_serinfo<span class="token punctuation">;</span>
+
+              Each of the dls_serpath elements <span class="token keyword">in</span> the above structure is
+              a structure of the following form:
+
+                  typedef struct <span class="token punctuation">{</span>
+                      char *dls_name<span class="token punctuation">;</span>            /* Name of library search
+                                                    path directory */
+                      unsigned int dls_flags<span class="token punctuation">;</span>    /* Indicates where this
+                                                    directory came from */
+                  <span class="token punctuation">}</span> Dl_serpath<span class="token punctuation">;</span>
+
+              The dls_flags field is currently unused, and always
+              contains zero.
+
+       RTLD_DI_SERINFOSIZE <span class="token punctuation">(</span>Dl_serinfo *<span class="token punctuation">)</span>
+              Populate the dls_size and dls_cnt fields of the Dl_serinfo
+              structure pointed to by info with values suitable <span class="token keyword">for</span>
+              allocating a buffer <span class="token keyword">for</span> <span class="token for-or-select variable">use</span> <span class="token keyword">in</span> a subsequent
+              RTLD_DI_SERINFO request.
+
+       RTLD_DI_TLS_MODID <span class="token punctuation">(</span>size_t *, since glibc <span class="token number">2.4</span><span class="token punctuation">)</span>
+              Obtain the module ID of this shared object<span class="token string">'s TLS (thread-
+              local storage) segment, as used in TLS relocations.  If
+              this object does not define a TLS segment, zero is placed
+              in *info.
+
+       RTLD_DI_TLS_DATA (void **, since glibc 2.4)
+              Obtain a pointer to the calling thread'</span>s TLS block
+              corresponding to this shared object<span class="token string">'s TLS segment.  If
+              this object does not define a PT_TLS segment, or if the
+              calling thread has not allocated a block for it, NULL is
+              placed in *info.
+RETURN VALUE         top
+       On success, dlinfo() returns 0.  On failure, it returns -1; the
+       cause of the error can be diagnosed using dlerror(3).
+ATTRIBUTES         top
+       For an explanation of the terms used in this section, see
+       attributes(7).
+       ┌─────────────────────────────────────┬───────────────┬─────────┐
+       │ Interface                           │ Attribute     │ Value   │
+       ├─────────────────────────────────────┼───────────────┼─────────┤
+       │ dlinfo()                            │ Thread safety │ MT-Safe │
+       └─────────────────────────────────────┴───────────────┴─────────┘
+VERSIONS         top
+       The sets of requests supported by the various implementations
+       overlaps only partially.
+STANDARDS         top
+       GNU.
+HISTORY         top
+       glibc 2.3.3.  Solaris.
+EXAMPLES         top
+       The program below opens a shared objects using dlopen(3) and then
+       uses the RTLD_DI_SERINFOSIZE and RTLD_DI_SERINFO requests to
+       obtain the library search path list for the library.  Here is an
+       example of what we might see when running the program:
+
+           $ ./a.out /lib64/libm.so.6
+           dls_serpath[0].dls_name = /lib64
+           dls_serpath[1].dls_name = /usr/lib64
+
+   Program source
+
+       #define _GNU_SOURCE
+       #include &lt;dlfcn.h&gt;
+       #include &lt;link.h&gt;
+       #include &lt;stdio.h&gt;
+       #include &lt;stdlib.h&gt;
+
+       int
+       main(int argc, char *argv[])
+       {
+           void *handle;
+           Dl_serinfo serinfo;
+           Dl_serinfo *sip;
+
+           if (argc != 2) {
+               fprintf(stderr, "Usage: %s &lt;libpath&gt;\n", argv[0]);
+               exit(EXIT_FAILURE);
+           }
+
+           /* Obtain a handle for shared object specified on command line. */
+
+           handle = dlopen(argv[1], RTLD_NOW);
+           if (handle == NULL) {
+               fprintf(stderr, "dlopen() failed: %s\n", dlerror());
+               exit(EXIT_FAILURE);
+           }
+
+           /* Discover the size of the buffer that we must pass to
+              RTLD_DI_SERINFO. */
+
+           if (dlinfo(handle, RTLD_DI_SERINFOSIZE, &amp;serinfo) == -1) {
+               fprintf(stderr, "RTLD_DI_SERINFOSIZE failed: %s\n", dlerror());
+               exit(EXIT_FAILURE);
+           }
+
+           /* Allocate the buffer for use with RTLD_DI_SERINFO. */
+
+           sip = malloc(serinfo.dls_size);
+           if (sip == NULL) {
+               perror("malloc");
+               exit(EXIT_FAILURE);
+           }
+
+           /* Initialize the '</span>dls_size<span class="token string">' and '</span>dls_cnt' fields <span class="token keyword">in</span> the newly
+              allocated buffer. */
+
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>dlinfo<span class="token punctuation">(</span>handle, RTLD_DI_SERINFOSIZE, sip<span class="token punctuation">)</span> <span class="token operator">==</span> -1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               fprintf<span class="token punctuation">(</span>stderr, <span class="token string">"RTLD_DI_SERINFOSIZE failed: %s<span class="token entity" title="\n">\n</span>"</span>, dlerror<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+               exit<span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+
+           /* Fetch and print library search list. */
+
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>dlinfo<span class="token punctuation">(</span>handle, RTLD_DI_SERINFO, sip<span class="token punctuation">)</span> <span class="token operator">==</span> -1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               fprintf<span class="token punctuation">(</span>stderr, <span class="token string">"RTLD_DI_SERINFO failed: %s<span class="token entity" title="\n">\n</span>"</span>, dlerror<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+               exit<span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+
+           <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> serinfo.dls_cnt<span class="token punctuation">;</span> j++<span class="token punctuation">)</span>
+               printf<span class="token punctuation">(</span><span class="token string">"dls_serpath[%zu].dls_name = %s<span class="token entity" title="\n">\n</span>"</span>,
+                      j, sip-<span class="token operator">&gt;</span>dls_serpath<span class="token punctuation">[</span>j<span class="token punctuation">]</span>.dls_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+           exit<span class="token punctuation">(</span>EXIT_SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+SEE ALSO         <span class="token function">top</span>
+       dl_iterate_phdr<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dladdr<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dlerror<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dlsym<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>,
+       ld.so<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+COLOPHON         <span class="token function">top</span>
+       This page is part of the man-pages <span class="token punctuation">(</span>Linux kernel and C library
+       user-space interface documentation<span class="token punctuation">)</span> project.  Information about
+       the project can be found at 
+       ⟨https://www.kernel.org/doc/man-pages/⟩.  If you have a bug report
+       <span class="token keyword">for</span> this manual page, see
+       ⟨https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/tree/CONTRIBUTING⟩.
+       This page was obtained from the tarball man-pages-6.9.1.tar.gz
+       fetched from
+       ⟨https://mirrors.edge.kernel.org/pub/linux/docs/man-pages/⟩ on
+       <span class="token number">2024</span>-06-26.  If you discover any rendering problems <span class="token keyword">in</span> this HTML
+       version of the page, or you believe there is a better or <span class="token function">more</span> up-
+       to-date <span class="token builtin class-name">source</span> <span class="token keyword">for</span> the page, or you have corrections or
+       improvements to the information <span class="token keyword">in</span> this COLOPHON <span class="token punctuation">(</span>which is not
+       part of the original manual page<span class="token punctuation">)</span>, send a mail to
+       man-pages@man7.org
+
+Linux man-pages <span class="token number">6.9</span>.1          <span class="token number">2024</span>-06-15                      dlinfo<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="freebsd"><a name="freebsd" class="plugin-anchor" href="#freebsd"><i class="fa fa-link" aria-hidden="true"></i></a>FreeBSD</h3>
+<p><a href="https://man.freebsd.org/cgi/man.cgi?query=dlinfo&amp;sektion=3&amp;manpath=FreeBSD+12.1-RELEASE+and+Ports" target="_blank">dlinfo(3)</a></p>
+<pre class="language-"><code class="lang-bash">DLINFO<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>            Library Functions Manual             DLINFO<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+NAME
+       dlinfo -- information about dynamically loaded object
+
+LIBRARY
+       Standard    C Library <span class="token punctuation">(</span>libc, -lc<span class="token punctuation">)</span>
+
+SYNOPSIS
+       <span class="token comment">#include    &lt;link.h&gt;</span>
+       <span class="token comment">#include    &lt;dlfcn.h&gt;</span>
+
+       int
+       dlinfo<span class="token punctuation">(</span>void * restrict handle, int request, void    * restrict p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+DESCRIPTION
+       The dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> provides information about    dynamically loaded ob-
+       ject.  The action taken by dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span> and exact meaning and <span class="token builtin class-name">type</span> of p ar-
+       gument depend on    value of the request argument provided by caller.
+
+       The  handle  argument  is  either the value returned from the dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+       <span class="token keyword">function</span>    call or    special    handle RTLD_SELF.  If handle is    the value  re-
+       turned  from  dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>,    the information    returned by the    dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span> func-
+       tion pertains to    the specified object.  If handle is the    special    handle
+       RTLD_SELF, the information returned pertains to the <span class="token builtin class-name">caller</span> itself.
+
+       Possible    values <span class="token keyword">for</span> the request argument    are:
+
+       RTLD_DI_LINKMAP
+           Retrieve    the Link_map <span class="token punctuation">(</span>struct link_map<span class="token punctuation">)</span> structure  pointer  <span class="token keyword">for</span>
+           the  specified handle.  On successful return, the p argument is
+           filled with the pointer to  the    Link_map  structure  <span class="token punctuation">(</span>Link_map
+           **p<span class="token punctuation">)</span>  describing     a shared object specified by the handle argu-
+           ment.  The Link_map  structures    are  maintained     as  a    doubly
+           linked  list  by     ld.so<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>,  <span class="token keyword">in</span> the same    order as dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> and
+           dlclose<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> are called.  See <span class="token string">"EXAMPLES"</span>, example <span class="token number">1</span>.
+
+           The Link_map structure is defined <span class="token keyword">in</span> <span class="token operator">&lt;</span>link.h<span class="token operator">&gt;</span> and has the  fol-
+           lowing members:
+
+             caddr_t         l_addr<span class="token punctuation">;</span>    /* Base    Address    of library */
+             const char         *l_name<span class="token punctuation">;</span>    /* Absolute Path to Library */
+             const void         *l_ld<span class="token punctuation">;</span>    /* Pointer to .dynamic <span class="token keyword">in</span> memory */
+             struct link_map *l_next,    /* linked list of mapped libs */
+                     *l_prev<span class="token punctuation">;</span>
+
+           l_addr  The base    address    of the object loaded into memory.
+
+           l_name  The full    name of    the loaded shared object.
+
+           l_ld    The  address of the dynamic linking information segment
+               <span class="token punctuation">(</span>PT_DYNAMIC<span class="token punctuation">)</span> loaded into    memory.
+
+           l_next  The next    Link_map structure on the link-map list.
+
+           l_prev  The previous Link_map structure on the link-map list.
+
+       RTLD_DI_SERINFO
+           Retrieve    the library search paths  associated  with  the     given
+           handle  argument.   The    p  argument should point to Dl_serinfo
+           structure buffer    <span class="token punctuation">(</span>Dl_serinfo  *p<span class="token punctuation">)</span>.   The     Dl_serinfo  structure
+           must be initialized first with the RTLD_DI_SERINFOSIZE request.
+
+           The  returned  Dl_serinfo structure contains dls_cnt Dl_serpath
+           entries.     Each entry<span class="token string">'s dlp_name    field  points  to  the    search
+           path.   The  corresponding  dlp_info field contains one of more
+           flags indicating    the origin of the path (see the    LA_SER_* flags
+           defined in the &lt;link.h&gt; header file).  See "EXAMPLES",  example
+           2, for a    usage example.
+
+       RTLD_DI_SERINFOSIZE
+           Initialize  a Dl_serinfo    structure for use in a RTLD_DI_SERINFO
+           request.     Both the dls_cnt and dls_size fields are returned  to
+           indicate     the  number of    search paths applicable    to the handle,
+           and the total size of a    Dl_serinfo  buffer  required  to  hold
+           dls_cnt    Dl_serpath  entries  and  the  associated  search path
+           strings.     See "EXAMPLES", example 2, for    a usage    example.
+
+       RTLD_DI_ORIGIN
+           Retrieve    the origin of the dynamic object associated  with  the
+           handle.     On  successful     return, p argument is filled with the
+           char pointer (char *p).
+
+RETURN VALUES
+       The dlinfo() function returns 0 on success, or -1 if an error occurred.
+       Whenever    an error has been detected, a message detailing    it can be  re-
+       trieved via a call to dlerror(3).
+
+EXAMPLES
+       Example 1: Using    dlinfo() to retrieve Link_map structure.
+
+       The  following example shows how    dynamic    library    can detect the list of
+       shared libraries    loaded after  caller'</span>s    one.   For  simplicity,     error
+       checking    has been omitted.
+
+         Link_map *map<span class="token punctuation">;</span>
+
+         dlinfo<span class="token punctuation">(</span>RTLD_SELF, RTLD_DI_LINKMAP,    <span class="token operator">&amp;</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+         <span class="token keyword">while</span> <span class="token punctuation">(</span>map    <span class="token operator">!=</span> NULL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             printf<span class="token punctuation">(</span><span class="token string">"%p: %s<span class="token entity" title="\n">\n</span>"</span>,    map-<span class="token operator">&gt;</span>l_addr, map-<span class="token operator">&gt;</span>l_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+             map <span class="token operator">=</span> map-<span class="token operator">&gt;</span>l_next<span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+
+       Example <span class="token number">2</span>: Using    dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span> to retrieve the library search    paths.
+
+       The  following  example    shows how a dynamic object can inspect the li-
+       brary search paths that would be    used to    <span class="token function">locate</span> a simple    filename  with
+       dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>.  For simplicity, error checking has been omitted.
+
+         Dl_serinfo          _info, *info <span class="token operator">=</span> <span class="token operator">&amp;</span>_info<span class="token punctuation">;</span>
+         Dl_serpath         *path<span class="token punctuation">;</span>
+         unsigned int     cnt<span class="token punctuation">;</span>
+
+         /*    determine search path count and    required buffer    size */
+         dlinfo<span class="token punctuation">(</span>RTLD_SELF, RTLD_DI_SERINFOSIZE, <span class="token punctuation">(</span>void *<span class="token punctuation">)</span>info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+         /*    allocate new buffer and    initialize */
+         info <span class="token operator">=</span> malloc<span class="token punctuation">(</span>_info.dls_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         info-<span class="token operator">&gt;</span>dls_size <span class="token operator">=</span> _info.dls_size<span class="token punctuation">;</span>
+         info-<span class="token operator">&gt;</span>dls_cnt <span class="token operator">=</span> _info.dls_cnt<span class="token punctuation">;</span>
+
+         /*    obtain sarch path information */
+         dlinfo<span class="token punctuation">(</span>RTLD_SELF, RTLD_DI_SERINFO,    <span class="token punctuation">(</span>void *<span class="token punctuation">)</span>info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+         path <span class="token operator">=</span> <span class="token operator">&amp;</span>info-<span class="token operator">&gt;</span>dls_serpath<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+         <span class="token keyword">for</span> <span class="token punctuation">(</span>cnt <span class="token operator">=</span>    <span class="token number">1</span><span class="token punctuation">;</span> cnt <span class="token operator">&lt;=</span> info-<span class="token operator">&gt;</span>dls_cnt<span class="token punctuation">;</span> cnt++,    path++<span class="token punctuation">)</span>    <span class="token punctuation">{</span>
+             <span class="token punctuation">(</span>void<span class="token punctuation">)</span> printf<span class="token punctuation">(</span><span class="token string">"%2d: %s<span class="token entity" title="\n">\n</span>"</span>,    cnt, path-<span class="token operator">&gt;</span>dls_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+
+SEE ALSO
+       rtld<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>,    dladdr<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dlopen<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>, dlsym<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+HISTORY
+       The  dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token keyword">function</span> first appeared <span class="token keyword">in</span> the Solaris operating system.
+       In FreeBSD, it first appeared <span class="token keyword">in</span>    FreeBSD    <span class="token number">4.8</span>.
+
+AUTHORS
+       The FreeBSD implementation of  the  dlinfo<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token keyword">function</span>  was  originally
+       written    by  Alexey Zelkin <span class="token operator">&lt;</span>phantom@FreeBSD.org<span class="token operator">&gt;</span>    and later extended and
+       improved    by Alexander Kabaev <span class="token operator">&lt;</span>kan@FreeBSD.org<span class="token operator">&gt;</span>.
+
+       The manual  page     <span class="token keyword">for</span>  this  <span class="token keyword">function</span>  was  written  by    Alexey    Zelkin
+       <span class="token operator">&lt;</span>phantom@FreeBSD.org<span class="token operator">&gt;</span>.
+
+FreeBSD    <span class="token number">13.2</span>               February    <span class="token number">14</span>, <span class="token number">2003</span>             DLINFO<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-15 09:38:47
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="dlsym.html" class="navigation navigation-prev " aria-label="Previous page: dlsym">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="dlopen.html" class="navigation navigation-next " aria-label="Next page: dlopen">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"dlinfo","level":"1.3.5.1.1.3","depth":5,"next":{"title":"dlopen","level":"1.3.5.1.1.4","depth":5,"path":"dyld/func/dyld_api/dlfcn_h/dlopen.md","ref":"dyld/func/dyld_api/dlfcn_h/dlopen.md","articles":[]},"previous":{"title":"dlsym","level":"1.3.5.1.1.2","depth":5,"path":"dyld/func/dyld_api/dlfcn_h/dlsym.md","ref":"dyld/func/dyld_api/dlfcn_h/dlsym.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_dyld_link/pdf/ios_re_dyld_link.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_dyld_link/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_dyld_link","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：dyld动态链接","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理关于iOS逆向期间涉及到的dyld动态链接的各种内容。先是dyld概述；然后是分别详细介绍dyld和libdyld.dylib的具体内容；dyld包括，二进制工具的man page；如何查看dyld的版本；哪里可以找到dyld的源码；dyld的app的加载过程；以及相关函数，包括dyld的API，具体有dlfcn.h的dladdr、dlsym、dlinfo、dlopen、dlclose、dlopen_preflight；dyld.h的_dyld_image_count、_dyld_get_image_header、_dyld_get_image_vmaddr_slide、_dyld_get_image_name、_dyld_register_func_for_add_image、_dyld_register_func_for_remove_image、NSVersionOfRunTimeLibrary、NSVersionOfLinkTimeLibrary、_NSGetExecutablePath；dyld_priv.h的dyld_image_header_containing_address、dyld_program_sdk_at_least、dyld_shared_cache_file_path、_dyld_get_all_image_infos；dyld-interposing.h的DYLD_INTERPOSE，以及一些其他函数start、_dyld_start和相关变量，比如gProcessInfo和一些定义dyld_all_image_infos等；以及相关涉及到的地方；再介绍libdyld.dylib中的内容，包括man page，相关函数dyld_stub_binder等；以及其他dyld相关的内容，包括getsect.h的getsectdata、getsectdatafromFramework、getsectiondata、getsectbyname、getsegbyname、getsegmentdata、getsectdatafromheader、getsectdatafromheader_64、getsectbynamefromheader、getsectbynamefromheader_64、getsectbynamefromheaderwithswap、getsectbynamefromheaderwithswap_64；DYLD环境变量的DYLD_LIBRARY_PATH、DYLD_INSERT_LIBRARIES、DYLD_PRINT_LIBRARIES、DYLD_PRINT_STATISTICS、DYLD_IMAGE_SUFFIX、DYLD_PRINT_APIS、DYLD_PRINT_WARNINGS；相关工具dyldinfo等；Mach-O中Load Command的详细定义和具体command，比如LC_DYLD_CHAINED_FIXUPS，和其他涉及到的地方；以及相关结构体dyld_info_command、linkedit_data_command等定义。"},"file":{"path":"dyld/func/dyld_api/dlfcn_h/dlinfo.md","mtime":"2024-10-15T01:38:47.248Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-15T02:59:24.475Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
