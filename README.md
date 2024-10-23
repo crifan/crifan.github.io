@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20241022`
+最后更新：`20241023`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -164,5 +164,6 @@
     * [借贷协议：AAVE](https://crifan.github.io/lending_protocol_aave/website)
     * [比特币L2：MAP Protocol](https://crifan.github.io/bitcoin_l2_map_protocol/website)
     * [HonKit演示](https://crifan.github.io/honkit_demo/website)
+    * [iOS逆向：Framework动态库](https://crifan.github.io/ios_re_framework_dylib/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
