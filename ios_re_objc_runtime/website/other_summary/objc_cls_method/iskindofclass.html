@@ -1,0 +1,1311 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>isKindOfClass · iOS逆向开发：ObjC运行时</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../get_cls_name/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../objc_runtime_overview/">
+            
+                <a href="../../objc_runtime_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    ObjC运行时概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../runtime_basic/">
+            
+                <a href="../../runtime_basic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Runtime基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../objc_func_cls/">
+            
+                <a href="../../objc_func_cls/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    ObjC函数和对象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../objc_func_cls/nsobject/">
+            
+                <a href="../../objc_func_cls/nsobject/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    NSObject
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../objc_func_cls/nsobject/nsobject_h/">
+            
+                <a href="../../objc_func_cls/nsobject/nsobject_h/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    NSObject.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../../objc_func_cls/nsobject/nsobject_h/print_detail.html">
+            
+                <a href="../../objc_func_cls/nsobject/nsobject_h/print_detail.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    打印类的详情
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../objc_func_cls/nsobject/nsobject_protocol_h/">
+            
+                <a href="../../objc_func_cls/nsobject/nsobject_protocol_h/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    NSObject-Protocol.h
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../objc_func_cls/corefoundation/">
+            
+                <a href="../../objc_func_cls/corefoundation/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    CoreFoundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../objc_func_cls/objc_func/">
+            
+                <a href="../../objc_func_cls/objc_func/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    objc系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../objc_func_cls/objc_func/objc_init.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_init.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    objc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../objc_func_cls/objc_func/objc_alloc.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_alloc.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    objc_alloc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../objc_func_cls/objc_func/objc_alloc_init.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_alloc_init.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    objc_alloc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../../objc_func_cls/objc_func/objc_msgsend/">
+            
+                <a href="../../objc_func_cls/objc_func/objc_msgsend/">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    objc_msgSend
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.4.1" data-path="../../objc_func_cls/objc_func/objc_msgsend/self_calc_para.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_msgsend/self_calc_para.html">
+            
+                    
+                        <b>1.4.3.4.1.</b>
+                    
+                    手动计算参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4.2" data-path="../../objc_func_cls/objc_func/objc_msgsend/self_merge.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_msgsend/self_merge.html">
+            
+                    
+                        <b>1.4.3.4.2.</b>
+                    
+                    自己组装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="../../objc_func_cls/objc_func/objc_getclass/">
+            
+                <a href="../../objc_func_cls/objc_func/objc_getclass/">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    objc_getClass
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.5.1" data-path="../../objc_func_cls/objc_func/objc_getclass/use_case.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_getclass/use_case.html">
+            
+                    
+                        <b>1.4.3.5.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="../../objc_func_cls/objc_func/objc_retain.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_retain.html">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    objc_retain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7" data-path="../../objc_func_cls/objc_func/objc_retainblock.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_retainblock.html">
+            
+                    
+                        <b>1.4.3.7.</b>
+                    
+                    objc_retainBlock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.8" data-path="../../objc_func_cls/objc_func/objc_release.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_release.html">
+            
+                    
+                        <b>1.4.3.8.</b>
+                    
+                    objc_release
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.9" data-path="../../objc_func_cls/objc_func/objc_autorelease.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_autorelease.html">
+            
+                    
+                        <b>1.4.3.9.</b>
+                    
+                    objc_autorelease
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.10" data-path="../../objc_func_cls/objc_func/objc_opt_class.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_opt_class.html">
+            
+                    
+                        <b>1.4.3.10.</b>
+                    
+                    objc_opt_class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.11" data-path="../../objc_func_cls/objc_func/objc_storestrong.html">
+            
+                <a href="../../objc_func_cls/objc_func/objc_storestrong.html">
+            
+                    
+                        <b>1.4.3.11.</b>
+                    
+                    objc_storeStrong
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../objc_func_cls/object_func/">
+            
+                <a href="../../objc_func_cls/object_func/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    object系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../objc_func_cls/object_func/object_getclassname/">
+            
+                <a href="../../objc_func_cls/object_func/object_getclassname/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    object_getClassName
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../../objc_func_cls/object_func/object_getclassname/use_case.html">
+            
+                <a href="../../objc_func_cls/object_func/object_getclassname/use_case.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    ObjC类的常用方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1.1" data-path="iskindofclass.html">
+            
+                <a href="iskindofclass.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    isKindOfClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../get_cls_name/">
+            
+                <a href="../get_cls_name/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    ObjC获取Class类名
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../get_cls_name/nsstringfromclass.html">
+            
+                <a href="../get_cls_name/nsstringfromclass.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    NSStringFromClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../get_cls_name/class_getname.html">
+            
+                <a href="../get_cls_name/class_getname.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    class_getName
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../get_cls_name/classname.html">
+            
+                <a href="../get_cls_name/classname.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    className
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../get_parent_cls/">
+            
+                <a href="../get_parent_cls/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    获取ObjC类的父类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../get_parent_cls/superclass.html">
+            
+                <a href="../get_parent_cls/superclass.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    superclass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >isKindOfClass</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="iskindofclass"><a name="iskindofclass" class="plugin-anchor" href="#iskindofclass"><i class="fa fa-link" aria-hidden="true"></i></a>isKindOfClass</h1>
+<h2 id="应用举例"><a name="应用举例" class="plugin-anchor" href="#应用举例"><i class="fa fa-link" aria-hidden="true"></i></a>应用举例</h2>
+<h3 id="authdaemonprotocolproxy"><a name="authdaemonprotocolproxy" class="plugin-anchor" href="#authdaemonprotocolproxy"><i class="fa fa-link" aria-hidden="true"></i></a>AuthDaemonProtocolProxy</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">%</span>hook NSXPCConnection
+
+<span class="token operator">-</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>remoteObjectProxyWithErrorHandler<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">^</span><span class="token punctuation">)</span><span class="token punctuation">(</span>NSError <span class="token operator">*</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>handler<span class="token punctuation">{</span>
+    id rmtObjPrx <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+    <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"rmtObjPrx=%{public}@"</span><span class="token punctuation">,</span> rmtObjPrx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BOOL isAuthDaemonProtocol <span class="token operator">=</span> <span class="token punctuation">[</span>rmtObjPrx isKindOfClass<span class="token punctuation">:</span> AuthDaemonProtocolProxy<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isAuthDaemonProtocol<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        gNoUse <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> rmtObjPrx<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">%</span>end
+</code></pre>
+<p><img src="../../assets/img/iskindofclass_case_authdaemonprotocolproxy.png" alt="iskindofclass_case_authdaemonprotocolproxy"></img></p>
+<h3 id="nshttpurlresponse"><a name="nshttpurlresponse" class="plugin-anchor" href="#nshttpurlresponse"><i class="fa fa-link" aria-hidden="true"></i></a>NSHTTPURLResponse</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>_unsafe_provisionAnisetteWithCompletion<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">^</span><span class="token punctuation">)</span><span class="token punctuation">(</span>BOOL<span class="token punctuation">,</span> NSError <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span>completion <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">[</span>session beginDataTaskWithRequest<span class="token punctuation">:</span>request completionHandler<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">(</span>NSData <span class="token operator">*</span>data<span class="token punctuation">,</span> NSHTTPURLResponse <span class="token operator">*</span>response<span class="token punctuation">,</span> NSError <span class="token operator">*</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">[</span>response isKindOfClass<span class="token punctuation">:</span><span class="token punctuation">[</span>NSHTTPURLResponse class<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre>
+<p>和：</p>
+<pre class="language-"><code class="lang-objc"><span class="token keyword">static</span> CFURLResponseRef <span class="token function">createCFURLResponseFromResponseData</span><span class="token punctuation">(</span>CFDataRef responseData<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">[</span>response isKindOfClass<span class="token punctuation">:</span><span class="token punctuation">[</span>NSHTTPURLResponse class<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="shortmethoddescription"><a name="shortmethoddescription" class="plugin-anchor" href="#shortmethoddescription"><i class="fa fa-link" aria-hidden="true"></i></a>_shortMethodDescription</h3>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">[</span>0x0000000120427c80 _shortMethodDescription<span class="token punctuation">]</span>
+<span class="token operator">&lt;</span>__NSCFLocalDataTask: 0x120427c8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>:
+<span class="token keyword">in</span> __NSCFLocalDataTask:
+     Instance Methods:
+         - <span class="token punctuation">(</span>void<span class="token punctuation">)</span> _onqueue_didReceiveResponse:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg1 completion:<span class="token punctuation">(</span>^block<span class="token punctuation">)</span>arg2<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x5c30dd01820f43dc<span class="token punctuation">)</span>
+         - <span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span> isKindOfClass:<span class="token punctuation">(</span>Class<span class="token punctuation">)</span>arg1<span class="token punctuation">;</span> <span class="token punctuation">(</span>0xda4fcc81820974fc<span class="token punctuation">)</span>
+<span class="token punctuation">(</span>__NSCFLocalSessionTask <span class="token punctuation">..</span>.<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="nsurl"><a name="nsurl" class="plugin-anchor" href="#nsurl"><i class="fa fa-link" aria-hidden="true"></i></a>NSURL</h3>
+<pre class="language-"><code class="lang-bash"><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> <span class="token punctuation">[</span>*<span class="token punctuation">]</span> Detected call to: -<span class="token punctuation">[</span>NSURL isKindOfClass:<span class="token punctuation">]</span>
+argSelStr:  isKindOfClass:
+argCount:  <span class="token number">1</span>
+</code></pre>
+<p>和：</p>
+<pre class="language-"><code class="lang-bash">           /* TID 0x103 */
+  <span class="token number">5609</span> ms  -<span class="token punctuation">[</span>NSURL _cfTypeID<span class="token punctuation">]</span>
+  <span class="token number">5611</span> ms  -<span class="token punctuation">[</span>NSURL path<span class="token punctuation">]</span>
+  <span class="token number">5611</span> ms     <span class="token operator">|</span> -<span class="token punctuation">[</span>NSURL _cfurl<span class="token punctuation">]</span>
+  <span class="token number">7203</span> ms  -<span class="token punctuation">[</span>NSURL isEqual:0x2806e07e0<span class="token punctuation">]</span>
+  <span class="token number">7203</span> ms     <span class="token operator">|</span> -<span class="token punctuation">[</span>NSURL isKindOfClass:0x1f2270158<span class="token punctuation">]</span>
+  <span class="token number">7203</span> ms     <span class="token operator">|</span> -<span class="token punctuation">[</span>NSURL _cfurl<span class="token punctuation">]</span>
+  <span class="token number">7203</span> ms     <span class="token operator">|</span> -<span class="token punctuation">[</span>NSURL _cfurl<span class="token punctuation">]</span>
+  <span class="token number">7203</span> ms  -<span class="token punctuation">[</span>NSURL _cfTypeID<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="ytadbreakrendererfetcher"><a name="ytadbreakrendererfetcher" class="plugin-anchor" href="#ytadbreakrendererfetcher"><i class="fa fa-link" aria-hidden="true"></i></a>YTAdBreakRendererFetcher</h3>
+<pre class="language-"><code class="lang-objc"><span class="token keyword">void</span> __cdecl <span class="token operator">-</span><span class="token punctuation">[</span>YTAdBreakRendererFetcher makeAdRequestWithAdBreak<span class="token punctuation">:</span>contentPlayerResponse<span class="token punctuation">:</span>responseBlock<span class="token punctuation">:</span>playbackContext<span class="token punctuation">:</span>clientPlaybackNonce<span class="token punctuation">:</span>midrollIndex<span class="token punctuation">:</span>liveTargetingParams<span class="token punctuation">:</span>adBreakLength<span class="token punctuation">:</span>autonavSettingState<span class="token punctuation">:</span>currentMediaTime<span class="token punctuation">:</span>retryEnabled<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>YTAdBreakRendererFetcher <span class="token operator">*</span><span class="token keyword">self</span><span class="token punctuation">,</span> SEL a2<span class="token punctuation">,</span> id a3<span class="token punctuation">,</span> id a4<span class="token punctuation">,</span> id a5<span class="token punctuation">,</span> id a6<span class="token punctuation">,</span> id a7<span class="token punctuation">,</span> <span class="token keyword">signed</span> __int64 a8<span class="token punctuation">,</span> id inputLiveTargetingParams<span class="token punctuation">,</span> <span class="token keyword">double</span> inputBreakLength<span class="token punctuation">,</span> <span class="token keyword">int</span> a11<span class="token punctuation">,</span> <span class="token keyword">double</span> a12<span class="token punctuation">,</span> bool retryEnabled<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">objc_msgSend_3E84298</span><span class="token punctuation">(</span>v21<span class="token punctuation">,</span> <span class="token string">"isKindOfClass:"</span><span class="token punctuation">,</span> v27<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+</code></pre>
+<h3 id="nserror"><a name="nserror" class="plugin-anchor" href="#nserror"><i class="fa fa-link" aria-hidden="true"></i></a>NSError</h3>
+<pre class="language-"><code class="lang-objc">id __cdecl <span class="token operator">+</span><span class="token punctuation">[</span>NSError HAMErrorWithURLResponse<span class="token punctuation">:</span>userInfo<span class="token punctuation">:</span>request<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">(</span>NSError_meta <span class="token operator">*</span><span class="token keyword">self</span><span class="token punctuation">,</span> SEL a2<span class="token punctuation">,</span> id a3<span class="token punctuation">,</span> id a4<span class="token punctuation">,</span> id a5<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">objc_msgSend</span><span class="token punctuation">(</span>v8<span class="token punctuation">,</span> <span class="token string">"isKindOfClass:"</span><span class="token punctuation">,</span> v16<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+</code></pre>
+<h3 id="errorwithdomain"><a name="errorwithdomain" class="plugin-anchor" href="#errorwithdomain"><i class="fa fa-link" aria-hidden="true"></i></a>errorWithDomain</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">+</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span> errorWithDomain<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg1 code<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span>arg2 userInfo<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg3<span class="token punctuation">{</span>
+    id newError <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+    <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"errDomain=%@,code=%ld, userInfo=%@ -&gt; newError=%@"</span><span class="token punctuation">,</span> arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">,</span> arg3<span class="token punctuation">,</span> newError<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>arg2 <span class="token operator">&gt;=</span> <span class="token number">6000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"YouTube related error: %@"</span><span class="token punctuation">,</span> newError<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        id errUrlReq <span class="token operator">=</span> arg3<span class="token punctuation">[</span><span class="token string">@"HAMErrorURLRequest"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>errUrlReq <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Class urlReqClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span><span class="token string">"NSMutableURLRequest"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            BOOL isUrlReq <span class="token operator">=</span> <span class="token punctuation">[</span>errUrlReq isKindOfClass<span class="token punctuation">:</span> urlReqClass<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>isUrlReq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                NSURL <span class="token operator">*</span>reqUrl <span class="token operator">=</span> <span class="token punctuation">[</span>errUrlReq URL<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">//            if (isYoutubeAdsVideo(reqUrl)){</span>
+    <span class="token comment">//                iosLogInfo("is ads video: reqUrl=%@", reqUrl);</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isYoutubeAdsVideo_ctierA</span><span class="token punctuation">(</span>reqUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"is ctier=A ads video: reqUrl=%@"</span><span class="token punctuation">,</span> reqUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+    <span class="token comment">//            }</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> newError<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../assets/img/iskindofclass_case_urlreqclass.png" alt="iskindofclass_case_urlreqclass"></img></p>
+<h3 id="hamerrorwithcode"><a name="hamerrorwithcode" class="plugin-anchor" href="#hamerrorwithcode"><i class="fa fa-link" aria-hidden="true"></i></a>HAMErrorWithCode</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">+</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>HAMErrorWithCode<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>arg1 userInfo<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg2<span class="token punctuation">{</span>
+    id hamewc_au <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+    <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"arg1=%lld,userInfo=%@ -&gt; hamewc_au=%@"</span><span class="token punctuation">,</span> arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">,</span> hamewc_au<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    id hamEur <span class="token operator">=</span> arg2<span class="token punctuation">[</span><span class="token string">@"HAMErrorURLRequest"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hamEur <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Class urlClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span><span class="token string">"NSMutableURLRequest"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        BOOL isUrlReq <span class="token operator">=</span> <span class="token punctuation">[</span>hamEur isKindOfClass<span class="token punctuation">:</span> urlClass<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>isUrlReq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            NSURL <span class="token operator">*</span>curUrl <span class="token operator">=</span> <span class="token punctuation">[</span>hamEur URL<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isYoutubeAdsVideo</span><span class="token punctuation">(</span>curUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"is ads video: urlStr=%@"</span><span class="token punctuation">,</span> curUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isYoutubeAdsVideo_ctierA</span><span class="token punctuation">(</span>curUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"is ctier=A ads video: urlStr=%@"</span><span class="token punctuation">,</span> curUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> hamewc_au<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../assets/img/iskindofclass_case_hameur.png" alt="iskindofclass_case_hameur"></img></p>
+<h3 id="ttinstallutil"><a name="ttinstallutil" class="plugin-anchor" href="#ttinstallutil"><i class="fa fa-link" aria-hidden="true"></i></a>TTInstallUtil</h3>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__text:</span>00000000092EC444 <span class="token comment">; id __cdecl +[TTInstallUtil onTheFlyParameter](TTInstallUtil_meta *self, SEL)</span>
+<span class="token label function">__text:</span>00000000092EC444 __TTInstallUtil_onTheFlyParameter_      <span class="token comment">; DATA XREF: __objc_const:00000000005F3588↑o</span>
+...
+<span class="token label function">__text:</span>00000000092ECD30                 MOV             X2, X0
+<span class="token label function">__text:</span>00000000092ECD34                 ADRP            X8, #isKindOfClass_@PAGE
+<span class="token label function">__text:</span>00000000092ECD38                 LDR             X1, <span class="token operator">[</span>X8,#isKindOfClass_@PAGEOFF<span class="token operator">]</span> <span class="token comment">; char *</span>
+</code></pre>
+<h3 id="uistatusbardatanetworkitemview"><a name="uistatusbardatanetworkitemview" class="plugin-anchor" href="#uistatusbardatanetworkitemview"><i class="fa fa-link" aria-hidden="true"></i></a>UIStatusBarDataNetworkItemView</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>networktype<span class="token punctuation">{</span>
+    NSArray <span class="token operator">*</span>subviews <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span>UIApplication sharedApplication<span class="token punctuation">]</span> valueForKey<span class="token punctuation">:</span><span class="token string">@"statusBar"</span><span class="token punctuation">]</span> valueForKey<span class="token punctuation">:</span><span class="token string">@"foregroundView"</span><span class="token punctuation">]</span>subviews<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    NSNumber <span class="token operator">*</span>dataNetworkItemView <span class="token operator">=</span> nil<span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>id subview <span class="token keyword">in</span> subviews<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">[</span>subview isKindOfClass<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token function">NSClassFromString</span><span class="token punctuation">(</span><span class="token string">@"UIStatusBarDataNetworkItemView"</span><span class="token punctuation">)</span> class<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dataNetworkItemView <span class="token operator">=</span> subview<span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<h3 id="awepremaindelayinittask"><a name="awepremaindelayinittask" class="plugin-anchor" href="#awepremaindelayinittask"><i class="fa fa-link" aria-hidden="true"></i></a>AWEPremainDelayInitTask</h3>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">[</span>objc_getClass<span class="token punctuation">(</span><span class="token string">"AWEPremainDelayInitTask"</span><span class="token punctuation">)</span> _methodDescription<span class="token punctuation">]</span>
+<span class="token operator">&lt;</span>AWEPremainDelayInitTask: 0x103c8047<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>:
+<span class="token keyword">in</span> AWEPremainDelayInitTask:
+     Class Methods:
+         + <span class="token punctuation">(</span>void<span class="token punctuation">)</span> stubForCheck<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x110f957fc<span class="token punctuation">)</span>
+         + <span class="token punctuation">(</span>void<span class="token punctuation">)</span> execute<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x1089c6910<span class="token punctuation">)</span>
+     Properties:
+         @property <span class="token punctuation">(</span>readonly<span class="token punctuation">)</span> unsigned long <span class="token builtin class-name">hash</span><span class="token punctuation">;</span>
+         @property <span class="token punctuation">(</span>readonly<span class="token punctuation">)</span> Class superclass<span class="token punctuation">;</span>
+         @property <span class="token punctuation">(</span>readonly, copy<span class="token punctuation">)</span> NSString* description<span class="token punctuation">;</span>
+         @property <span class="token punctuation">(</span>readonly, copy<span class="token punctuation">)</span> NSString* debugDescription<span class="token punctuation">;</span>
+<span class="token keyword">in</span> NSObject:
+     Class Methods:
+         + <span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span> bdp_swizzleClass:<span class="token punctuation">(</span>Class<span class="token punctuation">)</span>arg1 selector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>arg2 swizzledClass:<span class="token punctuation">(</span>Class<span class="token punctuation">)</span>arg3 swizzledSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>arg4<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x1089af3f4<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+         + <span class="token punctuation">(</span>id<span class="token punctuation">)</span> performSelector:<span class="token punctuation">(</span>SEL<span class="token punctuation">)</span>arg1 withObject:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg2 withObject:<span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg3<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x1bda92b48<span class="token punctuation">)</span>
+         + <span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span> isKindOfClass:<span class="token punctuation">(</span>Class<span class="token punctuation">)</span>arg1<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x1bda75df8<span class="token punctuation">)</span>
+         + <span class="token punctuation">(</span>BOOL<span class="token punctuation">)</span> isMemberOfClass:<span class="token punctuation">(</span>Class<span class="token punctuation">)</span>arg1<span class="token punctuation">;</span> <span class="token punctuation">(</span>0x1bda92a74<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+</code></pre>
+<h3 id="uistatusbarmodern"><a name="uistatusbarmodern" class="plugin-anchor" href="#uistatusbarmodern"><i class="fa fa-link" aria-hidden="true"></i></a>UIStatusBar_Modern</h3>
+<pre class="language-"><code class="lang-objc">    NSArray <span class="token operator">*</span>infoArray <span class="token operator">=</span> nil<span class="token punctuation">;</span>
+    id statusBar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>UIApplication sharedApplication<span class="token punctuation">]</span> valueForKey<span class="token punctuation">:</span><span class="token string">@"statusBar"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>statusBar isKindOfClass<span class="token punctuation">:</span><span class="token function">NSClassFromString</span><span class="token punctuation">(</span><span class="token string">@"UIStatusBar_Modern"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        infoArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span>statusBar valueForKey<span class="token punctuation">:</span><span class="token string">@"statusBar"</span><span class="token punctuation">]</span> valueForKey<span class="token punctuation">:</span><span class="token string">@"foregroundView"</span><span class="token punctuation">]</span> subviews<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        infoArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>statusBar valueForKey<span class="token punctuation">:</span><span class="token string">@"foregroundView"</span><span class="token punctuation">]</span> subviews<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h3 id="uistatusbarserviceitemview"><a name="uistatusbarserviceitemview" class="plugin-anchor" href="#uistatusbarserviceitemview"><i class="fa fa-link" aria-hidden="true"></i></a>UIStatusBarServiceItemView</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">-</span> <span class="token punctuation">(</span>IBAction<span class="token punctuation">)</span>statusCarrierBtnClicked<span class="token punctuation">:</span><span class="token punctuation">(</span>UIButton <span class="token operator">*</span><span class="token punctuation">)</span>sender <span class="token punctuation">{</span>
+    NSArray <span class="token operator">*</span>infoArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span>UIApplication sharedApplication<span class="token punctuation">]</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@"statusBar"</span><span class="token punctuation">]</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@"foregroundView"</span><span class="token punctuation">]</span> subviews<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    NSString <span class="token operator">*</span>serviceString <span class="token operator">=</span> <span class="token string">@"?"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>id info <span class="token keyword">in</span> infoArray<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>info isKindOfClass<span class="token punctuation">:</span><span class="token function">NSClassFromString</span><span class="token punctuation">(</span><span class="token string">@"UIStatusBarServiceItemView"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            serviceString <span class="token operator">=</span> <span class="token punctuation">[</span>info valueForKeyPath<span class="token punctuation">:</span><span class="token string">@"serviceString"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@"公司为：%@"</span><span class="token punctuation">,</span> serviceString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    _statusServiceStrLbl<span class="token punctuation">.</span>text <span class="token operator">=</span> serviceString<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="xcuiapplicationclass"><a name="xcuiapplicationclass" class="plugin-anchor" href="#xcuiapplicationclass"><i class="fa fa-link" aria-hidden="true"></i></a>XCUIApplication.class</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>writeXmlWithRootElement<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token operator">&lt;</span>FBElement<span class="token operator">&gt;</span><span class="token punctuation">)</span>root
+                     indexPath<span class="token punctuation">:</span><span class="token punctuation">(</span>nullable NSString <span class="token operator">*</span><span class="token punctuation">)</span>indexPath
+                  elementStore<span class="token punctuation">:</span><span class="token punctuation">(</span>nullable NSMutableDictionary <span class="token operator">*</span><span class="token punctuation">)</span>elementStore
+            includedAttributes<span class="token punctuation">:</span><span class="token punctuation">(</span>nullable NSSet<span class="token operator">&lt;</span>Class<span class="token operator">&gt;</span> <span class="token operator">*</span><span class="token punctuation">)</span>includedAttributes
+                        writer<span class="token punctuation">:</span><span class="token punctuation">(</span>xmlTextWriterPtr<span class="token punctuation">)</span>writer
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  XCElementSnapshot <span class="token operator">*</span>currentSnapshot<span class="token punctuation">;</span>
+  NSArray<span class="token operator">&lt;</span>XCElementSnapshot <span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>children<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>root isKindOfClass<span class="token punctuation">:</span>XCUIElement<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    XCUIElement <span class="token operator">*</span>element <span class="token operator">=</span> <span class="token punctuation">(</span>XCUIElement <span class="token operator">*</span><span class="token punctuation">)</span>root<span class="token punctuation">;</span>
+    NSMutableArray<span class="token operator">&lt;</span>NSString <span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>snapshotAttributes <span class="token operator">=</span> <span class="token punctuation">[</span>NSMutableArray array<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nil <span class="token operator">!=</span> includedAttributes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span>Class includedAttribute <span class="token keyword">in</span> includedAttributes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span>snapshotAttributes addObjectsFromArray<span class="token punctuation">:</span><span class="token punctuation">[</span>includedAttribute performSelector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>internalNames<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// Element types should always be there to build XML tree nodes</span>
+      <span class="token comment">// Duplicates in this array are OK, since insternally it is anyway</span>
+      <span class="token comment">// flattened to a set</span>
+      <span class="token punctuation">[</span>snapshotAttributes addObject<span class="token punctuation">:</span>FB_ElementTypeAttributeName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>snapshotAttributes containsObject<span class="token punctuation">:</span>FB_XCAXAIsVisibleAttributeName<span class="token punctuation">]</span>
+        <span class="token operator">||</span> <span class="token number">0</span> <span class="token operator">==</span> snapshotAttributes<span class="token punctuation">.</span>count<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// If the app is not idle state while we retrieve the visiblity state</span>
+      <span class="token comment">// then the snapshot retrieval operation might freeze and time out</span>
+      <span class="token punctuation">[</span>element<span class="token punctuation">.</span>application fb_waitUntilSnapshotIsStable<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>root isKindOfClass<span class="token punctuation">:</span>XCUIApplication<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      currentSnapshot <span class="token operator">=</span> element<span class="token punctuation">.</span>fb_cachedSnapshot <span class="token operator">?</span><span class="token punctuation">:</span> element<span class="token punctuation">.</span>fb_lastSnapshot<span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<h3 id="fbclassnametokenclass"><a name="fbclassnametokenclass" class="plugin-anchor" href="#fbclassnametokenclass"><i class="fa fa-link" aria-hidden="true"></i></a>FBClassNameToken.class</h3>
+<ul>
+<li><code>WebDriverAgent/WebDriverAgentLib/Utilities/FBClassChainQueryParser.m</code></li>
+</ul>
+<pre class="language-"><code class="lang-objc"><span class="token operator">+</span> <span class="token punctuation">(</span>nullable FBClassChain<span class="token operator">*</span><span class="token punctuation">)</span>compiledQueryWithTokenizedQuery<span class="token punctuation">:</span><span class="token punctuation">(</span>NSArray<span class="token operator">&lt;</span>FBBaseClassChainToken <span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span><span class="token punctuation">)</span>tokenizedQuery originalQuery<span class="token punctuation">:</span><span class="token punctuation">(</span>NSString <span class="token operator">*</span><span class="token punctuation">)</span>originalQuery error<span class="token punctuation">:</span><span class="token punctuation">(</span>NSError <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>error
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  NSMutableArray<span class="token operator">&lt;</span>FBAbstractPredicateItem <span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>predicates <span class="token operator">=</span> <span class="token punctuation">[</span>NSMutableArray array<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>FBBaseClassChainToken <span class="token operator">*</span>token <span class="token keyword">in</span> tokenizedQuery<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>token isKindOfClass<span class="token punctuation">:</span>FBClassNameToken<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>isTypeSet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSString <span class="token operator">*</span>description <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token punctuation">:</span><span class="token string">@"Unexpected token '%@'. The type name can be set only once."</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>asString<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span>error <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>class compilationErrorWithQuery<span class="token punctuation">:</span>originalQuery description<span class="token punctuation">:</span>description<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> nil<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">@try</span> <span class="token punctuation">{</span>
+        chainElementType <span class="token operator">=</span> <span class="token punctuation">[</span>FBElementTypeTransformer elementTypeWithTypeName<span class="token punctuation">:</span>token<span class="token punctuation">.</span>asString<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        isTypeSet <span class="token operator">=</span> YES<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">@catch</span> <span class="token punctuation">(</span>NSException <span class="token operator">*</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>e<span class="token punctuation">.</span>name isEqualToString<span class="token punctuation">:</span>FBInvalidArgumentException<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          NSString <span class="token operator">*</span>description <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token punctuation">:</span><span class="token string">@"'%@' class name is unknown to WDA"</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>asString<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token operator">*</span>error <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>class compilationErrorWithQuery<span class="token punctuation">:</span>originalQuery description<span class="token punctuation">:</span>description<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> nil<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">@throw</span> e<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>token isKindOfClass<span class="token punctuation">:</span>FBStarToken<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>isTypeSet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSString <span class="token operator">*</span>description <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token punctuation">:</span><span class="token string">@"Unexpected token '%@'. The type name can be set only once."</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>asString<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span>error <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>class compilationErrorWithQuery<span class="token punctuation">:</span>originalQuery description<span class="token punctuation">:</span>description<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> nil<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      chainElementType <span class="token operator">=</span> XCUIElementTypeAny<span class="token punctuation">;</span>
+      isTypeSet <span class="token operator">=</span> YES<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>token isKindOfClass<span class="token punctuation">:</span>FBDescendantMarkerToken<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>isDescendantSet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSString <span class="token operator">*</span>description <span class="token operator">=</span> <span class="token punctuation">[</span>NSString stringWithFormat<span class="token punctuation">:</span><span class="token string">@"Unexpected token '%@'. Descendant markers cannot be duplicated."</span><span class="token punctuation">,</span> token<span class="token punctuation">.</span>asString<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span>error <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>class compilationErrorWithQuery<span class="token punctuation">:</span>originalQuery description<span class="token punctuation">:</span>description<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> nil<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      isTypeSet <span class="token operator">=</span> NO<span class="token punctuation">;</span>
+      isPositionSet <span class="token operator">=</span> NO<span class="token punctuation">;</span>
+      <span class="token punctuation">[</span>predicates removeAllObjects<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      isDescendantSet <span class="token operator">=</span> YES<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>token isKindOfClass<span class="token punctuation">:</span>FBAbstractPredicateToken<span class="token punctuation">.</span>class<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>isPositionSet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<h3 id="hamcronetdataloadtaskclass"><a name="hamcronetdataloadtaskclass" class="plugin-anchor" href="#hamcronetdataloadtaskclass"><i class="fa fa-link" aria-hidden="true"></i></a>HAMCronetDataLoadTaskClass</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">%</span>hook MLHAMDataLoadTaskObserverImpl
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>dataLoadTaskDidStart<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>arg1<span class="token punctuation">{</span>
+    <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"dataLoadTask=%@"</span><span class="token punctuation">,</span> arg1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//    BOOL isCornetClass = [arg1 isKindOfClass: HAMCronetDataLoadTaskClass];</span>
+<span class="token comment">//    if (isCornetClass) {</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<h3 id="nserrorclass"><a name="nserrorclass" class="plugin-anchor" href="#nserrorclass"><i class="fa fa-link" aria-hidden="true"></i></a>NSErrorClass</h3>
+<pre class="language-"><code class="lang-objc">Class NSMutableURLRequestClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span><span class="token string">"NSMutableURLRequest"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Class NSErrorClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span><span class="token string">"NSError"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Class NSDictionaryClass <span class="token operator">=</span> <span class="token function">objc_getClass</span><span class="token punctuation">(</span><span class="token string">"NSDictionary"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//NSURL* getHamErrReqUrl(NSError* curError){</span>
+NSURL<span class="token operator">*</span> <span class="token function">getHamErrReqUrl</span><span class="token punctuation">(</span>id erroOrDict<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    NSURL<span class="token operator">*</span> curUrl <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token comment">//    if (curError) {</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>erroOrDict<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        NSDictionary<span class="token operator">*</span> curUserInfo <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>erroOrDict isKindOfClass<span class="token punctuation">:</span> NSErrorClass<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            curUserInfo <span class="token operator">=</span> <span class="token punctuation">[</span>erroOrDict userInfo<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>erroOrDict isKindOfClass<span class="token punctuation">:</span> NSDictionaryClass<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            curUserInfo <span class="token operator">=</span> <span class="token punctuation">(</span>NSDictionary<span class="token operator">*</span><span class="token punctuation">)</span>erroOrDict<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>curUserInfo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            id hamErrUrlReq <span class="token operator">=</span> curUserInfo<span class="token punctuation">[</span><span class="token string">@"HAMErrorURLRequest"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>hamErrUrlReq <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                BOOL isUrlReq <span class="token operator">=</span> <span class="token punctuation">[</span>hamErrUrlReq isKindOfClass<span class="token punctuation">:</span> NSMutableURLRequestClass<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>isUrlReq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    curUrl <span class="token operator">=</span> <span class="token punctuation">[</span>hamErrUrlReq URL<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">return</span> curUrl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="../../assets/img/iskindofclass_case_nserrorclass.png" alt="iskindofclass_case_nserrorclass"></img></p>
+<h3 id="nsnull"><a name="nsnull" class="plugin-anchor" href="#nsnull"><i class="fa fa-link" aria-hidden="true"></i></a>NSNull</h3>
+<pre class="language-"><code class="lang-objc"><span class="token operator">-</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>cb_objectForKey<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>aKey<span class="token punctuation">{</span>
+    id object <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> cb_objectForKey<span class="token punctuation">:</span>aKey<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>object isKindOfClass<span class="token punctuation">:</span><span class="token punctuation">[</span>NSNull class<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> nil<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="sub69cdc88"><a name="sub69cdc88" class="plugin-anchor" href="#sub69cdc88"><i class="fa fa-link" aria-hidden="true"></i></a>sub_69CDC88</h3>
+<pre class="language-"><code class="lang-asm"><span class="token label function">__text:</span>00000000069CDC88 sub_69CDC88
+...
+<span class="token label function">__text:</span>00000000069CDD64                 MOV             X2, X0
+<span class="token label function">__text:</span>00000000069CDD68                 ADRP            X8, #isKindOfClass_@PAGE
+<span class="token label function">__text:</span>00000000069CDD6C                 LDR             X1, <span class="token operator">[</span>X8,#isKindOfClass_@PAGEOFF<span class="token operator">]</span> <span class="token comment">; char *</span>
+</code></pre>
+<h3 id="sub100f6b4"><a name="sub100f6b4" class="plugin-anchor" href="#sub100f6b4"><i class="fa fa-link" aria-hidden="true"></i></a>sub_100F6B4</h3>
+<pre class="language-"><code class="lang-objc">__int64 __fastcall <span class="token function">sub_100F6B4</span><span class="token punctuation">(</span>__int64 result<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">objc_msgSend</span><span class="token punctuation">(</span>v4<span class="token punctuation">,</span> <span class="token string">"isKindOfClass:"</span><span class="token punctuation">,</span> v5<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-24 10:41:09
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: ObjC类的常用方法">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../get_cls_name/" class="navigation navigation-next " aria-label="Next page: ObjC获取Class类名">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"isKindOfClass","level":"1.5.1.1","depth":3,"next":{"title":"ObjC获取Class类名","level":"1.5.2","depth":2,"path":"other_summary/get_cls_name/README.md","ref":"other_summary/get_cls_name/README.md","articles":[{"title":"NSStringFromClass","level":"1.5.2.1","depth":3,"path":"other_summary/get_cls_name/nsstringfromclass.md","ref":"other_summary/get_cls_name/nsstringfromclass.md","articles":[]},{"title":"class_getName","level":"1.5.2.2","depth":3,"path":"other_summary/get_cls_name/class_getname.md","ref":"other_summary/get_cls_name/class_getname.md","articles":[]},{"title":"className","level":"1.5.2.3","depth":3,"path":"other_summary/get_cls_name/classname.md","ref":"other_summary/get_cls_name/classname.md","articles":[]}]},"previous":{"title":"ObjC类的常用方法","level":"1.5.1","depth":2,"path":"other_summary/objc_cls_method/README.md","ref":"other_summary/objc_cls_method/README.md","articles":[{"title":"isKindOfClass","level":"1.5.1.1","depth":3,"path":"other_summary/objc_cls_method/iskindofclass.md","ref":"other_summary/objc_cls_method/iskindofclass.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_runtime/pdf/ios_re_objc_runtime.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_runtime/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：ObjC运行时","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间常会涉及到的ObjC的底层知识Runtime运行时。以及介绍Runtime中的常遇到的各个函数和内容，包括NSObject、objc开头的系列函数，尤其是objc_msgSend函数、object开头的系列函数。"},"file":{"path":"other_summary/objc_cls_method/iskindofclass.md","mtime":"2024-10-24T02:41:09.902Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-26T06:52:14.533Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

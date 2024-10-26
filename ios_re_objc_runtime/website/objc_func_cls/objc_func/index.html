@@ -1,0 +1,1038 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>objc系列函数 · iOS逆向开发：ObjC运行时</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="objc_init.html" />
+    
+    
+    <link rel="prev" href="../corefoundation/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../objc_runtime_overview/">
+            
+                <a href="../../objc_runtime_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    ObjC运行时概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../runtime_basic/">
+            
+                <a href="../../runtime_basic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Runtime基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    ObjC函数和对象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../nsobject/">
+            
+                <a href="../nsobject/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    NSObject
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../nsobject/nsobject_h/">
+            
+                <a href="../nsobject/nsobject_h/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    NSObject.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../nsobject/nsobject_h/print_detail.html">
+            
+                <a href="../nsobject/nsobject_h/print_detail.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    打印类的详情
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../nsobject/nsobject_protocol_h/">
+            
+                <a href="../nsobject/nsobject_protocol_h/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    NSObject-Protocol.h
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../corefoundation/">
+            
+                <a href="../corefoundation/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    CoreFoundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    objc系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="objc_init.html">
+            
+                <a href="objc_init.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    objc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="objc_alloc.html">
+            
+                <a href="objc_alloc.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    objc_alloc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="objc_alloc_init.html">
+            
+                <a href="objc_alloc_init.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    objc_alloc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="objc_msgsend/">
+            
+                <a href="objc_msgsend/">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    objc_msgSend
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.4.1" data-path="objc_msgsend/self_calc_para.html">
+            
+                <a href="objc_msgsend/self_calc_para.html">
+            
+                    
+                        <b>1.4.3.4.1.</b>
+                    
+                    手动计算参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4.2" data-path="objc_msgsend/self_merge.html">
+            
+                <a href="objc_msgsend/self_merge.html">
+            
+                    
+                        <b>1.4.3.4.2.</b>
+                    
+                    自己组装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="objc_getclass/">
+            
+                <a href="objc_getclass/">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    objc_getClass
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.5.1" data-path="objc_getclass/use_case.html">
+            
+                <a href="objc_getclass/use_case.html">
+            
+                    
+                        <b>1.4.3.5.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="objc_retain.html">
+            
+                <a href="objc_retain.html">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    objc_retain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7" data-path="objc_retainblock.html">
+            
+                <a href="objc_retainblock.html">
+            
+                    
+                        <b>1.4.3.7.</b>
+                    
+                    objc_retainBlock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.8" data-path="objc_release.html">
+            
+                <a href="objc_release.html">
+            
+                    
+                        <b>1.4.3.8.</b>
+                    
+                    objc_release
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.9" data-path="objc_autorelease.html">
+            
+                <a href="objc_autorelease.html">
+            
+                    
+                        <b>1.4.3.9.</b>
+                    
+                    objc_autorelease
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.10" data-path="objc_opt_class.html">
+            
+                <a href="objc_opt_class.html">
+            
+                    
+                        <b>1.4.3.10.</b>
+                    
+                    objc_opt_class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.11" data-path="objc_storestrong.html">
+            
+                <a href="objc_storestrong.html">
+            
+                    
+                        <b>1.4.3.11.</b>
+                    
+                    objc_storeStrong
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../object_func/">
+            
+                <a href="../object_func/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    object系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../object_func/object_getclassname/">
+            
+                <a href="../object_func/object_getclassname/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    object_getClassName
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../object_func/object_getclassname/use_case.html">
+            
+                <a href="../object_func/object_getclassname/use_case.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../other_summary/">
+            
+                <a href="../../other_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../other_summary/objc_cls_method/">
+            
+                <a href="../../other_summary/objc_cls_method/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    ObjC类的常用方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../other_summary/objc_cls_method/iskindofclass.html">
+            
+                <a href="../../other_summary/objc_cls_method/iskindofclass.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    isKindOfClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../other_summary/get_cls_name/">
+            
+                <a href="../../other_summary/get_cls_name/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    ObjC获取Class类名
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../other_summary/get_cls_name/nsstringfromclass.html">
+            
+                <a href="../../other_summary/get_cls_name/nsstringfromclass.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    NSStringFromClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../other_summary/get_cls_name/class_getname.html">
+            
+                <a href="../../other_summary/get_cls_name/class_getname.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    class_getName
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../../other_summary/get_cls_name/classname.html">
+            
+                <a href="../../other_summary/get_cls_name/classname.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    className
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../other_summary/get_parent_cls/">
+            
+                <a href="../../other_summary/get_parent_cls/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    获取ObjC类的父类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../other_summary/get_parent_cls/superclass.html">
+            
+                <a href="../../other_summary/get_parent_cls/superclass.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    superclass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >objc系列函数</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="objc系列函数"><a name="objc系列函数" class="plugin-anchor" href="#objc系列函数"><i class="fa fa-link" aria-hidden="true"></i></a>objc系列函数</h1>
+<p>此处介绍iOS的ObjC的Runtime中，常见的，以<code>objc</code>开头的一些系列函数。</p>
+<p>其中对应官网资料就是：</p>
+<ul>
+<li><a href="https://clang.llvm.org/docs/AutomaticReferenceCounting.html#arc-runtime-objc-retain" target="_blank">Objective-C Automatic Reference Counting (ARC) — Clang 15.0.0git documentation (llvm.org)</a></li>
+</ul>
+<p>对应的<code>objc</code>开头的系列函数是：</p>
+<ul>
+<li>id <code>objc_autorelease</code>(id value);</li>
+<li>void <code>objc_autoreleasePoolPop</code>(void *pool);</li>
+<li>void *<code>objc_autoreleasePoolPush</code>(void);</li>
+<li>id <code>objc_autoreleaseReturnValue</code>(id value);</li>
+<li>void <code>objc_copyWeak</code>(id <em>dest, id </em>src);</li>
+<li>void <code>objc_destroyWeak</code>(id *object);</li>
+<li>id <code>objc_initWeak</code>(id *object, id value);</li>
+<li>id <code>objc_loadWeak</code>(id *object);</li>
+<li>id <code>objc_loadWeakRetained</code>(id *object);</li>
+<li>void <code>objc_moveWeak</code>(id <em>dest, id </em>src);</li>
+<li>void <code>objc_release</code>(id value);</li>
+<li>id <code>objc_retain</code>(id value);</li>
+<li>id <code>objc_retainAutorelease</code>(id value);</li>
+<li>id <code>objc_retainAutoreleaseReturnValue</code>(id value);</li>
+<li>id <code>objc_retainAutoreleasedReturnValue</code>(id value);</li>
+<li>id <code>objc_retainBlock</code>(id value);</li>
+<li>void <code>objc_storeStrong</code>(id *object, id value);</li>
+<li>id <code>objc_storeWeak</code>(id *object, id value);</li>
+<li>id <code>objc_unsafeClaimAutoreleasedReturnValue</code>(id value);</li>
+</ul>
+<p><img src="../../assets/img/clang_arc_runtime.png" alt="clang_arc_runtime"></img></p>
+<p>下面详细介绍部分函数：</p>
+<h2 id="objcallocwithzone"><a name="objcallocwithzone" class="plugin-anchor" href="#objcallocwithzone"><i class="fa fa-link" aria-hidden="true"></i></a>objc_allocWithZone</h2>
+<ul>
+<li>定义<ul>
+<li>精简<pre class="language-"><code class="lang-objc">id <span class="token function">objc_allocWithZone</span><span class="token punctuation">(</span>Class cls<span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>完整<pre class="language-"><code class="lang-objc">OBJC_EXPORT id <span class="token function">objc_allocWithZone</span><span class="token punctuation">(</span>Class cls<span class="token punctuation">)</span>
+    <span class="token function">__OSX_AVAILABLE_STARTING</span><span class="token punctuation">(</span>__MAC_10_9<span class="token punctuation">,</span> __IPHONE_7_0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="objcautoreleasereturnvalue"><a name="objcautoreleasereturnvalue" class="plugin-anchor" href="#objcautoreleasereturnvalue"><i class="fa fa-link" aria-hidden="true"></i></a>objc_autoreleaseReturnValue</h2>
+<p>TODO：</p>
+<ul>
+<li>【整理】iOS逆向心得：iOS函数objc_autoreleaseReturnValue</li>
+<li>【已解决】iOS逆向Xcode调试：_objc_autoreleaseReturnValue继续运行导致后续release相关代码运行不到</li>
+</ul>
+<h2 id="objcenumerationmutation"><a name="objcenumerationmutation" class="plugin-anchor" href="#objcenumerationmutation"><i class="fa fa-link" aria-hidden="true"></i></a>objc_enumerationMutation</h2>
+<p>iOS逆向期间，常会看到，伪代码中有个<code>objc_enumerationMutation</code>，其实就是表示：代码循环 而已</p>
+<p>-》反推：正向代码中，用了<code>for</code>、<code>while</code>等循环的逻辑。</p>
+<p>TODO：</p>
+<p>【已解决】iOS底层函数：objc_enumerationMutation</p>
+<h2 id="objcloadweakretained"><a name="objcloadweakretained" class="plugin-anchor" href="#objcloadweakretained"><i class="fa fa-link" aria-hidden="true"></i></a>objc_loadWeakRetained</h2>
+<p>TODO：</p>
+<p>【未解决】Xcode的lldb中objc_loadWeakRetained传入的对象是什么类</p>
+<h2 id="objccopyimagenames"><a name="objccopyimagenames" class="plugin-anchor" href="#objccopyimagenames"><i class="fa fa-link" aria-hidden="true"></i></a>objc_copyImageNames</h2>
+<p>TODO：</p>
+<p>【无需解决】iOS越狱检测和反越狱检测：objc_copyImageNames</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-24 10:10:21
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../corefoundation/" class="navigation navigation-prev " aria-label="Previous page: CoreFoundation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="objc_init.html" class="navigation navigation-next " aria-label="Next page: objc_init">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"objc系列函数","level":"1.4.3","depth":2,"next":{"title":"objc_init","level":"1.4.3.1","depth":3,"path":"objc_func_cls/objc_func/objc_init.md","ref":"objc_func_cls/objc_func/objc_init.md","articles":[]},"previous":{"title":"CoreFoundation","level":"1.4.2","depth":2,"path":"objc_func_cls/corefoundation/README.md","ref":"objc_func_cls/corefoundation/README.md","articles":[]},"articles":[{"title":"objc_init","level":"1.4.3.1","depth":3,"path":"objc_func_cls/objc_func/objc_init.md","ref":"objc_func_cls/objc_func/objc_init.md","articles":[]},{"title":"objc_alloc","level":"1.4.3.2","depth":3,"path":"objc_func_cls/objc_func/objc_alloc.md","ref":"objc_func_cls/objc_func/objc_alloc.md","articles":[]},{"title":"objc_alloc_init","level":"1.4.3.3","depth":3,"path":"objc_func_cls/objc_func/objc_alloc_init.md","ref":"objc_func_cls/objc_func/objc_alloc_init.md","articles":[]},{"title":"objc_msgSend","level":"1.4.3.4","depth":3,"path":"objc_func_cls/objc_func/objc_msgsend/README.md","ref":"objc_func_cls/objc_func/objc_msgsend/README.md","articles":[{"title":"手动计算参数","level":"1.4.3.4.1","depth":4,"path":"objc_func_cls/objc_func/objc_msgsend/self_calc_para.md","ref":"objc_func_cls/objc_func/objc_msgsend/self_calc_para.md","articles":[]},{"title":"自己组装","level":"1.4.3.4.2","depth":4,"path":"objc_func_cls/objc_func/objc_msgsend/self_merge.md","ref":"objc_func_cls/objc_func/objc_msgsend/self_merge.md","articles":[]}]},{"title":"objc_getClass","level":"1.4.3.5","depth":3,"path":"objc_func_cls/objc_func/objc_getclass/README.md","ref":"objc_func_cls/objc_func/objc_getclass/README.md","articles":[{"title":"应用举例","level":"1.4.3.5.1","depth":4,"path":"objc_func_cls/objc_func/objc_getclass/use_case.md","ref":"objc_func_cls/objc_func/objc_getclass/use_case.md","articles":[]}]},{"title":"objc_retain","level":"1.4.3.6","depth":3,"path":"objc_func_cls/objc_func/objc_retain.md","ref":"objc_func_cls/objc_func/objc_retain.md","articles":[]},{"title":"objc_retainBlock","level":"1.4.3.7","depth":3,"path":"objc_func_cls/objc_func/objc_retainblock.md","ref":"objc_func_cls/objc_func/objc_retainblock.md","articles":[]},{"title":"objc_release","level":"1.4.3.8","depth":3,"path":"objc_func_cls/objc_func/objc_release.md","ref":"objc_func_cls/objc_func/objc_release.md","articles":[]},{"title":"objc_autorelease","level":"1.4.3.9","depth":3,"path":"objc_func_cls/objc_func/objc_autorelease.md","ref":"objc_func_cls/objc_func/objc_autorelease.md","articles":[]},{"title":"objc_opt_class","level":"1.4.3.10","depth":3,"path":"objc_func_cls/objc_func/objc_opt_class.md","ref":"objc_func_cls/objc_func/objc_opt_class.md","articles":[]},{"title":"objc_storeStrong","level":"1.4.3.11","depth":3,"path":"objc_func_cls/objc_func/objc_storestrong.md","ref":"objc_func_cls/objc_func/objc_storestrong.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_runtime/pdf/ios_re_objc_runtime.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_runtime/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：ObjC运行时","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间常会涉及到的ObjC的底层知识Runtime运行时。以及介绍Runtime中的常遇到的各个函数和内容，包括NSObject、objc开头的系列函数，尤其是objc_msgSend函数、object开头的系列函数。"},"file":{"path":"objc_func_cls/objc_func/README.md","mtime":"2024-10-24T02:10:21.516Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-26T06:52:14.533Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

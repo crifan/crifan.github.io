@@ -1,0 +1,1088 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>打印类的详情 · iOS逆向开发：ObjC运行时</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../nsobject_protocol_h/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../objc_runtime_overview/">
+            
+                <a href="../../../objc_runtime_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    ObjC运行时概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../runtime_basic/">
+            
+                <a href="../../../runtime_basic/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Runtime基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    ObjC函数和对象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    NSObject
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    NSObject.h
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1.1.1" data-path="print_detail.html">
+            
+                <a href="print_detail.html">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    打印类的详情
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../nsobject_protocol_h/">
+            
+                <a href="../nsobject_protocol_h/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    NSObject-Protocol.h
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../corefoundation/">
+            
+                <a href="../../corefoundation/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    CoreFoundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../objc_func/">
+            
+                <a href="../../objc_func/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    objc系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../objc_func/objc_init.html">
+            
+                <a href="../../objc_func/objc_init.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    objc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../objc_func/objc_alloc.html">
+            
+                <a href="../../objc_func/objc_alloc.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    objc_alloc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../objc_func/objc_alloc_init.html">
+            
+                <a href="../../objc_func/objc_alloc_init.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    objc_alloc_init
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../../objc_func/objc_msgsend/">
+            
+                <a href="../../objc_func/objc_msgsend/">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    objc_msgSend
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.4.1" data-path="../../objc_func/objc_msgsend/self_calc_para.html">
+            
+                <a href="../../objc_func/objc_msgsend/self_calc_para.html">
+            
+                    
+                        <b>1.4.3.4.1.</b>
+                    
+                    手动计算参数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4.2" data-path="../../objc_func/objc_msgsend/self_merge.html">
+            
+                <a href="../../objc_func/objc_msgsend/self_merge.html">
+            
+                    
+                        <b>1.4.3.4.2.</b>
+                    
+                    自己组装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="../../objc_func/objc_getclass/">
+            
+                <a href="../../objc_func/objc_getclass/">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    objc_getClass
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.5.1" data-path="../../objc_func/objc_getclass/use_case.html">
+            
+                <a href="../../objc_func/objc_getclass/use_case.html">
+            
+                    
+                        <b>1.4.3.5.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="../../objc_func/objc_retain.html">
+            
+                <a href="../../objc_func/objc_retain.html">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    objc_retain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7" data-path="../../objc_func/objc_retainblock.html">
+            
+                <a href="../../objc_func/objc_retainblock.html">
+            
+                    
+                        <b>1.4.3.7.</b>
+                    
+                    objc_retainBlock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.8" data-path="../../objc_func/objc_release.html">
+            
+                <a href="../../objc_func/objc_release.html">
+            
+                    
+                        <b>1.4.3.8.</b>
+                    
+                    objc_release
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.9" data-path="../../objc_func/objc_autorelease.html">
+            
+                <a href="../../objc_func/objc_autorelease.html">
+            
+                    
+                        <b>1.4.3.9.</b>
+                    
+                    objc_autorelease
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.10" data-path="../../objc_func/objc_opt_class.html">
+            
+                <a href="../../objc_func/objc_opt_class.html">
+            
+                    
+                        <b>1.4.3.10.</b>
+                    
+                    objc_opt_class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.11" data-path="../../objc_func/objc_storestrong.html">
+            
+                <a href="../../objc_func/objc_storestrong.html">
+            
+                    
+                        <b>1.4.3.11.</b>
+                    
+                    objc_storeStrong
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../object_func/">
+            
+                <a href="../../object_func/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    object系列函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../object_func/object_getclassname/">
+            
+                <a href="../../object_func/object_getclassname/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    object_getClassName
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../../object_func/object_getclassname/use_case.html">
+            
+                <a href="../../object_func/object_getclassname/use_case.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    应用举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../other_summary/">
+            
+                <a href="../../../other_summary/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    其他心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../other_summary/objc_cls_method/">
+            
+                <a href="../../../other_summary/objc_cls_method/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    ObjC类的常用方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../../../other_summary/objc_cls_method/iskindofclass.html">
+            
+                <a href="../../../other_summary/objc_cls_method/iskindofclass.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    isKindOfClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../other_summary/get_cls_name/">
+            
+                <a href="../../../other_summary/get_cls_name/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    ObjC获取Class类名
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../../../other_summary/get_cls_name/nsstringfromclass.html">
+            
+                <a href="../../../other_summary/get_cls_name/nsstringfromclass.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    NSStringFromClass
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../../../other_summary/get_cls_name/class_getname.html">
+            
+                <a href="../../../other_summary/get_cls_name/class_getname.html">
+            
+                    
+                        <b>1.5.2.2.</b>
+                    
+                    class_getName
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../../../other_summary/get_cls_name/classname.html">
+            
+                <a href="../../../other_summary/get_cls_name/classname.html">
+            
+                    
+                        <b>1.5.2.3.</b>
+                    
+                    className
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../other_summary/get_parent_cls/">
+            
+                <a href="../../../other_summary/get_parent_cls/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    获取ObjC类的父类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../../other_summary/get_parent_cls/superclass.html">
+            
+                <a href="../../../other_summary/get_parent_cls/superclass.html">
+            
+                    
+                        <b>1.5.3.1.</b>
+                    
+                    superclass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >打印类的详情</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="打印类的详情"><a name="打印类的详情" class="plugin-anchor" href="#打印类的详情"><i class="fa fa-link" aria-hidden="true"></i></a>打印类的详情</h1>
+<p>前面提到的：<a href="./">NSObject.h</a>中有我们所关注的函数：</p>
+<ul>
+<li><code>_ivarDescription</code></li>
+<li><code>_methodDescription</code></li>
+<li><code>_propertyDescription</code></li>
+<li><code>_shortMethodDescription</code></li>
+</ul>
+<p>具体应用场景是：</p>
+<ul>
+<li><p>Xcode调试期间：打印ObjC类的描述详情信息</p>
+<ul>
+<li>已知的传统手段：<code>Xcode</code>/<code>lldb</code>中，<code>po</code>加上对应命令<code>_ivarDescription</code>、<code>_propertyDescription</code>、<code>_methodDescription</code>、<code>shortMethodDescription</code><pre class="language-"><code class="lang-bash">po <span class="token punctuation">[</span>xxx _ivarDescription<span class="token punctuation">]</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">po <span class="token punctuation">[</span>xxx _propertyDescription<span class="token punctuation">]</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">po <span class="token punctuation">[</span>xxx _methodDescription<span class="token punctuation">]</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">po <span class="token punctuation">[</span>xxx _shortMethodDescription<span class="token punctuation">]</span>
+</code></pre>
+</li>
+<li><p>新的手段：tweak插件的hook代码中，调用对应命令 <code>_ivarDescription</code>、<code>_propertyDescription</code>、<code>_methodDescription</code>、<code>shortMethodDescription</code></p>
+<pre class="language-"><code class="lang-objc">  <span class="token punctuation">[</span>classObj _ivarDescription<span class="token punctuation">]</span>
+
+  <span class="token punctuation">[</span>classObj _propertyDescription<span class="token punctuation">]</span>
+
+  <span class="token punctuation">[</span>classObj _methodDescription<span class="token punctuation">]</span>
+
+  <span class="token punctuation">[</span>classObj _shortMethodDescription<span class="token punctuation">]</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="相关完整代码"><a name="相关完整代码" class="plugin-anchor" href="#相关完整代码"><i class="fa fa-link" aria-hidden="true"></i></a>相关完整代码</h2>
+<p><code>dynamicDebug/iOSOpenDev/jailAppleAccount/jailAppleAccount/libs/iOS/HookLogiOS.m</code></p>
+<pre class="language-"><code class="lang-c"><span class="token comment">// write string to file</span>
+<span class="token keyword">void</span> <span class="token function">writeStrToFile</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> filePath<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> outputStr<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>filePath<span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"fp=%p"</span><span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>fp <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span>fp<span class="token punctuation">,</span> <span class="token string">"%s"</span><span class="token punctuation">,</span> outputStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Failed to open file %s"</span><span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// write class description string into file</span>
+<span class="token keyword">void</span> <span class="token function">dbgWriteClsDescToFile</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> className<span class="token punctuation">,</span> id classObj<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  NSString<span class="token operator">*</span> idNSStr <span class="token operator">=</span> <span class="token punctuation">[</span>classObj _ivarDescription<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  NSString<span class="token operator">*</span> pdNSStr <span class="token operator">=</span> <span class="token punctuation">[</span>classObj _propertyDescription<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  NSString<span class="token operator">*</span> mdNSStr <span class="token operator">=</span> <span class="token punctuation">[</span>classObj _methodDescription<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  NSString<span class="token operator">*</span> smdNSStr <span class="token operator">=</span> <span class="token punctuation">[</span>classObj _shortMethodDescription<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>idCStr <span class="token operator">=</span> <span class="token punctuation">[</span>idNSStr cStringUsingEncoding<span class="token operator">:</span>NSUTF8StringEncoding<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>pdCStr <span class="token operator">=</span> <span class="token punctuation">[</span>pdNSStr cStringUsingEncoding<span class="token operator">:</span>NSUTF8StringEncoding<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>mdCStr <span class="token operator">=</span> <span class="token punctuation">[</span>mdNSStr cStringUsingEncoding<span class="token operator">:</span>NSUTF8StringEncoding<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>smdCStr <span class="token operator">=</span> <span class="token punctuation">[</span>smdNSStr cStringUsingEncoding<span class="token operator">:</span>NSUTF8StringEncoding<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//    const char* smdOutputFile = "/var/root/dev/AADeviceInfo_shortMethodDescription.txt";</span>
+    <span class="token comment">//    const char* smdOutputFile = "/var/mobile/AADeviceInfo_shortMethodDescription.txt";</span>
+<span class="token comment">//    const char* outputFilePath = "/var/root/dev"; // failed for no write access</span>
+  <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> outputFilePath <span class="token operator">=</span> <span class="token string">"/var/mobile"</span><span class="token punctuation">;</span>
+<span class="token comment">//    iosLogInfo("outputFilePath=%{public}s", outputFilePath);</span>
+<span class="token comment">//    const char* idOutputFile = "AADeviceInfo_ivarDescription.txt";</span>
+<span class="token comment">//    const char* pdOutputFile = "AADeviceInfo_propertyDescription.txt";</span>
+<span class="token comment">//    const char* mdOutputFile = "AADeviceInfo_methodDescription.txt";</span>
+<span class="token comment">//    const char* smdOutputFile = "AADeviceInfo_shortMethodDescription.txt";</span>
+
+  <span class="token keyword">char</span> idFullPath<span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> pdFullPath<span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> mdFullPath<span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> smdFullPath<span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">//    snprintf(idFullPath, sizeof(idFullPath), "%s/%s", outputFilePath, idOutputFile);</span>
+<span class="token comment">//    snprintf(pdFullPath, sizeof(pdFullPath), "%s/%s", outputFilePath, pdOutputFile);</span>
+<span class="token comment">//    snprintf(mdFullPath, sizeof(mdFullPath), "%s/%s", outputFilePath, mdOutputFile);</span>
+<span class="token comment">//    snprintf(smdFullPath, sizeof(smdFullPath), "%s/%s", outputFilePath, smdOutputFile);</span>
+  <span class="token function">snprintf</span><span class="token punctuation">(</span>idFullPath<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>idFullPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%s/%s_ivarDescription.txt"</span><span class="token punctuation">,</span> outputFilePath<span class="token punctuation">,</span> className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">snprintf</span><span class="token punctuation">(</span>pdFullPath<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pdFullPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%s/%s_propertyDescription.txt"</span><span class="token punctuation">,</span> outputFilePath<span class="token punctuation">,</span> className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">snprintf</span><span class="token punctuation">(</span>mdFullPath<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>mdFullPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%s/%s_methodDescription.txt"</span><span class="token punctuation">,</span> outputFilePath<span class="token punctuation">,</span> className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">snprintf</span><span class="token punctuation">(</span>smdFullPath<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>smdFullPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%s/%s_shortMethodDescription.txt"</span><span class="token punctuation">,</span> outputFilePath<span class="token punctuation">,</span> className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">writeStrToFile</span><span class="token punctuation">(</span>idFullPath<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>idCStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">writeStrToFile</span><span class="token punctuation">(</span>pdFullPath<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>pdCStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">writeStrToFile</span><span class="token punctuation">(</span>mdFullPath<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>mdCStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">writeStrToFile</span><span class="token punctuation">(</span>smdFullPath<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>smdCStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//    iosLogInfo("Written %s description into %s", className, outputFilePath);</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>调用：</p>
+<p><code>dynamicDebug/iOSOpenDev/jailAppleAccount/jailAppleAccount/jailAppleAccount.xm</code></p>
+<pre class="language-"><code class="lang-c"><span class="token operator">%</span>hook AADeviceInfo
+
+<span class="token operator">-</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>udid<span class="token punctuation">{</span>
+  id objUdid <span class="token operator">=</span> <span class="token operator">%</span>orig<span class="token punctuation">;</span>
+  <span class="token function">iosLogInfo</span><span class="token punctuation">(</span><span class="token string">"objUdid=%{public}@, self=%{public}@"</span><span class="token punctuation">,</span> objUdid<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">dbgWriteClsDescToFile</span><span class="token punctuation">(</span><span class="token string">"AADeviceInfo"</span><span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> objUdid<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">%</span>end
+</code></pre>
+<p>注：最新代码详见：</p>
+<ul>
+<li><a href="https://github.com/crifan/crifanLib/blob/master/iOS/HookLogiOS.m" target="_blank">HookLogiOS.m</a></li>
+<li><a href="https://github.com/crifan/crifanLib/blob/master/c/crifanLib.c" target="_blank">crifanLib.c</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-10-24 12:07:29
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: NSObject.h">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../nsobject_protocol_h/" class="navigation navigation-next " aria-label="Next page: NSObject-Protocol.h">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"打印类的详情","level":"1.4.1.1.1","depth":4,"next":{"title":"NSObject-Protocol.h","level":"1.4.1.2","depth":3,"path":"objc_func_cls/nsobject/nsobject_protocol_h/README.md","ref":"objc_func_cls/nsobject/nsobject_protocol_h/README.md","articles":[]},"previous":{"title":"NSObject.h","level":"1.4.1.1","depth":3,"path":"objc_func_cls/nsobject/nsobject_h/README.md","ref":"objc_func_cls/nsobject/nsobject_h/README.md","articles":[{"title":"打印类的详情","level":"1.4.1.1.1","depth":4,"path":"objc_func_cls/nsobject/nsobject_h/print_detail.md","ref":"objc_func_cls/nsobject/nsobject_h/print_detail.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_runtime/pdf/ios_re_objc_runtime.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_runtime/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_runtime","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：ObjC运行时","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间常会涉及到的ObjC的底层知识Runtime运行时。以及介绍Runtime中的常遇到的各个函数和内容，包括NSObject、objc开头的系列函数，尤其是objc_msgSend函数、object开头的系列函数。"},"file":{"path":"objc_func_cls/nsobject/nsobject_h/print_detail.md","mtime":"2024-10-24T04:07:29.858Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-26T06:52:14.533Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
