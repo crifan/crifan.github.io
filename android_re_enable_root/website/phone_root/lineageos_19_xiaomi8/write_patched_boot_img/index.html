@@ -1,0 +1,891 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>用Kitsune Mask写入patch后的boot.img · Android逆向：开启root</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="popup_need_fix_env.html" />
+    
+    
+    <link rel="prev" href="../kitsune_mask_patch_boot_img.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_enable_root","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../android_root_overview/">
+            
+                <a href="../../../android_root_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    安卓root概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../enumator_root/">
+            
+                <a href="../../../enumator_root/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    安卓模拟器root
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    安卓手机root
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../process/">
+            
+                <a href="../../process/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    root流程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../process/bootloader_unlock.html">
+            
+                <a href="../../process/bootloader_unlock.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    BL解锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../process/fastboot_mode.html">
+            
+                <a href="../../process/fastboot_mode.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    fastboot mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../related_tool/">
+            
+                <a href="../../related_tool/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    root相关工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../related_tool/twrp.html">
+            
+                <a href="../../related_tool/twrp.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    TWRP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../related_tool/magisk.html">
+            
+                <a href="../../related_tool/magisk.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    Magisk
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../android_13_pixel_5/">
+            
+                <a href="../../android_13_pixel_5/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    给Android13的Pixel5去root
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../android_13_pixel_5/download_install_magisk.html">
+            
+                <a href="../../android_13_pixel_5/download_install_magisk.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    下载安装最新版Magisk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../android_13_pixel_5/unlock_bootloader.html">
+            
+                <a href="../../android_13_pixel_5/unlock_bootloader.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    解锁Bootloader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../android_13_pixel_5/find_boot_img.html">
+            
+                <a href="../../android_13_pixel_5/find_boot_img.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    找到要打补丁的boot.img文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../../android_13_pixel_5/magisk_patch_boot_img.html">
+            
+                <a href="../../android_13_pixel_5/magisk_patch_boot_img.html">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    用Magisk去给boot.img打patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="../../android_13_pixel_5/magisk_write_patched_boot_img.html">
+            
+                <a href="../../android_13_pixel_5/magisk_write_patched_boot_img.html">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    用Magisk写入patch后的boot.img
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="../../android_13_pixel_5/magisk_root_config.html">
+            
+                <a href="../../android_13_pixel_5/magisk_root_config.html">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    Magisk中root相关设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    给LineageOS19的的小米8去root
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../down_ins_kitsune.html">
+            
+                <a href="../down_ins_kitsune.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    下载安装Kitsune Mask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../unlock_bootloader.html">
+            
+                <a href="../unlock_bootloader.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    解锁Bootloader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../find_boot_img.html">
+            
+                <a href="../find_boot_img.html">
+            
+                    
+                        <b>1.4.4.3.</b>
+                    
+                    找到要打补丁的boot.img文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.4" data-path="../kitsune_mask_patch_boot_img.html">
+            
+                <a href="../kitsune_mask_patch_boot_img.html">
+            
+                    
+                        <b>1.4.4.4.</b>
+                    
+                    用Kitsune Mask去给boot.img打patch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.4.5.</b>
+                    
+                    用Kitsune Mask写入patch后的boot.img
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.5.1" data-path="popup_need_fix_env.html">
+            
+                <a href="popup_need_fix_env.html">
+            
+                    
+                        <b>1.4.4.5.1.</b>
+                    
+                    弹框：需要修复运行环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.6" data-path="../root_config.html">
+            
+                <a href="../root_config.html">
+            
+                    
+                        <b>1.4.4.6.</b>
+                    
+                    Kitsune Mask中root相关设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../root_related/">
+            
+                <a href="../../../root_related/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    root相关
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../root_related/a_b_slot.html">
+            
+                <a href="../../../root_related/a_b_slot.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    A/B槽位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../root_related/oppo_r11s.html">
+            
+                <a href="../../../root_related/oppo_r11s.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    OPPO R11s
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../root_summary/">
+            
+                <a href="../../../root_summary/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    root心得
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../appendix/">
+            
+                <a href="../../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../appendix/reference.html">
+            
+                <a href="../../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >用Kitsune Mask写入patch后的boot.img</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="用kitsune-mask写入patch后的bootimg"><a name="用kitsune-mask写入patch后的bootimg" class="plugin-anchor" href="#用kitsune-mask写入patch后的bootimg"><i class="fa fa-link" aria-hidden="true"></i></a>用Kitsune Mask写入patch后的boot.img</h1>
+<p>此处的：用Kitsune Mask写入patch后的boot.img</p>
+<p>其实也是和之前的：</p>
+<p><a href="../../phone_root/android_13_pixel_5/magisk_write_patched_boot_img.md">用Magisk写入patch后的boot.img</a></p>
+<p>的操作：一模一样。</p>
+<p>但是也是额外记录此处细节，供参考：</p>
+<hr></hr>
+<h2 id="进入bootloader模式"><a name="进入bootloader模式" class="plugin-anchor" href="#进入bootloader模式"><i class="fa fa-link" aria-hidden="true"></i></a>进入Bootloader模式</h2>
+<p>电脑端：</p>
+<pre class="language-"><code class="lang-bash">adb <span class="token function">reboot</span> bootloader
+</code></pre>
+<p>此时小米8手机中进入<code>FASTBOOT</code>界面：</p>
+<p><img src="../../../assets/img/xiaomi8_into_fastboot_ui.png" alt="xiaomi8_into_fastboot_ui"></img></p>
+<p>再去用<code>fastboot devices</code>确认：</p>
+<pre class="language-"><code class="lang-bash">➜  magisk_kitsuneMask_root fastboot devices
+f97a0408     fastboot
+</code></pre>
+<h2 id="写入打了补丁后的bootimg文件"><a name="写入打了补丁后的bootimg文件" class="plugin-anchor" href="#写入打了补丁后的bootimg文件"><i class="fa fa-link" aria-hidden="true"></i></a>写入打了补丁后的boot.img文件</h2>
+<p>然后继续去用<code>fastboot boot magisk_patched-27001_YqKbC.img</code>写入（之前打了补丁的）<code>boot.img</code>文件：</p>
+<p>效果：</p>
+<pre class="language-"><code class="lang-bash">➜  magisk_kitsuneMask_root fastboot boot magisk_patched-27001_YqKbC.img
+Sending <span class="token string">'boot.img'</span> <span class="token punctuation">(</span><span class="token number">65520</span> KB<span class="token punctuation">)</span>                      OKAY <span class="token punctuation">[</span>  <span class="token number">1</span>.516s<span class="token punctuation">]</span>
+Booting                                            OKAY <span class="token punctuation">[</span>  <span class="token number">0</span>.050s<span class="token punctuation">]</span>
+Finished. Total time: <span class="token number">1</span>.580s
+</code></pre>
+<h2 id="手机自动重启"><a name="手机自动重启" class="plugin-anchor" href="#手机自动重启"><i class="fa fa-link" aria-hidden="true"></i></a>手机自动重启</h2>
+<p>然后手机端小米8会重启：</p>
+<p><img src="../../../assets/img/xiaomi8_booting_lineageos.png" alt="xiaomi8_booting_lineageos"></img></p>
+<p>重启后，进入桌面：</p>
+<p><img src="../../../assets/img/xiaomi8_into_home.png" alt="xiaomi8_into_home"></img></p>
+<h2 id="进入kitsune-mask"><a name="进入kitsune-mask" class="plugin-anchor" href="#进入kitsune-mask"><i class="fa fa-link" aria-hidden="true"></i></a>进入Kitsune Mask</h2>
+<p>打开<code>Kitsune Mask</code>：</p>
+<ul>
+<li>此时往往要去注意和处理：<ul>
+<li><a href="popup_need_fix_env.html">弹框：需要修复运行环境</a></li>
+</ul>
+</li>
+</ul>
+<p>继续点击<code>Magisk</code>后面的<code>安装</code>：</p>
+<p><img src="../../../assets/img/kitsune_mask_continue_main_ui.jpg" alt="kitsune_mask_continue_main_ui"></img></p>
+<h2 id="直接安装"><a name="直接安装" class="plugin-anchor" href="#直接安装"><i class="fa fa-link" aria-hidden="true"></i></a>直接安装</h2>
+<p>点击：<code>直接安装（推荐）</code></p>
+<p><img src="../../../assets/img/kitsune_mask_direct_install_recommend.png" alt="kitsune_mask_direct_install_recommend"></img></p>
+<p>已勾选<code>直接安装（推荐）</code>，点击：<code>开始-&gt;</code></p>
+<p><img src="../../../assets/img/kitsune_mask_click_start.png" alt="kitsune_mask_click_start"></img></p>
+<h2 id="再次重启手机"><a name="再次重启手机" class="plugin-anchor" href="#再次重启手机"><i class="fa fa-link" aria-hidden="true"></i></a>再次重启手机</h2>
+<p>开始安装过程。稍等几十秒后，完成。点击按钮：<code>重启</code></p>
+<p><img src="../../../assets/img/kitsune_mask_install_done_reboot.png" alt="kitsune_mask_install_done_reboot"></img></p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-11-14 11:03:09
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../kitsune_mask_patch_boot_img.html" class="navigation navigation-prev " aria-label="Previous page: 用Kitsune Mask去给boot.img打patch">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="popup_need_fix_env.html" class="navigation navigation-next " aria-label="Next page: 弹框：需要修复运行环境">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"用Kitsune Mask写入patch后的boot.img","level":"1.4.4.5","depth":3,"next":{"title":"弹框：需要修复运行环境","level":"1.4.4.5.1","depth":4,"path":"phone_root/lineageos_19_xiaomi8/write_patched_boot_img/popup_need_fix_env.md","ref":"phone_root/lineageos_19_xiaomi8/write_patched_boot_img/popup_need_fix_env.md","articles":[]},"previous":{"title":"用Kitsune Mask去给boot.img打patch","level":"1.4.4.4","depth":3,"path":"phone_root/lineageos_19_xiaomi8/kitsune_mask_patch_boot_img.md","ref":"phone_root/lineageos_19_xiaomi8/kitsune_mask_patch_boot_img.md","articles":[]},"articles":[{"title":"弹框：需要修复运行环境","level":"1.4.4.5.1","depth":4,"path":"phone_root/lineageos_19_xiaomi8/write_patched_boot_img/popup_need_fix_env.md","ref":"phone_root/lineageos_19_xiaomi8/write_patched_boot_img/popup_need_fix_env.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_enable_root/pdf/android_re_enable_root.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_enable_root/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_enable_root","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：开启root","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"总结安卓逆向期间涉及的给安卓root。先是概览；然后是分别介绍安卓模拟器和安卓真机的root；之后详细介绍安卓真机的root的流程，包括Bootloader解锁、fastboot mode等，和涉及到的工具：TWRP、Magisk等；并且用实例去介绍如何给Android13的Pixel5去root，包括下载安装最新版Magisk、解锁Bootloader、用Magisk去给boot.img打patch、用Magisk写入patch后的boot.img和Magisk中root相关设置。以及相关知识和设备：A/B槽位、OPPO R11s的root；以及整理root相关心得。"},"file":{"path":"phone_root/lineageos_19_xiaomi8/write_patched_boot_img/README.md","mtime":"2024-11-14T03:03:09.394Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-14T03:09:40.138Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
