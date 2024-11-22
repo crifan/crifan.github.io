@@ -6,7 +6,7 @@
         <title>Interceptor · 逆向调试利器：Frida</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -1138,12 +1138,27 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.3.1" data-path="../../../../common_issue/android/java_lang_classnotfoundexception.html">
+        <li class="chapter " data-level="1.7.3.1" data-path="../../../../common_issue/android/java_js_mapping.html">
+            
+                <a href="../../../../common_issue/android/java_js_mapping.html">
+            
+                    
+                        <b>1.7.3.1.</b>
+                    
+                    Java和js变量的映射关系
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.2" data-path="../../../../common_issue/android/java_lang_classnotfoundexception.html">
             
                 <a href="../../../../common_issue/android/java_lang_classnotfoundexception.html">
             
                     
-                        <b>1.7.3.1.</b>
+                        <b>1.7.3.2.</b>
                     
                     java.lang.ClassNotFoundException
             
@@ -1349,23 +1364,23 @@
 <li>举例说明<ul>
 <li>akd中函数<code>___lldb_unnamed_symbol2575$$akd</code>的二进制内偏移量是：<code>0xa0460</code><ul>
 <li>思路：动态计算加上模块后的真实函数地址，再去hook</li>
-<li>核心代码：<pre class="language-"><code class="lang-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;dynamicDebug/frida/scripts/fridaStalker_akdSymbol2575.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<li>核心代码：<pre class="language-"><code class="lang-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"dynamicDebug/frida/scripts/fridaStalker_akdSymbol2575.js"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// var akdSymbol2575_functionAddress = 0x1000a0460;</span>
 <span class="token keyword">var</span> akdSymbol2575_functionAddress <span class="token operator">=</span> <span class="token number">0xa0460</span><span class="token punctuation">;</span>
 <span class="token comment">// arm64 akd: ___lldb_unnamed_symbol2575$$akd</span>
-<span class="token keyword">const</span> moduleName <span class="token operator">=</span> <span class="token string">&quot;akd&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> moduleName <span class="token operator">=</span> <span class="token string">"akd"</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> moduleBaseAddress <span class="token operator">=</span> Module<span class="token punctuation">.</span><span class="token function">findBaseAddress</span><span class="token punctuation">(</span>moduleName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;moduleName=&quot;</span><span class="token punctuation">,</span> moduleName<span class="token punctuation">,</span> <span class="token string">&quot;moduleBaseAddress=&quot;</span><span class="token punctuation">,</span> moduleBaseAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"moduleName="</span><span class="token punctuation">,</span> moduleName<span class="token punctuation">,</span> <span class="token string">"moduleBaseAddress="</span><span class="token punctuation">,</span> moduleBaseAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> functionRealAddress <span class="token operator">=</span> moduleBaseAddress<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>akdSymbol2575_functionAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;functionRealAddress=&quot;</span><span class="token punctuation">,</span> functionRealAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"functionRealAddress="</span><span class="token punctuation">,</span> functionRealAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
 Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>functionRealAddress<span class="token punctuation">,</span> <span class="token punctuation">{</span>
     <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">var</span> arg0 <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
         <span class="token keyword">var</span> arg1 <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
         <span class="token keyword">var</span> arg2 <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;arg0=&quot;</span> <span class="token operator">+</span> arg0 <span class="token operator">+</span> <span class="token string">&quot;, arg1=&quot;</span> <span class="token operator">+</span> arg1 <span class="token operator">+</span> <span class="token string">&quot;, arg2=&quot;</span> <span class="token operator">+</span> arg2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"arg0="</span> <span class="token operator">+</span> arg0 <span class="token operator">+</span> <span class="token string">", arg1="</span> <span class="token operator">+</span> arg1 <span class="token operator">+</span> <span class="token string">", arg2="</span> <span class="token operator">+</span> arg2<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">var</span> curTid <span class="token operator">=</span> Process<span class="token punctuation">.</span><span class="token function">getCurrentThreadId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;curTid=&quot;</span><span class="token punctuation">,</span> curTid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"curTid="</span><span class="token punctuation">,</span> curTid<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">...</span>
 </code></pre>
 <ul>
@@ -1398,9 +1413,9 @@ Interceptor<span class="token punctuation">.</span><span class="token function">
   <span class="token function-variable function">onLeave</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">retval</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">var</span> retValObj <span class="token operator">=</span> ObjC<span class="token punctuation">.</span><span class="token function">Object</span><span class="token punctuation">(</span>retval<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> retValObjStr <span class="token operator">=</span> retValObj<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;onLeave: retValObj=&quot;</span> <span class="token operator">+</span> retValObj <span class="token operator">+</span> <span class="token string">&quot;,retValObjStr=&quot;</span> <span class="token operator">+</span> retValObjStr<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"onLeave: retValObj="</span> <span class="token operator">+</span> retValObj <span class="token operator">+</span> <span class="token string">",retValObjStr="</span> <span class="token operator">+</span> retValObjStr<span class="token punctuation">)</span>
     <span class="token keyword">const</span> curSelfObj <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>argSelfObj
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;curSelfObj=&quot;</span> <span class="token operator">+</span> curSelfObj<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"curSelfObj="</span> <span class="token operator">+</span> curSelfObj<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
@@ -1413,7 +1428,7 @@ onLeave: <span class="token assign-left variable">retValObj</span><span class="t
 </li>
 </ul>
 <h2 id="问题"><a name="问题" class="plugin-anchor" href="#问题"><i class="fa fa-link" aria-hidden="true"></i></a>问题</h2>
-<h3 id="typeerror-cannot-read-property-implementation-of-undefined"><a name="typeerror-cannot-read-property-implementation-of-undefined" class="plugin-anchor" href="#typeerror-cannot-read-property-implementation-of-undefined"><i class="fa fa-link" aria-hidden="true"></i></a>TypeError: cannot read property &apos;implementation&apos; of undefined</h3>
+<h3 id="typeerror-cannot-read-property-implementation-of-undefined"><a name="typeerror-cannot-read-property-implementation-of-undefined" class="plugin-anchor" href="#typeerror-cannot-read-property-implementation-of-undefined"><i class="fa fa-link" aria-hidden="true"></i></a>TypeError: cannot read property 'implementation' of undefined</h3>
 <ul>
 <li>问题：</li>
 </ul>
@@ -1423,16 +1438,16 @@ onLeave: <span class="token assign-left variable">retValObj</span><span class="t
     <span class="token keyword">var</span> hook <span class="token operator">=</span> ObjC<span class="token punctuation">.</span>classes<span class="token punctuation">[</span>className<span class="token punctuation">]</span><span class="token punctuation">[</span>funcName<span class="token punctuation">]</span><span class="token punctuation">;</span>
     Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>hook<span class="token punctuation">.</span>implementation<span class="token punctuation">,</span> <span class="token punctuation">{</span>
       <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;[*] Detected call to: &quot;</span> <span class="token operator">+</span> className <span class="token operator">+</span> <span class="token string">&quot; -&gt; &quot;</span> <span class="token operator">+</span> funcName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"[*] Detected call to: "</span> <span class="token operator">+</span> className <span class="token operator">+</span> <span class="token string">" -&gt; "</span> <span class="token operator">+</span> funcName<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">//Your class name  and function name here</span>
-<span class="token function">hook_specific_method_of_class</span><span class="token punctuation">(</span><span class="token string">&quot;AAUISignInViewController&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;_nextButtonSelected:&quot;</span><span class="token punctuation">)</span>
+<span class="token function">hook_specific_method_of_class</span><span class="token punctuation">(</span><span class="token string">"AAUISignInViewController"</span><span class="token punctuation">,</span> <span class="token string">"_nextButtonSelected:"</span><span class="token punctuation">)</span>
 </code></pre>
 <p>始终报错：</p>
-<p><code>TypeError: cannot read property &apos;implementation&apos; of undefined</code></p>
+<p><code>TypeError: cannot read property 'implementation' of undefined</code></p>
 <ul>
 <li>原因：此处iOS的ObjC的函数名<code>_nextButtonSelected:</code>写法有误</li>
 <li>解决办法：改为正确的写法：<code>- _nextButtonSelected:</code><ul>
@@ -1440,7 +1455,7 @@ onLeave: <span class="token assign-left variable">retValObj</span><span class="t
 <li>加上类型是<code>class</code>的还是<code>instance</code>，所对应的<code>加号</code>=<code>+</code> 还是 <code>减号</code>=<code>-</code>，以及中间带上<code>空格</code>=<code> </code></li>
 </ul>
 </li>
-<li>相关代码改动：<pre class="language-"><code class="lang-js"><span class="token function">hook_specific_method_of_class</span><span class="token punctuation">(</span><span class="token string">&quot;AAUISignInViewController&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;- _nextButtonSelected:&quot;</span><span class="token punctuation">)</span>
+<li>相关代码改动：<pre class="language-"><code class="lang-js"><span class="token function">hook_specific_method_of_class</span><span class="token punctuation">(</span><span class="token string">"AAUISignInViewController"</span><span class="token punctuation">,</span> <span class="token string">"- _nextButtonSelected:"</span><span class="token punctuation">)</span>
 </code></pre>
 </li>
 <li>完整代码详见：<a href="../../../../frida_example/frida/ios_objc/hook_func/single_cls_single_func.md">单个类的单个函数</a></li>
@@ -1505,7 +1520,7 @@ onLeave: <span class="token assign-left variable">retValObj</span><span class="t
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Interceptor","level":"1.6.1.1.1","depth":4,"next":{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]},"previous":{"title":"frida","level":"1.6.1.1","depth":3,"path":"summary_note/hook_func/frida/README.md","ref":"summary_note/hook_func/frida/README.md","articles":[{"title":"Interceptor","level":"1.6.1.1.1","depth":4,"path":"summary_note/hook_func/frida/interceptor/README.md","ref":"summary_note/hook_func/frida/interceptor/README.md","articles":[{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]}]}]},"articles":[{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"summary_note/hook_func/frida/interceptor/README.md","mtime":"2023-06-26T15:16:00.287Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-07-31T09:57:42.747Z"},"basePath":"../../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Interceptor","level":"1.6.1.1.1","depth":4,"next":{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]},"previous":{"title":"frida","level":"1.6.1.1","depth":3,"path":"summary_note/hook_func/frida/README.md","ref":"summary_note/hook_func/frida/README.md","articles":[{"title":"Interceptor","level":"1.6.1.1.1","depth":4,"path":"summary_note/hook_func/frida/interceptor/README.md","ref":"summary_note/hook_func/frida/interceptor/README.md","articles":[{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]}]}]},"articles":[{"title":"Stalker","level":"1.6.1.1.1.1","depth":5,"path":"summary_note/hook_func/frida/interceptor/stalker.md","ref":"summary_note/hook_func/frida/interceptor/stalker.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"summary_note/hook_func/frida/interceptor/README.md","mtime":"2023-06-26T15:16:00.287Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-22T08:42:25.416Z"},"basePath":"../../../..","book":{"language":""}});
         });
     </script>
 </div>
