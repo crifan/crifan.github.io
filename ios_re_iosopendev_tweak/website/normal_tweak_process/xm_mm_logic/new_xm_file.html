@@ -3,7 +3,7 @@
 <html lang="zh-hans" >
     <head>
         <meta charset="UTF-8">
-        <title>初始化项目配置 · iOS逆向开发：iOSOpenDev开发插件</title>
+        <title>如何新增xm文件 · iOS逆向开发：iOSOpenDev开发插件</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 6.0.0">
@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../ssh_no_pwd_login.html" />
+    <link rel="next" href="../write_code/" />
     
     
-    <link rel="prev" href="../new_project.html" />
+    <link rel="prev" href="./" />
     
 
     <style>
@@ -234,9 +234,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2" data-path="./">
+        <li class="chapter " data-level="1.4.2" data-path="../init_config/">
             
-                <a href="./">
+                <a href="../init_config/">
             
                     
                         <b>1.4.2.</b>
@@ -270,9 +270,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../xm_mm_logic/">
+        <li class="chapter " data-level="1.4.3" data-path="./">
             
-                <a href="../xm_mm_logic/">
+                <a href="./">
             
                     
                         <b>1.4.3.</b>
@@ -286,9 +286,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.3.1" data-path="../xm_mm_logic/new_xm_file.html">
+        <li class="chapter active" data-level="1.4.3.1" data-path="new_xm_file.html">
             
-                <a href="../xm_mm_logic/new_xm_file.html">
+                <a href="new_xm_file.html">
             
                     
                         <b>1.4.3.1.</b>
@@ -725,7 +725,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >初始化项目配置</a>
+        <a href="../.." >如何新增xm文件</a>
     </h1>
 </div>
 
@@ -740,109 +740,63 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="初始化配置iosopendev的xcode项目"><a name="初始化配置iosopendev的xcode项目" class="plugin-anchor" href="#初始化配置iosopendev的xcode项目"><i class="fa fa-link" aria-hidden="true"></i></a>初始化配置iOSOpenDev的Xcode项目</h1>
-<h2 id="去掉deploymen-info中的mac和确保ios版本一致"><a name="去掉deploymen-info中的mac和确保ios版本一致" class="plugin-anchor" href="#去掉deploymen-info中的mac和确保ios版本一致"><i class="fa fa-link" aria-hidden="true"></i></a>去掉<code>Deploymen Info</code>中的<code>Mac</code>和确保iOS版本一致</h2>
-<p>此处，先去做第一个配置方面的改动：</p>
+                                <html><head></head><body><h1 id="如何新增xm和mm文件"><a name="如何新增xm和mm文件" class="plugin-anchor" href="#如何新增xm和mm文件"><i class="fa fa-link" aria-hidden="true"></i></a>如何新增(<code>.xm</code>和<code>.mm</code>)文件</h1>
+<p>对于想要新增hook代码逻辑，而去新增<code>.xm</code>文件的相关逻辑是：</p>
+<p>具体步骤是：</p>
 <ul>
-<li><code>TARGETS</code>-&gt;<code>General</code>-&gt;<code>Deploymen Info</code>：去掉<code>Mac</code>，因为我们开发的是<code>iOS</code>的插件，不需要发布到<code>Mac</code>，且设置好iOS的最低版本<ul>
-<li><img src="../../assets/img/deployment_remove_mac.jpg" alt="deployment_remove_mac"></img></li>
+<li>新建<code>.xm</code>文件<ul>
+<li><code>Xcode</code>-&gt;选中要新增文件所属的位置 -&gt; 右键 -&gt; <code>New File</code>-&gt; <code>iOS</code> -&gt; <code>Other</code>-&gt;<code>Empty</code>-&gt;输入文件名：<code>yourFilename.xm</code> -&gt;<code>Create</code><ul>
+<li><img src="../../assets/img/xcode_right_new_file.png" alt="xcode_right_new_file"></img></li>
+<li><img src="../../assets/img/xcode_ios_other_empty.png" alt="xcode_ios_other_empty"></img></li>
+<li><img src="../../assets/img/xcode_xm_create.png" alt="xcode_xm_create"></img></li>
 </ul>
 </li>
-<li><code>PROJECT</code>-&gt;<code>Info</code>-&gt;<code>Deployment Target</code>-&gt;<code>iOS Deployment Target</code>，也要同步设置<code>iOS</code>的最低版本<ul>
-<li><img src="../../assets/img/target_deployment_ios_version.png" alt="target_deployment_ios_version"></img></li>
+<li>此时项目列表中会新增出对应的<code>.xm</code>文件</li>
 </ul>
 </li>
+<li>编译 -&gt; 会生成对应<code>.mm</code>文件<ul>
+<li>【可选】如果遇到报错，就先Clean几次<ul>
+<li><code>Xcode</code>-&gt;<code>Product</code>-&gt;<code>Clean Build Folder</code></li>
 </ul>
-<h3 id="导入依赖库libsubstratedylib"><a name="导入依赖库libsubstratedylib" class="plugin-anchor" href="#导入依赖库libsubstratedylib"><i class="fa fa-link" aria-hidden="true"></i></a>导入依赖库<code>libsubstrate.dylib</code></h3>
-<p>把<code>libsubstrate.dylib</code>(一般在<code>/opt/iOSOpenDev/lib/libsubstrate.dylib</code>)：</p>
-<p><img src="../../assets/img/import_libsubstrate_dylib.jpg" alt="import_libsubstrate_dylib"></img></p>
-<p>导入到项目中的：<code>Targets</code>-&gt;<code>YourProjectName</code>-&gt;<code>Build Phases</code>-&gt;<code>Link Binary With Libraries</code></p>
-<p><img src="../../assets/img/imported_link_lib.jpg" alt="imported_link_lib"></img></p>
-<h2 id="设置被hook的app包名或二进制文件名"><a name="设置被hook的app包名或二进制文件名" class="plugin-anchor" href="#设置被hook的app包名或二进制文件名"><i class="fa fa-link" aria-hidden="true"></i></a>设置被hook的app包名或二进制文件名</h2>
-<p>去把要hook的，被拦截的app的包名，加到被hook的包名的列表中：</p>
-<p><code>YourProjectName</code>-&gt;<code>YourProjectName</code>-&gt;<code>Package</code>-&gt;<code>Libarary</code>-&gt;<code>MobileSubstrate</code>-&gt;<code>DynamicLibraries</code>-&gt;<code>CurrentProjectBundleIdentifier.plist</code></p>
-<p>在<code>Root</code>-&gt;<code>Filter</code>-&gt;<code>Bundles</code>，会看到<code>Item 0</code>：</p>
-<ul>
-<li><code>Type</code>：<code>String</code></li>
-<li><code>Value</code>：填入你要hook的app的包名<ul>
-<li>举例<ul>
-<li><code>com.crifan.ShowSystemInfo</code></li>
+</li>
+<li>（然后再）<code>Xcode</code>-&gt;<code>Product</code>-&gt;<code>Build</code><ul>
+<li>会从<code>yourFilename.xm</code>生成<code>yourFilename.mm</code><ul>
+<li>注：此时Xcode项目中是看不到的，但是文件系统中（比如通过Finder）是可以看到<code>.mm</code>文件的</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><img src="../../assets/img/set_filter_bundle.jpg" alt="set_filter_bundle"></img></p>
-<ul>
-<li>另外<ul>
-<li>如果要新增一行<ul>
-<li>移动到<code>Item 0</code>所在的行，会看到出现个<code>➕</code>=<code>加号</code>，点击<code>加号</code>，会新增一行</li>
+</li>
+<li>把<code>.mm</code>文件加到<code>Compile Sources</code>中<ul>
+<li>右键-&gt; <code>Add Files to {yourProjectName}</code> -&gt; 选择（刚新生成的）<code>yourFilename.mm</code><ul>
+<li><img src="../../assets/img/xcode_add_files_to_for_mm.png" alt="xcode_add_files_to_for_mm"></img></li>
+<li>其中勾选：<code>Copy items if needed</code><ul>
+<li><img src="../../assets/img/xcode_copy_items_if_needed.png" alt="xcode_copy_items_if_needed"></img></li>
+</ul>
+</li>
+<li>项目文件列表中，即可新增对应文件<code>yourFilename.mm</code></li>
+</ul>
+</li>
+<li>项目的待编译的<code>Compile Sources</code>文件中，也包含了对应的<code>.mm</code>文件<ul>
+<li><code>Targets</code>-&gt;<code>Build Phase</code>-&gt;<code>Compile Sources</code> 中有了刚加入的<code>.mm</code>文件<ul>
+<li><img src="../../assets/img/xcode_compile_source_see_mm.png" alt="xcode_compile_source_see_mm"></img></li>
+</ul>
+</li>
+<li>注<ul>
+<li>如果有需要，也可以通过点击<code>Compile Sources</code>中的<code>加号</code>=<code>➕</code>，去新增导入进来（对应的或其他的<code>.mm</code>文件）<ul>
+<li>这样后续编译代码时，才能真正编译到对应hook代码</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="如何hook二进制？"><a name="如何hook二进制？" class="plugin-anchor" href="#如何hook二进制？"><i class="fa fa-link" aria-hidden="true"></i></a>如何hook二进制？</h4>
-<p>如果需要hook二进制，则是新建<code>Array</code>类型的（和<code>Bundles</code>并列的）<code>Executables</code>子项，再加上对应的二进制文件名</p>
-<p>举例：</p>
-<ul>
-<li>hook二进制：<code>akd</code> = <code>AuthKit.framework</code>的daemon进程<ul>
-<li><img src="../../assets/img/hook_target_executables_akd.png" alt="hook_target_executables_akd"></img></li>
+</li>
 </ul>
 </li>
 </ul>
-<p>此时，对应的<code>plist</code>文件内容是：</p>
-<ul>
-<li>jailAppleAccount/Package/Library/MobileSubstrate/DynamicLibraries/jailAppleAccount.plist<pre class="language-"><code class="lang-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">plist</span> <span class="token name">PUBLIC</span> <span class="token string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="token string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plist</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1.0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dict</span><span class="token punctuation">&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>Filter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dict</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>Executables<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>array</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>akd<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>amsaccountsd<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>AppleMediaServices<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>AppleAccount<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>Preferences<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>array</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>Bundles<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>array</span><span class="token punctuation">&gt;</span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>com.apple.Preferences<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>array</span><span class="token punctuation">&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dict</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dict</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plist</span><span class="token punctuation">&gt;</span></span>
-</code></pre>
-</li>
-</ul>
-<h2 id="设置iphone的ip"><a name="设置iphone的ip" class="plugin-anchor" href="#设置iphone的ip"><i class="fa fa-link" aria-hidden="true"></i></a>设置iPhone的IP</h2>
-<p>把此处要把iOS调试设备（iPhone）中的IP地址：</p>
-<p><img src="../../assets/img/iphone_ip_address.jpg" alt="iphone_ip_address"></img></p>
-<p>此处是：<code>192.168.1.27</code></p>
-<p>去加到配置中去：</p>
-<ul>
-<li><code>iOSOpenDevDevice</code> = <code>192.168.1.27</code></li>
-</ul>
-<p><img src="../../assets/img/user_define_device_ip.jpg" alt="user_define_device_ip"></img></p>
-<p>附上原默认的更新后的配置：</p>
-<pre class="language-"><code class="lang-bash">iOSOpenDevBuildPackageOnAnyBuild <span class="token operator">=</span> NO
-iOSOpenDevCopyOnBuild <span class="token operator">=</span> NO
-iOSOpenDevDevice <span class="token operator">=</span> <span class="token number">192.168</span>.1.27
-iOSOpenDevInstallOnAnyBuild <span class="token operator">=</span> NO
-iOSOpenDevInstallOnProfiling <span class="token operator">=</span> YES
-iOSOpenDevPath <span class="token operator">=</span> /opt/iOSOpenDev
-iOSOpenDevRespringOnInstall <span class="token operator">=</span> YES
-iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
-</code></pre>
-<p>另外，理论上，去把对应变量加到环境变量：</p>
-<pre class="language-"><code class="lang-bash">➜  ~ <span class="token function">cat</span> ~/.zshrc <span class="token operator">|</span> <span class="token function">grep</span> iOSOpenDevDevice
-<span class="token builtin class-name">export</span> <span class="token assign-left variable">iOSOpenDevDevice</span><span class="token operator">=</span><span class="token number">192.168</span>.1.27
-</code></pre>
-<p>效果应该也是一样的。</p>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-07-20 14:48:30
+2024-11-25 11:44:25
 </span></footer></body></html>
                                 
                                 </section>
@@ -870,12 +824,12 @@ iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
 
             
                 
-                <a href="../new_project.html" class="navigation navigation-prev " aria-label="Previous page: 新建iOSOpenDev项目">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 搞懂.xm和.mm文件的逻辑">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../ssh_no_pwd_login.html" class="navigation navigation-next " aria-label="Next page: ssh免密登录">
+                <a href="../write_code/" class="navigation navigation-next " aria-label="Next page: 写hook插件代码">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -886,7 +840,7 @@ iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"初始化项目配置","level":"1.4.2","depth":2,"next":{"title":"ssh免密登录","level":"1.4.2.1","depth":3,"path":"normal_tweak_process/ssh_no_pwd_login.md","ref":"normal_tweak_process/ssh_no_pwd_login.md","articles":[]},"previous":{"title":"新建iOSOpenDev项目","level":"1.4.1","depth":2,"path":"normal_tweak_process/new_project.md","ref":"normal_tweak_process/new_project.md","articles":[]},"articles":[{"title":"ssh免密登录","level":"1.4.2.1","depth":3,"path":"normal_tweak_process/ssh_no_pwd_login.md","ref":"normal_tweak_process/ssh_no_pwd_login.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_iosopendev_tweak/pdf/ios_re_iosopendev_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_iosopendev_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_iosopendev_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：iOSOpenDev开发插件","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中如何用iOSOpenDev开发越狱插件tweak。先是对iOSOpenDev概览；然后介绍如何安装iOSOpenDev，以及安装后确认安装成功；然后是普通的插件的开发流程，包括新建iOSOpenDev的Xcode项目、初始化项目的配置，其中包括ssh免密登录、写hook插件tweak代码，包括如何新增文件、编译代码调试代码等；以及带UI界面的插件开发的流程，包括前提和目标、基本流程、使用效果、常见问题等；以及常见问题和一些经验心得；常见问题包括初始化环境方面的问题和编译调试方面的问题。"},"file":{"path":"normal_tweak_process/init_config/README.md","mtime":"2023-07-20T06:48:30.637Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-25T04:10:23.191Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"如何新增xm文件","level":"1.4.3.1","depth":3,"next":{"title":"写hook插件代码","level":"1.4.4","depth":2,"path":"normal_tweak_process/write_code/README.md","ref":"normal_tweak_process/write_code/README.md","articles":[]},"previous":{"title":"搞懂.xm和.mm文件的逻辑","level":"1.4.3","depth":2,"path":"normal_tweak_process/xm_mm_logic/README.md","ref":"normal_tweak_process/xm_mm_logic/README.md","articles":[{"title":"如何新增xm文件","level":"1.4.3.1","depth":3,"path":"normal_tweak_process/xm_mm_logic/new_xm_file.md","ref":"normal_tweak_process/xm_mm_logic/new_xm_file.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_iosopendev_tweak/pdf/ios_re_iosopendev_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_iosopendev_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_iosopendev_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：iOSOpenDev开发插件","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中如何用iOSOpenDev开发越狱插件tweak。先是对iOSOpenDev概览；然后介绍如何安装iOSOpenDev，以及安装后确认安装成功；然后是普通的插件的开发流程，包括新建iOSOpenDev的Xcode项目、初始化项目的配置，其中包括ssh免密登录、写hook插件tweak代码，包括如何新增文件、编译代码调试代码等；以及带UI界面的插件开发的流程，包括前提和目标、基本流程、使用效果、常见问题等；以及常见问题和一些经验心得；常见问题包括初始化环境方面的问题和编译调试方面的问题。"},"file":{"path":"normal_tweak_process/xm_mm_logic/new_xm_file.md","mtime":"2024-11-25T03:44:25.547Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-25T04:10:23.191Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
