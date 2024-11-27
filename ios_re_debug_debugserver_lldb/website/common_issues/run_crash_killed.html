@@ -6,7 +6,7 @@
         <title>运行崩溃killed · iOS逆向调试：debugserver+lldb</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -336,27 +336,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../usage_note/ios_bin_full_path.html">
-            
-                <a href="../usage_note/ios_bin_full_path.html">
-            
-                    
-                        <b>1.6.1.</b>
-                    
-                    获取iOS的app二进制路径
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../usage_note/entitlement/">
+        <li class="chapter " data-level="1.6.1" data-path="../usage_note/entitlement/">
             
                 <a href="../usage_note/entitlement/">
             
                     
-                        <b>1.6.2.</b>
+                        <b>1.6.1.</b>
                     
                     entitlement权限
             
@@ -367,12 +352,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.2.1" data-path="../usage_note/entitlement/check_entitlement/">
+        <li class="chapter " data-level="1.6.1.1" data-path="../usage_note/entitlement/check_entitlement/">
             
                 <a href="../usage_note/entitlement/check_entitlement/">
             
                     
-                        <b>1.6.2.1.</b>
+                        <b>1.6.1.1.</b>
                     
                     查看entitlement权限
             
@@ -382,12 +367,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2.2" data-path="../usage_note/entitlement/re_codesign.html">
+        <li class="chapter " data-level="1.6.1.2" data-path="../usage_note/entitlement/re_codesign.html">
             
                 <a href="../usage_note/entitlement/re_codesign.html">
             
                     
-                        <b>1.6.2.2.</b>
+                        <b>1.6.1.2.</b>
                     
                     重签名
             
@@ -540,13 +525,13 @@ zsh: killed     debugserver <span class="token parameter variable">--version</sp
 iPhone8-150:/usr/bin root<span class="token comment"># /usr/bin/debugserver --help</span>
 zsh: killed     /usr/bin/debugserver <span class="token parameter variable">--help</span>
 </code></pre>
-<p><img src="../assets/img/debugserver_recodesigned_crash_killed.png" alt="debugserver_recodesigned_crash_killed"></p>
+<p><img src="../assets/img/debugserver_recodesigned_crash_killed.png" alt="debugserver_recodesigned_crash_killed"></img></p>
 <h3 id="深层次现象"><a name="深层次现象" class="plugin-anchor" href="#深层次现象"><i class="fa fa-link" aria-hidden="true"></i></a>深层次现象</h3>
 <p><code>debugserver</code>的崩溃日志<code>.ips</code>文件：</p>
 <h4 id="崩溃日志1"><a name="崩溃日志1" class="plugin-anchor" href="#崩溃日志1"><i class="fa fa-link" aria-hidden="true"></i></a>崩溃日志1</h4>
-<p><img src="../assets/img/debugserver_crash_ips_file.png" alt="debugserver_crash_ips_file"></p>
+<p><img src="../assets/img/debugserver_crash_ips_file.png" alt="debugserver_crash_ips_file"></img></p>
 <p>可以看到具体崩溃原因是：</p>
-<p><img src="../assets/img/debugserver_ips_detail_sigkill_codesigning.png" alt="debugserver_ips_detail_sigkill_codesigning"></p>
+<p><img src="../assets/img/debugserver_ips_detail_sigkill_codesigning.png" alt="debugserver_ips_detail_sigkill_codesigning"></img></p>
 <pre class="language-"><code class="lang-json">Incident Identifier<span class="token operator">:</span> FC53485C-2EFB-4BBD-BFFA-C5E4423472AA
 CrashReporter Key<span class="token operator">:</span>   af51fc83d1f85f879bfdec1ca10f7cda9c77ed26
 Hardware Model<span class="token operator">:</span>      iPhone10<span class="token punctuation">,</span><span class="token number">1</span>
@@ -621,15 +606,15 @@ EOF
 </code></pre>
 <p>其中的<code>Exception Type:  EXC_CRASH (SIGKILL - CODESIGNING)</code>能看出是：代码签名方面的问题</p>
 <h4 id="崩溃日志2"><a name="崩溃日志2" class="plugin-anchor" href="#崩溃日志2"><i class="fa fa-link" aria-hidden="true"></i></a>崩溃日志2</h4>
-<p><img src="../assets/img/debugserver_ips_detail_bad_macho.png" alt="debugserver_ips_detail_bad_macho"></p>
-<pre class="language-"><code class="lang-json">  <span class="token property">&quot;exception&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;codes&quot;</span><span class="token operator">:</span><span class="token string">&quot;0x0000000000000000, 0x0000000000000000&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;rawCodes&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">&quot;type&quot;</span><span class="token operator">:</span><span class="token string">&quot;EXC_CRASH&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;signal&quot;</span><span class="token operator">:</span><span class="token string">&quot;SIGKILL - CODESIGNING&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token property">&quot;termination&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;flags&quot;</span><span class="token operator">:</span><span class="token number">64</span><span class="token punctuation">,</span><span class="token property">&quot;code&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token property">&quot;namespace&quot;</span><span class="token operator">:</span><span class="token string">&quot;EXEC&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;indicator&quot;</span><span class="token operator">:</span><span class="token string">&quot;Bad Mach-O&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token property">&quot;asi&quot;</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">&quot;libsystem_c.dylib&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">&quot;crashed on child side of fork pre-exec&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">&quot;dyld&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<p><img src="../assets/img/debugserver_ips_detail_bad_macho.png" alt="debugserver_ips_detail_bad_macho"></img></p>
+<pre class="language-"><code class="lang-json">  <span class="token property">"exception"</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">"codes"</span><span class="token operator">:</span><span class="token string">"0x0000000000000000, 0x0000000000000000"</span><span class="token punctuation">,</span><span class="token property">"rawCodes"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"EXC_CRASH"</span><span class="token punctuation">,</span><span class="token property">"signal"</span><span class="token operator">:</span><span class="token string">"SIGKILL - CODESIGNING"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"termination"</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">"flags"</span><span class="token operator">:</span><span class="token number">64</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token property">"namespace"</span><span class="token operator">:</span><span class="token string">"EXEC"</span><span class="token punctuation">,</span><span class="token property">"indicator"</span><span class="token operator">:</span><span class="token string">"Bad Mach-O"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"asi"</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">"libsystem_c.dylib"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">"crashed on child side of fork pre-exec"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"dyld"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 </code></pre>
 <p>其中的：</p>
 <ul>
-<li><code>&quot;signal&quot;:&quot;SIGKILL - CODESIGNING&quot;}</code>：确定是：代码签名方面的问题，导致的崩溃</li>
-<li><code>&quot;indicator&quot;:&quot;Bad Mach-O&quot;</code>：具体指示器 ~= 出错的地方/来源：是由于<code>Bad Mach-O</code>=Mach-O二进制文件是坏的<ul>
+<li><code>"signal":"SIGKILL - CODESIGNING"}</code>：确定是：代码签名方面的问题，导致的崩溃</li>
+<li><code>"indicator":"Bad Mach-O"</code>：具体指示器 ~= 出错的地方/来源：是由于<code>Bad Mach-O</code>=Mach-O二进制文件是坏的<ul>
 <li>后续证明：是签名方面有问题 -》所以是：坏的Mach-O文件</li>
 </ul>
 </li>
@@ -693,7 +678,7 @@ EOF
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"运行崩溃killed","level":"1.7.1","depth":2,"next":{"title":"附录","level":"1.8","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.8.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"常见问题","level":"1.7","depth":1,"path":"common_issues/README.md","ref":"common_issues/README.md","articles":[{"title":"运行崩溃killed","level":"1.7.1","depth":2,"path":"common_issues/run_crash_killed.md","ref":"common_issues/run_crash_killed.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/pdf/ios_re_debug_debugserver_lldb.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_debugserver_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向调试：debugserver+lldb","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中动态调试中的其中一种方式：debugserver+lldb。先是概览；然后再去详细介绍如何调试，首先是确保iPhone中debugserver有正确的权限，接着是iPhone中用debugserver启动app，最后是Mac中用lldb去调试app；接着单独介绍debugserver，包括原始的位置和来源，以及附录上原始entitlement权限供参考，以及help语法；然后介绍lldb；然后总结使用心得，包括获取iOS的app二进制路径，entitlement权限的如何查看权限、如何重签名；以及常见问题，包括运行崩溃killed等内容。"},"file":{"path":"common_issues/run_crash_killed.md","mtime":"2023-10-21T10:27:48.336Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-10-21T11:14:42.393Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"运行崩溃killed","level":"1.7.1","depth":2,"next":{"title":"附录","level":"1.8","depth":1,"path":"appendix/README.md","ref":"appendix/README.md","articles":[{"title":"参考资料","level":"1.8.1","depth":2,"path":"appendix/reference.md","ref":"appendix/reference.md","articles":[]}]},"previous":{"title":"常见问题","level":"1.7","depth":1,"path":"common_issues/README.md","ref":"common_issues/README.md","articles":[{"title":"运行崩溃killed","level":"1.7.1","depth":2,"path":"common_issues/run_crash_killed.md","ref":"common_issues/run_crash_killed.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/pdf/ios_re_debug_debugserver_lldb.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_debugserver_lldb/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_debugserver_lldb","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向调试：debugserver+lldb","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中动态调试中的其中一种方式：debugserver+lldb。先是概览；然后再去详细介绍如何调试，首先是确保iPhone中debugserver有正确的权限，接着是iPhone中用debugserver启动app，最后是Mac中用lldb去调试app；接着单独介绍debugserver，包括原始的位置和来源，以及附录上原始entitlement权限供参考，以及help语法；然后介绍lldb；然后总结使用心得，包括获取iOS的app二进制路径，entitlement权限的如何查看权限、如何重签名；以及常见问题，包括运行崩溃killed等内容。"},"file":{"path":"common_issues/run_crash_killed.md","mtime":"2023-10-21T10:27:48.336Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-27T14:56:17.223Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
