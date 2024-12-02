@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../xcode/" />
+    <link rel="next" href="common.html" />
     
     
-    <link rel="prev" href="../not_trigger.html" />
+    <link rel="prev" href="../" />
     
 
     <style>
@@ -378,14 +378,30 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../not_trigger.html">
+        <li class="chapter active" data-level="1.6.1" data-path="./">
             
-                <a href="../not_trigger.html">
+                <a href="./">
             
                     
                         <b>1.6.1.</b>
                     
-                    断点没触发
+                    断点加不上
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="common.html">
+            
+                <a href="common.html">
+            
+                    
+                        <b>1.6.1.1.</b>
+                    
+                    通用
             
                 </a>
             
@@ -393,14 +409,49 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6.2" data-path="./">
+        <li class="chapter " data-level="1.6.1.2" data-path="xcode.html">
             
-                <a href="./">
+                <a href="xcode.html">
+            
+                    
+                        <b>1.6.1.2.</b>
+                    
+                    Xcode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.3" data-path="lldb.html">
+            
+                <a href="lldb.html">
+            
+                    
+                        <b>1.6.1.3.</b>
+                    
+                    lldb
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../not_trigger.html">
+            
+                <a href="../not_trigger.html">
             
                     
                         <b>1.6.2.</b>
                     
-                    断点加不上
+                    断点没触发
             
                 </a>
             
@@ -786,183 +837,14 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="断点加不上"><a name="断点加不上" class="plugin-anchor" href="#断点加不上"><i class="fa fa-link" aria-hidden="true"></i></a>断点加不上</h1>
-<h2 id="xcode中断点加不上"><a name="xcode中断点加不上" class="plugin-anchor" href="#xcode中断点加不上"><i class="fa fa-link" aria-hidden="true"></i></a>Xcode中断点加不上</h2>
-<h3 id="xcode中断点加不上的原因"><a name="xcode中断点加不上的原因" class="plugin-anchor" href="#xcode中断点加不上的原因"><i class="fa fa-link" aria-hidden="true"></i></a>Xcode中断点加不上的原因</h3>
+<p>此处不论是带界面的<code>Xcode</code>，还是命令行的<code>lldb</code>中，对于断点，都会遇到：</p>
 <ul>
-<li>一般 <strong>断点添加失败</strong> = <strong>加不上断点</strong> = <strong>断点加不上</strong>，有几种常见的原因<ul>
-<li><code>The symbolic name is spelled correctly</code>=函数名有误<ul>
-<li>一种是：笔误型的，函数名写错了<ul>
-<li>举例<ul>
-<li>把ObjC的加号误写成了减号<ul>
-<li><code>+[AKSRPOperation performWithURL:SRPContext:error:]</code> -&gt; <code>-[AKSRPOperation performWithURL:SRPContext:error:]</code></li>
+<li><strong>断点添加失败</strong> = <strong>加不上断点</strong> = <strong>断点加不上</strong></li>
 </ul>
-</li>
-<li>把ObjC的函数末尾多写个了个冒号<code>:</code><ul>
-<li><code>-[__NSCFConstantString stringByAppendingString:]:</code> -&gt; <code>-[__NSCFConstantString stringByAppendingString:]</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>The symbol not exists in the library</code>=符号不存在于当前（所有的已加载的）库中<ul>
-<li>比如<ul>
-<li>ObjC中，调试<code>ak</code>d时，函数<code>-[AKAppleIDAuthenticationContextManager shouldContinueWithAuthenticationResults:error:forContextID:completion:]</code>加不上断点<ul>
-<li>原因，该函数其实是存在于另外的二进制=库=app：<code>Preference</code>中，需要把调试目标从<code>akd</code>改为<code>Preferences</code>才行，详见：<a href="../../note_summary/xcode/added_and_trigger.html">断点能加上且能触发</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>The library for the breakpoint is not loaded</code>=符号所在的二进制没有被加载</li>
-<li>iOS的ObjC的二进制中，本身就没有该函数名=符号，因为二进制中的符号表已经被去掉了</li>
-</ul>
-</li>
-</ul>
-<h3 id="xcode中断点加不上的解决办法"><a name="xcode中断点加不上的解决办法" class="plugin-anchor" href="#xcode中断点加不上的解决办法"><i class="fa fa-link" aria-hidden="true"></i></a>Xcode中断点加不上的解决办法</h3>
-<p>对应的，Xcode中，加不上断点时，一些常见的解决办法：</p>
-<ul>
-<li>原因：iOS的ObjC的二进制中，符号表已经去掉了<ul>
-<li>举例<ul>
-<li>抖音<ul>
-<li>现象：<code>AwemeCore</code>中，已经没有符号表了，所以去给函数<code>-[AWEUserRecommendMutiTagsView followBtnClicked:]</code>加断点，加不上<ul>
-<li><img src="../../assets/img/xcode_add_breakpont_fail_followbtnclicked.png" alt="xcode_add_breakpont_fail_followbtnclicked"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>WhatsApp</code><ul>
-<li>现象：<code>WhatsApp</code>中，去给函数<code>-[WARegistrationManager performSameDeviceCheckForSession:updateRegistrationTokenIfNecessary:withCompletion:]</code>加断点，但加不上<ul>
-<li><img src="../../assets/img/xcode_add_breakpont_fail_waregistrationmanager.png" alt="xcode_add_breakpont_fail_waregistrationmanager"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>解决办法：<a href="../../../note_summary/lldb_unname/restore_symbol.md">恢复符号表</a></li>
-</ul>
-</li>
-<li>原因：Xcode本身有bug<ul>
-<li>解决办法：清除当前已编译内容</li>
-<li>具体步骤：<code>Xcode</code>-&gt;<code>Product</code>-&gt;<code>Clean Build Folder</code><ul>
-<li>注：如果需要，可以多试几次</li>
-<li><img src="../../assets/img/xcode_product_clean.png" alt="xcode_product_clean"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>原因：之前（无辜，不小心）关闭了<code>调试</code><ul>
-<li>解决办法：（重新）开启调试</li>
-<li>具体步骤：<code>Xcode</code>-&gt;<code>Product</code>-&gt;<code>Scheme</code>-&gt;<code>Edit Scheme</code>-&gt;<code>Run</code>-&gt;<code>Info</code><ul>
-<li>把<code>Build Configuration</code>设置为<code>Debug</code>，且勾选<code>Debug executable</code><ul>
-<li><img src="../../assets/img/xcode_enable_debug_executable.png" alt="xcode_enable_debug_executable"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>原因：之前（不小心）关闭了（临时）所有的断点<ul>
-<li>此时：如果切换到断点试图，也会看到，所有断点已（从之前的蓝色）变成灰色了 + 鼠标移动上去，会提示：<code>Active Breakpoints</code><ul>
-<li><img src="../../assets/img/xcode_disabled_all_br.jpg" alt="xcode_disabled_all_br"></img></li>
-</ul>
-</li>
-<li>解决办法：点击该（临时关闭或开启所有的断点）按钮，开启所有断点<ul>
-<li>点击后，所有断点就恢复蓝色了<ul>
-<li><img src="../../assets/img/xcode_enable_all_br.png" alt="xcode_enable_all_br"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>原因：Debug调试模式下，调试信息被优化掉了<ul>
-<li>解决办法：恢复Debug调试模式下，不做任何优化</li>
-<li>具体步骤：<code>Xcode</code>-&gt;<code>PROJECT</code>-&gt;<code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourProjectName</span><span class="token punctuation">&gt;</span></span></code>-&gt;<code>Build Settings</code>-&gt;<code>Apple Clang</code>-&gt;<code>Code Generation</code>-&gt;<code>Optimization Level</code>-&gt;<code>Debug</code>设置为<code>None[-O0]</code><ul>
-<li>注：<code>None[-O0]</code>表示<code>Optimize</code>=优化为<code>0</code>=不做任何额外的优化<ul>
-<li><img src="../../assets/img/xcode_optimize_level_O0.png" alt="xcode_optimize_level_O0"></img></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="lldb命令行中断点加不上"><a name="lldb命令行中断点加不上" class="plugin-anchor" href="#lldb命令行中断点加不上"><i class="fa fa-link" aria-hidden="true"></i></a>lldb命令行中断点加不上</h2>
-<p>此处整理lldb中断点加不上的常见原因和解决办法：</p>
-<h3 id="warning-failed-to-set-breakpoint-site-at-for-breakpoint-error-9-sending-the-breakpoint-request"><a name="warning-failed-to-set-breakpoint-site-at-for-breakpoint-error-9-sending-the-breakpoint-request" class="plugin-anchor" href="#warning-failed-to-set-breakpoint-site-at-for-breakpoint-error-9-sending-the-breakpoint-request"><i class="fa fa-link" aria-hidden="true"></i></a>warning failed to set breakpoint site at for breakpoint error 9 sending the breakpoint request</h3>
-<h4 id="现象"><a name="现象" class="plugin-anchor" href="#现象"><i class="fa fa-link" aria-hidden="true"></i></a>现象</h4>
-<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> b 0x104F698
-warning: failed to <span class="token builtin class-name">set</span> breakpoint site at 0x104f698 <span class="token keyword">for</span> breakpoint <span class="token number">3.1</span>: error: <span class="token number">9</span> sending the breakpoint request
-</code></pre>
-<p><img src="../../assets/img/b_failed_set_error_9_req.png" alt="b_failed_set_error_9_req"></img></p>
-<h4 id="原因"><a name="原因" class="plugin-anchor" href="#原因"><i class="fa fa-link" aria-hidden="true"></i></a>原因</h4>
-<ul>
-<li>原因<ul>
-<li>表面原因：地址写错了</li>
-<li>底层原因：<code>image list</code>中输出的库的ALSR基地址，搞错了</li>
-</ul>
-</li>
-</ul>
-<h5 id="具体解释"><a name="具体解释" class="plugin-anchor" href="#具体解释"><i class="fa fa-link" aria-hidden="true"></i></a>具体解释</h5>
-<p>此处，从lldb的image list中输出：</p>
-<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> image list <span class="token parameter variable">-o</span> <span class="token parameter variable">-f</span> <span class="token operator">|</span> <span class="token function">grep</span> mobileactivationd
-<span class="token punctuation">[</span>  <span class="token number">0</span><span class="token punctuation">]</span> 0x0000000001048000 /usr/libexec/mobileactivationd<span class="token punctuation">(</span>0x0000000101048000<span class="token punctuation">)</span>
-</code></pre>
-<p>根据之前经验，以为，最前面的值：</p>
-<ul>
-<li><code>0x0000000001048000</code></li>
-</ul>
-<p>就是：此处库的ALSR基地址</p>
-<p>由此，后续手动算出来的函数地址是：<code>0x104F698</code></p>
-<p>但是实际上是：</p>
-<p>最后括号中的地址：</p>
-<ul>
-<li><code>0x0000000101048000</code><ul>
-<li>比前面的值，多出个<code>0x0000000100000000</code></li>
-</ul>
-</li>
-</ul>
-<p>才是真正的库的ALSR基地址</p>
-<h4 id="解决办法"><a name="解决办法" class="plugin-anchor" href="#解决办法"><i class="fa fa-link" aria-hidden="true"></i></a>解决办法</h4>
-<p>用真正的ALSR基地址：<code>0x0000000101048000</code></p>
-<ul>
-<li><code>/usr/libexec/mobileactivationd</code><ul>
-<li>基地址=image base：<ul>
-<li><strong>是</strong>（最后括号中的地址）：<code>0x0000000101048000</code><ul>
-<li><strong>不是</strong>（之前看到的，最前面的地址）：<code>0x0000000001048000</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>去计算：</p>
-<ul>
-<li>之前IDA中的地址：<code>0x100007698</code></li>
-<li>（IDA内）二进制内偏移量地址 = 去掉IDA中的基地址后是：<ul>
-<li><code>0x100007698</code> - <code>0x100000000</code></li>
-<li>= <code>0x7698</code></li>
-</ul>
-</li>
-<li>加上此处mobileactivationd的ALSR基地址<ul>
-<li><code>0x0000000101048000</code> + <code>0x7698</code></li>
-<li>= <code>0x10104F698</code></li>
-</ul>
-</li>
-</ul>
-<p>-》函数内部某代码地址：<code>0x10104F698</code></p>
-<p>-》即可正常加断点：</p>
-<pre class="language-"><code class="lang-bash"><span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> b 0x10104F698
-Breakpoint <span class="token number">4</span>: where <span class="token operator">=</span> mobileactivationd`getPcrt_1000075C0 + <span class="token number">216</span>, address <span class="token operator">=</span> 0x000000010104f698
-</code></pre>
+<p>方面的问题。</p>
+<p>现在去整理各种现象和原因及解决办法。</p>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-11-30 12:28:49
+2024-12-02 11:08:17
 </span></footer></body></html>
                                 
                                 </section>
@@ -990,12 +872,12 @@ Breakpoint <span class="token number">4</span>: where <span class="token operato
 
             
                 
-                <a href="../not_trigger.html" class="navigation navigation-prev " aria-label="Previous page: 断点没触发">
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 常见问题">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../xcode/" class="navigation navigation-next " aria-label="Next page: Xcode">
+                <a href="common.html" class="navigation navigation-next " aria-label="Next page: 通用">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1006,7 +888,7 @@ Breakpoint <span class="token number">4</span>: where <span class="token operato
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"断点加不上","level":"1.6.2","depth":2,"next":{"title":"Xcode","level":"1.6.3","depth":2,"path":"common_issue/xcode/README.md","ref":"common_issue/xcode/README.md","articles":[{"title":"hook代码的断点","level":"1.6.3.1","depth":3,"path":"common_issue/xcode/hook_code_br.md","ref":"common_issue/xcode/hook_code_br.md","articles":[]}]},"previous":{"title":"断点没触发","level":"1.6.1","depth":2,"path":"common_issue/not_trigger.md","ref":"common_issue/not_trigger.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_breakpoint/pdf/ios_re_debug_breakpoint.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_breakpoint/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_breakpoint","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向之动态调试：断点","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的断点的各方面的知识和心得。先对于iOS逆向调试期间的断点进行概览介绍。接着介绍Xcode图形界面和lldb命令行中的断点的通用逻辑，包括相关背景知识，比如如何得到函数的实际地址；以及介绍普通断点的通用逻辑；接着介绍普通断点如何加断点，以及断点的一些高级用法，比如指定模块、条件判断断点和对应例子；接着介绍Xcode图形界面和lldb命令行中的关于断点的各自特有的内容。包括lldb中breakpoint的help语法。接着整理常见问题，包括断点没触发、Xcode中hook代码的断点以及lldb；以及各种经验和心得，包括通用的，比如加断点导致卡死等；以及ObjC方面的断点，和Xcode的各种心得，包括如何同时调试多个断点、临时关闭所有断点、确认断点是否加上、确保断点能加上且能触发等；以及lldb无名函数和恢复符号表；最后贴上附录资料。"},"file":{"path":"common_issue/add_failed/README.md","mtime":"2024-11-30T04:28:49.997Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-11-30T04:29:43.882Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"断点加不上","level":"1.6.1","depth":2,"next":{"title":"通用","level":"1.6.1.1","depth":3,"path":"common_issue/add_failed/common.md","ref":"common_issue/add_failed/common.md","articles":[]},"previous":{"title":"常见问题","level":"1.6","depth":1,"path":"common_issue/README.md","ref":"common_issue/README.md","articles":[{"title":"断点加不上","level":"1.6.1","depth":2,"path":"common_issue/add_failed/README.md","ref":"common_issue/add_failed/README.md","articles":[{"title":"通用","level":"1.6.1.1","depth":3,"path":"common_issue/add_failed/common.md","ref":"common_issue/add_failed/common.md","articles":[]},{"title":"Xcode","level":"1.6.1.2","depth":3,"path":"common_issue/add_failed/xcode.md","ref":"common_issue/add_failed/xcode.md","articles":[]},{"title":"lldb","level":"1.6.1.3","depth":3,"path":"common_issue/add_failed/lldb.md","ref":"common_issue/add_failed/lldb.md","articles":[]}]},{"title":"断点没触发","level":"1.6.2","depth":2,"path":"common_issue/not_trigger.md","ref":"common_issue/not_trigger.md","articles":[]},{"title":"Xcode","level":"1.6.3","depth":2,"path":"common_issue/xcode/README.md","ref":"common_issue/xcode/README.md","articles":[{"title":"hook代码的断点","level":"1.6.3.1","depth":3,"path":"common_issue/xcode/hook_code_br.md","ref":"common_issue/xcode/hook_code_br.md","articles":[]}]},{"title":"lldb","level":"1.6.4","depth":2,"path":"common_issue/lldb/README.md","ref":"common_issue/lldb/README.md","articles":[]}]},"articles":[{"title":"通用","level":"1.6.1.1","depth":3,"path":"common_issue/add_failed/common.md","ref":"common_issue/add_failed/common.md","articles":[]},{"title":"Xcode","level":"1.6.1.2","depth":3,"path":"common_issue/add_failed/xcode.md","ref":"common_issue/add_failed/xcode.md","articles":[]},{"title":"lldb","level":"1.6.1.3","depth":3,"path":"common_issue/add_failed/lldb.md","ref":"common_issue/add_failed/lldb.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_debug_breakpoint/pdf/ios_re_debug_breakpoint.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_debug_breakpoint/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_debug_breakpoint","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向之动态调试：断点","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间涉及到的断点的各方面的知识和心得。先对于iOS逆向调试期间的断点进行概览介绍。接着介绍Xcode图形界面和lldb命令行中的断点的通用逻辑，包括相关背景知识，比如如何得到函数的实际地址；以及介绍普通断点的通用逻辑；接着介绍普通断点如何加断点，以及断点的一些高级用法，比如指定模块、条件判断断点和对应例子；接着介绍Xcode图形界面和lldb命令行中的关于断点的各自特有的内容。包括lldb中breakpoint的help语法。接着整理常见问题，包括断点没触发、Xcode中hook代码的断点以及lldb；以及各种经验和心得，包括通用的，比如加断点导致卡死等；以及ObjC方面的断点，和Xcode的各种心得，包括如何同时调试多个断点、临时关闭所有断点、确认断点是否加上、确保断点能加上且能触发等；以及lldb无名函数和恢复符号表；最后贴上附录资料。"},"file":{"path":"common_issue/add_failed/README.md","mtime":"2024-12-02T03:08:17.386Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-12-02T03:31:30.308Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
