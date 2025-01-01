@@ -167,5 +167,6 @@
     * [iOS逆向：Framework动态库](https://crifan.github.io/ios_re_framework_dylib/website)
     * [iOS逆向：Apple操作系统](https://crifan.github.io/ios_re_apple_os/website)
     * [安卓自动化工具：adb](https://crifan.github.io/android_auto_tool_adb/website)
+    * [iOS逆向分析：导出头文件](https://crifan.github.io/ios_re_export_header/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
