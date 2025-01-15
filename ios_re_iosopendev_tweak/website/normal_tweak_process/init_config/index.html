@@ -85,7 +85,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../ssh_no_pwd_login.html" />
+    <link rel="next" href="../xm_mm_logic/" />
     
     
     <link rel="prev" href="../new_project.html" />
@@ -246,27 +246,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.2.1" data-path="../ssh_no_pwd_login.html">
-            
-                <a href="../ssh_no_pwd_login.html">
-            
-                    
-                        <b>1.4.2.1.</b>
-                    
-                    ssh免密登录
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -832,7 +811,8 @@
 </code></pre>
 </li>
 </ul>
-<h2 id="设置iphone的ip"><a name="设置iphone的ip" class="plugin-anchor" href="#设置iphone的ip"><i class="fa fa-link" aria-hidden="true"></i></a>设置iPhone的IP</h2>
+<h2 id="更新iosopendev相关设置"><a name="更新iosopendev相关设置" class="plugin-anchor" href="#更新iosopendev相关设置"><i class="fa fa-link" aria-hidden="true"></i></a>更新iOSOpenDev相关设置</h2>
+<h3 id="设置iphone的ip"><a name="设置iphone的ip" class="plugin-anchor" href="#设置iphone的ip"><i class="fa fa-link" aria-hidden="true"></i></a>设置iPhone的IP</h3>
 <p>把此处要把iOS调试设备（iPhone）中的IP地址：</p>
 <p><img src="../../assets/img/iphone_ip_address.jpg" alt="iphone_ip_address"></img></p>
 <p>此处是：<code>192.168.1.27</code></p>
@@ -841,7 +821,18 @@
 <li><code>iOSOpenDevDevice</code> = <code>192.168.1.27</code></li>
 </ul>
 <p><img src="../../assets/img/user_define_device_ip.jpg" alt="user_define_device_ip"></img></p>
-<p>附上原默认的更新后的配置：</p>
+<h3 id="更新iosopendevusepackageversionplist为no，确保版本更新能生效"><a name="更新iosopendevusepackageversionplist为no，确保版本更新能生效" class="plugin-anchor" href="#更新iosopendevusepackageversionplist为no，确保版本更新能生效"><i class="fa fa-link" aria-hidden="true"></i></a>更新iOSOpenDevUsePackageVersionPList为NO，确保版本更新能生效</h3>
+<p>以及参考后续的：</p>
+<p><a href="../../common_issue/control_version_lost.html">control的Version版本号的改动会丢失</a></p>
+<p>再去从：</p>
+<ul>
+<li><code>iOSOpenDevUsePackageVersionPList = YES</code></li>
+</ul>
+<p>改为：</p>
+<ul>
+<li><code>iOSOpenDevUsePackageVersionPList = NO</code></li>
+</ul>
+<p>更新后的配置是：</p>
 <pre class="language-"><code class="lang-bash">iOSOpenDevBuildPackageOnAnyBuild <span class="token operator">=</span> NO
 iOSOpenDevCopyOnBuild <span class="token operator">=</span> NO
 iOSOpenDevDevice <span class="token operator">=</span> <span class="token number">192.168</span>.1.27
@@ -849,15 +840,52 @@ iOSOpenDevInstallOnAnyBuild <span class="token operator">=</span> NO
 iOSOpenDevInstallOnProfiling <span class="token operator">=</span> YES
 iOSOpenDevPath <span class="token operator">=</span> /opt/iOSOpenDev
 iOSOpenDevRespringOnInstall <span class="token operator">=</span> YES
-iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
+iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> NO
 </code></pre>
+<p><img src="../../assets/img/xcode_iosopendevusepackageversionplist_no.png" alt="xcode_iosopendevusepackageversionplist_no"></img></p>
 <p>另外，理论上，去把对应变量加到环境变量：</p>
 <pre class="language-"><code class="lang-bash">➜  ~ <span class="token function">cat</span> ~/.zshrc <span class="token operator">|</span> <span class="token function">grep</span> iOSOpenDevDevice
 <span class="token builtin class-name">export</span> <span class="token assign-left variable">iOSOpenDevDevice</span><span class="token operator">=</span><span class="token number">192.168</span>.1.27
 </code></pre>
 <p>效果应该也是一样的。</p>
+<h2 id="确保ssh登录且是ssh免密登录"><a name="确保ssh登录且是ssh免密登录" class="plugin-anchor" href="#确保ssh登录且是ssh免密登录"><i class="fa fa-link" aria-hidden="true"></i></a>确保ssh登录且是ssh免密登录</h2>
+<ul>
+<li>此处要弄好SSH登录，且是ssh免密登录<ul>
+<li>背景<ul>
+<li>在<code>Xcode</code>+<code>iOSOpenDev</code>的编译安装最后阶段，涉及到，自动通过ssh访问iPhone设备，把生成的<code>.deb</code>插件的文件下载和安装到iPhone中</li>
+<li>此时就需要先准备好环境：确保<code>Mac</code>中可以，ssh的免密登录iPhone</li>
+</ul>
+</li>
+<li>概述<ul>
+<li>先用ssh登录一次iPhone<ul>
+<li>命令<pre class="language-"><code class="lang-bash"><span class="token function">ssh</span> root@192.168.1.27
+</code></pre>
+</li>
+<li>输入密码<ul>
+<li><code>OpenSSH</code>的默认密码是：<code>alpine</code></li>
+</ul>
+</li>
+<li>即可登录到iPhone中</li>
+</ul>
+</li>
+<li>把ssh的key拷贝到iPhone中<ul>
+<li>命令<pre class="language-"><code class="lang-bash">ssh-copy-id root@192.168.1.27
+</code></pre>
+</li>
+<li>输入密码：<code>alpine</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>详解<ul>
+<li><a href="https://book.crifan.org/books/ios_re_common_tweak/website/ssh/openssh/login/login_no_pwd.html" target="_blank">ssh免密登录 · iOS越狱开发：常用越狱插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-07-20 14:48:30
+2025-01-15 15:43:08
 </span></footer></body></html>
                                 
                                 </section>
@@ -890,7 +918,7 @@ iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
                 </a>
                 
                 
-                <a href="../ssh_no_pwd_login.html" class="navigation navigation-next " aria-label="Next page: ssh免密登录">
+                <a href="../xm_mm_logic/" class="navigation navigation-next " aria-label="Next page: 搞懂.xm和.mm文件的逻辑">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -901,7 +929,7 @@ iOSOpenDevUsePackageVersionPList <span class="token operator">=</span> YES
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"初始化项目配置","level":"1.4.2","depth":2,"next":{"title":"ssh免密登录","level":"1.4.2.1","depth":3,"path":"normal_tweak_process/ssh_no_pwd_login.md","ref":"normal_tweak_process/ssh_no_pwd_login.md","articles":[]},"previous":{"title":"新建iOSOpenDev项目","level":"1.4.1","depth":2,"path":"normal_tweak_process/new_project.md","ref":"normal_tweak_process/new_project.md","articles":[]},"articles":[{"title":"ssh免密登录","level":"1.4.2.1","depth":3,"path":"normal_tweak_process/ssh_no_pwd_login.md","ref":"normal_tweak_process/ssh_no_pwd_login.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_iosopendev_tweak/pdf/ios_re_iosopendev_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_iosopendev_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_iosopendev_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：iOSOpenDev开发插件","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中如何用iOSOpenDev开发越狱插件tweak。先是对iOSOpenDev概览；然后介绍如何安装iOSOpenDev，以及安装后确认安装成功；然后是普通的插件的开发流程，包括新建iOSOpenDev的Xcode项目、初始化项目的配置，其中包括ssh免密登录、写hook插件tweak代码，包括如何新增文件、编译代码调试代码等；以及带UI界面的插件开发的流程，包括前提和目标、基本流程、使用效果、常见问题等；以及常见问题和一些经验心得；常见问题包括初始化环境方面的问题和编译调试方面的问题。"},"file":{"path":"normal_tweak_process/init_config/README.md","mtime":"2023-07-20T06:48:30.637Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-01-14T09:59:32.306Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"初始化项目配置","level":"1.4.2","depth":2,"next":{"title":"搞懂.xm和.mm文件的逻辑","level":"1.4.3","depth":2,"path":"normal_tweak_process/xm_mm_logic/README.md","ref":"normal_tweak_process/xm_mm_logic/README.md","articles":[{"title":"如何新增xm文件","level":"1.4.3.1","depth":3,"path":"normal_tweak_process/xm_mm_logic/new_xm_file.md","ref":"normal_tweak_process/xm_mm_logic/new_xm_file.md","articles":[]}]},"previous":{"title":"新建iOSOpenDev项目","level":"1.4.1","depth":2,"path":"normal_tweak_process/new_project.md","ref":"normal_tweak_process/new_project.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_iosopendev_tweak/pdf/ios_re_iosopendev_tweak.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_iosopendev_tweak/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_iosopendev_tweak","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：iOSOpenDev开发插件","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向中如何用iOSOpenDev开发越狱插件tweak。先是对iOSOpenDev概览；然后介绍如何安装iOSOpenDev，以及安装后确认安装成功；然后是普通的插件的开发流程，包括新建iOSOpenDev的Xcode项目、初始化项目的配置，其中包括ssh免密登录、写hook插件tweak代码，包括如何新增文件、编译代码调试代码等；以及带UI界面的插件开发的流程，包括前提和目标、基本流程、使用效果、常见问题等；以及常见问题和一些经验心得；常见问题包括初始化环境方面的问题和编译调试方面的问题。"},"file":{"path":"normal_tweak_process/init_config/README.md","mtime":"2025-01-15T07:43:08.896Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-01-15T07:44:02.865Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
