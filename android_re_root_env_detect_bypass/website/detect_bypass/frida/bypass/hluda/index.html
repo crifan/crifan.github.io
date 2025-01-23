@@ -1,0 +1,762 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>hluda · 安卓逆向：Root环境检测及绕过</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../florida/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"android_re_root_env_detect_bypass","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../android_root_detect_overview/">
+            
+                <a href="../../../../android_root_detect_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    安卓root环境检测概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../../tools/">
+            
+                <a href="../../../../tools/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    检测工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../../tools/hunter/">
+            
+                <a href="../../../../tools/hunter/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Hunter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../../tools/momo/">
+            
+                <a href="../../../../tools/momo/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    momo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Root环境检测及绕过
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../../root_files/">
+            
+                <a href="../../../root_files/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    root文件列表
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../../../root_files/detect.html">
+            
+                <a href="../../../root_files/detect.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    检测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../../root_files/bypass.html">
+            
+                <a href="../../../root_files/bypass.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    绕过
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    Frida
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../detect.html">
+            
+                <a href="../../detect.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    检测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    绕过
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.2.2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.2.2.1.</b>
+                    
+                    hluda
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.2" data-path="../florida/">
+            
+                <a href="../florida/">
+            
+                    
+                        <b>1.4.2.2.2.</b>
+                    
+                    Florida
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2.3" data-path="../froda/">
+            
+                <a href="../froda/">
+            
+                    
+                        <b>1.4.2.2.3.</b>
+                    
+                    Froda
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../../xposed/">
+            
+                <a href="../../../xposed/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    Xposed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../../adb/">
+            
+                <a href="../../../adb/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    adb
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../../other/">
+            
+                <a href="../../../other/">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../appendix/">
+            
+                <a href="../../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../../appendix/reference.html">
+            
+                <a href="../../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >hluda</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="hluda"><a name="hluda" class="plugin-anchor" href="#hluda"><i class="fa fa-link" aria-hidden="true"></i></a>hluda</h1>
+<ul>
+<li>定制版Frida=魔改版Frida：hluda == strongR-frida-android<ul>
+<li>Github代码<ul>
+<li><a href="https://github.com/hzzheyang/strongR-frida-android" target="_blank">https://github.com/hzzheyang/strongR-frida-android</a> <ul>
+<li><a href="https://github.com/hzzheyang/strongR-frida-android" target="_blank">hzzheyang/strongR-frida-android: An anti detection version frida-server for android. (github.com)</a><ul>
+<li>由于工作太忙，长时间没搞这个了，所以借用了一下Ylarod的patch，以后这里没更新的话，可以去Ylarod看看</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>核心二进制<ul>
+<li>hluda-server<ul>
+<li>直接下载<ul>
+<li><a href="https://github.com/hzzheyang/strongR-frida-android/releases" target="_blank">https://github.com/hzzheyang/strongR-frida-android/releases</a><ul>
+<li><a href="https://github.com/hzzheyang/strongR-frida-android/releases" target="_blank">Releases · hzzheyang/strongR-frida-android (github.com)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自己编译<ul>
+<li><a href="https://bbs.kanxue.com/thread-269889.htm" target="_blank">[原创]手动编译Hluda Frida Server-Android安全-看雪-安全社区|安全招聘|kanxue.com</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>相关<ul>
+<li>Fork自 = 原始仓库<ul>
+<li><a href="https://github.com/CrackerCat/strongR-frida-android" target="_blank">https://github.com/CrackerCat/strongR-frida-android</a><ul>
+<li><a href="https://github.com/CrackerCat/strongR-frida-android" target="_blank">CrackerCat/strongR-frida-android: An anti detection version frida-server for android. (github.com)</a><ul>
+<li>但是原始仓库：没有release编译好的，可下载的文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他工具<ul>
+<li><a href="https://github.com/Exo1i/MagiskHluda" target="_blank">https://github.com/Exo1i/MagiskHluda</a><ul>
+<li><a href="https://github.com/Exo1i/MagiskHluda" target="_blank">Exo1i/MagiskHluda: Run a more undetectable frida-server on boot using magisk 🔐✅ (github.com)</a><ul>
+<li>Florida on Boot: Unleash Florida's Power with Enhanced Undetectability</li>
+<li>🌟 This a magisk module based on Florida which is a more undetectable version of Frida.</li>
+<li>🌟 It basically sets up Florida to start on boot for you.</li>
+</ul>
+</li>
+<li>-》直接安装即可用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细介绍"><a name="详细介绍" class="plugin-anchor" href="#详细介绍"><i class="fa fa-link" aria-hidden="true"></i></a>详细介绍</h2>
+<p>hluda-server-15.1.21 是一个经过魔改的版本的 Frida-server，主要针对 x86-64 和 arm64 架构的设备。Frida 是一款强大的动态代码插桩工具，它允许开发者在运行时对应用程序进行修改、调试和逆向工程。这个“魔改版”主要是为了绕过某些应用或系统对于 Frida 的检测机制，以实现更加隐蔽的功能。</p>
+<h3 id="frida-server"><a name="frida-server" class="plugin-anchor" href="#frida-server"><i class="fa fa-link" aria-hidden="true"></i></a><strong>Frida-server</strong></h3>
+<ul>
+<li>Frida-server 是 Frida 的一部分，它是一个可以在目标设备上运行的代理服务器，与宿主机上的 Frida 客户端配合工作。</li>
+<li>Frida-server 可以注入 JavaScript 代码到目标应用的进程中，允许在运行时分析和修改应用的行为。</li>
+<li>在 Android 平台上，通常通过 ADB (Android Debug Bridge) 将 Frida-server 推送到设备上，并启动服务，然后在宿主机上连接并执行脚本。</li>
+</ul>
+<h3 id="魔改（magic-modification）"><a name="魔改（magic-modification）" class="plugin-anchor" href="#魔改（magic-modification）"><i class="fa fa-link" aria-hidden="true"></i></a><strong>魔改（Magic Modification）</strong></h3>
+<ul>
+<li>魔改版 hluda-server 去除了 Frida 的一些特征码，以避免被反调试和反病毒软件检测到。</li>
+<li>这种修改可能包括但不限于重写签名验证、去除特定字符串、混淆代码结构等，以提高隐蔽性。</li>
+<li>使用魔改版可以降低被目标应用或者安全防护系统识别为恶意软件的风险。</li>
+</ul>
+<h3 id="x86-64-和-arm64-支持"><a name="x86-64-和-arm64-支持" class="plugin-anchor" href="#x86-64-和-arm64-支持"><i class="fa fa-link" aria-hidden="true"></i></a><strong>x86-64 和 arm64 支持</strong></h3>
+<ul>
+<li>x86-64 版本适用于基于 x86 或 x86_64 架构的设备，如某些模拟器或特定的 Android 设备。</li>
+<li>arm64 版本则针对基于 ARMv8 架构的 64 位设备，这是现代 Android 设备的主流架构。</li>
+<li>提供这两个版本的 hluda-server 意味着它能广泛地覆盖不同硬件平台的用户。</li>
+</ul>
+<h3 id="逆向工程和调试"><a name="逆向工程和调试" class="plugin-anchor" href="#逆向工程和调试"><i class="fa fa-link" aria-hidden="true"></i></a><strong>逆向工程和调试</strong></h3>
+<ul>
+<li>Frida 的核心功能是用于逆向工程，开发者可以使用它来获取应用内部的工作原理，查找漏洞，或测试安全措施。</li>
+<li>由于 hluda-server 能避开检测，它特别适用于那些对调试有严格限制或者有自我保护机制的应用。</li>
+</ul>
+<h3 id="安全风险"><a name="安全风险" class="plugin-anchor" href="#安全风险"><i class="fa fa-link" aria-hidden="true"></i></a><strong>安全风险</strong></h3>
+<ul>
+<li>魔改版工具虽然提高了隐蔽性，但可能会被滥用，例如进行非法的恶意活动，因此使用时应确保遵守法律法规。</li>
+<li>对于普通用户，未经许可的设备调试可能侵犯隐私，因此在使用 Frida 或 hluda-server 时，务必确保拥有对目标应用的合法访问权限。</li>
+</ul>
+<h3 id="使用方法"><a name="使用方法" class="plugin-anchor" href="#使用方法"><i class="fa fa-link" aria-hidden="true"></i></a><strong>使用方法</strong></h3>
+<ul>
+<li>安装 hluda-server 之前，确保设备已开启调试模式，且 ADB 已正确配置。</li>
+<li>通过 ADB 将对应的 hluda-server 安装包推送到设备上，并按照官方文档的指示启动服务。</li>
+<li>在宿主机上安装 Frida 客户端，通过连接 hluda-server 实现远程控制和脚本执行。</li>
+</ul>
+<p>总结来说，hluda-server-15.1.21 是一个为绕过检测而优化的 Frida-server 版本，适用于多平台，尤其适合那些需要避开反调试机制的场景，如安全研究、应用测试和逆向工程。然而，使用此类工具时必须注意合法性和道德问题，以避免不必要的法律风险。</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2025-01-23 22:34:21
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 绕过">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../florida/" class="navigation navigation-next " aria-label="Next page: Florida">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"hluda","level":"1.4.2.2.1","depth":4,"next":{"title":"Florida","level":"1.4.2.2.2","depth":4,"path":"detect_bypass/frida/bypass/florida/README.md","ref":"detect_bypass/frida/bypass/florida/README.md","articles":[]},"previous":{"title":"绕过","level":"1.4.2.2","depth":3,"path":"detect_bypass/frida/bypass/README.md","ref":"detect_bypass/frida/bypass/README.md","articles":[{"title":"hluda","level":"1.4.2.2.1","depth":4,"path":"detect_bypass/frida/bypass/hluda/README.md","ref":"detect_bypass/frida/bypass/hluda/README.md","articles":[]},{"title":"Florida","level":"1.4.2.2.2","depth":4,"path":"detect_bypass/frida/bypass/florida/README.md","ref":"detect_bypass/frida/bypass/florida/README.md","articles":[]},{"title":"Froda","level":"1.4.2.2.3","depth":4,"path":"detect_bypass/frida/bypass/froda/README.md","ref":"detect_bypass/frida/bypass/froda/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_root_env_detect_bypass/pdf/android_re_root_env_detect_bypass.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_root_env_detect_bypass/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_root_env_detect_bypass","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"安卓逆向：Root环境检测及绕过","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"安卓逆向期间涉及到的，root环境检测和绕过root环境检测相关的各种内容。"},"file":{"path":"detect_bypass/frida/bypass/hluda/README.md","mtime":"2025-01-23T14:34:21.332Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-01-23T14:43:23.288Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
