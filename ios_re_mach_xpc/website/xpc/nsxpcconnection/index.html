@@ -1,0 +1,623 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>NSXPCConnection · iOS逆向：Mach消息和XPC进程通信</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="example/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"ios_re_mach_xpc","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../mach_xpc_overview/">
+            
+                <a href="../../mach_xpc_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Mach和XPC概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../mach/">
+            
+                <a href="../../mach/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Mach
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../mach/core/">
+            
+                <a href="../../mach/core/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Mach内核
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../mach/message/">
+            
+                <a href="../../mach/message/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Mach消息
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    XPC进程间通讯
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    NSXPCConnection
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="example/">
+            
+                <a href="example/">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >NSXPCConnection</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="nsxpcconnection"><a name="nsxpcconnection" class="plugin-anchor" href="#nsxpcconnection"><i class="fa fa-link" aria-hidden="true"></i></a>NSXPCConnection</h1>
+<p>TODO：</p>
+<ul>
+<li>iOS IPC NSXPCConnection launchd</li>
+<li>【未解决】iOS逆向akd：NSXPCConnection的resume和active相关函数</li>
+<li>【未解决】iOS逆向akd：NSXPCConnection的exportedInterface、exportedObject等内容</li>
+<li>【已解决】iOS逆向：寻找name是com.apple.ak.auth.xpc的Server端的NSXPCConnection</li>
+<li>【未解决】iOS逆向akd：NSXPCConnection中类__NSXPCInterfaceProxy_AKAnisetteProvisioningAndSigningDeamonInterface的函数fetchAnisetteDataAndProvisionIfNecessary:device:completion:的来源</li>
+<li></li>
+<li>【已解决】iOS逆向：frida调试hook类NSXPCConnection的setExportedObject</li>
+<li>【未解决】iOS逆向Apple账号：从com.apple.ak.anisette.xpc的NSXPCConnection获取到AKAnisetteData的过程</li>
+<li>【未解决】iOS逆向Apple账号：寻找NSXPCConnection解析调用shouldContinueWithAuthenticationResults:error:forContextID:completion:的地方</li>
+<li>【未解决】iOS逆向：NSXPCConnection发送mach消息event的逻辑</li>
+<li>【记录】iOS逆向Apple账号：重新用frida-trace追踪带NSXPCConnection的Apple账号的完整登录过程</li>
+<li>【未解决】iOS逆向Apple账号：NSXPCConnection相关</li>
+<li>【未解决】iOS逆向Apple账号：研究-[NSXPCConnection remoteObjectProxyWithErrorHandler:]返回类型是__NSXPCInterfaceProxy_AKAppleIDAuthenticationDaemonProtocol</li>
+<li>【未解决】iOS逆向Apple账号：NSXPCConnection的AuthKit的akd如何生成AKAnisetteData</li>
+<li>【未解决】iOS逆向Apple账号：-[NSXPCConnection _sendInvocation:orArguments:count:methodSignature:selector:withProxy:]</li>
+<li>【已解决】iOS逆向Apple账号：-[NSXPCConnection remoteObjectProxyWithErrorHandler:]的hook代码断点加不上</li>
+<li>【未解决】iOS逆向Apple账号：-[NSXPCConnection _sendSelector:withProxy:arg1:arg2:]</li>
+<li>【记录】iOS逆向akd：com.apple.ak.auth.xpc的NSXPCConnection相关调用逻辑和内容</li>
+<li>【规避解决】XCode实时调试NSXPCConnection的_XCT_fetchSnapshotForElement:attributes:parameters:reply错误</li>
+<li>【未解决】iOS逆向Apple账号：__88-[NSXPCConnection _sendInvocation:orArguments:count:methodSignature:selector:withProxy:]_block_invoke_3</li>
+<li>【已解决】iOS逆向akd：com.apple.ak.anisette.xpc的NSXPCConnection调用fetchAnisetteDataAndProvisionIfNecessary:device:completion:的过程</li>
+<li>【已解决】iOS逆向Apple账号：用frida打印com.apple.ak.auth.xpc的NSXPCConnection的其他属性值</li>
+<li>【未解决】iOS逆向akd：Preferences通过NSXPCConnection获取AnisetteData后触发了akd中什么函数去处理</li>
+<li></li>
+<li>【未解决】iOS逆向akd：NSXPCConnection的init初始化相关</li>
+<li>【已解决】Xcode中Logos插件hook代码编译报错：Expected unqualified-id</li>
+</ul>
+<hr></hr>
+<h2 id="xpc的nsxpcconnection的基本逻辑"><a name="xpc的nsxpcconnection的基本逻辑" class="plugin-anchor" href="#xpc的nsxpcconnection的基本逻辑"><i class="fa fa-link" aria-hidden="true"></i></a>XPC的NSXPCConnection的基本逻辑</h2>
+<ul>
+<li><strong>Client端</strong>：发送消息给Server端<ul>
+<li>举例<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">NSXPCConnection:</span></span> <span class="token attr-name">0x282adc640</span><span class="token punctuation">&gt;</span></span> connection to service with pid 125 named com.apple.ak.anisette.xpc</code><ul>
+<li>注：Server端的akd的PID=125</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>remoteObjectProxy</code><ul>
+<li>含义：<code>remote Object</code> 的 <code>Proxy</code>== （Server端的）负责处理对应函数的所属的类 的 代理</li>
+<li>举例<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">__NSXPCInterfaceProxy_AKAnisetteProvisioningAndSigningDeamonInterface:</span></span> <span class="token attr-name">0x2838ccb40</span><span class="token punctuation">&gt;</span></span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>remoteObjectInterface</code><ul>
+<li>含义：Server端的所能处理哪些函数</li>
+<li>举例<ul>
+<li>Protocol: <code>AKAnisetteProvisioningAndSigningDeamonInterface</code><ul>
+<li>内部其实继承了2个protocol<ul>
+<li><code>AKAnisetteProvisioningDaemonProtocol</code><ul>
+<li><code>attestationDataForDevice:withRequest:completion:</code></li>
+<li><code>legacyAnisetteDataForDSID:device:completion:</code></li>
+<li><code>fetchAnisetteDataAndProvisionIfNecessary:device:completion:</code></li>
+<li><code>eraseAnisetteForDevice:completion:</code></li>
+<li><code>syncAnisetteWithSIMData:device:completion:</code></li>
+<li><code>provisionAnisetteForDevice:completion:</code></li>
+</ul>
+</li>
+<li><code>AKAppleIDSigningDaemonProtocol</code><ul>
+<li><code>signaturesForData:options:completion:</code></li>
+<li><code>absintheSignatureForData:completion:</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Server端</strong>=<code>Listener端</code>：监听别人发送来的消息<ul>
+<li>举例<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">NSXPCConnection:</span></span> <span class="token attr-name">0x105204680</span><span class="token punctuation">&gt;</span></span> connection from pid 17416 on mach service named com.apple.ak.anisette.xpc</code><ul>
+<li>注：Client端的Preferences的PID=17416</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>exportedObject</code><ul>
+<li>说明：<ul>
+<li>会触发到：<code>-[NSXPCConnection setExportedObject:]</code>，设置了后续将要用的<code>exportedObject</code></li>
+</ul>
+</li>
+<li>举例<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">AKAnisetteProvisioningService:</span></span> <span class="token attr-name">0x107412620</span><span class="token punctuation">&gt;</span></span></code><ul>
+<li>其对应着的，内部conform了2个protocol<ul>
+<li><code>AKAnisetteProvisioningDaemonProtocol</code></li>
+<li><code>AKAppleIDSigningDaemonProtocol</code></li>
+</ul>
+</li>
+<li>所以能支持Client端发来的消息（中的函数，然后去处理）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>exportedInterface</code><ul>
+<li>说明：<ul>
+<li>会触发到：<code>-[NSXPCConnection setExportedInterface:]</code></li>
+</ul>
+</li>
+<li>举例<ul>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">NSXPCInterface:</span></span> <span class="token attr-name">0x107420650</span><span class="token punctuation">&gt;</span></span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2025-01-27 16:16:23
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: XPC进程间通讯">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="example/" class="navigation navigation-next " aria-label="Next page: 举例">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"NSXPCConnection","level":"1.4.1","depth":2,"next":{"title":"举例","level":"1.4.1.1","depth":3,"path":"xpc/nsxpcconnection/example/README.md","ref":"xpc/nsxpcconnection/example/README.md","articles":[]},"previous":{"title":"XPC进程间通讯","level":"1.4","depth":1,"path":"xpc/README.md","ref":"xpc/README.md","articles":[{"title":"NSXPCConnection","level":"1.4.1","depth":2,"path":"xpc/nsxpcconnection/README.md","ref":"xpc/nsxpcconnection/README.md","articles":[{"title":"举例","level":"1.4.1.1","depth":3,"path":"xpc/nsxpcconnection/example/README.md","ref":"xpc/nsxpcconnection/example/README.md","articles":[]}]}]},"articles":[{"title":"举例","level":"1.4.1.1","depth":3,"path":"xpc/nsxpcconnection/example/README.md","ref":"xpc/nsxpcconnection/example/README.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_mach_xpc/pdf/ios_re_mach_xpc.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_mach_xpc/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_mach_xpc","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向：Mach消息和XPC进程通信","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理iOS逆向涉及到的，Mach消息和XPC进程间通信相关内容。便于搞懂，进程间的消息发送的相关逻辑。"},"file":{"path":"xpc/nsxpcconnection/README.md","mtime":"2025-01-27T08:16:23.441Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-01-27T08:38:13.060Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
