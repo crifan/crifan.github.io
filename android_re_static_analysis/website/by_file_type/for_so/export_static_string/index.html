@@ -1803,11 +1803,15 @@ objdump <span class="token parameter variable">-R</span> libRehADGd_arm64v8a.so 
 </code></pre>
 <h2 id="shell脚本自动执行：单个elf的so文件"><a name="shell脚本自动执行：单个elf的so文件" class="plugin-anchor" href="#shell脚本自动执行：单个elf的so文件"><i class="fa fa-link" aria-hidden="true"></i></a>shell脚本自动执行：单个ELF的so文件</h2>
 <p>用脚本批量处理</p>
-<p><code>exportElf_StrResInfo.sh</code></p>
+<ul>
+<li><code>exportElf_StrResInfo.sh</code></li>
+</ul>
 <pre class="language-"><code class="lang-sh"><span class="token shebang important">#!/bin/bash</span>
 <span class="token comment"># Function: Export/Extract single ELF file string and resources related info</span>
 <span class="token comment"># Author: Crifan Li</span>
-<span class="token comment"># Update: 20240820</span>
+<span class="token comment"># Usage:</span>
+<span class="token comment">#   exportElf_StrResInfo.sh &lt;inputSoLibFile.so&gt; [&lt;outputFolder&gt;]</span>
+<span class="token comment"># Update: 20240824</span>
 
 <span class="token comment"># SEPERATOR="--------------------"</span>
 <span class="token assign-left variable">SEPERATOR</span><span class="token operator">=</span><span class="token string">"===================="</span>
@@ -1816,28 +1820,76 @@ objdump <span class="token parameter variable">-R</span> libRehADGd_arm64v8a.so 
   <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">${SEPERATOR}</span> <span class="token variable">$1</span> <span class="token variable">${SEPERATOR}</span>"</span>
 <span class="token punctuation">}</span>
 
+<span class="token keyword">function</span> <span class="token function-name function">extractInputFolder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token assign-left variable">curInputFile</span><span class="token operator">=</span><span class="token variable">$1</span>
+  <span class="token comment"># echo "curInputFile=${curInputFile}"</span>
+  <span class="token assign-left variable">retInputFolder</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> <span class="token string">"<span class="token variable">${curInputFile}</span>"</span><span class="token variable">)</span></span>"</span>
+  <span class="token comment"># echo "retInputFolder=${retInputFolder}"</span>
+  <span class="token comment"># return retInputFolder</span>
+  <span class="token comment"># return $retInputFolder</span>
+  <span class="token comment"># echo ${retInputFolder}</span>
+  <span class="token builtin class-name">echo</span> <span class="token variable">$retInputFolder</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">extractFilenameNoSuffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token assign-left variable">curInputFile</span><span class="token operator">=</span><span class="token variable">$1</span>
+  <span class="token comment"># echo "curInputFile=${curInputFile}"</span>
+  <span class="token assign-left variable">filenameWithSuffix</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> <span class="token string">"<span class="token variable">${inputFile}</span>"</span><span class="token variable">)</span></span>"</span>
+  <span class="token comment"># echo "filenameWithSuffix=${filenameWithSuffix}"</span>
+  <span class="token assign-left variable">filenameNoSuffix</span><span class="token operator">=</span><span class="token variable">${filenameWithSuffix<span class="token operator">%</span>.*}</span>
+  <span class="token comment"># echo "filenameNoSuffix=${filenameNoSuffix}"</span>
+  <span class="token builtin class-name">echo</span> <span class="token variable">${filenameNoSuffix}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">initOutputFolerFromInputFolder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token assign-left variable">inputFolder</span><span class="token operator">=</span><span class="token variable">$1</span>
+  <span class="token comment"># echo "inputFolder=${inputFolder}"</span>
+  <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">$2</span>
+  <span class="token comment"># echo "outputFoler=${outputFoler}"</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$outputFoler</span>"</span> <span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$inputFolder</span>"</span> <span class="token punctuation">]</span>
+    <span class="token keyword">then</span>
+      <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token string">"."</span>
+    <span class="token keyword">else</span>
+      <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">${inputFolder}</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># echo "outputFoler=${outputFoler}"</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${outputFoler}</span>
+  <span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${outputFoler}</span>
+  <span class="token keyword">fi</span>
+<span class="token punctuation">}</span>
+
 <span class="token assign-left variable">inputFile</span><span class="token operator">=</span><span class="token variable">$1</span>
 <span class="token builtin class-name">echo</span> <span class="token string">"inputFile=<span class="token variable">${inputFile}</span>"</span>
 <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">$2</span>
 <span class="token builtin class-name">echo</span> <span class="token string">"outputFoler=<span class="token variable">${outputFoler}</span>"</span>
 
-<span class="token assign-left variable">inputFolder</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> <span class="token string">"<span class="token variable">${inputFile}</span>"</span><span class="token variable">)</span></span>"</span>
+<span class="token comment"># inputFolder="$(dirname "${inputFile}")"</span>
+<span class="token assign-left variable">inputFolder</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>extractInputFolder $inputFile<span class="token variable">)</span></span>
 <span class="token builtin class-name">echo</span> <span class="token string">"inputFolder=<span class="token variable">${inputFolder}</span>"</span>
-<span class="token assign-left variable">elfFileWithSuffix</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> <span class="token string">"<span class="token variable">${inputFile}</span>"</span><span class="token variable">)</span></span>"</span>
-<span class="token builtin class-name">echo</span> <span class="token string">"elfFileWithSuffix=<span class="token variable">${elfFileWithSuffix}</span>"</span>
-<span class="token assign-left variable">elfFile</span><span class="token operator">=</span><span class="token variable">${elfFileWithSuffix<span class="token operator">%</span>.*}</span>
+
+<span class="token comment"># elfFileWithSuffix="$(basename "${inputFile}")"</span>
+<span class="token comment"># echo "elfFileWithSuffix=${elfFileWithSuffix}"</span>
+<span class="token comment"># elfFile=${elfFileWithSuffix%.*}</span>
+<span class="token comment"># echo "elfFile=${elfFile}"</span>
+<span class="token assign-left variable">elfFile</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>extractFilenameNoSuffix $inputFile<span class="token variable">)</span></span>
 <span class="token builtin class-name">echo</span> <span class="token string">"elfFile=<span class="token variable">${elfFile}</span>"</span>
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$outputFoler</span>"</span> <span class="token punctuation">]</span>
-<span class="token keyword">then</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$inputFolder</span>"</span> <span class="token punctuation">]</span>
-  <span class="token keyword">then</span>
-    <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token string">"."</span>
-  <span class="token keyword">else</span>
-    <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">${inputFolder}</span>
-  <span class="token keyword">fi</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">"outputFoler=<span class="token variable">${outputFoler}</span>"</span>
-<span class="token keyword">fi</span>
+<span class="token comment"># if [ -z "$outputFoler" ]</span>
+<span class="token comment"># then</span>
+<span class="token comment">#   if [ -z "$inputFolder" ]</span>
+<span class="token comment">#   then</span>
+<span class="token comment">#     outputFoler="."</span>
+<span class="token comment">#   else</span>
+<span class="token comment">#     outputFoler=${inputFolder}</span>
+<span class="token comment">#   fi</span>
+<span class="token comment">#   echo "outputFoler=${outputFoler}"</span>
+<span class="token comment"># fi</span>
+
+<span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>initOutputFolerFromInputFolder $inputFolder $outputFoler<span class="token variable">)</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">"outputFoler=<span class="token variable">${outputFoler}</span>"</span>
 
 log <span class="token string">"Exporting info use rabin2"</span>
 rabin2 <span class="token parameter variable">-I</span> <span class="token variable">${inputFile}</span> <span class="token operator">&gt;</span> <span class="token variable">${outputFoler}</span>/<span class="token variable">${elfFile}</span>_rabin2_I_identification.coffee
@@ -1885,13 +1937,21 @@ log <span class="token string">"Exporting info Done"</span>
 
 exportElf_StrResInfo.sh inputFolder/xxx.so outputFolder
 </code></pre>
+<p>提示：</p>
+<ul>
+<li>运行前，记得加上可执行权限：<code>chmod +x exportElf_StrResInfo.sh</code></li>
+</ul>
 <h2 id="shell脚本自动执行：某目录下所有的elf的so文件"><a name="shell脚本自动执行：某目录下所有的elf的so文件" class="plugin-anchor" href="#shell脚本自动执行：某目录下所有的elf的so文件"><i class="fa fa-link" aria-hidden="true"></i></a>shell脚本自动执行：某目录下所有的ELF的so文件</h2>
 <p>脚本：</p>
-<p><code>exportSoSymbol.sh</code></p>
+<ul>
+<li><code>batchExportElfInfo.sh</code></li>
+</ul>
 <pre class="language-"><code class="lang-sh"><span class="token shebang important">#!/bin/bash</span>
 <span class="token comment"># Function: Batch export so file symbols/functions</span>
 <span class="token comment"># Author: Crifan Li</span>
-<span class="token comment"># Update: 20240817</span>
+<span class="token comment"># Usage:</span>
+<span class="token comment">#   batchExportElfInfo.sh &lt;inputFolder_AllSoLibs&gt; &lt;outputFolder&gt;</span>
+<span class="token comment"># Update: 20240824</span>
 
 <span class="token comment"># SEPERATOR="--------------------"</span>
 <span class="token assign-left variable">SEPERATOR</span><span class="token operator">=</span><span class="token string">"===================="</span>
@@ -1900,36 +1960,63 @@ exportElf_StrResInfo.sh inputFolder/xxx.so outputFolder
   <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">${SEPERATOR}</span> <span class="token variable">$1</span> <span class="token variable">${SEPERATOR}</span>"</span>
 <span class="token punctuation">}</span>
 
-<span class="token assign-left variable">INPUT_SO_FOLDER</span><span class="token operator">=</span><span class="token string">"/xxx/resources/lib/arm64-v8a"</span>
-log <span class="token string">"Input folder: <span class="token variable">${INPUT_SO_FOLDER}</span>"</span>
+<span class="token keyword">function</span> <span class="token function-name function">initOutputFolerFromInputFolder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token assign-left variable">inputFolder</span><span class="token operator">=</span><span class="token variable">$1</span>
+  <span class="token comment"># echo "inputFolder=${inputFolder}"</span>
+  <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">$2</span>
+  <span class="token comment"># echo "outputFoler=${outputFoler}"</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$outputFoler</span>"</span> <span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$inputFolder</span>"</span> <span class="token punctuation">]</span>
+    <span class="token keyword">then</span>
+      <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token string">"."</span>
+    <span class="token keyword">else</span>
+      <span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">${inputFolder}</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># echo "outputFoler=${outputFoler}"</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${outputFoler}</span>
+  <span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${outputFoler}</span>
+  <span class="token keyword">fi</span>
+<span class="token punctuation">}</span>
 
-<span class="token assign-left variable">OUTPUT_FOLDER</span><span class="token operator">=</span><span class="token string">"douyinSo_exportedSymbols"</span>
+<span class="token assign-left variable">inputFolder</span><span class="token operator">=</span><span class="token variable">$1</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"inputFolder=<span class="token variable">${inputFolder}</span>"</span>
+<span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable">$2</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"outputFoler=<span class="token variable">${outputFoler}</span>"</span>
 
-<span class="token assign-left variable">soFileList</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ls</span> $INPUT_SO_FOLDER<span class="token variable">)</span></span>
-<span class="token comment"># soFileList=$(ls ${INPUT_SO_FOLDER})</span>
-<span class="token comment"># soFileList=`ls $INPUT_SO_FOLDER`</span>
-<span class="token comment"># soFileList=`ls ${INPUT_SO_FOLDER}`</span>
+<span class="token assign-left variable">outputFoler</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>initOutputFolerFromInputFolder $inputFolder $outputFoler<span class="token variable">)</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">"outputFoler=<span class="token variable">${outputFoler}</span>"</span>
+
+<span class="token assign-left variable">soFileList</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ls</span> $inputFolder<span class="token variable">)</span></span>
+<span class="token comment"># soFileList=$(ls ${inputFolder})</span>
+<span class="token comment"># soFileList=`ls $inputFolder`</span>
+<span class="token comment"># soFileList=`ls ${inputFolder}`</span>
 <span class="token comment"># echo "soFileList=${soFileList}"</span>
 <span class="token keyword">for</span> <span class="token for-or-select variable">eachSoFilename</span> <span class="token keyword">in</span> <span class="token variable">$soFileList</span>
 <span class="token keyword">do</span>
   <span class="token comment"># eachFilename=$eachSoFilename[0,-3]</span>
-  <span class="token assign-left variable">eachFilename</span><span class="token operator">=</span><span class="token variable">${eachSoFilename<span class="token operator">%</span>???}</span>
-  <span class="token assign-left variable">outputFilename</span><span class="token operator">=</span><span class="token string">"<span class="token variable">${eachFilename}</span>_rabin2_E_exports.coffee"</span>
-  <span class="token assign-left variable">inputFullFile</span><span class="token operator">=</span><span class="token variable">$INPUT_SO_FOLDER</span>/<span class="token variable">$eachSoFilename</span>
-  <span class="token assign-left variable">outputFullFile</span><span class="token operator">=</span><span class="token variable">$OUTPUT_FOLDER</span>/<span class="token variable">$outputFilename</span>
+  <span class="token comment"># eachFilename=${eachSoFilename%???}</span>
+  <span class="token assign-left variable">eachFilename</span><span class="token operator">=</span><span class="token variable">${eachSoFilename<span class="token operator">%</span>.*}</span>
+  <span class="token comment"># echo "eachFilename=${eachFilename}"</span>
+  <span class="token comment"># outputFilename="${eachFilename}_rabin2_E_exports.coffee"</span>
+  <span class="token assign-left variable">outputFilename</span><span class="token operator">=</span><span class="token string">"<span class="token variable">${eachFilename}</span>_rabin2_l_libraries.coffee"</span>
+  <span class="token assign-left variable">inputFullFile</span><span class="token operator">=</span><span class="token variable">$inputFolder</span>/<span class="token variable">$eachSoFilename</span>
+  <span class="token assign-left variable">outputFullFile</span><span class="token operator">=</span><span class="token variable">$outputFoler</span>/<span class="token variable">$outputFilename</span>
   <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$eachSoFilename</span> =&gt; <span class="token variable">$outputFullFile</span>"</span>
-  rabin2 <span class="token parameter variable">-E</span> <span class="token variable">$inputFullFile</span> <span class="token operator">&gt;</span> <span class="token variable">$outputFullFile</span>
+  <span class="token comment"># rabin2 -E $inputFullFile &gt; $outputFullFile</span>
+  rabin2 <span class="token parameter variable">-l</span> <span class="token variable">$inputFullFile</span> <span class="token operator">&gt;</span> <span class="token variable">$outputFullFile</span>
 <span class="token keyword">done</span>
 </code></pre>
-<p>使用：</p>
+<p>调用举例：</p>
+<pre class="language-"><code class="lang-bash">batchExportElfInfo.sh inputFoler_allSoLibs oututFoler_exportedAllSoLibsInfo
+</code></pre>
+<p>提示：</p>
 <ul>
-<li>把<code>INPUT_SO_FOLDER</code>改为你的目录</li>
-<li>把上述内容保存到<code>exportSoSymbol.sh</code></li>
-<li>加上可执行权限：<code>chmod +x exportSoSymbol.sh</code></li>
-<li>运行脚本：<code>exportSoSymbol.sh</code></li>
+<li>运行前，记得加上可执行权限：<code>chmod +x batchExportElfInfo.sh</code></li>
 </ul>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2024-08-24 10:56:07
+2025-02-16 14:44:44
 </span></footer></body></html>
                                 
                                 </section>
@@ -1973,7 +2060,7 @@ log <span class="token string">"Input folder: <span class="token variable">${INP
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"导出静态字符串资源信息","level":"1.4.4.2","depth":3,"next":{"title":"readelf","level":"1.4.4.2.1","depth":4,"path":"by_file_type/for_so/export_static_string/readelf.md","ref":"by_file_type/for_so/export_static_string/readelf.md","articles":[]},"previous":{"title":"ELF文件格式","level":"1.4.4.1","depth":3,"path":"by_file_type/for_so/elf_format/README.md","ref":"by_file_type/for_so/elf_format/README.md","articles":[]},"articles":[{"title":"readelf","level":"1.4.4.2.1","depth":4,"path":"by_file_type/for_so/export_static_string/readelf.md","ref":"by_file_type/for_so/export_static_string/readelf.md","articles":[]},{"title":"objdump","level":"1.4.4.2.2","depth":4,"path":"by_file_type/for_so/export_static_string/objdump.md","ref":"by_file_type/for_so/export_static_string/objdump.md","articles":[]},{"title":"rabin2","level":"1.4.4.2.3","depth":4,"path":"by_file_type/for_so/export_static_string/rabin2.md","ref":"by_file_type/for_so/export_static_string/rabin2.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_static_analysis/pdf/android_re_static_analysis.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_static_analysis/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：静态分析","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍安卓逆向之静态分析。包括先是概览；然后是相关子项，包括apk文件，以及其中的AndroidMenifest.xml，以及反编译，包括反编译的典型流程，以及如何从apk破解出java源码；常见反编译工具，包括jad、JEB、GDA等；以及常见的二进制编辑器，比如010editor、EverEdit等；接着是综合类工具，包括AndroidKiller、Android-Crack-Tool For Mac、ByteCode Viewer、Android Decompiler、decompile-apk、Android逆向助手、Androguard等；接着是按层级去介绍安卓静态分析所涉及的内容；以及再按文件格式去分相关内容；包括针对apk的，查看apk信息的aapt、APK Analyzer、ClassyShark等，apk解包的apktool，apk转java的jadx、JEB、GDA等；针对dex的，如何砸壳导出dex文件，包括判断哪家加固方案，砸壳工具FDex2以及如何用FDex2砸壳导出dex、DumpDex、DexExtractor、drizzleDumper、InDroid、DexHunter、FART等；接着是反编译dex，包括dex转jar、dex转smali、dex转java等。其中dex转jar包括dex2jar以及用法、Enjarify、Dedexer，dex转smali包括baksmali、dex转java包括jadx、GDA；针对jar的，jar转java，包括各种java反编译器的对比，以及常用的java反编译器，包括Procyon/Luyten、CFR、JD-GUI、Krakatau、Fernflower、Dare、JAD等；针对so的，ELF文件格式，以及如何从ELF的so导出静态资源供分析，常用工具有readelf、objdump、razbin2；以及如何反编译查看代码逻辑，常用工具有IDA、Hopper、radare2、Ghidra等；以及涉及到的子领域，包括反代码混淆，以及相关系列的子教程。"},"file":{"path":"by_file_type/for_so/export_static_string/README.md","mtime":"2024-08-24T02:56:07.957Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-02-14T09:56:23.306Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"导出静态字符串资源信息","level":"1.4.4.2","depth":3,"next":{"title":"readelf","level":"1.4.4.2.1","depth":4,"path":"by_file_type/for_so/export_static_string/readelf.md","ref":"by_file_type/for_so/export_static_string/readelf.md","articles":[]},"previous":{"title":"ELF文件格式","level":"1.4.4.1","depth":3,"path":"by_file_type/for_so/elf_format/README.md","ref":"by_file_type/for_so/elf_format/README.md","articles":[]},"articles":[{"title":"readelf","level":"1.4.4.2.1","depth":4,"path":"by_file_type/for_so/export_static_string/readelf.md","ref":"by_file_type/for_so/export_static_string/readelf.md","articles":[]},{"title":"objdump","level":"1.4.4.2.2","depth":4,"path":"by_file_type/for_so/export_static_string/objdump.md","ref":"by_file_type/for_so/export_static_string/objdump.md","articles":[]},{"title":"rabin2","level":"1.4.4.2.3","depth":4,"path":"by_file_type/for_so/export_static_string/rabin2.md","ref":"by_file_type/for_so/export_static_string/rabin2.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/android_re_static_analysis/pdf/android_re_static_analysis.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/android_re_static_analysis/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"android_re_static_analysis","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Android逆向：静态分析","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍安卓逆向之静态分析。包括先是概览；然后是相关子项，包括apk文件，以及其中的AndroidMenifest.xml，以及反编译，包括反编译的典型流程，以及如何从apk破解出java源码；常见反编译工具，包括jad、JEB、GDA等；以及常见的二进制编辑器，比如010editor、EverEdit等；接着是综合类工具，包括AndroidKiller、Android-Crack-Tool For Mac、ByteCode Viewer、Android Decompiler、decompile-apk、Android逆向助手、Androguard等；接着是按层级去介绍安卓静态分析所涉及的内容；以及再按文件格式去分相关内容；包括针对apk的，查看apk信息的aapt、APK Analyzer、ClassyShark等，apk解包的apktool，apk转java的jadx、JEB、GDA等；针对dex的，如何砸壳导出dex文件，包括判断哪家加固方案，砸壳工具FDex2以及如何用FDex2砸壳导出dex、DumpDex、DexExtractor、drizzleDumper、InDroid、DexHunter、FART等；接着是反编译dex，包括dex转jar、dex转smali、dex转java等。其中dex转jar包括dex2jar以及用法、Enjarify、Dedexer，dex转smali包括baksmali、dex转java包括jadx、GDA；针对jar的，jar转java，包括各种java反编译器的对比，以及常用的java反编译器，包括Procyon/Luyten、CFR、JD-GUI、Krakatau、Fernflower、Dare、JAD等；针对so的，ELF文件格式，以及如何从ELF的so导出静态资源供分析，常用工具有readelf、objdump、razbin2；以及如何反编译查看代码逻辑，常用工具有IDA、Hopper、radare2、Ghidra等；以及涉及到的子领域，包括反代码混淆，以及相关系列的子教程。"},"file":{"path":"by_file_type/for_so/export_static_string/README.md","mtime":"2025-02-16T06:44:44.624Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-02-16T06:46:04.676Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
