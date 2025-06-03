@@ -6,7 +6,7 @@
         <title>ObjC · 逆向利器：IDA</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -492,12 +492,27 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.5" data-path="../ida_features/plugins.html">
+        <li class="chapter " data-level="1.5.5" data-path="../ida_features/patch_program.html">
+            
+                <a href="../ida_features/patch_program.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    打补丁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ida_features/plugins.html">
             
                 <a href="../ida_features/plugins.html">
             
                     
-                        <b>1.5.5.</b>
+                        <b>1.5.6.</b>
                     
                     插件
             
@@ -777,13 +792,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="objc"><a name="objc" class="plugin-anchor" href="#objc"><i class="fa fa-link" aria-hidden="true"></i></a>ObjC</h1>
-<hr>
+<hr></hr>
 <p>TODO：</p>
 <ul>
 <li>【已解决】研究抖音设备注册逻辑：___lldb_unnamed_symbol580715$$AwemeCore</li>
 <li>【已解决】iOS逆向心得：如何从对x8的adrp和ldr计算出对应的qword字符串值</li>
 </ul>
-<hr>
+<hr></hr>
 <h2 id="背景知识"><a name="背景知识" class="plugin-anchor" href="#背景知识"><i class="fa fa-link" aria-hidden="true"></i></a>背景知识</h2>
 <ul>
 <li><code>SectionName</code>和描述</li>
@@ -799,10 +814,10 @@
 <li><code>__objc_const</code>    存放类的元数据，包括：method list、variable list、property list、class info</li>
 </ul>
 <p>-&gt;MachOView可以查看二进制的这些段的信息：</p>
-<p><img src="../assets/img/machoview_section_objc_selrefs.jpg" alt="machoview_section_objc_selrefs"></p>
+<p><img src="../assets/img/machoview_section_objc_selrefs.jpg" alt="machoview_section_objc_selrefs"></img></p>
 <h2 id="数据定义含义"><a name="数据定义含义" class="plugin-anchor" href="#数据定义含义"><i class="fa fa-link" aria-hidden="true"></i></a>数据定义含义</h2>
 <h3 id="dobjcselrefs"><a name="dobjcselrefs" class="plugin-anchor" href="#dobjcselrefs"><i class="fa fa-link" aria-hidden="true"></i></a>_D_objc_selrefs</h3>
-<p><img src="../assets/img/ida_D_objc_selrefs.png" alt="ida_D_objc_selrefs"></p>
+<p><img src="../assets/img/ida_D_objc_selrefs.png" alt="ida_D_objc_selrefs"></img></p>
 <pre class="language-"><code class="lang-bash">_D_objc_selrefs:00000000038AF870 qword_38AF870   % <span class="token number">8</span>
 </code></pre>
 <p>中的含义是：</p>
@@ -826,7 +841,7 @@
 </ul>
 <p>IDA分析抖音AwemeCore时，发现：</p>
 <p>伪代码：</p>
-<p><img src="../assets/img/awemecore_ida_f5_code_qword.png" alt="awemecore_ida_f5_code_qword">)</p>
+<p><img src="../assets/img/awemecore_ida_f5_code_qword.png" alt="awemecore_ida_f5_code_qword"></img>)</p>
 <pre class="language-"><code class="lang-c">bool __cdecl <span class="token operator">+</span><span class="token punctuation">[</span>UIDevice btd_isJailBroken<span class="token punctuation">]</span><span class="token punctuation">(</span>UIDevice_meta <span class="token operator">*</span>self<span class="token punctuation">,</span> SEL a2<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>v2<span class="token punctuation">;</span> <span class="token comment">// x19</span>
@@ -867,7 +882,7 @@
 <pre class="language-"><code class="lang-asm"><span class="token label function">_D_objc_selrefs:</span><span class="token number">0000000003893908</span> qword_3893908   <span class="token operator">%</span> <span class="token number">8</span>                     <span class="token comment">; DATA XREF: +[APRemoteLogger load]+23C↓o</span>
 <span class="token label function">_D_objc_selrefs:</span><span class="token number">0000000003893908</span>                                         <span class="token comment">; +[APRemoteLogger load]+240↓r ...</span>
 </code></pre>
-<p><img src="../assets/img/ida_qword_definition.png" alt="ida_qword_definition"></p>
+<p><img src="../assets/img/ida_qword_definition.png" alt="ida_qword_definition"></img></p>
 <p>参考资料地址：</p>
 <ul>
 <li><code>dword</code><ul>
@@ -920,9 +935,9 @@ qword_3896270
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/1gx 0x0000000108362270
 0x108362270: 0x0000000105859bc6
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">(</span>char*<span class="token punctuation">)</span>0x0000000105859bc6
-<span class="token string">&quot;onTheFlyParameter&quot;</span>
+<span class="token string">"onTheFlyParameter"</span>
 —》
-qword_3896270 <span class="token operator">=</span> <span class="token string">&quot;onTheFlyParameter&quot;</span>
+qword_3896270 <span class="token operator">=</span> <span class="token string">"onTheFlyParameter"</span>
 
 
 qword_38B2148
@@ -931,8 +946,8 @@ qword_38B2148
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/1gx 0x000000010837e148
 0x10837e148: 0x00000001c5619497
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">(</span>char*<span class="token punctuation">)</span>0x00000001c5619497
-<span class="token string">&quot;dictionaryWithDictionary:&quot;</span>
--<span class="token operator">&gt;</span> qword_38B2148 <span class="token operator">=</span> <span class="token string">&quot;dictionaryWithDictionary:&quot;</span>
+<span class="token string">"dictionaryWithDictionary:"</span>
+-<span class="token operator">&gt;</span> qword_38B2148 <span class="token operator">=</span> <span class="token string">"dictionaryWithDictionary:"</span>
 
 
 qword_3925208
@@ -941,8 +956,8 @@ qword_3925208
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/1gx 0x00000001083f1208
 0x1083f1208: 0x000000010957bb48
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">(</span>char*<span class="token punctuation">)</span>0x000000010957bb48
-<span class="token string">&quot;configParams&quot;</span>
--<span class="token operator">&gt;</span>qword_3925208 <span class="token operator">=</span> <span class="token string">&quot;configParams&quot;</span>
+<span class="token string">"configParams"</span>
+-<span class="token operator">&gt;</span>qword_3925208 <span class="token operator">=</span> <span class="token string">"configParams"</span>
 
 
 qword_38A1D98
@@ -951,8 +966,8 @@ qword_38A1D98
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/1gx 0x000000010836dd98
 0x10836dd98: 0x0000000105892952
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">(</span>char*<span class="token punctuation">)</span>0x0000000105892952
-<span class="token string">&quot;ttinstall_stringValueForKey:&quot;</span>
--<span class="token operator">&gt;</span>qword_38A1D98 <span class="token operator">=</span> <span class="token string">&quot;ttinstall_stringValueForKey:&quot;</span>
+<span class="token string">"ttinstall_stringValueForKey:"</span>
+-<span class="token operator">&gt;</span>qword_38A1D98 <span class="token operator">=</span> <span class="token string">"ttinstall_stringValueForKey:"</span>
 </code></pre>
 <p>后续还遇到其他类似例子：</p>
 <ul>
@@ -966,7 +981,7 @@ qword_38A1D98
 <pre class="language-"><code class="lang-asm"><span class="token label function">_D_objc_selrefs:</span>0000000003899F40 reportCommonParams <span class="token operator">%</span> <span class="token number">8</span>                  <span class="token comment">; DATA XREF: sub_69D6448+80↓o</span>
 <span class="token label function">_D_objc_selrefs:</span>0000000003899F40                                         <span class="token comment">; sub_69D6448+84↓r ...</span>
 </code></pre>
-<p><img src="../assets/img/ida_qword_3899F40.png" alt="ida_qword_3899F40"></p>
+<p><img src="../assets/img/ida_qword_3899F40.png" alt="ida_qword_3899F40"></img></p>
 <p>即是<code>objc_selrefs</code>的类型，即是<code>ObjC</code>的函数的自我引用</p>
 <p>-》则可以推断出就是：某个类的某个函数名</p>
 <p>所以也就是：字符串类型的值</p>
@@ -980,7 +995,7 @@ qword_38A1D98
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> x/1gx 0x000000010704df40
 0x10704df40: 0x00000001045537b4
 <span class="token punctuation">(</span>lldb<span class="token punctuation">)</span> po <span class="token punctuation">(</span>char*<span class="token punctuation">)</span>0x00000001045537b4
-<span class="token string">&quot;reportCommonParams&quot;</span>
+<span class="token string">"reportCommonParams"</span>
 </code></pre>
 <p>然后再去优化伪代码，改为：</p>
 <pre class="language-"><code class="lang-c">    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">jmp_objc_msgSend_D523EEC</span><span class="token punctuation">(</span>v0<span class="token punctuation">,</span> respondsToSelector_1<span class="token punctuation">,</span> reportCommonParams<span class="token punctuation">)</span> <span class="token punctuation">)</span>
@@ -1031,7 +1046,7 @@ qword_38A1D98
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ObjC","level":"1.6.2","depth":2,"next":{"title":"IDA动态调试","level":"1.7","depth":1,"path":"ida_dynamic_debug/README.md","ref":"ida_dynamic_debug/README.md","articles":[{"title":"iOS","level":"1.7.1","depth":2,"path":"ida_dynamic_debug/ios/README.md","ref":"ida_dynamic_debug/ios/README.md","articles":[{"title":"搭建环境","level":"1.7.1.1","depth":3,"path":"ida_dynamic_debug/ios/init_dev_env.md","ref":"ida_dynamic_debug/ios/init_dev_env.md","articles":[]},{"title":"开始调试","level":"1.7.1.2","depth":3,"path":"ida_dynamic_debug/ios/begin_debug.md","ref":"ida_dynamic_debug/ios/begin_debug.md","articles":[]},{"title":"调试界面","level":"1.7.1.3","depth":3,"path":"ida_dynamic_debug/ios/debug_ui.md","ref":"ida_dynamic_debug/ios/debug_ui.md","articles":[]},{"title":"常见问题","level":"1.7.1.4","depth":3,"path":"ida_dynamic_debug/ios/issues.md","ref":"ida_dynamic_debug/ios/issues.md","articles":[]}]}]},"previous":{"title":"打开和关闭","level":"1.6.1","depth":2,"path":"ida_usage_note/open_close.md","ref":"ida_usage_note/open_close.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_tool_ida/pdf/reverse_tool_ida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_tool_ida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向利器：IDA","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍逆向领域中功能强大且好用的利器：IDA。先介绍IDA概览；再介绍IDA的快速上手过程；再介绍IDA中通用的基础知识，包括版本选择、界面相关比如布局等、常见命名和含义、自动分析过程、搜索、快捷键；以及介绍IDA各种功能，包括查看代码，比如汇编代码、F5伪代码、函数调用、结构体的类的定义、字符串、函数列表插件等等；再去记录IDA的使用心得；最后整理一些IDA相关的文档和资料，供参考。"},"file":{"path":"ida_usage_note/objc.md","mtime":"2023-07-14T15:04:13.063Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-10-03T02:54:40.735Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ObjC","level":"1.6.2","depth":2,"next":{"title":"IDA动态调试","level":"1.7","depth":1,"path":"ida_dynamic_debug/README.md","ref":"ida_dynamic_debug/README.md","articles":[{"title":"iOS","level":"1.7.1","depth":2,"path":"ida_dynamic_debug/ios/README.md","ref":"ida_dynamic_debug/ios/README.md","articles":[{"title":"搭建环境","level":"1.7.1.1","depth":3,"path":"ida_dynamic_debug/ios/init_dev_env.md","ref":"ida_dynamic_debug/ios/init_dev_env.md","articles":[]},{"title":"开始调试","level":"1.7.1.2","depth":3,"path":"ida_dynamic_debug/ios/begin_debug.md","ref":"ida_dynamic_debug/ios/begin_debug.md","articles":[]},{"title":"调试界面","level":"1.7.1.3","depth":3,"path":"ida_dynamic_debug/ios/debug_ui.md","ref":"ida_dynamic_debug/ios/debug_ui.md","articles":[]},{"title":"常见问题","level":"1.7.1.4","depth":3,"path":"ida_dynamic_debug/ios/issues.md","ref":"ida_dynamic_debug/ios/issues.md","articles":[]}]}]},"previous":{"title":"打开和关闭","level":"1.6.1","depth":2,"path":"ida_usage_note/open_close.md","ref":"ida_usage_note/open_close.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_tool_ida/pdf/reverse_tool_ida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_tool_ida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_tool_ida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向利器：IDA","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍逆向领域中功能强大且好用的利器：IDA。先介绍IDA概览；再介绍IDA的快速上手过程；再介绍IDA中通用的基础知识，包括版本选择、界面相关比如布局等、常见命名和含义、自动分析过程、搜索、快捷键；以及介绍IDA各种功能，包括查看代码，比如汇编代码、F5伪代码、函数调用、结构体的类的定义、字符串、函数列表插件等等；再去记录IDA的使用心得；最后整理一些IDA相关的文档和资料，供参考。"},"file":{"path":"ida_usage_note/objc.md","mtime":"2023-07-14T15:04:13.063Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-06-03T13:56:54.298Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
