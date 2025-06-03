@@ -1,0 +1,941 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>修改并替换libsscronet.so库文件 · 移动端逆向：绕过抓包限制</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../ios/" />
+    
+    
+    <link rel="prev" href="../frida_hook/" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"mobile_re_capture_bypass_limit","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../../overview/">
+            
+                <a href="../../../../overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    绕过抓包限制概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../../bypass_pinning/">
+            
+                <a href="../../../../bypass_pinning/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    绕过证书绑定
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../../bypass_pinning/android/">
+            
+                <a href="../../../../bypass_pinning/android/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../../../bypass_pinning/android/trust_cert/">
+            
+                <a href="../../../../bypass_pinning/android/trust_cert/">
+            
+                    
+                        <b>1.3.1.1.</b>
+                    
+                    信任证书问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../../../../bypass_pinning/android/xposed_plugin/">
+            
+                <a href="../../../../bypass_pinning/android/xposed_plugin/">
+            
+                    
+                        <b>1.3.1.2.</b>
+                    
+                    Xposed插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.2.1" data-path="../../../../bypass_pinning/android/xposed_plugin/justtrustme.html">
+            
+                <a href="../../../../bypass_pinning/android/xposed_plugin/justtrustme.html">
+            
+                    
+                        <b>1.3.1.2.1.</b>
+                    
+                    JustTrustMe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2.2" data-path="../../../../bypass_pinning/android/xposed_plugin/trustmealready.html">
+            
+                <a href="../../../../bypass_pinning/android/xposed_plugin/trustmealready.html">
+            
+                    
+                        <b>1.3.1.2.2.</b>
+                    
+                    TrustMeAlready
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../../bypass_pinning/ios/">
+            
+                <a href="../../../../bypass_pinning/ios/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    iOS
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../../../bypass_pinning/plugin/">
+            
+                <a href="../../../../bypass_pinning/plugin/">
+            
+                    
+                        <b>1.3.2.1.</b>
+                    
+                    插件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1.1" data-path="../../../../bypass_pinning/plugin/ssl_kill_switch.html">
+            
+                <a href="../../../../bypass_pinning/plugin/ssl_kill_switch.html">
+            
+                    
+                        <b>1.3.2.1.1.</b>
+                    
+                    SSL Kill Switch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.1.2" data-path="../../../../bypass_pinning/plugin/sslbypass.html">
+            
+                <a href="../../../../bypass_pinning/plugin/sslbypass.html">
+            
+                    
+                        <b>1.3.2.1.2.</b>
+                    
+                    SSLBypass
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    其他特殊处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    抖音
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    Android版
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1.1" data-path="../frida_hook/">
+            
+                <a href="../frida_hook/">
+            
+                    
+                        <b>1.4.1.1.1.</b>
+                    
+                    Frida去hook代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.1.1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.4.1.1.2.</b>
+                    
+                    修改并替换libsscronet.so库文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../../ios/">
+            
+                <a href="../../ios/">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    iOS版
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../../appendix/">
+            
+                <a href="../../../../appendix/">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../../appendix/reference.html">
+            
+                <a href="../../../../appendix/reference.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >修改并替换libsscronet.so库文件</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="修改并替换libsscronetso库文件的方式"><a name="修改并替换libsscronetso库文件的方式" class="plugin-anchor" href="#修改并替换libsscronetso库文件的方式"><i class="fa fa-link" aria-hidden="true"></i></a>修改并替换libsscronet.so库文件的方式</h1>
+<p>此处，要去给抖音的<code>libsscronet.so</code>去patch打补丁 == 修改并替换<code>libsscronet.so</code>的so库文件的方式：</p>
+<p>实现绕过证书校验，实现反反抓包的效果：</p>
+<h2 id="修改libsscronetso的so库文件"><a name="修改libsscronetso的so库文件" class="plugin-anchor" href="#修改libsscronetso的so库文件"><i class="fa fa-link" aria-hidden="true"></i></a>修改libsscronet.so的so库文件</h2>
+<p>要patch的点=具体位置：</p>
+<p>先是从函数<code>SSL_CTX_set_custom_verify</code>的调用的地方：</p>
+<p>通过IDA，可以找到函数<code>SSL_CTX_set_custom_verify</code>的实际二进制内偏移地址是：<code>0x52EF30</code></p>
+<p><img src="../../../../assets/img/dy_so_found_ssl_verify_addr.jpg" alt="dy_so_found_ssl_verify_addr"></img></p>
+<p>通过：</p>
+<p><code>SSL_CTX_set_custom_verify</code> == <code>0x52EF30</code></p>
+<p>找到2处引用：</p>
+<p><img src="../../../../assets/img/dy_so_ssl_verfity_refs.png" alt="dy_so_ssl_verfity_refs"></img></p>
+<p>-&gt;</p>
+<ul>
+<li><code>sub_378DF4 + 8C</code><ul>
+<li><code>.text:0000000000378E7C                 MOV             W1, #1</code></li>
+</ul>
+</li>
+<li><code>sub_49BC2C + 28</code><ul>
+<li><code>.text:000000000049BC48                 MOV             W1, #1</code></li>
+</ul>
+</li>
+</ul>
+<p>加上<code>opcode</code>后显示为：</p>
+<ul>
+<li><code>sub_378DF4</code><ul>
+<li><code>.text:0000000000378E7C 21 00 80 52                 MOV             W1, #1</code><ul>
+<li><img src="../../../../assets/img/dy_so_ssl_verfity_ref_378DF4.jpg" alt="dy_so_ssl_verfity_ref_378DF4"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>sub_49BC2C</code><ul>
+<li><code>.text:000000000049BC48 21 00 80 52                 MOV             W1, #1</code><ul>
+<li><img src="../../../../assets/img/dy_so_ssl_verfity_ref_49BC2C.jpg" alt="dy_so_ssl_verfity_ref_49BC2C"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>根据之前的hook思路，就是：</p>
+<p>让传递给<code>SSL_CTX_set_custom_verify</code>的参数中<code>mode</code>参数的值从<code>1</code>改为<code>0</code>，而<code>mode</code>参数值，是保存在<code>W1</code>中的，所以就是去：</p>
+<p>把<code>W1</code>的值(从之前的<code>1</code>)改为<code>0</code></p>
+<p>分别去改为：</p>
+<ul>
+<li><code>sub_378DF4</code><ul>
+<li><code>.text:0000000000378E7C 01 00 80 52                 MOV             W1, #0</code><ul>
+<li><img src="../../../../assets/img/dy_so_ssl_verify_ref_378DF4_ret_0.jpg" alt="dy_so_ssl_verify_ref_378DF4_ret_0"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>sub_49BC2C</code><ul>
+<li><code>.text:000000000049BC48 01 00 80 52                 MOV             W1, #0</code><ul>
+<li><img src="../../../../assets/img/dy_so_ssl_verify_ref_49BC2C_ret_0.jpg" alt="dy_so_ssl_verify_ref_49BC2C_ret_0"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="替换libsscronetso的so库文件"><a name="替换libsscronetso的so库文件" class="plugin-anchor" href="#替换libsscronetso的so库文件"><i class="fa fa-link" aria-hidden="true"></i></a>替换libsscronet.so的so库文件</h2>
+<p>本身手动即可去替换修改后的so库文件，到安卓手机中已安装的app的相关路径下面的旧的so库文件</p>
+<p>不过为了简化，目前已写成搅脚本自动化操作：</p>
+<p><code>/Users/crifan/dev/dev_root/androidReverse/xxx/Douyin/dy297/Douyin/dy297/libsscronet_so/autoReplaceSo/autoReplaceSo.sh</code></p>
+<pre class="language-"><code class="lang-sh"><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment"># Function: Script to auto replace Douyin libsscronet.so</span>
+<span class="token comment"># Author: Crifan Li</span>
+<span class="token comment"># Update: 20240923</span>
+
+<span class="token comment"># SEPERATOR="--------------------"</span>
+<span class="token assign-left variable">SEPERATOR</span><span class="token operator">=</span><span class="token string">"===================="</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">${SEPERATOR}</span> <span class="token variable">$1</span> <span class="token variable">${SEPERATOR}</span>"</span>
+<span class="token punctuation">}</span>
+
+<span class="token assign-left variable">LIBSSCRONET_SO</span><span class="token operator">=</span><span class="token string">"libsscronet.so"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"LIBSSCRONET_SO=<span class="token variable">${LIBSSCRONET_SO}</span>"</span>
+
+<span class="token assign-left variable">SO_NEW_PATH_PC</span><span class="token operator">=</span><span class="token string">"/Users/crifan/dev/dev_root/androidReverse/xxx/Douyin/dy297/Douyin/dy297/libsscronet_so/input/libsscronet_yyy.so"</span>
+<span class="token comment"># SO_NEW_PATH_PC="/Users/crifan/dev/dev_root/androidReverse/xxx/Douyin/dy297/Douyin/dy297/libsscronet_so/input/libsscronet_crifan.so"</span>
+<span class="token comment"># SO_NEW_PATH_PC="/Users/crifan/dev/dev_root/androidReverse/xxx/Douyin/dy313/input/libsscronet/libsscronet_yyy.so"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_NEW_PATH_PC=<span class="token variable">${SO_NEW_PATH_PC}</span>"</span>
+<span class="token assign-left variable">SO_TEMP_DOWNLOAD_FOLDER</span><span class="token operator">=</span><span class="token string">"/sdcard/Download/"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_TEMP_DOWNLOAD_FOLDER=<span class="token variable">${SO_TEMP_DOWNLOAD_FOLDER}</span>"</span>
+<span class="token assign-left variable">SO_TEMP_DOWNLOAD_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable">${SO_TEMP_DOWNLOAD_FOLDER}</span>/<span class="token variable">${LIBSSCRONET_SO}</span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_TEMP_DOWNLOAD_PATH=<span class="token variable">${SO_TEMP_DOWNLOAD_PATH}</span>"</span>
+
+<span class="token comment"># echo "${SEPERATOR} Download ${LIBSSCRONET_SO} into android ${SEPERATOR}"</span>
+log <span class="token string">"Download <span class="token variable">${LIBSSCRONET_SO}</span> into android"</span>
+adb push <span class="token variable">${SO_NEW_PATH_PC}</span> <span class="token variable">${SO_TEMP_DOWNLOAD_FOLDER}</span>/<span class="token variable">${LIBSSCRONET_SO}</span>
+
+<span class="token comment"># echo "${SEPERATOR} Find ${LIBSSCRONET_SO} location ${SEPERATOR}"</span>
+log <span class="token string">"Find <span class="token variable">${LIBSSCRONET_SO}</span> location"</span>
+<span class="token comment"># LIBSSCRONET_SO_ROOT_FOLDER="/data/app"</span>
+<span class="token assign-left variable">LIBSSCRONET_SO_ROOT_FOLDER</span><span class="token operator">=</span><span class="token string">"/data/data"</span> <span class="token comment"># /data/data/com.ss.android.ugc.aweme/app_librarian/29.7.0.6746496378/libsscronet.so</span>
+<span class="token assign-left variable">SO_FILE_ANDROID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>adb shell <span class="token function">find</span> $<span class="token punctuation">{</span>LIBSSCRONET_SO_ROOT_FOLDER<span class="token punctuation">}</span> <span class="token parameter variable">-name</span> $<span class="token punctuation">{</span>LIBSSCRONET_SO<span class="token punctuation">}</span><span class="token variable">)</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_FILE_ANDROID=<span class="token variable">${SO_FILE_ANDROID}</span>"</span>
+
+<span class="token comment"># echo "${SEPERATOR} Extract ${LIBSSCRONET_SO} folder path ${SEPERATOR}"</span>
+log <span class="token string">"Extract <span class="token variable">${LIBSSCRONET_SO}</span> folder path"</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID#libsscronet}</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID##libsscronet}</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${${SO_FILE_ANDROID}#libsscronet.so}</span>
+<span class="token assign-left variable">SO_PATH_LEN</span><span class="token operator">=</span><span class="token variable">${<span class="token operator">#</span>SO_FILE_ANDROID}</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_PATH_LEN=<span class="token variable">${SO_PATH_LEN}</span>"</span>
+<span class="token assign-left variable">SO_FILE_LEN</span><span class="token operator">=</span><span class="token variable">${<span class="token operator">#</span>LIBSSCRONET_SO}</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_FILE_LEN=<span class="token variable">${SO_FILE_LEN}</span>"</span>
+<span class="token assign-left variable">SO_FOFER_LEN</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>${SO_PATH_LEN}<span class="token operator">-</span>${SO_FILE_LEN}<span class="token variable">))</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_FOFER_LEN=<span class="token variable">${SO_FOFER_LEN}</span>"</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID##libsscronet}</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID%libsscronet}</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID:96}</span>
+<span class="token comment"># SO_FOLDER_ANDROID=${SO_FILE_ANDROID:0:97}</span>
+<span class="token assign-left variable">SO_FOLDER_ANDROID</span><span class="token operator">=</span><span class="token variable">${SO_FILE_ANDROID<span class="token operator">:</span>0<span class="token operator">:</span>${SO_FOFER_LEN}</span><span class="token punctuation">}</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"SO_FOLDER_ANDROID=<span class="token variable">${SO_FOLDER_ANDROID}</span>"</span>
+
+<span class="token comment"># echo "${SEPERATOR} Into adb shell ${SEPERATOR}"</span>
+log <span class="token string">"Into adb shell"</span>
+
+adb shell <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+uname -a
+ls -lh <span class="token variable">${SO_TEMP_DOWNLOAD_FOLDER}</span> | grep <span class="token variable">${LIBSSCRONET_SO}</span>
+# cd /data/app
+# pwd
+# find . -name libsscronet.so
+# SO_FILE_ANDROID=<span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-name</span> libsscronet.so<span class="token variable">)</span></span>
+# echo "SO_FILE_ANDROID=<span class="token variable">${SO_FILE_ANDROID}</span>"
+cd <span class="token variable">${SO_FOLDER_ANDROID}</span>
+# echo "<span class="token variable">${SEPERATOR}</span> Into <span class="token variable">${SO_FOLDER_ANDROID}</span> <span class="token variable">${SEPERATOR}</span>"
+log "Into <span class="token variable">${SO_FOLDER_ANDROID}</span>"
+pwd
+# echo "<span class="token variable">${SEPERATOR}</span> Remove <span class="token variable">${LIBSSCRONET_SO}</span> <span class="token variable">${SEPERATOR}</span>"
+log "Remove <span class="token variable">${LIBSSCRONET_SO}</span>"
+ls -lh | grep <span class="token variable">${LIBSSCRONET_SO}</span>
+rm -f <span class="token variable">${LIBSSCRONET_SO}</span>
+ls -lh | grep <span class="token variable">${LIBSSCRONET_SO}</span>
+# echo "<span class="token variable">${SEPERATOR}</span> Move <span class="token variable">${LIBSSCRONET_SO}</span> to here <span class="token variable">${SEPERATOR}</span>"
+log "Move <span class="token variable">${LIBSSCRONET_SO}</span> to here"
+mv <span class="token variable">${SO_TEMP_DOWNLOAD_PATH}</span> <span class="token variable">${SO_FOLDER_ANDROID}</span>
+ls -lh | grep <span class="token variable">${LIBSSCRONET_SO}</span>
+# echo "<span class="token variable">${SEPERATOR}</span> Change permission for <span class="token variable">${LIBSSCRONET_SO}</span> <span class="token variable">${SEPERATOR}</span>"
+log "Change permission for <span class="token variable">${LIBSSCRONET_SO}</span>"
+chmod 755 <span class="token variable">${LIBSSCRONET_SO}</span>
+chown system <span class="token variable">${LIBSSCRONET_SO}</span>
+chgrp system <span class="token variable">${LIBSSCRONET_SO}</span>
+ls -lh | grep <span class="token variable">${LIBSSCRONET_SO}</span>
+EOF</span>
+</code></pre>
+<p>之前某次的运行效果：</p>
+<pre class="language-"><code class="lang-bash">➜  libsscronet_so autoReplaceSo/autoReplaceSo.sh 
+<span class="token assign-left variable">LIBSSCRONET_SO</span><span class="token operator">=</span>libsscronet.so
+<span class="token assign-left variable">SO_NEW_PATH_PC</span><span class="token operator">=</span>/Users/crifan/dev/dev_root/androidReverse/xxx/DouYin/dy297/libsscronet_so/input/libsscronet_crifan.so
+<span class="token assign-left variable">SO_TEMP_DOWNLOAD_FOLDER</span><span class="token operator">=</span>/sdcard/Download/
+<span class="token assign-left variable">SO_TEMP_DOWNLOAD_PATH</span><span class="token operator">=</span>/sdcard/Download//libsscronet.so
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span> Download libsscronet.so into android <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+/Users/crifan/dev/dev_root/androidReverse/xxx/<span class="token punctuation">..</span>.: <span class="token number">1</span> <span class="token function">file</span> pushed, <span class="token number">0</span> skipped. <span class="token number">97.4</span> MB/s <span class="token punctuation">(</span><span class="token number">5567544</span> bytes <span class="token keyword">in</span> <span class="token number">0</span>.055s<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span> Find libsscronet.so location <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token assign-left variable">SO_FILE_ANDROID</span><span class="token operator">=</span>/data/app/~~cJq-AFnKyZwZZqpRJY9hWA<span class="token operator">==</span>/com.ss.android.ugc.aweme-1LCghzY2HKvNbI0WF3vccQ<span class="token operator">==</span>/lib/arm64/libsscronet.so
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span> Extract libsscronet.so folder path <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token assign-left variable">SO_PATH_LEN</span><span class="token operator">=</span><span class="token number">111</span>
+<span class="token assign-left variable">SO_FILE_LEN</span><span class="token operator">=</span><span class="token number">14</span>
+<span class="token assign-left variable">SO_FOFER_LEN</span><span class="token operator">=</span><span class="token number">97</span>
+<span class="token assign-left variable">SO_FOLDER_ANDROID</span><span class="token operator">=</span>/data/app/~~cJq-AFnKyZwZZqpRJY9hWA<span class="token operator">==</span>/com.ss.android.ugc.aweme-1LCghzY2HKvNbI0WF3vccQ<span class="token operator">==</span>/lib/arm64/
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span> Into adb shell <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+Linux localhost <span class="token number">4.19</span>.269 <span class="token comment">#1 SMP PREEMPT Sat Jul 27 21:05:42 CST 2024 aarch64 Toybox</span>
+-rw-rw---- <span class="token number">1</span> u0_a216 media_rw <span class="token number">5</span>.3M <span class="token number">2024</span>-08-28 09:41 libsscronet.so
+/data/app/~~cJq-AFnKyZwZZqpRJY9hWA<span class="token operator">==</span>/com.ss.android.ugc.aweme-1LCghzY2HKvNbI0WF3vccQ<span class="token operator">==</span>/lib/arm64
+-rwxr-xr-x <span class="token number">1</span> system system <span class="token number">5</span>.3M <span class="token number">2024</span>-04-22 <span class="token number">22</span>:06 libsscronet.so
+-rw-rw---- <span class="token number">1</span> u0_a216 media_rw <span class="token number">5</span>.3M <span class="token number">2024</span>-08-28 09:41 libsscronet.so
+-rwxr-xr-x <span class="token number">1</span> system system <span class="token number">5</span>.3M <span class="token number">2024</span>-08-28 09:41 libsscronet.so
+</code></pre>
+<p>替换so后，重启抖音，抖音即可正常访问网络：</p>
+<p><img src="../../../../assets/img/dy_android_normal_use_network.png" alt="dy_android_normal_use_network"></img></p>
+<p>正常抓包了。</p>
+<h2 id="附录"><a name="附录" class="plugin-anchor" href="#附录"><i class="fa fa-link" aria-hidden="true"></i></a>附录</h2>
+<h3 id="如何确定要修改的值的逻辑--应该修改二进制指令为何值？"><a name="如何确定要修改的值的逻辑--应该修改二进制指令为何值？" class="plugin-anchor" href="#如何确定要修改的值的逻辑--应该修改二进制指令为何值？"><i class="fa fa-link" aria-hidden="true"></i></a>如何确定要修改的值的逻辑 = 应该修改二进制指令为何值？</h3>
+<p>此处是要修改函数<code>SSL_CTX_set_custom_verify</code>的参数，此处是第二个参数=<code>mode</code>参数=存放在<code>W1</code>中的值：从<code>1</code>变成<code>0</code></p>
+<pre class="language-"><code class="lang-asm">MOV             W1, #<span class="token number">1</span>
+</code></pre>
+<p>改为：</p>
+<pre class="language-"><code class="lang-asm">MOV             W1, #<span class="token number">0</span>
+</code></pre>
+<h3 id="如何把要改的指令生成对应的opcode操作码？"><a name="如何把要改的指令生成对应的opcode操作码？" class="plugin-anchor" href="#如何把要改的指令生成对应的opcode操作码？"><i class="fa fa-link" aria-hidden="true"></i></a>如何把要改的指令生成对应的Opcode操作码？</h3>
+<p>而已知要去把：</p>
+<pre class="language-"><code class="lang-asm">MOV             W1, #<span class="token number">0</span>
+</code></pre>
+<p>的改动写入到so库文件中，但是对应的opcode操作码的值是什么，此时并不知道</p>
+<p>所以可以借助于</p>
+<p><a href="https://book.crifan.org/books/popular_assembly_arm/website/tools/inst_opcode_convert.html" target="_blank">指令和二进制opcode互转 · 最流行汇编语言：ARM</a></p>
+<p>中的：</p>
+<p><a href="https://armconverter.com/" target="_blank">Online ARM to HEX Converter (armconverter.com)</a></p>
+<p>去生成此处的，ARM64的二级制的汇编指令码</p>
+<p>从而才能搞懂：</p>
+<p>原始的字节码 -》 对应的汇编代码含义</p>
+<p>以及，要修改成什么汇编代码 -》 所对应的新的字节码是多少</p>
+<p>举例：</p>
+<p>之前的汇编代码是：</p>
+<pre class="language-"><code class="lang-asm">MOV             W1, #<span class="token number">1</span>
+</code></pre>
+<p>对应着：</p>
+<p>ARM64的字节码是：</p>
+<pre class="language-"><code class="lang-asm"><span class="token number">21008052</span>
+</code></pre>
+<p>而要改为：</p>
+<pre class="language-"><code class="lang-asm">MOV             W1, #<span class="token number">0</span>
+</code></pre>
+<p>对应的ARM64字节码是：</p>
+<pre class="language-"><code class="lang-asm"><span class="token number">01008052</span>
+</code></pre>
+<p>》所以我们最终要改的数据就是：</p>
+<ul>
+<li>从：<code>21 00 80 52</code></li>
+<li>改为：<code>01 00 80 52</code></li>
+</ul>
+<p>-》对应到IDA中就是</p>
+<ul>
+<li><code>0x378E7C</code><ul>
+<li><code>Origin value</code><ul>
+<li><code>21 00 80 52 2C D8 06 94 80 02 40 F9 21 60 80 52</code><ul>
+<li>注：后续有更多的二进制字节码，不用管，保持原始值即可<ul>
+<li><code>2C D8 06 94 80 02 40 F9 21 60 80 52</code><ul>
+<li>且后续注意到：是后续其他3行汇编代码对应的汇编指令<pre class="language-"><code class="lang-asm"><span class="token label function">.text:</span><span class="token number">0000000000378E80</span> 2C D8 <span class="token number">06</span> <span class="token number">94</span>         <span class="token register variable">BL</span>       SSL_CTX_set_custom_verify
+<span class="token label function">.text:</span><span class="token number">0000000000378E84</span> <span class="token number">80</span> <span class="token number">02</span> <span class="token number">40</span> F9         LDR       X0, <span class="token operator">[</span>X20<span class="token operator">]</span>
+<span class="token label function">.text:</span><span class="token number">0000000000378E88</span> <span class="token number">21</span> <span class="token number">60</span> <span class="token number">80</span> <span class="token number">52</span>         MOV       W1, #<span class="token number">0x301</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Values</code><ul>
+<li><code>01 00 80 52 2C D8 06 94 80 02 40 F9 21 60 80 52</code><ul>
+<li><img src="../../../../assets/img/dy_so_bin_changed_inst_01008052.jpg" alt="dy_so_bin_changed_inst_01008052"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ida中如何修改二进制打补丁patch"><a name="ida中如何修改二进制打补丁patch" class="plugin-anchor" href="#ida中如何修改二进制打补丁patch"><i class="fa fa-link" aria-hidden="true"></i></a>IDA中如何修改二进制=打补丁=patch</h3>
+<ul>
+<li>概述<ul>
+<li>IDA-&gt;Edit-》Patch program-》Change byte-》修改数据-》OK</li>
+<li>IDA-&gt;Edit-》Patch program-》Apply patches to input file-》OK</li>
+</ul>
+</li>
+<li>详解<ul>
+<li><a href="https://book.crifan.org/books/reverse_tool_ida/website/ida_features/patch_program.html" target="_blank">打补丁 · 逆向利器：IDA</a></li>
+</ul>
+</li>
+</ul>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2025-06-03 09:43:01
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../frida_hook/" class="navigation navigation-prev " aria-label="Previous page: Frida去hook代码">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../ios/" class="navigation navigation-next " aria-label="Next page: iOS版">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"修改并替换libsscronet.so库文件","level":"1.4.1.1.2","depth":4,"next":{"title":"iOS版","level":"1.4.1.2","depth":3,"path":"other_special/dy/ios/README.md","ref":"other_special/dy/ios/README.md","articles":[]},"previous":{"title":"Frida去hook代码","level":"1.4.1.1.1","depth":4,"path":"other_special/dy/android/frida_hook/README.md","ref":"other_special/dy/android/frida_hook/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/mobile_re_capture_bypass_limit/pdf/mobile_re_capture_bypass_limit.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/mobile_re_capture_bypass_limit/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"mobile_re_capture_bypass_limit","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"移动端逆向：绕过抓包限制","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理移动端逆向期间，关于如何绕过各种抓包的限制；包括绕过证书绑定和其他一些特殊处理；绕过证书绑定又包括iOS端和安卓端，比如iOS端的插件，比如SSL Kill Switch的ssl-kill-switch3和SSL Kill Switch 2，以及SSLBypass等插件等去实现绕过ssl证书绑定从而破解https；安卓端的Xposed模块，包括TrustMeAlready、JustTrustMe等等；其他特殊处理包括抖音的iOS版和Android版的一些特定处理等等；"},"file":{"path":"other_special/dy/android/edit_replace_so/README.md","mtime":"2025-06-03T01:43:01.418Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-06-03T14:04:26.633Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
