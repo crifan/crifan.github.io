@@ -1,0 +1,1109 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Instruction的属性 · Frida高级调试：Stalker</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="follow_logic.html" />
+    
+    
+    <link rel="prev" href="context_props.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"frida_advanced_debug_stalker","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../overview_stalker/">
+            
+                <a href="../../overview_stalker/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Stalker概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../stalker_detail/">
+            
+                <a href="../../stalker_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Stalker介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../stalker_detail/usage/">
+            
+                <a href="../../stalker_detail/usage/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../stalker_detail/api/">
+            
+                <a href="../../stalker_detail/api/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    API接口
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../stalker_examples/">
+            
+                <a href="../../stalker_examples/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Stalker举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../stalker_examples/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../stalker_examples/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../stalker_examples/libinfieldcollection_dylib_vsphbdgf.html">
+            
+                <a href="../../stalker_examples/libinfieldcollection_dylib_vsphbdgf.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    libInFieldCollection.dylib的vsPHbdGf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../stalker_examples/libmetasec_ml_so_ms_bd_c_l_a.html">
+            
+                <a href="../../stalker_examples/libmetasec_ml_so_ms_bd_c_l_a.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    libmetasec_ml.so的ms_bd_c_l_a
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../stalker_examples/debug_loginwithphonenbr_func_.html">
+            
+                <a href="../../stalker_examples/debug_loginwithphonenbr_func_.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    调试loginWithPhoneNbr函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../stalker_examples/some_noval_app_stalker.html">
+            
+                <a href="../../stalker_examples/some_noval_app_stalker.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    某小说App的Stalker用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../stalker_examples/misc_frida_stalker_example_py.html">
+            
+                <a href="../../stalker_examples/misc_frida_stalker_example_py.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    misc/frida-stalker-example.py
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Stalker心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Stalker.follow
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="stalker_utilize.html">
+            
+                <a href="stalker_utilize.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Stalker的利用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="envents_props.html">
+            
+                <a href="envents_props.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    events的属性含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="transform_logic.html">
+            
+                <a href="transform_logic.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    transform的逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="context_props.html">
+            
+                <a href="context_props.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    context的属性和含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.1.5" data-path="instruction_props.html">
+            
+                <a href="instruction_props.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    Instruction的属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.6" data-path="follow_logic.html">
+            
+                <a href="follow_logic.html">
+            
+                    
+                        <b>1.5.1.6.</b>
+                    
+                    Stalker.follow()的内部实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.7" data-path="addr_not_equal.html">
+            
+                <a href="addr_not_equal.html">
+            
+                    
+                        <b>1.5.1.7.</b>
+                    
+                    Stalker中函数地址和指令地址匹配不上
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.8" data-path="non_debug_before_16_bytes.html">
+            
+                <a href="non_debug_before_16_bytes.html">
+            
+                    
+                        <b>1.5.1.8.</b>
+                    
+                    16字节之前的开始那段代码无法调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../stalker_exclude/">
+            
+                <a href="../stalker_exclude/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Stalker.exclude
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../stalker_exclude/reduce_jam.html">
+            
+                <a href="../stalker_exclude/reduce_jam.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    用Stalker.exclude提高效率和减少干扰
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../stalker_util_func/">
+            
+                <a href="../../stalker_util_func/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Stalker工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../stalker_util_func/stalkerhookunnamenative.html">
+            
+                <a href="../../stalker_util_func/stalkerhookunnamenative.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    stalkerHookUnnameNative
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Instruction的属性</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="stalkerfollow中的transform中的instruction的属性"><a name="stalkerfollow中的transform中的instruction的属性" class="plugin-anchor" href="#stalkerfollow中的transform中的instruction的属性"><i class="fa fa-link" aria-hidden="true"></i></a>Stalker.follow中的transform中的Instruction的属性</h1>
+<p>此处介绍<code>Stalker.follow</code>中<code>transform</code>中的<code>指令</code>=<code>instruction</code>的属性的详情：</p>
+<h2 id="instruction有哪些属性"><a name="instruction有哪些属性" class="plugin-anchor" href="#instruction有哪些属性"><i class="fa fa-link" aria-hidden="true"></i></a>Instruction有哪些属性</h2>
+<p>参考官网文档：<a href="https://frida.re/docs/javascript-api/#instruction" target="_blank">Frida的Instruction</a>（和其他相关资料），可以总结出：</p>
+<ul>
+<li>Instruction的属性<ul>
+<li><code>address</code></li>
+<li><code>next</code></li>
+<li><code>size</code></li>
+<li><code>mnemonic</code></li>
+<li><code>opStr</code></li>
+<li><code>operands</code></li>
+<li><code>regsRead</code></li>
+<li><code>regsWritten</code></li>
+<li><code>groups</code></li>
+<li><code>toString()</code></li>
+<li><code>regsAccessed</code></li>
+<li><code>toJSON()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="如何打印instruction的属性"><a name="如何打印instruction的属性" class="plugin-anchor" href="#如何打印instruction的属性"><i class="fa fa-link" aria-hidden="true"></i></a>如何打印Instruction的属性</h2>
+<p>打印对应的属性值的代码：</p>
+<pre class="language-"><code class="lang-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"instruction: address="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>address
+  <span class="token operator">+</span> <span class="token string">",next="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>next
+  <span class="token operator">+</span> <span class="token string">",size="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>size
+  <span class="token operator">+</span> <span class="token string">",mnemonic="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>mnemonic
+  <span class="token operator">+</span> <span class="token string">",opStr="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>opStr
+  <span class="token operator">+</span> <span class="token string">",operands="</span> <span class="token operator">+</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>instruction<span class="token punctuation">.</span>operands<span class="token punctuation">)</span>
+  <span class="token operator">+</span> <span class="token string">",regsRead="</span> <span class="token operator">+</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>instruction<span class="token punctuation">.</span>regsRead<span class="token punctuation">)</span>
+  <span class="token operator">+</span> <span class="token string">",regsWritten="</span> <span class="token operator">+</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>instruction<span class="token punctuation">.</span>regsWritten<span class="token punctuation">)</span>
+  <span class="token operator">+</span> <span class="token string">",groups="</span> <span class="token operator">+</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>instruction<span class="token punctuation">.</span>groups<span class="token punctuation">)</span>
+  <span class="token operator">+</span> <span class="token string">",toString()="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>输出效果：</p>
+<pre class="language-"><code class="lang-log"><span class="token property">instruction:</span> address<span class="token operator">=</span><span class="token number">0x10f4ecef4</span><span class="token punctuation">,</span>next<span class="token operator">=</span><span class="token number">0x4</span><span class="token punctuation">,</span>size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>mnemonic<span class="token operator">=</span>ldr<span class="token punctuation">,</span>opStr<span class="token operator">=</span>x0<span class="token punctuation">,</span> <span class="token operator">#</span><span class="token number">0x10f4ecf78</span><span class="token punctuation">,</span>operands<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"reg"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"x0"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"w"</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"imm"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"4551790456"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsRead<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsWritten<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>groups<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>toString<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">=</span>ldr x0<span class="token punctuation">,</span> <span class="token operator">#</span><span class="token number">0x10f4ecf78</span>
+<span class="token punctuation">[</span><span class="token number">0x10f4ecef4</span><span class="token punctuation">]</span> ldr x0<span class="token punctuation">,</span> <span class="token operator">#</span><span class="token number">0x10f4ecf78</span>
+
+<span class="token property">instruction:</span> address<span class="token operator">=</span><span class="token number">0x10f4ecef8</span><span class="token punctuation">,</span>next<span class="token operator">=</span><span class="token number">0x4</span><span class="token punctuation">,</span>size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>mnemonic<span class="token operator">=</span>bl<span class="token punctuation">,</span>opStr<span class="token operator">=</span><span class="token operator">#</span><span class="token number">0x1091a500c</span><span class="token punctuation">,</span>operands<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"imm"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"4447686668"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsRead<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsWritten<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"lr"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>groups<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"call"</span><span class="token punctuation">,</span><span class="token string">"jump"</span><span class="token punctuation">,</span><span class="token string">"branch_relative"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>toString<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">=</span>bl <span class="token operator">#</span><span class="token number">0x1091a500c</span>
+<span class="token punctuation">[</span><span class="token number">0x10f4ecef8</span><span class="token punctuation">]</span> bl <span class="token operator">#</span><span class="token number">0x1091a500c</span>
+</code></pre>
+<h3 id="fridautil的printinstructioninfo"><a name="fridautil的printinstructioninfo" class="plugin-anchor" href="#fridautil的printinstructioninfo"><i class="fa fa-link" aria-hidden="true"></i></a>FridaUtil的printInstructionInfo</h3>
+<p>以及后续新版中，加上：<code>regsAccessed</code>、<code>toJSON()</code>后，经过整理，已提取到工具类函数中：</p>
+<p><a href="https://github.com/crifan/JsFridaUtil/blob/main/frida/FridaUtil.js" target="_blank">https://github.com/crifan/JsFridaUtil/blob/main/frida/FridaUtil.js</a></p>
+<p>中的：</p>
+<pre class="language-"><code class="lang-js">  <span class="token keyword">static</span> <span class="token function">printInstructionInfo</span><span class="token punctuation">(</span><span class="token parameter">instruction</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// Instruction: address=0x252c0edf8,toString()=br x10,next=0x4,size=4,mnemonic=br,opStr=x10,operands=[{"type":"reg","value":"x10","access":"r"}],regsAccessed={"read":["x10"],"written":[]},regsRead=[],regsWritten=[],groups=["jump"],toJSON()={"address":"0x252c0edf8","next":"0x4","size":4,"mnemonic":"br","opStr":"x10","operands":[{"type":"reg","value":"x10","access":"r"}],"regsAccessed":{"read":["x10"],"written":[]},"regsRead":[],"regsWritten":[],"groups":["jump"]}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Instruction: address="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span>address
+      <span class="token operator">+</span> <span class="token string">",toString()="</span> <span class="token operator">+</span> instruction<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token operator">+</span> <span class="token string">",toJSON()="</span> <span class="token operator">+</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>instruction<span class="token punctuation">.</span><span class="token function">toJSON</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token comment">// + ",next=" + instruction.next</span>
+      <span class="token comment">// + ",size=" + instruction.size</span>
+      <span class="token comment">// + ",mnemonic=" + instruction.mnemonic</span>
+      <span class="token comment">// + ",opStr=" + instruction.opStr</span>
+      <span class="token comment">// + ",operands=" + JSON.stringify(instruction.operands)</span>
+      <span class="token comment">// + ",regsAccessed=" + JSON.stringify(instruction.regsAccessed)</span>
+      <span class="token comment">// + ",regsRead=" + JSON.stringify(instruction.regsRead)</span>
+      <span class="token comment">// + ",regsWritten=" + JSON.stringify(instruction.regsWritten)</span>
+      <span class="token comment">// + ",groups=" + JSON.stringify(instruction.groups)</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p>以及之前的某次输出的效果是：</p>
+<pre class="language-"><code class="lang-log"><span class="token property">Instruction:</span> address<span class="token operator">=</span><span class="token number">0x252c0eca4</span><span class="token punctuation">,</span>toString<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">=</span>stp x20<span class="token punctuation">,</span> x19<span class="token punctuation">,</span> <span class="token punctuation">[</span>sp<span class="token punctuation">,</span> <span class="token operator">#</span><span class="token number">0x40</span><span class="token punctuation">]</span><span class="token punctuation">,</span>next<span class="token operator">=</span><span class="token number">0x4</span><span class="token punctuation">,</span>size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>mnemonic<span class="token operator">=</span>stp<span class="token punctuation">,</span>opStr<span class="token operator">=</span>x20<span class="token punctuation">,</span> x19<span class="token punctuation">,</span> <span class="token punctuation">[</span>sp<span class="token punctuation">,</span> <span class="token operator">#</span><span class="token number">0x40</span><span class="token punctuation">]</span><span class="token punctuation">,</span>operands<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"reg"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"x20"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"reg"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"x19"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"mem"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token string">"base"</span><span class="token operator">:</span><span class="token string">"sp"</span><span class="token punctuation">,</span><span class="token string">"disp"</span><span class="token operator">:</span><span class="token number">64</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"rw"</span><span class="token operator">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsAccessed<span class="token operator">=</span><span class="token operator">{</span><span class="token string">"read"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">"x20"</span><span class="token punctuation">,</span><span class="token string">"x19"</span><span class="token punctuation">,</span><span class="token string">"sp"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"written"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">}</span><span class="token punctuation">,</span>regsRead<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>regsWritten<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>groups<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>toJSON<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">=</span><span class="token operator">{</span><span class="token string">"address"</span><span class="token operator">:</span><span class="token string">"0x252c0eca4"</span><span class="token punctuation">,</span><span class="token string">"next"</span><span class="token operator">:</span><span class="token string">"0x4"</span><span class="token punctuation">,</span><span class="token string">"size"</span><span class="token operator">:</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">"mnemonic"</span><span class="token operator">:</span><span class="token string">"stp"</span><span class="token punctuation">,</span><span class="token string">"opStr"</span><span class="token operator">:</span><span class="token string">"x20, x19, [sp, #0x40]"</span><span class="token punctuation">,</span><span class="token string">"operands"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"reg"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"x20"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"reg"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token string">"x19"</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"r"</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token operator">{</span><span class="token string">"type"</span><span class="token operator">:</span><span class="token string">"mem"</span><span class="token punctuation">,</span><span class="token string">"value"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token string">"base"</span><span class="token operator">:</span><span class="token string">"sp"</span><span class="token punctuation">,</span><span class="token string">"disp"</span><span class="token operator">:</span><span class="token number">64</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"access"</span><span class="token operator">:</span><span class="token string">"rw"</span><span class="token operator">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"regsAccessed"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token string">"read"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">"x20"</span><span class="token punctuation">,</span><span class="token string">"x19"</span><span class="token punctuation">,</span><span class="token string">"sp"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"written"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"regsRead"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"regsWritten"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"groups"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">}</span>
+</code></pre>
+<p>供参考。</p>
+<h2 id="instruction的属性的来源"><a name="instruction的属性的来源" class="plugin-anchor" href="#instruction的属性的来源"><i class="fa fa-link" aria-hidden="true"></i></a>Instruction的属性的来源</h2>
+<p>而这些属性的来源：</p>
+<ul>
+<li>主要是<code>Capstone</code><ul>
+<li>Java接口<ul>
+<li><a href="https://github.com/capstone-engine/capstone/blob/next/bindings/java/capstone/Capstone.java" target="_blank">capstone/Capstone.java at next · capstone-engine/capstone · GitHub</a></li>
+</ul>
+</li>
+<li>Python接口<ul>
+<li><a href="https://github.com/capstone-engine/capstone/blob/next/bindings/python/capstone/__init__.py" target="_blank">capstone/__init__.py at next · capstone-engine/capstone · GitHub</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其次是<code>Frida</code>内部<ul>
+<li><a href="https://github.com/frida/frida-gum/" target="_blank">frida/frida-gum</a><ul>
+<li><a href="https://github.com/frida/frida-gum/blob/main/bindings/gumjs/gumquickinstruction.c" target="_blank">https://github.com/frida/frida-gum/blob/main/bindings/gumjs/gumquickinstruction.c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面摘录其相关的核心代码：</p>
+<h3 id="capstonecapstonejava"><a name="capstonecapstonejava" class="plugin-anchor" href="#capstonecapstonejava"><i class="fa fa-link" aria-hidden="true"></i></a>capstone/Capstone.java</h3>
+<p><a href="https://github.com/capstone-engine/capstone/blob/next/bindings/java/capstone/Capstone.java" target="_blank">capstone/Capstone.java</a></p>
+<pre class="language-"><code class="lang-java">  <span class="token keyword">protected</span> <span class="token keyword">static</span> <span class="token keyword">class</span> _cs_insn <span class="token keyword">extends</span> <span class="token class-name">Structure</span> <span class="token punctuation">{</span>
+    <span class="token comment">// instruction ID.</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token comment">// instruction address.</span>
+    <span class="token keyword">public</span> <span class="token keyword">long</span> address<span class="token punctuation">;</span>
+    <span class="token comment">// instruction size.</span>
+    <span class="token keyword">public</span> <span class="token keyword">short</span> size<span class="token punctuation">;</span>
+    <span class="token comment">// machine bytes of instruction.</span>
+    <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes<span class="token punctuation">;</span>
+    <span class="token comment">// instruction mnemonic. NOTE: irrelevant for diet engine.</span>
+    <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> mnemonic<span class="token punctuation">;</span>
+    <span class="token comment">// instruction operands. NOTE: irrelevant for diet engine.</span>
+    <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> op_str<span class="token punctuation">;</span>
+    <span class="token comment">// detail information of instruction.</span>
+    <span class="token keyword">public</span> _cs_detail<span class="token punctuation">.</span>ByReference cs_detail<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">CsInsn</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">Pointer</span> csh<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">CS</span> cs<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> _cs_insn raw<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> arch<span class="token punctuation">;</span>
+
+    <span class="token comment">// instruction ID.</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token comment">// instruction address.</span>
+    <span class="token keyword">public</span> <span class="token keyword">long</span> address<span class="token punctuation">;</span>
+    <span class="token comment">// instruction size.</span>
+    <span class="token keyword">public</span> <span class="token keyword">short</span> size<span class="token punctuation">;</span>
+    <span class="token comment">// Machine bytes of this instruction, with number of bytes indicated by size above</span>
+    <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes<span class="token punctuation">;</span>
+    <span class="token comment">// instruction mnemonic. NOTE: irrelevant for diet engine.</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> mnemonic<span class="token punctuation">;</span>
+    <span class="token comment">// instruction operands. NOTE: irrelevant for diet engine.</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> opStr<span class="token punctuation">;</span>
+    <span class="token comment">// list of all implicit registers being read.</span>
+    <span class="token keyword">public</span> <span class="token keyword">short</span><span class="token punctuation">[</span><span class="token punctuation">]</span> regsRead<span class="token punctuation">;</span>
+    <span class="token comment">// list of all implicit registers being written.</span>
+    <span class="token keyword">public</span> <span class="token keyword">short</span><span class="token punctuation">[</span><span class="token punctuation">]</span> regsWrite<span class="token punctuation">;</span>
+    <span class="token comment">// list of semantic groups this instruction belongs to.</span>
+    <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> groups<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">OpInfo</span> operands<span class="token punctuation">;</span>
+</code></pre>
+<h3 id="capstoneinitpy"><a name="capstoneinitpy" class="plugin-anchor" href="#capstoneinitpy"><i class="fa fa-link" aria-hidden="true"></i></a>capstone/__init__.py</h3>
+<p><a href="https://github.com/capstone-engine/capstone/blob/next/bindings/python/capstone/__init__.py" target="_blank">capstone/__init__.py</a></p>
+<p>中相关核心代码：</p>
+<pre class="language-"><code class="lang-py"><span class="token keyword">class</span> <span class="token class-name">_cs_insn</span><span class="token punctuation">(</span>ctypes<span class="token punctuation">.</span>Structure<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    _fields_ <span class="token operator">=</span> <span class="token punctuation">(</span>
+        <span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_uint<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'alias_id'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_uint64<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'address'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_uint64<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'size'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_uint16<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'bytes'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_ubyte <span class="token operator">*</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'mnemonic'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_char <span class="token operator">*</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'op_str'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_char <span class="token operator">*</span> <span class="token number">160</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'is_alias'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_bool<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'usesAliasDetails'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_bool<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'illegal'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>c_bool<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'detail'</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>POINTER<span class="token punctuation">(</span>_cs_detail<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token comment"># Python-style class to disasm code</span>
+<span class="token keyword">class</span> <span class="token class-name">CsInsn</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cs<span class="token punctuation">,</span> all_info<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_raw <span class="token operator">=</span> copy_ctypes<span class="token punctuation">(</span>all_info<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>_cs <span class="token operator">=</span> cs
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_detail <span class="token keyword">and</span> <span class="token keyword">not</span> self<span class="token punctuation">.</span>is_invalid_insn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># save detail</span>
+            self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail <span class="token operator">=</span> ctypes<span class="token punctuation">.</span>pointer<span class="token punctuation">(</span>all_info<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>_type_<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            ctypes<span class="token punctuation">.</span>memmove<span class="token punctuation">(</span>ctypes<span class="token punctuation">.</span>byref<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ctypes<span class="token punctuation">.</span>byref<span class="token punctuation">(</span>all_info<span class="token punctuation">.</span>detail<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                           ctypes<span class="token punctuation">.</span>sizeof<span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>all_info<span class="token punctuation">.</span>detail<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'&lt;CsInsn 0x%x [%s]: %s %s&gt;'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>address<span class="token punctuation">,</span> self<span class="token punctuation">.</span><span class="token builtin">bytes</span><span class="token punctuation">.</span><span class="token builtin">hex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>mnemonic<span class="token punctuation">,</span> self<span class="token punctuation">.</span>op_str<span class="token punctuation">)</span>
+
+    <span class="token comment"># return if the instruction is invalid</span>
+    <span class="token keyword">def</span> <span class="token function">is_invalid_insn</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        arch <span class="token operator">=</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>arch
+        <span class="token keyword">if</span> arch <span class="token operator">==</span> CS_ARCH_EVM<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span><span class="token builtin">id</span> <span class="token operator">==</span> evm<span class="token punctuation">.</span>EVM_INS_INVALID
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span><span class="token builtin">id</span> <span class="token operator">==</span> <span class="token number">0</span>
+
+    <span class="token comment"># return instruction's ID.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">id</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span><span class="token builtin">id</span>
+
+    <span class="token comment"># return instruction's address.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">address</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>address
+
+    <span class="token comment"># return instruction's size.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">size</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>size
+
+    <span class="token comment"># return instruction's is_alias flag</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">is_alias</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>is_alias
+
+    <span class="token comment"># return instruction's illegal flag</span>
+    <span class="token comment"># Set if instruction can be decoded but is invalid</span>
+    <span class="token comment"># due to context or illegal operands.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">illegal</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>illegal
+
+    <span class="token comment"># return instruction's alias_id</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">alias_id</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>alias_id
+
+    <span class="token comment"># return instruction's flag if it uses alias details</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">uses_alias_details</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>usesAliasDetails
+
+    <span class="token comment"># return instruction's machine bytes (which should have @size bytes).</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">bytes</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">bytearray</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span><span class="token builtin">bytes</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>size<span class="token punctuation">]</span>
+
+    <span class="token comment"># return instruction's mnemonic.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">mnemonic</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @mnemonic.</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>mnemonic<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'ascii'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># return instruction's operands (in string).</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">op_str</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @op_str.</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>op_str<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'ascii'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># return list of all implicit registers being read.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">regs_read</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>is_invalid_insn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_SKIPDATA<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @regs_read.</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_detail<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>regs_read<span class="token punctuation">[</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>regs_read_count<span class="token punctuation">]</span>
+
+        <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DETAIL<span class="token punctuation">)</span>
+
+    <span class="token comment"># return list of all implicit registers being modified</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">regs_write</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>is_invalid_insn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_SKIPDATA<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @regs_write</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_detail<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>regs_write<span class="token punctuation">[</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>regs_write_count<span class="token punctuation">]</span>
+
+        <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DETAIL<span class="token punctuation">)</span>
+
+    <span class="token comment"># return list of semantic groups this instruction belongs to.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">groups</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>is_invalid_insn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_SKIPDATA<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @groups</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_detail<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>groups<span class="token punctuation">[</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>groups_count<span class="token punctuation">]</span>
+
+        <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DETAIL<span class="token punctuation">)</span>
+
+    <span class="token comment"># return whether instruction has writeback operands.</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">writeback</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>is_invalid_insn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_SKIPDATA<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_diet<span class="token punctuation">:</span>
+            <span class="token comment"># Diet engine cannot provide @writeback.</span>
+            <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DIET<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>_cs<span class="token punctuation">.</span>_detail<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_raw<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>contents<span class="token punctuation">.</span>writeback
+
+        <span class="token keyword">raise</span> CsError<span class="token punctuation">(</span>CS_ERR_DETAIL<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="frida-gumbindingsgumjsgumquickinstructionc"><a name="frida-gumbindingsgumjsgumquickinstructionc" class="plugin-anchor" href="#frida-gumbindingsgumjsgumquickinstructionc"><i class="fa fa-link" aria-hidden="true"></i></a>frida-gum/bindings/gumjs/gumquickinstruction.c</h3>
+<p><a href="https://github.com/frida/frida-gum/blob/main/bindings/gumjs/gumquickinstruction.c" target="_blank">frida-gum/bindings/gumjs/gumquickinstruction.c at main · frida/frida-gum</a></p>
+<p>的相关核心代码：</p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">static</span> <span class="token keyword">const</span> JSCFunctionListEntry gumjs_instruction_entries<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span>
+<span class="token punctuation">{</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"address"</span><span class="token punctuation">,</span> gumjs_instruction_get_address<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"next"</span><span class="token punctuation">,</span> gumjs_instruction_get_next<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"size"</span><span class="token punctuation">,</span> gumjs_instruction_get_size<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"mnemonic"</span><span class="token punctuation">,</span> gumjs_instruction_get_mnemonic<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"opStr"</span><span class="token punctuation">,</span> gumjs_instruction_get_op_str<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"operands"</span><span class="token punctuation">,</span> gumjs_instruction_get_operands<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"regsAccessed"</span><span class="token punctuation">,</span> gumjs_instruction_get_regs_accessed<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"regsRead"</span><span class="token punctuation">,</span> gumjs_instruction_get_regs_read<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"regsWritten"</span><span class="token punctuation">,</span> gumjs_instruction_get_regs_written<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CGETSET_DEF</span> <span class="token punctuation">(</span><span class="token string">"groups"</span><span class="token punctuation">,</span> gumjs_instruction_get_groups<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CFUNC_DEF</span> <span class="token punctuation">(</span><span class="token string">"toString"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> gumjs_instruction_to_string<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">JS_CFUNC_DEF</span> <span class="token punctuation">(</span><span class="token string">"toJSON"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> gumjs_instruction_to_json<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2025-06-04 12:13:28
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="context_props.html" class="navigation navigation-prev " aria-label="Previous page: context的属性和含义">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="follow_logic.html" class="navigation navigation-next " aria-label="Next page: Stalker.follow()的内部实现原理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Instruction的属性","level":"1.5.1.5","depth":3,"next":{"title":"Stalker.follow()的内部实现原理","level":"1.5.1.6","depth":3,"path":"stalker_summary/stalker_follow/follow_logic.md","ref":"stalker_summary/stalker_follow/follow_logic.md","articles":[]},"previous":{"title":"context的属性和含义","level":"1.5.1.4","depth":3,"path":"stalker_summary/stalker_follow/context_props.md","ref":"stalker_summary/stalker_follow/context_props.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/frida_advanced_debug_stalker/pdf/frida_advanced_debug_stalker.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/frida_advanced_debug_stalker/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"frida_advanced_debug_stalker","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Frida高级调试：Stalker","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Frida高级调试中的Stalker的详细用法和技巧，包括各种举例和心得。先是概述Frida的Stalker，然后是介绍其基本用法和API接口；然后给出多个Stalker的详细实例举例，包括完整的代码和输出日志以及相关说明；然后整理出Stalker.follow的相关心得，包括如何利用Staker，events的属性含义，transform的基本逻辑，context有哪些属性，Stalker.follow()的内部实现机制原理，为何函数地址和指令地址不匹配等等；然后介绍用Stalker.exclude提高效率和减少干扰；然后贴出Stalker的工具类函数，尤其是stalkerHookUnnameNative等。最后给出附录和参考资料。"},"file":{"path":"stalker_summary/stalker_follow/instruction_props.md","mtime":"2025-06-04T04:13:28.666Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-06-04T14:00:05.451Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

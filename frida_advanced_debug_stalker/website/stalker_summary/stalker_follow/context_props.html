@@ -1,0 +1,954 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>context的属性和含义 · Frida高级调试：Stalker</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="instruction_props.html" />
+    
+    
+    <link rel="prev" href="transform_logic.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"frida_advanced_debug_stalker","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../overview_stalker/">
+            
+                <a href="../../overview_stalker/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Stalker概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../stalker_detail/">
+            
+                <a href="../../stalker_detail/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Stalker介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../stalker_detail/usage/">
+            
+                <a href="../../stalker_detail/usage/">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../stalker_detail/api/">
+            
+                <a href="../../stalker_detail/api/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    API接口
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../stalker_examples/">
+            
+                <a href="../../stalker_examples/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Stalker举例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../stalker_examples/akd_lldb_unnamed_symbol2575.html">
+            
+                <a href="../../stalker_examples/akd_lldb_unnamed_symbol2575.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    ___lldb_unnamed_symbol2575$$akd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../stalker_examples/libinfieldcollection_dylib_vsphbdgf.html">
+            
+                <a href="../../stalker_examples/libinfieldcollection_dylib_vsphbdgf.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    libInFieldCollection.dylib的vsPHbdGf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../stalker_examples/libmetasec_ml_so_ms_bd_c_l_a.html">
+            
+                <a href="../../stalker_examples/libmetasec_ml_so_ms_bd_c_l_a.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    libmetasec_ml.so的ms_bd_c_l_a
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../stalker_examples/debug_loginwithphonenbr_func_.html">
+            
+                <a href="../../stalker_examples/debug_loginwithphonenbr_func_.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    调试loginWithPhoneNbr函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../stalker_examples/some_noval_app_stalker.html">
+            
+                <a href="../../stalker_examples/some_noval_app_stalker.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    某小说App的Stalker用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../stalker_examples/misc_frida_stalker_example_py.html">
+            
+                <a href="../../stalker_examples/misc_frida_stalker_example_py.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    misc/frida-stalker-example.py
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Stalker心得
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    Stalker.follow
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="stalker_utilize.html">
+            
+                <a href="stalker_utilize.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    Stalker的利用方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="envents_props.html">
+            
+                <a href="envents_props.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    events的属性含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="transform_logic.html">
+            
+                <a href="transform_logic.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    transform的逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.1.4" data-path="context_props.html">
+            
+                <a href="context_props.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    context的属性和含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="instruction_props.html">
+            
+                <a href="instruction_props.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    Instruction的属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.6" data-path="follow_logic.html">
+            
+                <a href="follow_logic.html">
+            
+                    
+                        <b>1.5.1.6.</b>
+                    
+                    Stalker.follow()的内部实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.7" data-path="addr_not_equal.html">
+            
+                <a href="addr_not_equal.html">
+            
+                    
+                        <b>1.5.1.7.</b>
+                    
+                    Stalker中函数地址和指令地址匹配不上
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.8" data-path="non_debug_before_16_bytes.html">
+            
+                <a href="non_debug_before_16_bytes.html">
+            
+                    
+                        <b>1.5.1.8.</b>
+                    
+                    16字节之前的开始那段代码无法调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../stalker_exclude/">
+            
+                <a href="../stalker_exclude/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Stalker.exclude
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../stalker_exclude/reduce_jam.html">
+            
+                <a href="../stalker_exclude/reduce_jam.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    用Stalker.exclude提高效率和减少干扰
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../stalker_util_func/">
+            
+                <a href="../../stalker_util_func/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Stalker工具类函数
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../stalker_util_func/stalkerhookunnamenative.html">
+            
+                <a href="../../stalker_util_func/stalkerhookunnamenative.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    stalkerHookUnnameNative
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >context的属性和含义</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="iteratorputcallout中的context的属性和含义"><a name="iteratorputcallout中的context的属性和含义" class="plugin-anchor" href="#iteratorputcallout中的context的属性和含义"><i class="fa fa-link" aria-hidden="true"></i></a><code>iterator.putCallout</code>中的<code>context</code>的属性和含义</h1>
+<p>对于</p>
+<pre class="language-"><code class="lang-js"><span class="token function-variable function">transform</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">iterator</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token operator">...</span>
+  iterator<span class="token punctuation">.</span><span class="token function">putCallout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<span class="token operator">...</span>
+</code></pre>
+<p>中的<code>context</code>，其定义是：</p>
+<p><a href="https://frida.re/docs/stalker/" target="_blank">Stalker | Frida • A world-class dynamic instrumentation toolkit</a></p>
+<pre class="language-"><code class="lang-c"><span class="token keyword">typedef</span> GumArm64CpuContext GumCpuContext<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">_GumArm64CpuContext</span>
+<span class="token punctuation">{</span>
+  guint64 pc<span class="token punctuation">;</span>
+  guint64 sp<span class="token punctuation">;</span>
+
+
+  guint64 x<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  guint64 fp<span class="token punctuation">;</span>
+  guint64 lr<span class="token punctuation">;</span>
+  guint8 q<span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>某次调试时打印出的值是：</p>
+<pre class="language-"><code class="lang-log">contextStr<span class="token operator">=</span><span class="token operator">{</span><span class="token string">"pc"</span><span class="token operator">:</span><span class="token string">"0x1041865a4"</span><span class="token punctuation">,</span><span class="token string">"sp"</span><span class="token operator">:</span><span class="token string">"0x16bf46740"</span><span class="token punctuation">,</span><span class="token string">"nzcv"</span><span class="token operator">:</span><span class="token number">1610612736</span><span class="token punctuation">,</span><span class="token string">"x0"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x1"</span><span class="token operator">:</span><span class="token string">"0x104ba0000"</span><span class="token punctuation">,</span><span class="token string">"x2"</span><span class="token operator">:</span><span class="token string">"0xc"</span><span class="token punctuation">,</span><span class="token string">"x3"</span><span class="token operator">:</span><span class="token string">"0x29"</span><span class="token punctuation">,</span><span class="token string">"x4"</span><span class="token operator">:</span><span class="token string">"0x470b"</span><span class="token punctuation">,</span><span class="token string">"x5"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x6"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x7"</span><span class="token operator">:</span><span class="token string">"0xec0"</span><span class="token punctuation">,</span><span class="token string">"x8"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x9"</span><span class="token operator">:</span><span class="token string">"0x3050500"</span><span class="token punctuation">,</span><span class="token string">"x10"</span><span class="token operator">:</span><span class="token string">"0x16bf46838"</span><span class="token punctuation">,</span><span class="token string">"x11"</span><span class="token operator">:</span><span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span><span class="token string">"x12"</span><span class="token operator">:</span><span class="token string">"0x6c245a3d"</span><span class="token punctuation">,</span><span class="token string">"x13"</span><span class="token operator">:</span><span class="token string">"0x1041864dc"</span><span class="token punctuation">,</span><span class="token string">"x14"</span><span class="token operator">:</span><span class="token string">"0x45"</span><span class="token punctuation">,</span><span class="token string">"x15"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x16"</span><span class="token operator">:</span><span class="token string">"0xd5709bdf0d7a48f0"</span><span class="token punctuation">,</span><span class="token string">"x17"</span><span class="token operator">:</span><span class="token string">"0x123209fc0"</span><span class="token punctuation">,</span><span class="token string">"x18"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x19"</span><span class="token operator">:</span><span class="token string">"0xdf3221f55389ecc8"</span><span class="token punctuation">,</span><span class="token string">"x20"</span><span class="token operator">:</span><span class="token string">"0x1233064b0"</span><span class="token punctuation">,</span><span class="token string">"x21"</span><span class="token operator">:</span><span class="token string">"0x93dba5a2"</span><span class="token punctuation">,</span><span class="token string">"x22"</span><span class="token operator">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"x23"</span><span class="token operator">:</span><span class="token string">"0x39207beb"</span><span class="token punctuation">,</span><span class="token string">"x24"</span><span class="token operator">:</span><span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span><span class="token string">"x25"</span><span class="token operator">:</span><span class="token string">"0x1041a6cb0"</span><span class="token punctuation">,</span><span class="token string">"x26"</span><span class="token operator">:</span><span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span><span class="token string">"x27"</span><span class="token operator">:</span><span class="token string">"0x194d2c100"</span><span class="token punctuation">,</span><span class="token string">"x28"</span><span class="token operator">:</span><span class="token string">"0xfffffffffffffffe"</span><span class="token punctuation">,</span><span class="token string">"fp"</span><span class="token operator">:</span><span class="token string">"0x16bf46820"</span><span class="token punctuation">,</span><span class="token string">"lr"</span><span class="token operator">:</span><span class="token string">"0x104186168"</span><span class="token punctuation">,</span><span class="token string">"q0"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q1"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q2"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q3"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q4"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q5"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q6"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q7"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q8"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q9"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q10"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q11"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q12"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q13"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q14"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q15"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q16"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q17"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q18"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q19"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q20"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q21"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q22"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q23"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q24"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q25"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q26"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q27"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q28"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q29"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q30"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"q31"</span><span class="token operator">:</span><span class="token operator">{</span><span class="token operator">}</span><span class="token punctuation">,</span><span class="token string">"d0"</span><span class="token operator">:</span><span class="token number">0.5585262685374610e-308</span><span class="token punctuation">,</span><span class="token string">"d1"</span><span class="token operator">:</span><span class="token number">0.0000169759663317e-308</span><span class="token punctuation">,</span><span class="token string">"d2"</span><span class="token operator">:</span><span class="token number">7.9499288951273454e-275</span><span class="token punctuation">,</span><span class="token string">"d3"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d4"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d5"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d6"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d7"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d8"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d9"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d10"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d11"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d12"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d13"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d14"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d15"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"d16"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.0855813867524649e+251</span><span class="token punctuation">,</span><span class="token string">"d17"</span><span class="token operator">:</span><span class="token number">0.000002084565455e-308</span><span class="token punctuation">,</span><span class="token string">"d18"</span><span class="token operator">:</span><span class="token number">3.0554698911305689e-152</span><span class="token punctuation">,</span><span class="token string">"d19"</span><span class="token operator">:</span><span class="token number">0.000001322084152e-308</span><span class="token punctuation">,</span><span class="token string">"d20"</span><span class="token operator">:</span><span class="token number">3.7696966457559071e-175</span><span class="token punctuation">,</span><span class="token string">"d21"</span><span class="token operator">:</span><span class="token number">1.0004894955531618e+128</span><span class="token punctuation">,</span><span class="token string">"d22"</span><span class="token operator">:</span><span class="token number">9.5944260775693913e+225</span><span class="token punctuation">,</span><span class="token string">"d23"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">6.8154492514793903e-236</span><span class="token punctuation">,</span><span class="token string">"d24"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">2.1930923744387854e+50</span><span class="token punctuation">,</span><span class="token string">"d25"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">3.1153191556287330e+141</span><span class="token punctuation">,</span><span class="token string">"d26"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.0031492505499153e+302</span><span class="token punctuation">,</span><span class="token string">"d27"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">3.1584786060327890e-284</span><span class="token punctuation">,</span><span class="token string">"d28"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.7036104465458726e+239</span><span class="token punctuation">,</span><span class="token string">"d29"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.1538744009003510e-197</span><span class="token punctuation">,</span><span class="token string">"d30"</span><span class="token operator">:</span><span class="token number">2.4944484440662111e-259</span><span class="token punctuation">,</span><span class="token string">"d31"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s0"</span><span class="token operator">:</span><span class="token number">1.1035169354619356e-39</span><span class="token punctuation">,</span><span class="token string">"s1"</span><span class="token operator">:</span><span class="token number">1.1210387714598533e-44</span><span class="token punctuation">,</span><span class="token string">"s2"</span><span class="token operator">:</span><span class="token number">3.8204714345426298e-37</span><span class="token punctuation">,</span><span class="token string">"s3"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s4"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s5"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s6"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s7"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s8"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s9"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s10"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s11"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s12"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s13"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s14"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s15"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"s16"</span><span class="token operator">:</span><span class="token number">1.5548730664783592e-21</span><span class="token punctuation">,</span><span class="token string">"s17"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.3084408235578860e+36</span><span class="token punctuation">,</span><span class="token string">"s18"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">8.6088756618229034e-23</span><span class="token punctuation">,</span><span class="token string">"s19"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">5.408784745233076e-20</span><span class="token punctuation">,</span><span class="token string">"s20"</span><span class="token operator">:</span><span class="token number">4.2151578028428229e+37</span><span class="token punctuation">,</span><span class="token string">"s21"</span><span class="token operator">:</span><span class="token number">18362722504671230</span><span class="token punctuation">,</span><span class="token string">"s22"</span><span class="token operator">:</span><span class="token number">3.372155249992253e+28</span><span class="token punctuation">,</span><span class="token string">"s23"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">7.6784630118876258e-30</span><span class="token punctuation">,</span><span class="token string">"s24"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">3715189.5</span><span class="token punctuation">,</span><span class="token string">"s25"</span><span class="token operator">:</span><span class="token number">2.6426119211413095e+23</span><span class="token punctuation">,</span><span class="token string">"s26"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">3.5724724140742379e-23</span><span class="token punctuation">,</span><span class="token string">"s27"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1.6239861190373424e-18</span><span class="token punctuation">,</span><span class="token string">"s28"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">205533200</span><span class="token punctuation">,</span><span class="token string">"s29"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">0.008124308660626411</span><span class="token punctuation">,</span><span class="token string">"s30"</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">5.6424941355004989e-36</span><span class="token punctuation">,</span><span class="token string">"s31"</span><span class="token operator">:</span><span class="token number">0</span><span class="token operator">}</span>
+</code></pre>
+<p>格式化后：</p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">{</span>
+    <span class="token property">"pc"</span><span class="token operator">:</span> <span class="token string">"0x1041865a4"</span><span class="token punctuation">,</span>
+    <span class="token property">"sp"</span><span class="token operator">:</span> <span class="token string">"0x16bf46740"</span><span class="token punctuation">,</span>
+    <span class="token property">"nzcv"</span><span class="token operator">:</span> <span class="token number">1610612736</span><span class="token punctuation">,</span>
+    <span class="token property">"x0"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x1"</span><span class="token operator">:</span> <span class="token string">"0x104ba0000"</span><span class="token punctuation">,</span>
+    <span class="token property">"x2"</span><span class="token operator">:</span> <span class="token string">"0xc"</span><span class="token punctuation">,</span>
+    <span class="token property">"x3"</span><span class="token operator">:</span> <span class="token string">"0x29"</span><span class="token punctuation">,</span>
+    <span class="token property">"x4"</span><span class="token operator">:</span> <span class="token string">"0x470b"</span><span class="token punctuation">,</span>
+    <span class="token property">"x5"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x6"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x7"</span><span class="token operator">:</span> <span class="token string">"0xec0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x8"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x9"</span><span class="token operator">:</span> <span class="token string">"0x3050500"</span><span class="token punctuation">,</span>
+    <span class="token property">"x10"</span><span class="token operator">:</span> <span class="token string">"0x16bf46838"</span><span class="token punctuation">,</span>
+    <span class="token property">"x11"</span><span class="token operator">:</span> <span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span>
+    <span class="token property">"x12"</span><span class="token operator">:</span> <span class="token string">"0x6c245a3d"</span><span class="token punctuation">,</span>
+    <span class="token property">"x13"</span><span class="token operator">:</span> <span class="token string">"0x1041864dc"</span><span class="token punctuation">,</span>
+    <span class="token property">"x14"</span><span class="token operator">:</span> <span class="token string">"0x45"</span><span class="token punctuation">,</span>
+    <span class="token property">"x15"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x16"</span><span class="token operator">:</span> <span class="token string">"0xd5709bdf0d7a48f0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x17"</span><span class="token operator">:</span> <span class="token string">"0x123209fc0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x18"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x19"</span><span class="token operator">:</span> <span class="token string">"0xdf3221f55389ecc8"</span><span class="token punctuation">,</span>
+    <span class="token property">"x20"</span><span class="token operator">:</span> <span class="token string">"0x1233064b0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x21"</span><span class="token operator">:</span> <span class="token string">"0x93dba5a2"</span><span class="token punctuation">,</span>
+    <span class="token property">"x22"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x23"</span><span class="token operator">:</span> <span class="token string">"0x39207beb"</span><span class="token punctuation">,</span>
+    <span class="token property">"x24"</span><span class="token operator">:</span> <span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span>
+    <span class="token property">"x25"</span><span class="token operator">:</span> <span class="token string">"0x1041a6cb0"</span><span class="token punctuation">,</span>
+    <span class="token property">"x26"</span><span class="token operator">:</span> <span class="token string">"0x6c245a87"</span><span class="token punctuation">,</span>
+    <span class="token property">"x27"</span><span class="token operator">:</span> <span class="token string">"0x194d2c100"</span><span class="token punctuation">,</span>
+    <span class="token property">"x28"</span><span class="token operator">:</span> <span class="token string">"0xfffffffffffffffe"</span><span class="token punctuation">,</span>
+    <span class="token property">"fp"</span><span class="token operator">:</span> <span class="token string">"0x16bf46820"</span><span class="token punctuation">,</span>
+    <span class="token property">"lr"</span><span class="token operator">:</span> <span class="token string">"0x104186168"</span><span class="token punctuation">,</span>
+    <span class="token property">"q0"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q1"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q2"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q3"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q4"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q5"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q6"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q7"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q8"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q9"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q10"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q11"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q12"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q13"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q14"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q15"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q16"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q17"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q18"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q19"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q20"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q21"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q22"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q23"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q24"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q25"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q26"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q27"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q28"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q29"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q30"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"q31"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"d0"</span><span class="token operator">:</span> <span class="token number">0.5585262685374610e-308</span><span class="token punctuation">,</span>
+    <span class="token property">"d1"</span><span class="token operator">:</span> <span class="token number">0.0000169759663317e-308</span><span class="token punctuation">,</span>
+    <span class="token property">"d2"</span><span class="token operator">:</span> <span class="token number">7.9499288951273454e-275</span><span class="token punctuation">,</span>
+    <span class="token property">"d3"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d4"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d5"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d6"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d7"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d8"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d9"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d10"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d11"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d12"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d13"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d14"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d15"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"d16"</span><span class="token operator">:</span> <span class="token number">-1.0855813867524649e+251</span><span class="token punctuation">,</span>
+    <span class="token property">"d17"</span><span class="token operator">:</span> <span class="token number">0.000002084565455e-308</span><span class="token punctuation">,</span>
+    <span class="token property">"d18"</span><span class="token operator">:</span> <span class="token number">3.0554698911305689e-152</span><span class="token punctuation">,</span>
+    <span class="token property">"d19"</span><span class="token operator">:</span> <span class="token number">0.000001322084152e-308</span><span class="token punctuation">,</span>
+    <span class="token property">"d20"</span><span class="token operator">:</span> <span class="token number">3.7696966457559071e-175</span><span class="token punctuation">,</span>
+    <span class="token property">"d21"</span><span class="token operator">:</span> <span class="token number">1.0004894955531618e+128</span><span class="token punctuation">,</span>
+    <span class="token property">"d22"</span><span class="token operator">:</span> <span class="token number">9.5944260775693913e+225</span><span class="token punctuation">,</span>
+    <span class="token property">"d23"</span><span class="token operator">:</span> <span class="token number">-6.8154492514793903e-236</span><span class="token punctuation">,</span>
+    <span class="token property">"d24"</span><span class="token operator">:</span> <span class="token number">-2.1930923744387854e+50</span><span class="token punctuation">,</span>
+    <span class="token property">"d25"</span><span class="token operator">:</span> <span class="token number">-3.1153191556287330e+141</span><span class="token punctuation">,</span>
+    <span class="token property">"d26"</span><span class="token operator">:</span> <span class="token number">-1.0031492505499153e+302</span><span class="token punctuation">,</span>
+    <span class="token property">"d27"</span><span class="token operator">:</span> <span class="token number">-3.1584786060327890e-284</span><span class="token punctuation">,</span>
+    <span class="token property">"d28"</span><span class="token operator">:</span> <span class="token number">-1.7036104465458726e+239</span><span class="token punctuation">,</span>
+    <span class="token property">"d29"</span><span class="token operator">:</span> <span class="token number">-1.1538744009003510e-197</span><span class="token punctuation">,</span>
+    <span class="token property">"d30"</span><span class="token operator">:</span> <span class="token number">2.4944484440662111e-259</span><span class="token punctuation">,</span>
+    <span class="token property">"d31"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s0"</span><span class="token operator">:</span> <span class="token number">1.1035169354619356e-39</span><span class="token punctuation">,</span>
+    <span class="token property">"s1"</span><span class="token operator">:</span> <span class="token number">1.1210387714598533e-44</span><span class="token punctuation">,</span>
+    <span class="token property">"s2"</span><span class="token operator">:</span> <span class="token number">3.8204714345426298e-37</span><span class="token punctuation">,</span>
+    <span class="token property">"s3"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s4"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s5"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s6"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s7"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s8"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s9"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s10"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s11"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s12"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s13"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s14"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s15"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"s16"</span><span class="token operator">:</span> <span class="token number">1.5548730664783592e-21</span><span class="token punctuation">,</span>
+    <span class="token property">"s17"</span><span class="token operator">:</span> <span class="token number">-1.3084408235578860e+36</span><span class="token punctuation">,</span>
+    <span class="token property">"s18"</span><span class="token operator">:</span> <span class="token number">-8.6088756618229034e-23</span><span class="token punctuation">,</span>
+    <span class="token property">"s19"</span><span class="token operator">:</span> <span class="token number">-5.408784745233076e-20</span><span class="token punctuation">,</span>
+    <span class="token property">"s20"</span><span class="token operator">:</span> <span class="token number">4.2151578028428229e+37</span><span class="token punctuation">,</span>
+    <span class="token property">"s21"</span><span class="token operator">:</span> <span class="token number">18362722504671230</span><span class="token punctuation">,</span>
+    <span class="token property">"s22"</span><span class="token operator">:</span> <span class="token number">3.372155249992253e+28</span><span class="token punctuation">,</span>
+    <span class="token property">"s23"</span><span class="token operator">:</span> <span class="token number">-7.6784630118876258e-30</span><span class="token punctuation">,</span>
+    <span class="token property">"s24"</span><span class="token operator">:</span> <span class="token number">-3715189.5</span><span class="token punctuation">,</span>
+    <span class="token property">"s25"</span><span class="token operator">:</span> <span class="token number">2.6426119211413095e+23</span><span class="token punctuation">,</span>
+    <span class="token property">"s26"</span><span class="token operator">:</span> <span class="token number">-3.5724724140742379e-23</span><span class="token punctuation">,</span>
+    <span class="token property">"s27"</span><span class="token operator">:</span> <span class="token number">-1.6239861190373424e-18</span><span class="token punctuation">,</span>
+    <span class="token property">"s28"</span><span class="token operator">:</span> <span class="token number">-205533200</span><span class="token punctuation">,</span>
+    <span class="token property">"s29"</span><span class="token operator">:</span> <span class="token number">-0.008124308660626411</span><span class="token punctuation">,</span>
+    <span class="token property">"s30"</span><span class="token operator">:</span> <span class="token number">-5.6424941355004989e-36</span><span class="token punctuation">,</span>
+    <span class="token property">"s31"</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>-》其中可以看到：各个寄存器的值</p>
+<p>-》实现了调试的目的：查看寄存器等方面的值</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2025-06-04 12:13:04
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="transform_logic.html" class="navigation navigation-prev " aria-label="Previous page: transform的逻辑">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="instruction_props.html" class="navigation navigation-next " aria-label="Next page: Instruction的属性">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"context的属性和含义","level":"1.5.1.4","depth":3,"next":{"title":"Instruction的属性","level":"1.5.1.5","depth":3,"path":"stalker_summary/stalker_follow/instruction_props.md","ref":"stalker_summary/stalker_follow/instruction_props.md","articles":[]},"previous":{"title":"transform的逻辑","level":"1.5.1.3","depth":3,"path":"stalker_summary/stalker_follow/transform_logic.md","ref":"stalker_summary/stalker_follow/transform_logic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/frida_advanced_debug_stalker/pdf/frida_advanced_debug_stalker.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/frida_advanced_debug_stalker/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"frida_advanced_debug_stalker","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Frida高级调试：Stalker","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍Frida高级调试中的Stalker的详细用法和技巧，包括各种举例和心得。先是概述Frida的Stalker，然后是介绍其基本用法和API接口；然后给出多个Stalker的详细实例举例，包括完整的代码和输出日志以及相关说明；然后整理出Stalker.follow的相关心得，包括如何利用Staker，events的属性含义，transform的基本逻辑，context有哪些属性，Stalker.follow()的内部实现机制原理，为何函数地址和指令地址不匹配等等；然后介绍用Stalker.exclude提高效率和减少干扰；然后贴出Stalker的工具类函数，尤其是stalkerHookUnnameNative等。最后给出附录和参考资料。"},"file":{"path":"stalker_summary/stalker_follow/context_props.md","mtime":"2025-06-04T04:13:04.217Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-06-04T14:00:05.451Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

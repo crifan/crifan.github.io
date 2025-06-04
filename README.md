@@ -175,5 +175,6 @@
     * [移动端逆向：通用数据格式Protobuf](https://crifan.github.io/mobile_re_format_protobuf/website)
     * [Frida调试经验总结](https://crifan.github.io/frida_debug_summary/website)
     * [移动端逆向：绕过抓包限制](https://crifan.github.io/mobile_re_capture_bypass_limit/website)
+    * [Frida高级调试：Stalker](https://crifan.github.io/frida_advanced_debug_stalker/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
