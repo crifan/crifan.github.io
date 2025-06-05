@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20250604`
+最后更新：`20250605`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -176,5 +176,6 @@
     * [Frida调试经验总结](https://crifan.github.io/frida_debug_summary/website)
     * [移动端逆向：绕过抓包限制](https://crifan.github.io/mobile_re_capture_bypass_limit/website)
     * [Frida高级调试：Stalker](https://crifan.github.io/frida_advanced_debug_stalker/website)
+    * [软件全生命周期管理](https://crifan.github.io/software_whole_lifecycle_manage/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
