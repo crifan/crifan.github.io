@@ -178,5 +178,6 @@
     * [Frida高级调试：Stalker](https://crifan.github.io/frida_advanced_debug_stalker/website)
     * [软件全生命周期管理](https://crifan.github.io/software_whole_lifecycle_manage/website)
     * [Frida调试Android经验总结](https://crifan.github.io/frida_debug_android_summary/website)
+    * [Frida调试iOS经验总结](https://crifan.github.io/frida_debug_ios_summary/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
