@@ -3,7 +3,7 @@
 <html lang="zh-hans" >
     <head>
         <meta charset="UTF-8">
-        <title>文档和资料 · 逆向调试利器：Frida</title>
+        <title>Hook函数原理 · 逆向调试利器：Frida</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 6.0.0">
@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../code.html" />
+    <link rel="next" href="../../install_upgrade/" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="../arch.html" />
     
 
     <style>
@@ -152,9 +152,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../">
+        <li class="chapter " data-level="1.2" data-path="../../frida_overview/">
             
-                <a href="../">
+                <a href="../../frida_overview/">
             
                     
                         <b>1.2.</b>
@@ -168,9 +168,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="./">
+        <li class="chapter " data-level="1.2.1" data-path="../../frida_overview/doc_refer/">
             
-                <a href="./">
+                <a href="../../frida_overview/doc_refer/">
             
                     
                         <b>1.2.1.</b>
@@ -183,9 +183,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../code.html">
+        <li class="chapter " data-level="1.2.2" data-path="../../frida_overview/code.html">
             
-                <a href="../code.html">
+                <a href="../../frida_overview/code.html">
             
                     
                         <b>1.2.2.</b>
@@ -203,9 +203,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../../frida_logic/">
+        <li class="chapter " data-level="1.3" data-path="../">
             
-                <a href="../../frida_logic/">
+                <a href="../">
             
                     
                         <b>1.3.</b>
@@ -219,9 +219,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../../frida_logic/arch.html">
+        <li class="chapter " data-level="1.3.1" data-path="../arch.html">
             
-                <a href="../../frida_logic/arch.html">
+                <a href="../arch.html">
             
                     
                         <b>1.3.1.</b>
@@ -234,9 +234,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../../frida_logic/hook/">
+        <li class="chapter active" data-level="1.3.2" data-path="./">
             
-                <a href="../../frida_logic/hook/">
+                <a href="./">
             
                     
                         <b>1.3.2.</b>
@@ -932,7 +932,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >文档和资料</a>
+        <a href="../.." >Hook函数原理</a>
     </h1>
 </div>
 
@@ -947,93 +947,128 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="文档和资料"><a name="文档和资料" class="plugin-anchor" href="#文档和资料"><i class="fa fa-link" aria-hidden="true"></i></a>文档和资料</h1>
+                                <html><head></head><body><h1 id="hook函数原理"><a name="hook函数原理" class="plugin-anchor" href="#hook函数原理"><i class="fa fa-link" aria-hidden="true"></i></a>Hook函数原理</h1>
+<h2 id="frida的hook函数的机制和原理"><a name="frida的hook函数的机制和原理" class="plugin-anchor" href="#frida的hook函数的机制和原理"><i class="fa fa-link" aria-hidden="true"></i></a>Frida的hook函数的机制和原理</h2>
+<p><strong>Q</strong>: Frida的hook钩子勾住函数的底层实现原理是什么？</p>
+<p><strong>A</strong>: Frida 作为一款强大的动态插桩工具，其核心能力在于通过 <strong>Inline Hook</strong> 或 <strong>PLT/GOT Hook</strong>（取决于目标平台和场景）技术，在运行时拦截并修改函数的执行逻辑。要理解其底层原理，需从<strong>进程注入、代码注入、Hook 机制</strong>三个层面展开：</p>
+<h3 id="一、前置：frida-如何进入目标进程？"><a name="一、前置：frida-如何进入目标进程？" class="plugin-anchor" href="#一、前置：frida-如何进入目标进程？"><i class="fa fa-link" aria-hidden="true"></i></a>一、前置：Frida 如何进入目标进程？</h3>
+<p>Frida 采用 <strong>注入器（Injector）</strong> 将自身 Agent（通常是 JavaScript 引擎 + Frida Core 库）加载到目标进程中：  </p>
 <ul>
-<li>官网文档入口: <a href="https://frida.re/docs/home/" target="_blank">Frida Docs</a><ul>
-<li>入门指南=Getting Started<ul>
-<li>快速入手: <a href="https://frida.re/docs/quickstart/" target="_blank">Quick-start guide</a></li>
-<li>安装: <a href="https://frida.re/docs/installation/" target="_blank">Installation</a></li>
-<li>操作模式: <a href="https://frida.re/docs/modes/" target="_blank">Modes of Operation</a></li>
-<li>Gadget: <a href="https://frida.re/docs/gadget/" target="_blank">Gadget</a></li>
-<li>内部原理: <a href="https://frida.re/docs/hacking/" target="_blank">Hacking</a></li>
-<li>Stalker: <a href="https://frida.re/docs/stalker/" target="_blank">Stalker</a></li>
-<li>演讲文档资料：<a href="https://frida.re/docs/presentations/" target="_blank">Presentations</a></li>
+<li>对于 Android/iOS 等移动平台，可能通过 <code>ptrace</code>（Linux/Android）、<code>debugserver</code>（iOS）或 zygote 注入等方式；  </li>
+<li>注入后，Agent 会在目标进程中启动一个 JavaScript 运行时（如 V8），并通过 <strong>Native 桥接层</strong>（C/C++ 实现的 Frida Core）将 JS 层的 Hook 操作转化为底层的机器指令修改。</li>
+</ul>
+<h3 id="二、核心：函数-hook-的底层实现原理"><a name="二、核心：函数-hook-的底层实现原理" class="plugin-anchor" href="#二、核心：函数-hook-的底层实现原理"><i class="fa fa-link" aria-hidden="true"></i></a>二、核心：函数 Hook 的底层实现原理</h3>
+<p>Frida 对函数的 Hook 主要基于两种经典技术：<strong>Inline Hook</strong>（针对任意函数，尤其是无符号表的函数）和 <strong>PLT/GOT Hook</strong>（针对动态链接库的外部函数调用）。</p>
+<h4 id="1-inline-hook（内联钩子）：直接修改函数体指令"><a name="1-inline-hook（内联钩子）：直接修改函数体指令" class="plugin-anchor" href="#1-inline-hook（内联钩子）：直接修改函数体指令"><i class="fa fa-link" aria-hidden="true"></i></a>1. Inline Hook（内联钩子）：直接修改函数体指令</h4>
+<p>这是 Frida 最常用、最灵活的 Hook 方式，适用于几乎所有可执行代码（包括静态函数、动态库函数、甚至自定义代码段）。</p>
+<h5 id="原理步骤："><a name="原理步骤：" class="plugin-anchor" href="#原理步骤："><i class="fa fa-link" aria-hidden="true"></i></a>原理步骤：</h5>
+<p>假设我们要 Hook 目标函数 <code>target_func</code>（地址为 <code>0x12345678</code>），替换为我们的 <code>hook_func</code>：  </p>
+<ul>
+<li><strong>Step 1：保存原函数的前 N 字节指令</strong><br></br>为了插入跳转指令，需要覆盖 <code>target_func</code> 开头的若干字节（比如 x86/x64 下覆盖 5~14 字节，对应 JMP 指令的长度）。这些被覆盖的原始字节必须保存下来，否则原函数无法恢复执行。  </li>
+<li><strong>Step 2：写入跳转指令到原函数开头</strong><br></br>在 <code>target_func</code> 的开头写入一条<strong>无条件跳转指令</strong>，跳转到我们的 <code>hook_func</code> 地址。例如：  <ul>
+<li>x86 下：<code>JMP hook_func</code>（机器码 <code>E9 XX XX XX XX</code>，相对跳转）；  </li>
+<li>x64 下：若 <code>hook_func</code> 与 <code>target_func</code> 距离超过 2GB，需用 <code>MOV RAX, hook_func; JMP RAX</code>（机器码 <code>48 B8 XX XX XX XX XX XX XX XX; FF E0</code>）；  </li>
+<li>ARM64 下：<code>LDR X16, =hook_func; BR X16</code>（机器码 <code>58 00 00 58 00 02 1F D6</code> 等）。  </li>
 </ul>
 </li>
-<li>教程=Tutorials<ul>
-<li>通用<ul>
-<li>函数: <a href="https://frida.re/docs/functions/" target="_blank">Functions</a></li>
-<li>消息: <a href="https://frida.re/docs/messages/" target="_blank">Messages</a></li>
+<li><strong>Step 3：处理跳转后的执行流</strong><br></br>当程序调用 <code>target_func</code> 时，会先执行我们插入的 JMP 指令，跳转到 <code>hook_func</code>。在 <code>hook_func</code> 中，我们可以：  <ul>
+<li>执行自定义逻辑（如打印参数、修改参数）；  </li>
+<li>通过之前保存的原始指令<strong>模拟执行原函数的前半部分</strong>（或直接跳回原函数被覆盖指令之后的位置继续执行，即“Trampoline 蹦床”）；  </li>
+<li>执行原函数的剩余逻辑（或直接返回）。  </li>
 </ul>
 </li>
-<li>移动端<ul>
-<li><a href="https://frida.re/docs/ios/" target="_blank">iOS</a></li>
-<li><a href="https://frida.re/docs/android/" target="_blank">Android</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>案例=Examples<ul>
-<li>PC端<ul>
-<li><a href="https://frida.re/docs/examples/windows/" target="_blank">Windows</a></li>
-<li><a href="https://frida.re/docs/examples/macos/" target="_blank">macOS</a></li>
-<li><a href="https://frida.re/docs/examples/linux/" target="_blank">Linux</a></li>
-</ul>
-</li>
-<li>移动端<ul>
-<li><a href="https://frida.re/docs/examples/ios/" target="_blank">iOS</a></li>
-<li><a href="https://frida.re/docs/examples/android/" target="_blank">Android</a></li>
-</ul>
-</li>
-<li>其他<ul>
-<li><a href="https://frida.re/docs/examples/javascript/" target="_blank">JavaScript</a></li>
+<li><strong>Step 4：Trampoline（蹦床）机制</strong><br></br>为了无缝衔接原函数执行，Frida 会构造一个 <strong>Trampoline 代码块</strong>：  <ul>
+<li>把 Step 1 保存的原函数前 N 字节复制到 Trampoline；  </li>
+<li>在 Trampoline 末尾添加一条跳转指令，跳回 <code>target_func</code> 中被覆盖指令之后的位置（即 <code>0x12345678 + N</code>）；<br></br>这样，当 <code>hook_func</code> 执行完自定义逻辑后，可以跳转到 Trampoline 来执行原函数的前半部分，再自动回到原函数后续逻辑。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>工具=Tools<ul>
-<li><code>frida</code>命令行工具: <a href="https://frida.re/docs/frida-cli/" target="_blank">Frida CLI</a></li>
-<li><a href="https://frida.re/docs/frida-ps/" target="_blank">frida-ps</a></li>
-<li><a href="https://frida.re/docs/frida-trace/" target="_blank">frida-trace</a></li>
-<li><a href="https://frida.re/docs/frida-discover/" target="_blank">frida-discover</a></li>
-<li><a href="https://frida.re/docs/frida-cli/" target="_blank">frida-ls-devices</a></li>
-<li><a href="https://frida.re/docs/frida-kill/" target="_blank">frida-kill</a></li>
-<li><a href="https://frida.re/docs/gum-graft/" target="_blank">gum-graft</a></li>
+<h4 id="2-pltgot-hook：修改动态链接的间接跳转表"><a name="2-pltgot-hook：修改动态链接的间接跳转表" class="plugin-anchor" href="#2-pltgot-hook：修改动态链接的间接跳转表"><i class="fa fa-link" aria-hidden="true"></i></a>2. PLT/GOT Hook：修改动态链接的间接跳转表</h4>
+<p>仅适用于<strong>动态链接的函数调用</strong>（如 libc.so 中的 <code>open</code>、<code>read</code> 等函数），原理是利用动态链接器的 <strong>Procedure Linkage Table（PLT）</strong> 和 <strong>Global Offset Table（GOT）</strong> 机制。</p>
+<h5 id="背景知识："><a name="背景知识：" class="plugin-anchor" href="#背景知识："><i class="fa fa-link" aria-hidden="true"></i></a>背景知识：</h5>
+<p>动态链接的程序调用外部函数时，不会直接写死函数地址，而是通过 PLT 中的桩代码跳转：  </p>
+<ul>
+<li>第一次调用时，PLT 桩代码会查询 GOT 表中对应的条目（初始指向 PLT 自身的解析代码）；  </li>
+<li>动态链接器会将 GOT 条目更新为<strong>实际的函数地址</strong>（懒加载）；  </li>
+<li>后续调用直接从 GOT 条目取地址跳转。</li>
+</ul>
+<h5 id="原理步骤："><a name="原理步骤：" class="plugin-anchor" href="#原理步骤："><i class="fa fa-link" aria-hidden="true"></i></a>原理步骤：</h5>
+<ul>
+<li><strong>Step 1：定位目标函数在 GOT 中的条目</strong><br></br>通过解析 ELF（Linux/Android）或 Mach-O（iOS/macOS）文件格式，找到目标函数（如 <code>libc.so!open</code>）对应的 GOT 表项地址。  </li>
+<li><strong>Step 2：修改 GOT 条目的值</strong><br></br>将 GOT 条目中原本指向 <code>open</code> 函数的地址，替换为我们的 <code>hook_open</code> 函数地址。  </li>
+<li><strong>Step 3：执行流劫持</strong><br></br>当程序调用 <code>open</code> 时，会通过 PLT → GOT 跳转到 <code>hook_open</code>；我们可以在 <code>hook_open</code> 中处理后，再手动调用原始的 <code>open</code> 函数（通过 Frida 保存的原始 GOT 值或再次查询动态链接器）。</li>
+</ul>
+<h3 id="三、frida-如何支撑这些底层操作？"><a name="三、frida-如何支撑这些底层操作？" class="plugin-anchor" href="#三、frida-如何支撑这些底层操作？"><i class="fa fa-link" aria-hidden="true"></i></a>三、Frida 如何支撑这些底层操作？</h3>
+<p>Frida 的 Native 层（C/C++）提供了以下关键组件：  </p>
+<ol>
+<li><strong> GumJS 引擎</strong>：连接 JavaScript 层和 Native 层，将 JS 中的 <code>Interceptor.attach(target, callback)</code> 转化为底层的 Inline Hook/PLT Hook 调用；  </li>
+<li><strong> Gum 库</strong>：Frida 的核心 Native 库，封装了跨平台的 Inline Hook 实现（如 <code>gum_module_find_export_by_name</code> 找函数、<code>gum_interceptor_attach</code> 设置 Hook）、内存读写（<code>gum_memory_read/write</code>）、线程挂起/恢复等功能；  </li>
+<li><strong>Stalker（可选）</strong>：用于跟踪函数调用流程（如记录所有函数调用栈），基于动态二进制翻译（DBI）技术，能更细粒度地控制执行流。</li>
+</ol>
+<h3 id="四、关键细节：跨平台与兼容性"><a name="四、关键细节：跨平台与兼容性" class="plugin-anchor" href="#四、关键细节：跨平台与兼容性"><i class="fa fa-link" aria-hidden="true"></i></a>四、关键细节：跨平台与兼容性</h3>
+<p>Frida 需要处理不同架构（x86/x64/ARM/ARM64/MIPS）和系统的指令差异：  </p>
+<ul>
+<li>针对不同架构设计对应的 JMP 指令模板；  </li>
+<li>处理指令对齐问题（如某些架构要求指令地址按 4/16 字节对齐）；  </li>
+<li>绕过系统保护（如 Linux 的 <code>W^X</code> 内存保护：Frida 可通过 <code>mprotect</code> 临时修改内存页的可写属性，写完跳转指令后再改回可执行）；  </li>
+<li>对抗反调试/反 Hook（如检测内存是否被修改、指令是否被破坏，Frida 会动态调整 Hook 策略）。</li>
+</ul>
+<h3 id="五、总结"><a name="五、总结" class="plugin-anchor" href="#五、总结"><i class="fa fa-link" aria-hidden="true"></i></a>五、总结</h3>
+<p>Frida 的 Hook 底层本质是<strong>通过修改目标函数的执行指令（Inline Hook）或间接跳转表（PLT/GOT Hook），将函数调用重定向到自定义的 Hook 函数，再通过 Trampoline 机制保证原函数逻辑的正常执行</strong>。其核心是利用操作系统提供的进程内存读写、指令修改能力，结合跨平台的 Hook 框架，实现对运行时函数行为的拦截与控制。</p>
+<h2 id="相关背景知识"><a name="相关背景知识" class="plugin-anchor" href="#相关背景知识"><i class="fa fa-link" aria-hidden="true"></i></a>相关背景知识</h2>
+<h3 id="plt和got"><a name="plt和got" class="plugin-anchor" href="#plt和got"><i class="fa fa-link" aria-hidden="true"></i></a>PLT和GOT</h3>
+<p>PLT/GOT 是 动态链接（Dynamic Linking）​ 机制中的两个关键数据结构</p>
+<h4 id="pltprocedure-linkage-table过程链接表"><a name="pltprocedure-linkage-table过程链接表" class="plugin-anchor" href="#pltprocedure-linkage-table过程链接表"><i class="fa fa-link" aria-hidden="true"></i></a><code>PLT</code>=<code>Procedure Linkage Table</code>=<code>过程链接表</code></h4>
+<ul>
+<li><strong>全称</strong>：Procedure Linkage Table（直译为“过程链接表”或“函数链接表”）</li>
+<li><strong>典型含义</strong>：<ul>
+<li>是<strong>目标文件（ELF/PE/Mach-O 等）代码段中的一个跳转表</strong>，用于在<strong>编译时不确定外部函数地址</strong>的场景下（如调用动态库中的函数），实现程序的“延迟绑定（Lazy Binding）”或“即时绑定（Immediate Binding）”。  </li>
+<li>简单来说，当程序调用一个动态库函数（如 <code>printf</code>）时，编译器不会直接生成调用 <code>printf</code> 的代码，而是生成调用 <strong>PLT 中对应桩函数（Stub Function）</strong> 的代码。PLT 桩函数的作用是<strong>通过 GOT 间接跳转到实际的函数地址</strong>（第一次调用时会触发动态链接器解析地址，后续直接使用已解析的地址）</li>
 </ul>
 </li>
-<li>API文档=API Reference<ul>
-<li><a href="https://frida.re/docs/javascript-api/" target="_blank">JavaScript API</a></li>
-<li><a href="https://frida.re/docs/c-api/" target="_blank">C API</a></li>
-<li><a href="https://frida.re/docs/swift-api/" target="_blank">Swift API</a></li>
-<li><a href="https://frida.re/docs/go-api/" target="_blank">Go API</a></li>
 </ul>
-</li>
-<li>其他细节=Miscellaneous<ul>
-<li>最佳实践: <a href="https://frida.re/docs/best-practices/" target="_blank">Best Practices</a></li>
-<li>排错: <a href="https://frida.re/docs/troubleshooting/" target="_blank">Troubleshooting</a></li>
-<li>自己编译Frida=参与Frida开发: <a href="https://frida.re/docs/building/" target="_blank">Building</a></li>
-<li>占用系统空间: <a href="https://frida.re/docs/footprint/" target="_blank">Footprint</a></li>
-</ul>
-</li>
-<li>起源和发展=Meta<ul>
-<li><a href="https://frida.re/docs/gsoc-ideas-2015/" target="_blank">GSoC Ideas 2015</a></li>
-<li><a href="https://frida.re/docs/gsod-ideas-2023/" target="_blank">GSoD Ideas 2023</a></li>
-<li><a href="https://frida.re/docs/history/" target="_blank">History</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>其他<ul>
-<li>教程<ul>
-<li><a href="https://learnfrida.info/basic_usage/" target="_blank">Frida basics - Frida HandBook (learnfrida.info)</a></li>
-<li><a href="https://learnfrida.info/" target="_blank">Frida HandBook</a></li>
+<h4 id="gotglobal-offset-table全局偏移表"><a name="gotglobal-offset-table全局偏移表" class="plugin-anchor" href="#gotglobal-offset-table全局偏移表"><i class="fa fa-link" aria-hidden="true"></i></a><code>GOT</code>=<code>Global Offset Table</code>=<code>全局偏移表</code></h4>
+<ul>
+<li><strong>全称</strong>：Global Offset Table（直译为“全局偏移表”）</li>
+<li><strong>典型含义</strong>：<ul>
+<li>是<strong>数据段中的一个指针表</strong>，存储了<strong>动态链接函数的实际地址（或间接地址）</strong>，以及全局变量/静态变量的地址。  </li>
+<li>GOT 与 PLT 配合使用：  <ul>
+<li>对于<strong>外部函数</strong>：GOT 中对应条目最初指向 PLT 的解析代码（用于第一次调用时让动态链接器填充真实地址）；之后会被动态链接器更新为<strong>目标函数的实际内存地址</strong>（懒加载完成后）。  </li>
+<li>对于<strong>全局/静态变量</strong>：GOT 条目直接存储变量的运行时地址（因为变量地址在加载时才确定）。  </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<h4 id="pltgot-的典型协作流程（以-elf-动态链接为例）"><a name="pltgot-的典型协作流程（以-elf-动态链接为例）" class="plugin-anchor" href="#pltgot-的典型协作流程（以-elf-动态链接为例）"><i class="fa fa-link" aria-hidden="true"></i></a>PLT/GOT 的典型协作流程（以 ELF 动态链接为例）</h4>
+<p>以调用 <code>libc.so</code> 中的 <code>open</code> 函数为例：  </p>
+<ol>
+<li><strong>编译阶段</strong>：编译器生成调用 <code>open@plt</code> 的指令（而非直接调用 <code>open</code>）——<code>open@plt</code> 是 PLT 中的桩函数。  </li>
+<li><strong>第一次调用 <code>open@plt</code></strong>：  <ul>
+<li>PLT 桩函数会先跳转到 GOT 中 <code>open</code> 对应的条目（此时 GOT 条目指向 PLT 的解析逻辑，而非 <code>open</code> 本身）；  </li>
+<li>触发动态链接器（<code>ld-linux.so</code>）解析 <code>open</code> 的实际地址，并将该地址写入 GOT 中 <code>open</code> 的条目；  </li>
+</ul>
+</li>
+<li><strong>后续调用 <code>open@plt</code></strong>：  <ul>
+<li>PLT 桩函数直接跳转到 GOT 中已更新的 <code>open</code> 地址，无需再次解析，效率等同于直接调用。  </li>
+</ul>
+</li>
+</ol>
+<h3 id="核心作用"><a name="核心作用" class="plugin-anchor" href="#核心作用"><i class="fa fa-link" aria-hidden="true"></i></a>核心作用</h3>
+<p>PLT/GOT 解决了<strong>动态链接的两个关键问题</strong>：</p>
+<ul>
+<li><strong>地址不确定性</strong>：动态库加载地址不固定（ASLR 机制下随机化），编译时无法写死函数地址；  </li>
+<li><strong>延迟绑定优化</strong>：避免程序启动时一次性解析所有动态函数地址（减少启动时间），仅在函数首次调用时解析。  </li>
+</ul>
+<h3 id="扩展：不同文件格式的对应概念"><a name="扩展：不同文件格式的对应概念" class="plugin-anchor" href="#扩展：不同文件格式的对应概念"><i class="fa fa-link" aria-hidden="true"></i></a>扩展：不同文件格式的对应概念</h3>
+<ul>
+<li>ELF（Linux/Android）：明确使用 PLT/GOT；  </li>
+<li>PE（Windows）：类似机制称为 <strong>Import Address Table（IAT，导入地址表）</strong> + <strong>Thunk 函数</strong>（对应 PLT）；  </li>
+<li>Mach-O（macOS/iOS）：类似机制称为 <strong>Lazy Symbol Pointer Table（懒符号指针表）</strong> + <strong>Stub Helper（桩辅助代码）</strong>（对应 PLT）。  </li>
+</ul>
+<p>但在讨论 Frida 等工具的 Hook 时，通常默认指 ELF 下的 PLT/GOT 机制。</p>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-06-27 22:55:46
+2025-12-31 11:09:12
 </span></footer></body></html>
                                 
                                 </section>
@@ -1061,12 +1096,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Frida概览">
+                <a href="../arch.html" class="navigation navigation-prev " aria-label="Previous page: 架构">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../code.html" class="navigation navigation-next " aria-label="Next page: 代码">
+                <a href="../../install_upgrade/" class="navigation navigation-next " aria-label="Next page: 安装和升级">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1077,7 +1112,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"文档和资料","level":"1.2.1","depth":2,"next":{"title":"代码","level":"1.2.2","depth":2,"path":"frida_overview/code.md","ref":"frida_overview/code.md","articles":[]},"previous":{"title":"Frida概览","level":"1.2","depth":1,"path":"frida_overview/README.md","ref":"frida_overview/README.md","articles":[{"title":"文档和资料","level":"1.2.1","depth":2,"path":"frida_overview/doc_refer/README.md","ref":"frida_overview/doc_refer/README.md","articles":[]},{"title":"代码","level":"1.2.2","depth":2,"path":"frida_overview/code.md","ref":"frida_overview/code.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"frida_overview/doc_refer/README.md","mtime":"2023-06-27T14:55:46.984Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-12-31T03:30:54.908Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Hook函数原理","level":"1.3.2","depth":2,"next":{"title":"安装和升级","level":"1.4","depth":1,"path":"install_upgrade/README.md","ref":"install_upgrade/README.md","articles":[{"title":"安装Frida","level":"1.4.1","depth":2,"path":"install_upgrade/install_frida/README.md","ref":"install_upgrade/install_frida/README.md","articles":[{"title":"电脑端","level":"1.4.1.1","depth":3,"path":"install_upgrade/install_frida/pc/README.md","ref":"install_upgrade/install_frida/pc/README.md","articles":[{"title":"Mac","level":"1.4.1.1.1","depth":4,"path":"install_upgrade/install_frida/pc/mac.md","ref":"install_upgrade/install_frida/pc/mac.md","articles":[]}]},{"title":"移动端","level":"1.4.1.2","depth":3,"path":"install_upgrade/install_frida/mobile/README.md","ref":"install_upgrade/install_frida/mobile/README.md","articles":[{"title":"iOS","level":"1.4.1.2.1","depth":4,"path":"install_upgrade/install_frida/mobile/ios.md","ref":"install_upgrade/install_frida/mobile/ios.md","articles":[]},{"title":"Android","level":"1.4.1.2.2","depth":4,"path":"install_upgrade/install_frida/mobile/android.md","ref":"install_upgrade/install_frida/mobile/android.md","articles":[]}]}]},{"title":"升级Frida","level":"1.4.2","depth":2,"path":"install_upgrade/upgrade_frida.md","ref":"install_upgrade/upgrade_frida.md","articles":[]}]},"previous":{"title":"架构","level":"1.3.1","depth":2,"path":"frida_logic/arch.md","ref":"frida_logic/arch.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/reverse_debug_frida/pdf/reverse_debug_frida.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/reverse_debug_frida/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"reverse_debug_frida","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"逆向调试利器：Frida","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍支持Android、iOS等多个平台的通用逆向工具：Frida。先是Frida概览，包括Frida的代码和架构，以及相关文档和案例和资料。再介绍如何在PC端和移动端即iOS和安卓端的安装和升级Frida。然后是如何使用Frida，先介绍Frida的典型使用逻辑，然后再去介绍frida命令行工具，其中包括通用的逻辑，比如调试目标的方式，以及写js脚本；然后是典型的使用方式，以及此处iOS逆向涉及到的ObjC的内容，包括ObjC的参数和变量类型；接着是数据类型，包括NativePointer。接着是高级的Stalker。接着介绍frida-trace，以及frida-tools工具集合，包括frida-ps、frida-ls、frida-ls-devices等；接着介绍其他相关的内容，包括frida-server等。接着整理一些Frida开发期间的经验和心得，包括hook函数方面的，包括frida和frida-trace，frida中的Interceptor、Stalker、常用iOS函数等。其他还有工具类的函数、js以及其中的console.log，和自己编译frida-server，和其他常见问题和报错。接着整理基于Frida的工具。以及Frida的一些常见用途，包括反调试、辅助反混淆、绕过参数加密、逆向各种app等。最后贴出参考资料。"},"file":{"path":"frida_logic/hook/README.md","mtime":"2025-12-31T03:09:12.019Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2025-12-31T03:30:54.908Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
