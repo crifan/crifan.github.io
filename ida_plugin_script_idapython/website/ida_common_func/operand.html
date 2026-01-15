@@ -6,7 +6,7 @@
         <title>Operand · IDA插件脚本：IDAPython</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.0">
         <meta name="author" content="Crifan Li <admin@crifan.com>">
         
         
@@ -28,7 +28,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism-atom-dark.css">
                 
             
                 
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-callouts/plugin.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-blockquote-callout/style.css">
                 
             
                 
@@ -488,17 +488,17 @@
 <span class="token comment">################################################################################</span>
 
 ArmSpecialRegNameList <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token string">&quot;SB&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;TR&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;XR&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;IP&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;IP0&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;IP1&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;PR&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;SP&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;FP&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;LR&quot;</span><span class="token punctuation">,</span>
-  <span class="token string">&quot;PC&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">"SB"</span><span class="token punctuation">,</span>
+  <span class="token string">"TR"</span><span class="token punctuation">,</span>
+  <span class="token string">"XR"</span><span class="token punctuation">,</span>
+  <span class="token string">"IP"</span><span class="token punctuation">,</span>
+  <span class="token string">"IP0"</span><span class="token punctuation">,</span>
+  <span class="token string">"IP1"</span><span class="token punctuation">,</span>
+  <span class="token string">"PR"</span><span class="token punctuation">,</span>
+  <span class="token string">"SP"</span><span class="token punctuation">,</span>
+  <span class="token string">"FP"</span><span class="token punctuation">,</span>
+  <span class="token string">"LR"</span><span class="token punctuation">,</span>
+  <span class="token string">"PC"</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span>
 
 <span class="token keyword">class</span> <span class="token class-name">Operand</span><span class="token punctuation">:</span>
@@ -545,11 +545,11 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
   o_dcr  <span class="token operator">=</span>         o_idpspec5      <span class="token comment"># Device control register</span>
 
 
-  <span class="token comment"># addStr = &quot;add&quot;</span>
-  <span class="token comment"># addStr = &quot;Add&quot;</span>
-  offStr <span class="token operator">=</span> <span class="token string">&quot;Off&quot;</span> <span class="token comment"># Offset=Index</span>
-  <span class="token comment"># valStr = &quot;val&quot;</span>
-  valStr <span class="token operator">=</span> <span class="token string">&quot;Val&quot;</span>
+  <span class="token comment"># addStr = "add"</span>
+  <span class="token comment"># addStr = "Add"</span>
+  offStr <span class="token operator">=</span> <span class="token string">"Off"</span> <span class="token comment"># Offset=Index</span>
+  <span class="token comment"># valStr = "val"</span>
+  valStr <span class="token operator">=</span> <span class="token string">"Val"</span>
 
   <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> operand<span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
     self<span class="token punctuation">.</span>operand <span class="token operator">=</span> operand
@@ -565,48 +565,48 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     self<span class="token punctuation">.</span>_postInit<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
   <span class="token keyword">def</span> <span class="token function">_postInit</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment"># print(&quot;_postInit&quot;)</span>
+    <span class="token comment"># print("_postInit")</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>isDispl<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
       <span class="token comment"># o_displ    = 4        # Memory Reg [Base Reg + Index Reg + Displacement] phrase+addr</span>
       <span class="token comment"># [SP,#arg_18]</span>
       <span class="token comment"># [X20,#0x50]</span>
-      <span class="token comment"># print(&quot;self.operand=%s&quot; % self.operand)</span>
-      <span class="token comment"># displMatch = re.search(&quot;\[(?P&lt;baseReg&gt;\w+),(?P&lt;displacement&gt;#[\w\-\.]+)\]&quot;, self.operand)</span>
+      <span class="token comment"># print("self.operand=%s" % self.operand)</span>
+      <span class="token comment"># displMatch = re.search("\[(?P&lt;baseReg&gt;\w+),(?P&lt;displacement&gt;#[\w\-\.]+)\]", self.operand)</span>
       <span class="token comment"># [X9]</span>
-      displMatch <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;\[(?P&lt;baseReg&gt;\w+)(,(?P&lt;displacement&gt;#[\w\-\.]+))?\]&quot;</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
-      <span class="token comment"># print(&quot;displMatch=%s&quot; % displMatch)</span>
+      displMatch <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">"\[(?P&lt;baseReg&gt;\w+)(,(?P&lt;displacement&gt;#[\w\-\.]+))?\]"</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
+      <span class="token comment"># print("displMatch=%s" % displMatch)</span>
       <span class="token keyword">if</span> displMatch<span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>baseReg <span class="token operator">=</span> displMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;baseReg&quot;</span><span class="token punctuation">)</span>
-        <span class="token comment"># print(&quot;self.baseReg=%s&quot; % self.baseReg)</span>
-        self<span class="token punctuation">.</span>displacement <span class="token operator">=</span> displMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;displacement&quot;</span><span class="token punctuation">)</span>
-        <span class="token comment"># print(&quot;self.displacement=%s&quot; % self.displacement)</span>
+        self<span class="token punctuation">.</span>baseReg <span class="token operator">=</span> displMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"baseReg"</span><span class="token punctuation">)</span>
+        <span class="token comment"># print("self.baseReg=%s" % self.baseReg)</span>
+        self<span class="token punctuation">.</span>displacement <span class="token operator">=</span> displMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"displacement"</span><span class="token punctuation">)</span>
+        <span class="token comment"># print("self.displacement=%s" % self.displacement)</span>
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isPhrase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
       <span class="token comment"># o_phrase   = 3        # Memory Ref [Base Reg + Index Reg]    phrase</span>
       <span class="token comment"># [X19,X8]</span>
-      <span class="token comment"># print(&quot;self.operand=%s&quot; % self.operand)</span>
-      phraseMatch <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">&quot;\[(?P&lt;baseReg&gt;\w+),(?P&lt;indexReg&gt;\w+)\]&quot;</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
-      <span class="token comment"># print(&quot;phraseMatch=%s&quot; % phraseMatch)</span>
+      <span class="token comment"># print("self.operand=%s" % self.operand)</span>
+      phraseMatch <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">"\[(?P&lt;baseReg&gt;\w+),(?P&lt;indexReg&gt;\w+)\]"</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
+      <span class="token comment"># print("phraseMatch=%s" % phraseMatch)</span>
       <span class="token keyword">if</span> phraseMatch<span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>baseReg <span class="token operator">=</span> phraseMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;baseReg&quot;</span><span class="token punctuation">)</span>
-        <span class="token comment"># print(&quot;self.baseReg=%s&quot; % self.baseReg)</span>
-        self<span class="token punctuation">.</span>indexReg <span class="token operator">=</span> phraseMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">&quot;indexReg&quot;</span><span class="token punctuation">)</span>
-        <span class="token comment"># print(&quot;self.indexReg=%s&quot; % self.indexReg)</span>
+        self<span class="token punctuation">.</span>baseReg <span class="token operator">=</span> phraseMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"baseReg"</span><span class="token punctuation">)</span>
+        <span class="token comment"># print("self.baseReg=%s" % self.baseReg)</span>
+        self<span class="token punctuation">.</span>indexReg <span class="token operator">=</span> phraseMatch<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"indexReg"</span><span class="token punctuation">)</span>
+        <span class="token comment"># print("self.indexReg=%s" % self.indexReg)</span>
 
   <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    valStr <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+    valStr <span class="token operator">=</span> <span class="token string">""</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>value <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
-      valStr <span class="token operator">=</span> <span class="token string">&quot;%s&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
+      valStr <span class="token operator">=</span> <span class="token string">"%s"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
     <span class="token keyword">else</span><span class="token punctuation">:</span>
-      valStr <span class="token operator">=</span> <span class="token string">&quot;0x%X&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
-    <span class="token comment"># curOpStr = &quot;&lt;Operand: op=%s,type=%d,val=%s&gt;&quot; % (self.operand, self.type, valStr)</span>
-    <span class="token comment"># curOpStr = &quot;&lt;Operand: op=%s,type=%d,val=%s, baseReg=%s,indexReg=%s,displ=%s&gt;&quot; % (self.operand, self.type, valStr, self.baseReg, self.indexReg, self.displacement)</span>
-    extraInfo <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+      valStr <span class="token operator">=</span> <span class="token string">"0x%X"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
+    <span class="token comment"># curOpStr = "&lt;Operand: op=%s,type=%d,val=%s&gt;" % (self.operand, self.type, valStr)</span>
+    <span class="token comment"># curOpStr = "&lt;Operand: op=%s,type=%d,val=%s, baseReg=%s,indexReg=%s,displ=%s&gt;" % (self.operand, self.type, valStr, self.baseReg, self.indexReg, self.displacement)</span>
+    extraInfo <span class="token operator">=</span> <span class="token string">""</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>isDispl<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-      extraInfo <span class="token operator">=</span> <span class="token string">&quot;,bsReg=%s,idxReg=%s,displ=%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>displacement<span class="token punctuation">)</span>
+      extraInfo <span class="token operator">=</span> <span class="token string">",bsReg=%s,idxReg=%s,displ=%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>displacement<span class="token punctuation">)</span>
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isPhrase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-      extraInfo <span class="token operator">=</span> <span class="token string">&quot;,bsReg=%s,idxReg=%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">)</span>
-    curOpStr <span class="token operator">=</span> <span class="token string">&quot;&lt;Operand: op=%s,type=%d,val=%s%s&gt;&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>operand<span class="token punctuation">,</span> self<span class="token punctuation">.</span><span class="token builtin">type</span><span class="token punctuation">,</span> valStr<span class="token punctuation">,</span> extraInfo<span class="token punctuation">)</span>
-    <span class="token comment"># print(&quot;curOpStr=%s&quot; % curOpStr)</span>
+      extraInfo <span class="token operator">=</span> <span class="token string">",bsReg=%s,idxReg=%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">)</span>
+    curOpStr <span class="token operator">=</span> <span class="token string">"&lt;Operand: op=%s,type=%d,val=%s%s&gt;"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>operand<span class="token punctuation">,</span> self<span class="token punctuation">.</span><span class="token builtin">type</span><span class="token punctuation">,</span> valStr<span class="token punctuation">,</span> extraInfo<span class="token punctuation">)</span>
+    <span class="token comment"># print("curOpStr=%s" % curOpStr)</span>
     <span class="token keyword">return</span> curOpStr
 
   <span class="token decorator annotation punctuation">@staticmethod</span>
@@ -614,14 +614,14 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     <span class="token comment"># operandStrList = []</span>
     <span class="token comment"># for curOperand in operandList:</span>
     <span class="token comment">#   if curOperand:</span>
-    <span class="token comment">#     curOperandStr = &quot;%s&quot; % curOperand</span>
+    <span class="token comment">#     curOperandStr = "%s" % curOperand</span>
     <span class="token comment">#   else:</span>
-    <span class="token comment">#     curOperandStr = &quot;&quot;</span>
-    <span class="token comment">#   # print(&quot;curOperandStr=%s&quot; % curOperandStr)</span>
+    <span class="token comment">#     curOperandStr = ""</span>
+    <span class="token comment">#   # print("curOperandStr=%s" % curOperandStr)</span>
     <span class="token comment">#   operandStrList.append(curOperandStr)</span>
     operandStrList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>eachOperand<span class="token punctuation">)</span> <span class="token keyword">for</span> eachOperand <span class="token keyword">in</span> operandList<span class="token punctuation">]</span>
-    operandListAllStr <span class="token operator">=</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>operandStrList<span class="token punctuation">)</span>
-    operandListAllStr <span class="token operator">=</span> <span class="token string">&quot;[%s]&quot;</span> <span class="token operator">%</span> operandListAllStr
+    operandListAllStr <span class="token operator">=</span> <span class="token string">", "</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>operandStrList<span class="token punctuation">)</span>
+    operandListAllStr <span class="token operator">=</span> <span class="token string">"[%s]"</span> <span class="token operator">%</span> operandListAllStr
     <span class="token keyword">return</span> operandListAllStr
 
   <span class="token keyword">def</span> <span class="token function">isReg</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -647,41 +647,41 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     isDebug <span class="token operator">=</span> <span class="token boolean">False</span>
 
     <span class="token comment"># isValidOperand = bool(self.operand)</span>
-    <span class="token comment"># print(&quot;isValidOperand=%s&quot; % isValidOperand)</span>
+    <span class="token comment"># print("isValidOperand=%s" % isValidOperand)</span>
     <span class="token comment"># if isValidOperand:</span>
     isValidOperand <span class="token operator">=</span> <span class="token boolean">False</span>
 
     <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;self.operand=%s&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self.operand=%s"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
 
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">:</span>
       <span class="token keyword">if</span> self<span class="token punctuation">.</span>isImm<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment"># #0x20200A2C</span>
         <span class="token comment"># #0x2020</span>
         <span class="token comment"># #arg_20</span>
-        <span class="token comment"># isMatchImm = re.match(&quot;^#[0-9a-fA-FxX]+$&quot;, self.operand)</span>
+        <span class="token comment"># isMatchImm = re.match("^#[0-9a-fA-FxX]+$", self.operand)</span>
         <span class="token comment"># #-3.0</span>
-        <span class="token comment"># isMatchImm = re.match(&quot;^#\w+$&quot;, self.operand)</span>
-        isMatchImm <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">&quot;^#[\w\-\.]+$&quot;</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
+        <span class="token comment"># isMatchImm = re.match("^#\w+$", self.operand)</span>
+        isMatchImm <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">"^#[\w\-\.]+$"</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">)</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;isMatchImm=%s&quot;</span> <span class="token operator">%</span> isMatchImm<span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"isMatchImm=%s"</span> <span class="token operator">%</span> isMatchImm<span class="token punctuation">)</span>
         isValidOperand <span class="token operator">=</span> <span class="token builtin">bool</span><span class="token punctuation">(</span>isMatchImm<span class="token punctuation">)</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;isValidOperand=%s&quot;</span> <span class="token operator">%</span> isValidOperand<span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"isValidOperand=%s"</span> <span class="token operator">%</span> isValidOperand<span class="token punctuation">)</span>
       <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isReg<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment"># X0/X1</span>
         <span class="token comment"># D8/D4</span>
         <span class="token comment"># Special: XZR/WZR</span>
         regNameUpper <span class="token operator">=</span> self<span class="token punctuation">.</span>operand<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment"># print(&quot;regNameUpper=%s&quot; % regNameUpper)</span>
-        <span class="token comment"># isMatchReg = re.match(&quot;^[XD]\d+$&quot;, regNameUpper)</span>
-        <span class="token comment"># isMatchReg = re.match(&quot;^[XDW]\d+$&quot;, regNameUpper)</span>
-        isMatchReg <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">&quot;^([XDW]\d+)|(XZR)|(WZR)$&quot;</span><span class="token punctuation">,</span> regNameUpper<span class="token punctuation">)</span>
+        <span class="token comment"># print("regNameUpper=%s" % regNameUpper)</span>
+        <span class="token comment"># isMatchReg = re.match("^[XD]\d+$", regNameUpper)</span>
+        <span class="token comment"># isMatchReg = re.match("^[XDW]\d+$", regNameUpper)</span>
+        isMatchReg <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">"^([XDW]\d+)|(XZR)|(WZR)$"</span><span class="token punctuation">,</span> regNameUpper<span class="token punctuation">)</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;isMatchReg=%s&quot;</span> <span class="token operator">%</span> isMatchReg<span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"isMatchReg=%s"</span> <span class="token operator">%</span> isMatchReg<span class="token punctuation">)</span>
         isValidOperand <span class="token operator">=</span> <span class="token builtin">bool</span><span class="token punctuation">(</span>isMatchReg<span class="token punctuation">)</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;isValidOperand=%s&quot;</span> <span class="token operator">%</span> isValidOperand<span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"isValidOperand=%s"</span> <span class="token operator">%</span> isValidOperand<span class="token punctuation">)</span>
         <span class="token keyword">if</span> <span class="token keyword">not</span> isValidOperand<span class="token punctuation">:</span>
           isValidOperand <span class="token operator">=</span> regNameUpper <span class="token keyword">in</span> ArmSpecialRegNameList
       <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isDispl<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -690,7 +690,7 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
         <span class="token comment"># if self.baseReg and (not self.indexReg) and self.displacement:</span>
         <span class="token comment"># curOperand=&lt;Operand: op=[X9],type=4,val=0x0&gt;</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;self.baseReg=%s, self.indexReg=%s, self.displacement=%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>displacement<span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self.baseReg=%s, self.indexReg=%s, self.displacement=%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>displacement<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>baseReg <span class="token keyword">and</span> <span class="token punctuation">(</span><span class="token keyword">not</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">)</span><span class="token punctuation">:</span>
           <span class="token comment"># Note: self.displacement is None / Not-None</span>
@@ -699,14 +699,14 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
       <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isPhrase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment"># curOperand=&lt;Operand: op=[X19,X8],type=3,val=0x94&gt;</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;self.baseReg=%s, self.indexReg=%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self.baseReg=%s, self.indexReg=%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">)</span><span class="token punctuation">)</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>baseReg <span class="token keyword">and</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">:</span>
           isValidOperand <span class="token operator">=</span> <span class="token boolean">True</span>
       <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isNear<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment"># o_near     = 7        # Immediate Near Address (CODE)        addr</span>
         <span class="token comment"># curOperand=&lt;Operand: op=_objc_copyWeak,type=7,val=0x1024ABBD0&gt;</span>
         <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;self.value=%s&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"self.value=%s"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
 
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>value<span class="token punctuation">:</span>
           <span class="token comment"># jump to some (non 0) address -&gt; consider is valid</span>
@@ -714,7 +714,7 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
       <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isIdpspec0<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         isValidOperand <span class="token operator">=</span> <span class="token boolean">True</span>
 
-    <span class="token comment"># print(&quot;isValidOperand=%s&quot; % isValidOperand)</span>
+    <span class="token comment"># print("isValidOperand=%s" % isValidOperand)</span>
 
     <span class="token comment"># isValidType = self.type != Operand.o_void</span>
     <span class="token comment"># isValidValue = self.value &gt;= 0</span>
@@ -734,7 +734,7 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     isValidAll <span class="token operator">=</span> isValidOperand <span class="token keyword">and</span> isValidTypeValue
 
     <span class="token keyword">if</span> isDebug<span class="token punctuation">:</span>
-      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Operand isValidAll=%s&quot;</span> <span class="token operator">%</span> isValidAll<span class="token punctuation">)</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Operand isValidAll=%s"</span> <span class="token operator">%</span> isValidAll<span class="token punctuation">)</span>
     <span class="token keyword">return</span> isValidAll
 
   <span class="token keyword">def</span> <span class="token function">isInvalid</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -745,15 +745,15 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     curImmVal <span class="token operator">=</span> <span class="token boolean">None</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>isImm<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
       curImmVal <span class="token operator">=</span> self<span class="token punctuation">.</span>value
-      <span class="token comment"># print(&quot;curImmVal=%s&quot; % curImmVal)</span>
+      <span class="token comment"># print("curImmVal=%s" % curImmVal)</span>
     <span class="token keyword">return</span> curImmVal
 
   <span class="token decorator annotation punctuation">@property</span>
   <span class="token keyword">def</span> <span class="token function">immValHex</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    curImmValHex <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+    curImmValHex <span class="token operator">=</span> <span class="token string">""</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>immVal <span class="token operator">!=</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-      curImmValHex <span class="token operator">=</span> <span class="token string">&quot;0x%X&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>immVal
-      <span class="token comment"># print(&quot;curImmValHex=%s&quot; % curImmValHex)</span>
+      curImmValHex <span class="token operator">=</span> <span class="token string">"0x%X"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>immVal
+      <span class="token comment"># print("curImmValHex=%s" % curImmValHex)</span>
     <span class="token keyword">return</span> curImmValHex
 
   <span class="token decorator annotation punctuation">@property</span>
@@ -765,50 +765,50 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
 
   <span class="token decorator annotation punctuation">@property</span>
   <span class="token keyword">def</span> <span class="token function">contentStr</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    contentStr <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+    contentStr <span class="token operator">=</span> <span class="token string">""</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>isReg<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token comment"># print(&quot;isReg&quot;)</span>
+      <span class="token comment"># print("isReg")</span>
       contentStr <span class="token operator">=</span> self<span class="token punctuation">.</span>regName
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isImm<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token comment"># print(&quot;isImm&quot;)</span>
+      <span class="token comment"># print("isImm")</span>
       <span class="token comment"># if 0 == self.immVal:</span>
       <span class="token comment"># for 0 &lt;= x &lt; 8, not add 0x prefix, eg: 0x7 -&gt; 7</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>immVal <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>immVal <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># contentStr = &quot;0&quot;</span>
-        contentStr <span class="token operator">=</span> <span class="token string">&quot;%X&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>immVal
+        <span class="token comment"># contentStr = "0"</span>
+        contentStr <span class="token operator">=</span> <span class="token string">"%X"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>immVal
       <span class="token keyword">else</span><span class="token punctuation">:</span>
         contentStr <span class="token operator">=</span> self<span class="token punctuation">.</span>immValHex
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isIdpspec0<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         contentStr <span class="token operator">=</span> self<span class="token punctuation">.</span>operand
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isDispl<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment"># [SP,#arg_18]</span>
-        <span class="token comment"># print(&quot;self.displacement=%s&quot; % self.displacement)</span>
+        <span class="token comment"># print("self.displacement=%s" % self.displacement)</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>displacement<span class="token punctuation">:</span>
-          displacementStr <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+          displacementStr <span class="token operator">=</span> <span class="token string">""</span>
           <span class="token keyword">if</span> self<span class="token punctuation">.</span>value <span class="token operator">!=</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>value <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>value <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-              displacementStr <span class="token operator">=</span> <span class="token string">&quot;%X&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
+              displacementStr <span class="token operator">=</span> <span class="token string">"%X"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
             <span class="token keyword">else</span><span class="token punctuation">:</span>
-              displacementStr <span class="token operator">=</span> <span class="token string">&quot;0x%X&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
-          <span class="token comment"># print(&quot;displacementStr=%s&quot; % displacementStr)</span>
-          contentStr <span class="token operator">=</span> <span class="token string">&quot;%s%s%s%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>offStr<span class="token punctuation">,</span> displacementStr<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
+              displacementStr <span class="token operator">=</span> <span class="token string">"0x%X"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>value
+          <span class="token comment"># print("displacementStr=%s" % displacementStr)</span>
+          contentStr <span class="token operator">=</span> <span class="token string">"%s%s%s%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>offStr<span class="token punctuation">,</span> displacementStr<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
-          contentStr <span class="token operator">=</span> <span class="token string">&quot;%s%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
+          contentStr <span class="token operator">=</span> <span class="token string">"%s%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
     <span class="token keyword">elif</span> self<span class="token punctuation">.</span>isPhrase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
       <span class="token comment"># [X19,X8]</span>
-      contentStr <span class="token operator">=</span> <span class="token string">&quot;%s%s%s%s&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>offStr<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
+      contentStr <span class="token operator">=</span> <span class="token string">"%s%s%s%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>baseReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>offStr<span class="token punctuation">,</span> self<span class="token punctuation">.</span>indexReg<span class="token punctuation">,</span> Operand<span class="token punctuation">.</span>valStr<span class="token punctuation">)</span>
 
     <span class="token comment"># remove invalid char</span>
     <span class="token comment"># &lt;Operand: op=W0,UXTB,type=8,val=-1&gt;</span>
     <span class="token comment"># W0,UXTB -&gt; W0UXTB</span>
-    contentStr <span class="token operator">=</span> contentStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+    contentStr <span class="token operator">=</span> contentStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
     <span class="token comment"># X21,LSL#32</span>
     <span class="token comment"># X8,ASR#29</span>
-    contentStr <span class="token operator">=</span> contentStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;#&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+    contentStr <span class="token operator">=</span> contentStr<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"#"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
 
     <span class="token comment"># TODO: add more case</span>
 
-    <span class="token comment"># print(&quot;contentStr=%s&quot; % contentStr)</span>
+    <span class="token comment"># print("contentStr=%s" % contentStr)</span>
     <span class="token keyword">return</span> contentStr
 
   <span class="token decorator annotation punctuation">@property</span>
@@ -866,7 +866,7 @@ ArmSpecialRegNameList <span class="token operator">=</span> <span class="token p
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Operand","level":"1.6.2.1","depth":3,"next":{"title":"Instruction","level":"1.6.2.2","depth":3,"path":"ida_common_func/instruction.md","ref":"ida_common_func/instruction.md","articles":[]},"previous":{"title":"工具类","level":"1.6.2","depth":2,"path":"ida_common_func/util_class/README.md","ref":"ida_common_func/util_class/README.md","articles":[{"title":"Operand","level":"1.6.2.1","depth":3,"path":"ida_common_func/operand.md","ref":"ida_common_func/operand.md","articles":[]},{"title":"Instruction","level":"1.6.2.2","depth":3,"path":"ida_common_func/instruction.md","ref":"ida_common_func/instruction.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","callouts","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"callouts":{"showTypeInHeader":false},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ida_plugin_script_idapython/pdf/ida_plugin_script_idapython.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ida_plugin_script_idapython/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ida_plugin_script_idapython","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"IDA插件脚本：IDAPython","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍IDA中支持用Python代码调用IDAPython接口编写插件脚本，实现各种功能。"},"file":{"path":"ida_common_func/operand.md","mtime":"2024-10-01T09:47:14.878Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-10-03T01:45:02.753Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Operand","level":"1.6.2.1","depth":3,"next":{"title":"Instruction","level":"1.6.2.2","depth":3,"path":"ida_common_func/instruction.md","ref":"ida_common_func/instruction.md","articles":[]},"previous":{"title":"工具类","level":"1.6.2","depth":2,"path":"ida_common_func/util_class/README.md","ref":"ida_common_func/util_class/README.md","articles":[{"title":"Operand","level":"1.6.2.1","depth":3,"path":"ida_common_func/operand.md","ref":"ida_common_func/operand.md","articles":[]},{"title":"Instruction","level":"1.6.2.2","depth":3,"path":"ida_common_func/instruction.md","ref":"ida_common_func/instruction.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ida_plugin_script_idapython/pdf/ida_plugin_script_idapython.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ida_plugin_script_idapython/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ida_plugin_script_idapython","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"IDA插件脚本：IDAPython","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍IDA中支持用Python代码调用IDAPython接口编写插件脚本，实现各种功能。"},"file":{"path":"ida_common_func/operand.md","mtime":"2024-10-01T09:47:14.878Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2026-01-15T06:42:04.154Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
