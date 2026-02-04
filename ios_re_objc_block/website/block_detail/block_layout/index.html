@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="type.html" />
+    <link rel="next" href="struct_mem/" />
     
     
-    <link rel="prev" href="../block_dev.html" />
+    <link rel="prev" href="../../block_type/" />
     
 
     <style>
@@ -198,12 +198,27 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.2" data-path="./">
+        <li class="chapter " data-level="1.3.2" data-path="../../block_type/">
+            
+                <a href="../../block_type/">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    Block类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="./">
             
                 <a href="./">
             
                     
-                        <b>1.3.2.</b>
+                        <b>1.3.3.</b>
                     
                     Block定义
             
@@ -214,14 +229,30 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.2.1" data-path="type.html">
+        <li class="chapter " data-level="1.3.3.1" data-path="struct_mem/">
             
-                <a href="type.html">
+                <a href="struct_mem/">
             
                     
-                        <b>1.3.2.1.</b>
+                        <b>1.3.3.1.</b>
                     
-                    Block类型
+                    结构体定义
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1.1" data-path="struct_mem/mem_layout.html">
+            
+                <a href="struct_mem/mem_layout.html">
+            
+                    
+                        <b>1.3.3.1.1.</b>
+                    
+                    内存结构布局图
             
                 </a>
             
@@ -229,12 +260,17 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.2" data-path="flags.html">
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="flags.html">
             
                 <a href="flags.html">
             
                     
-                        <b>1.3.2.2.</b>
+                        <b>1.3.3.2.</b>
                     
                     flags
             
@@ -244,12 +280,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.3" data-path="invoke/">
+        <li class="chapter " data-level="1.3.3.3" data-path="invoke/">
             
                 <a href="invoke/">
             
                     
-                        <b>1.3.2.3.</b>
+                        <b>1.3.3.3.</b>
                     
                     invoke
             
@@ -259,12 +295,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.4" data-path="descriptor.html">
+        <li class="chapter " data-level="1.3.3.4" data-path="descriptor.html">
             
                 <a href="descriptor.html">
             
                     
-                        <b>1.3.2.4.</b>
+                        <b>1.3.3.4.</b>
                     
                     descriptor
             
@@ -274,12 +310,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2.5" data-path="imported_variables.html">
+        <li class="chapter " data-level="1.3.3.5" data-path="imported_variables.html">
             
                 <a href="imported_variables.html">
             
                     
-                        <b>1.3.2.5.</b>
+                        <b>1.3.3.5.</b>
                     
                     imported variables
             
@@ -323,6 +359,21 @@
                         <b>1.4.1.</b>
                     
                     YouTube逆向
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../block_example/awemecore.html">
+            
+                <a href="../../block_example/awemecore.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    AwemeCore逆向
             
                 </a>
             
@@ -468,74 +519,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="block定义"><a name="block定义" class="plugin-anchor" href="#block定义"><i class="fa fa-link" aria-hidden="true"></i></a>Block定义</h1>
-<p>TODO：</p>
-<ul>
-<li>【记录】iOS中的Block的定义画出结构图</li>
-</ul>
-<hr></hr>
-<h2 id="block结构体定义"><a name="block结构体定义" class="plugin-anchor" href="#block结构体定义"><i class="fa fa-link" aria-hidden="true"></i></a>Block结构体定义</h2>
-<ul>
-<li>来源=官网源码<ul>
-<li>Block_private.h<ul>
-<li>旧：<a href="https://opensource.apple.com/source/libclosure/libclosure-38/Block_private.h" target="_blank">https://opensource.apple.com/source/libclosure/libclosure-38/Block_private.h</a></li>
-<li>新：<a href="https://opensource.apple.com/source/libclosure/libclosure-63/Block_private.h" target="_blank">https://opensource.apple.com/source/libclosure/libclosure-63/Block_private.h</a></li>
-</ul>
-</li>
-<li>TODO：更新版，记得还有额外的属性，抽空也去整理过来</li>
-</ul>
-</li>
-</ul>
-<p>-&gt; 合并后的最新的理解：</p>
-<h3 id="block定义的代码"><a name="block定义的代码" class="plugin-anchor" href="#block定义的代码"><i class="fa fa-link" aria-hidden="true"></i></a>Block定义的代码</h3>
-<pre class="language-"><code class="lang-c"><span class="token keyword">struct</span> <span class="token class-name">Block_layout</span> <span class="token punctuation">{</span>
-    <span class="token keyword">void</span> <span class="token operator">*</span>isa<span class="token punctuation">;</span>
-    <span class="token keyword">volatile</span> <span class="token class-name">int32_t</span> flags<span class="token punctuation">;</span> <span class="token comment">// contains ref count</span>
-    <span class="token class-name">int32_t</span> reserved<span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>invoke<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> <span class="token class-name">Block_descriptor_1</span> <span class="token operator">*</span>descriptor<span class="token punctuation">;</span>
-    <span class="token comment">// imported variables</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment">// merged new layout</span>
-<span class="token keyword">struct</span> <span class="token class-name">Block_descriptor</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Block_descriptor_1</span>
-    <span class="token class-name">uintptr_t</span> reserved<span class="token punctuation">;</span>
-    <span class="token class-name">uintptr_t</span> size<span class="token punctuation">;</span>
-
-    <span class="token comment">// Block_descriptor_2</span>
-    <span class="token comment">// requires BLOCK_HAS_COPY_DISPOSE</span>
-    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>copy<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>dst<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span>src<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>dispose<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment">// Block_descriptor_3</span>
-    <span class="token comment">// requires BLOCK_HAS_SIGNATURE</span>
-    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>signature<span class="token punctuation">;</span>
-    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>layout<span class="token punctuation">;</span>     <span class="token comment">// contents depend on BLOCK_HAS_EXTENDED_LAYOUT</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
-<h3 id="block定义的结构图"><a name="block定义的结构图" class="plugin-anchor" href="#block定义的结构图"><i class="fa fa-link" aria-hidden="true"></i></a>Block定义的结构图</h3>
-<ul>
-<li>自己的详细图<ul>
-<li><img src="../../assets/img/block_layout_crifan_detail.jpg" alt="block_layout_crifan_detail"></img><ul>
-<li>在线浏览<ul>
-<li><a href="https://www.processon.com/view/link/6293498c0e3e74603c4b2039" target="_blank">iOS的Block定义的结构图 | ProcessOn免费在线作图</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>别人的简单的图<ul>
-<li><img src="../../assets/img/block_layout_other_simple.png" alt="block_layout_other_simple"></img></li>
-</ul>
-</li>
-</ul>
-<p>TODO：</p>
-<ul>
-<li>【整理】iOS逆向心得：ObjC中Block的定义</li>
-</ul>
 <footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
-2023-07-07 09:42:47
+2026-02-04 14:32:29
 </span></footer></body></html>
                                 
                                 </section>
@@ -563,12 +548,12 @@
 
             
                 
-                <a href="../block_dev.html" class="navigation navigation-prev " aria-label="Previous page: Block正向开发">
+                <a href="../../block_type/" class="navigation navigation-prev " aria-label="Previous page: Block类型">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="type.html" class="navigation navigation-next " aria-label="Next page: Block类型">
+                <a href="struct_mem/" class="navigation navigation-next " aria-label="Next page: 结构体定义">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -579,7 +564,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Block定义","level":"1.3.2","depth":2,"next":{"title":"Block类型","level":"1.3.2.1","depth":3,"path":"block_detail/block_layout/type.md","ref":"block_detail/block_layout/type.md","articles":[]},"previous":{"title":"Block正向开发","level":"1.3.1","depth":2,"path":"block_detail/block_dev.md","ref":"block_detail/block_dev.md","articles":[]},"articles":[{"title":"Block类型","level":"1.3.2.1","depth":3,"path":"block_detail/block_layout/type.md","ref":"block_detail/block_layout/type.md","articles":[]},{"title":"flags","level":"1.3.2.2","depth":3,"path":"block_detail/block_layout/flags.md","ref":"block_detail/block_layout/flags.md","articles":[]},{"title":"invoke","level":"1.3.2.3","depth":3,"path":"block_detail/block_layout/invoke/README.md","ref":"block_detail/block_layout/invoke/README.md","articles":[]},{"title":"descriptor","level":"1.3.2.4","depth":3,"path":"block_detail/block_layout/descriptor.md","ref":"block_detail/block_layout/descriptor.md","articles":[]},{"title":"imported variables","level":"1.3.2.5","depth":3,"path":"block_detail/block_layout/imported_variables.md","ref":"block_detail/block_layout/imported_variables.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_block/pdf/ios_re_objc_block.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_block/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_block","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：Block匿名函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间会涉及到的Block匿名回调函数。先解释为何要研究Block；再详细介绍Block，包括正向开发时的如何写Block代码，然后是逆向时Block的结构定义，包括定义的代码和定义的结构图，再分别介绍每一部分的含义，包括Block类型、flags、invoke，以及其中的signature函数签名，以及descriptor、imported variables引用的量；再介绍iOS逆向期间所涉及到的Block最核心的内容是哪些，然后举例详细阐述如何通过Block搞懂函数调用逻辑，以及导入变量的参数传递，顺带介绍如何优化IDA伪代码。然后再整理Block相关的心得，比如动态调试期间，如何查看Block信息、和Block相关的objc函数。"},"file":{"path":"block_detail/block_layout/README.md","mtime":"2023-07-07T01:42:47.326Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2024-10-26T07:18:20.802Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Block定义","level":"1.3.3","depth":2,"next":{"title":"结构体定义","level":"1.3.3.1","depth":3,"path":"block_detail/block_layout/struct_mem/README.md","ref":"block_detail/block_layout/struct_mem/README.md","articles":[{"title":"内存结构布局图","level":"1.3.3.1.1","depth":4,"path":"block_detail/block_layout/struct_mem/mem_layout.md","ref":"block_detail/block_layout/struct_mem/mem_layout.md","articles":[]}]},"previous":{"title":"Block类型","level":"1.3.2","depth":2,"path":"block_type/README.md","ref":"block_type/README.md","articles":[]},"articles":[{"title":"结构体定义","level":"1.3.3.1","depth":3,"path":"block_detail/block_layout/struct_mem/README.md","ref":"block_detail/block_layout/struct_mem/README.md","articles":[{"title":"内存结构布局图","level":"1.3.3.1.1","depth":4,"path":"block_detail/block_layout/struct_mem/mem_layout.md","ref":"block_detail/block_layout/struct_mem/mem_layout.md","articles":[]}]},{"title":"flags","level":"1.3.3.2","depth":3,"path":"block_detail/block_layout/flags.md","ref":"block_detail/block_layout/flags.md","articles":[]},{"title":"invoke","level":"1.3.3.3","depth":3,"path":"block_detail/block_layout/invoke/README.md","ref":"block_detail/block_layout/invoke/README.md","articles":[]},{"title":"descriptor","level":"1.3.3.4","depth":3,"path":"block_detail/block_layout/descriptor.md","ref":"block_detail/block_layout/descriptor.md","articles":[]},{"title":"imported variables","level":"1.3.3.5","depth":3,"path":"block_detail/block_layout/imported_variables.md","ref":"block_detail/block_layout/imported_variables.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/ios_re_objc_block/pdf/ios_re_objc_block.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/ios_re_objc_block/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"ios_re_objc_block","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"iOS逆向开发：Block匿名函数","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"介绍iOS逆向期间会涉及到的Block匿名回调函数。先解释为何要研究Block；再详细介绍Block，包括正向开发时的如何写Block代码，然后是逆向时Block的结构定义，包括定义的代码和定义的结构图，再分别介绍每一部分的含义，包括Block类型、flags、invoke，以及其中的signature函数签名，以及descriptor、imported variables引用的量；再介绍iOS逆向期间所涉及到的Block最核心的内容是哪些，然后举例详细阐述如何通过Block搞懂函数调用逻辑，以及导入变量的参数传递，顺带介绍如何优化IDA伪代码。然后再整理Block相关的心得，比如动态调试期间，如何查看Block信息、和Block相关的objc函数。"},"file":{"path":"block_detail/block_layout/README.md","mtime":"2026-02-04T06:32:29.648Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2026-02-04T06:59:20.221Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
