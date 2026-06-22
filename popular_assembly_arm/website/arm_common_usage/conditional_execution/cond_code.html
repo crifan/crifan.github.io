@@ -1,0 +1,1253 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <title>cond条件码 · 最流行汇编语言：ARM</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.0">
+        <meta name="author" content="Crifan Li <admin@crifan.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-blockquote-callout/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../index_pre_post.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"repo":"popular_assembly_arm","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.crifan.org" target="_blank" class="custom-link">主页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../arm_overview/">
+            
+                <a href="../../arm_overview/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    ARM概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../arm_overview/calling_convention.html">
+            
+                <a href="../../arm_overview/calling_convention.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    调用规范
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../arm_reg/">
+            
+                <a href="../../arm_reg/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    ARM寄存器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../arm_reg/reg_name.html">
+            
+                <a href="../../arm_reg/reg_name.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    寄存器命名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../arm_reg/reg_arg.html">
+            
+                <a href="../../arm_reg/reg_arg.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    寄存器架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../arm_reg/common_reg/">
+            
+                <a href="../../arm_reg/common_reg/">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    常用寄存器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../arm_reg/common_reg/pc.html">
+            
+                <a href="../../arm_reg/common_reg/pc.html">
+            
+                    
+                        <b>1.3.3.1.</b>
+                    
+                    PC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../arm_reg/common_reg/ip.html">
+            
+                <a href="../../arm_reg/common_reg/ip.html">
+            
+                    
+                        <b>1.3.3.2.</b>
+                    
+                    IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../arm_reg/common_reg/sp.html">
+            
+                <a href="../../arm_reg/common_reg/sp.html">
+            
+                    
+                        <b>1.3.3.3.</b>
+                    
+                    SP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../../arm_reg/common_reg/lr.html">
+            
+                <a href="../../arm_reg/common_reg/lr.html">
+            
+                    
+                        <b>1.3.3.4.</b>
+                    
+                    LR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="../../arm_reg/common_reg/status/">
+            
+                <a href="../../arm_reg/common_reg/status/">
+            
+                    
+                        <b>1.3.3.5.</b>
+                    
+                    状态寄存器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.5.1" data-path="../../arm_reg/common_reg/status/cpsr.html">
+            
+                <a href="../../arm_reg/common_reg/status/cpsr.html">
+            
+                    
+                        <b>1.3.3.5.1.</b>
+                    
+                    CPSR
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../arm_reg/reg_other.html">
+            
+                <a href="../../arm_reg/reg_other.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    其他寄存器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../arm_reg/aarch64_regs/">
+            
+                <a href="../../arm_reg/aarch64_regs/">
+            
+                    
+                        <b>1.3.5.</b>
+                    
+                    AArch64=ARM64
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="../../arm_reg/aarch64_regs/special_purpose/">
+            
+                <a href="../../arm_reg/aarch64_regs/special_purpose/">
+            
+                    
+                        <b>1.3.5.1.</b>
+                    
+                    特殊用途寄存器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1.1" data-path="../../arm_reg/aarch64_regs/special_purpose/nzcv.html">
+            
+                <a href="../../arm_reg/aarch64_regs/special_purpose/nzcv.html">
+            
+                    
+                        <b>1.3.5.1.1.</b>
+                    
+                    NZCV
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../arm_assembly/">
+            
+                <a href="../../arm_assembly/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    ARM汇编指令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../arm_assembly/instruction_encoding/">
+            
+                <a href="../../arm_assembly/instruction_encoding/">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    指令编码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../arm_assembly/instruction_list/">
+            
+                <a href="../../arm_assembly/instruction_list/">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    指令列表
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../arm_assembly/instruction_list/alphabet.html">
+            
+                <a href="../../arm_assembly/instruction_list/alphabet.html">
+            
+                    
+                        <b>1.4.2.1.</b>
+                    
+                    按字母
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../arm_assembly/instruction_list/opcode.html">
+            
+                <a href="../../arm_assembly/instruction_list/opcode.html">
+            
+                    
+                        <b>1.4.2.2.</b>
+                    
+                    操作码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../arm_assembly/common_instruction/">
+            
+                <a href="../../arm_assembly/common_instruction/">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    常用汇编指令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../arm_assembly/common_instruction/mov.html">
+            
+                <a href="../../arm_assembly/common_instruction/mov.html">
+            
+                    
+                        <b>1.4.3.1.</b>
+                    
+                    赋值
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../arm_assembly/common_instruction/mem_op.html">
+            
+                <a href="../../arm_assembly/common_instruction/mem_op.html">
+            
+                    
+                        <b>1.4.3.2.</b>
+                    
+                    内存操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../arm_assembly/common_instruction/compare.html">
+            
+                <a href="../../arm_assembly/common_instruction/compare.html">
+            
+                    
+                        <b>1.4.3.3.</b>
+                    
+                    比较
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../../arm_assembly/common_instruction/branch_jump.html">
+            
+                <a href="../../arm_assembly/common_instruction/branch_jump.html">
+            
+                    
+                        <b>1.4.3.4.</b>
+                    
+                    分支跳转
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="../../arm_assembly/common_instruction/condition_select.html">
+            
+                <a href="../../arm_assembly/common_instruction/condition_select.html">
+            
+                    
+                        <b>1.4.3.5.</b>
+                    
+                    条件选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.6" data-path="../../arm_assembly/common_instruction/addressing.html">
+            
+                <a href="../../arm_assembly/common_instruction/addressing.html">
+            
+                    
+                        <b>1.4.3.6.</b>
+                    
+                    寻址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.7" data-path="../../arm_assembly/common_instruction/arithmetic_operation.html">
+            
+                <a href="../../arm_assembly/common_instruction/arithmetic_operation.html">
+            
+                    
+                        <b>1.4.3.7.</b>
+                    
+                    算数运算
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.8" data-path="../../arm_assembly/common_instruction/logical_calculus.html">
+            
+                <a href="../../arm_assembly/common_instruction/logical_calculus.html">
+            
+                    
+                        <b>1.4.3.8.</b>
+                    
+                    逻辑运算
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.9" data-path="../../arm_assembly/common_instruction/other.html">
+            
+                <a href="../../arm_assembly/common_instruction/other.html">
+            
+                    
+                        <b>1.4.3.9.</b>
+                    
+                    其他
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../arm_assembly/special_inst/">
+            
+                <a href="../../arm_assembly/special_inst/">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    特殊汇编指令
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../arm_assembly/special_inst/svc/">
+            
+                <a href="../../arm_assembly/special_inst/svc/">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    SVC系统调用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1.1" data-path="../../arm_assembly/special_inst/svc/example.html">
+            
+                <a href="../../arm_assembly/special_inst/svc/example.html">
+            
+                    
+                        <b>1.4.4.1.1.</b>
+                    
+                    举例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.1.2" data-path="../../arm_assembly/special_inst/svc/syscall.html">
+            
+                <a href="../../arm_assembly/special_inst/svc/syscall.html">
+            
+                    
+                        <b>1.4.4.1.2.</b>
+                    
+                    syscall
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    ARM常见用法和通用规则
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../exception_level.html">
+            
+                <a href="../exception_level.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    异常中断等级
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../function_call.html">
+            
+                <a href="../function_call.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    函数调用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../jump.html">
+            
+                <a href="../jump.html">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    跳转指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    条件执行
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.4.1" data-path="cond_code.html">
+            
+                <a href="cond_code.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    cond条件码
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../index_pre_post.html">
+            
+                <a href="../index_pre_post.html">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Pre-index和Post-index
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../flexible_second_operand.html">
+            
+                <a href="../flexible_second_operand.html">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    flexible second operand
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../tools/">
+            
+                <a href="../../tools/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../tools/inst_opcode_convert.html">
+            
+                <a href="../../tools/inst_opcode_convert.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    指令和二进制opcode互转
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../appendix/">
+            
+                <a href="../../appendix/">
+            
+                    
+                        <b>1.7.</b>
+                    
+                    附录
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../appendix/x86_assembly.html">
+            
+                <a href="../../appendix/x86_assembly.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    X86汇编
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../appendix/reference.html">
+            
+                <a href="../../appendix/reference.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    参考资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            本书使用 HonKit 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >cond条件码</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="cond条件码"><a name="cond条件码" class="plugin-anchor" href="#cond条件码"><i class="fa fa-link" aria-hidden="true"></i></a>cond条件码</h1>
+<ul>
+<li><code>condition</code>=<code>条件码</code>=<code>cond</code>=<code>condition code field</code><ul>
+<li>来源<ul>
+<li>ARM中，有各种<code>conditional selection instruction</code>去<code>Conditional execution</code>中的：<ul>
+<li><code>condition</code>=<code>条件码</code>=缩写为：<code>cond</code></li>
+</ul>
+</li>
+<li>指令语法中表示为：<code>{cond}</code></li>
+</ul>
+</li>
+<li>如何计算出<code>cond</code>的值：<ul>
+<li><code>NZCV</code>的组合值（确切的说是，<code>4</code>个<code>bit</code>中某个或某些<code>bit</code>值）决定了<code>cond</code>的值<ul>
+<li><code>NZCV</code>的值<ul>
+<li>ARM32：<code>CPSR</code>中的<code>NZCV</code>4个bit位（的组合的值）</li>
+<li>ARM64：特殊寄存器：<code>NZCV</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>具体含义逻辑<ul>
+<li>ARM64 Conditional Selection Instructions<ul>
+<li><img src="../../assets/img/arm64_cond_code.jpg" alt="arm64_cond_code"></img></li>
+</ul>
+</li>
+<li>ARM64的条件码表格<ul>
+<li><img src="../../assets/img/arm64_cond_table.png" alt="arm64_cond_table"></img></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="用法举例"><a name="用法举例" class="plugin-anchor" href="#用法举例"><i class="fa fa-link" aria-hidden="true"></i></a>用法举例</h2>
+<h3 id="ble"><a name="ble" class="plugin-anchor" href="#ble"><i class="fa fa-link" aria-hidden="true"></i></a>b.le</h3>
+<p>此处的指令：</p>
+<pre class="language-"><code class="lang-asm">libobjc.A.dylib`objc_msgSend:
+    <span class="token number">0x1921c7b20</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">0</span><span class="token operator">&gt;</span>:   cmp    x0, #<span class="token number">0x0</span>                  <span class="token comment">; =0x0</span>
+<span class="token operator">-</span><span class="token operator">&gt;</span>  <span class="token number">0x1921c7b24</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">4</span><span class="token operator">&gt;</span>:   b.le   <span class="token number">0x1921c7b98</span>              <span class="token comment">; &lt;+120&gt;</span>
+</code></pre>
+<p>其中前面的指令：</p>
+<pre class="language-"><code class="lang-asm"><span class="token number">0x1921c7b20</span> <span class="token operator">&lt;</span><span class="token operator">+</span><span class="token number">0</span><span class="token operator">&gt;</span>:   cmp    x0, #<span class="token number">0x0</span>                  <span class="token comment">; =0x0</span>
+</code></pre>
+<p>由于x0中的值是：<code>0x00000002820463a0</code></p>
+<p>-》已经设置了<code>CPSR</code>中的：<code>C</code>=<code>Carry</code>=<code>1</code></p>
+<p>然后再去运行：</p>
+<pre class="language-"><code class="lang-asm">b.le   <span class="token number">0x1921c7b98</span>
+</code></pre>
+<ul>
+<li><code>b.le</code> == <code>B指令</code> + <code>条件执行的cond是LE</code></li>
+</ul>
+<p><a href="https://developer.arm.com/documentation/dui0068/b/ARM-Instruction-Reference/Conditional-execution" target="_blank">ARM Developer Suite Assembler Guide</a></p>
+<pre class="language-"><code class="lang-bash">LE
+Z set, or N and V different
+Signed <span class="token operator">&lt;=</span>
+</code></pre>
+<p>即：</p>
+<p>如果之前的CPSR的条件中，满足：</p>
+<p><code>Z set, or N and V different</code></p>
+<p>即，逻辑上表示之前的判断是: <code>&lt;=</code>，那么就跳转</p>
+<p>而此处：</p>
+<ul>
+<li>N=0</li>
+<li>Z=0</li>
+<li>C=1</li>
+<li>V=0</li>
+</ul>
+<p>-&gt;</p>
+<ul>
+<li>Z是0，不符合</li>
+<li>N和V都是0 -》 一样，不符合</li>
+</ul>
+<p>所以，不跳转</p>
+<p>所以单步运行后：</p>
+<p><img src="../../assets/img/arm_cond_after_run_b_le.png" alt="arm_cond_after_run_b_le"></img></p>
+<p>程序没有b去跳转，而是继续执行下一行指令，是符合预期的。</p>
+<h3 id="bne的固定的间接跳转"><a name="bne的固定的间接跳转" class="plugin-anchor" href="#bne的固定的间接跳转"><i class="fa fa-link" aria-hidden="true"></i></a>B.NE的固定的间接跳转</h3>
+<p>IDA中代码：</p>
+<pre class="language-"><code class="lang-asm"><span class="token label function">.text:</span>00000000001042A8 E0 <span class="token number">03</span> 1F AA                 MOV             X0, XZR
+<span class="token label function">.text:</span>00000000001042AC 1F <span class="token number">00</span> 1F EB                 CMP             X0, XZR
+<span class="token label function">.text:</span>00000000001042B0 <span class="token number">00</span> <span class="token number">42</span> <span class="token number">1B</span> D5                 msr nzcv, x0
+<span class="token label function">.text:</span>00000000001042B4 <span class="token number">61</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">54</span>                 B.NE            loc_1042C0
+</code></pre>
+<p><img src="../../assets/img/ida_b_ne_brach.png" alt="ida_b_ne_brach"></img></p>
+<p>中的<code>B.NE</code>中的<code>NE</code></p>
+<p>这部分代码的总体逻辑是：</p>
+<ul>
+<li>通过XZR给X0赋值0</li>
+<li>比较X0和XZR，由于都是0，所以肯定相等</li>
+<li>把X0=0，写入NZCV条件码状态寄存器</li>
+<li>B.NE的判断逻辑是：<code>NE</code>=<code>Not Equal</code>=<code>不相等</code>，即：<code>Z=0</code>，此处的确是<code>Z=0</code>，符合条件，所以肯定会跳转到0x1042C0的代码位置</li>
+</ul>
+<p>从而实现了：</p>
+<p>固定的代码跳转逻辑：<code>B.NE</code>是100%会跳转到此处0x1042C0的位置的</p>
+<p>-》即：一种特殊的间接跳转的实现方式</p>
+<footer class="page-footer"><span class="copyright">crifan.org，使用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">署名4.0国际(CC BY 4.0)协议</a>发布 all right reserved，powered by Gitbook</span><span class="footer-modification">最后更新：
+2024-09-24 17:40:51
+</span></footer></body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 条件执行">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../index_pre_post.html" class="navigation navigation-next " aria-label="Next page: Pre-index和Post-index">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"cond条件码","level":"1.5.4.1","depth":3,"next":{"title":"Pre-index和Post-index","level":"1.5.5","depth":2,"path":"arm_common_usage/index_pre_post.md","ref":"arm_common_usage/index_pre_post.md","articles":[]},"previous":{"title":"条件执行","level":"1.5.4","depth":2,"path":"arm_common_usage/conditional_execution/README.md","ref":"arm_common_usage/conditional_execution/README.md","articles":[{"title":"cond条件码","level":"1.5.4.1","depth":3,"path":"arm_common_usage/conditional_execution/cond_code.md","ref":"arm_common_usage/conditional_execution/cond_code.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-comscore","anchors","expandable-menu","-lunr","-search","search-plus","disqus","-highlight","prism","prism-themes","github-buttons","-splitter","splitter-nosessionbutcookie","-sharing","sharing-plus","tbfed-pagefooter","donate","sitemap-general","copy-code-button","blockquote-callout","toolbar-button"],"root":"./src","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"crifan.org，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"useIdentifier":false,"shortName":"crifan"},"toolbar-button":{"label":"下载PDF","url":"https://book.crifan.org/books/popular_assembly_arm/pdf/popular_assembly_arm.pdf","icon":"fa-file-pdf-o"},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"donate":{"title":"","button":"打赏","wechat":"https://www.crifan.org/files/res/crifan_com/crifan_wechat_pay.jpg","alipay":"https://www.crifan.org/files/res/crifan_com/crifan_alipay_pay.jpg","wechatText":"微信打赏给Crifan","alipayText":"支付宝打赏给Crifan"},"sitemap-general":{"prefix":"https://book.crifan.org/books/popular_assembly_arm/website/"},"fontsettings":{"theme":"white","family":"sans","size":2},"blockquote-callout":{},"theme-comscore":{},"splitter-nosessionbutcookie":{},"prism-themes":{},"github-buttons":{"buttons":[{"repo":"popular_assembly_arm","user":"crifan","type":"star","count":true,"size":"small"},{"user":"crifan","type":"follow","width":"120","count":false,"size":"small"}]},"expandable-menu":{},"copy-code-button":{},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":true,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"Crifan Li <admin@crifan.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"最流行汇编语言：ARM","language":"zh-hans","links":{"sidebar":{"主页":"http://www.crifan.org"}},"gitbook":"*","description":"整理最流行的汇编语言ARM的相关内容。包括先概述，以及调用规范；ARM寄存器，包括寄存器架构、常用寄存器，比如IP和状态寄存器，以及其他寄存器；再解释ARM汇编指令，包括ARM汇编指令列表，包括按字母表顺序排列的、带操作码的；以及各种常用汇编指令，包括赋值、内存操作、比较、分支跳转、条件选择、寻址、算数运算、逻辑运算、SVC系统调用以及其他；继续整理了ARM常用用法和通用规则，包括函数调用、跳转指令、条件执行、Pre-Index和Post-Index、fleiable second oprand；最后附录上X86汇编。"},"file":{"path":"arm_common_usage/conditional_execution/cond_code.md","mtime":"2024-09-24T09:40:51.198Z","type":"markdown"},"gitbook":{"version":"6.0.0","time":"2026-06-22T06:05:29.536Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-menu/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter-nosessionbutcookie/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
