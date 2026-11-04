@@ -1,6 +1,6 @@
 # Crifan的电子书大全
 
-最后更新：`20261014`
+最后更新：`20261104`
 
 * 目的：存放我[Crifan](https://github.com/crifan)写的各种成体系的电子书教程
 * 入口地址：[https://crifan.github.io](https://crifan.github.io)
@@ -179,5 +179,6 @@
     * [软件全生命周期管理](https://crifan.github.io/software_whole_lifecycle_manage/website)
     * [Frida调试Android经验总结](https://crifan.github.io/frida_debug_android_summary/website)
     * [Frida调试iOS经验总结](https://crifan.github.io/frida_debug_ios_summary/website)
+    * [抓包利器：Reqable](https://crifan.github.io/good_capture_tool_reqable/website)
 * 其他独立内容
   * [crifan的折腾精神、学习能力和逻辑能力的体现](https://crifan.github.io/crifan_play_learn_logic_spirit/)
